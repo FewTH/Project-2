@@ -202,7 +202,10 @@
                             <p class="message-view-history">ดูประวัติการสุ่ม</p>
                         </button>
 
-
+                        <button class="view-history">
+                            <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                        </button>
+                         
 
                 </div>
             </div>

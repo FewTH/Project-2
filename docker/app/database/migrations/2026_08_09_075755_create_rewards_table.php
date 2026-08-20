@@ -1,31 +1,17 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-return new class extends Migration
+use Illuminate\Database\Eloquent\Model;
+
+class Reward extends Model
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('rewards', function (Blueprint $table) {
-            $table->id('reward_id');    //primarykey ของ ตารางreward
-            $table->string('name');     //ชื่อของรางวัล ตารางreward
-            $table->integer('quantity');    //จำนวนรางวัล ของ ตารางreward
-            $table->foreignId('category_id')    //ใช้ของตาราง reward_categories
-                  ->constrained('reward_categories', 'category_id')
-                  ->onDelete('cascade');
-        }); 
-    }
+    protected $primaryKey = 'reward_id';
+    public $timestamps = false;
+    protected $fillable = ['name', 'quantity', 'category_id', 'rate'];
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function category()
     {
-        Schema::dropIfExists('rewards');
+        return $this->belongsTo(RewardCategory::class, 'category_id', 'category_id');
     }
-};
+}
