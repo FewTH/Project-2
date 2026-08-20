@@ -1,77 +1,61 @@
+version: "3.0"
 services:
-  # 1. Application (PHP-FPM)
-  assess-app:
-    container_name: assess-app
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    image: training-laravel:latest
-    restart: unless-stopped
-    working_dir: /var/www/html
-    volumes:
-      - ./app:/var/www/html
-    environment:
-      DB_CONNECTION: mysql
-      DB_HOST: assess-db
-      DB_PORT: 3306
-      DB_DATABASE: assess_db
-      DB_USERNAME: assess
-      DB_PASSWORD: "Assess@2025."
-    networks:
-      - assess_net
-    depends_on:
-      - assess-db
+   assess-app:
+     container_name: assess-app
+     build: 
+       context: ./nginx8.4
+     working_dir: /app
+     ports:
+       - "8320:80"
+     networks:
+       - assess_net
+     volumes:
+       #- ./www:/app
+       - ./app:/app
+       #- ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+     restart: always
+     environment:
+       APPLICATION_UID: "9999"  # <-- แทนที่ 1000 ด้วย UID ของคุณ
+       APPLICATION_GID: "9999"  # <-- แทนที่ 1000 ด้วย GID ของคุณ
+       DB_CONNECTION: mysql
+       DB_HOST: assess-db
+       DB_PORT: 3306
+       DB_DATABASE: assess_db
+       DB_USERNAME: assess
+       DB_PASSWORD: "Assess@2025."
 
-  # 2. Web Server (Nginx) - Port 8320
-  assess-nginx:
-    image: nginx:alpine
-    container_name: assess-nginx
-    restart: unless-stopped
-    ports:
-      - "8320:80" # Web Port
-    volumes:
-      - ./app:/var/www/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - assess-app
-    networks:
-      - assess_net
+   assess-db:
+     container_name: assess-db
+     image: mysql:8.4.7
+     volumes:
+       - db-data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: "Assess@2025."
+       MYSQL_DATABASE: assess_db
+       MYSQL_USER: assess
+       MYSQL_PASSWORD: "Assess@2025."
+     ports:
+       - "8321:3306" # DB Port
+     networks:
+       - assess_net
+     restart: always
+     depends_on:
+       - assess-db
 
-  # 3. Database (MySQL) - Port 8321
-  assess-db:
-    container_name: assess-db
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: "Assess@2025."
-      MYSQL_DATABASE: assess_db
-      MYSQL_USER: assess
-      MYSQL_PASSWORD: "Assess@2025."
-    networks:
-      - assess_net
-    restart: always
-    ports:
-      - "8321:3306" # DB Port
-    volumes:
-      - db-data:/var/lib/mysql
-
-  # 4. Database UI (phpMyAdmin) - Port 8322
-  assess-myadmin:
-    container_name: assess-myadmin
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: assess-db
-      MYSQL_ROOT_PASSWORD: "Assess@2025."
-    ports:
-      - "8322:80" # MyAdmin Port
-    networks:
-      - assess_net
-    restart: always
-    depends_on:
-      - assess-db
+   assess-myadmin:
+     container_name: assess-myadmin
+     image: phpmyadmin/phpmyadmin
+     environment:
+       PMA_HOST: assess-db
+       MYSQL_ROOT_PASSWORD: "Assess@2025."
+     ports:
+       - "8322:80" # MyAdmin Port
+     networks:
+       - assess_net
+     restart: always
 
 networks:
-  assess_net:
-    driver: bridge
-
+   assess_net:
+     driver: bridge
 volumes:
-  db-data:
+   db-data:

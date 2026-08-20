@@ -1,0 +1,4306 @@
+/*ป้องกันกล่องส้น*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #ffffff;
+  min-width: 1000px;
+}
+
+/*ส่วนของหน้า Dashboard.html*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content {
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/*โปรไฟล์ผู้ใช้*/
+.btn-user-wrapper {
+  background-color: #FCD53F;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  right: 0;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  min-width: 1000px;
+  z-index: 10;
+}
+
+/*หน้าต่างเมนู*/
+.container {
+  background-color: #FFFFFF;
+  width: 250px;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  z-index: 11;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Dashboard {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px;
+  background-color: #FCD53F;
+  margin-top: 40px;
+  margin-left: 10px;
+  padding-left: 5px;
+  max-width: 230px;
+  max-height: 70px;
+  border-radius: 40px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 20px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Manage_users {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการผู้ใช้*/
+.btn-Manage_users-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+
+}
+
+/*รูปปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel-img {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รปปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-img {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*กรอบของหัวข้อเว็บ แดชบอร์ดภาพรวม ปุ่ม วัน สัปดาห์ เดือน*/
+.framedashboard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+/*ชื่อแดชบอร์ดภาพรวม*/
+.Overview_Dashboard{
+  color: #5381EC;
+  font-size: 20px;
+  min-width: 350px;
+}
+
+/*ปุ่มกดวัน สัปดาห์ เดือน*/
+.ButtonDate{
+  background-color: #8C8D8D;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/*ปุ่มวัน*/
+.btn-day{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #FCD53F;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 5;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มวัน*/
+.btn-day::before{
+  content: "";
+  background-color: #ffce0b;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของปุ่มวัน*/
+.btn-day:hover::before{
+  width: 150px;
+  height: 150px;
+}
+
+/*ข้อความปุ่มวัน*/
+.btn-day-1{
+  padding: 11px 40px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มสัปดาห์*/
+.btn-week{
+  background: none;
+  border: none;
+  min-width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  left: 5px;
+}
+
+/*ปุ่มเดือน*/
+.btn-month{
+  background: none;
+  border: none;
+  min-width: 100px;
+  height: 45px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/*กรอบเปิดปิดerrorแจ้งตื่นเวลาดึงข้อมูล database ไม่ได้*/
+.dashboard-error{
+  display: none;
+  width: 100%;
+}
+
+/*กรอบerrorแจ้งตื่นเวลาดึงข้อมูล database ไม่ได้*/
+.dashboard-error-1{
+  display: flex;
+  align-items: center;
+  background-color: #3D0C0C;
+  border-radius: 20px;
+  padding: 0px 0px 0px 40px;
+  gap: 15px;
+}
+
+
+/*รูปerror ดึงข้อมูล database ไม่ได้*/
+.img-dashboard-error{
+  width: 38px;
+  height: 35px;
+}
+
+
+/*กรอบข้อความดึงข้อมูล database ไม่ได้*/
+.cannotDownload-1{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/*หัวข้อความโหลดข้อมูลไม่สำเร็จ*/
+.cannotDownload{
+  color: #e57373;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  top: 10px;
+}
+
+/*ข้อความไม่สามารถโหลดข้อมูลแดชบอร์ดได้ กรุณาลองใหม่อีกครั้ง*/
+.cannotDownloadDashboard{
+  color: #e57373d8;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบรูปปุ่มลองใหม่ กับชื่อปุ่มลองใหม่*/
+.but-cannotDownload{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3D0C0C;
+  border: 0.4px solid #E57373;
+  border-radius: 10px;
+  margin-right: 40px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+}
+
+/*รูปปุ่มลองใหม่*/
+.img-but-cannotDownload{
+  padding: 0px 10px 0px 0px;
+}
+
+/*ข้อตวามปุ่มลองใหม่*/
+.but-cannotDownload-1{
+  color: #E57373;
+  font-size: 17px;
+}
+
+
+
+
+
+/*กรอบรวมของผู้ใช้ ทำแบบประเมิน สุ่มทั้งหมด รอรับของขวัญ*/
+.alluser_frames-1{
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  min-width: 950px;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+/*กรอบของผู้ใช้*/
+.alluser_frames{
+  background-color: #FFFFFF;
+  width: 330px;
+  height: 235px;
+  border-radius: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อผู้ใช้งานทั้งหมด*/
+.All_users{
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+/*ตัวเลขผู้ใช้งานทั้งหมด*/
+.Userfigures{
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+/*เปอร์เซ็นผู้ใช้งานทั้งหมด*/
+.Addnumbers_users{
+  color: #4CAF50;
+  font-size: 17px;
+  margin-left: 40px;
+}
+
+/*กรอบของผู้ทำแบบประเมิน*/
+.assessmentframe{
+  background-color: #ffffff;
+  width: 330px;
+  height: 235px;
+  border-radius: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อผู้ทำแบบประเมิน*/
+.frame{
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+/*ตัวเลขผู้ทำแบบประเมิน*/
+.Numberframe{
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+/*เปอร์เซ็นนผู้ทำแบบประเมิน*/
+.Addnumbers{
+  color: #4CAF50;
+  font-size: 17px;
+  margin-left: 40px;
+}
+
+/*กรอบของสุ่มทั้งหมด*/
+.randomall{
+  background-color: #ffffff;
+  width: 330px;
+  height: 235px;
+  border-radius: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อสุ่มทั้งหมด*/
+.Random_all{
+  font-size: 20px;
+  margin-left: 40px;
+} 
+
+/*ตัวเลขสุ่มทั้งหมด*/
+.numberrandom{
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+/*เปอร์เซ็นนสุ่มทั้งหมด*/
+.numberotherday{
+  color: #4CAF50;
+  font-size: 17px;
+  margin-left: 40px;
+}
+
+/*กรอบของรอรับของขวัญ*/
+.framewaitreceiveaward{
+  background-color: #ffffff;
+  width: 330px;
+  height: 235px;
+  border-radius: 20px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อรอรับของขวัญ*/
+.waitreceiveaward{
+  font-size: 20px;
+  margin-left: 40px;
+}
+
+/*ตัวเลขสุ่มทั้งหมด*/
+.numberaward{
+  font-size: 30px;
+  margin-left: 40px;
+}
+
+/*เปอร์เซ็นสุ่มทั้งหมด*/
+.followaward{
+  color: #F44336;
+  font-size: 17px;
+  margin-left: 40px;
+
+}
+
+/*กรอบของกราฟ*/
+.chart-wrap{
+  background-color: #fcfcfc;
+  flex: 2;
+  height: 580px;
+  margin-top: 100px;
+  border-radius: 15px;
+  box-shadow: 0 8px 14px rgba(0,0,0,0.22);
+  min-width: 680px;
+}
+
+
+
+/*หัวข้อการสุ่มรายวัน - 14 วันล่าสุด*/
+.sectionrandom{
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  flex-shrink: 0;
+}
+
+
+/*กอรบของขวัญยอดนิยม*/
+.framesmost_popular{
+  background-color: #ffffff;
+  min-width: 675px;
+  height: 580px;
+  border-radius: 20px;
+  margin-top: 100px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*กรอบของของขวัญยอดนิยม จากการสุ่มทั้งหมด 100 ครั้ง*/
+.most_popular-1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*หัวข้องขวัญยอดนิยม*/
+.most_popular{
+  font-size: 18px;
+  margin-left: 30px;
+}
+
+
+/*การสุ่มทั้งหมด 100 ครั้ง*/
+.randomall-100{
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  position: relative;
+  right: 50px;
+  text-align: right;
+}
+
+/*กรอบของดินสอ ถึง ตั้งค่า*/
+.framepancil{
+  display: flex;
+  align-items: center;
+  padding: 10px 30px 20px 30px;
+  gap: 15px;
+}
+
+/*กรอบสีแดง*/
+.redframe{
+  background-color: #F44336;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 12px;
+}
+
+/*ชื่อหัวข้อดินสอ*/
+.pencil{
+  display: flex;
+  position: relative;
+  right: 15px;
+  bottom: 20px;
+}
+
+/*รูปดินสอ*/
+.img-pencil-1{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  right: 45px;
+  top: 35px
+}
+
+/*จำนวนครั้งที่สุ่มของดินสอ*/
+.timeallpancil {
+  position: relative;
+  right: 80px;
+  top: 20px;
+  font-size: 17px;
+}
+
+/*จุดตรงกลางครั้ง · ตั้งค่าดินสอ*/
+.point-1 {
+  font-size: 25px;
+  position: relative;
+  right: 80px;
+  top: 20px;
+}
+
+/*เปอร์เช็น ตั้งค่าดินสอ*/
+.settingspencil{
+  position: relative;
+  right: 80px;
+  top: 20px;
+  font-size: 17px;
+  min-width: 60px;
+}
+
+/*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เช็นดินสอ*/
+.black-frame-pencil-1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 330px;
+}
+
+
+/*หลอดเปอร์เซ็นสีเทาดินสอ*/
+.black-frame-pencil{
+  background-color: #3D3D3B;
+  width: 270px;
+  height: 10px;
+  position: relative;
+  right: 30px;
+  border-radius: 30px;
+}
+
+/*หลอดเปอร์เซ็นสีแดงดินสอ*/
+.frame-pencil{
+  background-color: #FF4D4F;
+  width: 90px;
+  height: 10px;
+  border-radius: 30px;
+}
+
+/*เส้นของดินสอ*/
+.blackline-1{
+  border: 0.1px solid #3D3D3B;
+}
+
+/*กรอบขอสมุด ถึง ตั้งค่า*/
+.framenotebook{
+  display: flex;
+  align-items: center;
+  padding: 10px 30px 20px 30px;
+  gap: 15px;
+}
+
+
+/*กรอบสีดำเงิน*/
+.blueframe{
+  background-color: #2563EB;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/*ชื่อหัวข้อสมุด*/
+.notebook{
+  display: flex;
+  position: relative;
+  right: 20px;
+  bottom: 10px;
+  font-size: 17px;
+}
+
+/*รูปสมุด*/
+.img-notebook-1{
+  width: 38px;
+  height: 38px;
+  position: relative;
+  right: 45px;
+  top: 29px;
+}
+
+/*จำนวนครั้งที่สุ่มของสมุด*/
+.timeallnotebook{
+  position: relative;
+  right: 75px;
+  top: 25px;
+  font-size: 17px;
+}
+
+/*จุดตรงกลางครั้ง · ตั้งค่าสมุด*/
+.point-2 {
+  font-size: 25px;
+  position: relative;
+  right: 75px;
+  top: 25px;
+}
+
+.settingsnotebook{
+  position: relative;
+  right: 75px;
+  top: 25px;
+  font-size: 17px;
+  min-width: 60px;
+}
+
+/*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เช็นสมุด*/
+.black-frame-notebook-1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 330px;
+}
+
+
+.black-frame-notebook{
+  background-color: #3D3D3B;
+  width: 270px;
+  height: 10px;
+  position: relative;
+  right: 25px;
+  border-radius: 30px;
+}
+
+/*เส้นของสมุด*/
+.blackline-2{
+  border: 0.1px solid #3D3D3B;
+}
+
+
+
+
+/*หลอดเปอร์เซ็นสีน้ำเงินสมุด*/
+.frame-notebook{
+  background-color: #2563EB;
+  width: 55px;
+  height: 10px;
+  border-radius: 30px;
+}
+
+/*กรอบขอหนังสือ ถึง ตั้งค่า*/
+.framebook{
+  display: flex;
+  align-items: center;
+  padding: 10px 30px 20px 30px;
+  gap: 15px;
+} 
+
+/*กรอบสีเขียว*/
+.greenframe{
+  background-color: #10B981;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+/*ชื่อหัวข้อหนังสือ*/
+.book{
+  display: flex;
+  position: relative;
+  right: 20px;
+  bottom: 10px;
+  font-size: 17px;
+}
+
+/*รูปหนังสือ*/
+.img-book-1{
+  width: 38px;
+  height: 38px;
+  position: relative;
+  right: 45px;
+  top: 29px;
+}
+
+/*จำนวนครั้งที่สุ่มของหนังสือ*/
+.timeallbook{
+  position: relative;
+  right: 100px;
+  top: 25px;
+  font-size: 17px;
+}
+
+/*จุดตรงกลางครั้ง · ตั้งค่าหนังสือ*/
+.point-3{
+  font-size: 25px;
+  position: relative;
+  right: 100px;
+  top: 25px;
+} 
+
+/*เปอร์เช็น ตั้งค่าหนังสือ*/
+.settingsbook{
+  position: relative;
+  right: 100px;
+  top: 25px;
+  font-size: 17px;
+  min-width: 60px;
+}
+
+/*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เช็นหนังสือ*/
+.black-frame-book-1{
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ width: 310px;
+}
+
+
+/*หลอดเปอร์เซ็นสีเทาหนังสือ*/
+.black-frame-book{
+  background-color: #3D3D3B;
+  width: 270px;
+  height: 10px;
+  position: relative;
+  right: 45px;
+  border-radius: 30px;
+}
+
+/*หลอดเปอร์เซ็นสีเขียวหนังสือ*/
+.frame-book{
+  background-color: #10B981;
+  width: 40px;
+  height: 10px;
+  border-radius: 30px;
+}
+
+/*เส้นของหนังสือ*/
+.blackline-3{
+  border: 0.1px solid #3D3D3B;
+}
+
+
+/*กรอบขอแบตสำรอง ถึง ตั้งค่า*/
+.framepowerbank{
+  display: flex;
+  gap: 15px;
+  padding: 15px 0px 0px 0px;
+}
+
+/*กรอบสีส้ม*/
+.orangeframe{
+  background-color: #FF9800;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+/*ชื่อหัวข้อแบตสำรอง*/
+.powerbank{
+  display: flex;
+  position: relative;
+  right: 20px;
+  bottom: 10px;
+  font-size: 17px;
+  min-width: 140px;
+}
+
+/*รูปแบตสำรอง*/
+.img-powerbank-1{
+  width: 38px;
+  height: 38px;
+  position: relative;
+  right: 43px;
+  top: 33px;
+}
+
+/*จำนวนครั้งที่สุ่มของแบตสำรอง*/
+.timeallpowerbank{
+  position: relative;
+  right: 140px;
+  top: 25px;
+  font-size: 17px;
+}
+
+
+/*จุดตรงกลางครั้ง · ตั้งค่าแบตสำรอง*/
+.point-4{
+  font-size: 25px;
+  position: relative;
+  right: 135px;
+  top: 15px;
+}
+
+/*เปอร์เซ็น ตั้งค่าแบตสำรอง*/
+.settingspowerbank{
+  position: relative;
+  right: 135px;
+  top: 25px;
+  font-size: 17px;
+  min-width: 60px;
+}
+
+/*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เซ็นแบตสำรอง*/
+.black-frame-powerbank-1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 305px;
+}
+
+/*หลอดเปอร์เซ็นสีเทาแบตสำรอง*/
+.black-frame-powerbank{
+  background-color: #3D3D3B;
+  width: 270px;
+  height: 10px;
+  position: relative;
+  right: 80px;
+  border-radius: 30px;
+}
+
+/*หลอดเปอร์เซ็นสีส้มแบตสำรอง*/
+.frame-powerbank{
+  background-color: #FF9800;
+  width: 20px;
+  height: 10px;
+  border-radius: 30px;
+}
+
+/*เปอร์เช็นของหลอดแบตสำรอง*/
+.Percent-4{
+  position: relative;
+  right: 25px;
+
+}
+
+/*กรอบรวมของสรุปสถานะ QR code*/
+.framestatusQRCode{
+  width: 100%;
+  width: 600px;
+  height: 525px;
+  background-color: #FFFFFF;
+  margin-top: 100px;
+  border-radius: 15px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อสรุปสถานะ QR code*/
+.statusQRCode{
+  font-size: 18px;
+  margin-left: 30px;
+}
+
+/*กรอบรวม รับแล้ว รอรับ ทั้งหมด*/
+.framenumberreceived{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 60px  10px 60px;
+}
+
+/*กรอบของรับแล้ว*/
+.numberreceived{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+/*ตัวเลขรับแล้ว*/
+.number_received-1{
+  font-size: 40px;
+  color: #1D9E75;
+  position: relative;
+  top: 10px;
+}
+
+/*ตัวหนังสือรับแล้ว*/
+.letterreceived{
+  font-size: 18px;
+  color: #8E8E93;
+  position: relative;
+  bottom: 10px;
+}
+
+/*เส้นตรงแนวตั้งของรับแล้ว*/
+.blackline-6{
+  width: 1px;
+  height: 100px;
+  border: none; 
+  background: #2C2C2E;
+}
+
+/*กรอบของรอรับ*/
+.numberwaitreceive{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*ตัวเลขรอรับ*/
+.numberwait_receive-1{
+  font-size: 40px;
+  color: #EF9F27;
+  position: relative;
+  top: 10px;
+}
+
+/*ตัวหนังสือรอรับ*/
+.letterwaitreceive{
+  font-size: 18px;
+  color: #8E8E93;
+  position: relative;
+  bottom: 10px;
+}
+
+/*เส้นตรงแนวตั้งสรุปสถานะ QR code*/
+.blackline-7{
+  width: 1px;
+  height: 100px;
+  border: none; 
+  background: #2C2C2E;
+}
+
+/*กรอบของทั้งหมด*/
+.numberall{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*ตัวเลขทั้งหมด*/
+.number_all-1{
+  font-size: 40px;
+  position: relative;
+  top: 10px;
+}
+
+/*ตัวหนังสือทั้งหมด*/
+.letterall{
+  font-size: 18px;
+  color: #8E8E93;
+  position: relative;
+  bottom: 10px;
+}
+
+/*กรอบรวมของอัตราการรับของขวัญ หลอด เปอร์เซ็นรับแล้ว รายการ*/
+.frameratereceiveaward{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px  10px 30px;
+  gap: 10px;
+}
+
+/*หัวข้ออัตราการรับของขวัญ*/
+.ratereceiveaward{
+  color: #A2A2A5;
+  font-size: 18px;
+}
+
+/*หลอดสีเทาเปอร์เซ็นอัตราการรับของขวัญ*/
+.black-frame-award{
+  background-color: #3D3D3B;
+  width: 500px;
+  height: 10px;
+  position: relative;
+  border-radius: 30px;
+}
+
+/*หลอดสีเขียวเปอร์เซ็นอัตราการรับของขวัญ*/
+.green-frame-award{
+  background-color: #1D9E75;
+  width: 280px;
+  height: 10px;
+  border-radius: 30px;
+}
+
+/*ตัวเลขเปอร์เซ็นอัตราการรับของขวัญ*/
+.bold-text{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/*จุดตรงกลางรับแล้ว · เหลือ รายการ*/
+.point-5{
+  font-size: 25px;
+  color: #8C8D8D;
+  position: relative;
+  top: 3px;
+}
+
+/*ตัวหนังสือเหลือ 35 รายการ*/
+.left{
+  font-size: 18px;
+  color: #8C8D8D;
+}
+
+/*ตัวเลขเหลือ 35 รายการ*/
+.numberlist{
+  font-size: 18px;
+  color: #8C8D8D;
+}
+
+/*ตัวหนังสือรายการ*/
+.list{
+  font-size: 18px;
+  color: #8C8D8D;
+}
+
+/*เส้นสรุปสถานะ QR code*/
+.blackline-5{
+  border: 0.2px solid #2C2C2E;
+}
+
+/*กรอบของการสุ่มวันนี้*/
+.randomtoday-1{
+  display: flex;
+  align-items: center;
+  padding: 10px 10px 0px 30px;
+  gap: 15px;
+}
+
+/*ตัวหนังสือการสุ่มวันนี้*/
+.randomtoday{
+  color: #8E8E93;
+  font-size: 18px;
+}
+
+.fromyesterday{
+  background-color: #E1F5EE ;
+  color: #085041;
+  width: 200px;
+  height: 50px;
+  font-size: 17px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+/*ส่วนของหน้าEdit_information.blade.php*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content-edit_information{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+
+}
+
+/*กรอบของแก้ไขข้อมูล*/
+.frameeditinformation{
+  background-color: #ffffff;
+  width: 600px;
+  height: auto;
+  margin-top: 8vh;
+  position: relative;
+  left: 80px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ข้อความในกรอบลูกศรกดกลับหน้า Profile*/
+.arrow-1{
+  font-size: 30px;
+  text-decoration: none;
+  color: #000000;
+  position: relative;
+}
+
+
+/*ลูกศรกดกลับหน้า Profile*/
+.arrow-2{
+  display: flex;
+  justify-content: center;
+  background-color: #f1f1f1;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: relative;
+  top: 25px;
+  left: 30px;
+  padding-top: 3px;
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ปุ่มลูกศรกดกลับหน้า Profile*/
+.arrow-2::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #dddddd;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำเป็นวงกลมเอฟเฟ็กต์ปุ่มลูกศรกดกลับหน้า Profile*/
+.arrow-2:hover::before{
+  width: 100px;
+  height: 100px;
+}
+
+
+/*รูปของแก้ไขข้อมูล*/
+.img-edit-information-1{
+  width: 80px;
+  height: 80px;
+}
+
+/*หัวข้อของแก้ไขข้อมูล*/
+.sectioneditinformation{
+  color: #5381EC;
+  font-size: 35px;
+}
+
+/*ข้อความของแก้ไขข้อมูล*/
+.messageditinformation{
+  font-size: 19px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้ว*/
+.savesuccess{
+  display: none;
+  background-color: #E1F5EE;
+  width: 500px;
+  height: 45px;
+  position: relative;
+  left: 50px;
+  bottom: 15px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+/*ข้อความแสดงว่าบันทึกรหัสผ่านแล้ว*/
+.savesuccess-1{
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*กรอบชื่อผู้ใช้ของหน้าแก้ไขข้อมูล*/
+.username-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*ชื่อผู้ใช้ของหน้าแก้ไขข้อมูล*/
+.type-username-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/*กรอบเอาไว้พิมชื่อของหน้าแก้ไขข้อมูล*/
+.input-username-1{
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*กรอบชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.FirstName-LastName-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*ชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.FirstNameLastName-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.input-FirstName-LastName-1{
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*กรอบอีเมลของหน้าแก้ไขข้อมูล*/
+.email-user-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*อีเมลของหน้าแก้ไขข้อมูล*/
+.typeemail-user-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมอีเมลของหน้าแก้ไขข้อมูล*/
+.input-email-user-1{
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*errorเวลาใส่ Email ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
+.pleasecompleteemail{
+  display: none;
+  color: #F44336;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*กรอบเบอร์โทรของหน้าแก้ไขข้อมูล*/
+.phone_number-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*เบอร์โทรของหน้าแก้ไขข้อมูล*/
+.typephone_number-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมเบอร์โทรของหน้าแก้ไขข้อมูล*/
+.input-phonenumber-1{
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*errorเวลาใส่ เบอร์โทร ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
+.pleasewearnumber{
+  display: none;
+  color: #F44336;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*กรอบของปุ่ม บันทึกข้อมูล ยกเลิกของหน้าแก้ไขข้อมูล*/
+.save-data-btn-cancel{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px 45px 50px;
+}
+
+/*ปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1{
+  background-color: #FCD53F;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-2 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 25px 60px;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  z-index: 1;
+}
+
+
+/*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1::before{
+  content: "";
+  position: absolute;
+  background-color: #ffce0b;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำกรอบให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+/*ปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1{
+  position: relative;
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มยกเลิกขของหน้าแก้ไขข้อมูล*/
+.btn-cancel-2{
+  border: none;
+  background: none;
+  font-size: 20px;
+  padding: 25px 85px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #cacaca;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำกรอบให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+
+
+
+
+/*ส่วนของหน้า Change_password.blade.php*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content-change-password{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+/*กรอบของหน้าเปลี่ยนรหัสผ่าน*/
+.framechangepassword{
+  background-color: #ffffff;
+  width: 600px;
+  height: auto;
+  margin-top: 22vh;
+  position: relative;
+  left: 80px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*รูปของหน้าเปลี่ยนรหัสผ่าน*/
+.img-change-password-1{
+  width: 80px;
+  height: 80px;
+}
+
+/*หัวข้อของหน้าเปลี่ยนรหัสผ่าน*/
+.sectionchangepassword{
+  color: #5381EC;
+  font-size: 35px;
+}
+
+/*ข้อความของหน้าเปลี่ยนรหัสผ่าน*/
+.messagchangepassword{
+  font-size: 19px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้วของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccesschangepassword{
+  display: none;
+  background-color: #E1F5EE;
+  width: 500px;
+  height: 45px;
+  position: relative;
+  left: 50px;
+  bottom: 15px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+/*ข้อความแสดงว่าบันทึกรหัสผ่านแล้วของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccess-changepassword{
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*กรอบรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordcurrent{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*รหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.type-passwordcurrent-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/*กรอบของปุ่มตาเปิดปิดรหัสผ่านกับ กรอบเอาไว้พิมรหัสผ่านของหน้าเปลี่ยนรหัสผ่าน*/
+.img-eye-password{
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+/*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.input-passwordcurrent-1{
+  color: #777777;
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*ปุ่มตาเปิดปิดรหัสผ่านของหน้าเปลี่ยนรหัสผ่าน*/
+.img-eye{
+  position: absolute;
+  right: 25px;
+  border: none;
+  background: none;
+  font-size: 25px;
+  color: #575757;
+  cursor: pointer;
+}
+
+/*errorเวลาใส่ รหัสผ่านปัจจุบัน ไม่ถูกต้องของหน้าเปลี่ยนรหัสผ่าน*/
+.pleasepassword{
+  display: none;
+  color: #F44336;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*กรอบเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordlasttime{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*เปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.type-password-lasttime-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.input-password-lasttime-1{
+  cursor: text;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #8C8D8D;
+  font-size: 15px;
+}
+
+/*กรอบของปุ่ม บันทึกรหัสผ่าน ยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-btn-cancel{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px 45px 50px;
+}
+
+/*ปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1{
+  position: relative;
+  background-color: #FCD53F;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ข้อความปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-2{
+  font-size: 20px;
+  cursor: pointer;
+  padding: 25px 55px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1::before{
+  content: "";
+  background-color: #ffce0b;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password{
+  position: relative;
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password-1{
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  padding: 25px 90px;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password::before{
+  content: "";
+  background-color: #cacaca;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำห้เป็นวงกลมเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+
+
+
+
+
+/*ส่วนของหน้า Assessment.blade.php*/
+/*หน้าต่างเมนู*/
+.container-assessment {
+  background-color: #FFFFFF;
+  width: 250px;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  z-index: 11;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Dashboard-assessment {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 30px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img-assessment {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-assess {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img-assess {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
+.btn-Assessment-assess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FCD53F;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+
+/*รูปปุ่มแบบประเมิน/กิจกรรม*/
+.btn-Assessment-img-assess {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 5px;
+}
+
+/*หัวข้อแบบประเมินของหน้าแบบประเมิน/กิจกรรม*/
+.sectionlist{
+  color: #5381EC;
+  width: 100%;
+  font-size: 20px;
+}
+
+/*กรอบของปุ่มรายการกิจกรรมกับแบบประเมิน*/
+.btn-activity-rate{
+  margin-top: 40px;
+  position: relative;
+  bottom: 18px;
+  display: flex;
+  gap: 60px;
+}
+
+/*ปุ่มกดรายการกิจกรรม*/
+.btn-activity{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 60px;
+  padding: 0px 30px;
+  border-radius: 15px;
+  border: none;
+  background: none;
+  overflow: hidden;
+  gap: 20px;
+}
+
+/*เอฟเฟ็กต์ปุ่มกดรายการกิจกรรม*/
+.btn-activity::before{
+  content: "";
+  background-color: #e9e7e7;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, height 0.1s;
+}
+
+/*กรอบเอฟเฟ็กต์ปุ่มกดรายการกิจกรรม*/
+.btn-activity:hover::before{
+  width: 300px;
+  height: 150px;
+} 
+
+
+/*ปุ่มตัวอักษรรายการกิจกรรม*/
+.btn-activity-1{
+  color: #8C8D8D;
+  font-size: 23px;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มตัวอักษรรายการกิจกรรมใช้เป็นสี js*/
+.btn-activity.active .btn-activity-1{ 
+  color: #000;
+}
+
+/*ปุ่มตัวเลขรายการกิจกรรม*/
+.number-activity{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8C8D8D;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 100px;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มตัวเลขรายการกิจกรรมเอาไว้ไปดึงใช้ใน js*/
+.number-activity.active {
+  background-color: #FCD53F;
+  border: 0.4px solid #8C8D8D;
+  color: #000;
+}
+
+/*กรอบปุ่มตัวเลข-อักษรแบบประเมิน*/
+.btn-rate{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 60px;
+  padding: 0px 30px;
+  border-radius: 15px;
+  border: none;
+  background: none;
+  overflow: hidden;
+  gap: 20px;
+}
+
+
+
+
+/*เอฟเฟ็กต์ปุ่มตัวเลข-อักษรแบบประเมิน*/
+.btn-rate::before{
+  content: "";
+  background-color: #e9e7e7;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+}
+
+/*กรอบเอฟเฟ็กต์ปุ่มตัวเลข-อักษรแบบประเมิน*/
+.btn-rate:hover::before{
+  width: 300px;
+  height: 150px;
+}
+
+/*ปุ่มตัวอักษรแบบประเมิน*/
+.btn-rate-1{
+  color: #8C8D8D;
+  font-size: 23px;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-rate.active .btn-rate-1{
+  color: #000000;
+}
+
+/*ปุ่มตัวเลขแบบประเมิน*/
+.number-rate{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8C8D8D;
+  color: #ffffff;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.number-rate.active{
+   background-color: #FCD53F;
+   border: 0.4px solid #8C8D8D;
+   color: #000;
+}
+
+
+/*หลอดเอาไว้กดลิงค์เปลี่ยนหน้าไปพร้อมรายการกิจกรรมกับและแบบประเมิน*/
+.bulb-black{
+  background-color: #1C1C1E;
+  width: 100%;
+  height: 5px;
+  position: relative;
+  bottom: 20px;
+  border-radius: 15px;
+  min-width: 800px;
+}
+
+/*หลอดสีเหลืองเอาไว้กดลิงค์เปลี่ยนหน้าไปพร้อมรายการกิจกรรมกับและแบบประเมิน*/
+.bulb-yellow{
+  background-color: #FCD53F;
+  width: 300px;
+  height: 5px;
+  border-radius: 15px;
+}
+
+
+/*กรอบสีเทา*/
+.frame-grey{
+  width: 100%;
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  padding: 0px 0px 35px 0px;
+  min-width: 800px;
+  display: none;
+}
+
+/*เอาไว้โชว์หน้าตอนเข้าหน้าเว็บ*/
+.frame-grey.active{
+  display: block;
+}
+
+/*กรอบของกิจกรรมทั้งหมดจนถึงปุ่มสร้างกิจกรรมด่วน*/
+.activity-Closed-Open{
+  display: flex;
+  align-items: center;
+  padding: 30px 30px 0px 50px;
+  gap: 60px;
+}
+
+/*กรอบของตัวเลขกิจกรรมทั้งหมด*/
+.all-activities{
+  background-color: #1C1C1E;
+  border-radius: 15px;
+  width: 300px;
+  height: 140px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ตัวเลขของกิจกรรมทั้งหมด*/
+.activities-number-assessment{
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: 900;
+  position: relative;
+  bottom: 25px;
+  left: 30px;
+  min-width: 140px;
+}
+
+/*ตัวอักษรของกิจกรรมทั้งหมด*/
+.activities-assessment{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  position: relative;
+  bottom: 50px;
+  left: 30px;
+}
+
+/*กรอบของตัวเลขปิดแล้ว*/
+.Closed-assessment{
+  background-color: #1C1C1E;
+  border-radius: 15px;
+  width: 300px;
+  height: 140px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ตัวเลขของปิดแล้ว*/
+.Closed-assessment-1{
+  color: #FF453A;
+  font-size: 50px;
+  font-weight: 900;
+  position: relative;
+  bottom: 25px;
+  left: 30px;
+}
+
+/*ตัวอักษรของปิดแล้ว*/
+.Closed-assessment-2{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  position: relative;
+  bottom: 50px;
+  left: 30px;
+  min-width: 140px;
+}
+
+/*กรอบของตัวเลขเปิดอยู่*/
+.Open-assessment{
+  background-color: #1C1C1E;
+  border-radius: 15px;
+  width: 300px;
+  height: 140px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ตัวเลขของเปิดอยู่*/
+.open-assessment-1{
+  color: #30D158;
+  font-size: 50px;
+  font-weight: 900;
+  position: relative;
+  bottom: 25px;
+  left: 30px;
+}
+
+/*ตัวอักษรของเปิดอยู่*/
+.open-assessment-2{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+  position: relative;
+  bottom: 50px;
+  left: 30px;
+  min-width: 140px;
+}
+
+/*กรอบของปุ่มสร้างกิจกรรมด่วน*/
+.btn-build-activityurgent{
+  position: relative;
+  margin-left: auto;
+  margin-bottom: auto;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
+.btn-build-activityurgent::before{
+  content: "";
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
+.btn-build-activityurgent:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+/*ข้อความของปุ่มสร้างกิจกรรมด่วน*/
+.btn-build-activityurgent-1{
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #000000;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มรูปบวกของสร้างกิจกรรมด่วน*/
+.btn-plus{
+  font-size: 40px;
+  padding: 0px 10px 0px 0px;
+}
+
+/*กรอบของค้นหารายชื่อกิจกรรม*/
+.frame-search-activity{
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  margin-left: 50px;
+  margin-top: 50px;
+  width: 600px;
+  border-radius: 15px;
+  border: 2px solid #8C8D8D;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์กรอบของค้นหารายชื่อกิจกรรม*/
+.frame-search-activity::before{
+  content: "";
+  background-color: #ececec77;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, height 0.1s;
+}
+
+/*กรอบเอฟเฟ็กต์ของค้นหารายชื่อกิจกรรม*/
+.frame-search-activity:hover::before{
+  width: 650px;
+  height: 200px;
+}
+
+/*ข้อความของค้นหารายชื่อกิจกรรม*/
+.search-activity{
+  outline: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 600px;
+  border: none;
+  background: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*รูปของค้นหารายชื่อกิจกรรม*/
+.img-btn-activity{
+  position: absolute;
+  margin-left: 530px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/*กรอบของการสร้างกิจกรรมด่วน*/
+.frame-activity-assessment{
+  background-color: #1C1C1E;
+  width: 650px;
+  margin-left: 50px;
+  margin-top: 30px;
+  padding: 5px 15px 30px 20px;
+  border-radius: 20px;
+  border-left: 30px solid var(--activity-color);
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*กรอบของหัวข้อความกับข้อความปิดแล้ว*/
+.framecontentactivity{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*หัวข้อความ*/
+.headingactivity{
+  color: #FCD53F;
+  font-size: 21px;
+}
+
+/*กรอบของสถานะปิดแล้ว*/
+.frameclosed{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  width: 100px;
+  height: 30px;
+  gap: 8px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
+.frameclosed::before{
+  content: "";
+  background-color: #d313131f;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, height 0.1s;
+}
+
+.frameclosed.is-open::before{
+  background-color: #17a34a1f;
+}
+
+/*กรอบวงกลมของเอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
+.frameclosed:hover::before{
+  width: 100px;
+  height: 100px;
+}
+
+/*จุดของสถานะ*/
+.pointclosed{
+  background-color: #D31313;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.frameclosed.is-open .pointclosed{
+  background-color: #17A34A;
+}
+
+/*ข้อความปิดแล้ว*/
+.closed, .open{
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.closed{
+  color: #D31313;
+}
+.open{
+  color: #17A34A;
+}
+
+/*ข้อความเวลาสร้าง*/
+.messagecreationtime{
+  color: #8E8E93;
+  position: relative;
+  bottom: 30px;
+}
+
+/*เส้นระหว่างสร้างเมื่อกับผู้เข้าร่วม*/
+.lineactivity-1{
+  border: 2px solid #2C2C2E;
+  position: relative;
+  bottom: 10px;
+}
+
+/*กรอบของผู้เข้าร่วมสูงสุด กับ หมดเวลา*/
+.maximumnumber_outtime{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/*ข้อความของผู้เข้าร่วมสูงสุด*/
+.maximumnumber{
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*ข้อความของหมดเวลา*/
+.outtime{
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*กรอบของดินสอ สมุดโน้ต แบตสำรอง*/
+.framerank-1-2-3{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/*กรอบของดินสอ*/
+.framerank-1-assessment{
+  position: relative;
+  background-color: #2C2C2E;
+  border-radius: 20px;
+  padding: 0px 60px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของกรอบของดินสอ*/
+.framerank-1-assessment::before{
+  content: "";
+  background-color: #39393a;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, heigth 0.1s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดินสอ*/
+.framerank-1-assessment:hover::before{
+  width: 200px;
+  height: 200px;
+}
+
+/*ข้อความของกรอบของดินสอ*/
+.rank-1-assessment{
+  color: #AEAEB2;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/*เส้นของส่วนกรอบดินสอ กับ คนลงทะเบียน*/
+.lineactivity-2{
+  margin-top: 30px;
+  border: 2px solid #2C2C2E;
+}
+
+/*กรอบของคนลงทะเบียน กับ ปุ่มดูรายละเอียด*/
+.register{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/*ข้อความคนลงทะเบียนแล้ว*/
+.register-1{
+  color: #AEAEB2;
+  font-size: 20px;
+}
+
+/*กรอบของดูรายละเอียด*/
+.view-details{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid #48484A;
+  border-radius: 15px;
+  width: 270px;
+  height: 60px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
+.view-details::before{
+  content: "";
+  background-color: #39393a;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
+.view-details:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
+/*ข้อความของกรอบของดูรายละเอียด*/
+.view-details-1{
+  border: none;
+  color: #ffffff;
+  padding: 30px 80px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+}
+
+/*กรอบของข้อมูลทั้งหมดของปุ่มแบบประเมินเอาไว้กดปิด*/
+.frame-evaluation{
+  display: none;
+}
+/*กรอบของข้อมูลทั้งหมดของปุ่มแบบประเมินเอาไว้โชว์ข้อมูล*/
+.frame-evaluation.active{
+  display: block;
+}
+
+/*กรอบของกรอบค้นหาถึง ปุ่มมอบหมายแบบประเมิน*/
+.frame-search-activity-1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+/*กรอบค้นหา*/
+.search-activity-1{
+  position: relative;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  width: 600px;
+  border-radius: 15px;
+  border: 2px solid #8C8D8D;
+  overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*เอฟเฟ็กต์ของกรอบค้นหา*/
+.search-activity-1::before{
+  content: "";
+  background-color: #ececec77;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 57%;
+  transform: translate(-50%, -50%);
+  transition: width 0.1s, height 0.1s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของกรอบค้นหา*/
+.search-activity-1:hover::before{
+  width: 650px;
+  height: 200px;
+}
+
+/*ข้อความของกรอบค้นหา*/
+.search-activity-2{
+  outline: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 600px;
+  border: none;
+  background: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*รูปของกรอบค้นหา*/
+.img-btn-activity-2{
+  position: absolute;
+  margin-left: 530px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/*กรอบของทั้งหมด ปิดแล้ว เปิดอยู่*/
+.framealloffon-assessment{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/*กรอบของปุ่มทั้งหมด*/
+.frameall-assessment{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 2px solid #8C8D8D;
+  width: 120px;
+  height: 45px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+/*เอาไว้ดึงสีไปเปลี่ยนใน js*/
+.frameall-assessment.active{
+  border: 2px solid #FCD53F;
+  background-color: #222;
+  height: 50px;
+}
+/*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
+.frameall-assessment::before{
+  content: "";
+  background-color: #8c8d8d18;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+/*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
+.frameall-assessment.active::before{
+  background-color: #000;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
+.frameall-assessment:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความของปุ่มทั้งหมด*/
+.all-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  padding-right: 5px;
+  color: #8C8D8D;
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อความของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+.all-assessment.active{
+  color: #FCD53F;
+}
+
+/*ตัวเลขของปุ่มทั้งหมด*/
+.allnumber-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  color: #8C8D8D;
+  position: relative;
+  top: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+/*ตัวเลขของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+.allnumber-assessment.active{
+  color: #FCD53F;
+}
+
+/*กรอบของปุ่มปิดแล้ว*/
+.frameoff-assessment{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 2px solid #8C8D8D;
+  width: 120px;
+  height: 45px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอาไว้ดึงสีไปเปลี่ยนใน js*/
+.frameoff-assessment.active{
+  border: 2px solid #FCD53F;
+  background-color: #222;
+  height: 50px;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มปิดแล้ว*/
+.frameoff-assessment::before{
+  content: "";
+  background-color: #8c8d8d18;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
+.frameoff-assessment.active::before{
+  background-color: #000;
+}
+
+/*กรอบวงลอมเอฟเฟ็กต์กรอบของปุ่มปิดแล้ว*/
+.frameoff-assessment:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+/*ข้อความของปุ่มปิดแล้ว*/
+.off-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  padding-right: 5px;
+  color: #8C8D8D;
+  position: relative;
+  z-index: 1;
+}
+
+/*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+.off-assessment.active{
+  color: #FCD53F;
+}
+
+/*ตัวเลขของปุ่มปิดแล้ว*/
+.offnumber-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  color: #8C8D8D;
+  position: relative;
+  top: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+/*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+.offnumber-assessment.active{
+  color: #FCD53F;
+}
+
+
+/*กรอบของปุ่มปิดแล้ว*/
+.farmeon-assessment{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 2px solid #8C8D8D;
+  width: 120px;
+  height: 45px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.on-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  padding-right: 5px;
+  color: #8C8D8D;
+  position: relative;
+  z-index: 1;
+}
+
+.onnumber-assessment{
+  font-size: 16px;
+  font-weight: 600;
+  color: #8C8D8D;
+  position: relative;
+  top: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+/*ส่วนของหน้า Profile.blade.php*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content-1 {
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/*โปรไฟล์ผู้ใช้*/
+.btn-user-wrapper-1 {
+  background-color: #FCD53F;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  right: 0;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  min-width: 1000px;
+  z-index: 15;
+}
+
+/*ชื่อผู้ใช้*/
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #FCD53F;
+  background-color: #757575;
+  font-weight: 1000;
+  font-size: 20px;
+  padding: 6px 40px;
+}
+
+/*รูปโปรไฟล์ผู้ใช้*/
+.btn-user-img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/*แถบเมนูด้านซ้าย*/
+.Top_frame {
+  position: fixed;
+}
+
+/*หน้าต่างเมนู*/
+.container-1 {
+  background-color: #FFFFFF;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 250px;
+  z-index: 20;
+}
+
+/*โลโก้ BUULIB*/
+.img-Logo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Dashboard-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 30px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Manage_users-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการผู้ใช้*/
+.btn-Manage_users-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel-img-1 {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รปปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-img-1 {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*กรอบชื่อปุ่มออกจากระบบ*/
+.btn-logout-wrapper {
+  margin-top: auto;
+}
+
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.2px solid #8C8D8D;
+  width: 250px;
+  height: 55px;
+  text-decoration: none;
+  color: #D31313;
+  font-weight: 1000;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+/*ชื่อโปรไฟล์*/
+.My_Profile {
+  color: #5381EC;
+  width: 100%;
+  font-size: 20px;
+}
+
+/*โปรไฟล์*/
+.Profile {
+  background-color: #000000;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 10px 14px rgba(0,0,0,0.22);
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/*โปรไฟล์ฝั่งซ้าย*/
+.profile-left {
+  display: grid;
+  grid-template-columns: 200px;
+  align-items: center;
+  gap: 20px 70px;
+  flex: 1;
+}
+
+/*รูปภาพผู้ใช้*/
+.photo_user {
+  width: 150px;
+  height: 150px;
+  margin-left: 25px;
+  border-radius: 50%;
+  background-color: #000000;
+}
+
+/*รูปภาพผู้ใช้*/
+.photo_user-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*กรอบpopup*/
+.Change_image{
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ขอบปุ่มเปลี่ยนรูปโปรไฟล์*/
+.Change_image::before{
+  content: "";
+  background-color: #e7e7e7;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+/*กรอบเอฟเฟ็กต์ขอบปุ่มเปลี่ยนรูปโปรไฟล์*/
+.Change_image:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
+/*ชื่อปุ่มpopup*/
+.btn-open {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 10px 31px;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*เอาไว้ขนาดชื่อรูปโปรไฟล์*/
+.Nameprofile {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/*กรอบชื่อตรงสถานะ*/
+.useremailstatus {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/*ชื่อ*/
+.name {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 1000;
+  margin-top: 50px;
+}
+.name h2 {
+  margin: 0;
+}
+
+/*อีเมล*/
+.email {
+  color: #8C8D8D;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/*สถานะ*/
+.In_use {
+  background-color: #57D96B;
+  color: #FFFFFF;
+  font-weight: 1000;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+/*กรอบของสุ่มทั้งหมด*/
+.profile-right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+/*กล่องสุ่มทั้งหมด*/
+.framerandom_all {
+  background-color: #FFFFFF;
+  width: 250px;
+  height:200px;
+  border-radius: 10px;
+  padding: 20px;
+  flex-direction: column;
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+}
+
+/*สุ่มทั้งหมด*/
+.random_all {
+  margin-bottom: 15px;
+}
+
+/* กล่องจำนวนรางวัลที่ได้ */
+.frameReward_Box {
+  background-color: #FFFFFF;
+  width: 250px;
+  height:200px;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-size: 17px;
+}
+
+/*กล่องของรางวัล*/
+.Reward_Box {
+  margin-bottom: 15px;
+}
+
+/*ตัวเลขจำนวนรางวัลที่ได้*/
+.Number_of_Reward {
+  font-size: 18px;
+}
+.Number_of_Reward h1{
+  margin: 6px;
+}
+
+/*ตัวเลขจำนวนรางวัลที่ได้*/
+.Award_Name {
+  color: #000000;
+  font-size: 15px;
+}
+.Award_Name h4{
+  margin: 15px;
+  font-size: 17px;
+}
+
+
+/*กรอบ popup ของเปลี่ยนรูปโปรไฟล์*/
+.popup-box{
+  position: absolute;
+  top: 35%;
+  left: 8%;
+  background-color: #ffffff;
+  width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border: none;
+  z-index: 2;
+}
+/*ซ่อนปุ่มเลือกรูปภาพ*/
+#uploadphoto {
+    display: none;
+}
+
+/*รูปกล้องในpopup เปลี่ยนรูปโปรไฟล์*/
+.img-Camera-icon{
+  width: 260px;
+  height: 130px;
+  padding: 30px 0px 0px 160px;
+}
+
+/*หัวข้อpopupเปลี่ยรหัสผ่าน*/
+.Change-photo{
+  padding: 0px 0px 0px 100px;
+  font-size: 28px;
+}
+
+/*ข้อความในกรอบpopup*/
+.choosephotonew{
+  padding: 0px 0px 0px 80px;
+  font-size: 19px;
+}
+
+/*ขนาดไฟล์ในกรอบ popup*/
+.file_size_5MB{
+  padding: 0px 0px 0px 120px;
+  font-size: 19px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*ข้อความerrorในกรอบpopup*/
+.upload_error{
+  padding: 0px 0px 0px 20px;
+  color: #e02424;
+  font-size: 17px;
+  position: relative;
+  bottom: 10px;
+  display: none;
+}
+
+/*กรอบของปุ่ม เลือกรูปภาพ ยกเลิก*/
+.btn-select-file-1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 0px 30px 0px;
+}
+
+/*กรอบปุ่มเลือกรูปภาพ*/
+.btn-select-file{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  background-color: #FCD53F;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/*ข้อความปุ่มเลือกรูปภาพ*/
+.btn-select-file-2{
+  border: none;
+  background: none;
+  padding: 15px 153px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*เอฟเฟ็ตปุ่มเลือกรูปภาพ*/
+.btn-select-file::before{
+  content: "";
+  background-color: #ffce0b;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+/*กรอบวงกลมเอฟเฟ็ตปุ่มเลือกรูปภาพ*/
+.btn-select-file:hover::before{
+  width: 500px;
+  height: 500px;
+}
+
+/*กรอบของปุ่มยกเลิก*/
+.btn-close{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  background-color: #222;
+  color: #ffffff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็ตของปุ่มยกเลิก*/
+.btn-close::before{
+  content: "";
+  background-color: #000000;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบเอฟเฟ็ตของปุ่มปุ่มยกเลิก*/
+.btn-close:hover::before{
+  width: 500px;
+  height: 500px;
+}
+
+/*ปุ่มยกเลิก*/
+.btn-close-1{
+  border: none;
+  background: none;
+  padding: 17px 183px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อมูลผู้ใช้*/
+.User_Information {
+  background-color: #ffffff;
+  flex: 3;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  padding-bottom: 60px;
+  margin-top: 60px;
+}
+
+/*ข้อมูลส่วนตัว*/
+.personal_information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28px;
+  padding: 10px 25px 0 25px;
+}
+
+
+/*ข้อความปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #222;
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #000000;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบเอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-2 {
+  border: none;
+  font-size: 15px;
+  font-weight: 1000;
+  padding: 17px 30px;
+  background: none;
+  color: #ffffff;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบpopupแก้ไขข้อมูล*/
+.popup-btn-edit-1{
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 400px;
+  height: 340px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+/*รูปpopupแก้ไขข้อมูล*/
+.img-edit-information{
+  width: 80px;
+  height: 80px;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+/*หัวข้อของpopup แก้ไขข้อมูล*/
+.confirm-edit{
+  font-size: 28px;
+  margin-left: 115px;
+}
+
+/*ข้อความข้างใน popup แก้ไขข้อมูล*/
+.message-confirm-edit{
+  font-size: 19px;
+  margin-left: 60px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบของปุ่ม ยืนยัน ยกเลิก*/
+.btn_editinformation{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบปุ่มยืนยัน*/
+.btn-Edit-information-profile{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btn-Edit-information-profile::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #000000;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btn-Edit-information-profile:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยืนยัน*/
+.btn-Edit-information-profile-1{
+  padding: 15px 60px;
+  color: #FCD53F;
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบปุ่มยกเลิก*/
+.btn-close-Edit{
+  position: relative;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #8C8D8D;
+  position: relative;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ปุ่มยกเลิก*/
+.btn-close-Edit::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ปุ่มยกเลิก*/
+.btn-close-Edit:hover:before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยกเลิก*/
+.btn-close-Edit-1{
+  padding: 15px 50px;
+  font-size: 23px;
+  color: #8C8D8D;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: 800;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*ชื่อผู้ใช้*/
+.username {
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 100px;
+}
+/*หัวข้อชื่อผู้ใช้ ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.Type_username{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกข้อมูลชื่อผู้ใช้*/
+.input-username {
+  flex: 1;
+  border-radius: 7px;
+  width: 540px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+  font-size: 15px; 
+}
+
+/*ชื่อ-นามสกุล*/
+.FirstName-LastName {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 50px;
+}
+/*หัวข้อชื่อ-นามสกุล ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.FirstNameLastName{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกข้อมูลชื่อ-นามสกุล*/
+.input-FirstName-LastName {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+
+}
+
+/* ช่องกรอกอีเมล */
+.email-user {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 120px;
+}
+
+/*หัวข้ออีเมล ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typeemail-user{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกอีเมล*/
+.input-email-user {
+  width: 100%;
+  border-radius: 7px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*เบอร์โทร*/
+.phone_number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 85px;
+}
+
+/*หัวข้อเบอร์โทร ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typephone_number{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกเบอร์โทร*/
+.input-phonenumber {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*ปิดไว้เพราะไม่ได้ใช้เอาไว้แต่ให้ระบบทำงานได้อย่างมีเต็มที่*/
+.hidden-username-1{
+  display: none;
+}
+
+/*เปลี่ยนรหัสผ่าน*/
+.Change_password {
+  background-color: #FFFFFF;
+  flex: 2;
+  max-height: 370px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  margin-top: 60px;
+}
+
+/*รหัสผ่าน*/
+.password {
+  font-size: 28px;
+  padding: 20px 25px 0 25px;
+}
+
+/*รหัสผ่านปัจจุบัน*/
+.Current_password {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 70px;
+}
+
+/*หัวข้อรหัสผ่านปัจจุบัน ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typeCurrent_password{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกรหัสผ่านปัจจุบัน*/
+.input-Current_password {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*เปลี่ยนครั้งล่าสุด*/
+.Last_updated {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 28px;
+}
+
+/*หัวข้อเปลี่ยนรหัสครั้งล่าสุด ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typelast_updated{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกเปลี่ยนรหัสครั้งล่าสุด*/
+.input-Last_updated {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #8C8D8D;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*ปุ่มเปลี่ยนหัสผ่าน*/
+.Password-Change-Button {
+  position: relative;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  background-color: #222;
+  margin-left: auto;
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
+.Password-Change-Button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #000000;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, heigth 0.6s;
+}
+
+/*กรอบวงกลทเอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
+.Password-Change-Button:hover::before {
+  width: 250px;
+  height: 250px;
+}
+
+/*กรอบpopupเปลี่ยนรหัสผ่าน*/
+.btn-Change-password{
+  border: none;
+  font-size: 15px;
+  font-weight: 1000;
+  padding: 17px 23px 17px 23px;
+  background: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบpopupเปลี่ยนรหัสผ่าน*/
+.popup-btn-Change-1{
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 400px;
+  height: 340px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+
+.popup-btn-Change-1.active{
+  display: block;
+}
+
+
+/*รูปpopupเปลี่ยนรหัสผ่าน*/
+.img-change-password{
+  width: 80px;
+  height: 80px;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+/*หัวข้อของpopup เปลี่ยนรหัสผ่าน*/
+.change-password{
+  font-size: 28px;
+  margin-left: 95px;
+}
+
+/*ข้อความข้างใน popup เปลี่ยนรหัสผ่าน*/
+.message-change-password{
+  font-size: 19px;
+  margin-left: 50px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบของปุ่ม ยืนยัน ยกเลิกเปลี่ยนรหัสผ่าน*/
+.btn_changepassword{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบปุ่มหลักของปุ่มยืนยัน*/
+.btn-change-password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #222;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/*เอฟเฟ็กต์วงกลมสีดำ*/
+.btn-change-password::before {
+  content: "";
+  background-color: #000000;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบเอฟเฟ็กต์วงกลมสีดำ*/
+.btn-change-password:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* กรอบตัวหนังสือของปุ่มยืนยัน */
+.btn-change-password-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 60px;
+  font-size: 23px;
+  font-weight: 800;
+  color: #FCD53F;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบปุ่มยกเลิกของเปลี่ยนรหัสผ่าน*/
+.btn-close-change{
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #8C8D8D;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.btn-close-change::before{
+  content: "";
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-close-change:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยกเลิกของเปลี่ยนรหัสผ่าน*/
+.btn-close-change-1{
+  font-size: 23px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-weight: 800;
+  padding: 15px 50px;
+  color: #8C8D8D;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+
+
+
+
+/* ตกแต่งหน้าจัดการของรางวัล */
+/*หน้าต่างเมนู*/
+.container2 {
+  background-color: #FFFFFF;
+  z-index: 11;
+  width: 250px;       
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+/*โลโก้ BUULIB*/
+.img-Logo2{
+  width: 150px;
+  height:250px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+/*ชื่อปุ่มแดชบอร์ด*/
+.btn-Dashboard2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -6px;
+  margin-left: 13px;
+  text-decoration: none;   
+  color: #8C8D8D;           
+  font-weight: 1000;
+  font-size: 20px;
+  width: 220px;
+  height: 65px;
+}
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+  margin-top: -1px;
+}
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  margin-left: 2px;
+  text-decoration: none; 
+  background-color: #FCD535;  
+  color: #000000;  
+  font-weight: 1000;
+  padding: 10px;
+  font-size: 20px;
+  border-radius:999px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Manage_users2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 18px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 20px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+}
+/*รูปปุ่มจัดการผู้ใช้*/ 
+.btn-Manage_users-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 34px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 20px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+}
+/*รูปปุ่มจัดการวงล้อสุ่ม*/ 
+.btn-Managewheel-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 55px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 20px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+  line-height: 1.2;
+}
+/*รปปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-img2{
+width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 710px;
+  border: 0.2px solid #8C8D8D; 
+  width: 248px;
+  height: 50px;
+  text-decoration: none;   
+  color: #D31313;           
+  font-weight: 1000;
+  font-size: 20px;
+}
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img2 {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.detail {
+    padding: 30px 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* หัวข้อจัดการรางวัล */
+.maintitle-name {
+    color: #4A86E8;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    margin-right: 65%;
+    top: 10%;
+    right: 10%;
+    
+}
+.searchbox {
+    display: flex;
+    margin-top: 150px;
+    align-items: center;
+    margin-bottom: 25px;
+    margin-right: 35%;
+}
+
+/* กล่องหุ้มช่องกรอกค้นหา */
+.input-wrapper {
+    position: relative;
+    width: 450px;
+}
+
+/* ช่องพิมพ์ค้นหาสีดำ */
+.search-box {
+    width: 100%;
+    height: 65px;
+    background-color: #000000;
+    color: #FCD53F;
+    border: none;
+    border-radius: 8px;
+    padding: 20px 40px;
+    font-size: large;
+    outline: none;
+    box-sizing: border-box;
+}
+.search-icon {
+    position: absolute;
+    right: 14px;
+    top: 39%;
+    width: 16px;
+}
+
+/* ปุ่มเพิ่มของรางวัล */
+.addbutton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 400px;
+  top: 220px;
+}
+.addreward-btn{
+  border-radius: 10px;
+  color: #000000;
+  display: flex;
+  padding: 15px 25px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.addreward {
+    background-color: #FCD535;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.plus-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 10px;
+}
+
+.addrwdtext {
+    color: #000000;
+    font-weight: bold;
+    font-size: large;
+}
+
+.reward-list {
+    width: 60%;
+    background-color: #fffdfd;
+    border-radius: 10px;
+    border-color: #000000;
+}
+
+/* หัวข้อตาราง */
+.topic-rewardlist {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    padding: 0 20px 12px 20px;
+    color: #000000;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.topic-rewardlist {
+    margin: 0;
+    font-size: 15px;
+}
+
+.reward-list-name {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.box-reward1 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    align-items: center;
+    background-color: #262626;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    
+}
+.box-reward2 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    align-items: center;
+    background-color: #262626;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    
+}
+.box-reward3 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    align-items: center;
+    background-color: #262626;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    
+}
+.box-reward4 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    align-items: center;
+    background-color: #262626;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    
+}
+.box-reward5 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    align-items: center;
+    background-color: #262626;
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    
+}
+/* แต่งปุ่มแก้ไขกับลบรางวัล */
+.edit-delete-button1 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.edit-delete-button2 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.edit-delete-button3 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.edit-delete-button4 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.edit-delete-button5 {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+/* หน้าเพิ่มรางวัล */
+.add-box-main{
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 70px;
+  background-color: #d4d1d1;
+  width: 750px;
+  height: 650px;
+  margin: auto;
+  margin-top: 150px;
+}
+.Topic-addreward{
+  color: #4A86E8;
+}
+/* input ชื่อรางวัล */
+.name-reward{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: #ffe748;
+}
+/* input หมวดหมู่รางวัล */
+.category-reward{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: #ffe748;
+}
+/* input อัตรารางวัล */
+.rate-reward{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: #ffe748;
+}
+/* ปุ่มบันทึกรางวัล */
+.ad-botton{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  width: 500px;
+}
+.addreward-btn1{
+  border-radius: 10px;
+  background-color: #ffe748;
+  color: #000000;
+  display: flex;
+  padding: 15px 25px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+.cancle-btn{
+  display: flex;
+  align-items: center;
+  font-size: larger;
+  justify-content: center;
+  width: 150px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #e91e1e;
+  color: #E1F5EE;
+  text-decoration: none;
+}
+/* หน้าจัดการผู้ใช้ */
+.manageuser-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+/* หน้าจัดการผู้ใช้ทั้งหมด */
+/* บ็อกหลักของรายชื่อผู้ใช้ทั้งหมด */
+.manageusr-mainbox{
+  background-color: #000000;
+  width: 70%;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5%;
+  left: 2%;
+}
+/* หัวข้อในตารางรายชื่อ */
+.usr-topic{
+  color: #FCD53F;
+  display: grid;
+  grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
+  margin-top: 10px;
+}
+/* ปรับตำแหน่งหัวข้อ ผู้ใช้ */
+.topic-name-usr{
+  margin-left: 20px;
+}
+/* ปุ่มเพิ่มผู้ใช้ */
+.add-usr-btn{
+  background-color: #FCD535;
+  color: #000000;
+  border-radius: 10px;
+  width: 160px;
+  height: 50px;
+  font-size: medium;
+  font-weight: bold;
+  position: relative;
+  left: 87%;
+  top: 110px;
+}
+/* กล่องเสิร์ชรายชื่อ */
+.search-usr-box{
+  margin-top: 50px;
+  margin-left: 20px;
+  display: flex;
+}
+.usr-searchbox{
+  border-radius: 10px;
+  background-color: #000000;
+  border-color: #EF9F27;
+  color: #A2A2A5;
+  width: 27%;
+  height: 50px;
+  font-size: 17px;
+}
+/* ไอคอนแว่นขยาย */
+.search-usr-png{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top: 10px;
+  right: 40px;
+}
+/* หัวข้อย่อย */
+.sub-manageuser{
+  position: relative;
+  color: #FFFFFF;
+  left: 24px;
+}
+/* จัดตำแหน่งหัวข้อหลัก */
+.manageusr-title{
+  display: flex;
+  position: absolute;
+  color: #4A86E8;
+  left: 15%;
+  top: 10%;
+}
+/* list-user */
+.user-1{
+  display: grid;
+  grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
+  color: #E1F5EE;
+}
+.name1{
+  margin-left: 15px;
+}
+.manage-btn3{
+  display: flex;
+}
+/* ปุ่มหน้าจัดการผู้ใช้ */
+/*หน้าต่างเมนู*/
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Dashboard3 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img3 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.btn-Manage_Rewards3 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img3 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Manage_users3{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  margin-left: 2px;
+  text-decoration: none; 
+  background-color: #FCD535;  
+  color: #000000;  
+  font-weight: 1000;
+  padding: 10px;
+  font-size: 20px;
+  border-radius:999px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  height: 70px;
+}
+/*รูปปุ่มจัดการผู้ใช้*/ 
+.btn-Manage_users-img3{
+  width: 45px;
+  height: 25px;
+  margin-right: 15px; 
+  margin-left: -20px;
+}
