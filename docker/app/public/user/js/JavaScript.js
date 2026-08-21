@@ -1,13 +1,14 @@
 //เอาไว้บอกว่าให้สร้าง html ให้เสร็จก่อนแล้วค่อยมาเรียกใช่ js
 document.addEventListener('DOMContentLoaded', function(){
 
+
 //ส่วนของหน้า profile.blade.php
 //ปุ่มเปิดpopupเปลี่ยนรูปโปรไฟล์ หน้า profile.blade.php
 const btnopen_1 = document.getElementById('btn_open_1');
 
 if(btnopen_1){
     btnopen_1.addEventListener('click', function(){
-        document.getElementById('image-popup').showModal();
+        document.getElementById('image-popup').show();
     });
 }
 
@@ -25,7 +26,7 @@ const editinformation = document.getElementById('Edit_information')
 
 if(editinformation){
     editinformation.addEventListener('click', function(){
-        document.getElementById('popup_btn_edit').showModal();
+        document.getElementById('popup_btn_edit').show();
 });
 }
 
@@ -43,7 +44,7 @@ const Changepassword = document.getElementById('Change_password');
 
 if(Changepassword){
     Changepassword.addEventListener('click', function(){
-        document.getElementById('popup_btn_Change').showModal();
+        document.getElementById('popup_btn_Change').show();
     });
 }
 
@@ -55,6 +56,7 @@ if(btnclosechange){
         document.getElementById('popup_btn_Change').close();
     });
 }
+
 
 
 

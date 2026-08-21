@@ -352,6 +352,7 @@ body {
   left: 80px;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
 }
 
 /*ข้อความในกรอบลูกศรกดกลับหน้า Profile*/
@@ -915,6 +916,7 @@ body {
   justify-content: flex-end;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
   min-width: 1000px;
+  z-index: 15;
 }
 
 /*ชื่อผู้ใช้*/
@@ -941,6 +943,7 @@ body {
 /*แถบเมนูด้านซ้าย*/
 .Top_frame {
   position: fixed;
+    z-index: 16;
 }
 
 /*หน้าต่างเมนู*/
@@ -953,6 +956,7 @@ body {
   align-items: center;
   position: fixed;
   width: 250px;
+
 }
 
 /*โลโก้ BUULIB*/
@@ -1261,7 +1265,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border: none;
-  z-index: 2;
+  z-index: 18;
 }
 /*ซ่อนปุ่มเลือกรูปภาพ*/
 #uploadphoto {
@@ -1475,7 +1479,7 @@ body {
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
   position: absolute;
-  top: 25%;
+  top: 35%;
   left: 8%;
   width: 400px;
   height: 340px;
@@ -1815,7 +1819,7 @@ body {
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
   position: absolute;
-  top: 25%;
+  top: 35%;
   left: 8%;
   width: 400px;
   height: 340px;

@@ -162,12 +162,12 @@
     <!--อีเมลผู้ใช้-->
     <div class="email-user">
         <label class="typeemail-user"> อีเมล </label>
-        <input type="text" id="Compose_email"  value="Admin02@gmail.com" class="input-email-user" autocomplete="email" disabled>
+        <input type="email" id="Compose_email"  value="Admin02@gmail.com" class="input-email-user" autocomplete="email" disabled>
     </div>
     <!--เบอร์โทร-->
     <div class="phone_number">
         <label class="typephone_number"> เบอร์โทร </label>
-        <input type="text" id="Enter_phonenumber" value="081-123-xxxx" class="input-phonenumber"  autocomplete="tel" disabled>
+        <input type="tel" id="Enter_phonenumber" value="081-123-xxxx" class="input-phonenumber"  autocomplete="tel" disabled>
     </div>
     </form>
 </div>

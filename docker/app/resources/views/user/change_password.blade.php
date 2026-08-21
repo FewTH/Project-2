@@ -60,9 +60,9 @@
             <p class="savesuccess-changepassword"> ✓ บันทึกรหัสผ่านสำเร็จแล้ว </p>
         </div>
         <div class="passwordcurrent">
-            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">รหัสผ่านปัจจุบัน</label> <br>
+            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรหัสผ่าน</label> <br>
             <div class="img-eye-password">
-            <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" value="12345678" >
+            <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" value="12345678" autocomplete="new-password">
             <button class="img-eye" id="img_eye">👁</button>
             </div>
             <p class="pleasepassword" id="please_password">กรุณาใส่รหัสผ่านให้ถูกต้อง เช่น 12345678</p>

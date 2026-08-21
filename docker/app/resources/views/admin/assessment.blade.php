@@ -101,7 +101,7 @@
         </div>
 
 <template id="cardTemplate"> 
-    <div class="frame-activity-assessment">
+    <div class="frame-activity-assessment" data-status="closed">
         <div class="framecontentactivity">
             <h4 class="headingactivity">กิจกรรมเช็คอินโต้รุ่ง ช่วงติวไฟนอล 2568</h4>
             <div class="frameclosed">
@@ -136,7 +136,7 @@
     </div>
 </template>
 
-<div id="cardContainer"></div>
+<div class="card-Container" id="cardContainer"></div>
 </div>
 
 <!--กรอบของแบบประเมิน-->
@@ -147,9 +147,9 @@
         <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-btn-activity-2" id="img_btn_activity_1">
         </div>
         <div class="framealloffon-assessment">
-            <button class="frameall-assessment" id="frameall_assessment">
-                <p class="all-assessment" id="all_assessment">ทั้งหมด</p>
-                <span class="allnumber-assessment" id="allnumber_assessment">(0)</span>
+            <button class="frameall-assessment active" id="frameall_assessment">
+                <p class="all-assessment active" id="all_assessment">ทั้งหมด</p>
+                <span class="allnumber-assessment active" id="allnumber_assessment">(0)</span>
             </button>
             <button class="frameoff-assessment" id="frameoff_assessment">
                 <p class="off-assessment" id="off_assessment">ปิดแล้ว</p>
@@ -171,50 +171,50 @@
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">
 
-
-        <div class="sectionassessment">
-            <h3>แบบประเมิน - BUU Book Fair 2569</h3>
+    <template id="Sectionassessment">
+        <div class="sectionassessment" data-status="open" data-random="false">
+            <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
             <div class="frameinformation-assessment">
                 <div class="framesection-status">
-                    <h2 class="section-assessment">แบบประเมิน - BUU Book Fair 2569</h2>
+                    <h3 class="section-assessment">แบบประเมิน - BUU Book Fair 2569</h3>
                     <div class="frame-status">
                         <p class="point-status"></p>
                         <p class="message-status">เปิดอยู่</p>
                     </div>
-                    <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
-                    <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
-                    <div>
-                    
-
-                        <button class="assessment-open-1">
-                            <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
-                        </button>
-
-
-                        <button class="enter-random">
-                            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
-                            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
-                        </button>
-
-
-
-                        <button class="view-history">
-                            <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                        </button>
-
-                        <button class="view-history">
-                            <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                        </button>
-                         
+                </div>
+                        <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
+                        <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
 
                 </div>
             </div>
 
         </div>
+    </template>
+    
+    <template id="Assessmentopen1">
+        <button class="assessment-open-1">
+            <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
+            </button>
+    </template>
 
-        
+    <template id="Enterrandom">
+        <a href="{{ url('admin/spinwhell') }}" class="enter-random">
+            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
+            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
+        </a>
+    </template>
+
+    <template id="Viewhistory">
+        <a href="{{ url('admin/history_random') }}" class="view-history">
+            <p class="message-view-history">ดูประวัติการสุ่ม</p>
+        </a>
+    </template> 
     </div>
 </div>
+
+<dialog class="assignevaluation" id="assign_evaluation">
+
+</dialog>
 
 </div>
 

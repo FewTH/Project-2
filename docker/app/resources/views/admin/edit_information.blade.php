@@ -66,20 +66,20 @@
         </div>
         <div class="username-1">
             <label class="type-username-1" for="Type_name_1">ชื่อผู้ใช้</label> <br>
-            <input type="text" class="input-username-1" id="Type_name_1" placeholder="Admin02">
+            <input type="text" class="input-username-1" id="Type_name_1" placeholder="Admin02" autocomplete="username">
         </div>
         <div class="FirstName-LastName-1">
             <label class="FirstNameLastName-1" for="Enter_firstname_lastname_1">ชื่อ-นามสกุล</label> <br>
-            <input type="text" class="input-FirstName-LastName-1" id="Enter_firstname_lastname_1" placeholder="นายนารี ใจดี">
+            <input type="text" class="input-FirstName-LastName-1" id="Enter_firstname_lastname_1" placeholder="นายนารี ใจดี" autocomplete="name">
         </div>
         <div class="email-user-1">
             <label class="typeemail-user-1" for="Compose_email_1"> อีเมล </label> <br>
-            <input type="email" class="input-email-user-1" id="Compose_email_1" placeholder="Admin02@gmail.com">
+            <input type="email" class="input-email-user-1" id="Compose_email_1" placeholder="Admin02@gmail.com" autocomplete="email">
             <p class="pleasecompleteemail" id="please_complete_email">กรุณากรอกอีเมลให้ถูกต้อง เช่น Admin02@gmail.com</p>
         </div>
         <div class="phone_number-1">
             <label class="typephone_number-1" for="Enter_phonenumber_1"> เบอร์โทร </label> <br>
-            <input type="text" class="input-phonenumber-1" id="Enter_phonenumber_1" placeholder="081-123-xxxx">
+            <input type="tel" class="input-phonenumber-1" id="Enter_phonenumber_1" placeholder="081-123-xxxx" autocomplete="tel">
             <p class="pleasewearnumber" id="please_wear_number">กรุณาใส่เบอร์ให้ให้ถูกต้อง เช่น 1234567890</p>
         </div>
         <div class="save-data-btn-cancel">

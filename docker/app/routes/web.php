@@ -47,6 +47,13 @@ Route::get('/admin/managespin', function () {
     return view('admin.managespin');
 });
 
+Route::get('/admin/spinwhell', function () {
+    return view('admin.spinwhell');
+});
+
+Route::get('/admin/history_random', function () {
+    return view('admin.history_random');
+});
 
 
 
