@@ -32,6 +32,7 @@ butactivity.addEventListener('click', function() {
     document.getElementById('btn_rate').classList.remove('active');
     document.getElementById('number_activity').classList.add('active');
     document.getElementById('number_rate').classList.remove('active');
+    document.getElementById('assign_evaluation').close();
     moveBulb(document.getElementById('btn_activity'));
 });
 }
@@ -157,7 +158,7 @@ if(frameonassessment){
     });
 }
 
-//กรองกรอบเปิดอยู่กับปิดแล้วตามสถานะ
+//กรองกรอบเปิดอยู่กับปิดแล้วตามสถานะ assessment.blade.php
 function alloffnoassessment(status){
     const lookforname = document.querySelectorAll('.sectionassessment');
     for (let i = 0; i < lookforname.length; i++) {
@@ -174,7 +175,7 @@ function alloffnoassessment(status){
 
 }
 
-//เปลี่ยนค่าตัวเลขอัตโนมัตใน ปุ่มทั้งหมด ปุ่มปิดแล้ว เปิดอยู่
+//เปลี่ยนค่าตัวเลขอัตโนมัตใน ปุ่มทั้งหมด ปุ่มปิดแล้ว เปิดอยู่ assessment.blade.php
 function updatenumberassessment() {
     const allnumberassessment =  document.getElementById('allnumber_assessment');
      if (!allnumberassessment) {
@@ -216,11 +217,66 @@ function updatenumberassessment() {
 updatenumberassessment();
 
 
+//ปุ่มกดเปิด popup มอบหมายแบบประเมิน  assessment.blade.php
+const btnassignassessment = document.getElementById('btn_assign_assessment');
+
+if (btnassignassessment){
+    btnassignassessment.addEventListener('click', function(){
+        document.getElementById('assign_evaluation').show();
+    })
+}
+
+//ปุ่มกดปิด popup มอบหมายแบบประเมิน  assessment.blade.php
+const closebutton = document.getElementById('close_button');
+
+if (closebutton){
+    closebutton.addEventListener('click', function(){
+        document.getElementById('assign_evaluation').close();
+    });
+}
 
 
+//การกดปุ่มยืนยันตอนเลือกทุกอย่างเสร็จใน popup มอบหมายแบบประเมิน assessment.blade.php
+const Evaluationformid = document.getElementById('Evaluation_formid');
+const btnconfirmevaluation = document.getElementById('btn_confirm_evaluation');
+const checkboxgivemanager = document.querySelectorAll('.checkboxgivemanager');
+
+    function updatastatusbtnconfirmevaluation(){
+        const Evaluationformid_1  = Evaluationformid.value;
 
 
+        let selectedcountname = 0;
+        
+        for (let i = 0; i < checkboxgivemanager.length; i++){
+            const checkboxgivemanager_1 = checkboxgivemanager[i];
+            if (checkboxgivemanager_1.checked){
+                selectedcountname++;
+            }
+        }
+        if (Evaluationformid_1 !== '' &&  selectedcountname > 0){
+            btnconfirmevaluation.disabled = false;
+        }else{
+            btnconfirmevaluation.disabled = true;
+        }
+}
+if(Evaluationformid && btnconfirmevaluation){
+Evaluationformid.addEventListener('change', updatastatusbtnconfirmevaluation);
+checkboxgivemanager.forEach(function (checkbox){
+    checkbox.addEventListener('change', updatastatusbtnconfirmevaluation);
+});
 
+updatastatusbtnconfirmevaluation()
+}
+
+//ปุ่มเอาไว้กดยกเลิกข้อความในpopup มอบหมายแบบประเมิน
+const btncancelevaluation = document.getElementById('btn_cancel_evaluation');
+
+if (btncancelevaluation){
+    btncancelevaluation.addEventListener('click', function(){
+       document.getElementById('frame-choose-evaluation').reset();
+        updatastatusbtnconfirmevaluation();
+    });
+}
 
 
 //ส่วนของหน้า profile.blade.php

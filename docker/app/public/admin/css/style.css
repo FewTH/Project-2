@@ -2122,7 +2122,9 @@ body {
 /*กรอบของการสร้างกิจกรรมด่วน*/
 .frame-activity-assessment{
   background-color: #1C1C1E;
-  width: 100%;
+  width: 700px;
+  margin-left: 50px;
+  margin-top: 40px;
   padding: 5px 15px 30px 20px;
   border-radius: 20px;
   border-left: 30px solid var(--activity-color);
@@ -2355,10 +2357,7 @@ body {
 .card-Container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-left: 50px;
   margin-right: 50px;
-  margin-top: 30px;
 }
 
 
@@ -3839,6 +3838,282 @@ body {
   position: relative;
   z-index: 1;
 }
+
+/*popupของมอบหมายแบบประเมิน*/
+.assignevaluation{
+  border: none;
+  background-color: #2E2E2D;
+  padding: 70px 20px 30px 20px;
+  border-radius: 15px;
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  z-index: 5;
+}
+
+/*กรอบของรูปข้อความปุ่มปิดของมอบหมายแบบประเมิน*/
+.framephotomessage-evaluation{
+  position: absolute;
+  top: -1px;
+  left: 0px;
+  background-color: #FFC200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 20px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+/*ข้อความของมอบหมายแบบประเมิน*/
+.message-evaluation{
+  position: relative;
+  right: 75px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/*กรอบของปุ่มปิดมอบหมายแบบประเมิน*/
+.close-button{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 2px solid #9E7800;
+  background: none;
+  height: 35px;
+  width: 45px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.close-button::before{
+  content: "";
+  background-color: rgba(255, 174, 0, 0.541);
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+
+.close-button:hover::before{
+  width: 150px;
+  height: 150px;
+}
+
+
+/*ข้อความข้างในปุ่มปิดมอบหมายแบบประเมิน*/
+.message-close-button{
+  font-size: 20px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อความเลือกแบบประเมินและตำแหน่งที่ต้องการมอบหมาย*/
+.message-choose{
+  color: #ffffff;
+  font-size: 18px;
+}
+
+/*กรอบของข้อความแบบประเมินกับที่เลือกแบบประเมิน*/
+.message-choose-evaluation-1{
+  padding: 0px 20px;
+}
+
+/*ข้อความแบบประเมิน*/
+.message-evaluation-1{
+  color: #AAAAAA;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*กรอบเลือกแบบประเมิน*/
+.evaluation-formid{
+  background-color: #222;
+  font-size: 14px;
+  outline: none;
+  border: 1.5px solid #8C8D8D;
+  border-radius: 15px;
+  padding: 0px 10px;
+  height: 40px;
+  width: 400px;
+  color: #ffffff;
+}
+
+/*กรอบของข้อความมอบหมายให้ผู้จัดการกับปุ่มติ๊กเลือกชื่อ*/
+.assigngivemanager{
+  padding: 20px 20px;
+}
+
+/*ข้อความมอบหมายให้ผู้จัด*/
+.message-assigngivemanager{
+  color: #AAAAAA;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*กรอบของกลุ่มปุ่มติ๊กชื่อ*/
+.frame-checkbox-name{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบของข้อความชื่อกับปุ่มติ๊ก*/
+.message-checkbox-name{
+  background-color: #222;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  width: 170px;
+  height: 70px;
+  padding: 0px 15px;
+  border-radius: 15px;
+  border: 1.5px solid #8C8D8D;
+  font-size: 18px;
+}
+
+/*ขนาดของปุ่มติ๊กถูก*/
+.checkboxgivemanager{
+  position: relative;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #8C8D8D;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*กรอบสีข้างในปุ่มติ๊กถูก*/
+.checkboxgivemanager:checked{
+  background-color: #4c4d4d;
+}
+
+/*เอฟเฟ็กต์ปุ่มติ๊กถูกทำให้มีรูปติดถูกขึ้นมา*/
+.checkboxgivemanager:checked::after{
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  width: 6px;
+  height: 12px;
+  border: 1px solid #ffffff;
+  border-width: 0px 2px 2px 0px;
+  transform: rotate(45deg);
+}
+
+/*เส้นระหว่างกรอบติ๊กชื่อ กับ ปุ่มยืนยัน ยกเลิก*/
+.linepopupevaluation{
+  border: 2px solid #4E4E4E;
+}
+
+/*กรอบของปุ่มยกเลิก ปุ่มยืนยัน*/
+.btn-cancel-btn-confirm{
+  padding: 15px 0px 0px 0px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+/*กรอบของปุ่มยกเลิก*/
+.btn-cancel-evaluation{
+  position: relative;
+  background: none;
+  border: 2px solid #8C8D8D;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 15px 25px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มยกเลิก*/
+.btn-cancel-evaluation::before{
+  content: "";
+  background-color: #8c8d8d2a;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มยกเลิก*/
+.btn-cancel-evaluation:hover::before{
+  width: 200px;
+  height: 200px;
+}
+
+/*ข้อตวามของปุ่มยกเลิก*/
+.btn-cancel-evaluation-1{
+  font-size: 14px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบของปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation{
+  position: relative;
+  background: none;
+  border: 2px solid #FFC200;
+  padding: 15px 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation::before{
+  content: "";
+  background-color: #ffc4001a;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation:hover::before{
+  width: 200px;
+  height: 200px;
+}
+
+.btn-confirm-evaluation:disabled{
+  border: 2px solid #4a4a4a;
+  cursor: not-allowed;
+}
+
+/*ข้อความของปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation-1{
+  font-size: 14px;
+  color: #FFC200;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*กรอบคุมแบบประเมินทั้งหมด*/
 .frame-grey-1{

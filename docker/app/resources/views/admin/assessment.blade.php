@@ -212,8 +212,50 @@
     </div>
 </div>
 
-<dialog class="assignevaluation" id="assign_evaluation">
+<dialog class="assignevaluation" id="assign_evaluation" >
+    <div class="framephotomessage-evaluation">
+        <img src="{{ asset('admin/img/รูปของมอบหมายแบบประเมิน.png') }}" alt="รูปของมอบหมายแบบประเมิน" class="photo-evaluation">
+        <p class="message-evaluation">มอบหมายแบบประเมิน</p>
+        <button class="close-button" id="close_button">     
+            <p class="message-close-button">x</p>
+        </button>
+    </div>
+    
+    <p class="message-choose">เลือกแบบประเมินและตำแหน่งที่ต้องการมอบหมาย</p>
+    <form id="frame-choose-evaluation">
+    <div class="message-choose-evaluation-1">
+        <p class="message-evaluation-1">แบบประเมิน</p>
+        <select name="evaluationformid" id="Evaluation_formid" class="evaluation-formid" required>
+            <option  value="" disabled selected >— เลือกแบบประเมิน —</option>
+            <option value="1" class="assessmentform">แบบประเมินความพึงพอใจ BUU Book Fair 2569</option>
+            <option value="2">แบบประเมินบุคคลากรในห้องสมุดประจำปี 2569</option>
+            <option value="3">แบบประเมินความพึงพอใจความสะอาดของห้องสมุด</option>
+        </select>
+    </div>
 
+        <div class="assigngivemanager">
+            <p class="message-assigngivemanager">มอบหมายให้ผู้จัดการ</p>     
+            <div class="frame-checkbox-name">
+                <label class="message-checkbox-name">
+                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="1" >ศุภากร วงศ์
+                </label>
+                <label class="message-checkbox-name">
+                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="2" >วชิรวัทย์
+                </label>
+            </div>
+        </div>
+
+    <hr class="linepopupevaluation">
+    <div class="btn-cancel-btn-confirm">
+        <button type="button" class="btn-cancel-evaluation" id="btn_cancel_evaluation1">
+           <spna class="btn-cancel-evaluation-1">ยกเลิก</spna>
+        </button>
+        <button type="submit" class="btn-confirm-evaluation" id="btn_confirm_evaluation"  disabled>
+            <spna class="btn-confirm-evaluation-1">ยืนยันการมอบหมาย</spna>
+        </button>
+
+    </div>
+    </form>
 </dialog>
 
 </div>

@@ -14,7 +14,7 @@ return new class extends Migration
             $user->string('full_name', 200);
             $user->string('email', 200);
             $user->string('password_hash', 255);
-            $user->enum('role', ['admin', 'wheel_manager', 'user'])->default('user');
+            $user->enum('role', ['admin', 'manager', 'user'])->default('user');
             $user->tinyInteger('is_active')->default(1);
             $user->timestamps();
         });

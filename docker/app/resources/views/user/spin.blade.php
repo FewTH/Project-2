@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('user/css/style.css') }}">
+ 
     <title>BUUGIFT</title>
 </head>
 <body class="main-spin-body">
@@ -14,6 +15,34 @@
             <span> User </span>
         </a>
     </div>
+
+{{-- อันหลักของหน้าสุ่ม --}}
+    <div class="main-content2">
+        <h1 class="Topic-main-spin">ศูนย์กลางสุ่มของขวัญ</h1>
+
+        <div class="main-search-spin2">
+            <input type="text" class="search-spin2" placeholder="ค้นหารายชื่อแบบประเมิน">
+            <img src="img/แว่นขยาย.png" alt="แว่นขยาย" class="search-spin-icon">
+        </div>
+        <div class="filter-main">
+            <button type="button" class="filter-btn active" id="all-btn">ทั้งหมด</button>
+            <button type="button" class="filter-btn" id="spined-btn">สุ่มแล้ว</button>
+            <button type="button" class="filter-btn" id="not-spin">ยังไม่สุ่ม</button>
+        </div>
+        <div class="main-spincontent">
+            <h2 class="spin-subtiltle">รายการแบบประเมินที่ทำแล้ว</h2>
+            <div class="test-content2">
+                <div class="spincontent-test1" id="test1">
+                    <h4 class="test101">แบบประเมินความเครียด1</h4>
+                </div>
+                <div class="spincontent-test2" id="test2" >
+                    <h4 class="test101">แบบประเมินความเครียด2</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="container-spin">
     <!-- โลโกมหาลัย -->
     <div class="img-Logo-spin">
@@ -45,5 +74,6 @@
         </a>
     </div>
     </div>
+       <script src="{{ asset('user/js/JavaScript.js') }}"></script>
 </body>
 </html>

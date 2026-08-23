@@ -2443,3 +2443,82 @@ body {
   height: 40px;
   margin-right: 15px;
 }
+/* ส่วนของเมนูศูนย์กลางสุ่มของรางวัล */
+.Topic-main-spin{
+  margin-top: 90px;
+  margin-left: 300px;
+  color: #5381EC;
+}
+/* แต่งช่องค้นหา */
+.main-search-spin2{
+  margin-top: 60px;
+  margin-left: 300px;
+}
+/* ช่องค้นหาหลัก */
+.search-spin2{
+  width: 350px;
+  height: 50px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border-color: #000000;
+  padding: 20px 10px 20px;
+  font-size: large;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+/* จัดตำแหน่งไอคอนแว่นขยาย */
+.search-spin-icon{
+  position: absolute;
+  margin-top: 10px;
+  left: 600px;
+}
+/* แต่งปุ่มฟิวเตอหน้าสุ่มของรางวัล */
+.filter-main{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 700px;
+}
+/* แต่งสีปุ่มฟิวเตอร์ */
+.filter-btn{
+  border-radius: 20px;
+  width: 90px;
+  height: 40px;
+  position: relative;
+  left: 20px;
+  bottom: 40px;
+  background-color: #FFFFFF;
+  color: #575757;
+  border: 3px solid #c7c0c0;
+  transition: all 0.10s ease;
+  outline: none;
+}
+/* ทำให้ปุ่มเวลาเอาเม้าไปแช่ไว้มีสี */
+.filter-btn:hover {
+    background-color: #c1bfbf;
+}
+.filter-btn.active {
+    background-color: #000000;
+    color: #ffc107;
+    border: 2px solid #ffc107;
+    font-weight: bold;
+}
+/* แต่งพื้นหลังหน้าสุ่ม */
+.main-spincontent{
+  background-color: #cfd0d0;
+  width: 70%;
+  height: auto;
+  margin-left: 300px;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+/* หัวข้อหน้าสุ่ม */
+.spin-subtiltle{
+  padding: 20px 0px 0px 0px;
+  position: relative;
+  color: #000000;
+}
+.test-content2{
+  display: flex;
+  justify-content: center;
+}

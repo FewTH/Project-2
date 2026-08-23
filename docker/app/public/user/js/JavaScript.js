@@ -59,8 +59,26 @@ if(btnclosechange){
 
 
 
+//หน้า spin.blade.php
+   const allbtn = document.getElementById('all-btn');
 
+    if(allbtn);
+        allbtn.addEventListener('click', function(){
+            document.getElementById('all-btn').classList.add('active');
+            document.getElementById('spined-btn').classList.remove('active');
+            document.getElementById('not-spin').classList.remove('active');
+            
+        });
 
+    const spinedbtn = document.getElementById('spined-btn');  
+    
+    if(spinedbtn);
+        spinedbtn.addEventListener('click', function(){
+            document.getElementById('spined-btn').classList.add('active');
+            document.getElementById('all-btn').classList.remove('active');
+            document.getElementById('not-spin').classList.remove('active');
+            
+        });
 
 
 
