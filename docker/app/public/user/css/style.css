@@ -1479,7 +1479,7 @@ body {
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
   position: absolute;
-  top: 35%;
+  top: 42%;
   left: 8%;
   width: 400px;
   height: 340px;
@@ -1704,11 +1704,17 @@ body {
   font-size: 15px;
 }
 
+/*ปิดไว้เพราะไม่ได้ใช้เอาไว้แต่ให้ระบบทำงานได้อย่างมีเต็มที่*/
+.hidden-username-1{
+  display: none;
+}
+
+
 /*เปลี่ยนรหัสผ่าน*/
 .Change_password {
   background-color: #FFFFFF;
   flex: 2;
-  max-height: 370px;
+  height: 370px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
   margin-top: 60px;
@@ -1819,7 +1825,7 @@ body {
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
   position: absolute;
-  top: 35%;
+  top: 42%;
   left: 8%;
   width: 400px;
   height: 340px;
@@ -2500,7 +2506,7 @@ body {
 .filter-btn.active {
     background-color: #000000;
     color: #ffc107;
-    border: 2px solid #ffc107;
+    border: 3px solid #ffc107;
     font-weight: bold;
 }
 /* แต่งพื้นหลังหน้าสุ่ม */

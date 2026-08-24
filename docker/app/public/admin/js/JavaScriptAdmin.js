@@ -158,7 +158,7 @@ if(frameonassessment){
     });
 }
 
-//กรองกรอบเปิดอยู่กับปิดแล้วตามสถานะ assessment.blade.php
+//กดปุ่มทั้งหมด ปิดอยู่ เปิดแล้ว ให้มันเข้าไปอยู่ในสถานะปุ่มของตัวมันเอง assessment.blade.php
 function alloffnoassessment(status){
     const lookforname = document.querySelectorAll('.sectionassessment');
     for (let i = 0; i < lookforname.length; i++) {
@@ -206,10 +206,10 @@ function updatenumberassessment() {
     
     //เปลี่ยนตัวแลขอัตโนมัตของปุ่ม ทั้งหมด ปิดแล้ว เปิดอยู่
     allnumberassessment.textContent='(' + allnumber + ')';
-    const offnumberassessment = document.getElementById('onnumber_assessment');
-    offnumberassessment.textContent='(' + opennumber + ')';
-    const onnumberassessment = document.getElementById('offnumber_assessment');
-    onnumberassessment.textContent='(' + closednumber  + ')';
+    const nonumberassessment = document.getElementById('onnumber_assessment');
+    nonumberassessment.textContent='(' + opennumber + ')';
+    const offnumberassessment = document.getElementById('offnumber_assessment');
+    offnumberassessment.textContent='(' + closednumber  + ')';
      //เปลี่ยนตัวแลขอัตโนมัตของปุ่ม แบบประเมิน
     const numberrate = document.getElementById('number_rate');
     numberrate.textContent= allnumber;
@@ -269,10 +269,10 @@ updatastatusbtnconfirmevaluation()
 }
 
 //ปุ่มเอาไว้กดยกเลิกข้อความในpopup มอบหมายแบบประเมิน
-const btncancelevaluation = document.getElementById('btn_cancel_evaluation');
+const btncancelevaluation1 = document.getElementById('btn_cancel_evaluation1');
 
-if (btncancelevaluation){
-    btncancelevaluation.addEventListener('click', function(){
+if (btncancelevaluation1){
+    btncancelevaluation1.addEventListener('click', function(){
        document.getElementById('frame-choose-evaluation').reset();
         updatastatusbtnconfirmevaluation();
     });
@@ -286,6 +286,8 @@ const btnopen_1 = document.getElementById('btn_open_1');
 if(btnopen_1){
     btnopen_1.addEventListener('click', function(){
         document.getElementById('image-popup').show();
+        document.getElementById('popup_btn_Change').close();
+        document.getElementById('popup_btn_edit').close();
     });
 }
 
@@ -304,6 +306,8 @@ const editinformation = document.getElementById('Edit_information')
 if(editinformation){
     editinformation.addEventListener('click', function(){
         document.getElementById('popup_btn_edit').show();
+        document.getElementById('image-popup').close();
+        document.getElementById('popup_btn_Change').close();    
 });
 }
 
@@ -322,6 +326,8 @@ const Changepassword = document.getElementById('Change_password');
 if(Changepassword){
     Changepassword.addEventListener('click', function(){
         document.getElementById('popup_btn_Change').show();
+        document.getElementById('popup_btn_edit').close();
+        document.getElementById('image-popup').close();
     });
 }
 

@@ -9,6 +9,8 @@ const btnopen_1 = document.getElementById('btn_open_1');
 if(btnopen_1){
     btnopen_1.addEventListener('click', function(){
         document.getElementById('image-popup').show();
+        document.getElementById('popup_btn_Change').close();
+        document.getElementById('popup_btn_edit').close();
     });
 }
 
@@ -27,6 +29,8 @@ const editinformation = document.getElementById('Edit_information')
 if(editinformation){
     editinformation.addEventListener('click', function(){
         document.getElementById('popup_btn_edit').show();
+        document.getElementById('image-popup').close();
+        document.getElementById('popup_btn_Change').close();    
 });
 }
 
@@ -45,6 +49,8 @@ const Changepassword = document.getElementById('Change_password');
 if(Changepassword){
     Changepassword.addEventListener('click', function(){
         document.getElementById('popup_btn_Change').show();
+        document.getElementById('popup_btn_edit').close();
+        document.getElementById('image-popup').close();
     });
 }
 
@@ -58,30 +64,35 @@ if(btnclosechange){
 }
 
 
-
 //หน้า spin.blade.php
    const allbtn = document.getElementById('all-btn');
 
-    if(allbtn);
+    if(allbtn){
         allbtn.addEventListener('click', function(){
             document.getElementById('all-btn').classList.add('active');
             document.getElementById('spined-btn').classList.remove('active');
             document.getElementById('not-spin').classList.remove('active');
             
         });
-
+    }
     const spinedbtn = document.getElementById('spined-btn');  
-    
-    if(spinedbtn);
+    if(spinedbtn){
         spinedbtn.addEventListener('click', function(){
             document.getElementById('spined-btn').classList.add('active');
             document.getElementById('all-btn').classList.remove('active');
             document.getElementById('not-spin').classList.remove('active');
             
         });
+    }
 
-
-
+    const notspinbtn = document.getElementById('not-spin');
+    if(notspinbtn){
+        notspinbtn.addEventListener('click' , function(){
+            document.getElementById('not-spin').classList.add('active');
+            document.getElementById('all-btn').classList.remove('active');
+            document.getElementById('spined-btn').classList.remove('active');
+        });
+    }
 
 
 

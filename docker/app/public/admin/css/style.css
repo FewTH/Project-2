@@ -3301,7 +3301,7 @@ body {
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
   position: absolute;
-  top: 35%;
+  top: 42%;
   left: 8%;
   width: 400px;
   height: 340px;
@@ -3534,7 +3534,7 @@ body {
 .Change_password {
   background-color: #FFFFFF;
   flex: 2;
-  max-height: 370px;
+  height: 370px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
   margin-top: 60px;
@@ -3645,7 +3645,7 @@ body {
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
   position: absolute;
-  top: 35%;
+  top: 42%;
   left: 8%;
   width: 400px;
   height: 340px;
@@ -3886,6 +3886,7 @@ body {
   width: 45px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 .close-button::before{
@@ -3972,11 +3973,11 @@ body {
   display: flex;
   align-items: center;
   width: 170px;
-  height: 70px;
+  height: 60px;
   padding: 0px 15px;
   border-radius: 15px;
   border: 1.5px solid #8C8D8D;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /*ขนาดของปุ่มติ๊กถูก*/
@@ -4030,6 +4031,7 @@ body {
   cursor: pointer;
   padding: 15px 25px;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็กต์กรอบของปุ่มยกเลิก*/
@@ -4069,12 +4071,20 @@ body {
   border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*สีตอนกดปุ่มไม่ได้ของกรอบปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation:disabled{
+  border: 2px solid #4a4a4a;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /*เอฟเฟ็กต์กรอบของปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation::before{
   content: "";
-  background-color: #ffc4001a;
+  background-color: #ffc4000e;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -4085,16 +4095,18 @@ body {
   transition: width 0.6s, height 0.6s;
 }
 
+/*สีตอนกดปุ่มไม่ได้ของกรอบเอฟเฟ็กต์ปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation:disabled::before{
+  background: none;
+}
+
 /*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation:hover::before{
   width: 200px;
   height: 200px;
 }
 
-.btn-confirm-evaluation:disabled{
-  border: 2px solid #4a4a4a;
-  cursor: not-allowed;
-}
+
 
 /*ข้อความของปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation-1{
@@ -4104,16 +4116,10 @@ body {
   z-index: 1;
 }
 
-
-
-
-
-
-
-
-
-
-
+/*สีตอนกดปุ่มไม่ได้ของข้อความปุ่มยืนยันการมอบหมาย*/
+.btn-confirm-evaluation:disabled .btn-confirm-evaluation-1{
+  color: #8a8a8a;
+}
 
 /*กรอบคุมแบบประเมินทั้งหมด*/
 .frame-grey-1{
@@ -4308,6 +4314,10 @@ body {
   color: #ffffff;
 }
 
+
+
+
+/*ส่วนของหน้า create_activity.blade.php*/
 
 
 

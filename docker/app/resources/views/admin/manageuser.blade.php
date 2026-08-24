@@ -40,7 +40,7 @@
                 <h3 class="name1">Admin</h3>
                 <h3 class="email1">admin@gmail.com</h3>
                 <h3 class="auth1">แอดมิน</h3>
-                <h3 class="sts1">ใช้งานอยุ่</h3>
+                <h3 class="sts1">ใช้งานอยู่</h3>
                 <div class="manage-btn3">
                     <img src="img\editicon.png" alt="รูปปุ่มแก้ไข" class="edit-icon3">
                     <img src="img\delete.png" alt="รูปปุ่มลบ" class="delete-icon3">

@@ -53,8 +53,55 @@
     </div>
 </div> 
 <div class="main-content">
-    <div>
-        <h1></h1>
+    <div class="createactivity">
+        <h1>สร้างกิจกรรม</h1>
+    </div>
+    <div class="grayframeactivity">
+        <a href="{{ url('admin/assessment') }}" class="frameretrospective">
+            <img src="{{ asset('admin/img/รูปของปุ่มย้อนกลับ.png') }}" alt="รูปของปุ่มย้อนกลับ" class="img-retrospective">
+            <p class="messageretrospective">ย้อนกลับ</p>
+        </a>
+        <img src="{{ asset('admin/img/รูปโลโกมหาลัย.png') }}" alt="รูปโลโกมหาลัย" class="img-university">
+        <div class="framecreateactivity">
+            <p class="messagecreateactivity">สร้างกิจกรรม</p>
+            <span class="create-QR">สร้าง QR แล้วให้ผู้เข้าร่วม scan ลงทะเบียนในงานได้เลย</span>
+            <form id="frame_blackactivity_1">
+            <div class="frameblackactivity">
+                <div class="framesettings">
+                    <p class="messagesettings">ตั้งค่ากิจกรรม</p>
+                    <span class="fill-information">กรอกข้อมูลด้านล่าง ระบบจะสร้าง QR code ให้อัตโนมัติ</span>
+                </div>
+                <div class="frameactivity-name">
+                    <div class="activity-name-1">
+                        <p class="messageactivity-name">ชื่อกิจกรรม</p>
+                        <span class="asteriskactivity">*</span>
+                    </div>
+                    <input type="text" class="framepimactivity-nam" placeholder="กิจกรรมแจกของรางวัลแก่ผู้เข้าห้องสมุด" id="frame_pim_activitynam">
+                </div>
+                <div class="framemessagedatetime">
+                    <p class="dateactivity">วันที่จัดกิจกรรม</p>
+                    <span class="asteriskdateactivity">*</span>
+                    <p class="closingtimeregister">เวลาปิด Register</p>
+                    <span class="asteriskregister">*</span>
+                </div>
+                <div class="frameweardate">
+                    <input type="date" class="framedatemonthyear" id="framedate_month_year">
+                    <input type="time" class="timeoffregister" id="time_offregister">
+                </div>
+                <div class="framechoosereward-1">
+                    <p class="messagechoosereward">เลือกของรางวัล</p>
+                    <span class="asteriskchoosereward">*</span>
+                    
+                </div>
+
+            </div>
+            </form>
+        </div>
+
+
+
+
+
     </div>
 </div>
 

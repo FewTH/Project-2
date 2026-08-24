@@ -144,6 +144,7 @@
             <button class="btn-Edit-information-2"> แก้ไขข้อมูล </button>
         </div>
     </div>
+    <form onsubmit="return false">
     <!--ชื่อผู้ใช้-->
     <div class="username">
         <label class="Type_username"> ชื่อผู้ใช้ </label> 
@@ -164,6 +165,7 @@
         <label class="typephone_number"> เบอร์โทร </label>
         <input type="text" id="Enter_phonenumber" value="081-123-xxxx" class="input-phonenumber" disabled>
     </div>
+    </form>
 </div>
 
 <!--เปลี่ยนรหัสผ่าน-->
@@ -171,21 +173,24 @@
     <div class="password">
         <h3>รหัสผ่าน/เปลี่ยนรหัสผ่าน</h3>
     </div>
+     <form onsubmit="return false">
+        <input type="text" name="username" value="Admin02" autocomplete="username" class="hidden-username-1">
     <!--รหัสผ่านปัจจุบัน-->
     <div class="Current_password">
         <label class="typeCurrent_password">รหัสผ่านปัจจุบัน</label>
-        <input type="password" id="Enter_password" value="12345678" class="input-Current_password" disabled>
+        <input type="password" id="Enter_password" value="12345678" class="input-Current_password" autocomplete="current-password" disabled>
     </div>
     <!--เปลี่ยนครั้งล่าสุด-->
     <div class="Last_updated">
         <label class="typelast_updated">เปลี่ยนรหัสครั้งล่าสุด</label>
         <input type="text" id="Update_password" value="01/01/2026" class="input-Last_updated" disabled>
     </div>
-    <!--ปุ่มเปลี่ยนหัสผ่าน-->
-    <div class="Password-Change-Button" id="Change_password">
-        <button class="btn-Change-password"> เปลี่ยนรหัสผ่าน </button>
-    </div>
-    </div>
+    </form>
+     <!--ปุ่มเปลี่ยนหัสผ่าน-->
+        <div class="Password-Change-Button" id="Change_password">
+            <button class="btn-Change-password"> เปลี่ยนรหัสผ่าน </button>
+        </div>
+</div>
     <!--popupแก้ไขข้อมูลส่วนตัว-->
     <div class="popup-btn-edit">
         <dialog id="popup_btn_edit" class="popup-btn-edit-1">

@@ -225,7 +225,7 @@
     <form id="frame-choose-evaluation">
     <div class="message-choose-evaluation-1">
         <p class="message-evaluation-1">แบบประเมิน</p>
-        <select name="evaluationformid" id="Evaluation_formid" class="evaluation-formid" required>
+        <select name="evaluationformid" id="Evaluation_formid" class="evaluation-formid">
             <option  value="" disabled selected >— เลือกแบบประเมิน —</option>
             <option value="1" class="assessmentform">แบบประเมินความพึงพอใจ BUU Book Fair 2569</option>
             <option value="2">แบบประเมินบุคคลากรในห้องสมุดประจำปี 2569</option>
