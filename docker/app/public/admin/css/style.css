@@ -4548,7 +4548,7 @@ body {
   background-color: #8B5CF6;
   width: 45px;
   height: 45px;
-  border-radius: 5px;
+  border-radius: 8px;
 
 }
 
@@ -4571,13 +4571,44 @@ body {
   color: #9CA3AF;
 }
 
+/*เปอร์เช็นของในกรอบเลือกของรางวัล*/
+.percentpencil{
+  color: #ffffff;
+  font-size: 18px;
+  position: relative;
+  left: 10px;
+}
+
+.btn-plus-delete-checkbox{
+  display: flex;
+  align-items: center;
+}
+
+
+.btndelete{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+  border: 2px solid #52525B;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  left: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 
 
 
 /*กรอบของตัวเลขเพิ่มลด*/
 .btndelete-1{
   text-align: center;
-  width: 30px;
+  width: 40px;
+  height: 30px;
+  border: none;
+  outline: none;
 }
 /*ลบตัวเพิ่มกดเดิมในกรอบของตัวเลขเพิ่มลด*/
 .btndelete-1::-webkit-outer-spin-button,

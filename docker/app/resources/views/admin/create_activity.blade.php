@@ -123,7 +123,7 @@
                          <p class="percentpencil">20.0%</p>
                           <div class="btn-plus-delete-checkbox">
                             <button type="button" class="btndelete" data-target="btndelete-2">-</button>
-                            <input type="number" id="btndelete-2" name="reward[2][qty]" value="1">
+                            <input type="number" id="btndelete-2" name="reward[2][qty]" value="1" class="btndelete-1">
                             <button type="button" class="btnplus" data-target="btndelete-2">+</button>
                             <input type="checkbox" class="btn-checkbox" name="reward[2][active]" value="2">
                         </div>
