@@ -6,7 +6,7 @@ services:
        context: ./nginx8.4
      working_dir: /app
      ports:
-       - "8320:80"
+       - "8323:80"
      networks:
        - assess_net
      volumes:
@@ -17,15 +17,14 @@ services:
      depends_on:
        - assess-db
      environment:
-       APPLICATION_UID: "9999"  # <-- แทนที่ 1000 ด้วย UID ของคุณ
-       APPLICATION_GID: "9999"  # <-- แทนที่ 1000 ด้วย GID ของคุณ
+       APPLICATION_UID: "9999"
+       APPLICATION_GID: "9999"
        DB_CONNECTION: mysql
        DB_HOST: assess-db
        DB_PORT: 3306
-       DB_DATABASE: assess_db
+       DB_DATABASE: buu-gift
        DB_USERNAME: assess
        DB_PASSWORD: "Assess@2025."
-
    assess-db:
      container_name: assess-db
      image: mysql:8.4.7
@@ -33,15 +32,14 @@ services:
        - db-data:/var/lib/mysql
      environment:
        MYSQL_ROOT_PASSWORD: "Assess@2025."
-       MYSQL_DATABASE: assess_db
+       MYSQL_DATABASE: buu-gift
        MYSQL_USER: assess
        MYSQL_PASSWORD: "Assess@2025."
      ports:
-       - "8321:3306" # DB Port
+       - "8324:3306"
      networks:
        - assess_net
      restart: always
-
    assess-myadmin:
      container_name: assess-myadmin
      image: phpmyadmin/phpmyadmin
@@ -49,11 +47,10 @@ services:
        PMA_HOST: assess-db
        MYSQL_ROOT_PASSWORD: "Assess@2025."
      ports:
-       - "8322:80" # MyAdmin Port
+       - "8325:80"
      networks:
        - assess_net
      restart: always
-
 networks:
    assess_net:
      driver: bridge

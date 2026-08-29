@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WheelController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,6 +10,10 @@ Route::get('/', function () {
 // ส่วนของ admin
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
+});
+
+Route::get('/admin/adduser', function () {
+    return view('admin.adduser');
 });
 
 Route::get('/admin/assessment', function () {
@@ -43,9 +48,11 @@ Route::get('/admin/manageuser', function () {
     return view('admin.manageuser');
 });
 
-Route::get('/admin/managespin', function () {
-    return view('admin.managespin');
-});
+// Route::get('/admin/managespin', function () {
+//     return view('admin.managespin');
+// });
+
+Route::get('/admin/managespin', [WheelController::class, 'index']);
 
 Route::get('/admin/spinwhell', function () {
     return view('admin.spinwhell');

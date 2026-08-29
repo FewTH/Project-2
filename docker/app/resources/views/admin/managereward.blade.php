@@ -48,10 +48,10 @@
     <div class="reward-list-name">
     <!-- รายการของรางวัลชิ้นที่ 1 -->
     <div class="box-reward1">
-    <span class="name-reward1">ดินสอ</span>
-        <span class="catigory-reward1">เครื่องเขียน</span>
-        <span class="rate-reward1">50%</span>
-        <span class="number-reward1">100</span>
+    <span class="name-reward001">ดินสอ</span>
+        <span class="catigory-reward001">เครื่องเขียน</span>
+        <span class="rate-reward001">50%</span>
+        <span class="number-reward001">100</span>
         <div class="edit-delete-button1">
         <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon1">
         <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon1">

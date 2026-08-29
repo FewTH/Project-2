@@ -4318,6 +4318,281 @@ body {
 
 
 /*ส่วนของหน้า create_activity.blade.php*/
+/*กรอบสีเทาคุมส่วนสร้างกิจรรมเอาไว้*/
+.createactivity{
+  color: #5381EC;
+  width: 100%;
+  font-size: 20px;
+}
+
+.grayframeactivity {
+  background-color: #D9D9D9;
+  width: 100%;
+  min-width: 900px;
+  border-radius: 20px;
+}
+
+/*กรอบของปุ่มย้อนกลับ*/
+.frameretrospective{
+  background-color: #ffffff;
+  width: 125px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 25px;
+  left: 20px;
+  gap: 12px;
+  border-radius: 12px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มย้อนกลับ*/
+.frameretrospective::before{
+  content: "";
+  background-color: #eeeeee;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมของเอฟเฟ็กต์กรอบของปุ่มย้อนกลับ*/
+.frameretrospective:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*รูปภาพของปุ่มย้อนกลับ*/
+.img-retrospective{
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อความของปุ่มย้อนกลับ*/
+.messageretrospective{
+  color: #222;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบคุมlogo กับข้อมูลการสร้างกิจกรรม*/
+.framecreateactivity{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 0px 30px 0px;
+}
+
+/*กรอบข้อความสร้างกิจกรรม กับ สร้าง QR */
+.messagecreateactivity{
+  display: flex;
+  flex-direction: column;
+  width: 830px;
+}
+
+/*ข้อความสร้างกิจกรรม*/
+.messagecreateactivity-1{
+  font-size: 30px;
+  font-weight: 600;
+}
+
+/*ข้อความสร้าง QR*/
+.create-QR{
+  font-size: 16px;
+  position: relative;
+  bottom: 20px;
+}
+
+/*กรอบของตั้งค่ากิจกรรม*/
+.frameblackactivity{
+  background-color: #22252A;
+  padding: 10px 30px 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 15px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ข้อความตั้งค่ากิจกรรม*/
+.messagesettings{
+  font-size: 22px;
+  font-weight: 600;
+  color: #FCD53F;
+}
+
+/*ข้อความกรอกข้อมูล*/
+.fill-information{
+  color: #ffffff;
+  font-size: 16px;
+  position: relative;
+  bottom: 10px;
+}
+
+/*ข้อความชื่อกิจกรรม*/
+.messageactivity-name{
+  font-size: 16px;
+  color: #FCD53F;
+  margin-top: 20px;
+}
+
+/*ข้อความเครื่องหมาย**/
+.asteriskactivity{
+  color: #EF4444;
+}
+
+/*กรอบเอาไว้พิมชื่อกิจกรรม*/
+.framepimactivity-nam{
+  background-color: #1C1E22;
+  padding: 15px 20px;
+  width: 800px;
+  border-radius: 15px;
+  border: 2px solid #373D47;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/*กรอบของข้อความวันที่จัดกิจกรรม เวลาปิด Register*/
+.framemessagedatetime{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/*ข้อความวันที่จัดกิจกรรม*/
+.dateactivity{
+  font-size: 16px;
+  color: #FCD53F;
+}
+
+/*ดอกจันของข้อความวันที่จัดกิจกรรม*/
+.asteriskdateactivity{
+  color: #EF4444;
+}
+
+/*ข้อความเวลาปิด Register*/
+.closingtime-Register{
+  position: relative;
+  right: 250px;
+  font-size: 16px;
+  color: #FCD53F;
+}
+
+/*กรอบของที่เอาไว้เลือกวันกับเวลา*/
+.frameweardate{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบของที่เอาไว้เลือกวันเดือนปี*/
+.framedatemonthyear{
+  background-color: #1C1E22;
+  width: 380px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 15px;
+  border: 2px solid #373D47;
+  color: #ffffff;
+  
+}
+
+/*ใช้สลับสีไอคอนของกรอบวันที่จัดกิจกรรมและเวลาปิด Register */
+.framedatemonthyear::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
+}
+
+/*ข้อความเลือกของรางวัล*/
+.messagechoosereward{
+  font-size: 16px;
+  color: #FCD53F;
+  margin-top: 25px;
+}
+
+/*ดอกจันของข้อความเลือกของรางวัล*/
+.asteriskchoosereward{
+  color: #EF4444;
+}
+
+/*กรอบของข้อมูลตัวเลือก*/
+.framebtn-chooserewardall{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบทั้งหมดของที่เอาไว้เลือกของรางวัล*/
+.framechooserewardall{
+  display: flex;
+  align-items: center;
+  border: 2px solid #444443; 
+  width: 380px;
+  height: 70px;
+  border-radius: 15px;
+  padding: 0px 10px;
+  gap: 12px;
+}
+
+/*กรอบของรูปเครื่องเขียน*/
+.framepicture{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8B5CF6;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+
+}
+
+/*กรอบของข้อความดินสอ เครื่องเขียน*/
+.framemessage2{
+  margin-bottom: 8px;
+}
+
+/*ข้อความดินสอ*/
+.messagepencil{
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/*ข้อความเครื่องเขียน*/
+.messagestationery{
+  position: relative;
+  bottom: 8px;
+  color: #9CA3AF;
+}
+
+
+
+
+/*กรอบของตัวเลขเพิ่มลด*/
+.btndelete-1{
+  text-align: center;
+  width: 30px;
+}
+/*ลบตัวเพิ่มกดเดิมในกรอบของตัวเลขเพิ่มลด*/
+.btndelete-1::-webkit-outer-spin-button,
+.btndelete-1::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4686,29 +4961,66 @@ width: 50px;
   margin: auto;
   margin-top: 150px;
 }
+/* แต่งบ็อกรางวัลหลัก */
 .Topic-addreward{
   color: #4A86E8;
+  margin-bottom: 100px;
 }
 /* input ชื่อรางวัล */
-.name-reward{
+.name-reward1{
   width: 500px;
   height: 40px;
   border-radius: 10px;
   border-color: #ffe748;
+}
+/* แต่งกล่องชื่อรางวัล */
+.input-reward-name{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 /* input หมวดหมู่รางวัล */
-.category-reward{
+.category-reward1{
   width: 500px;
   height: 40px;
   border-radius: 10px;
   border-color: #ffe748;
 }
-/* input อัตรารางวัล */
-.rate-reward{
+/* แต่งกล่อง dropdown หมวดหมู่รางวัล */
+.category_list_01{
+  width: 700px;
+}
+/* แต่งกล่องหมวดหมู่รางวัล */
+.input-reward-category{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+/* input จำนวนรางวัล */
+.num-reward1{
   width: 500px;
   height: 40px;
   border-radius: 10px;
   border-color: #ffe748;
+}
+/* แต่งกล่องจำนวนรางวัล */
+.input-reward-num{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+/* input อัตรารางวัล */
+.rate-reward1{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: #ffe748;
+}
+/* แต่งกล่องอัตรารางวัล */
+.input-reward-rate{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 /* ปุ่มบันทึกรางวัล */
 .ad-botton{
@@ -4819,6 +5131,43 @@ width: 50px;
   left: 15%;
   top: 10%;
 }
+/* แต่งหน้าเพิ่มชื่อผู้ใช้ */
+.name-usr-box{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.Topic-adduser{
+  color: #4A86E8;
+  margin-bottom: 60spx;
+}
+.name-usr-in{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: #ffe748;
+}
+.last-name-in{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border:2px solid #ffe748;
+}
+.last-usr-box{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.role-usr-box{
+  font-size: large;
+  font-weight: bold;
+}
+.role-usr-in{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border:2px solid #ffe748;
+}
 /* list-user */
 .user-1{
   display: grid;
@@ -4892,4 +5241,158 @@ width: 50px;
   height: 25px;
   margin-right: 15px; 
   margin-left: -20px;
+}
+
+
+
+/* ปุ่มเมนูsidebar หน้าจัดการวงล้อสุ่ม */
+/* ตกแต่งหน้าจัดการของรางวัล */
+/*หน้าต่างเมนู*/
+.container2 {
+  background-color: #FFFFFF;
+  z-index: 11;
+  width: 250px;       
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+/*โลโก้ BUULIB*/
+.img-Logo2{
+  width: 150px;
+  height:250px;
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+/*ชื่อปุ่มแดชบอร์ด*/
+.btn-Dashboard2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -6px;
+  margin-left: 13px;
+  text-decoration: none;   
+  color: #8C8D8D;           
+  font-weight: 1000;
+  font-size: 20px;
+  width: 220px;
+  height: 65px;
+}
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Dashboard-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+  margin-top: -1px;
+}
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards4{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 5px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 18px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+}
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Manage_Rewards-img4{
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Manage_users2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 18px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 20px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+}
+/*รูปปุ่มจัดการผู้ใช้*/ 
+.btn-Manage_users-img2{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel4{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  margin-left: 2px;
+  text-decoration: none; 
+  background-color: #FCD535;  
+  color: #000000;  
+  font-weight: 1000;
+  padding: 10px;
+  font-size: 20px;
+  border-radius:999px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+}
+/*รูปปุ่มจัดการวงล้อสุ่ม*/ 
+.btn-Managewheel-img4{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 55px;
+  text-decoration: none;   
+  font-weight: 1000;
+  font-size: 20px;
+  color: #8C8D8D; 
+  width: 220px;
+  height: 65px;
+  border-radius:999px;
+  line-height: 1.2;
+}
+/*รปปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-img2{
+width: 50px;
+  height: 50px;
+  margin-right: 15px; 
+  margin-left: -15px;
+}
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout2{
+  display:  flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 710px;
+  border: 0.2px solid #8C8D8D; 
+  width: 248px;
+  height: 50px;
+  text-decoration: none;   
+  color: #D31313;           
+  font-weight: 1000;
+  font-size: 20px;
+}
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img2 {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
 }

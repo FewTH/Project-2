@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reward extends Model
 {
-    //
+    protected $fillable = ['name', 'category', 'rate', 'quantity'];
 }

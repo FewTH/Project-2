@@ -15,14 +15,75 @@
         <span>Admin</span>
     </a>
 
-    
-
-
-
-
-
-
-
+    <div class="spinwheel-page">
+    <!-- ฝั่งซ้าย: คลังของรางวัล -->
+    <div class="reward-pool-box">
+        <div class="pool-header">
+            <h4>คลังของรางวัลทั้งหมด</h4>
+            <span class="pool-count">ทั้งหมด {{ $rewards->count() }} รายการ</span>
+        </div>
+        <div class="pool-search">
+            <input type="text" placeholder="ค้นหารายการรางวัล" id="rewardSearch">
+            <select id="categoryFilter">
+                <option value="">หมวดหมู่</option>
+                <option value="เครื่องเขียน">เครื่องเขียน</option>
+                <option value="ของใช้ทั่วไป">ของใช้ทั่วไป</option>
+                <!-- ... -->
+            </select>
+        </div>
+        <div class="pool-table-header">
+            <span>ชื่อรางวัล</span>
+            <span>อัตราการออก</span>
+            <span>จำนวน</span>
+            <span>เลือกจำนวน</span>
+        </div>
+        <div class="pool-list">
+            @foreach ($rewards as $reward)
+                <div class="pool-item" data-id="{{ $reward->id }}" data-rate="{{ $reward->rate }}">
+                    <div class="pool-item-info">
+                        <img src="{{ asset('admin/img/icon-' . $reward->id . '.png') }}" class="pool-item-icon">
+                        <div>
+                            <p class="pool-item-name">{{ $reward->name }}</p>
+                            <p class="pool-item-category">{{ $reward->category }}</p>
+                        </div>
+                    </div>
+                    <div class="pool-item-rate">
+                        {{ $reward->rate }}%
+                        <div class="rate-bar">
+                            <div class="rate-bar-fill" style="width: {{ $reward->rate }}%"></div>
+                        </div>
+                    </div>
+                    <span class="pool-item-qty">{{ $reward->quantity }}</span>
+                    <div class="pool-item-select-qty">
+                        <button type="button" class="qty-minus">−</button>
+                        <input type="number" class="qty-input" value="1" min="1" max="{{ $reward->quantity }}">
+                        <button type="button" class="qty-plus">+</button>
+                    </div>
+                    <!-- ตัวติ๊กเลือก -->
+                    <input type="checkbox" class="pool-item-checkbox" id="reward-{{ $reward->id }}">
+                    <label for="reward-{{ $reward->id }}" class="pool-item-radio-visual"></label>
+                </div>
+            @endforeach
+        </div>
+        <p class="pool-footer-note">ขั้นต่ำควรเลือก 2 รายการ</p>
+        <button type="button" class="btn-clear-all" disabled>ล้างทั้งหมด</button>
+    </div>
+    <!-- ฝั่งขวา: วงล้อ -->
+    <div class="wheel-box">
+        <div class="wheel-header">
+            <h4>วงล้อสุ่มรางวัล</h4>
+            <span class="wheel-count">จำนวนของรางวัล <span id="selectedCount">0</span> รายการ</span>
+        </div>
+        <div class="wheel-canvas-wrapper">
+            <canvas id="rewardWheel" width="500" height="500"></canvas>
+            <div class="wheel-pointer"></div>
+        </div>
+        <div class="wheel-actions">
+            <button type="button" class="btn-save-wheel" id="saveWheelBtn">บันทึกวงล้อ</button>
+            <button type="button" class="btn-cancel-wheel">ยกเลิก</button>
+        </div>
+    </div>
+</div>
 
     <!-- ส่วนเมนูsidebar -->
     <div class="container2">
@@ -36,16 +97,16 @@
             <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img2">
             <span>แดชบอร์ด</span>
         </a>
-        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards2">
-            <img src="{{ asset('admin/img/รูปจัดการรางวัลสีดำ.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img2">
+        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards4">
+            <img src="{{ asset('admin/img/รูปจัดการรางวัล.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img4">
             <span>จัดการรางวัล</span>
         </a>
         <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users2">
             <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img2">
             <span>จัดการผู้ใช้</span>
         </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel2">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img2">
+        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel4">
+            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่มสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img4">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
         <a href="{{ url('admin/assessment') }}" class="btn-Assessment2">
