@@ -50,12 +50,14 @@
 <div class="main-content-change-password">
     <!--กรอบเปลี่ยนรหัสผ่าน-->
     <div class="framechangepassword">
-        <div class=arrow-2>
-        <a href="{{ url('user/profile') }}" class="arrow-1">←</a>
-        </div>
-        <img src="{{ asset('user/img/รูปเปลี่ยนรหัสผ่าน.png') }}" alt="รูปเปลี่ยนรหัสผ่าน" class="img-change-password-1">
-        <h1 class="sectionchangepassword">เปลี่ยนรหัสผ่าน</h1>
-        <p class="messagchangepassword">เปลี่ยนรหัสผ่านใหม่ของคุณได้ที่นี่</p>
+            <a href="{{ url('user/profile') }}" class="arrow-2">
+                <p class="arrow-1">←</p>
+            </a>
+            <img src="{{ asset('user/img/รูปเปลี่ยนรหัสผ่าน.png') }}" alt="รูปเปลี่ยนรหัสผ่าน" class="img-change-password-1">
+            <h1 class="sectionchangepassword">เปลี่ยนรหัสผ่าน</h1>
+            <p class="messagchangepassword">เปลี่ยนรหัสผ่านใหม่ของคุณได้ที่นี่</p>
+
+        <form id="savesuccesschangepassword_1">
         <div class="savesuccesschangepassword" id="save_successchangepassword">
             <p class="savesuccess-changepassword"> ✓ บันทึกรหัสผ่านสำเร็จแล้ว </p>
         </div>
@@ -63,7 +65,7 @@
             <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรหัสผ่าน</label> <br>
             <div class="img-eye-password">
             <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" value="12345678" autocomplete="new-password">
-            <button class="img-eye" id="img_eye">👁</button>
+            <button  class="img-eye" id="img_eye">👁</button>
             </div>
             <p class="pleasepassword" id="please_password">กรุณาใส่รหัสผ่านให้ถูกต้อง เช่น 12345678</p>
         </div>
@@ -73,12 +75,13 @@
         </div>
         <div class="save-password-btn-cancel">
         <div class="save-password-1" id="save-password-1">
-            <button class="save-password-2">บันทึกรหัสผ่าน</button>
+            <button type="submit" class="save-password-2">บันทึกรหัสผ่าน</button>
         </div>
         <div class="btn-cancel-password" id="btn_cancel_password">
-            <button class="btn-cancel-password-1">ยกเลิก</button>
+            <button type="button" class="btn-cancel-password-1">ยกเลิก</button>
         </div>
         </div>
+        </form>
     </div>
 </div>
 <script src="{{ asset('user/js/JavaScript.js') }}"></script>

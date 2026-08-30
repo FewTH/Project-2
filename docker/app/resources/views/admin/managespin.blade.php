@@ -15,7 +15,7 @@
         <span>Admin</span>
     </a>
 
-    <div class="spinwheel-page">
+    {{-- <div class="spinwheel-page">
     <!-- ฝั่งซ้าย: คลังของรางวัล -->
     <div class="reward-pool-box">
         <div class="pool-header">
@@ -83,7 +83,7 @@
             <button type="button" class="btn-cancel-wheel">ยกเลิก</button>
         </div>
     </div>
-</div>
+</div> --}}
 
     <!-- ส่วนเมนูsidebar -->
     <div class="container2">

@@ -50,18 +50,20 @@
 <div class="main-content-edit_information">
     <!--กรอบแก้ไขข้อมูลส่วนตัว-->
     <div class="frameeditinformation">
-         <div class="arrow-2">
-        <a href="{{ url('user/profile') }}" class="arrow-1">←</a>
-        </div>
+            <a href="{{ url('user/profile') }}" class="arrow-2">
+                <p class="arrow-1">←</p>
+            </a>
         <img src="{{ asset('user/img/รูปการแก้ไขข้อมูล.png') }}" alt="รูปการแก้ไขข้อมูล" class="img-edit-information-1">
         <h1 class="sectioneditinformation">แก้ไขข้อมูล</h1>
         <p class="messageditinformation">แก้ไขข้อมูลเดิมของคุณได้ที่นี่</p>
+        
+       <form id="save_success_1">
         <div class="savesuccess" id="save_success">
             <p class="savesuccess-1"> ✓ บันทึกข้อมูลสำเร็จแล้ว </p>
         </div>
         <div class="username-1">
             <label class="type-username-1" for="Type_name_1">ชื่อผู้ใช้</label> <br>
-            <input type="text" class="input-username-1" id="Type_name_1" placeholder="User01" autocomplete="username">
+            <input type="text" class="input-username-1" id="Type_name_1" placeholder="Admin02" autocomplete="username">
         </div>
         <div class="FirstName-LastName-1">
             <label class="FirstNameLastName-1" for="Enter_firstname_lastname_1">ชื่อ-นามสกุล</label> <br>
@@ -69,7 +71,7 @@
         </div>
         <div class="email-user-1">
             <label class="typeemail-user-1" for="Compose_email_1"> อีเมล </label> <br>
-            <input type="email" class="input-email-user-1" id="Compose_email_1" placeholder="User01@gmail.com" autocomplete="email">
+            <input type="email" class="input-email-user-1" id="Compose_email_1" placeholder="Admin02@gmail.com" autocomplete="email">
             <p class="pleasecompleteemail" id="please_complete_email">กรุณากรอกอีเมลให้ถูกต้อง เช่น Admin02@gmail.com</p>
         </div>
         <div class="phone_number-1">
@@ -79,12 +81,15 @@
         </div>
         <div class="save-data-btn-cancel">
             <div class="save-data-1"  id="save-data-2">
-            <button class="save-data-2">บันทึกข้อมูล</button>
+            <button type="submit" class="save-data-2">บันทึกข้อมูล</button>
         </div>
         <div class="btn-cancel-1"  id="btn_cancel_2">
-            <button class="btn-cancel-2">ยกเลิก</button>
+            <button type="button" class="btn-cancel-2">ยกเลิก</button>
         </div>
         </div>
+        </form>
+    </div>
+</div>
     </div>
 </div>
 <script src="{{ asset('user/js/JavaScript.js') }}"></script>

@@ -358,16 +358,17 @@ body {
 /*ข้อความในกรอบลูกศรกดกลับหน้า Profile*/
 .arrow-1{
   font-size: 30px;
-  text-decoration: none;
   color: #000000;
   position: relative;
+  padding-bottom: 5px;
 }
-
 
 /*ลูกศรกดกลับหน้า Profile*/
 .arrow-2{
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-decoration: none;
   background-color: #f1f1f1;
   width: 46px;
   height: 46px;
@@ -375,10 +376,10 @@ body {
   position: relative;
   top: 25px;
   left: 30px;
-  padding-top: 3px;
   box-shadow: 0px 6px 14px rgba(0,0,0,0.22);
   overflow: hidden;
 }
+
 
 /*เอฟเฟ็กต์ปุ่มลูกศรกดกลับหน้า Profile*/
 .arrow-2::before{

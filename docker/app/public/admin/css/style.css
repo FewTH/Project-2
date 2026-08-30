@@ -1112,9 +1112,9 @@ body {
 /*ข้อความในกรอบลูกศรกดกลับหน้า Profile*/
 .arrow-1{
   font-size: 30px;
-  text-decoration: none;
   color: #000000;
   position: relative;
+  padding-bottom: 5px;
 }
 
 
@@ -1122,6 +1122,8 @@ body {
 .arrow-2{
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-decoration: none;
   background-color: #f1f1f1;
   width: 46px;
   height: 46px;
@@ -1129,7 +1131,6 @@ body {
   position: relative;
   top: 25px;
   left: 30px;
-  padding-top: 3px;
   box-shadow: 0px 6px 14px rgba(0,0,0,0.22);
   overflow: hidden;
 }
@@ -2127,7 +2128,7 @@ body {
   margin-top: 40px;
   padding: 5px 15px 30px 20px;
   border-radius: 20px;
-  border-left: 30px solid var(--activity-color);
+  border-left: 30px solid var(--activity-color, #D31313);
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
@@ -4077,7 +4078,7 @@ body {
 /*สีตอนกดปุ่มไม่ได้ของกรอบปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation:disabled{
   border: 2px solid #4a4a4a;
-  cursor: not-allowed;
+  cursor: auto;
   box-shadow: none;
 }
 
@@ -4524,8 +4525,7 @@ body {
 
 /*กรอบของข้อมูลตัวเลือก*/
 .framebtn-chooserewardall{
-  display: flex;
-  justify-content: space-between;
+  padding: 0px 0px 20px 0px;
 }
 
 /*กรอบทั้งหมดของที่เอาไว้เลือกของรางวัล*/
@@ -4533,11 +4533,11 @@ body {
   display: flex;
   align-items: center;
   border: 2px solid #444443; 
-  width: 380px;
+  width: auto;
   height: 70px;
   border-radius: 15px;
-  padding: 0px 10px;
-  gap: 12px;
+  padding: 0px 20px;
+  gap: 20px;
 }
 
 /*กรอบของรูปเครื่องเขียน*/
@@ -4545,15 +4545,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #8B5CF6;
+  background-color: var(--activity-color, #8B5CF6);
   width: 45px;
   height: 45px;
   border-radius: 8px;
-
 }
 
 /*กรอบของข้อความดินสอ เครื่องเขียน*/
 .framemessage2{
+  width: 260px;
   margin-bottom: 8px;
 }
 
@@ -4577,14 +4577,16 @@ body {
   font-size: 18px;
   position: relative;
   left: 10px;
+  width: 220px;
 }
 
+/*กรอบของปุ่มบวกลบกับปุ่มติกถูก*/
 .btn-plus-delete-checkbox{
   display: flex;
   align-items: center;
 }
 
-
+/*ปุ่มลบ*/
 .btndelete{
   display: flex;
   align-items: center;
@@ -4594,21 +4596,20 @@ body {
   width: 35px;
   height: 35px;
   position: relative;
-  left: 10px;
-  border-radius: 8px;
+  left: 8px;
+  border-radius: 8px 0px 0px 8px;
   cursor: pointer;
 }
-
-
 
 
 /*กรอบของตัวเลขเพิ่มลด*/
 .btndelete-1{
   text-align: center;
   width: 40px;
-  height: 30px;
+  height: 35px;
   border: none;
   outline: none;
+  border: 2px solid #52525B;
 }
 /*ลบตัวเพิ่มกดเดิมในกรอบของตัวเลขเพิ่มลด*/
 .btndelete-1::-webkit-outer-spin-button,
@@ -4616,14 +4617,191 @@ body {
     -webkit-appearance: none;
 }
 
+/*ปุ่มบวก*/
+.btnplus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  border: 2px solid #52525B;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  right: 8px;
+  border-radius: 0px 8px 8px 0px;
+  cursor: pointer;
+}
+
+/*ปุ่มเอาไว้ติ๊ก*/
+.btn-checkbox{
+  margin-left: 29px;
+  position: relative;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #8C8D8D;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*พิ้นหลังปุ่มเอาไว้ติ๊ก*/
+.btn-checkbox:checked{
+  background-color: #4c4d4d;
+}
+
+/*ทำให้กดแล้วมีติ๊กถูกขึ้นของปุ่มเอาไว้ติ๊ก*/
+.btn-checkbox:checked::after{
+  content: "";
+  position: absolute;
+  top: 12%;
+  left: 32%;
+  width: 6px;
+  height: 12px;
+  border: 1px solid #ffffff;
+  border-width: 0px 3px 3px 0px;
+  transform: rotate(45deg);
+}
+
+/*ปุ่มกดแสดงเพิ่มเติม*/
+.showmore{
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0px 30px;
+  height: 30px;
+  border-radius: 12px;
+  border: 2px solid #444443;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ปุ่มกดแสดงเพิ่มเติม*/
+.showmore::before{
+  content: "";
+  background-color: #1a1c1d;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  border-radius: 50%;
+}
+
+/*กรอบวงกลมทำเอฟเฟ็กต์ปุ่มกดแสดงเพิ่มเติม*/
+.showmore:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความแสดงเพิ่มเติม*/
+.messageshowmore{
+  font-size: 15px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบของจจำนวนผู้เข้าร่วมสูงสุด*/
+.frameandquantity{
+  padding: 0px 0px 30px 0px;
+}
+
+/*ข้อความจำนวนผู้เข้าร่วมสูงสุด*/
+.messagequantity{
+  font-size: 16px;
+  color: #FCD53F;
+}
 
 
 
+/*กรอบเอาไว้พิมของจำนวนผู้เข้าร่วมสูงสุด*/
+.framenumberquantity{
+  background-color: #1C1E22;
+  padding: 15px 20px;
+  width: 800px;
+  border-radius: 15px;
+  border: 2px solid #373D47;
+  font-size: 16px;
+  color: #ffffff;
+}
+/*ลบตัวเพิ่มกดเดิมในกรอบของจำนวนผู้เข้าร่วมสูงสุด*/
+.framenumberquantity::-webkit-outer-spin-button,
+.framenumberquantity::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.submitbuildandQR{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2D3139;
+  border: 2px solid #47515F;
+  border-radius: 15px;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.submitbuildandQR:disabled{
+  cursor: auto;
+  background-color: #2d313941;
+  border: 2px solid #47515f3b;
+}
 
 
 
+.submitbuildandQR::before{
+  content: "";
+  background-color: #252930;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+  border-radius: 50%;
+}
+
+.submitbuildandQR:disabled:before{
+  background:none;
+}
 
 
+.submitbuildandQR:hover::before{
+  width: 1000px;
+  height: 1000px;
+}
+
+.buildandQR{
+  width: 25px;
+  height: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.submitbuildandQR:disabled .buildandQR{
+  filter: opacity(50%);
+}
+
+.messagebuildandQR{
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+}
+
+
+.submitbuildandQR:disabled .messagebuildandQR{
+  color: #ffffff77;
+}
 
 
 

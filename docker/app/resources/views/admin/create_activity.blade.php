@@ -94,7 +94,7 @@
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
                 </div>
 
-                <div class="framebtn-chooserewardall" id="framebtn_choosereward_all">
+                <div class="framebtn-chooserewardall">
                     <div class="framechooserewardall">
                         <div class="framepicture">
                             <img src="{{ asset('admin/img/ดินสอ.png') }}" alt="ดินสอ" class="framepicture-1">
@@ -111,24 +111,11 @@
                             <input type="checkbox" class="btn-checkbox" name="reward[1][active]" value="1">
                         </div>
                     </div>
-
-                    <div class="framechooserewardall">
-                         <div class="framepicture">
-                            <img src="{{ asset('admin/img/สมุด.png') }}" alt="สมุด" class="framepicture-1">
-                        </div>
-                        <div class="framemessage2">
-                            <p class="messagepencil">หนังสือการ์ตูน</p>
-                            <span class="messagestationery">หนังสือ</span>
-                        </div>
-                         <p class="percentpencil">20.0%</p>
-                          <div class="btn-plus-delete-checkbox">
-                            <button type="button" class="btndelete" data-target="btndelete-2">-</button>
-                            <input type="number" id="btndelete-2" name="reward[2][qty]" value="1" class="btndelete-1">
-                            <button type="button" class="btnplus" data-target="btndelete-2">+</button>
-                            <input type="checkbox" class="btn-checkbox" name="reward[2][active]" value="2">
-                        </div>
-                    </div>
                 </div>
+
+                    <button type="button" class="showmore" id="show_more">
+                        <p class="messageshowmore">แสดงเพิ่มเติม</p>
+                    </button>
 
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>

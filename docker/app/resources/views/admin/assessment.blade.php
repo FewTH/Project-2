@@ -182,9 +182,8 @@
                         <p class="message-status">เปิดอยู่</p>
                     </div>
                 </div>
-                        <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
-                        <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
-
+                    <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
+                    <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
                 </div>
             </div>
 

@@ -55,12 +55,14 @@
 <div class="main-content-edit_information">
     <!--กรอบแก้ไขข้อมูลส่วนตัว-->
     <div class="frameeditinformation">
-        <div class="arrow-2">
-        <a href="{{ url('admin/profile') }}" class="arrow-1">←</a>
-        </div>
+            <a href="{{ url('admin/profile') }}" class="arrow-2">
+                <p class="arrow-1">←</p>
+            </a>
         <img src="{{ asset('admin/img/รูปการแก้ไขข้อมูล.png') }}" alt="รูปการแก้ไขข้อมูล" class="img-edit-information-1">
         <h1 class="sectioneditinformation">แก้ไขข้อมูล</h1>
         <p class="messageditinformation">แก้ไขข้อมูลเดิมของคุณได้ที่นี่</p>
+
+        <form id="save_success_1">
         <div class="savesuccess" id="save_success">
             <p class="savesuccess-1"> ✓ บันทึกข้อมูลสำเร็จแล้ว </p>
         </div>
@@ -84,12 +86,13 @@
         </div>
         <div class="save-data-btn-cancel">
             <div class="save-data-1"  id="save-data-2">
-            <button class="save-data-2">บันทึกข้อมูล</button>
+            <button type="submit" class="save-data-2">บันทึกข้อมูล</button>
         </div>
         <div class="btn-cancel-1"  id="btn_cancel_2">
-            <button class="btn-cancel-2">ยกเลิก</button>
+            <button type="button" class="btn-cancel-2">ยกเลิก</button>
         </div>
         </div>
+        </form>
     </div>
 </div>
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
