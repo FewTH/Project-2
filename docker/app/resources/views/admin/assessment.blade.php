@@ -100,7 +100,7 @@
             <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-btn-activity" id="img_btn_activity">
         </div>
 
-<template id="cardTemplate"> 
+
     <div class="frame-activity-assessment" data-status="closed">
         <div class="framecontentactivity">
             <h4 class="headingactivity">กิจกรรมเช็คอินโต้รุ่ง ช่วงติวไฟนอล 2568</h4>

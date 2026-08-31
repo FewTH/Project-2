@@ -52,6 +52,10 @@ Route::get('/admin/edituser', function () {
     return view('admin.edituser');
 });
 
+Route::get('/admin/view_details', function () {
+    return view('admin.view_details');
+});
+
 // Route::get('/admin/managespin', function () {
 //     return view('admin.managespin');
 // });
