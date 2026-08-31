@@ -186,7 +186,6 @@
                     <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
                 </div>
             </div>
-
         </div>
     </template>
     

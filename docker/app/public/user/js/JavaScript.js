@@ -66,6 +66,7 @@ if(btnclosechange){
 
 //หน้า spin.blade.php
    const allbtn = document.getElementById('all-btn');
+//    const alltest = document.getElementById('');
 
     if(allbtn){
         allbtn.addEventListener('click', function(){

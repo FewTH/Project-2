@@ -98,13 +98,13 @@
             <span>หน้าหลัก</span>
         </a>
 
-        <a href="{{ url('user/spin') }}" class="btn-Random1">
-            <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img1">
+        <a href="{{ url('user/spin') }}" class="btn-Random">
+            <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img">
             <span>สุ่มของรางวัล</span>
         </a>
 
-        <a href="{{ url('user/contact') }}" class="btn-Contact1">
-            <img src="{{ asset('user/img/Contact.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img1">
+        <a href="{{ url('user/contact') }}" class="btn-Contact-1">
+            <img src="{{ asset('user/img/Contact.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img-1">
             <span>ติดต่อเรา</span>
         </a>
     </div>

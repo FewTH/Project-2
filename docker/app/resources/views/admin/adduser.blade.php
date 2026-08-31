@@ -15,36 +15,40 @@
         <span>Admin</span>
     </a>
 </div>
-    
+
     <!-- ตัวฟอร์มให้ใส่รายละเอียดรางวัล -->
 <div class="add-box-main">
     <h1 class="Topic-adduser">เพิ่มผู้ใช้งาน</h1>
+<form id="add-usr-form">
     <!-- ช่องกรอกข้อมูลของรางวัล -->
     <div class="name-usr-box">
-        <label class="name-usr01" for="name-usr">ชื่อ</label> <br>
-        <input type="text" class="name-usr-in" id="name-usr-in">
+        <label class="name-usr01" for="name-usr-in">ชื่อ</label> <br>
+        <input type="text" class="name-usr-in" id="name-usr-in" name="first_name" placeholder="กรอกชื่อของคุณ">
     </div>
     <div class="last-usr-box">
-        <label class="last-name01" for="last-name">นามสกุล</label> <br>
-        <input type="text" class="last-name-in" id="last-name-in">
+        <label class="last-name01" for="last-name-in">นามสกุล</label> <br>
+        <input type="text" class="last-name-in" id="last-name-in" name="last_name" placeholder="กรอกนามสกุลของคุณ">
     </div>
     <div class="role-usr-box">
-        <label class="role-usr01" for="role-usr">บทบาท</label> <br>
-        <input type="text" class="role-usr-in" id="role-usr-in" list="role_list" placeholder="กรุณากรอกหรือเลือกหมวดหมู่">
-    <datalist  class="role_list_01" id="role_list">
+        <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
+        <input type="text" class="role-usr-in" id="role-usr-in" list="role_list" name="role" placeholder="กรุณากรอกหรือเลือกบทบาท">
+        <datalist  class="role_list_01" id="role_list">
             <option value="Admin">
             <option value="User">
             <option value="Manager">
-    </datalist>     
-    </div>   
+        </datalist>     
+    </div>  
+     {{-- ปุ่มบันทึกกับปุ่มยกเลิก --}}
     <div class="ad-botton">
-        <a href="{{ url('admin/manageuser') }}" class="addreward-btn1">
+        <button type="submit" class="addreward-btn1">
             <span>บันทึกข้อมูล</span>
-        </a>
+        </button>
+
         <a href="{{ url('admin/manageuser') }}" class="cancle-btn">
             <span>ยกเลิก</span>
         </a>
     </div>
+</form>
 </div>
     
 <!-- ส่วนเมนูsidebar -->

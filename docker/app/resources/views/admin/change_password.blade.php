@@ -80,7 +80,7 @@
         </div>
         <div class="save-password-btn-cancel">
             <div class="save-password-1" id="save-password-1">
-        <button type="submit" class="save-password-2">บันทึกรหัสผ่าน</button>
+                <button type="submit" class="save-password-2">บันทึกรหัสผ่าน</button>
             </div>
         <div class="btn-cancel-password" id="btn_cancel_password">
             <button type="button" class="btn-cancel-password-1">ยกเลิก</button>

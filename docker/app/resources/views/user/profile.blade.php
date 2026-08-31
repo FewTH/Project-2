@@ -24,8 +24,8 @@
    </div>
    <!-- ปุ่มเมนู -->
    <div class="btn-Sidebar">
-        <a href="{{ url('user/home') }}" class="btn-Home-1">
-            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img-1">
+        <a href="{{ url('user/home') }}" class="btn-Home-2">
+            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img-2">
             <span>หน้าหลัก</span>
         </a>
         <a href="{{ url('user/spin') }}" class="btn-Random-1">

@@ -42,17 +42,15 @@
         </div>
     </div>
 
-
-    <div class="container-spin">
+<div class="container-home">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo-spin">
+    <div class="img-Logo-home">
         <img src="img/Logo.png" alt="รูปโลโกมหาลัย" class="Logo-img">
     </div>
     <!-- ปุ่มเมนู -->
     <div class="btn-Sidebar">
-
-        <a href="{{ url('user/home') }}" class="btn-Home2">
-            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img2">
+        <a href="{{ url('user/home') }}" class="btn-Home-2">
+            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img-2">
             <span>หน้าหลัก</span>
         </a>
 
@@ -61,15 +59,15 @@
             <span>สุ่มของรางวัล</span>
         </a>
 
-        <a href="{{ url('user/contact') }}" class="btn-Contact2">
-            <img src="{{ asset('user/img/Contact.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img2">
+        <a href="{{ url('user/contact') }}" class="btn-Contact-2">
+            <img src="{{ asset('user/img/Contact.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img-2">
             <span>ติดต่อเรา</span>
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout2">
-            <img src="img/รูปปุ่มกดออก.png" alt="รูปออกจากระบบ" class="btn-logout-img2">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout1">
+            <img src="img/รูปปุ่มกดออก.png" alt="รูปออกจากระบบ" class="btn-logout-img1">
             <span>ออกจากระบบ </span>
         </a>
     </div>

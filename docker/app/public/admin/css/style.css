@@ -4815,56 +4815,56 @@ body {
 .container2 {
   background-color: #FFFFFF;
   z-index: 11;
-  width: 250px;       
+  width: 250px;
+  height: 100vh;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  position: absolute;
+  position: fixed;
   top: 0%;
   left: 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /*โลโก้ BUULIB*/
 .img-Logo2{
-  width: 150px;
-  height:250px;
-  display: flex;
-  align-items: center;
-  margin-left: 30px;
+  padding: 20px 0px 26px 0px;
 }
 /*ชื่อปุ่มแดชบอร์ด*/
 .btn-Dashboard2{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -6px;
-  margin-left: 13px;
-  text-decoration: none;   
-  color: #8C8D8D;           
-  font-weight: 1000;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
   font-size: 20px;
-  width: 220px;
-  height: 65px;
+  padding: 20px 0px;
+  margin-right: 48px;
 }
 /*รูปปุ่มแดชบอร์ด*/
 .btn-Dashboard-img2{
   width: 50px;
   height: 50px;
-  margin-right: 15px; 
-  margin-left: -15px;
-  margin-top: -1px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 /*ชื่อปุ่มจัดการรางวัล*/
 .btn-Manage_Rewards2{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
-  margin-left: 2px;
-  text-decoration: none; 
-  background-color: #FCD535;  
-  color: #000000;  
-  font-weight: 1000;
-  padding: 10px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
   font-size: 20px;
-  border-radius:999px;
+  padding: 20px;
+  background-color: #FCD53F;
+  margin-top: 20px;
+  margin-left: 6px;
+  padding-left: 5px;
+  max-width: 230px;
+  max-height: 70px;
+  border-radius: 40px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
 }
 /*รูปปุ่มจัดการรางวัล*/
@@ -4872,80 +4872,79 @@ body {
   width: 50px;
   height: 50px;
   margin-right: 15px;
+  margin-left: 15px;
 }
 /*ชื่อปุ่มจัดการผู้ใช้*/
 .btn-Manage_users2{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  margin-left: 18px;
-  text-decoration: none;   
-  font-weight: 1000;
+  text-decoration: none;
+  color: #8C8D8D;
+  margin-top: 32px;
+  margin-right: 40px;
+  font-weight: bold;
   font-size: 20px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
+  padding: 20px 0px;
+  margin-top: 20px;
 }
 /*รูปปุ่มจัดการผู้ใช้*/ 
 .btn-Manage_users-img2{
   width: 50px;
   height: 50px;
   margin-right: 15px; 
-  margin-left: -15px;
+  margin-left: 15px;
 }
 /*ชื่อปุ่มจัดการวงล้อสุ่ม*/
 .btn-Managewheel2{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  margin-left: 34px;
-  text-decoration: none;   
-  font-weight: 1000;
+  text-decoration: none;
+  color: #8C8D8D;
+  margin-top: 10px;
+  margin-right: 12px;
+  font-weight: bold;
   font-size: 20px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
+  padding: 20px 0px;
 }
 /*รูปปุ่มจัดการวงล้อสุ่ม*/ 
 .btn-Managewheel-img2{
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   margin-right: 15px; 
-  margin-left: -15px;
+  margin-left: 16px;
 }
 /*ชื่อปุ่มแบบประเมินกิจกรรม*/
 .btn-Assessment2{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
-  margin-left: 55px;
-  text-decoration: none;   
-  font-weight: 1000;
+  text-decoration: none;
+  color: #8C8D8D;
+  margin-top: 10px;
+  margin-left: 15px;
+  font-weight: bold;
   font-size: 20px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
-  line-height: 1.2;
+  padding: 20px 0px;
 }
 /*รปปุ่มแบบประเมินกิจกรรม*/
 .btn-Assessment-img2{
-width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   margin-right: 15px; 
-  margin-left: -15px;
+  margin-left: 15px;
 }
+
+.btn-logout-wrapper2 {
+  margin-top: auto;
+}
+
 /*ชื่อปุ่มออกจากระบบ*/
 .btn-logout2{
   display:  flex;
   align-items: center;
   justify-content: center;
-  margin-top: 710px;
   border: 0.2px solid #8C8D8D; 
   width: 248px;
   height: 50px;
@@ -5236,7 +5235,7 @@ width: 50px;
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-  width: 500px;
+  /* width: 500px; */
 }
 .addreward-btn1{
   border-radius: 10px;
@@ -5247,6 +5246,7 @@ width: 50px;
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  border: 1px solid #000000;
 }
 .cancle-btn{
   display: flex;
@@ -5390,7 +5390,6 @@ width: 50px;
   display: flex;
 }
 /* ปุ่มหน้าจัดการผู้ใช้ */
-/*หน้าต่างเมนู*/
 /* ปุ่มเมนูแดชบอร์ด */
 .btn-Dashboard3 {
   display: flex;
@@ -5428,74 +5427,77 @@ width: 50px;
   margin-left: 15px;
 }
 /*ชื่อปุ่มจัดการผู้ใช้*/
-.btn-Manage_users3{
-  display:  flex;
+  .btn-Manage_users3{
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
-  margin-left: 2px;
-  text-decoration: none; 
-  background-color: #FCD535;  
-  color: #000000;  
-  font-weight: 1000;
-  padding: 10px;
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
   font-size: 20px;
-  border-radius:999px;
+  padding: 20px;
+  background-color: #FCD53F;
+  margin-top: 23px;
+  margin-left: 5px;
+  padding-left: 5px;
+  max-width: 230px;
+  max-height: 70px;
+  border-radius: 40px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  height: 70px;
 }
 /*รูปปุ่มจัดการผู้ใช้*/ 
 .btn-Manage_users-img3{
-  width: 45px;
+  width: 50px;
   height: 25px;
   margin-right: 15px; 
-  margin-left: -20px;
+
+}
+
+/*ชื่อปุ่มจัดการวงล้อสุ่ม*/
+.btn-Managewheel3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  margin-top: 22px;
+  margin-right: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 0px;
+}
+/*รูปปุ่มจัดการวงล้อสุ่ม*/ 
+.btn-Managewheel-img3{
+  width: 45px;
+  height: 45px;
+  margin-right: 15px; 
+  margin-left: 16px;
+}
+/*ชื่อปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  margin-top: 10px;
+  margin-left: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 0px;
+}
+/*รปปุ่มแบบประเมินกิจกรรม*/
+.btn-Assessment-img3{
+  width: 45px;
+  height: 45px;
+  margin-right: 15px; 
+  margin-left: 15px;
 }
 
 
 
 /* ปุ่มเมนูsidebar หน้าจัดการวงล้อสุ่ม */
 /* ตกแต่งหน้าจัดการของรางวัล */
-/*หน้าต่างเมนู*/
-.container2 {
-  background-color: #FFFFFF;
-  z-index: 11;
-  width: 250px;       
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  position: absolute;
-  top: 0%;
-  left: 0%;
-}
-/*โลโก้ BUULIB*/
-.img-Logo2{
-  width: 150px;
-  height:250px;
-  display: flex;
-  align-items: center;
-  margin-left: 30px;
-}
-/*ชื่อปุ่มแดชบอร์ด*/
-.btn-Dashboard2{
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -6px;
-  margin-left: 13px;
-  text-decoration: none;   
-  color: #8C8D8D;           
-  font-weight: 1000;
-  font-size: 20px;
-  width: 220px;
-  height: 65px;
-}
-/*รูปปุ่มแดชบอร์ด*/
-.btn-Dashboard-img2{
-  width: 50px;
-  height: 50px;
-  margin-right: 15px; 
-  margin-left: -15px;
-  margin-top: -1px;
-}
 /*ชื่อปุ่มจัดการรางวัล*/
 .btn-Manage_Rewards4{
   display:  flex;
@@ -5517,28 +5519,7 @@ width: 50px;
   height: 50px;
   margin-right: 20px;
 }
-/*ชื่อปุ่มจัดการผู้ใช้*/
-.btn-Manage_users2{
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-left: 18px;
-  text-decoration: none;   
-  font-weight: 1000;
-  font-size: 20px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
-}
-/*รูปปุ่มจัดการผู้ใช้*/ 
-.btn-Manage_users-img2{
-  width: 50px;
-  height: 50px;
-  margin-right: 15px; 
-  margin-left: -15px;
-}
+
 /*ชื่อปุ่มจัดการวงล้อสุ่ม*/
 .btn-Managewheel4{
   display:  flex;
@@ -5561,47 +5542,4 @@ width: 50px;
   height: 50px;
   margin-right: 15px; 
   margin-left: -15px;
-}
-/*ชื่อปุ่มแบบประเมินกิจกรรม*/
-.btn-Assessment2{
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-left: 55px;
-  text-decoration: none;   
-  font-weight: 1000;
-  font-size: 20px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
-  line-height: 1.2;
-}
-/*รปปุ่มแบบประเมินกิจกรรม*/
-.btn-Assessment-img2{
-width: 50px;
-  height: 50px;
-  margin-right: 15px; 
-  margin-left: -15px;
-}
-/*ชื่อปุ่มออกจากระบบ*/
-.btn-logout2{
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 710px;
-  border: 0.2px solid #8C8D8D; 
-  width: 248px;
-  height: 50px;
-  text-decoration: none;   
-  color: #D31313;           
-  font-weight: 1000;
-  font-size: 20px;
-}
-/*รูปปุ่มออกจากระบบ*/
-.btn-logout-img2 {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
 }

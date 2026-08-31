@@ -48,6 +48,10 @@ Route::get('/admin/manageuser', function () {
     return view('admin.manageuser');
 });
 
+Route::get('/admin/edituser', function () {
+    return view('admin.edituser');
+});
+
 // Route::get('/admin/managespin', function () {
 //     return view('admin.managespin');
 // });
