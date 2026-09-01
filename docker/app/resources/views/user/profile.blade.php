@@ -70,11 +70,11 @@
         <div class="useremailstatus">
             <!--ชื่อ-->
             <div class="name">
-                <h2 id="username">User01</h2>
+                <h2 id="username">{{ $user->username }}</h2>
             </div>
             <!--อีเมล-->
             <div class="email">
-                <p id="email_user">User01@gmail.com</p>
+                <p id="email_user">{{ $user->email }}</p>
             </div>
             <!--สถานะ-->
             <div class="In_use">
@@ -146,24 +146,24 @@
     </div>
     <form onsubmit="return false">
     <!--ชื่อผู้ใช้-->
-    <div class="username">
+   <div class="username">
         <label class="Type_username"> ชื่อผู้ใช้ </label> 
-        <input type="text" id="Type_name" value="User01" class="input-username" disabled>
+        <input type="text" id="Type_name" value="{{ $user->username }}" class="input-username" autocomplete="username" disabled>
     </div>
     <!--ชื่อ-นามสกุล-->
     <div class="FirstName-LastName">
         <label class="FirstNameLastName"> ชื่อ-นามสกุล </label>
-        <input type="text" id="Enter_firstname-lastname" value="นายนารี ใจดี" class="input-FirstName-LastName" disabled>
+        <input type="text" id="Enter_firstname_lastname" value="{{ $user->full_name }}" class="input-FirstName-LastName" autocomplete="name" disabled>
     </div>
     <!--อีเมลผู้ใช้-->
     <div class="email-user">
         <label class="typeemail-user"> อีเมล </label>
-        <input type="text" id="Compose_email"  value="User01@gmail.com" class="input-email-user" disabled>
+        <input type="email" id="Compose_email"  value="{{ $user->email }}" class="input-email-user" autocomplete="email" disabled>
     </div>
     <!--เบอร์โทร-->
     <div class="phone_number">
         <label class="typephone_number"> เบอร์โทร </label>
-        <input type="text" id="Enter_phonenumber" value="081-123-xxxx" class="input-phonenumber" disabled>
+        <input type="tel" id="Enter_phonenumber" value="{{ $user->phone }}" class="input-phonenumber"  autocomplete="tel" disabled>
     </div>
     </form>
 </div>
@@ -174,16 +174,16 @@
         <h3>รหัสผ่าน/เปลี่ยนรหัสผ่าน</h3>
     </div>
      <form onsubmit="return false">
-        <input type="text" name="username" value="Admin02" autocomplete="username" class="hidden-username-1">
+       <input type="text" name="username" value="{{ $user->username }}" autocomplete="username" class="hidden-username-1">
     <!--รหัสผ่านปัจจุบัน-->
     <div class="Current_password">
         <label class="typeCurrent_password">รหัสผ่านปัจจุบัน</label>
-        <input type="password" id="Enter_password" value="12345678" class="input-Current_password" autocomplete="current-password" disabled>
+        <input type="password" id="Enter_password" value="********" class="input-Current_password" autocomplete="current-password" disabled>
     </div>
     <!--เปลี่ยนครั้งล่าสุด-->
     <div class="Last_updated">
         <label class="typelast_updated">เปลี่ยนรหัสครั้งล่าสุด</label>
-        <input type="text" id="Update_password" value="01/01/2026" class="input-Last_updated" disabled>
+        <input type="text" id="Update_password" value="{{ $user->password_changed_at ? $user->password_changed_at->format('d/m/y') : ''}}" class="input-Last_updated" disabled>
     </div>
     </form>
      <!--ปุ่มเปลี่ยนหัสผ่าน-->

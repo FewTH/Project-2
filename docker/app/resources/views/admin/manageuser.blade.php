@@ -20,10 +20,10 @@
         <!-- บ็อกหลักรายชื่อผู้ใช้ -->
         <div class="manageusr-mainbox">
             <h3 class="sub-manageuser">รายชื่อผู้ใช้ทั้งหมด</h3>
-            <button type="button" class="add-usr-btn">
+            <a href="{{ route('admin.adduser') }}" class="add-usr-btn">
                 <img src="img/ไอคอนบวก.png" alt="ไอคอนเพิ่มผู้ใช้งาน">
                 <span>เพิ่มผู้ใช้งานใหม่</span>
-            </button>
+            </a>
             <!-- search-user -->
             <div class="search-usr-box">
                 <input type="text" class="usr-searchbox" placeholder="ค้นหาชื่อผู้ใช้งานหรืออีเมล">

@@ -17,34 +17,39 @@
 </div>
 
     <!-- ตัวฟอร์มให้ใส่รายละเอียดรางวัล -->
-<div class="add-box-main">
-    <h1 class="Topic-adduser">เพิ่มผู้ใช้งาน</h1>
-<form id="add-usr-form">
+    <div class="add-box-main">
+        <h1 class="Topic-adduser">เพิ่มผู้ใช้งาน</h1>
+    <form id="add-usr-form" action="{{ route('users.store') }}" method="POST">
+    @csrf
+
     <!-- ช่องกรอกข้อมูลของรางวัล -->
     <div class="name-usr-box">
-        <label class="name-usr01" for="name-usr-in">ชื่อ</label> <br>
-        <input type="text" class="name-usr-in" id="name-usr-in" name="first_name" placeholder="กรอกชื่อของคุณ">
+        <label class="name-usr01" for="name-usr-in">ชื่อ (Username)</label> <br>
+        <input type="text" class="name-usr-in" id="name-usr-in" name="first_name" placeholder="กรอกชื่อของคุณ" required>
     </div>
     <div class="last-usr-box">
         <label class="last-name01" for="last-name-in">นามสกุล</label> <br>
-        <input type="text" class="last-name-in" id="last-name-in" name="last_name" placeholder="กรอกนามสกุลของคุณ">
+        <input type="text" class="last-name-in" id="last-name-in" name="last_name" placeholder="กรอกนามสกุลของคุณ" required>
     </div>
     <div class="role-usr-box">
         <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
-        <input type="text" class="role-usr-in" id="role-usr-in" list="role_list" name="role" placeholder="กรุณากรอกหรือเลือกบทบาท">
+        <input type="text" class="role-usr-in" id="role-usr-in" list="role_list" name="role" placeholder="กรุณากรอกหรือเลือกบทบาท" required>
         <datalist  class="role_list_01" id="role_list">
             <option value="Admin">
             <option value="User">
             <option value="Manager">
         </datalist>     
-    </div>  
+    </div>
+    <div class="passwd-addusr">
+        <label class="passwd-usr-la" for="passwd-addusr-in">รหัสผ่าน</label> <br>
+        <input type="password" class="passwd-addusr-in" id="passwd-addusr-in" name="password" placeholder="กรอกรหัสผ่านของคุณ" required>
+    </div>
      {{-- ปุ่มบันทึกกับปุ่มยกเลิก --}}
-    <div class="ad-botton">
-        <button type="submit" class="addreward-btn1">
+    <div class="addusr-botton">
+        <button type="submit" class="addusr-btn1">
             <span>บันทึกข้อมูล</span>
         </button>
-
-        <a href="{{ url('admin/manageuser') }}" class="cancle-btn">
+        <a href="{{ url('admin/manageuser') }}" class="cancle-btn-addusr">
             <span>ยกเลิก</span>
         </a>
     </div>

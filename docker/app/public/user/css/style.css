@@ -422,7 +422,6 @@ body {
 
 /*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้ว*/
 .savesuccess{
-  display: none;
   background-color: #E1F5EE;
   width: 500px;
   height: 45px;
@@ -701,7 +700,6 @@ body {
 
 /*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้วของหน้าเปลี่ยนรหัสผ่าน*/
 .savesuccesschangepassword{
-  display: none;
   background-color: #E1F5EE;
   width: 500px;
   height: 45px;
@@ -718,6 +716,19 @@ body {
   padding-left: 30px;
   color: #085041;
   padding-top: 8px;
+}
+
+/*ข้อความแสดงerrorว่าบันทึกรหัสผ่านไม่สำเสร็จของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccesschangepassword-error{
+  margin-right: auto;
+  font-size: 18px;
+  color: #c22b3a;
+  margin-left: 5px;
+}
+
+
+.usernamechangepassword{
+  display: none;
 }
 
 /*กรอบรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
@@ -740,6 +751,13 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
+}
+
+/*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordcurrent-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px 20px 50px;
 }
 
 /*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/

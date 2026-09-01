@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset ('admin/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
     <title>แก้ไขผู้ใช้งาน</title>
 </head>
 <body>
@@ -16,13 +16,42 @@
     </a>
 </div>
 
-    <div class="background-main">
-        <div main-edit-box>
-            <h2 class="edit-usr-topic">แก้ไขผู้ใช้งาน</h2>
-            <div class=""></div>
-        </div>
-    </div>
+        <div class="main-edit-box">
+            <h1 class="edit-usr-topic">แก้ไขผู้ใช้งาน</h1>
+            <form id="edit-usr-box">
+                {{-- ลำดับ --}}
+                <div class="num-user">
+                    <label  class="num-user-li" for="">ลำดับ</label> <br>
+                    <input type="number" class="num-user-acc" id="num-user-acc" placeholder="2" default="0">
+                </div>
+                {{-- ชื่อ --}}
+                <div class="name-user">
+                    <label class="name-user-li" for="name-user-acc">ชื่อผู้ใช้งาน</label> <br>
+                    <input type="text" class="name-user-acc" id="name-user-acc" name="fullname" placeholder="ระบุชื่อผู้ใช้งาน">
+                </div>
+                {{-- บทบาท --}}
+                <div class="role-user">
+                    <label class="role-usr-li" for="role-usr-acc">บทบาท</label> <br>
+                    <input type="text" class="role-user-acc" list="role_list" id="role-usr-acc" placeholder="บทบาทผู้ใช้">
+                    <datalist class="role_list_01" id="role_list">
+                        <option value="Admin">
+                        <option value="User">
+                        <option value="Manager">
+                    </datalist>
+                </div>
+                {{-- ปุ่มบันทีกกับยกเลิก --}}
+                <div class="btn-sub_cln">
+                    <button type="submit" class="submit-btn-edtusr">
+                        <span>บันทึก</span>
+                    </button>
 
+                    <a href="{{url ('admin/manageuser')}}" class="cancle-btn-editusr">
+                        <span>ยกเลิก</span>
+                    </a>
+                </div> 
+            </form>
+        </div>
+    
 
 <!-- ส่วนเมนูsidebar -->
     <div class="container2">

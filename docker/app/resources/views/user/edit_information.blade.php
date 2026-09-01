@@ -57,34 +57,47 @@
         <h1 class="sectioneditinformation">แก้ไขข้อมูล</h1>
         <p class="messageditinformation">แก้ไขข้อมูลเดิมของคุณได้ที่นี่</p>
         
-       <form id="save_success_1">
+        <form id="save_success_1" action="{{ url('admin/edit_information') }}" method="POST">
+        @csrf
+        @if(session('success'))
         <div class="savesuccess" id="save_success">
-            <p class="savesuccess-1"> ✓ บันทึกข้อมูลสำเร็จแล้ว </p>
+            <p class="savesuccess-1"> {{ session('success') }} </p>
         </div>
+        @endif
         <div class="username-1">
             <label class="type-username-1" for="Type_name_1">ชื่อผู้ใช้</label> <br>
-            <input type="text" class="input-username-1" id="Type_name_1" placeholder="Admin02" autocomplete="username">
+            <input type="text" name="username" class="input-username-1" id="Type_name_1" value="{{ $user->username}}" autocomplete="username">
+        @error('username')
+            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
+        @enderror
         </div>
         <div class="FirstName-LastName-1">
             <label class="FirstNameLastName-1" for="Enter_firstname_lastname_1">ชื่อ-นามสกุล</label> <br>
-            <input type="text" class="input-FirstName-LastName-1" id="Enter_firstname_lastname_1" placeholder="นายนารี ใจดี" autocomplete="name">
+            <input type="text" name="full_name" class="input-FirstName-LastName-1" id="Enter_firstname_lastname_1" value="{{ $user->full_name }}" autocomplete="name">
+        @error('full_name')
+            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
+        @enderror
         </div>
         <div class="email-user-1">
             <label class="typeemail-user-1" for="Compose_email_1"> อีเมล </label> <br>
-            <input type="email" class="input-email-user-1" id="Compose_email_1" placeholder="Admin02@gmail.com" autocomplete="email">
-            <p class="pleasecompleteemail" id="please_complete_email">กรุณากรอกอีเมลให้ถูกต้อง เช่น Admin02@gmail.com</p>
+            <input type="email" name="email" class="input-email-user-1" id="Compose_email_1" value="{{ $user->email }}" autocomplete="email">
+        @error('email')
+            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
+        @enderror
         </div>
         <div class="phone_number-1">
             <label class="typephone_number-1" for="Enter_phonenumber_1"> เบอร์โทร </label> <br>
-            <input type="tel" class="input-phonenumber-1" id="Enter_phonenumber_1" placeholder="081-123-xxxx" autocomplete="tel">
-            <p class="pleasewearnumber" id="please_wear_number">กรุณาใส่เบอร์ให้ให้ถูกต้อง เช่น 1234567890</p>
+            <input type="tel" name='phone' class="input-phonenumber-1" id="Enter_phonenumber_1" value="{{ $user->phone }}" autocomplete="tel">
+        @error('phone')
+            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
+        @enderror
         </div>
         <div class="save-data-btn-cancel">
             <div class="save-data-1"  id="save-data-2">
             <button type="submit" class="save-data-2">บันทึกข้อมูล</button>
         </div>
         <div class="btn-cancel-1"  id="btn_cancel_2">
-            <button type="button" class="btn-cancel-2">ยกเลิก</button>
+            <button type="reset" class="btn-cancel-2">ยกเลิก</button>
         </div>
         </div>
         </form>

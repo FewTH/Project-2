@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WheelController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,6 +13,20 @@ Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 });
 
+
+// อันนี้เป็นของหน้าเพิ่มผู้ใช้
+use App\Http\Controllers\UserController;
+// Route สำหรับรับข้อมูลจากฟอร์มเพิ่มผู้ใช้งาน
+Route::post('/admin/manageuser/store', [UserController::class, 'store'])->name('users.store');
+// แสดงหน้าฟอร์มเพิ่มผู้ใช้
+Route::get('/adduser', [UserController::class, 'create'])->name('admin.adduser');
+// รับข้อมูลมาบันทึกลงดาต้าเบส
+Route::post('/manageuser/store', [UserController::class, 'store'])->name('admin.user.store');
+// ฟังก์ชันที่ลบผู้ใช้งาน 
+Route::delete('/deleteuser/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+
+
+
 Route::get('/admin/adduser', function () {
     return view('admin.adduser');
 });
@@ -20,17 +35,13 @@ Route::get('/admin/assessment', function () {
     return view('admin.assessment');
 });
 
-Route::get('/admin/profile', function () {
-    return view('admin.profile');
-});
+Route::get('/admin/profile', [ProfileController::class, 'adminProfile']);
 
-Route::get('/admin/edit_information', function () {
-    return view('admin.edit_information');
-});
+Route::get('/admin/edit_information', [ProfileController::class, 'adminEditForm']); 
+Route::post('/admin/edit_information', [ProfileController::class, 'editinformation']);
 
-Route::get('/admin/change_password', function () {
-    return view('admin.change_password');
-});
+Route::get('/admin/change_password', [ProfileController::class, 'adminchangePassword']); 
+Route::post('/admin/change_password', [ProfileController::class, 'changePassword']);
 
 Route::get('/admin/create_activity', function () {
     return view('admin.create_activity');
@@ -56,6 +67,7 @@ Route::get('/admin/view_details', function () {
     return view('admin.view_details');
 });
 
+
 // Route::get('/admin/managespin', function () {
 //     return view('admin.managespin');
 // });
@@ -73,21 +85,20 @@ Route::get('/admin/history_random', function () {
 
 
 // ส่วนของ user
-Route::get('/user/profile', function () {
-    return view('user.profile');
-});
+Route::get('/user/profile', [ProfileController::class, 'userProfile']); 
+
 
 Route::get('/user/contact', function () {
     return view('user.contact');
 });
 
-Route::get('/user/edit_information', function () {
-    return view('user.edit_information');
-});
+Route::get('/user/edit_information', [ProfileController::class, 'userEditForm']);
+Route::post('/user/edit_information', [ProfileController::class, 'editinformation']);
 
-Route::get('/user/change_password', function () {
-    return view('user.change_password');
-});
+
+Route::get('/user/change_password', [ProfileController::class, 'userchangePassword']);
+Route::post('/user/change_password', [ProfileController::class, 'changePassword']);
+
 
 
 Route::get('/user/home', function () {

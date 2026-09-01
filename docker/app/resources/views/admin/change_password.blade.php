@@ -62,28 +62,42 @@
             <h1 class="sectionchangepassword">เปลี่ยนรหัสผ่าน</h1>
             <p class="messagchangepassword">เปลี่ยนรหัสผ่านใหม่ของคุณได้ที่นี่</p>
 
-        <form id="savesuccesschangepassword_1">
+        <form id="savesuccesschangepassword_1" action="{{ url('admin/change_password') }}" method="POST">
+        @csrf
+        @if (session('success'))
         <div class="savesuccesschangepassword" id="save_successchangepassword">
-            <p class="savesuccess-changepassword"> ✓ บันทึกรหัสผ่านสำเร็จแล้ว </p>
+            <p class="savesuccess-changepassword"> {{ session('success') }} </p>
+        </div>
+        @endif
+        <input type="text" name="username" value="{{ $user->username }}" autocomplete="username" class="usernamechangepassword">
+        <div class="passwordcurrent-1">
+            <label class="type-passwordcurrent-1" for="Type_Current_password_1">รหัสผ่านปัจจุบัน</label> <br>
+            <div class="img-eye-password">
+            <input type="password" class="input-passwordcurrent-1" id="Type_Current_password_1" name="current_password"  autocomplete="current-password">
+            </div>
+            @error('current_password')
+                <p class="savesuccesschangepassword-error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="passwordcurrent">
             <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรห้สผ่าน</label> <br>
             <div class="img-eye-password">
-            <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" value="12345678"  autocomplete="new-password">
-            <button type="button" class="img-eye" id="img_eye">👁</button>
+            <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" name="new_password"  autocomplete="new-password">
             </div>
-            <p class="pleasepassword" id="please_password">กรุณาใส่รหัสผ่านให้ถูกต้อง เช่น 12345678</p>
+             @error('new_password')
+                <p class="savesuccesschangepassword-error">{{ $message }}</p>
+            @enderror
         </div>
         <div class="passwordlasttime">
             <label class="type-password-lasttime-1" for="Type_password-lasttime_1">เปลี่ยนรหัสผ่านครั้งล่าสุด</label> <br>
-            <input type="text" class="input-password-lasttime-1" id="Type_password-lasttime_1" value="01/01/2026" disabled>
+            <input type="text" class="input-password-lasttime-1" id="Type_password-lasttime_1" value="{{ $user->password_changed_at ? $user->password_changed_at->format('d/m/y') : ''}}" disabled>
         </div>
         <div class="save-password-btn-cancel">
             <div class="save-password-1" id="save-password-1">
                 <button type="submit" class="save-password-2">บันทึกรหัสผ่าน</button>
             </div>
         <div class="btn-cancel-password" id="btn_cancel_password">
-            <button type="button" class="btn-cancel-password-1">ยกเลิก</button>
+            <button type="reset" class="btn-cancel-password-1">ยกเลิก</button>
         </div>
         </div>
         </form>

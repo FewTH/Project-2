@@ -13,9 +13,12 @@ return new class extends Migration
             $user->string('username', 100)->unique();
             $user->string('full_name', 200);
             $user->string('email', 200);
+            $user->string('phone', 20)->nullable();
             $user->string('password_hash', 255);
+            $user->string('profile_image', 255)->nullable();
             $user->enum('role', ['admin', 'manager', 'user'])->default('user');
             $user->tinyInteger('is_active')->default(1);
+            $user->timestamp('password_changed_at')->nullable();
             $user->timestamps();
         });
     }

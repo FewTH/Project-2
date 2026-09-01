@@ -16,9 +16,12 @@ class User extends Authenticatable
         'username',
         'full_name',
         'email',
+        'phone',
         'password_hash',
+        'profile_image',
         'role',
         'is_active',
+        'password_changed_at',
     ];
 
     protected $hidden = [
@@ -29,8 +32,10 @@ class User extends Authenticatable
     {
         return [
             'password_hash' => 'hashed',
+            'password_changed_at' => 'datetime',
         ];
     }
+
     public function getAuthPassword()
     {
         return $this->password_hash;
