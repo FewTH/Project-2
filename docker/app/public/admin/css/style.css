@@ -2924,6 +2924,15 @@ body {
   flex: 1;
 }
 
+/*เอาไว้ปรับขนาดรูปภาพที่เปลี่ยนในหน้า profile*/
+.photo_user-img-1{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
 /*รูปภาพผู้ใช้*/
 .photo_user {
   width: 150px;
@@ -3141,14 +3150,33 @@ body {
   bottom: 15px;
 }
 
-/*ข้อความerrorในกรอบpopup*/
-.upload_error{
-  padding: 0px 0px 0px 20px;
-  color: #e02424;
-  font-size: 17px;
+/*กรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
+.savesuccessimage-1{
+  background-color: #E1F5EE;
+  height: 45px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
   position: relative;
-  bottom: 10px;
-  display: none;
+  bottom: 15px;
+}
+
+/*ข้อความของกรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
+.savesuccess-image{
+  display: flex;
+  justify-content: center;
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*ข้อความerrorของpopupเปลี่ยนรูปโปรไฟล์*/
+.savesuccessimage-error{
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  font-size: 18px;
+  color: #c22b3a;
 }
 
 /*กรอบของปุ่ม เลือกรูปภาพ ยกเลิก*/
@@ -3204,6 +3232,52 @@ body {
   width: 500px;
   height: 500px;
 }
+
+/*กรอบของปุ่มบันทึกรูปภาพ*/
+.btn-save-file-2{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #22c55e;
+  border-radius: 15px;
+  border: none;
+  height: 60px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ปุ่มบันทึกรูปภาพ*/
+.btn-save-file-2::before{
+  content: "";
+  background-color: #25ce63;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+/*ทำเป็นวงกลมของเอฟเฟ็กต์ปุ่มบันทึกรูปภาพ*/
+.btn-save-file-2:hover::before{
+  width: 500px;
+  height: 500px;
+}
+
+/*ข้อความของปุ่มบันทึกรูปภาพ*/
+.btn-save-file-1{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
 
 /*กรอบของปุ่มยกเลิก*/
 .btn-close{
@@ -5386,11 +5460,23 @@ body {
   font-weight: bold;
   margin-bottom: 30px;
 }
-.role-usr-box{
+
+.emaill-usr-box{
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.emaill-usr-in{
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  border:2px solid #ffe748;
+}
+.role-usr01{
   font-size: large;
   font-weight: bold;
 }
-.role-usr-in{
+.role_list_01{
   width: 500px;
   height: 40px;
   border-radius: 10px;

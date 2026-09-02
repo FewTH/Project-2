@@ -11,7 +11,11 @@
 <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper-1">
     <a href="{{ url('user/profile') }}" class="btn-user">
+        @if($user->profile_image)
+        <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @else
         <img src="{{ asset('user/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @endif
         <span>User</span>
    </a>
 </div>
@@ -58,7 +62,11 @@
     <div class="profile-left">
         <!--รูปภาพผู้ใช้-->
         <div class="photo_user">
+        @if ($user->profile_image)
+            <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปภาพผู้ใช้" class="photo_user-img-1" id="photo_user_img_2">
+        @else
             <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปภาพผู้ใช้" class="photo_user-img" id="photo_user_img_1">
+        @endif
         </div>
         <!--ปุ่มไว้กดเปลี่ยนรูปมี popup เด้งขึ้นมา-->
         <div class="Change_image">
@@ -117,21 +125,33 @@
 
 <!--หน้า Pop-up สำหรับอัปโหลดรูป-->
 <div class="popup">
-    <dialog id="image-popup" class="popup-box">
-        <img src="{{ asset('user/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon" id="img_Camera_icon">
+     <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : 'false' }}">
+        <form action="{{ url('admin/profile') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <img src="{{ asset('admin/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
         <h2 class="Change-photo">เปลี่ยนรูปโปรไฟล์</h2>
         <p class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</p>
-        <p class="file_size_5MB">ขนาดไฟล์ไม่เกิน 5MB</p>
-        <input type="file" id="uploadphoto" accept="image/jpeg,image/png,image/webp">
-        <p id="uploaderror" class="upload_error">ไฟล์ใหญ่เกินไป กรุณาเลือกไฟล์ที่มีขนาดไม่เกิน 5MB</p>
+        @if (session('success'))
+        <div class="savesuccessimage-1">
+            <p class="savesuccess-image"> {{ session('success') }} </p>
+        </div>    
+        @endif
+        @error('profile_image')
+            <p class="savesuccessimage-error">{{ $message }}</p>
+        @enderror
+        <input type="file" name="profile_image" id="uploadphoto" accept="image/jpeg,image/png,image/webp">
         <div class="btn-select-file-1">
             <div class="btn-select-file" id="btn_select_file_1">
-                <button class="btn-select-file-2">เลือกรูปภาพ</button>
+                <button type="button" class="btn-select-file-2">เลือกรูปภาพ</button>
             </div>
+            <button type="submit" class="btn-save-file-2" id="btn_save_file_1">
+                <p class="btn-save-file-1">บันทึกรูปภาพ</p>
+            </button>
             <div class="btn-close" id="btn_close_1">
-                <button class="btn-close-1" >ยกเลิก</button>
+                <button type="button" class="btn-close-1" >ยกเลิก</button>
             </div>
         </div>
+        </form>
     </dialog>
 </div>
 

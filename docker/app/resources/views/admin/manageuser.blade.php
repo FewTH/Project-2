@@ -11,7 +11,11 @@
     <!-- ชื่อผู้ใช้งาน -->
     <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
+        @if($user->profile_image)
+        <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @else
         <img src="{{ asset('admin/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @endif
         <span>Admin</span>
     </a>
     </div>
@@ -20,6 +24,7 @@
         <!-- บ็อกหลักรายชื่อผู้ใช้ -->
         <div class="manageusr-mainbox">
             <h3 class="sub-manageuser">รายชื่อผู้ใช้ทั้งหมด</h3>
+            
             <a href="{{ route('admin.adduser') }}" class="add-usr-btn">
                 <img src="img/ไอคอนบวก.png" alt="ไอคอนเพิ่มผู้ใช้งาน">
                 <span>เพิ่มผู้ใช้งานใหม่</span>
@@ -36,6 +41,8 @@
                 <h3 class="topic-sts-usr">สถานะ</h3>
                 <h3 class="topic-manage-usr">จัดการ</h3>
             </div>
+
+            
             <div class="user-1">
                 <h3 class="name1">Admin</h3>
                 <h3 class="email1">admin@gmail.com</h3>

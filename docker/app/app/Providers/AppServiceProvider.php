@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
+
 {
     /**
      * Register any application services.
@@ -20,8 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-	if ($this->app->environment('production')) {
-            URL::forceScheme('https');
-        }
+        View::share('user', Auth::user() ?? User::find(1));
     }
 }

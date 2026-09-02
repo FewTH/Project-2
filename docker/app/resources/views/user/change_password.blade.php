@@ -11,9 +11,13 @@
 <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper-1">
     <a href="{{ url('user/profile') }}" class="btn-user">
-        <img src="{{ asset('user/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
-        <span>User</span>
-   </a>
+            @if($user->profile_image)
+            <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+            @else
+            <img src="{{ asset('user/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+            @endif
+            <span>User</span>
+    </a>
 </div>
 <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
 <div class="Top_frame">

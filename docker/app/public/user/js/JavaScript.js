@@ -63,6 +63,23 @@ if(btnclosechange){
     });
 }
 
+//ปุ่มกดเปลี่ยนโฟล์เดอร์ในเครื่องคอมเรา
+const btnselectfile1 = document.getElementById('btn_select_file_1');
+
+if(btnselectfile1){
+    btnselectfile1.addEventListener('click', function(){
+        document.getElementById('uploadphoto').click();
+    });
+}
+
+//เอาไว้เวลาโหลดหน้าแล้วปุ่ม popup จะไม่ปิด
+const imagepopup = document.getElementById('image-popup');
+
+if(imagepopup && imagepopup.dataset.open === 'true'){
+    imagepopup.show();
+}
+
+
 
 //หน้า spin.blade.php
    const allbtn = document.getElementById('all-btn');
@@ -94,6 +111,7 @@ if(btnclosechange){
             document.getElementById('spined-btn').classList.remove('active');
         });
     }
+
 
 
 

@@ -36,6 +36,7 @@ Route::get('/admin/assessment', function () {
 });
 
 Route::get('/admin/profile', [ProfileController::class, 'adminProfile']);
+Route::post('/admin/profile', [ProfileController::class, 'uploadimg']);
 
 Route::get('/admin/edit_information', [ProfileController::class, 'adminEditForm']); 
 Route::post('/admin/edit_information', [ProfileController::class, 'editinformation']);
@@ -86,7 +87,7 @@ Route::get('/admin/history_random', function () {
 
 // ส่วนของ user
 Route::get('/user/profile', [ProfileController::class, 'userProfile']); 
-
+Route::post('/user/profile', [ProfileController::class, 'uploadimg']);
 
 Route::get('/user/contact', function () {
     return view('user.contact');

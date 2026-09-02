@@ -11,7 +11,11 @@
     <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
+        @if($user->profile_image)
+        <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @else
         <img src="{{ asset('admin/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @endif
         <span>Admin</span>
     </a>
 </div>
@@ -19,30 +23,34 @@
     <!-- ตัวฟอร์มให้ใส่รายละเอียดรางวัล -->
     <div class="add-box-main">
         <h1 class="Topic-adduser">เพิ่มผู้ใช้งาน</h1>
-    <form id="add-usr-form" action="{{ route('users.store') }}" method="POST">
+    <form id="add-usr-form" action="{{ route('admin.user.store') }}" method="POST">
     @csrf
 
     <!-- ช่องกรอกข้อมูลของรางวัล -->
     <div class="name-usr-box">
-        <label class="name-usr01" for="name-usr-in">ชื่อ (Username)</label> <br>
-        <input type="text" class="name-usr-in" id="name-usr-in" name="first_name" placeholder="กรอกชื่อของคุณ" required>
+        <label class="name-usr01" for="name-usr-in">ชื่อผู้ใช้ (Username)</label> <br>
+        <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username') }}" placeholder="กรอกชื่อของคุณ" required>
     </div>
     <div class="last-usr-box">
-        <label class="last-name01" for="last-name-in">นามสกุล</label> <br>
-        <input type="text" class="last-name-in" id="last-name-in" name="last_name" placeholder="กรอกนามสกุลของคุณ" required>
+        <label class="last-name01" for="last-name-in">ชื่อ-นามสกุล</label> <br>
+        <input type="text" class="last-name-in" id="full-name" name="full_name" value="{{ old('full_name') }}" placeholder="กรอกชื่อ-นามสกุลของคุณ" required>
+    </div>
+    <div class="emaill-usr-box">
+        <label class="emaill-usr01" for="email">อีเมล</label> <br>
+        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมลของคุณ" required>
     </div>
     <div class="role-usr-box">
         <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
-        <input type="text" class="role-usr-in" id="role-usr-in" list="role_list" name="role" placeholder="กรุณากรอกหรือเลือกบทบาท" required>
-        <datalist  class="role_list_01" id="role_list">
-            <option value="Admin">
-            <option value="User">
-            <option value="Manager">
-        </datalist>     
+        <select  class="role_list_01" id="role" name="role" required>
+            <option value=""> --เลือกบทบาทของคุณ-- </option>
+            <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : ''}}>Admin</option>
+            <option value="Manager" {{old('role')== 'Manager' ? 'selected' : ''}}>Manager</option>
+            <option value="User" {{old('role')== 'User' ? 'selected' : ''}}>User</option>
+        </select>     
     </div>
     <div class="passwd-addusr">
         <label class="passwd-usr-la" for="passwd-addusr-in">รหัสผ่าน</label> <br>
-        <input type="password" class="passwd-addusr-in" id="passwd-addusr-in" name="password" placeholder="กรอกรหัสผ่านของคุณ" required>
+        <input type="password" class="passwd-addusr-in" id="passwd-addusr-in" name="password" placeholder="กรอกรหัสผ่านของคุณอย่างน้อย 8 ตัว" required>
     </div>
      {{-- ปุ่มบันทึกกับปุ่มยกเลิก --}}
     <div class="addusr-botton">

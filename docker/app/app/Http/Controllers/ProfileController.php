@@ -5,48 +5,54 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    private function getUser()
+    {
+        return Auth::user() ?? User::find(1);
+    }
+
+    
+
+
     //ส่วนของ user
     //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ user
     public function userProfile()
     {
-        $user = User::find(1);
-        return view('user.profile', ['user' => $user]);
+        return view('user.profile', ['user' => $this->getUser()]);
     }
 
     public function userEditForm()
     {
-        $user = User::find(1);
-        return view('user.edit_information', ['user' => $user]);
+        return view('user.edit_information', ['user' => $this->getUser()]);
     }
 
     public function userchangePassword()
     {
-        $user = User::find(1);
-        return view('user.change_password', ['user' => $user]);
+        return view('user.change_password', ['user' => $this->getUser()]);
     }
 
 
     //ส่วนของ admin
     public function adminProfile()
     {
-        $user = User::find(1);
-        return view('admin.profile', ['user' => $user]);
+        return view('admin.profile', ['user' => $this->getUser()]);
     }
 
     public function adminEditForm()
     {
-        $user = User::find(1);
-        return view('admin.edit_information', ['user' => $user]);
+
+        return view('admin.edit_information', ['user' => $this->getUser()]);
     }
 
     public function adminchangePassword()
     {
-        $user = User::find(1);
-        return view('admin.change_password', ['user' => $user]);
+        return view('admin.change_password', ['user' => $this->getUser()]);
     }
+
 
     // ส่วนของ user admin ใช่ร่วมกัน
     // บันทึกข้อมูลที่แก้ไข
@@ -73,7 +79,7 @@ class ProfileController extends Controller
 
       
         //หาuser ที่จะแก้ไขแล้วให้มันอัพเดทข้อมูลใน database แล้วส่ง return กลับมา
-        $user = User::find(1);
+        $user = $this->getUser();
         $user->update($data);
         return back()->with('success', '✓ บันทึกข้อมูลสำเร็จแล้ว');
     }
@@ -91,7 +97,7 @@ class ProfileController extends Controller
         ]);
 
         //หาuser ที่จะแก้ไข
-        $user = User::find(1);
+        $user = $this->getUser();
         $checkpassword = Hash::check($request->current_password, $user->password_hash);
 
         if (!$checkpassword) {
@@ -105,4 +111,34 @@ class ProfileController extends Controller
 
         return back()->with('success', '✓ เปลี่ยนรหัสผ่านสำเร็จแล้ว');
     }
+
+    // บันทึกการเปลี่ยนรูปโปรไฟล์
+    public function uploadimg(Request $request)
+    {
+        $request->validate([
+            'profile_image' => 'required|image|mimes:jpeg,png,webp|max:10240',
+        ],[
+            'profile_image.required' => 'กรุณาเลือกรูปภาพ',
+            'profile_image.image' => 'ต้องเป็นรูปภาพเท่านั้น',
+            'profile_image.mimes' => 'ต้องเป็นไฟล์ jpeg, png, webp เท่านั้น',
+            'profile_image.max' => 'ไฟล์รูปต้องมีขนาดไม่เกิน 10 MB',
+        ]);
+
+        $user = $this->getUser();
+
+        // เอาไว้ลบรูปภาพเก่าทิ้งก่อนไม่งั้นภาพเก่ามันจะค้างอยู่ในdatabaseเรื่อยๆ
+        if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)){
+            Storage::disk('public')->delete($user->profile_image);
+        }
+
+        $savenewphoto = $request->file('profile_image')->store('profile_images', 'public');
+
+        $user->update(['profile_image' => $savenewphoto] );
+
+        return back()->with('success', '✓ เปลี่ยนรูปภาพใหม่สำเร็จแล้ว')
+                     ->with('open_popup', true);
+
+    }
+
+
 }
