@@ -639,13 +639,14 @@ body {
   color: #8A5B10;
   font-weight: 1000;
   font-size: 20px;
-  padding: 6px 40px;
+  padding: 6px 0px 6px 0px;
+  margin-right: 35px;
 }
 
 /*รูปโปรไฟล์ผู้ใช้*/
 .btn-user-img {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   background-color: #8A5B10;
   border: 3px solid #d39b00;
   object-fit: cover;
