@@ -18,41 +18,57 @@
         <span>Admin</span>
     </a>
 </div>
+
+@if ($errors->any())
+    <div style="color:red; margin-bottom:10px;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <!-- ตัวฟอร์มให้ใส่รายละเอียดรางวัล -->
 <div class="add-box-main">
+    <form action="{{route('admin.reward.store')}}" method="POST">
+    @csrf
     <h1 class="Topic-addreward">เพิ่มของรางวัล</h1>
     <!-- ช่องกรอกข้อมูลของรางวัล -->
     <div class="input-reward-name">
         <label class="name-reward-sub" for="name-reward">ชื่อของรางวัล</label> <br>
-        <input type="text" class="name-reward1" id="name-reward01" placeholder="กรอกรายชื่อของรางวัลของคุณ">
+        <input type="text" class="name-reward1" id="name-reward01" name="name" value="{{ old('name') }}" placeholder="กรอกรายชื่อของรางวัลของคุณ" required>
     </div>
-
     <div class="input-reward-category">
         <label class="category-reward-sub" for="category-reward01">หมวดหมู่</label> <br>
-        <input type="text" class="category-reward1" id="category-reward01" list="category_list" placeholder="กรุณากรอกหรือเลือกหมวดหมู่">
-    <datalist  class="category_list_01" id="category_list">
-            <option value="เครื่องเขียน">
-            <option value="อุปกรณ์การเรียน">
-            <option value="ของใช้ทั่วไป">
-    </datalist>     
+        {{-- <input type="text" class="category-reward1" id="category-reward01" placeholder="กรุณากรอกหรือเลือกหมวดหมู่"> --}}
+    <select class="category_list_01" id="category_list" name="category_id" required>
+    <option value="">--เลือกหมวดหมู่ของรางวัล--</option>
+    @foreach($categories as $category)
+        <option value="{{ $category->category_id }}" {{ old('category_id') == $category->category_id ? 'selected' : '' }}>
+            {{ $category->name }}
+        </option>
+    @endforeach
+    </select>     
     </div>
 
     <div class="input-reward-num">
         <label class="num-reward-sub" for="num_reward">จำนวน</label> <br>
-        <input type="number" class="num-reward1" id="num-reward01" placeholder="โปรดระบุจำนวนของรางวัลของคุณ">
+        <input type="number" class="num-reward1" id="num-reward01" name="quantity_reward" value="{{ old('quantity_reward') }}" placeholder="โปรดระบุจำนวนของรางวัลของคุณ" required>
     </div>
     <div class="input-reward-rate">
         <label class="rate-reward-sub" for="rate-reward_sub">อัตราการออก(%)</label> <br>
-        <input type="number" class="rate-reward1" id="rate-reward01" placeholder="ระบุเปอร์เซ็นของรางวัล">
+        <input type="number" class="rate-reward1" id="rate-reward01" name="rate" value="{{ old('rate') }}" placeholder="ระบุเปอร์เซ็นของรางวัล" required>
     </div>   
     <div class="ad-botton">
-        <a href="{{ url('admin/managereward') }}" class="addreward-btn1">
+        <button type="submit" class="addre-btn1">
             <span>บันทึกข้อมูล</span>
-        </a>
+        </button>
         <a href="{{ url('admin/managereward') }}" class="cancle-btn">
             <span>ยกเลิก</span>
         </a>
     </div>
+    </form>
 </div>
 
 <!-- ส่วนเมนูsidebar -->

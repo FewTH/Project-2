@@ -109,6 +109,76 @@ const uploadPhotoInput = document.getElementById('uploadphoto');
 
 
 
+
+
+
+
+//ส่วนของหน้า contact.blade.php
+//ดึง id ของรูปภาพกับปุ่มมาเก็บไว้
+const Galleryimgleft = document.getElementById('Gallery_img_left');
+const Galleryimgcenter = document.getElementById('Gallery_img_center');
+const Galleryimgright = document.getElementById('Gallery_img_right');
+const arrowleft = document.getElementById('arrow_left');
+const arrowright = document.getElementById('arrow_right');
+
+    const imageleft1 = Galleryimgleft.src;
+    const imagecenter2 = Galleryimgcenter.src;
+    const imageright3 = Galleryimgright.src;
+
+    let findpicture = 2;
+
+    //ปุ่มกดเปลียนรูปไปทางขวา
+    arrowright.addEventListener('click', function(){
+
+        if(findpicture === 1){
+            findpicture = 2;
+        }else if (findpicture === 2){
+            findpicture = 3;
+        }else if (findpicture === 3){
+            findpicture = 1;
+        }
+
+        showimage();      
+    });
+
+    //ปุ่มกดเปลียนรูปไปทางซ้าย
+    arrowleft.addEventListener('click', function(){
+        
+        if(findpicture === 1){
+            findpicture = 3;
+        }else if (findpicture === 2){
+            findpicture = 1;
+        }else if (findpicture === 3){
+            findpicture = 2;
+        }
+
+        showimage();
+    });
+
+    //เอาไว้ให้รูปเปลี่ยนตรงกับ findpicture
+    function showimage(){
+        if(findpicture === 1){
+            Galleryimgleft.src = imageright3;
+            Galleryimgcenter.src = imageleft1;
+            Galleryimgright.src = imagecenter2;
+        }else if(findpicture === 2){
+            Galleryimgleft.src = imageleft1;
+            Galleryimgcenter.src = imagecenter2;
+            Galleryimgright.src = imageright3;
+        }else if (findpicture === 3){
+            Galleryimgleft.src = imagecenter2;
+            Galleryimgcenter.src = imageright3;
+            Galleryimgright.src = imageleft1;
+        }
+
+    };
+
+
+
+    
+
+
+
 //หน้า spin.blade.php
    const allbtn = document.getElementById('all-btn');
 //    const alltest = document.getElementById('');

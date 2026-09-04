@@ -18,7 +18,7 @@
         @endif
         <span>Admin</span>
     </a>
-    
+
     </div>
     <!-- ส่วนเนื้อหาหลัก (Detail) -->
         <div class="detail">
@@ -35,80 +35,52 @@
                 <div class="addbutton">
                     <button type="button" class="addreward">
                     <a href="{{ url('admin/addreward') }}" class="addreward-btn">
-                    <img src="img/ไอคอนบวก.png" alt="plusicon" class="plus-icon">
-                    <span class="addrwdtext">เพิ่มของรางวัล</span>
+                        <img src="img/ไอคอนบวก.png" alt="plusicon" class="plus-icon">
+                        <span class="addrwdtext">เพิ่มของรางวัล</span>
                     </a>
-                        {{-- <img src="img/ไอคอนบวก.png" alt="plusicon" class="plus-icon">
-                        <span class="addrwdtext">เพิ่มของรางวัล</span> --}}
                     </button>
                 </div>
         <div class="reward-list">
             <div class="topic-rewardlist">
-            <h4 class="topic1">ชื่อของรางวัล</h4>
-            <h4 class="topic2">หมวดหมู่</h4>
-            <h4 class="topic3">อัตราการออก</h4>
-            <h4 class="topic4">จำนวน</h4>
-            <h4 class="topic5">จัดการ</h4>
-        </div>
+                <h4 class="topic1">ชื่อของรางวัล</h4>
+                <h4 class="topic2">หมวดหมู่</h4>
+                <h4 class="topic3">อัตราการออก</h4>
+                <h4 class="topic4">จำนวน</h4>
+                <h4 class="topic5">จัดการ</h4>
+            </div>
     <div class="reward-list-name">
     <!-- รายการของรางวัลชิ้นที่ 1 -->
-    <div class="box-reward1">
-    <span class="name-reward001">ดินสอ</span>
-        <span class="catigory-reward001">เครื่องเขียน</span>
-        <span class="rate-reward001">50%</span>
-        <span class="number-reward001">100</span>
-        <div class="edit-delete-button1">
-        <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon1">
-        <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon1">
+    @forelse($rewards as $reward)
+        <div class="reward-1">
+            <h3 class="name_re1">{{ $reward->name }}</h3>
+            <h3 class="category_re1">{{ $reward->category->name }}</h3>
+            <h3 class="rate_re1">{{ $reward->rate }}</h3>
+            <h3 class="quantity_re1">{{ $reward->quantity_reward }}</h3>
+
+        <div class="manage-btn3">
+             <!-- ปุ่มแก้ไข -->
+            <a href="{{ route('admin.reward.edit', $reward->reward_id) }}">
+                <img src="{{ asset('admin/img/editicon.png') }}" alt="รูปปุ่มแก้ไข" class="edit-icon3">
+            </a>
+            <!-- ปุ่มลบข้อมูล -->
+            <form action="{{ route('admin.reward.destroy', $reward->reward_id) }}" method="POST" class="delete-form" onsubmit="return confirm('ต้องการลบรางวัลใช่หรือไม่?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-btn-action">
+                    <img src="{{ asset('admin/img/delete.png') }}" alt="รูปปุ่มลบ" class="delete-icon3">
+                </button>
+            </form>
+            </div>
         </div>
-    </div>
-    <!-- รายการของรางวัลชิ้นที่ 2 -->
-    <div class="box-reward2">
-        <span class="name-reward2">สมุดโน้ต</span>
-        <span class="catigory-reward2">ของใช้ทั่วไป</span>
-        <span class="rate-reward2">40%</span>
-        <span class="number-reward2">80</span>
-        <div class="edit-delete-button2">
-        <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon2">
-        <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon2">
+    @empty
+        <div class="no-data">
+            <p>ยังไม่มีรายการของรางวัลในระบบ</p>
         </div>
-    </div>
-    <!-- รายการของรางวัลชิ้นที่ 3 -->
-    <div class="box-reward3">
-        <span class="name-reward3">กระเป๋าดินสอ</span>
-        <span class="catigory-reward3">ของใช้ทั่วไป</span>
-        <span class="rate-reward3">30%</span>
-        <span class="number-reward3">50</span>
-        <div class="edit-delete-button3">
-        <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon3">
-        <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon3">
-    </div>
-    </div>
-                    <!-- รายการของรางวัลชิ้นที่ 4 -->
-    <div class="box-reward4">
-        <span class="name-reward4">หนังสือการ์ตูน</span>
-        <span class="catigory-reward4">หนังสือ</span>
-        <span class="rate-reward4">20%</span>
-        <span class="number-reward4">25</span>
-        <div class="edit-delete-button4">
-        <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon4">
-        <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon4">
-        </div>
-    </div>
-                    <!-- รายการของรางวัลชิ้นที่ 5 -->
-    <div class="box-reward5">
-        <span class="name-reward5">แบตสำรอง</span>
-        <span class="catigory-reward5">อิเล็กทรอนิกส์</span>
-        <span class="rate-reward5">10%</span>
-        <span class="number-reward5">10</span>
-        <div class="edit-delete-button5">
-        <img src="img/editicon.png" alt="ไอคอนแก้ไข" class="edit-icon5">
-        <img src="img/delete.png" alt="ไอคอนลบ" class="delete-icon5">
+    @endforelse
     </div>
     </div>
     </div>
-    </div>
-    </div>
+
     <!-- ส่วนเมนูsidebar -->
     <div class="container2">
     <!-- โลโกมหาลัย -->

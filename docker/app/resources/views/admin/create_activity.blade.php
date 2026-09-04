@@ -68,6 +68,7 @@
                 <p class="messageretrospective">ย้อนกลับ</p>
             </a>
 
+
         <div class="framecreateactivity">
             <img src="{{ asset('admin/img/รูปโลโกมหาลัย.png') }}" alt="รูปโลโกมหาลัย" class="img-university">
             <div class="messagecreateactivity">
@@ -98,24 +99,26 @@
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
                 </div>
 
+                @foreach($rewards as $reward)
                 <div class="framebtn-chooserewardall">
                     <div class="framechooserewardall">
-                        <div class="framepicture">
-                            <img src="{{ asset('admin/img/ดินสอ.png') }}" alt="ดินสอ" class="framepicture-1">
-                        </div>
                         <div class="framemessage2">
-                            <p class="messagepencil">ดินสอ</p>
-                            <span class="messagestationery">เครื่องเขียน</span>
+                            <p class="messagepencil">{{ $reward->name }}</p>
+                            <span class="messagestationery">{{ $reward->category->name }}</span>
                         </div>
-                            <p class="percentpencil">50.0%</p>
+                            <p class="percentpencil">{{ $reward->quantity_reward }}</p>
+                            <p class="percentpencil">{{ number_format($reward->rate, 1) }} %</p>
                         <div class="btn-plus-delete-checkbox">
-                            <button type="button" class="btndelete" data-target="btndelete_1">-</button>
-                            <input type="number" id="btndelete_1" name="reward[1][qty]" value="1" class="btndelete-1">
-                            <button type="button" class="btnplus" data-target="btndelete_1">+</button>
-                            <input type="checkbox" class="btn-checkbox" name="reward[1][active]" value="1">
+                            <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
+                                <p class="btndelet-10">-</p>
+                            </button>
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}">
+                            <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" name="reward[{{ $reward->reward_id }}][active]" value="1">
                         </div>
                     </div>
                 </div>
+                @endforeach
 
                     <button type="button" class="showmore" id="show_more">
                         <p class="messageshowmore">แสดงเพิ่มเติม</p>
@@ -125,7 +128,7 @@
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
                     <input type="number" value="1" class="framenumberquantity" id="frame_number_quantity">
                 </div>
-                <button type="submit" id="submit_buildandQR" class="submitbuildandQR" disabled>
+                <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
                     <p class="messagebuildandQR">สร้างกิจกรรมและ QR code</p>
                 </button>
@@ -133,6 +136,6 @@
         </div>
     </div>
 </div>
-
+<script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
 </body>
 </html>

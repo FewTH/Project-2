@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reward extends Model
 {
     protected $table = 'reward';
-    protected $primaryKey = 'reward_id'; // ไม่ใช่ id
+    protected $primaryKey = 'reward_id';
+    public $timestamps = false;
+    
     protected $fillable = [
         'name', 
         'quantity_reward', 

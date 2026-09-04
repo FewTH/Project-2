@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WheelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RewardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,12 +40,17 @@ Route::prefix('admin')->group(function () {
     Route::put('/manageuser/{id}', [UserController::class, 'update'])->name('admin.user.update'); // อันนี้คือการที่ เราบันทึกข้อมูลใหม่ที่แก้ไขทับข้อมูลเก่าเลยใช้ เม็ดตอดput
 
     // ระบบจัดการของรางวัล
-    
+    Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
+    Route::post('/addreward', [RewardController::class, 'store'])->name('admin.reward.store');
+    Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
+    Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
+    Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
+    Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update'); 
     // Route::get('/edituser', function () {
     //     return view('admin.edituser');
     // });
 
-    // ระบบจัดการกิจกรรม / รางวัล / วงล้อ
+    // ระบบจัดการกิจกรรม
     Route::get('/assessment', function () {
         return view('admin.assessment');
     });
@@ -53,13 +59,13 @@ Route::prefix('admin')->group(function () {
         return view('admin.create_activity');
     });
 
-    Route::get('/managereward', function () {
-        return view('admin.managereward');
-    });
+    // Route::get('/managereward', function () {
+    //     return view('admin.managereward');
+    // });
 
-    Route::get('/addreward', function () {
-        return view('admin.addreward');
-    });
+    // Route::get('/addreward', function () {
+    //     return view('admin.addreward');
+    // });
 
     Route::get('/view_details', function () {
         return view('admin.view_details');

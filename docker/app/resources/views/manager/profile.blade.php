@@ -127,6 +127,7 @@
 <div class="popup">
      <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : 'false' }}">
         <form action="{{ url('manager/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
+        @csrf
        <button type="button" class="btn-close-1" id="btn_close_1">
             <p class="btn-close-popup">x</p>
         </button>
@@ -224,7 +225,7 @@
             <p class="message-confirm-edit">คุณต้องการแก้ไขข้อมูลนี้หรือไม่?</p>
         <div class="btn_editinformation">
             <div class="btn-Edit-information-profile" id="btn_Edit_information">
-                <a href="{{ url('user/edit_information') }}" class="btn-Edit-information-profile-1">ยืนยัน</a>
+                <a href="{{ url('manager/edit_information') }}" class="btn-Edit-information-profile-1">ยืนยัน</a>
             </div>
             <div class="btn-close-Edit" id="btn_close_Edit">
                <button class="btn-close-Edit-1">ยกเลิก</button>
@@ -240,7 +241,7 @@
             <p class="message-change-password">คุณต้องการเปลี่ยนรหัสผ่านนี้หรือไม่?</p>
         <div class="btn_changepassword">
             <div class="btn-change-password" id="btn_change_password">
-                <a href="{{ url('user/change_password') }}" class="btn-change-password-1">ยืนยัน</a>
+                <a href="{{ url('manager/change_password') }}" class="btn-change-password-1">ยืนยัน</a>
             </div>
             <div class="btn-close-change"  id="btn_close_change"> 
                 <button class="btn-close-change-1">ยกเลิก</button>

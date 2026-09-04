@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RewardCategory extends Model
 {
+    protected $table = 'reward_categories';
     protected $primaryKey = 'category_id';
     public $timestamps = false;
     protected $fillable = ['name'];

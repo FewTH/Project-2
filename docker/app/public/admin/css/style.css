@@ -178,10 +178,11 @@ body {
 
 /*ปุ่มกดวัน สัปดาห์ เดือน*/
 .ButtonDate{
-  background-color: #b8b1a4;
+  background-color: rgba(184, 177, 164, 0.363);
   border-radius: 10px;
   display: flex;
   flex-wrap: nowrap;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*ปุ่มวัน*/
@@ -190,7 +191,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #FCD53F;
+  background-color: #a8731d;
   border-radius: 10px;
   cursor: pointer;
   z-index: 5;
@@ -200,7 +201,7 @@ body {
 /*เอฟเฟ็กต์ของปุ่มวัน*/
 .btn-day::before{
   content: "";
-  background-color: #ffce0b;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -219,6 +220,7 @@ body {
 
 /*ข้อความปุ่มวัน*/
 .btn-day-1{
+  color: #ffffff;
   padding: 11px 40px;
   border: none;
   background: none;
@@ -1569,8 +1571,10 @@ body {
 
 /*ปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
 .save-password-1{
+  display: flex;
+  align-items: center;
   position: relative;
-  background-color: #FCD53F;
+  background-color: #a8731d;
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -1579,9 +1583,10 @@ body {
 
 /*ข้อความปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
 .save-password-2{
+  color: #ffffff;
   font-size: 20px;
   cursor: pointer;
-  padding: 25px 55px;
+  padding: 20px 55px;
   font-weight: 600;
   border: none;
   background: none;
@@ -1592,7 +1597,7 @@ body {
 /*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
 .save-password-1::before{
   content: "";
-  background-color: #ffce0b;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -1612,7 +1617,8 @@ body {
 /*ปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password{
   position: relative;
-  background-color: #D9D9D9;
+  background-color: #ffffff;
+  border: 2px solid #d39b00;
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -1621,7 +1627,8 @@ body {
 
 /*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password-1{
-  font-size: 20px;
+  color: #d39b00;
+  font-size: 22px;
   font-weight: 600;
   border: none;
   padding: 25px 90px;
@@ -1634,7 +1641,7 @@ body {
 /*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password::before{
   content: "";
-  background-color: #cacaca;
+  background-color: #f7f4f4;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -1927,11 +1934,12 @@ body {
 /*กรอบสีเทา*/
 .frame-grey{
   width: 100%;
-  background-color: #D9D9D9;
+  background-color: #fdfbf5;
   border-radius: 20px;
   padding: 0px 0px 35px 0px;
   min-width: 800px;
   display: none;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอาไว้โชว์หน้าตอนเข้าหน้าเว็บ*/
@@ -1949,7 +1957,8 @@ body {
 
 /*กรอบของตัวเลขกิจกรรมทั้งหมด*/
 .all-activities{
-  background-color: #1C1C1E;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   border-radius: 15px;
   width: 300px;
   height: 140px;
@@ -1958,7 +1967,7 @@ body {
 
 /*ตัวเลขของกิจกรรมทั้งหมด*/
 .activities-number-assessment{
-  color: #ffffff;
+  color: #000;
   font-size: 50px;
   font-weight: 900;
   position: relative;
@@ -1969,7 +1978,7 @@ body {
 
 /*ตัวอักษรของกิจกรรมทั้งหมด*/
 .activities-assessment{
-  color: #ffffff;
+  color: #8A5B10;
   font-size: 20px;
   font-weight: 900;
   position: relative;
@@ -1979,7 +1988,8 @@ body {
 
 /*กรอบของตัวเลขปิดแล้ว*/
 .Closed-assessment{
-  background-color: #1C1C1E;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   border-radius: 15px;
   width: 300px;
   height: 140px;
@@ -1998,7 +2008,7 @@ body {
 
 /*ตัวอักษรของปิดแล้ว*/
 .Closed-assessment-2{
-  color: #ffffff;
+  color: #8A5B10;
   font-size: 20px;
   font-weight: 900;
   position: relative;
@@ -2009,7 +2019,8 @@ body {
 
 /*กรอบของตัวเลขเปิดอยู่*/
 .Open-assessment{
-  background-color: #1C1C1E;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   border-radius: 15px;
   width: 300px;
   height: 140px;
@@ -2028,7 +2039,7 @@ body {
 
 /*ตัวอักษรของเปิดอยู่*/
 .open-assessment-2{
-  color: #ffffff;
+  color: #8A5B10;
   font-size: 20px;
   font-weight: 900;
   position: relative;
@@ -2042,10 +2053,7 @@ body {
   position: relative;
   margin-left: auto;
   margin-bottom: auto;
-  background-color: #FFFFFF;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #a8731d;
   border-radius: 15px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -2054,7 +2062,7 @@ body {
 /*เอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
 .btn-build-activityurgent::before{
   content: "";
-  background-color: #f7f4f4;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -2076,17 +2084,20 @@ body {
 .btn-build-activityurgent-1{
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 20px;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
   position: relative;
   z-index: 1;
 }
 
 /*ปุ่มรูปบวกของสร้างกิจกรรมด่วน*/
 .btn-plus{
+  position: relative;
+  bottom: 3px;
   font-size: 40px;
   padding: 0px 10px 0px 0px;
 }
@@ -2101,7 +2112,7 @@ body {
   margin-top: 50px;
   width: 600px;
   border-radius: 15px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   overflow: hidden;
 }
 
@@ -2146,13 +2157,14 @@ body {
 
 /*กรอบของการสร้างกิจกรรมด่วน*/
 .frame-activity-assessment{
-  background-color: #1C1C1E;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   width: 700px;
   margin-left: 50px;
   margin-top: 40px;
   padding: 5px 15px 30px 20px;
   border-radius: 20px;
-  border-left: 30px solid var(--activity-color, #D31313);
+  border-left: 30px solid var(--activity-color, #a8731d);
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
@@ -2165,7 +2177,7 @@ body {
 
 /*หัวข้อความ*/
 .headingactivity{
-  color: #FCD53F;
+  color: #8A5B10;
   font-size: 21px;
 }
 
@@ -2177,6 +2189,7 @@ body {
   justify-content: center;
   border-radius: 12px;
   background-color: #FFFFFF;
+  border: 2px solid #d39b00;
   width: 100px;
   height: 30px;
   gap: 8px;
@@ -2236,14 +2249,14 @@ body {
 
 /*ข้อความเวลาสร้าง*/
 .messagecreationtime{
-  color: #8E8E93;
+  color: #4e4e4e;
   position: relative;
   bottom: 30px;
 }
 
 /*เส้นระหว่างสร้างเมื่อกับผู้เข้าร่วม*/
 .lineactivity-1{
-  border: 2px solid #2C2C2E;
+  border: 2px solid #d39b00;
   position: relative;
   bottom: 10px;
 }
@@ -2257,14 +2270,14 @@ body {
 
 /*ข้อความของผู้เข้าร่วมสูงสุด*/
 .maximumnumber{
-  color: #ffffff;
+  color: #c57a01;
   font-size: 18px;
   font-weight: 600;
 }
 
 /*ข้อความของหมดเวลา*/
 .outtime{
-  color: #ffffff;
+  color: #c57a01;
   font-size: 18px;
   font-weight: 600;
 }
@@ -2279,7 +2292,7 @@ body {
 /*กรอบของดินสอ*/
 .framerank-1-assessment{
   position: relative;
-  background-color: #2C2C2E;
+  background-color: #a8731d;
   border-radius: 20px;
   padding: 0px 60px;
   overflow: hidden;
@@ -2288,7 +2301,7 @@ body {
 /*เอฟเฟ็กต์ของกรอบของดินสอ*/
 .framerank-1-assessment::before{
   content: "";
-  background-color: #39393a;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -2306,7 +2319,7 @@ body {
 
 /*ข้อความของกรอบของดินสอ*/
 .rank-1-assessment{
-  color: #AEAEB2;
+  color: #ffffff;
   font-weight: 600;
   position: relative;
   z-index: 1;
@@ -2315,7 +2328,7 @@ body {
 /*เส้นของส่วนกรอบดินสอ กับ คนลงทะเบียน*/
 .lineactivity-2{
   margin-top: 30px;
-  border: 2px solid #2C2C2E;
+  border: 2px solid #d39b00;
 }
 
 /*กรอบของคนลงทะเบียน กับ ปุ่มดูรายละเอียด*/
@@ -2328,7 +2341,7 @@ body {
 
 /*ข้อความคนลงทะเบียนแล้ว*/
 .register-1{
-  color: #AEAEB2;
+  color: #4e4e4e;
   font-size: 20px;
 }
 
@@ -2338,7 +2351,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  border: 2px solid #48484A;
+  border: 2px solid #d39b00;
   border-radius: 15px;
   width: 270px;
   height: 60px;
@@ -2348,7 +2361,7 @@ body {
 /*เอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
 .view-details::before{
   content: "";
-  background-color: #39393a;
+  background-color: #d39b0011;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -2368,7 +2381,7 @@ body {
 /*ข้อความของกรอบของดูรายละเอียด*/
 .view-details-1{
   border: none;
-  color: #ffffff;
+  color: #8A5B10;
   padding: 30px 80px;
   font-size: 18px;
   font-weight: 600;
@@ -2413,7 +2426,7 @@ body {
   width: 600px;
   min-width: 350px;
   border-radius: 15px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   overflow: hidden;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
@@ -2480,8 +2493,8 @@ body {
 }
 /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
 .frameall-assessment.active{
-  border: 2px solid #FCD53F;
-  background-color: #222;
+  border: 2px solid #d39b00;
+  background-color: #fdfbf5;
   height: 50px;
 }
 /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
@@ -2499,7 +2512,7 @@ body {
 }
 /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
 .frameall-assessment.active::before{
-  background-color: #000;
+  background-color: #d39b0015;
 }
 
 /*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
@@ -2520,7 +2533,7 @@ body {
 
 /*ข้อความของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .all-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 /*ตัวเลขของปุ่มทั้งหมด*/
@@ -2536,7 +2549,7 @@ body {
 
 /*ตัวเลขของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .allnumber-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 /*กรอบของปุ่มปิดแล้ว*/
@@ -2556,8 +2569,8 @@ body {
 
 /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
 .frameoff-assessment.active{
-  border: 2px solid #FCD53F;
-  background-color: #222;
+  border: 2px solid #d39b00;
+  background-color: #fdfbf5;
   height: 50px;
 }
 
@@ -2577,7 +2590,7 @@ body {
 
 /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
 .frameoff-assessment.active::before{
-  background-color: #000;
+  background-color: #d39b0015;
 }
 
 /*กรอบวงลอมเอฟเฟ็กต์กรอบของปุ่มปิดแล้ว*/
@@ -2599,7 +2612,7 @@ body {
 
 /*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .off-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 /*ตัวเลขของปุ่มปิดแล้ว*/
@@ -2615,7 +2628,7 @@ body {
 
 /*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .offnumber-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 
@@ -2636,8 +2649,8 @@ body {
 
 /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
 .farmeon-assessment.active{
-  border: 2px solid #FCD53F;
-  background-color: #222;
+  border: 2px solid #d39b00;
+  background-color: #fdfbf5;
   height: 50px;
 }
 
@@ -2657,7 +2670,7 @@ body {
 
 /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
 .farmeon-assessment.active::before{
-  background-color: #000;
+  background-color: #d39b0015;
 }
 
 /*กรอบวงลอมเอฟเฟ็กต์กรอบของปุ่มเปิดอยู่*/
@@ -2678,7 +2691,7 @@ body {
 
 /*ตัวเลขของปุ่มเปิดอยู่ เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .on-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 /*ตัวเลขของปุ่มเปิดอยู่*/
@@ -2693,7 +2706,7 @@ body {
 
 /*ตัวเลขของปุ่มเปิดอยู่ เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
 .onnumber-assessment.active{
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 
@@ -3856,7 +3869,7 @@ body {
   align-items: center;
   border-radius: 20px;
   border: none;
-  background-color: #222;
+  background-color: #a8731d;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -3865,7 +3878,7 @@ body {
 /*เอฟเฟ็กต์ปุ่มของมอบหมายแบบประเมิน*/
 .btn-assign-assessment::before{
   content: "";
-  background-color: #000;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -3892,7 +3905,7 @@ body {
 
 /*ข้อความของปุ่มมอบหมายแบบประเมิน*/
 .message-assign-assessment{
-  color: #FCD53F;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 600;
   position: relative;
@@ -3902,7 +3915,7 @@ body {
 /*popupของมอบหมายแบบประเมิน*/
 .assignevaluation{
   border: none;
-  background-color: #2E2E2D;
+  background-color: #FCF6E5;
   padding: 70px 20px 30px 20px;
   border-radius: 15px;
   position: absolute;
@@ -3916,7 +3929,7 @@ body {
   position: absolute;
   top: -1px;
   left: 0px;
-  background-color: #FFC200;
+  background-color: #d39b00;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3927,6 +3940,7 @@ body {
 
 /*ข้อความของมอบหมายแบบประเมิน*/
 .message-evaluation{
+  color: #ffffff;
   position: relative;
   right: 75px;
   font-size: 20px;
@@ -3979,7 +3993,7 @@ body {
 
 /*ข้อความเลือกแบบประเมินและตำแหน่งที่ต้องการมอบหมาย*/
 .message-choose{
-  color: #ffffff;
+  color: #000;
   font-size: 18px;
 }
 
@@ -3990,22 +4004,22 @@ body {
 
 /*ข้อความแบบประเมิน*/
 .message-evaluation-1{
-  color: #AAAAAA;
+  color: #8A5B10;
   font-size: 18px;
   font-weight: 600;
 }
 
 /*กรอบเลือกแบบประเมิน*/
 .evaluation-formid{
-  background-color: #222;
+  background-color: #e7dec4;
   font-size: 14px;
   outline: none;
-  border: 1.5px solid #8C8D8D;
+  border: 2px solid #d39b00;
   border-radius: 15px;
   padding: 0px 10px;
   height: 40px;
   width: 400px;
-  color: #ffffff;
+  color: #4e4e4e;
 }
 
 /*กรอบของข้อความมอบหมายให้ผู้จัดการกับปุ่มติ๊กเลือกชื่อ*/
@@ -4015,7 +4029,7 @@ body {
 
 /*ข้อความมอบหมายให้ผู้จัด*/
 .message-assigngivemanager{
-  color: #AAAAAA;
+  color: #8A5B10;
   font-size: 18px;
   font-weight: 600;
 }
@@ -4028,15 +4042,15 @@ body {
 
 /*กรอบของข้อความชื่อกับปุ่มติ๊ก*/
 .message-checkbox-name{
-  background-color: #222;
-  color: #ffffff;
+  background-color: #e7dec4;
+  color: #4e4e4e;
   display: flex;
   align-items: center;
   width: 170px;
   height: 60px;
   padding: 0px 15px;
   border-radius: 15px;
-  border: 1.5px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 16px;
 }
 
@@ -4046,14 +4060,14 @@ body {
   appearance: none;
   width: 25px;
   height: 25px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   border-radius: 5px;
   cursor: pointer;
 }
 
 /*กรอบสีข้างในปุ่มติ๊กถูก*/
 .checkboxgivemanager:checked{
-  background-color: #4c4d4d;
+  background-color: #d39b0098;
 }
 
 /*เอฟเฟ็กต์ปุ่มติ๊กถูกทำให้มีรูปติดถูกขึ้นมา*/
@@ -4071,7 +4085,7 @@ body {
 
 /*เส้นระหว่างกรอบติ๊กชื่อ กับ ปุ่มยืนยัน ยกเลิก*/
 .linepopupevaluation{
-  border: 2px solid #4E4E4E;
+  border: 2px solid #d39b00;
 }
 
 /*กรอบของปุ่มยกเลิก ปุ่มยืนยัน*/
@@ -4086,7 +4100,7 @@ body {
 .btn-cancel-evaluation{
   position: relative;
   background: none;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   border-radius: 12px;
   cursor: pointer;
   padding: 15px 25px;
@@ -4097,7 +4111,7 @@ body {
 /*เอฟเฟ็กต์กรอบของปุ่มยกเลิก*/
 .btn-cancel-evaluation::before{
   content: "";
-  background-color: #8c8d8d2a;
+  background-color: #d39b0013;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -4117,7 +4131,7 @@ body {
 /*ข้อตวามของปุ่มยกเลิก*/
 .btn-cancel-evaluation-1{
   font-size: 14px;
-  color: #ffffff;
+  color: #8A5B10;
   position: relative;
   z-index: 1;
 }
@@ -4126,7 +4140,8 @@ body {
 .btn-confirm-evaluation{
   position: relative;
   background: none;
-  border: 2px solid #FFC200;
+  background-color: #966516;
+  border: none;
   padding: 15px 25px;
   border-radius: 12px;
   cursor: pointer;
@@ -4136,15 +4151,16 @@ body {
 
 /*สีตอนกดปุ่มไม่ได้ของกรอบปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation:disabled{
-  border: 2px solid #4a4a4a;
+  background-color: #9665168e;
   cursor: auto;
   box-shadow: none;
+  border: none;
 }
 
 /*เอฟเฟ็กต์กรอบของปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation::before{
   content: "";
-  background-color: #ffc4000e;
+  background-color: #ffc40013;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -4171,25 +4187,26 @@ body {
 /*ข้อความของปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation-1{
   font-size: 14px;
-  color: #FFC200;
+  color: #ffffff;
   position: relative;
   z-index: 1;
 }
 
 /*สีตอนกดปุ่มไม่ได้ของข้อความปุ่มยืนยันการมอบหมาย*/
 .btn-confirm-evaluation:disabled .btn-confirm-evaluation-1{
-  color: #8a8a8a;
+  color: #ffffff80;
 }
 
 /*กรอบคุมแบบประเมินทั้งหมด*/
 .frame-grey-1{
-  background-color: #D9D9D9;
+  background-color: #fdfbf5;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 1050px;
   border-radius: 20px;
   padding: 10px 0px 30px 0px;
+  box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
 }
 
 /*หัวข้อข้างบนแบบประเมิน*/
@@ -4200,12 +4217,14 @@ body {
 
 /*กรอบของแบบประเมิน*/
 .frameinformation-assessment{
-  background-color: #ffffff;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   padding: 0px 30px 30px 30px;
   width: 1000px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
 }
 
 /*กรอบของหัวข้อแบบประเมิน กับ กรอบเปิดอยู่*/
@@ -4386,10 +4405,11 @@ body {
 }
 
 .grayframeactivity {
-  background-color: #D9D9D9;
+  background-color: #fdfbf5;
   width: 100%;
   min-width: 900px;
   border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*กรอบของปุ่มย้อนกลับ*/
@@ -4473,7 +4493,8 @@ body {
 
 /*กรอบของตั้งค่ากิจกรรม*/
 .frameblackactivity{
-  background-color: #22252A;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   padding: 10px 30px 40px 30px;
   display: flex;
   flex-direction: column;
@@ -4486,12 +4507,12 @@ body {
 .messagesettings{
   font-size: 22px;
   font-weight: 600;
-  color: #FCD53F;
+  color: #8A5B10;
 }
 
 /*ข้อความกรอกข้อมูล*/
 .fill-information{
-  color: #ffffff;
+  color: #000000;
   font-size: 16px;
   position: relative;
   bottom: 10px;
@@ -4500,24 +4521,26 @@ body {
 /*ข้อความชื่อกิจกรรม*/
 .messageactivity-name{
   font-size: 16px;
-  color: #FCD53F;
+  color: #8A5B10;
   margin-top: 20px;
+  font-weight: 600;
 }
 
 /*ข้อความเครื่องหมาย**/
 .asteriskactivity{
-  color: #EF4444;
+  color: #ff0000;
 }
 
 /*กรอบเอาไว้พิมชื่อกิจกรรม*/
 .framepimactivity-nam{
-  background-color: #1C1E22;
+  outline: none;
+  background-color: #e7dec4;
   padding: 15px 20px;
   width: 800px;
   border-radius: 15px;
-  border: 2px solid #373D47;
+  border: 2px solid #d39b00;
   font-size: 16px;
-  color: #ffffff;
+  color: #4e4e4e;
 }
 
 /*กรอบของข้อความวันที่จัดกิจกรรม เวลาปิด Register*/
@@ -4531,20 +4554,21 @@ body {
 /*ข้อความวันที่จัดกิจกรรม*/
 .dateactivity{
   font-size: 16px;
-  color: #FCD53F;
+  color: #8A5B10;
+  font-weight: 600;
 }
 
 /*ดอกจันของข้อความวันที่จัดกิจกรรม*/
 .asteriskdateactivity{
-  color: #EF4444;
+  color: #ff0000;
 }
 
 /*ข้อความเวลาปิด Register*/
 .closingtime-Register{
   position: relative;
   right: 250px;
-  font-size: 16px;
-  color: #FCD53F;
+  color: #8A5B10;
+  font-weight: 600;
 }
 
 /*กรอบของที่เอาไว้เลือกวันกับเวลา*/
@@ -4555,31 +4579,27 @@ body {
 
 /*กรอบของที่เอาไว้เลือกวันเดือนปี*/
 .framedatemonthyear{
-  background-color: #1C1E22;
+  background-color: #e7dec4;
   width: 380px;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 15px;
-  border: 2px solid #373D47;
-  color: #ffffff;
-  
-}
-
-/*ใช้สลับสีไอคอนของกรอบวันที่จัดกิจกรรมและเวลาปิด Register */
-.framedatemonthyear::-webkit-calendar-picker-indicator {
-    filter: invert(1); 
+  border: 2px solid #d39b00;
+  color: #4e4e4e;
+  outline: none;
 }
 
 /*ข้อความเลือกของรางวัล*/
 .messagechoosereward{
   font-size: 16px;
-  color: #FCD53F;
+  color: #8A5B10;
   margin-top: 25px;
+  font-weight: 600;
 }
 
 /*ดอกจันของข้อความเลือกของรางวัล*/
 .asteriskchoosereward{
-  color: #EF4444;
+  color: #ff0000;
 }
 
 /*กรอบของข้อมูลตัวเลือก*/
@@ -4591,7 +4611,9 @@ body {
 .framechooserewardall{
   display: flex;
   align-items: center;
-  border: 2px solid #444443; 
+  justify-content: space-between;
+  background-color: #e7dec4;
+  border: 2px solid #d39b00;
   width: auto;
   height: 70px;
   border-radius: 15px;
@@ -4599,44 +4621,28 @@ body {
   gap: 20px;
 }
 
-/*กรอบของรูปเครื่องเขียน*/
-.framepicture{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--activity-color, #8B5CF6);
-  width: 45px;
-  height: 45px;
-  border-radius: 8px;
-}
-
-/*กรอบของข้อความดินสอ เครื่องเขียน*/
-.framemessage2{
-  width: 260px;
-  margin-bottom: 8px;
-}
-
 /*ข้อความดินสอ*/
 .messagepencil{
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
+  color: #8A5B10;
 }
 
 /*ข้อความเครื่องเขียน*/
 .messagestationery{
   position: relative;
-  bottom: 8px;
-  color: #9CA3AF;
+  bottom: 14px;
+  color: #4e4e4e;
 }
 
 /*เปอร์เช็นของในกรอบเลือกของรางวัล*/
 .percentpencil{
-  color: #ffffff;
+  color: #8A5B10;
   font-size: 18px;
-  position: relative;
-  left: 10px;
-  width: 220px;
+}
+
+.framemessage2 {
+  width: 100px;
 }
 
 /*กรอบของปุ่มบวกลบกับปุ่มติกถูก*/
@@ -4650,14 +4656,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 35px;
-  border: 2px solid #52525B;
+
+  border: 2px solid #d39b00;
   width: 35px;
   height: 35px;
   position: relative;
   left: 8px;
   border-radius: 8px 0px 0px 8px;
   cursor: pointer;
+}
+
+.btndelet-10{
+  font-size: 35px;
+  position: relative;
+  bottom: 1px;
 }
 
 
@@ -4668,7 +4680,7 @@ body {
   height: 35px;
   border: none;
   outline: none;
-  border: 2px solid #52525B;
+  border: 2px solid #d39b00;
 }
 /*ลบตัวเพิ่มกดเดิมในกรอบของตัวเลขเพิ่มลด*/
 .btndelete-1::-webkit-outer-spin-button,
@@ -4682,7 +4694,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 25px;
-  border: 2px solid #52525B;
+  border: 2px solid #d39b00;
   width: 35px;
   height: 35px;
   position: relative;
@@ -4698,14 +4710,14 @@ body {
   appearance: none;
   width: 30px;
   height: 30px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   border-radius: 5px;
   cursor: pointer;
 }
 
 /*พิ้นหลังปุ่มเอาไว้ติ๊ก*/
 .btn-checkbox:checked{
-  background-color: #4c4d4d;
+  background-color: #d39b0098;
 }
 
 /*ทำให้กดแล้วมีติ๊กถูกขึ้นของปุ่มเอาไว้ติ๊ก*/
@@ -4730,16 +4742,17 @@ body {
   padding: 0px 30px;
   height: 30px;
   border-radius: 12px;
-  border: 2px solid #444443;
+  border: 2px solid #d39b00;
   background: none;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็กต์ปุ่มกดแสดงเพิ่มเติม*/
 .showmore::before{
   content: "";
-  background-color: #1a1c1d;
+  background-color: #d39b0028;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -4759,7 +4772,7 @@ body {
 /*ข้อความแสดงเพิ่มเติม*/
 .messageshowmore{
   font-size: 15px;
-  color: #ffffff;
+  color: #8A5B10;
   position: relative;
   z-index: 1;
 }
@@ -4772,20 +4785,22 @@ body {
 /*ข้อความจำนวนผู้เข้าร่วมสูงสุด*/
 .messagequantity{
   font-size: 16px;
-  color: #FCD53F;
+  color: #8A5B10;
+  font-weight: 600;
 }
 
 
 
 /*กรอบเอาไว้พิมของจำนวนผู้เข้าร่วมสูงสุด*/
 .framenumberquantity{
-  background-color: #1C1E22;
+  outline: none;
+  background-color: #e7dec4;
   padding: 15px 20px;
   width: 800px;
   border-radius: 15px;
-  border: 2px solid #373D47;
+  border: 2px solid #d39b00;
   font-size: 16px;
-  color: #ffffff;
+  color: #4e4e4e;
 }
 /*ลบตัวเพิ่มกดเดิมในกรอบของจำนวนผู้เข้าร่วมสูงสุด*/
 .framenumberquantity::-webkit-outer-spin-button,
@@ -4798,26 +4813,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2D3139;
-  border: 2px solid #47515F;
+  background-color: #a8731d;
+  border: none;
   border-radius: 15px;
   padding: 5px;
   gap: 10px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
-
-.submitbuildandQR:disabled{
-  cursor: auto;
-  background-color: #2d313941;
-  border: 2px solid #47515f3b;
-}
-
 
 
 .submitbuildandQR::before{
   content: "";
-  background-color: #252930;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -4826,10 +4835,6 @@ body {
   transform: translate(-50%, -50%);
   transition: width 0.3s, height 0.3s;
   border-radius: 50%;
-}
-
-.submitbuildandQR:disabled:before{
-  background:none;
 }
 
 
@@ -4845,10 +4850,6 @@ body {
   z-index: 1;
 }
 
-.submitbuildandQR:disabled .buildandQR{
-  filter: opacity(50%);
-}
-
 .messagebuildandQR{
   color: #FFFFFF;
   font-size: 16px;
@@ -4856,12 +4857,6 @@ body {
   position: relative;
   z-index: 1;
 }
-
-
-.submitbuildandQR:disabled .messagebuildandQR{
-  color: #ffffff77;
-}
-
 
 
 
@@ -5041,21 +5036,22 @@ body {
 }
 .searchbox {
     display: flex;
-    margin-top: 150px;
+    margin-top: 200px;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     margin-right: 35%;
 }
 
 /* กล่องหุ้มช่องกรอกค้นหา */
 .input-wrapper {
     position: relative;
-    width: 450px;
+    width: 400px;
+    margin-right: 50px;
 }
 
 /* ช่องพิมพ์ค้นหาสีดำ */
 .search-box {
-    width: 100%;
+    width: 400px;
     height: 65px;
     background-color: #000000;
     color: #FCD53F;
@@ -5079,14 +5075,15 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 400px;
-  top: 220px;
+  margin-left: 900px;
+  margin-top: 90px;
+  /* top: 220px; */
 }
 .addreward-btn{
   border-radius: 10px;
   color: #000000;
   display: flex;
-  padding: 15px 25px;
+  padding: 10px 25px;
   justify-content: center;
   align-items: center;
   text-decoration: none;
@@ -5112,9 +5109,10 @@ body {
 
 .reward-list {
     width: 60%;
-    background-color: #fffdfd;
+    background-color: #f2ebaa;
     border-radius: 10px;
     border-color: #000000;
+    border: 1px solid #000000;
 }
 
 /* หัวข้อตาราง */
@@ -5148,45 +5146,9 @@ body {
     padding: 18px 20px;
     
 }
-.box-reward2 {
-    display: grid;
-    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
-    align-items: center;
-    background-color: #262626;
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    
-}
-.box-reward3 {
-    display: grid;
-    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
-    align-items: center;
-    background-color: #262626;
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    
-}
-.box-reward4 {
-    display: grid;
-    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
-    align-items: center;
-    background-color: #262626;
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    
-}
-.box-reward5 {
-    display: grid;
-    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
-    align-items: center;
-    background-color: #262626;
-    color: #ffffff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    
+.no-data{
+  display: flex;
+  justify-content: center;
 }
 /* แต่งปุ่มแก้ไขกับลบรางวัล */
 .edit-delete-button1 {
@@ -5231,8 +5193,10 @@ body {
 
 /* แต่งบ็อกรางวัลหลัก */
 .Topic-addreward{
+  display: flex;
+  justify-content: center;
   color: #4A86E8;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 /* input ชื่อรางวัล */
 .name-reward1{
@@ -5248,15 +5212,14 @@ body {
   margin-bottom: 20px;
 }
 /* input หมวดหมู่รางวัล */
-.category-reward1{
-  width: 500px;
+.category_list_01{
   height: 40px;
   border-radius: 10px;
   border-color: #ffe748;
 }
 /* แต่งกล่อง dropdown หมวดหมู่รางวัล */
 .category_list_01{
-  width: 700px;
+  width: 500px;
 }
 /* แต่งกล่องหมวดหมู่รางวัล */
 .input-reward-category{
@@ -5298,6 +5261,17 @@ body {
   /* width: 500px; */
 }
 .addreward-btn1{
+  border-radius: 10px;
+  background-color: #ffe748;
+  color: #000000;
+  display: flex;
+  padding: 15px 25px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #000000;
+}
+.addre-btn1{
   border-radius: 10px;
   background-color: #ffe748;
   color: #000000;
@@ -5524,6 +5498,9 @@ border-radius: 10px;
   background: none;
   border: none;
 }
+
+
+
 /* ปุ่มหน้าจัดการผู้ใช้ */
 /* ปุ่มเมนูแดชบอร์ด */
 .btn-Dashboard3 {
@@ -5632,51 +5609,52 @@ border-radius: 10px;
 
 /* ปุ่มเมนูsidebar หน้าจัดการวงล้อสุ่ม */
 /* ตกแต่งหน้าจัดการของรางวัล */
-/*ชื่อปุ่มจัดการรางวัล*/
-.btn-Manage_Rewards4{
-  display:  flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  margin-left: 5px;
-  text-decoration: none;   
-  font-weight: 1000;
-  font-size: 18px;
-  color: #8C8D8D; 
-  width: 220px;
-  height: 65px;
-  border-radius:999px;
-}
-/*รูปปุ่มจัดการรางวัล*/
-.btn-Manage_Rewards-img4{
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-}
-
 /*ชื่อปุ่มจัดการวงล้อสุ่ม*/
 .btn-Managewheel4{
-  display:  flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 22px;
-  margin-left: 2px;
-  text-decoration: none; 
-  background-color: #FCD535;  
-  color: #000000;  
-  font-weight: 1000;
-  padding: 10px;
+  background-color: #FCD53F;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: bold;
   font-size: 20px;
-  border-radius:999px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 15px 22px 15px 5px;
+
+  margin-top: 15px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
 }
 /*รูปปุ่มจัดการวงล้อสุ่ม*/ 
 .btn-Managewheel-img4{
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   margin-right: 15px; 
-  margin-left: -15px;
+  margin-left: 15px;
 }
+
+.btn-Assessment4{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 15px;
+}
+
+.btn-Assessment-img4{
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+
+
 /* หน้าแก้ไขผู้ใช้งาน */
 .main-edit-box{
   display: flex;

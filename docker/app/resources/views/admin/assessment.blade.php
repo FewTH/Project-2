@@ -175,7 +175,7 @@
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">
 
-    <template id="Sectionassessment">
+    <template id="Assessmentopen1">
         <div class="sectionassessment" data-status="open" data-random="false">
             <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
             <div class="frameinformation-assessment">

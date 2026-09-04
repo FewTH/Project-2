@@ -10,6 +10,598 @@ body {
   background-color: #fdfbf4;
   min-width: 1000px;
 }
+
+.main-content-edit_information{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 60px;
+}
+
+/*กรอบของแก้ไขข้อมูล*/
+.frameeditinformation{
+  background-color: #fdfbf5;
+  width: 600px;
+  height: auto;
+  margin-top: 8vh;
+  position: relative;
+  left: 80px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+/*ข้อความในกรอบลูกศรกดกลับหน้า Profile*/
+.arrow-1{
+  font-size: 30px;
+  color: #000000;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+/*ลูกศรกดกลับหน้า Profile*/
+.arrow-2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  border: 1px solid #d39b00;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: relative;
+  top: 25px;
+  left: 30px;
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+
+/*เอฟเฟ็กต์ปุ่มลูกศรกดกลับหน้า Profile*/
+.arrow-2::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #dddddd;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำเป็นวงกลมเอฟเฟ็กต์ปุ่มลูกศรกดกลับหน้า Profile*/
+.arrow-2:hover::before{
+  width: 100px;
+  height: 100px;
+}
+
+
+
+/*รูปของแก้ไขข้อมูล*/
+.img-edit-information-1{
+  width: 80px;
+  height: 80px;
+}
+
+/*หัวข้อของแก้ไขข้อมูล*/
+.sectioneditinformation{
+  color: #5381EC;
+  font-size: 35px;
+}
+
+/*ข้อความของแก้ไขข้อมูล*/
+.messageditinformation{
+  font-size: 19px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้ว*/
+.savesuccess{
+  background-color: #E1F5EE;
+  width: 500px;
+  height: 45px;
+  position: relative;
+  left: 50px;
+  bottom: 15px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+/*ข้อความแสดงว่าบันทึกรหัสผ่านแล้ว*/
+.savesuccess-1{
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*กรอบชื่อผู้ใช้ของหน้าแก้ไขข้อมูล*/
+.username-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*ชื่อผู้ใช้ของหน้าแก้ไขข้อมูล*/
+.type-username-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/*กรอบเอาไว้พิมชื่อของหน้าแก้ไขข้อมูล*/
+.input-username-1{
+  outline: none;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*กรอบชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.FirstName-LastName-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*ชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.FirstNameLastName-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
+.input-FirstName-LastName-1{
+  outline: none;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*กรอบอีเมลของหน้าแก้ไขข้อมูล*/
+.email-user-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*อีเมลของหน้าแก้ไขข้อมูล*/
+.typeemail-user-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมอีเมลของหน้าแก้ไขข้อมูล*/
+.input-email-user-1{
+  outline: none;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*errorเวลาใส่ Email ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
+.pleasecompleteemail{
+  display: none;
+  color: #F44336;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*กรอบเบอร์โทรของหน้าแก้ไขข้อมูล*/
+.phone_number-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*เบอร์โทรของหน้าแก้ไขข้อมูล*/
+.typephone_number-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมเบอร์โทรของหน้าแก้ไขข้อมูล*/
+.input-phonenumber-1{
+  outline: none;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*errorเวลาใส่ เบอร์โทร ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
+.pleasewearnumber{
+  display: none;
+  color: #F44336;
+  text-align: left;
+  font-size: 15px;
+}
+
+/*กรอบของปุ่ม บันทึกข้อมูล ยกเลิกของหน้าแก้ไขข้อมูล*/
+.save-data-btn-cancel{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px 45px 50px;
+}
+
+/*ปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1{
+  display: flex;
+  align-items: center;
+  background-color: #a8731d;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-2 {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 25px 60px;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  z-index: 1;
+}
+
+
+/*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1::before{
+  content: "";
+  position: absolute;
+  background-color: #966516;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำกรอบให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
+.save-data-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1{
+  position: relative;
+  background-color: #ffffff;
+  border: 2px solid #d39b00;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มยกเลิกขของหน้าแก้ไขข้อมูล*/
+.btn-cancel-2{
+  color: #d39b00;
+  border: none;
+  background: none;
+  font-size: 22px;
+  padding: 20px 85px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำกรอบให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
+.btn-cancel-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+
+
+/*ส่วนของหน้า Change_password.blade.php*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content-change-password{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+/*กรอบของหน้าเปลี่ยนรหัสผ่าน*/
+.framechangepassword{
+  background-color: #fdfbf5;
+  width: 600px;
+  height: auto;
+  margin-top: 22vh;
+  position: relative;
+  left: 80px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*ลูกศรกดกลับหน้า Profile ของหน้าเปลี่ยนรหัสผ่าน*/
+.arrow-password{
+  display: flex;
+  justify-content: center;
+  background-color: #f1f1f1;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: relative;
+  top: 25px;
+  left: 30px;
+  padding-top: 3px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 30px;
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.22);
+}
+
+/*รูปของหน้าเปลี่ยนรหัสผ่าน*/
+.img-change-password-1{
+  width: 80px;
+  height: 80px;
+}
+
+/*หัวข้อของหน้าเปลี่ยนรหัสผ่าน*/
+.sectionchangepassword{
+  color: #5381EC;
+  font-size: 35px;
+}
+
+/*ข้อความของหน้าเปลี่ยนรหัสผ่าน*/
+.messagchangepassword{
+  font-size: 19px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบข้อความแสดงว่าบันทึกรหัสผ่านแล้วของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccesschangepassword{
+  background-color: #E1F5EE;
+  width: 500px;
+  height: 45px;
+  position: relative;
+  left: 50px;
+  bottom: 15px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+/*ข้อความแสดงว่าบันทึกรหัสผ่านแล้วของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccess-changepassword{
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*ข้อความแสดงerrorว่าบันทึกรหัสผ่านไม่สำเสร็จของหน้าเปลี่ยนรหัสผ่าน*/
+.savesuccesschangepassword-error{
+  margin-right: auto;
+  font-size: 18px;
+  color: #c22b3a;
+  margin-left: 5px;
+  margin-bottom: -5px;
+}
+
+
+.usernamechangepassword{
+  display: none;
+}
+
+/*กรอบรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordcurrent{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*รหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.type-passwordcurrent-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+/*กรอบของปุ่มตาเปิดปิดรหัสผ่านกับ กรอบเอาไว้พิมรหัสผ่านของหน้าเปลี่ยนรหัสผ่าน*/
+.img-eye-password{
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+/*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordcurrent-1{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px 20px 50px;
+}
+
+/*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
+.input-passwordcurrent-1{
+  outline: none;
+  color: #777777;
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*ปุ่มตาเปิดปิดรหัสผ่านของหน้าเปลี่ยนรหัสผ่าน*/
+.img-eye{
+  position: absolute;
+  right: 25px;
+  border: none;
+  background: none;
+  font-size: 25px;
+  color: #745500;
+  cursor: pointer;
+}
+
+/*กรอบเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.passwordlasttime{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+/*เปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.type-password-lasttime-1{
+  text-align: left;
+  font-size: 19px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/*กรอบเอาไว้พิมเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
+.input-password-lasttime-1{
+  cursor: text;
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*กรอบของปุ่ม บันทึกรหัสผ่าน ยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-btn-cancel{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px 45px 50px;
+}
+
+
+
+/*ปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1{
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #a8731d;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ข้อความปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-2{
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 20px 55px;
+  font-weight: 600;
+  border: none;
+  background: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1::before{
+  content: "";
+  background-color: #966516;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำให้เป็นวงกลมเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
+.save-password-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password{
+  position: relative;
+  background-color: #ffffff;
+  border: 2px solid #d39b00;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password-1{
+  color: #d39b00;
+  font-size: 22px;
+  font-weight: 600;
+  border: none;
+  padding: 25px 90px;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password::before{
+  content: "";
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*ทำห้เป็นวงกลมเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
+.btn-cancel-password:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+
+
+
+
+
+
+
  
 /*ส่วนของหน้า Profile.blade.php*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/

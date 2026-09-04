@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Reward;
 
 class AppServiceProvider extends ServiceProvider
 
@@ -25,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         View::share('user', Auth::user() ?? User::find(1));
+        View::share('rewards', Reward::all());
     }
 }
