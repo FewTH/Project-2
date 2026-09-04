@@ -6,5 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reward extends Model
 {
-    protected $fillable = ['name', 'category', 'rate', 'quantity'];
+    protected $table = 'reward';
+    protected $primaryKey = 'reward_id'; // ไม่ใช่ id
+    protected $fillable = [
+        'name', 
+        'quantity_reward', 
+        'category_id', 
+        'rate', 
+        'created_by',
+        ];
+
+    public function category()
+    {
+        return $this->belongsTo(RewardCategory::class, 'category_id', 'category_id');
+    }
 }

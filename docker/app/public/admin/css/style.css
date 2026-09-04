@@ -1,14 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
 /*ป้องกันกล่องส้น*/
 * {
   box-sizing: border-box;
 }
-
+ 
 body {
   margin: 0;
-  font-family: sans-serif;
-  background-color: #ffffff;
+  font-family: 'Chakra Petch', sans-serif;
+  background-color: #f8f8f6;
   min-width: 1000px;
 }
+ 
 
 /*ส่วนของหน้า Dashboard.html*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/
@@ -24,7 +26,7 @@ body {
 
 /*โปรไฟล์ผู้ใช้*/
 .btn-user-wrapper {
-  background-color: #FCD53F;
+  background-color: #F3D577;
   position: fixed;
   top: 0;
   left: 0px;
@@ -40,7 +42,7 @@ body {
 
 /*หน้าต่างเมนู*/
 .container {
-  background-color: #FFFFFF;
+  background-color: #fdfbf4;
   width: 250px;
   height: 100vh;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -176,7 +178,7 @@ body {
 
 /*ปุ่มกดวัน สัปดาห์ เดือน*/
 .ButtonDate{
-  background-color: #8C8D8D;
+  background-color: #b8b1a4;
   border-radius: 10px;
   display: flex;
   flex-wrap: nowrap;
@@ -341,7 +343,7 @@ body {
 
 /*กรอบของผู้ใช้*/
 .alluser_frames{
-  background-color: #FFFFFF;
+  background-color: #fdfbf5;
   width: 330px;
   height: 235px;
   border-radius: 20px;
@@ -369,7 +371,7 @@ body {
 
 /*กรอบของผู้ทำแบบประเมิน*/
 .assessmentframe{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   width: 330px;
   height: 235px;
   border-radius: 20px;
@@ -397,7 +399,7 @@ body {
 
 /*กรอบของสุ่มทั้งหมด*/
 .randomall{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   width: 330px;
   height: 235px;
   border-radius: 20px;
@@ -425,7 +427,7 @@ body {
 
 /*กรอบของรอรับของขวัญ*/
 .framewaitreceiveaward{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   width: 330px;
   height: 235px;
   border-radius: 20px;
@@ -454,7 +456,7 @@ body {
 
 /*กรอบของกราฟ*/
 .chart-wrap{
-  background-color: #fcfcfc;
+  background-color: #fdfbf5;
   flex: 2;
   height: 580px;
   margin-top: 100px;
@@ -477,7 +479,7 @@ body {
 
 /*กอรบของขวัญยอดนิยม*/
 .framesmost_popular{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   min-width: 675px;
   height: 580px;
   border-radius: 20px;
@@ -886,7 +888,7 @@ body {
   width: 100%;
   width: 600px;
   height: 525px;
-  background-color: #FFFFFF;
+  background-color: #fdfbf5;
   margin-top: 100px;
   border-radius: 15px;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -1098,7 +1100,7 @@ body {
 
 /*กรอบของแก้ไขข้อมูล*/
 .frameeditinformation{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   width: 600px;
   height: auto;
   margin-top: 8vh;
@@ -1125,6 +1127,7 @@ body {
   align-items: center;
   text-decoration: none;
   background-color: #f1f1f1;
+  border: 1px solid #d39b00;
   width: 46px;
   height: 46px;
   border-radius: 50%;
@@ -1211,9 +1214,10 @@ body {
 
 /*กรอบเอาไว้พิมชื่อของหน้าแก้ไขข้อมูล*/
 .input-username-1{
+  outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1234,9 +1238,10 @@ body {
 
 /*กรอบเอาไว้พิมชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
 .input-FirstName-LastName-1{
+  outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1257,9 +1262,10 @@ body {
 
 /*กรอบเอาไว้พิมอีเมลของหน้าแก้ไขข้อมูล*/
 .input-email-user-1{
+  outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1288,9 +1294,10 @@ body {
 
 /*กรอบเอาไว้พิมเบอร์โทรของหน้าแก้ไขข้อมูล*/
 .input-phonenumber-1{
+  outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1311,7 +1318,9 @@ body {
 
 /*ปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
 .save-data-1{
-  background-color: #FCD53F;
+  display: flex;
+  align-items: center;
+  background-color: #a8731d;
   border-radius: 20px;
   cursor: pointer;
   position: relative;
@@ -1321,6 +1330,7 @@ body {
 
 /*ชื่อปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
 .save-data-2 {
+  color: #ffffff;
   font-size: 20px;
   font-weight: 600;
   padding: 25px 60px;
@@ -1336,7 +1346,7 @@ body {
 .save-data-1::before{
   content: "";
   position: absolute;
-  background-color: #ffce0b;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   left: 50%;
@@ -1356,7 +1366,8 @@ body {
 /*ปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
 .btn-cancel-1{
   position: relative;
-  background-color: #D9D9D9;
+  background-color: #ffffff;
+  border: 2px solid #d39b00;
   border-radius: 20px;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -1365,10 +1376,11 @@ body {
 
 /*ชื่อปุ่มยกเลิกขของหน้าแก้ไขข้อมูล*/
 .btn-cancel-2{
+  color: #d39b00;
   border: none;
   background: none;
-  font-size: 20px;
-  padding: 25px 85px;
+  font-size: 22px;
+  padding: 20px 85px;
   font-weight: 600;
   cursor: pointer;
   position: relative;
@@ -1381,7 +1393,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #cacaca;
+  background-color: #f7f4f4;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -1410,7 +1422,7 @@ body {
 
 /*กรอบของหน้าเปลี่ยนรหัสผ่าน*/
 .framechangepassword{
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   width: 600px;
   height: auto;
   margin-top: 22vh;
@@ -1504,11 +1516,12 @@ body {
 
 /*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
 .input-passwordcurrent-1{
+  outline: none;
   color: #777777;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1519,16 +1532,8 @@ body {
   border: none;
   background: none;
   font-size: 25px;
-  color: #575757;
+  color: #745500;
   cursor: pointer;
-}
-
-/*errorเวลาใส่ รหัสผ่านปัจจุบัน ไม่ถูกต้องของหน้าเปลี่ยนรหัสผ่าน*/
-.pleasepassword{
-  display: none;
-  color: #F44336;
-  text-align: left;
-  font-size: 15px;
 }
 
 /*กรอบเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
@@ -1551,7 +1556,7 @@ body {
   cursor: text;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   font-size: 15px;
 }
 
@@ -1655,7 +1660,7 @@ body {
 /*ส่วนของหน้า Assessment.blade.php*/
 /*หน้าต่างเมนู*/
 .container-assessment {
-  background-color: #FFFFFF;
+  background-color: #fdfbf4;
   width: 250px;
   height: 100vh;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -2709,7 +2714,7 @@ body {
 
 /*โปรไฟล์ผู้ใช้*/
 .btn-user-wrapper-1 {
-  background-color: #FCD53F;
+  background-color: #F3D577;
   position: fixed;
   top: 0;
   left: 0px;
@@ -2728,8 +2733,7 @@ body {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #FCD53F;
-  background-color: #757575;
+  color: #8A5B10;
   font-weight: 1000;
   font-size: 20px;
   padding: 6px 40px;
@@ -2739,6 +2743,8 @@ body {
 .btn-user-img {
   width: 45px;
   height: 45px;
+  background-color: #8A5B10;
+  border: 3px solid #d39b00;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 15px;
@@ -2751,7 +2757,7 @@ body {
 
 /*หน้าต่างเมนู*/
 .container-1 {
-  background-color: #FFFFFF;
+  background-color: #fdfbf4;
   height: 100vh;
   box-shadow: 0 6px 14px rgba(0,0,0,0.22);
   display: flex;
@@ -2879,7 +2885,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.2px solid #8C8D8D;
+  border: 1px solid #d39b00;
   width: 250px;
   height: 55px;
   text-decoration: none;
@@ -2905,9 +2911,10 @@ body {
 
 /*โปรไฟล์*/
 .Profile {
-  background-color: #000000;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
   width: 100%;
-  border-radius: 15px;
+  border-radius: 20px;
   box-shadow: 0 10px 14px rgba(0,0,0,0.22);
   padding: 25px;
   display: flex;
@@ -2935,11 +2942,12 @@ body {
 
 /*รูปภาพผู้ใช้*/
 .photo_user {
+  border: 3px solid #d39b00;
   width: 150px;
   height: 150px;
   margin-left: 25px;
   border-radius: 50%;
-  background-color: #000000;
+  background-color: #8A5B10;
 }
 
 /*รูปภาพผู้ใช้*/
@@ -2953,19 +2961,20 @@ body {
 .Change_image{
   position: relative;
   cursor: pointer;
-  width: 100%;
+  width: 210px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
-  border-radius: 10px;
+  background-color: #ffffff;
+  border: 3px solid #d39b00;
+  border-radius: 20px;
   overflow: hidden;
 }
 
 /*เอฟเฟ็กต์ขอบปุ่มเปลี่ยนรูปโปรไฟล์*/
 .Change_image::before{
   content: "";
-  background-color: #e7e7e7;
+  background-color: #d39b0017;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -3012,9 +3021,8 @@ body {
 
 /*ชื่อ*/
 .name {
-  color: #FFFFFF;
+  color: #000000;
   font-size: 20px;
-  font-weight: 1000;
   margin-top: 50px;
 }
 .name h2 {
@@ -3023,7 +3031,7 @@ body {
 
 /*อีเมล*/
 .email {
-  color: #8C8D8D;
+  color: #000;
   font-size: 16px;
   font-weight: 600;
 }
@@ -3053,8 +3061,9 @@ body {
 /*กล่องสุ่มทั้งหมด*/
 .framerandom_all {
   background-color: #FFFFFF;
+  border: 3px solid #d39b00;
   width: 250px;
-  height:200px;
+  height:210px;
   border-radius: 10px;
   padding: 20px;
   flex-direction: column;
@@ -3070,9 +3079,10 @@ body {
 
 /* กล่องจำนวนรางวัลที่ได้ */
 .frameReward_Box {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
+  border: 3px solid #d39b00;
   width: 250px;
-  height:200px;
+  height:210px;
   border-radius: 10px;
   padding: 20px;
   display: flex;
@@ -3111,8 +3121,9 @@ body {
   position: absolute;
   top: 35%;
   left: 8%;
-  background-color: #ffffff;
-  width: 450px;
+  background-color: #fdfbf5;
+  width: 900px;
+  padding: 20px 20px 40px 20px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border: none;
@@ -3128,27 +3139,23 @@ body {
   width: 260px;
   height: 130px;
   padding: 30px 0px 0px 160px;
+  margin-left: 225px;
 }
 
 /*หัวข้อpopupเปลี่ยรหัสผ่าน*/
 .Change-photo{
   padding: 0px 0px 0px 100px;
   font-size: 28px;
+  margin-left: 235px;
 }
 
 /*ข้อความในกรอบpopup*/
 .choosephotonew{
   padding: 0px 0px 0px 80px;
   font-size: 19px;
+  margin-left: 230px;
 }
 
-/*ขนาดไฟล์ในกรอบ popup*/
-.file_size_5MB{
-  padding: 0px 0px 0px 120px;
-  font-size: 19px;
-  position: relative;
-  bottom: 15px;
-}
 
 /*กรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
 .savesuccessimage-1{
@@ -3157,8 +3164,6 @@ body {
   text-align: left;
   font-size: 19px;
   border-radius: 10px;
-  position: relative;
-  bottom: 15px;
 }
 
 /*ข้อความของกรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
@@ -3181,155 +3186,114 @@ body {
 
 /*กรอบของปุ่ม เลือกรูปภาพ ยกเลิก*/
 .btn-select-file-1{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding: 0px 0px 30px 0px;
 }
 
-/*กรอบปุ่มเลือกรูปภาพ*/
-.btn-select-file{
+/*กรอบของ รูปภาพ ข้อความในส่วนเลือกรูปโปรไฟล์*/
+.btn-uploadphoto{
+  position: relative;
+  top: 15px;
+  padding: 25px 0px 20px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   border-radius: 15px;
-  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-  background-color: #FCD53F;
+  border: 2px dashed #3b82f6;
+  background-color: #f0f9ff;
   cursor: pointer;
-  position: relative;
   overflow: hidden;
 }
 
+.btn-uploadphoto::before{
+  content: "";
+  background-color: #3b83f634;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  border-radius: 50%;
+}
 
-/*ข้อความปุ่มเลือกรูปภาพ*/
-.btn-select-file-2{
-  border: none;
-  background: none;
-  padding: 15px 153px;
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
+.btn-uploadphoto:hover::before{
+  width: 1000px;
+  height: 1000px;
+}
+
+.img-btn-select-file{
   position: relative;
   z-index: 1;
 }
 
-/*เอฟเฟ็ตปุ่มเลือกรูปภาพ*/
-.btn-select-file::before{
-  content: "";
-  background-color: #ffce0b;
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
-}
-
-/*กรอบวงกลมเอฟเฟ็ตปุ่มเลือกรูปภาพ*/
-.btn-select-file:hover::before{
-  width: 500px;
-  height: 500px;
-}
-
-/*กรอบของปุ่มบันทึกรูปภาพ*/
-.btn-save-file-2{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  background-color: #22c55e;
-  border-radius: 15px;
-  border: none;
-  height: 60px;
-  cursor: pointer;
-  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-  overflow: hidden;
-}
-
-/*เอฟเฟ็กต์ปุ่มบันทึกรูปภาพ*/
-.btn-save-file-2::before{
-  content: "";
-  background-color: #25ce63;
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
-}
-
-/*ทำเป็นวงกลมของเอฟเฟ็กต์ปุ่มบันทึกรูปภาพ*/
-.btn-save-file-2:hover::before{
-  width: 500px;
-  height: 500px;
-}
-
-/*ข้อความของปุ่มบันทึกรูปภาพ*/
-.btn-save-file-1{
-  color: #ffffff;
+/*ข้อความเลือกรูปภาพ*/
+.message-uploadphoto{
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
   z-index: 1;
 }
 
-
-/*กรอบของปุ่มยกเลิก*/
-.btn-close{
-  position: relative;
+/*กรอบ/*ข้อความไฟล์ jpeg,png.webpกับขนาดรูปโปรไฟล์*/
+.message-uploadphoto-1-2{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
-  border-radius: 15px;
-  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-  background-color: #222;
-  color: #ffffff;
-  cursor: pointer;
-  overflow: hidden;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
-/*เอฟเฟ็ตของปุ่มยกเลิก*/
-.btn-close::before{
-  content: "";
-  background-color: #000000;
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-/*กรอบเอฟเฟ็ตของปุ่มปุ่มยกเลิก*/
-.btn-close:hover::before{
-  width: 500px;
-  height: 500px;
+/*ข้อความไฟล์ jpeg,png.webpกับขนาดรูปโปรไฟล์*/
+.message-uploadphoto-1{
+  font-size: 16px;
 }
 
 /*ปุ่มยกเลิก*/
 .btn-close-1{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+  background-color: #a8731d;
+  padding: 0px 25px;
+  height: 40px;
   border: none;
-  background: none;
-  padding: 17px 183px;
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 700;
+  border-radius: 20px;
   cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.btn-close-1::before{
+  content: "";
+  background-color: #966516;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  border-radius: 50%;
+}
+
+.btn-close-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+.btn-close-popup{
+  font-size: 25px;
+  color: #ffffff;
   position: relative;
   z-index: 1;
 }
 
 /*ข้อมูลผู้ใช้*/
 .User_Information {
-  background-color: #ffffff;
+  background-color: #fdfbf5;
   flex: 3;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
@@ -3353,8 +3317,8 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #222;
-  border-radius: 15px;
+  background-color: #ad7924;
+  border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
 }
@@ -3365,7 +3329,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #000000;
+  background-color: #a3701e;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -3394,6 +3358,7 @@ body {
 
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
+  background-color: #fdfbf5;
   position: absolute;
   top: 42%;
   left: 8%;
@@ -3439,7 +3404,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222;
+  background-color: #a8731d;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -3451,7 +3416,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #000000;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -3468,7 +3433,7 @@ body {
 /*ข้อความปุ่มยืนยัน*/
 .btn-Edit-information-profile-1{
   padding: 15px 60px;
-  color: #FCD53F;
+  color: #ffffff;
   text-decoration: none;
   font-size: 23px;
   font-weight: 800;
@@ -3484,7 +3449,7 @@ body {
   justify-self: center;
   background-color: #ffffff;
   border-radius: 20px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   position: relative;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -3514,7 +3479,7 @@ body {
 .btn-close-Edit-1{
   padding: 15px 50px;
   font-size: 23px;
-  color: #8C8D8D;
+  color: #d39b00;
   cursor: pointer;
   background: none;
   border: none;
@@ -3530,7 +3495,7 @@ body {
   align-items: center;
   padding: 0 25px;
   font-size: 23px;
-  gap: 20px 100px;
+  gap: 20px 105px;
 }
 /*หัวข้อชื่อผู้ใช้ ทำให้ขึ้นเคอร์เซอร์เมาส์*/
 .Type_username{
@@ -3542,7 +3507,7 @@ body {
   flex: 1;
   border-radius: 7px;
   width: 540px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
   font-size: 15px; 
 }
@@ -3565,7 +3530,7 @@ body {
 .input-FirstName-LastName {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
 
 }
@@ -3589,7 +3554,7 @@ body {
 .input-email-user {
   width: 100%;
   border-radius: 7px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -3602,7 +3567,7 @@ body {
   margin-top: 20px;
   padding: 0 25px;
   font-size: 23px;
-  gap: 20px 85px;
+  gap: 20px 88px;
 }
 
 /*หัวข้อเบอร์โทร ทำให้ขึ้นเคอร์เซอร์เมาส์*/
@@ -3614,7 +3579,7 @@ body {
 .input-phonenumber {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -3626,7 +3591,7 @@ body {
 
 /*เปลี่ยนรหัสผ่าน*/
 .Change_password {
-  background-color: #FFFFFF;
+  background-color: #fdfbf5;
   flex: 2;
   height: 370px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
@@ -3659,7 +3624,7 @@ body {
 .input-Current_password {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -3683,7 +3648,7 @@ body {
 .input-Last_updated {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -3696,7 +3661,7 @@ body {
   display: flex;
   justify-content: center;
   width: 150px;
-  background-color: #222;
+  background-color: #a8731d;
   margin-left: auto;
   border-radius: 15px;
   cursor: pointer;
@@ -3709,7 +3674,7 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #000000;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -3738,6 +3703,7 @@ body {
 
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
+  background-color: #fdfbf5;
   position: absolute;
   top: 42%;
   left: 8%;
@@ -3789,7 +3755,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #222;
+  background-color: #a8731d;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   overflow: hidden;
@@ -3799,7 +3765,7 @@ body {
 /*เอฟเฟ็กต์วงกลมสีดำ*/
 .btn-change-password::before {
   content: "";
-  background-color: #000000;
+  background-color: #966516;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -3825,7 +3791,7 @@ body {
   padding: 15px 60px;
   font-size: 23px;
   font-weight: 800;
-  color: #FCD53F;
+  color: #ffffff;
   text-decoration: none;
   position: relative;
   z-index: 1;
@@ -3838,7 +3804,7 @@ body {
   justify-self: center;
   background-color: #ffffff;
   border-radius: 20px;
-  border: 2px solid #8C8D8D;
+  border: 2px solid #d39b00;
   position: relative;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -3871,7 +3837,7 @@ body {
   border: none;
   font-weight: 800;
   padding: 15px 50px;
-  color: #8C8D8D;
+  color: #d39b00;
   cursor: pointer;
   position: relative;
   z-index: 2;
@@ -4906,7 +4872,7 @@ body {
 /* ตกแต่งหน้าจัดการของรางวัล */
 /*หน้าต่างเมนู*/
 .container2 {
-  background-color: #FFFFFF;
+  background-color: #fdfbf4;
   z-index: 11;
   width: 250px;
   height: 100vh;
@@ -4920,7 +4886,7 @@ body {
 }
 /*โลโก้ BUULIB*/
 .img-Logo2{
-  padding: 20px 0px 26px 0px;
+  padding: 20px 0px 25px 0px;
 }
 /*ชื่อปุ่มแดชบอร์ด*/
 .btn-Dashboard2{
@@ -4932,14 +4898,14 @@ body {
   font-weight: bold;
   font-size: 20px;
   padding: 20px 0px;
-  margin-right: 48px;
+  margin-right: 55px;
 }
 /*รูปปุ่มแดชบอร์ด*/
 .btn-Dashboard-img2{
   width: 50px;
   height: 50px;
   margin-right: 15px;
-  margin-left: 15px;
+  margin-left: 16px;
 }
 /*ชื่อปุ่มจัดการรางวัล*/
 .btn-Manage_Rewards2{
@@ -4953,8 +4919,8 @@ body {
   padding: 20px;
   background-color: #FCD53F;
   margin-top: 20px;
-  margin-left: 6px;
-  padding-left: 5px;
+  margin-left: 4px;
+  padding-left: 3px;
   max-width: 230px;
   max-height: 70px;
   border-radius: 40px;
@@ -4965,7 +4931,7 @@ body {
   width: 50px;
   height: 50px;
   margin-right: 15px;
-  margin-left: 15px;
+  margin-left: 16px;
 }
 /*ชื่อปุ่มจัดการผู้ใช้*/
 .btn-Manage_users2{
@@ -4975,7 +4941,7 @@ body {
   text-decoration: none;
   color: #8C8D8D;
   margin-top: 32px;
-  margin-right: 40px;
+  margin-right: 50px;
   font-weight: bold;
   font-size: 20px;
   padding: 20px 0px;
@@ -4996,7 +4962,7 @@ body {
   text-decoration: none;
   color: #8C8D8D;
   margin-top: 10px;
-  margin-right: 12px;
+  margin-right: 18px;
   font-weight: bold;
   font-size: 20px;
   padding: 20px 0px;
@@ -5038,7 +5004,7 @@ body {
   display:  flex;
   align-items: center;
   justify-content: center;
-  border: 0.2px solid #8C8D8D; 
+  border: 1px solid #d39b00; 
   width: 248px;
   height: 50px;
   text-decoration: none;   
@@ -5262,6 +5228,7 @@ body {
   margin: auto;
   margin-top: 150px;
 }
+
 /* แต่งบ็อกรางวัลหลัก */
 .Topic-addreward{
   color: #4A86E8;
@@ -5385,6 +5352,9 @@ body {
 }
 /* ปุ่มเพิ่มผู้ใช้ */
 .add-usr-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #FCD535;
   color: #000000;
   border-radius: 10px;
@@ -5395,6 +5365,7 @@ body {
   position: relative;
   left: 87%;
   top: 110px;
+  text-decoration: none;
 }
 /* กล่องเสิร์ชรายชื่อ */
 .search-usr-box{
@@ -5523,6 +5494,20 @@ border-radius: 10px;
   color: #E1F5EE;
   text-decoration: none;
 }
+/* หน้าแก้ไขผู้ใช้ */
+.edit-box-main{
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 70px;
+  background-color: #d4d1d1;
+  width: 750px;
+  height: 650px;
+  margin: auto;
+  margin-top: 150px;
+}
 /* list-user */
 .user-1{
   display: grid;
@@ -5534,6 +5519,10 @@ border-radius: 10px;
 }
 .manage-btn3{
   display: flex;
+}
+.delete-btn-action{
+  background: none;
+  border: none;
 }
 /* ปุ่มหน้าจัดการผู้ใช้ */
 /* ปุ่มเมนูแดชบอร์ด */
@@ -5583,8 +5572,8 @@ border-radius: 10px;
   font-size: 20px;
   padding: 20px;
   background-color: #FCD53F;
-  margin-top: 23px;
-  margin-left: 5px;
+  margin-top: 22px;
+
   padding-left: 5px;
   max-width: 230px;
   max-height: 70px;
@@ -5596,7 +5585,6 @@ border-radius: 10px;
   width: 50px;
   height: 25px;
   margin-right: 15px; 
-
 }
 
 /*ชื่อปุ่มจัดการวงล้อสุ่ม*/
@@ -5607,7 +5595,7 @@ border-radius: 10px;
   text-decoration: none;
   color: #8C8D8D;
   margin-top: 22px;
-  margin-right: 12px;
+  margin-right: 18px;
   font-weight: bold;
   font-size: 20px;
   padding: 20px 0px;

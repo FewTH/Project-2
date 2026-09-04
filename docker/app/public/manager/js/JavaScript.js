@@ -109,43 +109,8 @@ const uploadPhotoInput = document.getElementById('uploadphoto');
 
 
 
-//หน้า spin.blade.php
-   const allbtn = document.getElementById('all-btn');
-//    const alltest = document.getElementById('');
-
-    if(allbtn){
-        allbtn.addEventListener('click', function(){
-            document.getElementById('all-btn').classList.add('active');
-            document.getElementById('spined-btn').classList.remove('active');
-            document.getElementById('not-spin').classList.remove('active');
-            
-        });
-    }
-    const spinedbtn = document.getElementById('spined-btn');  
-    if(spinedbtn){
-        spinedbtn.addEventListener('click', function(){
-            document.getElementById('spined-btn').classList.add('active');
-            document.getElementById('all-btn').classList.remove('active');
-            document.getElementById('not-spin').classList.remove('active');
-            
-        });
-    }
-
-    const notspinbtn = document.getElementById('not-spin');
-    if(notspinbtn){
-        notspinbtn.addEventListener('click' , function(){
-            document.getElementById('not-spin').classList.add('active');
-            document.getElementById('all-btn').classList.remove('active');
-            document.getElementById('spined-btn').classList.remove('active');
-        });
-    }
 
 
 
-
-
-
-
-
-
+    
 });

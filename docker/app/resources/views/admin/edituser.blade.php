@@ -14,34 +14,34 @@
         @if($user->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
-        <img src="{{ asset('admin/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @endif
         <span>Admin</span>
     </a>
 </div>
 
-        <div class="main-edit-box">
-            <h1 class="edit-usr-topic">แก้ไขผู้ใช้งาน</h1>
-            <form id="edit-usr-box">
-                {{-- ลำดับ --}}
-                <div class="num-user">
-                    <label  class="num-user-li" for="">ลำดับ</label> <br>
-                    <input type="number" class="num-user-acc" id="num-user-acc" placeholder="2" default="0">
+        <div class="edit-box-main">
+            <h1 class="edit-usr-title">แก้ไขผู้ใช้งาน</h1>
+            <form id="edit-usr-form">
+                {{-- ชื่อผู้ใช้ --}}
+                <div class="name-usr-box">
+                    <label class="name-usr01" for="name-usr-in">ชื่อผู้ใช้ (Username)</label> <br>
+                    <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username') }}" placeholder="กรอกชื่อของคุณ" required>
                 </div>
-                {{-- ชื่อ --}}
-                <div class="name-user">
-                    <label class="name-user-li" for="name-user-acc">ชื่อผู้ใช้งาน</label> <br>
-                    <input type="text" class="name-user-acc" id="name-user-acc" name="fullname" placeholder="ระบุชื่อผู้ใช้งาน">
+                {{-- email --}}
+                <div class="emaill-usr-box">
+                    <label class="emaill-usr01" for="email">อีเมล</label> <br>
+                    <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมลของคุณ" required>
                 </div>
                 {{-- บทบาท --}}
-                <div class="role-user">
-                    <label class="role-usr-li" for="role-usr-acc">บทบาท</label> <br>
-                    <input type="text" class="role-user-acc" list="role_list" id="role-usr-acc" placeholder="บทบาทผู้ใช้">
-                    <datalist class="role_list_01" id="role_list">
-                        <option value="Admin">
-                        <option value="User">
-                        <option value="Manager">
-                    </datalist>
+                <div class="role-usr-box">
+                    <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
+                    <select  class="role_list_01" id="role" name="role" required>
+                        <option value=""> --เลือกบทบาทของคุณ-- </option>
+                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : ''}}>Admin</option>
+                        <option value="Manager" {{old('role')== 'Manager' ? 'selected' : ''}}>Manager</option>
+                        <option value="User" {{old('role')== 'User' ? 'selected' : ''}}>User</option>
+                    </select>     
                 </div>
                 {{-- ปุ่มบันทีกกับยกเลิก --}}
                 <div class="btn-sub_cln">
@@ -52,9 +52,9 @@
                     <a href="{{url ('admin/manageuser')}}" class="cancle-btn-editusr">
                         <span>ยกเลิก</span>
                     </a>
-                </div> 
-            </form>
-        </div>
+                </div>
+                </form>
+            </div>
     
 
 <!-- ส่วนเมนูsidebar -->

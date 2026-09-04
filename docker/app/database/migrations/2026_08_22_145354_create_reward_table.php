@@ -12,7 +12,7 @@ return new class extends Migration
     Schema::create('reward', function (Blueprint $reward) {
         $reward->id('reward_id');                 
         $reward->string('name', 200);             
-        $reward->integer('category_id');          
+        $reward->foreignId('category_id')->constrained('reward_categories', 'category_id');          
         $reward->unsignedInteger('created_by');           
         $reward->integer('quantity_reward');      
         $reward->integer('rate');                 

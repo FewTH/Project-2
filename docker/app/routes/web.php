@@ -3,112 +3,116 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WheelController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// ส่วนของ admin
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+// ส่วนของ Admin 
+Route::prefix('admin')->group(function () {
+    
+    // Dashboard & Profile
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+    // Route::get('/edituser', function () {
+    //     return view('admin.edituser');
+    // });
+
+    Route::get('/profile', [ProfileController::class, 'adminProfile']);
+    Route::post('/profile', [ProfileController::class, 'uploadimg']);
+
+    Route::get('/edit_information', [ProfileController::class, 'adminEditForm']); 
+    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
+
+    Route::get('/change_password', [ProfileController::class, 'adminchangePassword']); 
+    Route::post('/change_password', [ProfileController::class, 'changePassword']);
+
+    // ระบบจัดการผู้ใช้งาน UserController
+    Route::get('/manageuser', [UserController::class, 'index'])->name('admin.manageuser');  // เม็ดตอดนี้ก็ประมาณว่า แสดงหน้าจัดการผู้ใช้เลยใช้เม็ดตอด get
+    Route::get('/adduser', [UserController::class, 'create'])->name('admin.adduser'); // อันนี้ก็แสดงฟอร์มเพิ่มผู้ใช้
+    Route::post('/manageuser/store', [UserController::class, 'store'])->name('admin.user.store'); // อันนี้จะเป็นการบันทึกข้อมูลลงดาต้าเบสบน myadmin เลยใช้ post และ store
+    Route::delete('/manageuser/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy'); // อันนี้ก็ตรงตัวคือลบผู้ใช้
+    Route::get('/manageuser/{id}/edit', [UserController::class, 'edit'])->name('admin.user.edit'); // อันนี้คือแสดงแบบฟอร์มแก้ไขผู้ใช้
+    Route::put('/manageuser/{id}', [UserController::class, 'update'])->name('admin.user.update'); // อันนี้คือการที่ เราบันทึกข้อมูลใหม่ที่แก้ไขทับข้อมูลเก่าเลยใช้ เม็ดตอดput
+
+    // ระบบจัดการของรางวัล
+    
+    // Route::get('/edituser', function () {
+    //     return view('admin.edituser');
+    // });
+
+    // ระบบจัดการกิจกรรม / รางวัล / วงล้อ
+    Route::get('/assessment', function () {
+        return view('admin.assessment');
+    });
+
+    Route::get('/create_activity', function () {
+        return view('admin.create_activity');
+    });
+
+    Route::get('/managereward', function () {
+        return view('admin.managereward');
+    });
+
+    Route::get('/addreward', function () {
+        return view('admin.addreward');
+    });
+
+    Route::get('/view_details', function () {
+        return view('admin.view_details');
+    });
+
+    Route::get('/managespin', [WheelController::class, 'index']);
+
+    Route::get('/spinwhell', function () {
+        return view('admin.spinwhell');
+    });
+
+    Route::get('/history_random', function () {
+        return view('admin.history_random');
+    });
+});
+
+// ส่วนของ User (ผู้ใช้งานทั่วไป)
+Route::prefix('user')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'userProfile']); 
+    Route::post('/profile', [ProfileController::class, 'uploadimg']);
+
+    Route::get('/contact', function () {
+        return view('user.contact');
+    });
+
+    Route::get('/edit_information', [ProfileController::class, 'userEditForm']);
+    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
+
+    Route::get('/change_password', [ProfileController::class, 'userchangePassword']);
+    Route::post('/change_password', [ProfileController::class, 'changePassword']);
+
+    Route::get('/home', function () {
+        return view('user.home');
+    });
+
+    Route::get('/spin', function () {
+        return view('user.spin');
+    });
+
+    Route::get('/loginuser', function () {
+        return view('user.loginuser');
+    });
 });
 
 
-// อันนี้เป็นของหน้าเพิ่มผู้ใช้
-use App\Http\Controllers\UserController;
-// Route สำหรับรับข้อมูลจากฟอร์มเพิ่มผู้ใช้งาน
-Route::post('/admin/manageuser/store', [UserController::class, 'store'])->name('users.store');
-// แสดงหน้าฟอร์มเพิ่มผู้ใช้
-Route::get('/adduser', [UserController::class, 'create'])->name('admin.adduser');
-// รับข้อมูลมาบันทึกลงดาต้าเบส
-Route::post('/manageuser/store', [UserController::class, 'store'])->name('admin.user.store');
-// ฟังก์ชันที่ลบผู้ใช้งาน 
-Route::delete('/deleteuser/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+//ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
+Route::prefix('manager')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'managerProfile']);
+    Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
+    Route::get('/edit_information', [ProfileController::class, 'managerEditForm']); 
+    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
 
-
-Route::get('/admin/adduser', function () {
-    return view('admin.adduser');
-});
-
-Route::get('/admin/assessment', function () {
-    return view('admin.assessment');
-});
-
-Route::get('/admin/profile', [ProfileController::class, 'adminProfile']);
-Route::post('/admin/profile', [ProfileController::class, 'uploadimg']);
-
-Route::get('/admin/edit_information', [ProfileController::class, 'adminEditForm']); 
-Route::post('/admin/edit_information', [ProfileController::class, 'editinformation']);
-
-Route::get('/admin/change_password', [ProfileController::class, 'adminchangePassword']); 
-Route::post('/admin/change_password', [ProfileController::class, 'changePassword']);
-
-Route::get('/admin/create_activity', function () {
-    return view('admin.create_activity');
-});
-
-Route::get('/admin/managereward', function () {
-    return view('admin.managereward');
-});
-
-Route::get('/admin/addreward', function () {
-    return view('admin.addreward');
-});
-
-Route::get('/admin/manageuser', function () {
-    return view('admin.manageuser');
-});
-
-Route::get('/admin/edituser', function () {
-    return view('admin.edituser');
-});
-
-Route::get('/admin/view_details', function () {
-    return view('admin.view_details');
-});
-
-
-// Route::get('/admin/managespin', function () {
-//     return view('admin.managespin');
-// });
-
-Route::get('/admin/managespin', [WheelController::class, 'index']);
-
-Route::get('/admin/spinwhell', function () {
-    return view('admin.spinwhell');
-});
-
-Route::get('/admin/history_random', function () {
-    return view('admin.history_random');
-});
-
-
-
-// ส่วนของ user
-Route::get('/user/profile', [ProfileController::class, 'userProfile']); 
-Route::post('/user/profile', [ProfileController::class, 'uploadimg']);
-
-Route::get('/user/contact', function () {
-    return view('user.contact');
-});
-
-Route::get('/user/edit_information', [ProfileController::class, 'userEditForm']);
-Route::post('/user/edit_information', [ProfileController::class, 'editinformation']);
-
-
-Route::get('/user/change_password', [ProfileController::class, 'userchangePassword']);
-Route::post('/user/change_password', [ProfileController::class, 'changePassword']);
-
-
-
-Route::get('/user/home', function () {
-    return view('user.home');
-});
-
-Route::get('/user/spin', function () {
-    return view('user.spin');
-});
-Route::get('/user/loginuser', function () {
-    return view('user.loginuser');
+    Route::get('/change_password', [ProfileController::class, 'managerchangePassword']); 
+    Route::post('/change_password', [ProfileController::class, 'changePassword']);
 });

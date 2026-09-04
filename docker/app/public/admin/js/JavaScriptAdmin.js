@@ -340,15 +340,6 @@ if(btnclosechange){
     });
 }
 
-//ปุ่มกดเปลี่ยนโฟล์เดอร์ในเครื่องคอมเรา
-const btnselectfile1 = document.getElementById('btn_select_file_1');
-
-if(btnselectfile1){
-    btnselectfile1.addEventListener('click', function(){
-        document.getElementById('uploadphoto').click();
-    });
-}
-
 //เอาไว้เวลาโหลดหน้าแล้วปุ่ม popup จะไม่ปิด
 const imagepopup = document.getElementById('image-popup');
 
@@ -357,9 +348,42 @@ if(imagepopup && imagepopup.dataset.open === 'true'){
 }
 
 
+//ปุ่มเปิด/ปิดเอาไว้ดูรหัสผ่านปัจจุบัน
+const imgeye1 = document.getElementById('img_eye_1');
+const iconeye1 = document.getElementById('icon_eye_1');
+const TypeCurrentpassword1 = document.getElementById('Type_Current_password_1');
 
+if(imgeye1 && TypeCurrentpassword1 && iconeye1){
+    imgeye1.addEventListener('click', function(){
+        const ispassword1 = TypeCurrentpassword1.type === 'password';
+        TypeCurrentpassword1.type = ispassword1 ? 'text' : 'password';
+        iconeye1.className = ispassword1 ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye' ;
+    });
+}
+//ปุ่มเปิด/ปิดเอาไว้ดูรหัสผ่านใหม่
+const imgeye2 = document.getElementById('img_eye_2');
+const iconeye2 = document.getElementById('icon_eye_2');
+const Typepasswordcurrent1 = document.getElementById('Type_passwordcurrent_1');
 
+if(imgeye2 && Typepasswordcurrent1 && iconeye2){
+    imgeye2.addEventListener('click', function(){
+        const ispassword2 = Typepasswordcurrent1.type === 'password';
+        Typepasswordcurrent1.type = ispassword2 ? 'text' : 'password';
+        iconeye2.className = ispassword2 ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye' ;
+    });
+}
 
+//เมื่อกดเลือกรูปโปรไฟล์เสร็จ ก็จะส่งไปบอก ProfileController ทันทีว่ากดบันทึกได้เลยนะ
+const uploadPhotoInput = document.getElementById('uploadphoto');
+    const profileForm = document.getElementById('profileForm');
+
+    if (uploadPhotoInput && profileForm) {
+        uploadPhotoInput.addEventListener('change', function () {
+            if (this.files && this.files[0]) {
+                profileForm.submit(); 
+            }
+        });
+    }
 
 
 

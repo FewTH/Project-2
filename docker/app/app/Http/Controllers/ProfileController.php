@@ -10,12 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    //เอาไว้ดึงข้อมูลuserมาใช้งานซ้ำ
     private function getUser()
     {
         return Auth::user() ?? User::find(1);
     }
-
-    
 
 
     //ส่วนของ user
@@ -53,6 +52,22 @@ class ProfileController extends Controller
         return view('admin.change_password', ['user' => $this->getUser()]);
     }
 
+    //ส่วนของ manager
+    public function managerProfile()
+    {
+        return view('manager.profile',['user' => $this->getUser()]);
+    }
+
+    public function managerEditForm()
+    {
+        return view('manager.edit_information', ['user' => $this->getUser()]);
+    }
+
+    public function managerchangePassword()
+    {
+        return view('manager.change_password', ['user' => $this->getUser()]);
+    }
+    
 
     // ส่วนของ user admin ใช่ร่วมกัน
     // บันทึกข้อมูลที่แก้ไข
@@ -116,12 +131,12 @@ class ProfileController extends Controller
     public function uploadimg(Request $request)
     {
         $request->validate([
-            'profile_image' => 'required|image|mimes:jpeg,png,webp|max:10240',
+            'profile_image' => 'required|image|mimes:jpeg,png,webp|max:5120',
         ],[
             'profile_image.required' => 'กรุณาเลือกรูปภาพ',
             'profile_image.image' => 'ต้องเป็นรูปภาพเท่านั้น',
             'profile_image.mimes' => 'ต้องเป็นไฟล์ jpeg, png, webp เท่านั้น',
-            'profile_image.max' => 'ไฟล์รูปต้องมีขนาดไม่เกิน 10 MB',
+            'profile_image.max' => 'ไฟล์รูปต้องมีขนาดไม่เกิน 5 MB',
         ]);
 
         $user = $this->getUser();

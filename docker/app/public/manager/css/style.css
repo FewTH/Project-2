@@ -1,0 +1,1130 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+/*ป้องกันกล่องส้น*/
+* {
+  box-sizing: border-box;
+}
+ 
+body {
+  margin: 0;
+  font-family: 'Chakra Petch', sans-serif;
+  background-color: #fdfbf4;
+  min-width: 1000px;
+}
+ 
+/*ส่วนของหน้า Profile.blade.php*/
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content-1 {
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/*โปรไฟล์ผู้ใช้*/
+.btn-user-wrapper-1 {
+  background-color: #F3D577;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  right: 0;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  min-width: 1000px;
+  z-index: 15;
+}
+
+/*ชื่อผู้ใช้*/
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8A5B10;
+  font-weight: 1000;
+  font-size: 20px;
+  padding: 6px 40px;
+}
+
+/*รูปโปรไฟล์ผู้ใช้*/
+.btn-user-img {
+  width: 45px;
+  height: 45px;
+  background-color: #8A5B10;
+  border: 3px solid #d39b00;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/*แถบเมนูด้านซ้าย*/
+.Top_frame {
+  position: fixed;
+  z-index: 25;
+}
+
+/*หน้าต่างเมนู*/
+.container-1 {
+  background-color: #fdfbf4;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 250px;
+}
+
+/*โลโก้ BUULIB*/
+.img-Logo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Home-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 30px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Home-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Random-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Random-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Contact-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการผู้ใช้*/
+.btn-Contact-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+/*กรอบชื่อปุ่มออกจากระบบ*/
+.btn-logout-wrapper {
+  margin-top: auto;
+}
+
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.2px solid #8C8D8D;
+  width: 250px;
+  height: 55px;
+  text-decoration: none;
+  color: #D31313;
+  font-weight: 1000;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+/*โปรไฟล์*/
+.Profile {
+  background-color: #fffae8;
+  border: 2px solid #d39b00;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 14px rgba(0,0,0,0.22);
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/*ชื่อโปรไฟล์*/
+.My_Profile {
+  color: #5381EC;
+  width: 100%;
+  font-size: 20px;
+}
+
+/*โปรไฟล์ฝั่งซ้าย*/
+.profile-left {
+  display: grid;
+  grid-template-columns: 200px;
+  align-items: center;
+  gap: 25px 70px;
+  flex: 1;
+}
+
+/*เอาไว้ปรับขนาดรูปภาพที่เปลี่ยนในหน้า profile*/
+.photo_user-img-1{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/*รูปภาพผู้ใช้*/
+.photo_user {
+  border: 3px solid #d39b00;
+  width: 150px;
+  height: 150px;
+  margin-left: 25px;
+  border-radius: 50%;
+  background-color: #8A5B10;
+}
+
+/*รูปภาพผู้ใช้*/
+.photo_user-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*กรอบpopup*/
+.Change_image{
+  position: relative;
+  cursor: pointer;
+  width: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 3px solid #d39b00;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ขอบปุ่มเปลี่ยนรูปโปรไฟล์*/
+.Change_image::before{
+  content: "";
+  background-color: #d39b0017;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+/*กรอบเอฟเฟ็กต์ขอบปุ่มเปลี่ยนรูปโปรไฟล์*/
+.Change_image:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
+/*ชื่อปุ่มpopup*/
+.btn-open {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 10px 31px;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*เอาไว้ขนาดชื่อรูปโปรไฟล์*/
+.Nameprofile {
+  margin-left: 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/*กรอบชื่อตรงสถานะ*/
+.useremailstatus {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/*ชื่อ*/
+.name {
+  color: #000000;
+  font-size: 20px;
+  margin-top: 50px;
+}
+.name h2 {
+  margin: 0;
+}
+
+/*อีเมล*/
+.email {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/*สถานะ*/
+.In_use {
+  background-color: #57D96B;
+  color: #FFFFFF;
+  font-weight: 1000;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+/*กรอบของสุ่มทั้งหมด*/
+.profile-right {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+/*กล่องสุ่มทั้งหมด*/
+.framerandom_all {
+  background-color: #FFFFFF;
+  border: 3px solid #d39b00;
+  width: 250px;
+  height:210px;
+  border-radius: 10px;
+  padding: 20px;
+  flex-direction: column;
+  text-align: center;
+  margin: 0;
+  font-size: 17px;
+}
+
+/*สุ่มทั้งหมด*/
+.random_all {
+  margin-bottom: 15px;
+}
+
+/* กล่องจำนวนรางวัลที่ได้ */
+.frameReward_Box {
+  background-color: #FFFFFF;
+  border: 3px solid #d39b00;
+  width: 250px;
+  height:210px;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  font-size: 17px;
+}
+
+/*กล่องของรางวัล*/
+.Reward_Box {
+  margin-bottom: 15px;
+}
+
+/*ตัวเลขจำนวนรางวัลที่ได้*/
+.Number_of_Reward {
+  font-size: 18px;
+}
+.Number_of_Reward h1{
+  margin: 6px;
+}
+
+/*ตัวเลขจำนวนรางวัลที่ได้*/
+.Award_Name {
+  color: #000000;
+  font-size: 15px;
+}
+.Award_Name h4{
+  margin: 15px;
+  font-size: 17px;
+}
+
+
+/*กรอบ popup ของเปลี่ยนรูปโปรไฟล์*/
+.popup-box{
+  position: absolute;
+  top: 35%;
+  left: 8%;
+  background-color: #fdfbf5;
+  width: 900px;
+  padding: 20px 20px 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border: none;
+  z-index: 2;
+}
+/*ซ่อนปุ่มเลือกรูปภาพ*/
+#uploadphoto {
+    display: none;
+}
+
+/*รูปกล้องในpopup เปลี่ยนรูปโปรไฟล์*/
+.img-Camera-icon{
+  width: 260px;
+  height: 130px;
+  padding: 30px 0px 0px 160px;
+  margin-left: 225px;
+}
+
+/*หัวข้อpopupเปลี่ยรหัสผ่าน*/
+.Change-photo{
+  padding: 0px 0px 0px 100px;
+  font-size: 28px;
+  margin-left: 235px;
+}
+
+/*ข้อความในกรอบpopup*/
+.choosephotonew{
+  padding: 0px 0px 0px 80px;
+  font-size: 19px;
+  margin-left: 230px;
+}
+
+
+/*กรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
+.savesuccessimage-1{
+  background-color: #E1F5EE;
+  height: 45px;
+  text-align: left;
+  font-size: 19px;
+  border-radius: 10px;
+}
+
+/*ข้อความของกรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
+.savesuccess-image{
+  display: flex;
+  justify-content: center;
+  padding-left: 30px;
+  color: #085041;
+  padding-top: 8px;
+}
+
+/*ข้อความerrorของpopupเปลี่ยนรูปโปรไฟล์*/
+.savesuccessimage-error{
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  font-size: 18px;
+  color: #c22b3a;
+}
+
+/*กรอบของปุ่ม เลือกรูปภาพ ยกเลิก*/
+.btn-select-file-1{
+  padding: 0px 0px 30px 0px;
+}
+
+
+/*กรอบของ รูปภาพ ข้อความในส่วนเลือกรูปโปรไฟล์*/
+.btn-uploadphoto{
+  position: relative;
+  top: 15px;
+  padding: 25px 0px 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 2px dashed #3b82f6;
+  background-color: #f0f9ff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.btn-uploadphoto::before{
+  content: "";
+  background-color: #3b83f634;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  border-radius: 50%;
+}
+
+.btn-uploadphoto:hover::before{
+  width: 1000px;
+  height: 1000px;
+}
+
+.img-btn-select-file{
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อความเลือกรูปภาพ*/
+.message-uploadphoto{
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบ/*ข้อความไฟล์ jpeg,png.webpกับขนาดรูปโปรไฟล์*/
+.message-uploadphoto-1-2{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อความไฟล์ jpeg,png.webpกับขนาดรูปโปรไฟล์*/
+.message-uploadphoto-1{
+  font-size: 16px;
+}
+
+/*ปุ่มยกเลิก*/
+.btn-close-1{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 20px;
+  background-color: #a8731d;
+  padding: 0px 25px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.btn-close-1::before{
+  content: "";
+  background-color: #966516;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  border-radius: 50%;
+}
+
+.btn-close-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+
+.btn-close-popup{
+  font-size: 25px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*ข้อมูลผู้ใช้*/
+.User_Information {
+  background-color: #ffffff;
+  flex: 3;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  padding-bottom: 60px;
+  margin-top: 60px;
+}
+
+/*ข้อมูลผู้ใช้*/
+.User_Information {
+  background-color: #ffffff;
+  flex: 3;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  padding-bottom: 60px;
+  margin-top: 60px;
+}
+
+
+
+/*ข้อมูลผู้ใช้*/
+.User_Information {
+  background-color: #fdfbf5;
+  flex: 3;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  padding-bottom: 60px;
+  margin-top: 60px;
+}
+
+/*ข้อมูลส่วนตัว*/
+.personal_information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28px;
+  padding: 10px 25px 0 25px;
+}
+
+/*ปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #ad7924;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #a3701e;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบเอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-1:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความของปุ่มแก้ไขข้อมูล*/
+.btn-Edit-information-2 {
+  border: none;
+  font-size: 15px;
+  font-weight: 1000;
+  padding: 17px 30px;
+  background: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบpopupแก้ไขข้อมูล*/
+.popup-btn-edit-1{
+  background-color: #fdfbf5;
+  position: absolute;
+  top: 42%;
+  left: 8%;
+  width: 400px;
+  height: 340px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+/*รูปpopupแก้ไขข้อมูล*/
+.img-edit-information{
+  width: 80px;
+  height: 80px;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+/*หัวข้อของpopup แก้ไขข้อมูล*/
+.confirm-edit{
+  font-size: 28px;
+  margin-left: 115px;
+}
+
+/*ข้อความข้างใน popup แก้ไขข้อมูล*/
+.message-confirm-edit{
+  font-size: 19px;
+  margin-left: 60px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบของปุ่ม ยืนยัน ยกเลิก*/
+.btn_editinformation{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบปุ่มยืนยัน*/
+.btn-Edit-information-profile{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #a8731d;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btn-Edit-information-profile::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #966516;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btn-Edit-information-profile:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยืนยัน*/
+.btn-Edit-information-profile-1{
+  padding: 15px 60px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 23px;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+
+/*กรอบปุ่มยกเลิก*/
+.btn-close-Edit{
+  position: relative;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #d39b00;
+  position: relative;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ปุ่มยกเลิก*/
+.btn-close-Edit::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมเอฟเฟ็กต์ปุ่มยกเลิก*/
+.btn-close-Edit:hover:before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยกเลิก*/
+.btn-close-Edit-1{
+  padding: 15px 50px;
+  font-size: 23px;
+  color: #d39b00;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-weight: 800;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*ชื่อผู้ใช้*/
+.username {
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 105px;
+}
+/*หัวข้อชื่อผู้ใช้ ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.Type_username{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกข้อมูลชื่อผู้ใช้*/
+.input-username {
+  flex: 1;
+  border-radius: 7px;
+  width: 540px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+  font-size: 15px; 
+}
+
+/*ชื่อ-นามสกุล*/
+.FirstName-LastName {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 50px;
+}
+/*หัวข้อชื่อ-นามสกุล ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.FirstNameLastName{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกข้อมูลชื่อ-นามสกุล*/
+.input-FirstName-LastName {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+
+}
+
+/* ช่องกรอกอีเมล */
+.email-user {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 120px;
+}
+
+/*หัวข้ออีเมล ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typeemail-user{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกอีเมล*/
+.input-email-user {
+  width: 100%;
+  border-radius: 7px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*เบอร์โทร*/
+.phone_number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 88px;
+}
+
+/*หัวข้อเบอร์โทร ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typephone_number{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกเบอร์โทร*/
+.input-phonenumber {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*ปิดไว้เพราะไม่ได้ใช้เอาไว้แต่ให้ระบบทำงานได้อย่างมีเต็มที่*/
+.hidden-username-1{
+  display: none;
+}
+
+
+/*เปลี่ยนรหัสผ่าน*/
+.Change_password {
+  background-color: #fdfbf5;
+  flex: 2;
+  height: 370px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.22);
+  border-radius: 15px;
+  margin-top: 60px;
+}
+
+/*รหัสผ่าน*/
+.password {
+  font-size: 28px;
+  padding: 20px 25px 0 25px;
+}
+
+/*รหัสผ่านปัจจุบัน*/
+.Current_password {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 70px;
+}
+
+/*หัวข้อรหัสผ่านปัจจุบัน ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typeCurrent_password{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกรหัสผ่านปัจจุบัน*/
+.input-Current_password {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*เปลี่ยนครั้งล่าสุด*/
+.Last_updated {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 25px;
+  font-size: 23px;
+  gap: 20px 28px;
+}
+
+/*หัวข้อเปลี่ยนรหัสครั้งล่าสุด ทำให้ขึ้นเคอร์เซอร์เมาส์*/
+.typelast_updated{
+  cursor: text;
+}
+
+/*กรอบเอาไว้กรอกเปลี่ยนรหัสครั้งล่าสุด*/
+.input-Last_updated {
+  flex: 1;
+  border-radius: 7px;
+  border: 2px solid #d39b00;
+  padding: 13px 16px;
+  font-size: 15px;
+}
+
+/*ปุ่มเปลี่ยนหัสผ่าน*/
+.Password-Change-Button {
+  position: relative;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  background-color: #a8731d;
+  margin-left: auto;
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
+.Password-Change-Button::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: #966516;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, heigth 0.6s;
+}
+
+/*กรอบวงกลทเอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
+.Password-Change-Button:hover::before {
+  width: 250px;
+  height: 250px;
+}
+
+/*กรอบpopupเปลี่ยนรหัสผ่าน*/
+.btn-Change-password{
+ border: none;
+  font-size: 15px;
+  font-weight: 1000;
+  padding: 17px 23px 17px 23px;
+  background: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+/*กรอบpopupเปลี่ยนรหัสผ่าน*/
+.popup-btn-Change-1{
+  background-color: #fdfbf5;
+  position: absolute;
+  top: 42%;
+  left: 8%;
+  width: 400px;
+  height: 340px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  z-index: 2;
+}
+
+/*รูปpopupเปลี่ยนรหัสผ่าน*/
+.img-change-password{
+  width: 80px;
+  height: 80px;
+  margin-left: 150px;
+  margin-top: 20px;
+}
+
+/*หัวข้อของpopup เปลี่ยนรหัสผ่าน*/
+.change-password{
+  font-size: 28px;
+  margin-left: 95px;
+}
+
+/*ข้อความข้างใน popup เปลี่ยนรหัสผ่าน*/
+.message-change-password{
+  font-size: 19px;
+  margin-left: 50px;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบของปุ่ม ยืนยัน ยกเลิกเปลี่ยนรหัสผ่าน*/
+.btn_changepassword{
+  display: flex;
+  justify-content: space-between;
+}
+
+/*กรอบปุ่มหลักของปุ่มยืนยัน*/
+.btn-change-password {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #a8731d;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/*เอฟเฟ็กต์วงกลมสีดำ*/
+.btn-change-password::before {
+  content: "";
+  background-color: #966516;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบเอฟเฟ็กต์วงกลมสีดำ*/
+.btn-change-password:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/*กรอบตัวหนังสือของปุ่มยืนยัน*/
+.btn-change-password-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 60px;
+  font-size: 23px;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+}
+
+/*กรอบปุ่มยกเลิกของเปลี่ยนรหัสผ่าน*/
+.btn-close-change{
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 2px solid #d39b00;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.btn-close-change::before{
+  content: "";
+  background-color: #f7f4f4;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-close-change:hover::before{
+  width: 250px;
+  height: 250px;
+}
+
+/*ข้อความปุ่มยกเลิกของเปลี่ยนรหัสผ่าน*/
+.btn-close-change-1{
+  font-size: 23px;
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-weight: 800;
+  padding: 15px 50px;
+  color: #d39b00;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}

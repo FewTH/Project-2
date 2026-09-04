@@ -4,57 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>โปรไฟล์</title>
-    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
-    <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
+   <link rel="stylesheet" href="{{ asset('manager/css/style.css') }}">
+   <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
 </head>
 <body>
 <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper-1">
-    <a href="{{ url('admin/profile') }}" class="btn-user">
+    <a href="{{ url('manager/profile') }}" class="btn-user">
         @if($user->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
-        <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @endif
-        <span>Admin</span>
-    </a>
+        <span>manager</span>
+   </a>
 </div>
-<div class="container-1">
-    <!-- โลโกมหาลัย -->
-    <div class="img-Logo">
-       <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
-    </div>
-    <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
-        <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard-1">
-            <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ด" class="btn-Dashboard-img-1">
-            <span>แดชบอร์ด</span>
-        </a>
-        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards-1">
-            <img src="{{ asset('admin/img/รูปจัดการรางวัล.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img-1">
+<!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
+<div class="Top_frame">
+    <div class="container-1">
+   <!-- โลโกมหาลัย -->
+   <div class="img-Logo">
+        <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+   </div>
+   <!-- ปุ่มเมนู -->
+   <div class="btn-Sidebar">
+        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+            <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
         </a>
-        <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users-1">
-            <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img-1">
-            <span>จัดการผู้ใช้</span>
-        </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel-1">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img-1">
+        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Random-1">
+            <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('admin/assessment') }}" class="btn-Assessment-1">
-            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-1">
+        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Contact-1">
+            <img src="{{ asset('manager/img/รูปปุ่มเมนูรายการกิจกรรม.png') }}" alt="รูปปุ่มเมนูรายการกิจกรรม" class="btn-Contact-img-1">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>
     </div>
-    <!-- ปุ่มกดออกจากระบบ -->
-    <div class="btn-logout-wrapper">    
-        <a href="{{ url('user/loginuser') }}" class="btn-logout">
-            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
-            <span>ออกจากระบบ </span>
-        </a>
+        <!-- ปุ่มกดออกจากระบบ -->
+        <div class="btn-logout-wrapper">
+            <a href="{{ url('user/loginuser') }}" class="btn-logout">
+                <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
+                <span>ออกจากระบบ </span>
+            </a>
+        </div>
     </div>
-</div>
+</div> 
 <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
 <div class="main-content-1">
     <!-- ชื่อโปรไฟล์-->  
@@ -70,74 +65,73 @@
         @if ($user->profile_image)
             <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปภาพผู้ใช้" class="photo_user-img-1" id="photo_user_img_2">
         @else
-            <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปภาพผู้ใช้" class="photo_user-img" id="photo_user_img_1">
+            <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปภาพผู้ใช้" class="photo_user-img" id="photo_user_img_1">
         @endif
         </div>
         <!--ปุ่มไว้กดเปลี่ยนรูปมี popup เด้งขึ้นมา-->
         <div class="Change_image">
             <button class="btn-open" id="btn_open_1">
-                <img src="{{ asset('admin/img/รูปกล้อง.png') }}" alt="รูปกล้อง">
+                <img src="{{ asset('user/img/รูปกล้อง.png') }}" alt="รูปกล้อง">
                 <span class="Nameprofile"> เปลี่ยนรูปโปรไฟล์ </span>
             </button>
         </div>  
-    <div class="useremailstatus">
-        <!--ชื่อ-->
-        <div class="name">
-            <h2 id="username">{{ $user->username }}</h2>
+        <div class="useremailstatus">
+            <!--ชื่อ-->
+            <div class="name">
+                <h2 id="username">{{ $user->username }}</h2>
+            </div>
+            <!--อีเมล-->
+            <div class="email">
+                <p id="email_user">{{ $user->email }}</p>
+            </div>
+            <!--สถานะ-->
+            <div class="In_use">
+               <span>กำลังใช้งาน</span>
+            </div>
         </div>
-        <!--อีเมล-->
-        <div class="email">
-            <p id="email_user">{{ $user->email }}</p>
+    </div> 
+    <!-- ฝั่งขวาปิดแท็กตรงชื่อจำนวนของรางวัล--->
+    <div class="profile-right">
+        <div class="framerandom_all">
+            <!--สุ่มทั้งหมด-->
+            <div class="random_all"> 
+                <img src="{{ asset('user/img/รูปลูกเต๋า.png') }}" alt="รูปลูกเต๋า" class="random_all-img">
+            </div>
+            <!--การสุ่มทั้งหมด-->
+            <div class="Random_number">
+                <h1 id="Random_numberaward">0</h1>
+            </div>
+            <!--ชื่อสุ่มทั้งหมด-->
+            <div class="all_random">
+                <h4>สุ่มทั้งหมด</h4>
+            </div>
         </div>
-        <!--สถานะ-->
-        <div class="In_use">
-            <span>กำลังใช้งาน</span>
-        </div>
-    </div>
-</div>
-<!-- ฝั่งขวาปิดแท็กตรงชื่อจำนวนของรางวัล--->
-<div class="profile-right">
-    <div class="framerandom_all">
-        <!--สุ่มทั้งหมด-->
-        <div class="random_all"> 
-            <img src="{{ asset('admin/img/รูปลูกเต๋า.png') }}" alt="รูปลูกเต๋า" class="random_all-img">
-        </div>
-        <!--การสุ่มทั้งหมด-->
-        <div class="Random_number">
-            <h1 id="Random_numberaward">0</h1>
-        </div>
-        <!--ชื่อสุ่มทั้งหมด-->
-        <div class="all_random">
-            <h4>สุ่มทั้งหมด</h4>
-        </div>
-    </div>
-    <div class="frameReward_Box">
-        <!--รูปของรางวัล-->
-        <div class="Reward_Box">
-            <img src="{{ asset('admin/img/รูปกล่องของรางวัล.png') }}" alt="รูปกล่องของรางวัล" class="Reward_Box-img">
-        </div>
-        <!--จำนวนรางวัลที่ได้-->
-        <div class="Number_of_Reward">
-            <h1 id="number_ofaward">0</h1>
-        </div>
-        <!--ชื่อจำนวนของรางวัล-->
-        <div class="Award_Name">
-            <h4>จำนวนรางวัลที่ได้</h4>
+        <div class="frameReward_Box">
+            <!--รูปของรางวัล-->
+            <div class="Reward_Box">
+                <img src="{{ asset('user/img/รูปกล่องของรางวัล.png') }}" alt="รูปกล่องของรางวัล" class="Reward_Box-img">
+            </div>
+            <!--จำนวนรางวัลที่ได้-->
+            <div class="Number_of_Reward">
+                <h1 id="number_ofaward">0</h1>
+            </div>
+            <!--ชื่อจำนวนของรางวัล-->
+            <div class="Award_Name">
+                <h4>จำนวนรางวัลที่ได้</h4>
             </div>
         </div>
     </div>
 </div>
+
 <!--หน้า Pop-up สำหรับอัปโหลดรูป-->
 <div class="popup">
-    <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : '' }}">
-        <form action="{{ url('admin/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
-        @csrf
-
-        <button type="button" class="btn-close-1" id="btn_close_1">
+     <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : 'false' }}">
+        <form action="{{ url('manager/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
+       <button type="button" class="btn-close-1" id="btn_close_1">
             <p class="btn-close-popup">x</p>
         </button>
             
-        <img src="{{ asset('admin/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
+        <img src="{{ asset('user/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
 
         <h2 class="Change-photo">เปลี่ยนรูปโปรไฟล์</h2>
         <p class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</p>
@@ -154,14 +148,13 @@
         
             <!--ปุ่มเอาไว้เปลี่ยนอยู่โปรไฟล์อยู่ตรงนี้-->
             <label for="uploadphoto" class="btn-uploadphoto" >
-                    <img src="{{ asset('admin/img/รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์.png') }}" alt="รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์" class="img-btn-select-file">
+                    <img src="{{ asset('user/img/รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์.png') }}" alt="รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์" class="img-btn-select-file">
                     <p class="message-uploadphoto">เลือกรูปภาพ</p>
                     <div class="message-uploadphoto-1-2">
                         <span class="message-uploadphoto-1">ต้องเป็นไฟล์ jpeg, png, webp</span>
                         <span class="message-uploadphoto-1">ขนาดของรูปภาพไม่เกิน 5 MB</span>
                     </div>
             </label>
-
 
         </form>
     </dialog>
@@ -172,13 +165,13 @@
     <!--ข้อมูลส่วนตัว-->
     <div class="personal_information">
         <h3>ข้อมูลส่วนตัว</h3>
-        <div class="btn-Edit-information-1"  id="Edit_information">
+        <div class="btn-Edit-information-1"  id="Edit_information" >
             <button class="btn-Edit-information-2"> แก้ไขข้อมูล </button>
         </div>
     </div>
     <form onsubmit="return false">
     <!--ชื่อผู้ใช้-->
-    <div class="username">
+   <div class="username">
         <label class="Type_username"> ชื่อผู้ใช้ </label> 
         <input type="text" id="Type_name" value="{{ $user->username }}" class="input-username" autocomplete="username" disabled>
     </div>
@@ -205,8 +198,8 @@
     <div class="password">
         <h3>รหัสผ่าน/เปลี่ยนรหัสผ่าน</h3>
     </div>
-    <form onsubmit="return false">
-        <input type="text" name="username" value="{{ $user->username }}" autocomplete="username" class="hidden-username-1">
+     <form onsubmit="return false">
+       <input type="text" name="username" value="{{ $user->username }}" autocomplete="username" class="hidden-username-1">
     <!--รหัสผ่านปัจจุบัน-->
     <div class="Current_password">
         <label class="typeCurrent_password">รหัสผ่านปัจจุบัน</label>
@@ -224,30 +217,30 @@
         </div>
 </div>
     <!--popupแก้ไขข้อมูลส่วนตัว-->
-     <div class="popup-btn-edit" >
+    <div class="popup-btn-edit">
         <dialog id="popup_btn_edit" class="popup-btn-edit-1">
-            <img src="{{ asset('admin/img/รูปการแก้ไขข้อมูล.png') }}" alt="รูปการแก้ไขข้อมูล" class="img-edit-information">
+            <img src="{{ asset('user/img/รูปการแก้ไขข้อมูล.png') }}" alt="รูปการแก้ไขข้อมูล" class="img-edit-information">
             <h2 class="confirm-edit">แก้ไขข้อมูล</h2>
             <p class="message-confirm-edit">คุณต้องการแก้ไขข้อมูลนี้หรือไม่?</p>
         <div class="btn_editinformation">
-            <div class="btn-Edit-information-profile">
-                <a href="{{ url('admin/edit_information') }}" class="btn-Edit-information-profile-1">ยืนยัน</a>
+            <div class="btn-Edit-information-profile" id="btn_Edit_information">
+                <a href="{{ url('user/edit_information') }}" class="btn-Edit-information-profile-1">ยืนยัน</a>
             </div>
             <div class="btn-close-Edit" id="btn_close_Edit">
-                <button class="btn-close-Edit-1">ยกเลิก</button>
+               <button class="btn-close-Edit-1">ยกเลิก</button>
             </div>
         </div>
         </dialog>
     </div>
     <!--popupเปลี่ยนรหัสผ่าน-->
-    <div class="popup-btn-Change" >
+    <div class="popup-btn-Change">
         <dialog id="popup_btn_Change" class="popup-btn-Change-1">
-            <img src="{{ asset('admin/img/รูปเปลี่ยนรหัสผ่าน.png') }}" alt="รูปเปลี่ยนรหัสผ่าน" class="img-change-password">
+            <img src="{{ asset('user/img/รูปเปลี่ยนรหัสผ่าน.png') }}" alt="รูปเปลี่ยนรหัสผ่าน" class="img-change-password">
             <h2 class="change-password">เปลี่ยนรหัสผ่าน</h2>
             <p class="message-change-password">คุณต้องการเปลี่ยนรหัสผ่านนี้หรือไม่?</p>
         <div class="btn_changepassword">
             <div class="btn-change-password" id="btn_change_password">
-                <a href="{{ url('admin/change_password') }}" class="btn-change-password-1" >ยืนยัน</a>
+                <a href="{{ url('user/change_password') }}" class="btn-change-password-1">ยืนยัน</a>
             </div>
             <div class="btn-close-change"  id="btn_close_change"> 
                 <button class="btn-close-change-1">ยกเลิก</button>
@@ -255,7 +248,8 @@
         </div>
         </dialog>
     </div>
+    
 </div>
-<script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
+<script src="{{ asset('manager/js/JavaScript.js') }}"></script>
 </body>
 </html>

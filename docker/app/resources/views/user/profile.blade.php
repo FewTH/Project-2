@@ -14,7 +14,7 @@
         @if($user->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
-        <img src="{{ asset('user/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @endif
         <span>User</span>
    </a>
@@ -126,11 +126,17 @@
 <!--หน้า Pop-up สำหรับอัปโหลดรูป-->
 <div class="popup">
      <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : 'false' }}">
-        <form action="{{ url('admin/profile') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('admin/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
         @csrf
+        
+        <button type="button" class="btn-close-1" id="btn_close_1">
+            <p class="btn-close-popup">x</p>
+        </button>
+            
         <img src="{{ asset('admin/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
         <h2 class="Change-photo">เปลี่ยนรูปโปรไฟล์</h2>
         <p class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</p>
+          
         @if (session('success'))
         <div class="savesuccessimage-1">
             <p class="savesuccess-image"> {{ session('success') }} </p>
@@ -140,17 +146,15 @@
             <p class="savesuccessimage-error">{{ $message }}</p>
         @enderror
         <input type="file" name="profile_image" id="uploadphoto" accept="image/jpeg,image/png,image/webp">
-        <div class="btn-select-file-1">
-            <div class="btn-select-file" id="btn_select_file_1">
-                <button type="button" class="btn-select-file-2">เลือกรูปภาพ</button>
-            </div>
-            <button type="submit" class="btn-save-file-2" id="btn_save_file_1">
-                <p class="btn-save-file-1">บันทึกรูปภาพ</p>
-            </button>
-            <div class="btn-close" id="btn_close_1">
-                <button type="button" class="btn-close-1" >ยกเลิก</button>
-            </div>
-        </div>
+          <!--ปุ่มเอาไว้เปลี่ยนอยู่โปรไฟล์อยู่ตรงนี้-->
+            <label for="uploadphoto" class="btn-uploadphoto" >
+                    <img src="{{ asset('user/img/รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์.png') }}" alt="รูปของปุ่มเอาไวอัพโหลดรูปโปรไฟล์" class="img-btn-select-file">
+                    <p class="message-uploadphoto">เลือกรูปภาพ</p>
+                    <div class="message-uploadphoto-1-2">
+                        <span class="message-uploadphoto-1">ต้องเป็นไฟล์ jpeg, png, webp</span>
+                        <span class="message-uploadphoto-1">ขนาดของรูปภาพไม่เกิน 5 MB</span>
+                    </div>
+            </label>
         </form>
     </dialog>
 </div>

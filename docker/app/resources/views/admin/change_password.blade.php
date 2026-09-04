@@ -6,6 +6,7 @@
     <title>เปลี่ยนรหัสผ่าน</title>
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
     <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 <!-- ชื่อผู้ใช้งาน -->
@@ -14,7 +15,7 @@
         @if($user->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
-        <img src="{{ asset('admin/img/user.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @endif
         <span>Admin</span>
     </a>
@@ -78,17 +79,23 @@
             <label class="type-passwordcurrent-1" for="Type_Current_password_1">รหัสผ่านปัจจุบัน</label> <br>
             <div class="img-eye-password">
             <input type="password" class="input-passwordcurrent-1" id="Type_Current_password_1" name="current_password"  autocomplete="current-password">
-            </div>
+            <button type="button" class="img-eye" id="img_eye_1">
+                <i class="fa-regular fa-eye" id="icon_eye_1"></i>
+            </button>
+        </div>
             @error('current_password')
                 <p class="savesuccesschangepassword-error">{{ $message }}</p>
             @enderror
         </div>
         <div class="passwordcurrent">
-            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรห้สผ่าน</label> <br>
+            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรห้สผ่านใหม่</label> <br>
             <div class="img-eye-password">
             <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" name="new_password"  autocomplete="new-password">
-            </div>
-             @error('new_password')
+            <button type="button" class="img-eye" id="img_eye_2">
+                <i class="fa-regular fa-eye" id="icon_eye_2"></i>
+            </button>
+        </div>
+            @error('new_password')
                 <p class="savesuccesschangepassword-error">{{ $message }}</p>
             @enderror
         </div>
