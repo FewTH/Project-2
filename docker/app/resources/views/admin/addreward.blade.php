@@ -40,16 +40,15 @@
         <input type="text" class="name-reward1" id="name-reward01" name="name" value="{{ old('name') }}" placeholder="กรอกรายชื่อของรางวัลของคุณ" required>
     </div>
     <div class="input-reward-category">
-        <label class="category-reward-sub" for="category-reward01">หมวดหมู่</label> <br>
-        {{-- <input type="text" class="category-reward1" id="category-reward01" placeholder="กรุณากรอกหรือเลือกหมวดหมู่"> --}}
-    <select class="category_list_01" id="category_list" name="category_id" required>
-    <option value="">--เลือกหมวดหมู่ของรางวัล--</option>
-    @foreach($categories as $category)
-        <option value="{{ $category->category_id }}" {{ old('category_id') == $category->category_id ? 'selected' : '' }}>
-            {{ $category->name }}
-        </option>
-    @endforeach
-    </select>     
+    <label class="category-reward-sub" for="category-reward01">หมวดหมู่</label> <br>
+        <select class="category_list_01" id="category_list" name="category_id" required>
+            <option value="">--เลือกหมวดหมู่ของรางวัล--</option>
+                @foreach($categories as $category)
+            <option value="{{ $category->category_id }}" {{ old('category_id') == $category->category_id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+                @endforeach
+        </select>     
     </div>
 
     <div class="input-reward-num">

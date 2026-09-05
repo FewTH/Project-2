@@ -285,8 +285,15 @@ if (btncancelevaluation1){
 
 
 
+//ส่วนของหน้า view_details.blade.php
+//ปุ่มเอาไว้ให้ปุ่ม button ที่ไม่ใช่ <a> สามารถกดเปลี่ยนหน้าได้
+const btnrandomreward = document.getElementById('btn_randomreward');
 
-
+if(btnrandomreward){
+    btnrandomreward.addEventListener('click', function(){
+        window.location.href = btnrandomreward.dataset.url;
+    });
+}
 
 
 

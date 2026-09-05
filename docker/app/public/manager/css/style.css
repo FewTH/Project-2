@@ -1205,6 +1205,7 @@ body {
   border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
@@ -1552,6 +1553,7 @@ body {
   border-radius: 15px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/

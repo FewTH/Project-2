@@ -36,7 +36,7 @@ class RewardController extends Controller
     public function index()
     {
         // เอาผู้ใช้ที่เพิ่งสร้างกลับไปแสดงที่หน้าmanagerewardของแอดมิน
-        $rewards = Reward::with('category')->latest()->get();
+        $rewards = Reward::with('category')->orderByDesc('reward_id')->get();
         // ส่งตัวแปร users ไปให้หน้า managereward
         return view('admin.managereward', compact('rewards'));
     }

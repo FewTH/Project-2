@@ -80,6 +80,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/history_random', function () {
         return view('admin.history_random');
     });
+
+     Route::get('/edit_activity', function () {
+        return view('admin.edit_activity');
+    });
+
+     Route::get('/random_reward', function () {
+        return view('admin.random_reward');
+    });
 });
 
 // ส่วนของ User (ผู้ใช้งานทั่วไป)

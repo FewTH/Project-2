@@ -20,6 +20,7 @@ return new class extends Migration
             $event->enum('status', ['draft', 'open', 'closed', 'completed'])->default('draft');
             $event->unsignedInteger('created_by');
             $event->dateTime('created_at')->useCurrent();
+            $event->dateTime('updated_at')->nullable();
         });
     }
 

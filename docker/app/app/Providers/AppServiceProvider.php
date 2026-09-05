@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         View::share('user', Auth::user() ?? User::find(1));
-        View::share('rewards', Reward::all());
+        View::share('rewards', Reward::orderByDesc('reward_id')->get());
     }
 }

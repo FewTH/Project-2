@@ -2713,6 +2713,413 @@ body {
 
 
 
+
+
+
+
+/*ส่วนของหน้า view_details.blade.php*/
+/*กรอบใหญ่ของข้อมูล*/
+.framelargest{
+  padding: 30px 30px 30px 30px;
+  background-color: #fdfbf5;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*กรอบของปุ่มย้อนกลับ แก้ไข ปิดRegister*/
+.frameback-correct-offRegister{
+  display: flex;
+}
+
+/*กรอบของปุ่มย้อนกลับ*/
+.btn-retrospective{
+  position: relative;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 60px;
+  text-decoration: none;
+  gap: 15px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มย้อนกลับ*/
+.btn-retrospective::before{
+  content: "";
+  background-color: #eeeeee;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมของปุ่มเอฟเฟ็กต์ของปุ่มย้อนกลับ*/
+.btn-retrospective:hover::before{
+  width: 500px;
+  height: 500px;
+}
+
+
+/*ข้อความของปุ่มย้อนกลับ*/
+.messageretrospective{
+  font-size: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มแก้ไขข้อมูล*/
+.edit-activity{
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 30px;
+  text-decoration: none;
+  border: 2px solid #d39b00;
+  padding: 0px 40px;
+  height: 60px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มแก้ไขข้อมูล*/
+.edit-activity::before{
+  content: "";
+  background-color: #f5f2f2;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมของปุ่มเอฟเฟ็กต์ของปุ่มแก้ไขข้อมูล*/
+.edit-activity:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
+/*ข้อความของปุ่มแก้ไขข้อมูล*/
+.message-edit-activity{
+  color: #8A5B10;
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มปิด Register*/
+.offRegister{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a8731d;
+  border: none;
+  height: 60px;
+  padding: 0px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มปิด Register*/
+.offRegister::before{
+  content: "";
+  background-color: #96651644;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*กรอบวงกลมของปุ่มเอฟเฟ็กต์ของปุ่มปิด Register*/
+.offRegister:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
+/*ข้อความของปุ่มปิด Register*/
+.message-offRegister{
+  position: relative;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  z-index: 1;
+}
+
+/*กรอบลองลงมาของกิจกรรม*/
+.frameactivitytime{
+  padding: 40px 80px 0px 80px;
+}
+
+/*กรอบของหัวข้อกิจกรรมจนถึงเวลาปิด Register*/
+.frameactivitytime-1{
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 20px;
+  padding: 5px 30px 0px 30px;
+  height: 160px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+
+/*หัวข้อของกิจกรรม*/
+.messagesectionactivity{
+  color: #8A5B10;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+/*ข้อความของสร้างเมื่อไหร่*/
+.messagesectionactivity-1{
+  position: relative;
+  bottom: 15px;
+  font-size: 18px;
+  flex-wrap: nowrap;
+}
+
+/*กรอบของข้อความปิด Register กับ เวลา*/
+.framemessageoffregister-time{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*กรอบของข้อความปิด Register*/
+.messageoffregister{
+  position: relative;
+  top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4e4e4e;
+}
+
+/*กรอบของข้อความเวลา*/
+.numbertime{
+  color: #5381EC;
+  font-size: 40px;
+  position: relative;
+  bottom: 30px;
+}
+
+/*กรอบของปุ่มเริ่มสุ่มรางวัล*/
+.btn-randomreward{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background-color: #4A9B8E;
+  margin-top: 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  gap: 40px;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+.btn-randomreward:disabled{
+  cursor: auto;
+  background-color: #4a9b8e80;
+}
+
+/*เอฟเฟ็กต์กรอบของปุ่มเริ่มสุ่มรางวัล*/
+.btn-randomreward::before{
+  content: "";
+  background-color: #48a596;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+}
+.btn-randomreward:disabled:before{
+  background: none;
+}
+
+/*วงกลมของเอฟเฟ็กต์กรอบของปุ่มเริ่มสุ่มรางวัล*/
+.btn-randomreward:hover::before{
+  width: 1600px;
+  height: 1600px;
+}
+
+/*รูปภาพถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล*/
+.img-trophy{
+  height: 35px;
+  position: relative;
+  z-index: 1;
+  
+}
+.btn-randomreward:disabled .img-trophy{
+  opacity: 0.5;
+}
+
+/*ข้อความของปุ่มเริ่มสุ่มรางวัล*/
+.messagestartrandom{
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.btn-randomreward:disabled .messagestartrandom{
+  color: #ffffff9f;
+}
+
+/*รูปภาพของปุ่มเริ่มสุ่มรางวัล*/
+.img-arrowstartrandom{
+  height: 25px;
+  position: relative;
+  z-index: 1;
+}
+.btn-randomreward:disabled .img-arrowstartrandom{
+  opacity: 0.5;
+}
+
+/*กรอบของลงทะเบียนแล้ว รับสูงสุด สถานะ เวลาปิด*/
+.frame4frame{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+/*กรอบของลงทะเบียนแล้ว*/
+.framenumbermessageregister{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 25px 125px 0px 25px;
+  height: 120px;
+  border-radius: 20px;
+}
+
+/*ตัวเลขของลงทะเบียนแล้ว*/
+.numberregister{
+  color: #8A5B10;
+  font-size: 40px;
+}
+
+/*ข้อความของลงทะเบียนแล้ว*/
+.messageregister{
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  bottom: 40px;
+}
+
+.framenumbermessagereceiveupto{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 25px 175px 0px 25px;
+  height: 120px;
+  border-radius: 20px;
+}
+
+
+.numberreceiveupto{
+  color: #8A5B10;
+  font-size: 40px;
+}
+
+
+.messagereceiveupto{
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  bottom: 40px;
+}
+
+.framemessagenomessagestatus{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 25px 150px 0px 25px;
+  height: 120px;
+  border-radius: 20px;
+}
+
+
+.messageno{
+  color: #8A5B10;
+  font-size: 35px;
+}
+
+
+.messagestatus{
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  bottom: 30px;
+}
+
+
+.framenumbertimemessagestimeoff{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 25px 125px 0px 25px;
+  height: 120px;
+  border-radius: 20px;
+}
+
+.numbertime-1{
+  color: #8A5B10;
+  font-size: 35px;
+}
+
+.messagestimeoff{
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  bottom: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*ส่วนของหน้า Profile.blade.php*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/
 .main-content-1 {
@@ -2740,6 +3147,7 @@ body {
   min-width: 1000px;
   z-index: 15;
 }
+
 
 /*ชื่อผู้ใช้*/
 .btn-user {
@@ -3335,6 +3743,7 @@ body {
   border-radius: 20px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็ตของปุ่มแก้ไขข้อมูล*/
@@ -3680,6 +4089,7 @@ body {
   border-radius: 15px;
   cursor: pointer;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 
 /*เอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
@@ -4416,7 +4826,8 @@ body {
 /*กรอบของปุ่มย้อนกลับ*/
 .frameretrospective{
   background-color: #ffffff;
-  width: 125px;
+  width: 150px;
+  height: 60px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -4425,7 +4836,7 @@ body {
   top: 25px;
   left: 20px;
   gap: 12px;
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
 }
@@ -5726,4 +6137,26 @@ border-radius: 10px;
   background-color: #e91e1e;
   color: #E1F5EE;
   text-decoration: none;
+}
+/* หน้าจัดการวงล้อสุ่ม */
+.main-spn-box{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  background-color: #f2ebaa;
+  width: 650px;
+  margin-left: 400px;
+  border-radius: 10px;
+  border: 2px solid #000000;
+}
+.main-spn-topic{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  margin-right: 950px;
+  color: #2563EB;
+}
+.topic-spn-list{
+  display: grid;
+  grid-template-columns: 2.5fr 2fr 2.5fr 1fr;
 }
