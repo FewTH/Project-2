@@ -63,12 +63,6 @@
 
     <div class="grayframeactivity">
 
-            <a href="{{ url('admin/assessment') }}" class="frameretrospective">
-                <img src="{{ asset('admin/img/รูปของปุ่มย้อนกลับ.png') }}" alt="รูปของปุ่มย้อนกลับ" class="img-retrospective">
-                <p class="messageretrospective">ย้อนกลับ</p>
-            </a>
-
-
         <div class="framecreateactivity">
             <img src="{{ asset('admin/img/รูปโลโกมหาลัย.png') }}" alt="รูปโลโกมหาลัย" class="img-university">
             <div class="messagecreateactivity">

@@ -55,9 +55,6 @@
 <div class="main-content-change-password">
     <!--กรอบเปลี่ยนรหัสผ่าน-->
     <div class="framechangepassword">
-            <a href="{{ url('manager/profile') }}" class="arrow-2">
-                <p class="arrow-1">←</p>
-            </a>
             <img src="{{ asset('user/img/รูปเปลี่ยนรหัสผ่าน.png') }}" alt="รูปเปลี่ยนรหัสผ่าน" class="img-change-password-1">
             <h1 class="sectionchangepassword">เปลี่ยนรหัสผ่าน</h1>
             <p class="messagchangepassword">เปลี่ยนรหัสผ่านใหม่ของคุณได้ที่นี่</p>

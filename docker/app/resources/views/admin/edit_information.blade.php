@@ -59,9 +59,6 @@
 <div class="main-content-edit_information">
     <!--กรอบแก้ไขข้อมูลส่วนตัว-->
     <div class="frameeditinformation">
-            <a href="{{ url('admin/profile') }}" class="arrow-2">
-                <p class="arrow-1">←</p>
-            </a>
         <img src="{{ asset('admin/img/รูปการแก้ไขข้อมูล.png') }}" alt="รูปการแก้ไขข้อมูล" class="img-edit-information-1">
         <h1 class="sectioneditinformation">แก้ไขข้อมูล</h1>
         <p class="messageditinformation">แก้ไขข้อมูลเดิมของคุณได้ที่นี่</p>

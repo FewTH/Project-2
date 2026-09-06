@@ -64,13 +64,13 @@
     <div class="framelargest">
 
         <div class="frameback-correct-offRegister">
-            <a href="{{ url('admin/assessment') }}" class="btn-retrospective">
-                <img src="{{ asset('admin/img/รูปของปุ่มย้อนกลับ.png') }}" alt="รูปของปุ่มย้อนกลับ" class="img-retrospective">
-                <p class="messageretrospective">ย้อนกลับ</p>
-            </a>
+            <button type="button" class="deleteRegister" id="delete_Register">
+                <p class="message-deleteRegister">ลบกิจกรรม</p>
+            </button>
             <a href="{{ url('admin/edit_activity') }}" class="edit-activity">
                 <p class="message-edit-activity">แก้ไข</p>
             </a>
+           
             <button type="button" class="offRegister" id="off_Register">
                 <p class="message-offRegister">ปิด Register</p>
             </button>
@@ -114,52 +114,64 @@
                     </div>
                 </div>
 
-                <div class="frameQRcoderegister-1">
-                    <div class="frmaemessageQRcoderegistermessagescan">
-                        <p class="messageQRcoderegister">QR code ลงทะเบียน</p>
-                        <div class="frmaemessagescan">
-                            <p class="messagescan">Scan ได้เลย</p>
+                <div class="frameQRcoderegisteractivity">
+                    <div class="frameQRcoderegister-1">
+                        <div class="frmaemessageQRcoderegistermessagescan">
+                            <p class="messageQRcoderegister">QR code ลงทะเบียน</p>
+                            <div class="frmaemessagescan">
+                                <p class="messagescan">Scan ได้เลย</p>
+                            </div>
+                        </div>
+                        <hr class="lineQRcode">
+                        <div class="img-QRcode">
+                        <img src="{{ asset('admin/img/รูปQrcodeจำลอง.png') }}" alt="รูปQrcodeจำลอง" class="img-QRcode-1">
+                        </div>
+
+                        <div class="framerecordshare">
+                            <button type="button" class="btn-recordQrcode" id="btn_recordQrcode">
+                                <img src="{{ asset('admin/img/รูปของปุ่มบันทึก.png') }}" alt="รูปของปุ่มบันทึก" class="img-recordQrcode">
+                                <p class="message-recordQrcode">บันทึก</p>
+                            </button>
+                            <button type="button" class="frameshare" id="frame_shareQrcode">
+                                <img src="{{ asset('admin/img/รูปของปุ่มแชร์.png') }}" alt="รูปของปุ่มแชร์" class="img-shareQrcode">
+                                <p class="messageframeshare">แชร์</p>
+                            </button>
                         </div>
                     </div>
-                    <hr class="lineQRcode">
-                    <img src="{{ asset('admin/img/รูปQrcodeจำลอง.png') }}" alt="รูปQrcodeจำลอง" class="img-QRcode">
 
-                    <div class="framerecordshare">
-                        <button type="button" class="btn-recordQrcode" id="btn_recordQrcode">
-                            <p class="message-recordQrcode">บันทึก</p>
-                        </button>
+                <div class="frameQRcoderegister-2">
+                    <div class="messageactivity">
+                        <p class="messageactivity-1">ข้อมูลกิจกรรม</p>
+                        <div class="frmaemessagescan-1">
+                            <p class="messagescan-1">ทั้งหมด</p>
+                        </div>
                     </div>
-                    <button type="button" class="frameshare" id="frame_shareQrcode">
-                        <img src="{{ asset('admin/img/รูปของปุ่มแชร์.png') }}" alt="รูปของปุ่มแชร์" class="img-shareQrcode">
-                        <p class="messageframeshare">แชร์</p>
-                    </button>
-                </div>
-
-
-            <div class="frameQRcoderegister">
-                <p class="messageactivity">ข้อมูลกิจกรรม</p>
-                <hr class="lineactivity">
-                <div class="framedateorganize">
-                    <p class="messagedateorganize">วันที่จัดกิจกรรม</p>
-                    <span class="dateorganize">30 พ.ค 2569</span>
-                </div>
-                <div class="frametimeoffRegister">
-                    <p class="messageRegister">เวลาปิด Register</p>
-                    <span class="numbertimeoffRegister">10:30 น.</span>
-                </div>
-                <div class="framequantitymaximum">
-                    <p class="messagequantitymaximum">จำนวนสูงสุด</p>
-                    <span class="numberquantitymaximum">5</span>
-                </div>
-                <div class="framelistrewardall">
-                    <p class="messagelistrewardall">รายการรางวัลทั้งหมด</p>
-                    <span class="message-listrewardall">ดินสอ สมุดโน้ต ยางลบ</span>
+                    <hr class="lineactivity">
+                    <div class="framedateorganize">
+                        <p class="messagedateorganize">วันที่จัดกิจกรรม</p>
+                        <span class="dateorganize">30 พ.ค 2569</span>
+                    </div>
+                    <hr class="lineactivity">
+                    <div class="framedateorganize">
+                        <p class="messagedateorganize">เวลาปิด Register</p>
+                        <span class="dateorganize">10:30 น.</span>
+                    </div>
+                    <hr class="lineactivity">
+                    <div class="framedateorganize">
+                        <p class="messagedateorganize">จำนวนสูงสุด</p>
+                        <span class="dateorganize">5</span>
+                    </div>
+                    <hr class="lineactivity">
+                    <div class="framedateorganize">
+                        <p class="messagedateorganize">รายการรางวัลทั้งหมด</p>
+                        <span class="dateorganize">ดินสอ 5, สมุดโน้ต 15, ยางลบ 10</span>
+                    </div>
                 </div>
             </div>
 
             <div class="framelistnamesregister">
-                <div class="pointlistnamesregister"></div>
                 <div class="framelistnamesregister-1">
+                    <div class="pointlistnamesregister"></div>
                     <p class="messagelistnamesregiste">รายชื่อผู้ลงทะเบียน</p>
                     <div class="framequantitypeople">
                         <p class="numberquantitypeople">1 คน</p>
@@ -179,6 +191,7 @@
                         <p class="timeparticipants">10:24 น.</p>
                     </div>
                 </div>
+                <hr class="linequantitypeople">
             </div>
         </div>
 
