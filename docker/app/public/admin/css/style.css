@@ -1324,6 +1324,9 @@ body.no-scroll {
 
 /*ปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
 .btn-cancel-1{
+  display: flex;
+  justify-content: center;
+  height: 75px;
   position: relative;
   background-color: #ffffff;
   border: 2px solid #d39b00;
@@ -1335,6 +1338,7 @@ body.no-scroll {
 
 /*ชื่อปุ่มยกเลิกขของหน้าแก้ไขข้อมูล*/
 .btn-cancel-2{
+  text-decoration: none;
   color: #d39b00;
   border: none;
   background: none;
@@ -1575,10 +1579,13 @@ body.no-scroll {
 
 /*ปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password{
+  display: flex;
+  align-items: center;
   position: relative;
   background-color: #ffffff;
   border: 2px solid #d39b00;
   border-radius: 20px;
+  height: 75px;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -1591,6 +1598,7 @@ body.no-scroll {
   font-weight: 600;
   border: none;
   padding: 25px 90px;
+  text-decoration: none;
   background: none;
   cursor: pointer;
   position: relative;
@@ -2739,6 +2747,15 @@ body.no-scroll {
   z-index: 1;
 }
 
+
+
+.popupdeleteRegister{
+  z-index: 2;
+}
+
+
+
+
 /*ปุ่มแก้ไขข้อมูล*/
 .edit-activity{
   position: relative;
@@ -2827,6 +2844,157 @@ body.no-scroll {
   font-weight: 600;
   z-index: 1;
 }
+
+/*กรอบpopup ของ ยืนยันปิด Register*/
+.popupoffRegister{
+  background-color: #fdfbf5;
+  width: 450px;
+  padding: 30px 40px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.popupoffRegister.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
+/*กรอบของรูปปิด Register*/
+.imgpopupoffRegister{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/*กรอบของข้อความปิด Register*/
+.messageconfirmoffRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*หัวข้อปิด Register*/
+.message-confirmoffRegister{
+  font-size: 25px;
+  font-weight: 600;
+  color: #8A5B10;
+}
+
+/*ข้อความแจ้งเตือนปิด Register*/
+.messagewarn{
+  font-size: 18px;
+  color: #6b4b0c;
+}
+
+/*กรอบบอของปุ่มยืนยันกับยกเลิก*/
+.btn-confirm-cancel{
+  display: flex;
+  margin-top: 30px;
+}
+
+/*ปุ่มยืนยัน*/
+.btnconfirmoffRegister{
+  position: relative;
+  background-color: #a8731d;
+  border: none;
+  padding: 0px 65px;
+  height: 65px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btnconfirmoffRegister::before{
+  content: "";
+  background-color: #96651644;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*วงกลมเอฟเฟ็กต์ของปุ่มยืนยัน*/
+.btnconfirmoffRegister:hover::before{
+  width: 400px;
+  height: 400px;
+}
+
+/*ข้อความของปุ่มยืนยัน*/
+.btnconfirmoffRegister-1{
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มยกเลิก*/
+.canceloffRegister{
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+  background: none;
+  border: 2px solid #d39b00;
+  padding: 0px 55px;
+  height: 65px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยกเลิก*/
+.canceloffRegister::before{
+  content: "";
+  background-color: #d39b000e;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*วงกลมเอฟเฟ็กต์ของปุ่มยกเลิก*/
+.canceloffRegister:hover::before{
+  width: 400px;
+  height: 400px;
+}
+
+/*ข้อความของปุ่มยกเลิก*/
+.canceloffRegister-1{
+  font-size: 20px;
+  font-weight: 600;
+  color: #8A5B10;
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
 
 /*กรอบลองลงมาของกิจกรรม*/
 .frameactivitytime{
@@ -5214,6 +5382,7 @@ body.no-scroll {
 
 /*ข้อความสร้างกิจกรรม*/
 .messagecreateactivity-1{
+  color: #745500;
   font-size: 30px;
   font-weight: 600;
 }
@@ -6476,7 +6645,8 @@ border-radius: 10px;
 /* หน้าจัดการวงล้อสุ่ม */
 .main-spn-box{
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
 }
 /* จัดตกแต่งหัวข้อ */
 .wheel-mainspn-topic{
@@ -6492,59 +6662,55 @@ border-radius: 10px;
   border: 2px solid #a8731d;
   border-radius: 10px;
   width: 650px;
-  margin-top: 100px;
-  margin-left: 100px;
+  margin-top: 60px;
+  margin-left: 300px;
 }
 /* จัดการบ็อกหัวข้อรางวัล */
 .topic-spn-list{
   display: grid;
-  grid-template-columns: 2.5fr 1.5fr 2fr 1fr;
-  border-bottom: 1px solid #FCD535;
+  grid-template-columns:2.5fr 1.5fr 2fr 1fr;
   margin-left: 10px;
 }
 .reward-wheel-1 {
+    border-top: 1px solid #FCD535;
     display: grid;
     grid-template-columns: 2fr 1.3fr 2.5fr; 
     align-items: center;
     padding: 15px 20px;
-    border-bottom: 2px solid #FCD535;
 }
 /* แต่งบ็อกวงล้อ */
-.main-wheel-spn{
+/* .main-wheel-spn{
   display: flex;
   justify-content: center;
   background-color: #FCF6E5;
   border: 2px solid #a8731d;
   border-radius: 10px;
-  margin-top: 100px;
+  margin-top: 50px;
   width: 700px;
   margin-left: 40px;
+  overflow: hidden;
+} */
+ .main-wheel-spn {
+    background-color: #FFFDF0; /* สีพื้นหลังของการ์ด */
+    border: 2px solid #a8731d;
+    border-radius: 16px;
+    overflow: hidden;          /* สำคัญ! ตัดขอบแถบสีดำด้านล่างไม่ให้ล้นมุมโค้ง */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 700px;
+    box-sizing: border-box;
+    margin-top: 57px;
+    margin-left: 50px;
 }
 /* ปุ่มบันทึกและยกเลิกวงล้อ */
-/* .ad-botton{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 50px;
-  width: 500px;
-} */
-/* .addreward-btn1{
-  border-radius: 10px;
-  background-color: #ffe748;
-  color: #000000;
-  display: flex;
-  padding: 15px 25px;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  border: 1px solid #000000;
-} */
 .btn-manage-wheel{
   display: flex;
-  margin-top: 500px;
+  justify-content: center;
+  margin-top: 300px;
   gap: 12px;
   padding: 15px 20px;
-  width: 210px;
-  background-color: #1e1e1e;
+  width: 100%;
   background-color: #000;
 }
 .submit-wheel-reward{
@@ -6553,11 +6719,13 @@ border-radius: 10px;
   background-color: #FCD535;
   border-radius: 10px;
   color: #000000;
+  border: none;
 }
 .cancle-wheel-btn{
   width: 100px;
   height: 50px;
   background-color: #D31313;
+  border: none;
   border-radius: 10px;
   color: #FFFFFF;
 }

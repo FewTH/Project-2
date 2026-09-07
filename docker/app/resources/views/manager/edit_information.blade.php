@@ -98,7 +98,7 @@
             <button type="submit" class="save-data-2">บันทึกข้อมูล</button>
         </div>
         <div class="btn-cancel-1"  id="btn_cancel_2">
-            <button type="reset" class="btn-cancel-2">ยกเลิก</button>
+            <a href="{{ url('manager/profile') }}" class="btn-cancel-2">ยกเลิก</a>
         </div>
         </div>
         </form>

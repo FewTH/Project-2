@@ -133,6 +133,46 @@ const uploadPhotoInput = document.getElementById('uploadphoto');
     }
 
 
+//ส่วนของหน้า view_details.blade.php
+//ใช้สำหลับนับเวลาส่วนของเวลาปิดRegisterของหน้ารายละเอียดกิจกรรม
+const numbertime = document.getElementById('number_time');
+
+if (numbertime){
+    let time = Number(numbertime.dataset.seconds);
+
+    const timeoffregister = setInterval(function (){
+
+        if(time <= 0){
+            clearInterval(timeoffregister);
+        }else{
+            let hour = Math.floor(time / 3600);
+            let minute = Math.floor ((time % 3600) / 60);
+            let second = Math.floor((time % 60));
+
+            if(hour < 10){
+                hour = '0' + hour;
+            }
+            if(minute < 10){
+                minute = '0' + minute;
+            }
+            if(second < 10){
+                second = '0' + second;
+            }
+            
+            if(hour > 0){
+                numbertime.innerHTML = hour + ':' + minute + ':' + second;
+            }else{
+                numbertime.innerHTML = minute+ ':' + second;
+            }
+
+            time--;
+
+        }
+
+    }, 1000);
+}
+
+
 
 
 

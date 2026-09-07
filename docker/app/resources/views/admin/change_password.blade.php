@@ -105,7 +105,7 @@
                 <button type="submit" class="save-password-2">บันทึกรหัสผ่าน</button>
             </div>
         <div class="btn-cancel-password" id="btn_cancel_password">
-            <button type="reset" class="btn-cancel-password-1">ยกเลิก</button>
+            <a href="{{ url('admin/profile') }}" class="btn-cancel-password-1">ยกเลิก</a>
         </div>
         </div>
         </form>

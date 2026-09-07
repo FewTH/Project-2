@@ -66,7 +66,7 @@
             <p class="sectionactivity">{{ $event->title }}</p>
             <span class="messageregisterreward">ลงทะเบียนก่อนหมดเวลาเพื่อสิทธิ์ลุ้นรางวัล!</span>
             <div class="frametimeactivityreward">
-                <h1 class="timeactivityrewards">10:00</h1>
+                <h1 class="numbertime" id="number_time" data-seconds="{{ $remainingseconds }}">00:00</h1>
             </div>
         </div>
 
@@ -76,15 +76,17 @@
                 <p class="messagedata_framework">กรอกข้อมูลเพื่อลงทะเบียน</p>
 
                 @if(session('success'))
-                <div class="successdataframework">{{ session('success') }}</div>
+                <div class="savesuccessdataframework">
+                    <p class="savesuccessdataframework-1"> {{ session('success') }}</p>
+                </div>
                 @endif
 
                 @error('status')
-                        <p class="savesuccessimage-error">{{ $message }}</p>
+                        <p class="savesuccessimage-errordataframework">{{ $message }}</p>
                 @enderror
 
                 @error('limitmax')
-                        <p class="savesuccessimage-error">{{ $message }}</p>
+                        <p class="savesuccessimage-errordataframework">{{ $message }}</p>
                 @enderror
 
 
@@ -93,9 +95,9 @@
                     <span class="asteriskdataframe">*</span> 
                 </label>
                 <input type="text" name="full_name" class="dataframeworkfullname" value="{{ old('full_name') }}" placeholder="กรอกชื่อ-นามสกุล" autocomplete="name" id="dataframe_workfullname">
-                @error('full_name')
-                        <p class="savesuccessimage-error">{{ $message }}</p>
-                @enderror
+                    @error('full_name')
+                            <p class="savesuccessimage-error-1">{{ $message }}</p>
+                    @enderror
 
                 <label class="framedataframeworkname" for="dataframe_workemail">
                     <p class="messagename">อีเมล</p>
@@ -103,7 +105,7 @@
                 </label>
                 <input type="email" name="email" class="dataframeworkfullname" value="{{ old('email') }}" placeholder="กรอบอีเมล" autocomplete="email" id="dataframe_workemail">
                 @error('email')
-                        <p class="savesuccessimage-error">{{ $message }}</p>
+                        <p class="savesuccessimage-error-1">{{ $message }}</p>
                 @enderror
                 
                 <button type="submit" class="btn-registerparticipate">

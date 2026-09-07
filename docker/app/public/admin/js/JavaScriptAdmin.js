@@ -17,6 +17,15 @@ function deletenumberquantity(inputId){
     }
 }
 
+function checkmarkbutton(rewardId){
+    const checkbox = document.getElementById('active_' + rewardId);
+    const qtyinput = document.getElementById('qty_' + rewardId);
+
+    if (checkbox && qtyinput){
+        qtyinput.disabled = !checkbox.checked;
+    }
+}
+
 
 //เอาไว้บอกว่าให้สร้าง html ให้เสร็จก่อนแล้วค่อยมาเรียกใช่ js
 document.addEventListener('DOMContentLoaded', function(){
@@ -294,6 +303,63 @@ if(btnrandomreward){
         window.location.href = btnrandomreward.dataset.url;
     });
 }
+
+
+//ใช้สำหลับนับเวลาส่วนของเวลาปิดRegisterของหน้ารายละเอียดกิจกรรม
+const numbertime = document.getElementById('number_time');
+
+if (numbertime){
+    let time = Number(numbertime.dataset.seconds);
+
+    const timeoffregister = setInterval(function (){
+
+        if(time <= 0){
+            clearInterval(timeoffregister);
+        }else{
+            let hour = Math.floor(time / 3600);
+            let minute = Math.floor ((time % 3600) / 60);
+            let second = Math.floor((time % 60));
+
+            if(hour < 10){
+                hour = '0' + hour;
+            }
+            if(minute < 10){
+                minute = '0' + minute;
+            }
+            if(second < 10){
+                second = '0' + second;
+            }
+            
+            if(hour > 0){
+                numbertime.innerHTML = hour + ':' + minute + ':' + second;
+            }else{
+                numbertime.innerHTML = minute+ ':' + second;
+            }
+
+            time--;
+
+        }
+
+    }, 1000);
+}
+
+
+const offRegister = document.getElementById('off_Register');
+
+if(offRegister){
+    offRegister.addEventListener('click', function(){
+        openDialog(document.getElementById('popupoff_Register'));
+    });
+}
+
+const canceloffRegister = document.getElementById('cancel_offRegister');
+
+if(canceloffRegister){
+    canceloffRegister.addEventListener('click', function(){
+        closeDialog(document.getElementById('popupoff_Register'));
+    });
+}
+
 
 
 

@@ -243,6 +243,9 @@ body.no-scroll {
 
 /*ปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
 .btn-cancel-1{
+  display: flex;
+  justify-content: center;
+  height: 75px;
   position: relative;
   background-color: #ffffff;
   border: 2px solid #d39b00;
@@ -254,6 +257,7 @@ body.no-scroll {
 
 /*ชื่อปุ่มยกเลิกขของหน้าแก้ไขข้อมูล*/
 .btn-cancel-2{
+  text-decoration: none;
   color: #d39b00;
   border: none;
   background: none;
@@ -512,10 +516,13 @@ body.no-scroll {
 
 /*ปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password{
+  display: flex;
+  align-items: center;
   position: relative;
   background-color: #ffffff;
   border: 2px solid #d39b00;
   border-radius: 20px;
+  height: 75px;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -528,6 +535,7 @@ body.no-scroll {
   font-weight: 600;
   border: none;
   padding: 25px 90px;
+  text-decoration: none;
   background: none;
   cursor: pointer;
   position: relative;

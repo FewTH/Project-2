@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\EventRegistrationController;
+use App\Http\Controllers\ActivityController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,9 +60,8 @@ Route::prefix('admin')->group(function () {
         return view('admin.assessment');
     });
 
-    Route::get('/create_activity', function () {
-        return view('admin.create_activity');
-    });
+    Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity.show');
+    Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity');
 
     // Route::get('/managereward', function () {
     //     return view('admin.managereward');
@@ -71,9 +71,8 @@ Route::prefix('admin')->group(function () {
     //     return view('admin.addreward');
     // });
 
-    Route::get('/view_details', function () {
-        return view('admin.view_details');
-    });
+    Route::get('/view_details/{id}', [ActivityController::class, 'show'])->name('admin.activity.detail');
+    Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');
 
     Route::get('/managespin', [WheelController::class, 'index']);
 
@@ -121,8 +120,8 @@ Route::prefix('user')->group(function () {
         return view('user.loginuser');
     });
 
-    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
-    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
+    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');//->middleware('auth');
+    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');//->middleware('auth');
 });
 
 
