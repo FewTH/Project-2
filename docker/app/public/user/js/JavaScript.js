@@ -3,14 +3,39 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 //ส่วนของหน้า profile.blade.php
+/*ฟังชันเอาไว้ไปดึงใช้ของปุ่มเปิด ปิด popupให้มีAnimation*/
+function openDialog(dialog) {
+
+    dialog.showModal();
+    document.body.classList.add('no-scroll');
+
+    requestAnimationFrame(function(){
+        dialog.classList.add('show');
+  
+    });
+}
+
+function closeDialog(dialog) {
+    
+    dialog.classList.remove('show');
+
+    setTimeout(function(){
+        dialog.close();
+
+        const nothaveunlock = document.querySelector('dialog[open]');
+        if(!nothaveunlock){
+            document.body.classList.remove('no-scroll');
+        }
+    }, 200); 
+}
 //ปุ่มเปิดpopupเปลี่ยนรูปโปรไฟล์ หน้า profile.blade.php
 const btnopen_1 = document.getElementById('btn_open_1');
 
 if(btnopen_1){
     btnopen_1.addEventListener('click', function(){
-        document.getElementById('image-popup').show();
-        document.getElementById('popup_btn_Change').close();
-        document.getElementById('popup_btn_edit').close();
+        openDialog(document.getElementById('image-popup'));
+        closeDialog(document.getElementById('popup_btn_Change'));
+        closeDialog(document.getElementById('popup_btn_edit'));
     });
 }
 
@@ -19,7 +44,7 @@ const btnclose_1 = document.getElementById('btn_close_1');
 
 if(btnclose_1){
     btnclose_1.addEventListener('click', function(){
-        document.getElementById('image-popup').close();
+        closeDialog(document.getElementById('image-popup'));
     });
 }
 
@@ -28,9 +53,9 @@ const editinformation = document.getElementById('Edit_information')
 
 if(editinformation){
     editinformation.addEventListener('click', function(){
-        document.getElementById('popup_btn_edit').show();
-        document.getElementById('image-popup').close();
-        document.getElementById('popup_btn_Change').close();    
+        openDialog(document.getElementById('popup_btn_edit'));
+        closeDialog(document.getElementById('image-popup'));
+        closeDialog(document.getElementById('popup_btn_Change'));     
 });
 }
 
@@ -39,7 +64,7 @@ const btncloseedit = document.getElementById ('btn_close_Edit');
 
 if(btncloseedit){
     btncloseedit.addEventListener('click', function(){
-        document.getElementById('popup_btn_edit').close();
+        closeDialog(document.getElementById('popup_btn_edit'));
     });
 }
 
@@ -48,9 +73,9 @@ const Changepassword = document.getElementById('Change_password');
 
 if(Changepassword){
     Changepassword.addEventListener('click', function(){
-        document.getElementById('popup_btn_Change').show();
-        document.getElementById('popup_btn_edit').close();
-        document.getElementById('image-popup').close();
+        openDialog(document.getElementById('popup_btn_Change'));
+        closeDialog(document.getElementById('popup_btn_edit'));
+        closeDialog(document.getElementById('image-popup'));
     });
 }
 
@@ -59,7 +84,7 @@ const btnclosechange = document.getElementById('btn_close_change');
 
 if(btnclosechange){
     btnclosechange.addEventListener('click', function(){
-        document.getElementById('popup_btn_Change').close();
+        closeDialog(document.getElementById('popup_btn_Change'));
     });
 }
 
@@ -67,7 +92,7 @@ if(btnclosechange){
 const imagepopup = document.getElementById('image-popup');
 
 if(imagepopup && imagepopup.dataset.open === 'true'){
-    imagepopup.show();
+    openDialog(imagepopup);
 }
 
 //ปุ่มเปิด/ปิดเอาไว้ดูรหัสผ่านปัจจุบัน
@@ -121,6 +146,8 @@ const Galleryimgright = document.getElementById('Gallery_img_right');
 const arrowleft = document.getElementById('arrow_left');
 const arrowright = document.getElementById('arrow_right');
 
+if (Galleryimgleft && Galleryimgcenter && Galleryimgright && arrowleft && arrowright){
+
     const imageleft1 = Galleryimgleft.src;
     const imagecenter2 = Galleryimgcenter.src;
     const imageright3 = Galleryimgright.src;
@@ -173,7 +200,8 @@ const arrowright = document.getElementById('arrow_right');
 
     };
 
-
+    
+}
 
     
 

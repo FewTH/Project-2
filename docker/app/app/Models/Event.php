@@ -21,4 +21,16 @@ class Event extends Model
         'created_by',
         'created_at',
         ];
+
+        
+        public function wheel()
+    {
+        return $this->belongsTo(spin_wheels::class, 'wheel_id', 'wheel_id');
+    }
+
+    public function registrations()
+    {
+        return $this->hasMany(EventRegistration::class, 'event_id', 'event_id');
+    }
 }
+

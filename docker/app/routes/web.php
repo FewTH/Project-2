@@ -5,6 +5,7 @@ use App\Http\Controllers\WheelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RewardController;
+use App\Http\Controllers\EventRegistrationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -46,6 +47,9 @@ Route::prefix('admin')->group(function () {
     Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
     Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
     Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update'); 
+
+    // ระบบจัดการวงล้อสุ่ม
+    Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
     // Route::get('/edituser', function () {
     //     return view('admin.edituser');
     // });
@@ -116,6 +120,9 @@ Route::prefix('user')->group(function () {
     Route::get('/loginuser', function () {
         return view('user.loginuser');
     });
+
+    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
+    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
 });
 
 

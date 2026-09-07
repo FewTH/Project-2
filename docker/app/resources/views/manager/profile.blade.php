@@ -209,7 +209,7 @@
     <!--เปลี่ยนครั้งล่าสุด-->
     <div class="Last_updated">
         <label class="typelast_updated">เปลี่ยนรหัสครั้งล่าสุด</label>
-        <input type="text" id="Update_password" value="{{ $user->password_changed_at ? $user->password_changed_at->format('d/m/y') : ''}}" class="input-Last_updated" disabled>
+        <input type="text" id="Update_password" value="{{ $user->password_changed_at }}" class="input-Last_updated" disabled>
     </div>
     </form>
      <!--ปุ่มเปลี่ยนหัสผ่าน-->

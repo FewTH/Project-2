@@ -10,7 +10,13 @@ body {
   background-color: #fdfbf4;
   min-width: 1000px;
 }
- 
+
+/*ทำให้เวลาเปิด popup แล้วไม่สามารถเลื่อนได้*/
+body.no-scroll {
+  overflow: hidden;
+}
+
+
 /*ส่วนของหน้า Contact.html.html*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/
 .main-content {
@@ -1255,19 +1261,26 @@ body {
 }
 
 
+
 /*กรอบ popup ของเปลี่ยนรูปโปรไฟล์*/
 .popup-box{
-  position: absolute;
-  top: 35%;
-  left: 8%;
   background-color: #fdfbf5;
   width: 900px;
   padding: 20px 20px 40px 20px;
   border-radius: 20px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border: none;
   z-index: 2;
 }
+
+.popup-box.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
 /*ซ่อนปุ่มเลือกรูปภาพ*/
 #uploadphoto {
     display: none;
@@ -1327,6 +1340,287 @@ body {
 .btn-select-file-1{
   padding: 0px 0px 30px 0px;
 }
+
+
+
+
+/*ส่วนของหน้า register_event.blade.php*/
+/*เอาไว้จัดหน้าให้อยู่ในกรอบของเว็บ*/
+.main-content-register{
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+/*กรอบของข้อมูลลงทะเบียน*/
+.framebigregisterevent{
+  background-color: #fdfbf5;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  padding: 30px 20px 40px 20px;
+  border-radius: 20px;
+  width: 600px;
+}
+
+/*กรอบของรูปภาพ*/
+.img-buuburaphauniversity{
+  display: flex;
+  justify-content: center;
+}
+
+/*กรอบของหัวข้อกิจกรรม ถึง เวลา*/
+.frmaesectionactivity{
+  margin-top: 30px;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 10px 20px 0px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+
+/*หัวข้อกิจรรม*/
+.sectionactivity{
+  color: #8A5B10;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+/*ข้อความของลงทะเบียนก่อนหมดเวลา*/
+.messageregisterreward{
+  color: #4e4e4e;
+  position: relative;
+  bottom: 10px;
+  font-weight: 600;
+}
+
+/*กรอบและข้อความของ เวลา*/
+.frametimeactivityreward{
+  display: flex;
+  justify-content: center;
+  font-size: 22px;
+  color: #5381EC;
+}
+
+/*กรอบของกรอข้อมูลเพื่อลงทะเบียน*/
+.framedataframework{
+  margin-top: 30px;
+  background-color: #FCF6E5;
+  border: 2px solid #d39b00;
+  padding: 10px 20px 40px 20px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+
+/*หัวข้อกรอกข้อมูลเพื่อลงทะเบียน*/
+.messagedata_framework{
+  font-size: 22px;
+  font-weight: 900;
+  color: #745500;
+}
+
+/*กรอบชื่อ-นามสกุล กับ อีเมล ดอกจัน*/
+.framedataframeworkname{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/*กรอบชื่อ-นามสกุล กับ อีเมล*/
+.messagename{
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/*ดอกจัน*/
+.asteriskdataframe{
+  color: #ff0000;
+  font-size: 18px;
+}
+
+/*กรอบเอาไว้พิมของชื่อ-นามสกุล กับ อีเมล*/
+.dataframeworkfullname{
+  outline: none;
+  color: #777777;
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #fdfbf5;
+  border: 2px solid #d39b00;
+  font-size: 15px;
+}
+
+/*ปุ่มลงทะเบียนเข้าร่วม*/
+.btn-registerparticipate{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  width: 100%;
+  border: 2px solid #9C6F2E;
+  height: 60px;
+  border-radius: 20px;
+  background: none;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มลงทะเบียนเข้าร่วม*/
+.btn-registerparticipate::before{
+  content: "";
+  background-color: #9c6e2e10;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+}
+
+/*วงกลมเอฟเฟ็กต์ของปุ่มลงทะเบียนเข้าร่วม*/
+.btn-registerparticipate:hover::before{
+  width: 500px;
+  height: 500px;
+}
+
+/*ข้อความของปุ่มลงทะเบียนเข้าร่วม*/
+.messageregisterparticipate{
+  font-size: 18px;
+  font-weight: 600;
+  color: #8d6227;
+  position: relative;
+  z-index: 1;
+}
+
+
+/*กรอบของผู้ลงทะเบียนแล้ว*/
+.framepersonRegistrant{
+  margin-top: 30px;
+  border-radius: 20px;
+  border: 2px solid #d39b00;
+  background-color: #FCF6E5;
+  padding: 10px 20px 30px 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+
+/*กรอบของผู้ลงทะเบียนแล้ว*/
+.framepersonRegistrantnumberpeople{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/*จุดวงกลมข้างหน้าข้อความผู้ลงทะเบียนแล้ว*/
+.pointtopicpage{
+  background-color: #C1440E;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/*ข้อความผู้ลงทะเบียนแล้ว*/
+.messagepersonRegistrant{
+  font-size: 21px;
+  font-weight: 900;
+  color: #745500;
+}
+
+/*กรอบของจำนวนผู้ลงทะเบียน*/
+.frmaenumberpeople{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  border: 2px solid #8A5B10;
+  padding: 0px 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+/*ข้อความจำนวนผู้ลงทะเบียน*/
+.messagenumberpeople{
+  color: #d39b00;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/*เส้นระหว่างข้อความผู้ลงทะเบียนแล้ว กับ รายชื่อผู้เข้าร่วม*/
+.linepersonRegistrant{
+  margin-top: 20px;
+  border: 1px solid #d39b00;
+}
+
+/*กรอบของชื่อของผู้เข้าร่วม*/
+.framefullname-timepersonRegistrant{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/*กรอบของเลขลำดับ*/
+.numbertopicpagfullnamee{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d39b00;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+}
+
+/*ตัวเลขลำดับ*/
+.messatopicpagfullnamee{
+  font-size: 20px;
+  color: #ffffff;
+}
+
+/*ชื่อของผู้เข้าร่วม*/
+.fullnameRegistrant-1{
+  color: #4e4e4e;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/*อีเมลของผู้เข้าร่วม*/
+.emailparticipants{
+  color: #4e4e4e;
+  position: relative;
+  bottom: 15px;
+}
+
+/*กรอบของเวลาผู้เข้าร่วม*/
+.timepersonRegistrant{
+  padding: 0px 20px 0px 0px;
+  margin-left: auto;
+}
+
+/*ข้อความของเวลาผู้เข้าร่วม*/
+.timepersonRegistrant-1{
+  font-size: 18px;
+  color: #4e4e4e;
+}
+
+.linepersonRegistrant-1{
+  border: 1px solid #d39b00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*กรอบของ รูปภาพ ข้อความในส่วนเลือกรูปโปรไฟล์*/
@@ -1521,15 +1815,20 @@ body {
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
   background-color: #fdfbf5;
-  position: absolute;
-  top: 42%;
-  left: 8%;
   width: 400px;
   height: 340px;
   border: none;
   border-radius: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   z-index: 2;
+}
+
+.popup-btn-edit-1.show{
+  opacity: 1;
+  transform: scale(1);
 }
 
 /*รูปpopupแก้ไขข้อมูล*/
@@ -1844,13 +2143,13 @@ body {
   height: 0px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, heigth 0.6s;
+  transition: width 0.6s, height 0.6s;
 }
 
 /*กรอบวงกลทเอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
 .Password-Change-Button:hover::before {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
 }
 
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
@@ -1865,18 +2164,28 @@ body {
   position: relative;
   z-index: 1;
 }
+
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
   background-color: #fdfbf5;
-  position: absolute;
-  top: 42%;
-  left: 8%;
   width: 400px;
   height: 340px;
   border: none;
   border-radius: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   z-index: 2;
+}
+
+.popup-btn-Change-1.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.popup-btn-Change-1.active{
+  display: block;
 }
 
 /*รูปpopupเปลี่ยนรหัสผ่าน*/

@@ -11,6 +11,10 @@ body {
   min-width: 1000px;
 }
  
+/*ทำให้เวลาเปิด popup แล้วไม่สามารถเลื่อนได้*/
+body.no-scroll {
+  overflow: hidden;
+}
 
 /*ส่วนของหน้า Dashboard.html*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/
@@ -2069,6 +2073,7 @@ body {
   border-radius: 15px;
   border: 2px solid #d39b00;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*เอฟเฟ็กต์กรอบของค้นหารายชื่อกิจกรรม*/
@@ -2979,6 +2984,7 @@ body {
   padding: 25px 150px 0px 25px;
   height: 120px;
   border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*ตัวเลขของลงทะเบียนแล้ว*/
@@ -3006,6 +3012,7 @@ body {
   padding: 25px 200px 0px 25px;
   height: 120px;
   border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*ตัวเลขของรับสูงสุด*/
@@ -3033,6 +3040,7 @@ body {
   padding: 25px 165px 0px 25px;
   height: 120px;
   border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*ตัวเลขของสถานะ*/
@@ -3060,6 +3068,7 @@ body {
   padding: 25px 135px 0px 25px;
   height: 120px;
   border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*ตัวเลขของเวลาปิด*/
@@ -3091,6 +3100,7 @@ body {
   border-radius: 20px;
   width: 640px;
   padding: 0px 20px 0px 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*กรอบหัวข้อQR code ลงทะเบียน กับ Scan ได้เลย*/
@@ -3264,6 +3274,7 @@ body {
   width: 640px;
   height: 500px;
   padding: 0px 20px 20px 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 
@@ -3332,6 +3343,7 @@ body {
   border: 2px solid #d39b00;
   border-radius: 20px;
   padding: 10px 20px 20px 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
 /*กรอบของรายชื่อผู้ลงทะเบียน กับ จำนวนคน*/
@@ -3879,17 +3891,24 @@ body {
 
 /*กรอบ popup ของเปลี่ยนรูปโปรไฟล์*/
 .popup-box{
-  position: absolute;
-  top: 35%;
-  left: 8%;
   background-color: #fdfbf5;
   width: 900px;
   padding: 20px 20px 40px 20px;
   border-radius: 20px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border: none;
   z-index: 2;
 }
+
+.popup-box.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
+
 /*ซ่อนปุ่มเลือกรูปภาพ*/
 #uploadphoto {
     display: none;
@@ -4121,16 +4140,22 @@ body {
 /*กรอบpopupแก้ไขข้อมูล*/
 .popup-btn-edit-1{
   background-color: #fdfbf5;
-  position: absolute;
-  top: 42%;
-  left: 8%;
   width: 400px;
   height: 340px;
   border: none;
   border-radius: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   z-index: 2;
 }
+
+.popup-btn-edit-1.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 /*รูปpopupแก้ไขข้อมูล*/
 .img-edit-information{
@@ -4442,7 +4467,7 @@ body {
   height: 0px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.6s, heigth 0.6s;
+  transition: width 0.6s, height 0.6s;
 }
 
 /*กรอบวงกลทเอฟเฟ็กต์ของปุ่มเปลี่ยนรหัสผ่าน*/
@@ -4467,17 +4492,21 @@ body {
 /*กรอบpopupเปลี่ยนรหัสผ่าน*/
 .popup-btn-Change-1{
   background-color: #fdfbf5;
-  position: absolute;
-  top: 42%;
-  left: 8%;
   width: 400px;
   height: 340px;
   border: none;
   border-radius: 30px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   z-index: 2;
 }
 
+.popup-btn-Change-1.show {
+  opacity: 1;
+  transform: scale(1);
+}
 
 .popup-btn-Change-1.active{
   display: block;
@@ -4668,11 +4697,17 @@ body {
   background-color: #FCF6E5;
   padding: 70px 20px 30px 20px;
   border-radius: 15px;
-  position: absolute;
-  top: 30%;
-  left: 15%;
   z-index: 5;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s, transform 0.2s;
 }
+
+.assignevaluation.show{
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 /*กรอบของรูปข้อความปุ่มปิดของมอบหมายแบบประเมิน*/
 .framephotomessage-evaluation{
@@ -5219,7 +5254,7 @@ body {
 
 /*ข้อความชื่อกิจกรรม*/
 .messageactivity-name{
-  font-size: 16px;
+  font-size: 18px;
   color: #8A5B10;
   margin-top: 20px;
   font-weight: 600;
@@ -5228,12 +5263,13 @@ body {
 /*ข้อความเครื่องหมาย**/
 .asteriskactivity{
   color: #ff0000;
+  font-size: 18px;
 }
 
 /*กรอบเอาไว้พิมชื่อกิจกรรม*/
 .framepimactivity-nam{
   outline: none;
-  background-color: #e7dec4;
+  background-color: #fdfbf5;
   padding: 15px 20px;
   width: 800px;
   border-radius: 15px;
@@ -5252,7 +5288,7 @@ body {
 
 /*ข้อความวันที่จัดกิจกรรม*/
 .dateactivity{
-  font-size: 16px;
+  font-size: 18px;
   color: #8A5B10;
   font-weight: 600;
 }
@@ -5260,14 +5296,16 @@ body {
 /*ดอกจันของข้อความวันที่จัดกิจกรรม*/
 .asteriskdateactivity{
   color: #ff0000;
+  font-size: 18px;
 }
 
 /*ข้อความเวลาปิด Register*/
 .closingtime-Register{
   position: relative;
-  right: 250px;
+  right: 230px;
   color: #8A5B10;
   font-weight: 600;
+  font-size: 18px;
 }
 
 /*กรอบของที่เอาไว้เลือกวันกับเวลา*/
@@ -5278,7 +5316,7 @@ body {
 
 /*กรอบของที่เอาไว้เลือกวันเดือนปี*/
 .framedatemonthyear{
-  background-color: #e7dec4;
+  background-color: #fdfbf5;
   width: 380px;
   padding: 10px 20px;
   font-size: 16px;
@@ -5290,7 +5328,7 @@ body {
 
 /*ข้อความเลือกของรางวัล*/
 .messagechoosereward{
-  font-size: 16px;
+  font-size: 18px;
   color: #8A5B10;
   margin-top: 25px;
   font-weight: 600;
@@ -5299,6 +5337,7 @@ body {
 /*ดอกจันของข้อความเลือกของรางวัล*/
 .asteriskchoosereward{
   color: #ff0000;
+  font-size: 18px;
 }
 
 /*กรอบของข้อมูลตัวเลือก*/
@@ -5311,7 +5350,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #e7dec4;
+  background-color: #fdfbf5;
   border: 2px solid #d39b00;
   width: auto;
   height: 70px;
@@ -5355,7 +5394,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: 2px solid #d39b00;
   width: 35px;
   height: 35px;
@@ -5483,7 +5521,7 @@ body {
 
 /*ข้อความจำนวนผู้เข้าร่วมสูงสุด*/
 .messagequantity{
-  font-size: 16px;
+  font-size: 18px;
   color: #8A5B10;
   font-weight: 600;
 }
@@ -5493,7 +5531,7 @@ body {
 /*กรอบเอาไว้พิมของจำนวนผู้เข้าร่วมสูงสุด*/
 .framenumberquantity{
   outline: none;
-  background-color: #e7dec4;
+  background-color: #fdfbf5;
   padding: 15px 20px;
   width: 800px;
   border-radius: 15px;
@@ -5714,12 +5752,13 @@ body {
 }
 
 .detail {
-    padding: 30px 40px;
-    box-sizing: border-box;
+    /* padding: 30px 40px; */
+    /* box-sizing: border-box; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 60px;
 }
 
 /* หัวข้อจัดการรางวัล */
@@ -5729,34 +5768,33 @@ body {
     font-weight: bold;
     position: absolute;
     margin-right: 65%;
-    top: 10%;
-    right: 10%;
+    top: 100px;
+    margin-left: 100px;
     
 }
 .searchbox {
     display: flex;
     margin-top: 200px;
     align-items: center;
-    margin-bottom: 5px;
-    margin-right: 35%;
+    margin-right: 650px;
+    margin-bottom: 10px;
 }
 
 /* กล่องหุ้มช่องกรอกค้นหา */
 .input-wrapper {
     position: relative;
     width: 400px;
-    margin-right: 50px;
 }
 
 /* ช่องพิมพ์ค้นหาสีดำ */
 .search-box {
     width: 400px;
-    height: 65px;
+    height: 55px;
     background-color: #000000;
     color: #FCD53F;
     border: none;
     border-radius: 8px;
-    padding: 20px 40px;
+    padding: 10px 40px 10px 15px;
     font-size: large;
     outline: none;
     box-sizing: border-box;
@@ -5764,34 +5802,34 @@ body {
 .search-icon {
     position: absolute;
     right: 14px;
-    top: 39%;
+    top: 50%;
+    transform: translateY(-50%);
     width: 16px;
 }
 
 /* ปุ่มเพิ่มของรางวัล */
 .addbutton{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  margin-left: 900px;
-  margin-top: 90px;
-  /* top: 220px; */
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;                
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 700px;
 }
 .addreward-btn{
-  border-radius: 10px;
-  color: #000000;
-  display: flex;
-  padding: 10px 25px;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
+    border-radius: 10px;
+    color: #000000;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
 }
 .addreward {
     background-color: #FCD535;
     border-radius: 8px;
     display: flex;
-    align-items: center;
+    cursor: pointer;
 }
 
 .plus-icon {
@@ -5807,11 +5845,18 @@ body {
 }
 
 .reward-list {
+    margin-bottom: 100px;
     width: 60%;
     background-color: #f2ebaa;
     border-radius: 10px;
     border-color: #000000;
     border: 1px solid #000000;
+}
+/* จัดการแสดงรายการของรางวัล */
+.reward-list-name{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 /* หัวข้อตาราง */
@@ -5822,6 +5867,7 @@ body {
     color: #000000;
     font-weight: bold;
     font-size: larger;
+    border-bottom: 2px solid #000;
 }
 
 .topic-rewardlist {
@@ -5829,15 +5875,17 @@ body {
     font-size: 15px;
 }
 
-.reward-list-name {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.reward-1 {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr; 
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #FCD535;
 }
 
 .box-reward1 {
     display: grid;
-    grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+    /* grid-template-co 2.5fr 1.5fr 2fr 1fr 1fr; */
     align-items: center;
     background-color: #262626;
     color: #ffffff;
@@ -6429,21 +6477,87 @@ border-radius: 10px;
 .main-spn-box{
   display: flex;
   justify-content: center;
-  margin-top: 100px;
-  background-color: #f2ebaa;
-  width: 650px;
-  margin-left: 400px;
-  border-radius: 10px;
-  border: 2px solid #000000;
 }
-.main-spn-topic{
+/* จัดตกแต่งหัวข้อ */
+.wheel-mainspn-topic{
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-left: 300px;
   margin-top: 100px;
-  margin-right: 950px;
   color: #2563EB;
 }
+/* จัดการบอกหลักรายการางวัล */
+.reward-spn-list{
+  background-color: #FCF6E5;
+  border: 2px solid #a8731d;
+  border-radius: 10px;
+  width: 650px;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+/* จัดการบ็อกหัวข้อรางวัล */
 .topic-spn-list{
   display: grid;
-  grid-template-columns: 2.5fr 2fr 2.5fr 1fr;
+  grid-template-columns: 2.5fr 1.5fr 2fr 1fr;
+  border-bottom: 1px solid #FCD535;
+  margin-left: 10px;
+}
+.reward-wheel-1 {
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 2.5fr; 
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 2px solid #FCD535;
+}
+/* แต่งบ็อกวงล้อ */
+.main-wheel-spn{
+  display: flex;
+  justify-content: center;
+  background-color: #FCF6E5;
+  border: 2px solid #a8731d;
+  border-radius: 10px;
+  margin-top: 100px;
+  width: 700px;
+  margin-left: 40px;
+}
+/* ปุ่มบันทึกและยกเลิกวงล้อ */
+/* .ad-botton{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  width: 500px;
+} */
+/* .addreward-btn1{
+  border-radius: 10px;
+  background-color: #ffe748;
+  color: #000000;
+  display: flex;
+  padding: 15px 25px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #000000;
+} */
+.btn-manage-wheel{
+  display: flex;
+  margin-top: 500px;
+  gap: 12px;
+  padding: 15px 20px;
+  width: 210px;
+  background-color: #1e1e1e;
+  background-color: #000;
+}
+.submit-wheel-reward{
+  width: 100px;
+  height: 50px;
+  background-color: #FCD535;
+  border-radius: 10px;
+  color: #000000;
+}
+.cancle-wheel-btn{
+  width: 100px;
+  height: 50px;
+  background-color: #D31313;
+  border-radius: 10px;
+  color: #FFFFFF;
 }

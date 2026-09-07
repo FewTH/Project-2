@@ -79,15 +79,15 @@
                     <div class="activity-name-1">
                         <p class="messageactivity-name">ชื่อกิจกรรม <span class="asteriskactivity">*</span></p>
                     </div>
-                    <input type="text" class="framepimactivity-nam" placeholder="กรอกชื่อกิจกรรม" id="frame_pim_activitynam">
+                    <input type="text" name="title" class="framepimactivity-nam" placeholder="กรอกชื่อกิจกรรม" id="frame_pim_activitynam">
                 </label>
                 <div class="framemessagedatetime">
                     <p class="dateactivity">วันที่จัดกิจกรรม <span class="asteriskdateactivity">*</span></p>
                     <p class="closingtime-Register">เวลาปิด Register <span class="asteriskdateactivity">*</span></p>
                 </div>
                 <div class="frameweardate">
-                    <input type="date" class="framedatemonthyear" id="framedate_month_year">
-                    <input type="time" class="framedatemonthyear" id="time_offregister">
+                    <input type="date" name="event_date" class="framedatemonthyear" id="framedate_month_year">
+                    <input type="time" name="register_close_time" class="framedatemonthyear" id="time_offregister">
                 </div>
                 <div class="framechoosereward-1">
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
@@ -108,7 +108,7 @@
                             </button>
                             <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}">
                             <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
-                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" name="reward[{{ $reward->reward_id }}][active]" value="1">
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][active]" value="1">
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
-                    <input type="number" value="1" class="framenumberquantity" id="frame_number_quantity">
+                    <input type="number" name="max_participants" value="1" class="framenumberquantity" id="frame_number_quantity">
                 </div>
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">

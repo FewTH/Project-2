@@ -94,7 +94,7 @@
         </div>
         <div class="passwordlasttime">
             <label class="type-password-lasttime-1" for="Type_password-lasttime_1">เปลี่ยนรหัสผ่านครั้งล่าสุด</label> <br>
-            <input type="text" class="input-password-lasttime-1" id="Type_password-lasttime_1" value="{{ $user->password_changed_at ? $user->password_changed_at->format('d/m/y') : ''}}" disabled>
+            <input type="text" class="input-password-lasttime-1" id="Type_password-lasttime_1" value="{{ $user->password_changed_at }}" disabled>
         </div>
         <div class="save-password-btn-cancel">
         <div class="save-password-1" id="save-password-1">

@@ -20,15 +20,18 @@
     </a>
     </div>
 
-    <h1 class="main-spn-topic">สร้างวงล้อสุ่มรางวัล</h1>
+    <div class="wheel-mainspn-topic">
+        <h1 class="main-spn-topic">จัดการวงล้อสุ่ม</h1>
+    </div>
+
     <div class="main-spn-box">
         <div class="reward-spn-list">
-            <h5 class="descrip-title">เลือกของรางวัลจากคลัง</h5>
             {{-- ช่องค้นหารางวัล --}}
             <div class="search-btn-box">
                 <input type="text" class="search-spn-input">
                 <img src="{{ asset('admin/img/search.png')}}" alt="รูปแว่นขยาย">
             </div>
+            <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
         {{-- dropdownของหน้ารางวัล --}}
         {{-- <div class="dropdown-spn-cate">
             <label for="category-spn-re" class="cate-spn-re"></label>
@@ -48,7 +51,37 @@
             <h4 class="spn-quantity">จำนวน</h4>
             <h4 class="spn-selected-quantity">ระบุจำนวน</h4>
         </div>
-
+        <div class="reward-list-name">
+    <!-- รายการของรางวัลชิ้นที่ 1 -->
+    @forelse($rewards as $reward)
+        <div class="reward-wheel-1">
+            <h3 class="name_re1">{{ $reward->name }}</h3>
+            <h3 class="rate_re1">{{ $reward->rate }}</h3>
+            <h3 class="quantity_re1">{{ $reward->quantity_reward }}</h3>
+        </div>
+    @empty
+        <div class="no-data">
+            <p>ยังไม่มีรายการของรางวัลในระบบ</p>
+        </div>
+    @endforelse
+    </div>
+        </div>
+        {{-- วงล้อสุ่ม --}}
+    <div class="main-wheel-spn">
+        <div class="spn-wheel-topic">
+            <h4>วงล้อสุ่มรางวัล</h4>
+            {{-- ตัวนับจำนวนราง --}}
+             <span>จำนวนของรางวัล <span id="selectedCount">0</span> รายการ</span>
+        </div>
+        {{-- ตัววงล้อ --}}
+        <div class="wheel-spn-main">
+            <canvas id="wheel-spn-reward"></canvas>
+        </div>
+        {{-- ปุ่มบันทึกกับลบ --}}
+        <div class="btn-manage-wheel">
+            <button type="button" class="submit-wheel-reward" id="submit-btn-wheel">บันทึก</button>
+            <button type="button" class="cancle-wheel-btn" id="cancle-btn-wheel">ยกเลิก</button>
+        </div>
     </div>
     </div>
     

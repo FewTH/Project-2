@@ -82,13 +82,13 @@ class ProfileController extends Controller
         $data = $request->validate([
             'username' => 'required|string|max:100',
             'full_name' => 'required|string|max:200',
-            'email' => 'required|email|max:200',
+            'email' => 'required|email:rfc,dns|max:200',
             'phone' => 'nullable|digits:10',
         ],[
                 'username.required' => 'กรุณากรอกชื่อผู้ใช้ด้วย',
                 'full_name.required' => 'กรุณากรอกชื่อ-นามสกุลด้วย',
                 'email.required' => 'กรุณากรอกอีเมลด้วย',
-                'email.email' => 'รูปแบบอีเมลไม่ถูกต้อง',
+                'email.email' => 'กรุณากรอกอีเมลที่ถูกต้องและมีอยู่จริง',
                 'phone.digits' => 'เบอร์โทรต้องมีความยาว 10 ตัวอักษร',
         ]);
 
