@@ -56,9 +56,7 @@ Route::prefix('admin')->group(function () {
     // });
 
     // ระบบจัดการกิจกรรม
-    Route::get('/assessment', function () {
-        return view('admin.assessment');
-    });
+    Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
 
     Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity.show');
     Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity');
@@ -73,6 +71,7 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/view_details/{id}', [ActivityController::class, 'show'])->name('admin.activity.detail');
     Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');
+    Route::delete('/activity/{event}', [ActivityController::class, 'deletedata'])->name('admin.activity.deletedata');
 
     Route::get('/managespin', [WheelController::class, 'index']);
 
@@ -88,9 +87,10 @@ Route::prefix('admin')->group(function () {
         return view('admin.edit_activity');
     });
 
-     Route::get('/random_reward', function () {
-        return view('admin.random_reward');
-    });
+    Route::get('/random_reward/{id}', [ActivityController::class, 'randomReward'])->name('admin.random_reward');
+
+
+    Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
 });
 
 // ส่วนของ User (ผู้ใช้งานทั่วไป)

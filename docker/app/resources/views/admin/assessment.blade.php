@@ -104,44 +104,46 @@
             <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-btn-activity" id="img_btn_activity">
         </div>
 
-
-    <div class="frame-activity-assessment" data-status="closed">
-        <div class="framecontentactivity">
-            <h4 class="headingactivity">กิจกรรมเช็คอินโต้รุ่ง ช่วงติวไฟนอล 2568</h4>
-            <div class="frameclosed">
-                <p class="pointclosed"></p>
-                <span class="closed" >ปิด</span>
+    <div class="card-Container" id="cardContainer">
+        @forelse($events as $event)
+        <div class="frame-activity-assessment" data-status="{{ $event->status === 'open' ? 'open' : 'closed' }}">
+            <div class="framecontentactivity">
+                <h4 class="headingactivity">{{ $event->title }}</h4>
+                <div class="frameclosed">
+                    <p class="pointclosed"></p>
+                    <span class="closed" >{{ $event->status === 'open' ? 'เปิดอยู่' : 'ปิด' }}</span>
+                </div>
+            </div>
+            <p class="messagecreationtime">สร้างเมื่อ {{ $event->created_at->format('d M Y') }} · ปิด Register {{ \Carbon\Carbon::parse($event->register_close_at)->format('d M Y') }}</p>
+            <hr class="lineactivity-1">
+            <div class="maximumnumber_outtime">
+                <p class="maximumnumber">ผู้เข้าร่วมสูงสุด {{ $event->max_participants }} คน</p>
+                <p class="outtime">หมดเวลา {{ \Carbon\Carbon::parse($event->register_close_at)->format('H.i') }} น.</p>
+            </div>
+            <div class="framerank-1-2-3">
+                @if($event->wheel)
+                    @foreach($event->wheel->rewards->take(3) as $reward)
+                    <div class="framerank-1-assessment">
+                        <p class="rank-1-assessment">{{ $reward->name }}</p>
+                    </div>
+                    @endforeach
+                @endif
+            </div>
+            <hr class="lineactivity-2">
+            <div class="register">
+                <p class="register-1">{{ $event->registrations->count() }} คนลงทะเบียนแล้ว</p>
+                <div class="view-details">
+                    <a href="{{ route('admin.activity.detail', $event->event_id) }}" class="view-details-1">ดูรายละเอียด</a>
+                </div>
             </div>
         </div>
-        <p class="messagecreationtime">สร้างเมื่อ 20 ต.ค. 2568 · ปิด Register 23 ต.ค. 2568</p>
-        <hr class="lineactivity-1">
-        <div class="maximumnumber_outtime">
-            <p class="maximumnumber">ผู้เข้าร่วมสูงสุด 10 คน</p>
-            <p class="outtime">หมดเวลา 11.30 น.</p>
+        @empty
+        <div class="nothaveactivity">
+            <p class="nothaveactivity-1">ยังไม่มีกิจกรรมในตอนนี้</p>
         </div>
-        <div class="framerank-1-2-3">
-            <div class="framerank-1-assessment">
-                <p class="rank-1-assessment">ดินสอ</p>
-            </div>
-            <div class="framerank-1-assessment">
-                <p class="rank-1-assessment">สมุดโน้ต</p>
-            </div>
-            <div class="framerank-1-assessment">
-                <p class="rank-1-assessment">แบตสำรอง</p>
-            </div>               
-        </div>
-        <hr class="lineactivity-2">
-        <div class="register">
-            <p class="register-1">8 คนลงทะเบียนแล้ว</p>
-            <div class="view-details">
-                <a href="{{ url('admin/view_details/') }}" class="view-details-1">ดูรายละเอียด</a>
-            </div>
-        </div>
+        @endforelse
     </div>
-</template>
 
-<div class="card-Container" id="cardContainer"></div>
-</div>
 
 <!--กรอบของแบบประเมิน-->
 <div class="frame-evaluation" id="frame_evaluation">

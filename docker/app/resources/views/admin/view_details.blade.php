@@ -63,45 +63,45 @@
     </div>
     <div class="framelargest">
 
+
         <div class="frameback-correct-offRegister">
             <button type="button" class="deleteRegister" id="delete_Register">
                 <p class="message-deleteRegister">ลบกิจกรรม</p>
             </button>
-
-        <dialog class="popupdeleteRegister" id="popup_deleteRegister" open>
+        <dialog class="popupdeleteRegister" id="popup_deleteRegister">
+            <form action="{{ route('admin.activity.deletedata', $event->event_id) }}" method="POST">
+            @csrf
+            @method('DELETE')
             <div class="imgpopupdeleteRegister">
                 <img src="{{ asset('admin/img/รูปของpopupลบกิจกรรม.png') }}" alt="รูปของpopupลบกิจกรรม" class="img-popupdeleteRegister">
             </div>
             <div class="message-popupdeleteRegister">
                 <p class="message-confirmdeleteRegister">ยืนยันลบกิจกรรม</p>
                 <span class="messagewarndeleteactivity">กิจกรรมนี้จะถูกลบอย่างถาวร</span>
-                <span class="messagewarndeleteactivity">ข้อมูลการลงทะเบียนและ QR codeจะหายไปทั้งหมด</span>
+                <span class="messagewarndeleteactivity">ข้อมูลการลงทะเบียนและอื่นๆจะหายไปทั้งหมด</span>
             </div>
-
+            <div class="btn-confirmdeletion-1">
             <button type="submit" class="btn-confirmdeletion" id="btn_confirmdeletion">
-                <p class="btn-confirmdeletion-1">ยืนยันลบ</p>
+                <p class="btn-confirmdeletion-2">ยืนยันลบ</p>
             </button>
-
             <button type="button" class="btn-canceldeletion" id="btn_canceldeletion">
                 <p class="btn-canceldeletion-1">ยกเลิก</p>
             </button>
-
+            </div>
+            </form> 
         </dialog>
-
 
             <a href="{{ url('admin/edit_activity') }}" class="edit-activity">
                 <p class="message-edit-activity">แก้ไข</p>
             </a>
-           
-            <form id="form_close_register" action="{{ route('admin.activity.close', $event->event_id) }}" method="POST" >
-                @csrf
             <button type="button" class="offRegister" id="off_Register" >
                 <p class="message-offRegister">ปิด Register</p>
             </button>
-            </form>
         </div>
 
         <dialog class="popupoffRegister" id="popupoff_Register" >
+            <form id="form_close_register" action="{{ route('admin.activity.close', $event->event_id) }}" method="POST" >
+            @csrf
             <div class="imgpopupoffRegister">
                 <img src="{{ asset('admin/img/รูปของpopupยืนยันปิด Register.png') }}" alt="รูปของpopupยืนยันปิด Register" class="img-popupoffRegister"> 
             </div>
@@ -110,16 +110,16 @@
                 <span class="messagewarn">กิจกรรมนี้จะไม่สามารถลงทะเบียนเพิ่มได้อีก</span>
                 <span class="messagewarn">หลังจากยืนยันแล้ว</span>
             </div>
-
             <div class="btn-confirm-cancel">
-                <button type="submit" class="btnconfirmoffRegister" id="btn_confirmoffRegister" form="form_close_register"> 
+                <button type="submit" class="btnconfirmoffRegister" id="btn_confirmoffRegister" > 
                     <p class="btnconfirmoffRegister-1">ยืนยัน</p>
                 </button>
 
                 <button type="button" class="canceloffRegister" id="cancel_offRegister">
                     <p class="canceloffRegister-1">ยกเลิก</p>
                 </button>
-            </div>   
+            </div>  
+            </form> 
         </dialog>
 
 
@@ -127,7 +127,7 @@
                 <div class="frameactivitytime-1">
                     <div class="frmemsectionCreated">
                         <p class="messagesectionactivity">{{ $event->title }}</p>
-                        <span class="messagesectionactivity-1">สร้างเมื่อ {{ $event->created_at->format('d m Y') }} · โดย Admin</span>
+                        <span class="messagesectionactivity-1">สร้างเมื่อ {{ $event->created_at->format('d M Y') }}</span>
                     </div>
                     <div class="framemessageoffregister-time">
                         <p class="messageoffregister">ปิด Register ใน</p>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <button href="{{ url('admin/random_reward') }}" class="btn-randomreward" id="btn_randomreward" data-url="{{ url('admin/random_reward/' . $event->event_id) }}" disabled>
+                <button href="{{ url('admin/random_reward') }}" class="btn-randomreward" id="btn_randomreward" data-url="{{ url('admin/random_reward/' . $event->event_id) }}" {{ $isexpired ? '' : 'disabled' }}>
                     <img src="{{ asset('admin/img/รูปถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล.png') }}" alt="รูปถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล" class="img-trophy">
                     <p class="messagestartrandom">เริ่มสุ่มรางวัล</p>
                     <img src="{{ asset('admin/img/รูปลูกศรของปุ่มเริ่มสุ่มรางวัล.png') }}" alt="รูปลูกศรของปุ่มเริ่มสุ่มรางวัล" class="img-arrowstartrandom">
@@ -170,18 +170,14 @@
                         </div>
                         <hr class="lineQRcode">
                         <div class="img-QRcode">
-                        <img src="{{ asset('admin/img/รูปQrcodeจำลอง.png') }}" alt="รูปQrcodeจำลอง" class="img-QRcode-1">
+                            {!! QrCode::size(300)->generate(url('user/register_event/' . $event->event_id)) !!}
                         </div>
 
                         <div class="framerecordshare">
-                            <button type="button" class="btn-recordQrcode" id="btn_recordQrcode">
+                           <a href="{{ route('admin.activity.qrcode.download', $event->event_id) }}" class="btn-recordQrcode" id="btn_recordQrcode">
                                 <img src="{{ asset('admin/img/รูปของปุ่มบันทึก.png') }}" alt="รูปของปุ่มบันทึก" class="img-recordQrcode">
                                 <p class="message-recordQrcode">บันทึก</p>
-                            </button>
-                            <button type="button" class="frameshare" id="frame_shareQrcode">
-                                <img src="{{ asset('admin/img/รูปของปุ่มแชร์.png') }}" alt="รูปของปุ่มแชร์" class="img-shareQrcode">
-                                <p class="messageframeshare">แชร์</p>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -195,7 +191,7 @@
                     <hr class="lineactivity">
                     <div class="framedateorganize">
                         <p class="messagedateorganize">วันที่จัดกิจกรรม</p>
-                        <span class="dateorganize">{{ \Carbon\Carbon::parse($event->register_close_at)->format('d M Y') }}</span>
+                        <span class="dateorganize">{{ \Carbon\Carbon::parse($event->register_close_at)->format('d m Y') }}</span>
                     </div>
                     <hr class="lineactivity">
                     <div class="framedateorganize">

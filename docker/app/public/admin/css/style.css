@@ -2127,7 +2127,8 @@ body.no-scroll {
 .frame-activity-assessment{
   background-color: #FCF6E5;
   border: 2px solid #d39b00;
-  width: 700px;
+  width: 100%;
+  max-width: 700px;
   margin-left: 50px;
   margin-top: 40px;
   padding: 5px 15px 30px 20px;
@@ -2167,7 +2168,7 @@ body.no-scroll {
 /*เอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
 .frameclosed::before{
   content: "";
-  background-color: #d313131f;
+  background-color: #d39b0015;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -2190,16 +2191,12 @@ body.no-scroll {
 
 /*จุดของสถานะ*/
 .pointclosed{
-  background-color: #D31313;
+  background-color: #5381EC;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   position: relative;
   z-index: 1;
-}
-
-.frameclosed.is-open .pointclosed{
-  background-color: #17A34A;
 }
 
 /*ข้อความปิดแล้ว*/
@@ -2209,11 +2206,9 @@ body.no-scroll {
   z-index: 1;
 }
 .closed{
-  color: #D31313;
+  color: #5381EC;
 }
-.open{
-  color: #17A34A;
-}
+
 
 /*ข้อความเวลาสร้าง*/
 .messagecreationtime{
@@ -2359,11 +2354,23 @@ body.no-scroll {
   z-index: 1;
 }
 
+.nothaveactivity{
+  display: flex;
+  justify-content: center;
+}
+
+.nothaveactivity-1{
+  font-size: 20px;
+  font-weight: 600;
+  color: #4e4e4e;
+}
+
+
 /*อันนี้ของกรอบเอาไว้รอclone*/
 .card-Container{
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(2, 1fr);
-  margin-right: 50px;
+  flex-wrap: wrap;
 }
 
 
@@ -2748,10 +2755,143 @@ body.no-scroll {
 }
 
 
-
+/*กรอบpopup ของ ยืนยันลบกิจกรรม*/
 .popupdeleteRegister{
+  background-color: #fdfbf5;
+  width: 450px;
+  padding: 30px 40px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   z-index: 2;
 }
+
+/*กรอบของรูปลบกิจกรรม*/
+.imgpopupdeleteRegister{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/*กรอบของข้อความลบกิจกรรม*/
+.message-popupdeleteRegister{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*หัวข้อลบกิจกรรม*/
+.message-confirmdeleteRegister{
+  font-size: 25px;
+  font-weight: 600;
+  color: #A32D2D;
+}
+
+/*ข้อความแจ้งเตือนลบกิจกรรม*/
+.messagewarndeleteactivity{
+  font-size: 18px;
+  color: #6b4b0c;
+}
+
+/*กรอบบอของปุ่มยืนยันกับยกเลิก*/
+.btn-confirmdeletion-1{
+  display: flex;
+  margin-top: 30px;
+}
+
+/*ปุ่มยืนยันลบ*/
+.btn-confirmdeletion{
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #A32D2D;
+  border: none;
+  padding: 0px 50px;
+  height: 65px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยืนยันลบ*/
+.btn-confirmdeletion::before{
+  content: "";
+  background-color: rgb(153, 40, 40);
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+/*วงกลมเอฟเฟ็กต์ของปุ่มยืนยันลบ*/
+.btn-confirmdeletion:hover::before{
+  width: 400px;
+  height: 400px;
+}
+
+/*ข้อความของปุ่มยืนยันลบ*/
+.btn-confirmdeletion-2{
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+/*ปุ่มยกเลิก*/
+.btn-canceldeletion{
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: auto;
+  background: none;
+  border: 2px solid #d39b00;
+  padding: 0px 55px;
+  height: 65px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+/*เอฟเฟ็กต์ของปุ่มยกเลิก*/
+.btn-canceldeletion::before{
+  content: "";
+  background-color: #d39b000e;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+
+}
+
+/*วงกลมเอฟเฟ็กต์ของปุ่มยกเลิก*/
+.btn-canceldeletion::before{
+  width: 400px;
+  height: 400px;
+}
+
+/*ข้อความของปุ่มยกเลิก*/
+.btn-canceldeletion-1{
+   font-size: 20px;
+  font-weight: 600;
+  color: #8A5B10;
+  position: relative;
+  z-index: 1;
+}
+
+
 
 
 
@@ -2986,16 +3126,6 @@ body.no-scroll {
   z-index: 1;
 }
 
-
-
-
-
-
-
-
-
-
-
 /*กรอบลองลงมาของกิจกรรม*/
 .frameactivitytime{
   padding: 40px 80px 0px 80px;
@@ -3011,10 +3141,6 @@ body.no-scroll {
   padding: 5px 30px 0px 30px;
   height: 160px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-}
-
-.frmemsectionCreated{
-  min-width: 270px;
 }
 
 /*หัวข้อของกิจกรรม*/
@@ -3259,6 +3385,8 @@ body.no-scroll {
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 20px;  
 }
 
 /*กรอบเล็กของQR code ลงทะเบียน ข้อมูลกิจกรรม*/
@@ -3310,13 +3438,12 @@ body.no-scroll {
 .img-QRcode{
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
-/*รูป QRcode*/
-.img-QRcode-1{
-  margin-top: 20px;
-  width: 350px;
-  height: 350px;
+.img-QRcode svg {
+  border-radius: 10px;
+  box-shadow: 0 8px 14px rgba(0,0,0,0.1);
 }
 
 /*กรอบของปุ่มบันทึก กับ แชร์*/
@@ -3329,16 +3456,18 @@ body.no-scroll {
 
 /*ปุ่มบันทึก*/
 .btn-recordQrcode{
+  text-decoration: none;
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: none;
   border: 3px solid #9C6F2E;
-  padding: 0px 90px;
-  height: 60px;
+  width: 100%;
+  height: 55px;
   border-radius: 20px;
-  gap: 20px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  gap: 15px;
   cursor: pointer;
   overflow: hidden;
 }
@@ -3359,14 +3488,14 @@ body.no-scroll {
 
 /*กรอบวงกลมเอฟเฟ็กต์ปุ่มบันทึก*/
 .btn-recordQrcode:hover::before{
-  width: 400px;
-  height: 400px;
+  width: 1000px;
+  height: 1000px;
 }
 
 /*รูปของปุ่มบันทึก*/
 .img-recordQrcode{
-  width: 20px;
-  height: 25px;
+  width: 23px;
+  height: 27px;
   position: relative;
   z-index: 1;
 }
@@ -3374,65 +3503,12 @@ body.no-scroll {
 /*ข้อความของปุ่มบันทึก*/
 .message-recordQrcode{
   color: #8d6227;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 600;
   position: relative;
   z-index: 1;
 }
 
-/*ปุ่มแชร์*/
-.frameshare{
-  position: relative;
-  display: flex;
-  align-items: center;
-  border: 3px solid #D4A94A;
-  padding: 0px 90px;
-  height: 60px;
-  background: none;
-  border-radius: 20px;
-  gap: 20px;
-  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-  cursor: pointer;
-  overflow: hidden;
-}
-
-/*เอฟเฟ็กต์ปุ่มแชร์*/
-.frameshare::before{
-  content: "";
-  background-color: #d4a84a17;
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
-
-/*กรอบวงกลมเอฟเฟ็กต์ปุ่มแชร์*/
-.frameshare:hover::before{
-  width: 400px;
-  height: 400px;
-}
-
-/*รูปของปุ่มแชร์*/
-.img-shareQrcode{
-  position: relative;
-  top: 2px;
-  width: 25px;
-  height: 25px;
-  z-index: 1;
-}
-
-/*ข้อความของปุ่มแชร์*/
-.messageframeshare{
-  color: #be953d;
-  font-size: 22px;
-  font-weight: 600;
-  position: relative;
-  z-index: 1;
-}
 
 /*กรอบของข้อมูลกิจกรรม*/
 .frameQRcoderegister-2{
@@ -3486,6 +3562,7 @@ body.no-scroll {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 /*ข้อความทั้งหมดของกรอบข้อมูลกิจกรรม*/

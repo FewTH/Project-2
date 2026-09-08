@@ -315,6 +315,13 @@ if (numbertime){
 
         if(time <= 0){
             clearInterval(timeoffregister);
+
+            // เปิดปุ่มเริ่มสุ่มรางวัลทันทีที่หมดเวลา
+            const btnrandomreward = document.getElementById('btn_randomreward');
+            if(btnrandomreward){
+                btnrandomreward.disabled = false;
+            }
+
         }else{
             let hour = Math.floor(time / 3600);
             let minute = Math.floor ((time % 3600) / 60);
@@ -343,7 +350,7 @@ if (numbertime){
     }, 1000);
 }
 
-
+//ปุ่มกดเปิดpopup ปิด Register
 const offRegister = document.getElementById('off_Register');
 
 if(offRegister){
@@ -352,6 +359,7 @@ if(offRegister){
     });
 }
 
+//ปุ่มกดปิดpopup ปิด Register
 const canceloffRegister = document.getElementById('cancel_offRegister');
 
 if(canceloffRegister){
@@ -361,6 +369,24 @@ if(canceloffRegister){
 }
 
 
+//ปุ่มกดเปิดpopip ลบกิจกรรม
+const deleteRegister = document.getElementById('delete_Register');
+
+if(deleteRegister){
+    deleteRegister.addEventListener('click', function(){
+        openDialog(document.getElementById('popup_deleteRegister'));
+    });
+}
+
+
+////ปุ่มกดปิดpopip ลบกิจกรรม
+const btncanceldeletion = document.getElementById('btn_canceldeletion');
+
+if(btncanceldeletion){
+    btncanceldeletion.addEventListener('click', function(){
+        closeDialog(document.getElementById('popup_deleteRegister'))
+    });
+}
 
 
 
