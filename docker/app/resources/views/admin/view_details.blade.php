@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
 </head>
 <body>
-        <!-- ชื่อผู้ใช้งาน -->
+<!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
         @if($user->profile_image)
@@ -91,7 +91,7 @@
             </form> 
         </dialog>
 
-            <a href="{{ url('admin/edit_activity') }}" class="edit-activity">
+            <a href="{{ route('admin.activity.editactivity', $event->event_id) }}" class="edit-activity">
                 <p class="message-edit-activity">แก้ไข</p>
             </a>
             <button type="button" class="offRegister" id="off_Register" >
@@ -122,7 +122,7 @@
             </form> 
         </dialog>
 
-
+        
             <div class="frameactivitytime">
                 <div class="frameactivitytime-1">
                     <div class="frmemsectionCreated">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <button href="{{ url('admin/random_reward') }}" class="btn-randomreward" id="btn_randomreward" data-url="{{ url('admin/random_reward/' . $event->event_id) }}" {{ $isexpired ? '' : 'disabled' }}>
+                <button type="button" class="btn-randomreward" id="btn_randomreward" data-url="{{ route('admin.random_reward', $event->event_id) }}" {{ $isexpired ? '' : 'disabled' }}>
                     <img src="{{ asset('admin/img/รูปถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล.png') }}" alt="รูปถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล" class="img-trophy">
                     <p class="messagestartrandom">เริ่มสุ่มรางวัล</p>
                     <img src="{{ asset('admin/img/รูปลูกศรของปุ่มเริ่มสุ่มรางวัล.png') }}" alt="รูปลูกศรของปุ่มเริ่มสุ่มรางวัล" class="img-arrowstartrandom">

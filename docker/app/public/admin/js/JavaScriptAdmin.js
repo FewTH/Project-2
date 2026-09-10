@@ -1,5 +1,4 @@
 //ส่วนของหน้า create_activity.blade.php
-
 //ปุ่มบวกลบตัวเลขลองเลือกของรางวัล
 function addnumberquantity(inputId, maxLimit){
     let inputid = document.getElementById(inputId);
@@ -8,7 +7,6 @@ function addnumberquantity(inputId, maxLimit){
         inputid.value = parseInt(inputid.value) + 1;
     }
 }
-
 function deletenumberquantity(inputId){
     let inputid = document.getElementById(inputId);
 
@@ -17,6 +15,7 @@ function deletenumberquantity(inputId){
     }
 }
 
+//ต้องกดปุ่มติ๊กถูกถึงจะเลือกของรางวัลได้
 function checkmarkbutton(rewardId){
     const checkbox = document.getElementById('active_' + rewardId);
     const qtyinput = document.getElementById('qty_' + rewardId);
@@ -25,6 +24,7 @@ function checkmarkbutton(rewardId){
         qtyinput.disabled = !checkbox.checked;
     }
 }
+
 
 
 //เอาไว้บอกว่าให้สร้าง html ให้เสร็จก่อนแล้วค่อยมาเรียกใช่ js
@@ -291,6 +291,63 @@ if (btncancelevaluation1){
 }
 
 
+//ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
+const framesearchactivity = document.getElementById('frame_search_activity');
+
+if(framesearchactivity){
+    framesearchactivity.addEventListener('keyup', function(){
+        const keyword = framesearchactivity.value.trim().toLowerCase();
+        const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
+
+        frameactivityassessment.forEach(function (card){
+            const headingname = card.querySelector('.headingactivity');
+            if (!headingname)
+                return;
+
+            const  headingname1 = headingname.textContent.trim().toLowerCase();
+
+            if(headingname1.includes(keyword)){
+                card.style.display = '';
+            }else{
+                card.style.display = 'none';
+            }
+        });
+
+    })
+}
+
+
+
+
+
+//ส่วนของหน้า create_activity.blade.php กับ edit_activity.blade.php
+//ปุ่มกดแสดงเพิ่มเติมและแสดงน้อยลงของรางวัล ในหน้า create_activity.blade.php และ edit_activity.blade.php
+const showmore = document.getElementById('show_more');
+const showless = document.getElementById('show_less');
+
+if(showmore && showless){
+    showmore.addEventListener('click', function(){
+        const btnshowmore = document.querySelectorAll('.btn-showmore');
+
+        btnshowmore.forEach(function (showmore1){
+            showmore1.style.display = 'flex';
+        });
+        showmore.style.display = 'none';
+        showless.style.display = 'flex';
+    });
+
+    showless.addEventListener('click', function(){
+        const btnshowmore = document.querySelectorAll('.btn-showmore');
+        btnshowmore.forEach(function (showmore1){
+            showmore1.style.display = 'none';
+        });
+        showmore.style.display = 'flex';
+        showless.style.display = 'none';
+    });
+
+}
+
+
 
 
 
@@ -315,6 +372,7 @@ if (numbertime){
 
         if(time <= 0){
             clearInterval(timeoffregister);
+            numbertime.innerHTML = '00:00';
 
             // เปิดปุ่มเริ่มสุ่มรางวัลทันทีที่หมดเวลา
             const btnrandomreward = document.getElementById('btn_randomreward');

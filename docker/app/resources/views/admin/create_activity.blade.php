@@ -69,7 +69,7 @@
                 <p class="messagecreateactivity-1">สร้างกิจกรรม</p>
                 <span class="create-QR">สร้าง QR แล้วให้ผู้เข้าร่วม scan ลงทะเบียนในงานได้เลย</span>
             </div>
-            <form id="frame_blackactivity_1" action="{{ route('admin.create_activity') }}" method="POST">
+            <form id="frame_blackactivity_1" action="{{ route('admin.create_activity.store') }}" method="POST">
                 @csrf
             <div class="frameblackactivity">
                 <div class="framesettings">
@@ -82,6 +82,10 @@
                     </div>
                     <input type="text" name="title" class="framepimactivity-nam" value="{{ old('title') }}" placeholder="กรอกชื่อกิจกรรม" id="frame_pim_activitynam">
                 </label>
+                @error(('title'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
+
                 <div class="framemessagedatetime">
                     <p class="dateactivity">วันที่จัดกิจกรรม <span class="asteriskdateactivity">*</span></p>
                     <p class="closingtime-Register">เวลาปิด Register <span class="asteriskdateactivity">*</span></p>
@@ -90,12 +94,27 @@
                     <input type="date" name="event_date" value="{{ old('event_date') }}" class="framedatemonthyear" id="framedate_month_year">
                     <input type="time" name="register_close_time" value="{{ old('register_close_time')}}" class="framedatemonthyear" id="time_offregister">
                 </div>
+                <div class="savesuccesschangepassword-error-1-1">
+                @error(('event_date'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
+                @error(('register_close_time'))
+                    <div class="savesuccesschangepassword-error-2">{{ $message }}</div>
+                @enderror
+                </div>  
                 <div class="framechoosereward-1">
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
                 </div>
 
+                @error(('rewards'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
+                @error(('rewards.*.qty'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
+
                 @foreach($rewards as $reward)
-                <div class="framebtn-chooserewardall">
+                <div class="framebtn-chooserewardall {{ $loop->index >= 8? 'btn-showmore' : '' }}">
                     <div class="framechooserewardall">
                         <div class="framemessage2">
                             <p class="messagepencil">{{ $reward->name }}</p>
@@ -107,7 +126,7 @@
                             <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
                                 <p class="btndelet-10">-</p>
                             </button>
-                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}" disabled>
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1"  max="{{ $reward->quantity_reward }}" disabled>
                             <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
                             <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})">
                         </div>
@@ -116,13 +135,20 @@
                 @endforeach
 
                     <button type="button" class="showmore" id="show_more">
-                        <p class="messageshowmore">แสดงเพิ่มเติม</p>
+                        <p class="messageshowmore" >แสดงเพิ่มเติม</p>
+                    </button>
+                    <button type="button" class="showmore-1" id="show_less" >
+                        <p class="messageshowmore">แสดงน้อยลง</p>
                     </button>
 
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
                     <input type="number" name="max_participants" value="{{ old('max_participants', 1)}}" class="framenumberquantity" id="frame_number_quantity">
                 </div>
+                @error(('max_participants'))
+                 <div class="savesuccesschangepassword-error-1-2-3">{{ $message }}</div>
+                @enderror
+
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
                     <p class="messagebuildandQR">สร้างกิจกรรมและ QR code</p>

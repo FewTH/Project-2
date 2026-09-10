@@ -16,7 +16,7 @@ return new class extends Migration
             $wheelitem->foreignId('reward_id')
                 ->constrained('reward', 'reward_id')
                 ->onDelete('cascade');
-            $wheelitem->integer('quantity_selected')->default(1); // จำนวนที่ใส่เข้าวงล้อ
+            $wheelitem->integer('quantity_selected')->default(1); 
             $wheelitem->timestamps();
         });
     }

@@ -144,6 +144,8 @@ if (numbertime){
 
         if(time <= 0){
             clearInterval(timeoffregister);
+            numbertime.innerHTML = '00:00';
+
         }else{
             let hour = Math.floor(time / 3600);
             let minute = Math.floor ((time % 3600) / 60);

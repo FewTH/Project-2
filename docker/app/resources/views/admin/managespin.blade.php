@@ -27,23 +27,11 @@
     <div class="main-spn-box">
         <div class="reward-spn-list">
             {{-- ช่องค้นหารางวัล --}}
-            <div class="search-btn-box">
+            <div class="search-box-spn">
                 <input type="text" class="search-spn-input">
-                <img src="{{ asset('admin/img/search.png')}}" alt="รูปแว่นขยาย">
+                <img src="{{ asset('admin/img/search.png')}}" class="search-spn-icon" alt="รูปแว่นขยาย">
             </div>
             <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
-        {{-- dropdownของหน้ารางวัล --}}
-        {{-- <div class="dropdown-spn-cate">
-            <label for="category-spn-re" class="cate-spn-re"></label>
-            <select class="category_list_02" name="category_id" id="category_list">
-                <option value="">หมวดหมู่</option>
-                @foreach
-                <option value="{{$categories->category_id}}" {{old('category_id') == $category->category_id ? 'selected': ''}}>
-                    {{$category->name}}
-                </option>
-                @endforeach
-            </select>
-        </div> --}}
         {{-- หัวข้อด้านบน --}}
         <div class="topic-spn-list">
             <h4 class="spn-name">ชื่อรางวัล</h4>
@@ -54,10 +42,22 @@
         <div class="reward-list-name">
     <!-- รายการของรางวัลชิ้นที่ 1 -->
     @forelse($rewards as $reward)
-        <div class="reward-wheel-1">
-            <h3 class="name_re1">{{ $reward->name }}</h3>
-            <h3 class="rate_re1">{{ $reward->rate }}</h3>
-            <h3 class="quantity_re1">{{ $reward->quantity_reward }}</h3>
+        <div class="reward-wheel-1" 
+         data-id="{{ $reward->reward_id }}" 
+         data-name="{{ $reward->name }}" 
+         data-rate="{{ $reward->rate }}">
+        <span class="name_re1">{{ $reward->name }}</span>
+        <span class="rate_re1">{{ $reward->rate }}%</span>
+        <span class="quantity_re1">{{ $reward->quantity_reward }}</span>
+
+            {{-- ปุ่มเพิ่มกับลดจำนวนของรางวัล --}}
+            <div class="select-re-qnty">
+                <button type="button" class="qnty-plus">+</button>
+                <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
+                <button type="button" class="qnty-minus">-</button>
+                <input type="checkbox" class="reward-check-box" id="reward-{{$reward->reward_id}}">
+                <label for="reward-{{$reward->reward_id}}" class="checkbx-reward"></label>
+            </div>
         </div>
     @empty
         <div class="no-data">
@@ -65,17 +65,19 @@
         </div>
     @endforelse
     </div>
-        </div>
-        {{-- วงล้อสุ่ม --}}
+        <button type="button" class="claerall-selected" id="clearAllselected" disabled>ล้างทั้งหมด</button>
+    </div>
+    
+    {{-- วงล้อสุ่ม --}}
     <div class="main-wheel-spn">
         <div class="spn-wheel-topic">
             <h4>วงล้อสุ่มรางวัล</h4>
             {{-- ตัวนับจำนวนราง --}}
-             <span>จำนวนของรางวัล <span id="selectedCount">0</span> รายการ</span>
+             <span>จำนวนของรางวัล <span id="slected-count">0</span> รายการ</span>
         </div>
         {{-- ตัววงล้อ --}}
         <div class="wheel-spn-main">
-            <canvas id="wheel-spn-reward"></canvas>
+            <canvas id="wheel-spn-reward" width="500" height="500"></canvas>
         </div>
         {{-- ปุ่มบันทึกกับลบ --}}
         <div class="btn-manage-wheel">
@@ -123,5 +125,6 @@
         </a>
     </div>
 </div>
+<script src="{{ asset('admin/js/managespin.js') }}"></script>
 </body>
 </html>

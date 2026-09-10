@@ -101,17 +101,16 @@
 
         <div class="frame-search-activity">
             <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
-            <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-btn-activity" id="img_btn_activity">
         </div>
 
     <div class="card-Container" id="cardContainer">
         @forelse($events as $event)
-        <div class="frame-activity-assessment" data-status="{{ $event->status === 'open' ? 'open' : 'closed' }}">
+        <div class="frame-activity-assessment" data-status="{{ $event->isexpired ? 'closed' : 'open' }}">
             <div class="framecontentactivity">
                 <h4 class="headingactivity">{{ $event->title }}</h4>
                 <div class="frameclosed">
                     <p class="pointclosed"></p>
-                    <span class="closed" >{{ $event->status === 'open' ? 'เปิดอยู่' : 'ปิด' }}</span>
+                    <span class="closed" >{{ $event->isexpired ? 'ปิด' : 'เปิดอยู่' }}</span>
                 </div>
             </div>
             <p class="messagecreationtime">สร้างเมื่อ {{ $event->created_at->format('d M Y') }} · ปิด Register {{ \Carbon\Carbon::parse($event->register_close_at)->format('d M Y') }}</p>
@@ -143,14 +142,13 @@
         </div>
         @endforelse
     </div>
-
-
+</div>
+    
 <!--กรอบของแบบประเมิน-->
 <div class="frame-evaluation" id="frame_evaluation">
     <div class="frame-search-activity-1">
         <div class="search-activity-1">
         <input type=text class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน">
-        <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-btn-activity-2" id="img_btn_activity_1">
         </div>
         <div class="framealloffon-assessment">
             <button class="frameall-assessment active" id="frameall_assessment">
@@ -177,7 +175,7 @@
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">
 
-    <template id="Assessmentopen1">
+
         <div class="sectionassessment" data-status="open" data-random="false">
             <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
             <div class="frameinformation-assessment">
@@ -193,7 +191,7 @@
                 </div>
             </div>
         </div>
-    </template>
+    
     
     <template id="Assessmentopen1">
         <button class="assessment-open-1">

@@ -58,8 +58,8 @@ Route::prefix('admin')->group(function () {
     // ระบบจัดการกิจกรรม
     Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
 
-    Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity.show');
-    Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity');
+    Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
+    Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
     // Route::get('/managereward', function () {
     //     return view('admin.managereward');
@@ -69,9 +69,10 @@ Route::prefix('admin')->group(function () {
     //     return view('admin.addreward');
     // });
 
-    Route::get('/view_details/{id}', [ActivityController::class, 'show'])->name('admin.activity.detail');
+    Route::get('/view_details/{id}', [ActivityController::class, 'showviewdetails'])->name('admin.activity.detail');
     Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');
     Route::delete('/activity/{event}', [ActivityController::class, 'deletedata'])->name('admin.activity.deletedata');
+
 
     Route::get('/managespin', [WheelController::class, 'index']);
 
@@ -83,9 +84,8 @@ Route::prefix('admin')->group(function () {
         return view('admin.history_random');
     });
 
-     Route::get('/edit_activity', function () {
-        return view('admin.edit_activity');
-    });
+    Route::get('/edit_activity/{id}', [ActivityController::class, 'editactivity'])->name('admin.activity.editactivity');
+    Route::put('/edit_activity/{id}', [ActivityController::class, 'updateactivity'])->name('admin.activity.updateactivity');
 
     Route::get('/random_reward/{id}', [ActivityController::class, 'randomReward'])->name('admin.random_reward');
 

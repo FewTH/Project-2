@@ -68,7 +68,9 @@
                 <p class="messagecreateactivity-1">แก้ไขกิจกรรม</p>
                 <span class="create-QR">สร้าง QR แล้วให้ผู้เข้าร่วม scan ลงทะเบียนในงานได้เลย</span>
             </div>
-            <form id="frame_blackactivity_1">
+            <form id="frame_blackactivity_1" action="{{ route('admin.activity.updateactivity', $event->event_id) }}" method="POST">
+                @csrf
+                @method('PUT')
             <div class="frameblackactivity">
                 <div class="framesettings">
                     <p class="messagesettings">ตั้งค่ากิจกรรม</p>
@@ -78,22 +80,26 @@
                     <div class="activity-name-1">
                         <p class="messageactivity-name">ชื่อกิจกรรม <span class="asteriskactivity">*</span></p>
                     </div>
-                    <input type="text" class="framepimactivity-nam" placeholder="กรอกชื่อกิจกรรม" id="frame_pim_activitynam">
+                    <input type="text" name="title" class="framepimactivity-nam" value="{{ old('title', $event->title) }}" id="frame_pim_activitynam">
                 </label>
                 <div class="framemessagedatetime">
                     <p class="dateactivity">วันที่จัดกิจกรรม <span class="asteriskdateactivity">*</span></p>
                     <p class="closingtime-Register">เวลาปิด Register <span class="asteriskdateactivity">*</span></p>
                 </div>
                 <div class="frameweardate">
-                    <input type="date" class="framedatemonthyear" id="framedate_month_year">
-                    <input type="time" class="framedatemonthyear" id="time_offregister">
+                    <input type="date" name="event_date" value="{{ old('event_date', \Carbon\Carbon::parse($event->register_close_at)->format('Y-m-d')) }}" class="framedatemonthyear" id="framedate_month_year">
+                    <input type="time" name="register_close_time" value="{{ old('register_close_time', \Carbon\Carbon::parse($event->register_close_at)->format('H:i')) }}" class="framedatemonthyear" id="time_offregister">
                 </div>
                 <div class="framechoosereward-1">
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
                 </div>
 
-                @foreach($rewards as $reward)
-                <div class="framebtn-chooserewardall">
+                 @foreach($rewards as $reward)
+                @php
+                    $isSelected = isset($selectedrewards[$reward->reward_id]);
+                    $selectedQty = $selectedrewards[$reward->reward_id] ?? 1;
+                @endphp
+                <div class="framebtn-chooserewardall {{ $loop->index >= 8? 'btn-showmore' : '' }}">
                     <div class="framechooserewardall">
                         <div class="framemessage2">
                             <p class="messagepencil">{{ $reward->name }}</p>
@@ -105,21 +111,24 @@
                             <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
                                 <p class="btndelet-10">-</p>
                             </button>
-                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}">
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}" {{ $isSelected ? '' : 'disabled' }} >
                             <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
-                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" name="reward[{{ $reward->reward_id }}][active]" value="1">
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $isSelected ? 'checked' : '' }}>
                         </div>
                     </div>
                 </div>
                 @endforeach
 
                     <button type="button" class="showmore" id="show_more">
-                        <p class="messageshowmore">แสดงเพิ่มเติม</p>
+                        <p class="messageshowmore" >แสดงเพิ่มเติม</p>
+                    </button>
+                    <button type="button" class="showmore-1" id="show_less" >
+                        <p class="messageshowmore">แสดงน้อยลง</p>
                     </button>
 
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
-                    <input type="number" value="1" class="framenumberquantity" id="frame_number_quantity">
+                    <input type="number" name="max_participants"  value="{{ old('max_participants', $event->max_participants) }}" class="framenumberquantity" id="frame_number_quantity">
                 </div>
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
