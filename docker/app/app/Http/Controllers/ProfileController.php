@@ -24,11 +24,13 @@ class ProfileController extends Controller
         return view('user.profile', ['user' => $this->getUser()]);
     }
 
+    //แสดงข้อมูลหน้าแก้ไขข้อมูล user
     public function userEditForm()
     {
         return view('user.edit_information', ['user' => $this->getUser()]);
     }
 
+    //แสดงข้อมูลหน้าเปลี่ยนรหัสผ่าน user
     public function userchangePassword()
     {
         return view('user.change_password', ['user' => $this->getUser()]);
@@ -36,33 +38,40 @@ class ProfileController extends Controller
 
 
     //ส่วนของ admin
+    //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ admin
     public function adminProfile()
     {
         return view('admin.profile', ['user' => $this->getUser()]);
     }
 
+    //แสดงข้อมูลหน้าแก้ไขข้อมูล admin
     public function adminEditForm()
     {
 
         return view('admin.edit_information', ['user' => $this->getUser()]);
     }
 
+     //แสดงข้อมูลหน้าเปลี่ยนรหัสผ่าน admin
     public function adminchangePassword()
     {
         return view('admin.change_password', ['user' => $this->getUser()]);
     }
 
+
     //ส่วนของ manager
+    //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ manager
     public function managerProfile()
     {
         return view('manager.profile',['user' => $this->getUser()]);
     }
 
+    //แสดงข้อมูลหน้าแก้ไขข้อมูล manager
     public function managerEditForm()
     {
         return view('manager.edit_information', ['user' => $this->getUser()]);
     }
 
+    //แสดงข้อมูลหน้าเปลี่ยนรหัสผ่าน manager
     public function managerchangePassword()
     {
         return view('manager.change_password', ['user' => $this->getUser()]);

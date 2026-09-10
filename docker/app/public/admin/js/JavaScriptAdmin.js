@@ -296,6 +296,7 @@ const framesearchactivity = document.getElementById('frame_search_activity');
 
 if(framesearchactivity){
     framesearchactivity.addEventListener('keyup', function(){
+        
         const keyword = framesearchactivity.value.trim().toLowerCase();
         const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
 

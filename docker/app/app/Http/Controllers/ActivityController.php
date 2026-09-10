@@ -60,24 +60,22 @@ class ActivityController extends Controller
         $event = $this->getEvent($eventId);
 
         // เช็คว่ากิจกรรมหมดเวลาไปแล้วหรือยัง ใช้แบบเดียวกับหน้า view_details
-        $isexpired = $event->status !== 'open' || Carbon::now()->greaterThanOrEqualTo(Carbon::parse($event->register_close_at));
+        $now = Carbon::now();
+        $closeat = Carbon::parse($event->register_close_at);
+
+        $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
 
         // ถ้าปิดไปแล้ว ไม่ให้เข้าหน้าแก้ไข ส่งกลับไปหน้ารายละเอียด
         if ($isexpired) {
-            return redirect()
-                ->route('admin.activity.detail', $event->event_id);
+            return redirect()->route('admin.activity.detail', $event->event_id);
         }
 
 
         //ดึงของรางวัลที่เลือกไว้แล้ว เอาไปติ๊กในหน้าแก้ไขกิจกรรมอัตโนมัติ ของหน้าedit_activity
         $selectedrewards = $event->wheel
-            ? $event->wheel->rewards->pluck('pivot.quantity_selected', 'reward_id')->toArray()
-            : [];
+            ? $event->wheel->rewards->pluck('pivot.quantity_selected', 'reward_id')->toArray(): [];
 
-        return view('admin.edit_activity',[
-            'event' => $event,
-            'selectedrewards' => $selectedrewards,
-        ]);
+        return view('admin.edit_activity',['event' => $event,'selectedrewards' => $selectedrewards,]);
     }
 
 
@@ -108,24 +106,19 @@ class ActivityController extends Controller
         foreach ($data['rewards'] as $rewardId => $item) {
             $reward = Reward::find($rewardId);
 
-            // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน (กัน error ตอนอ้าง $reward->name)
+            // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน กัน error ตอนอ้าง $reward->name
             if (!$reward) {
-                return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"
-                ])->withInput();
+                return back()->withErrors(["rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"])->withInput();
             }
 
-            // หากจำนวนที่เลือกเกินจำนวนที่มีให้ส่งกลับมาพร้อม Error ของหน้าcreate_activity
+            // หากจำนวนที่เลือกเกินที่มีให้ส่งกลับมาพร้อม Error ของหน้าcreate_activity
             if ($item['qty'] > $reward->quantity_reward) {
-                return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"
-                ])->withInput();
+                return back()->withErrors(["rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"])->withInput();
             }
         }
 
         // รวมวันและเวลาปิดลงทะเบียน ของหน้าcreate_activity
         $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
-
         // ลบ key ออกจาก $data ก่อนบันทึกลงตาราง events ของหน้าcreate_activity
         unset($data['rewards'], $data['event_date'], $data['register_close_time']);
 
@@ -141,9 +134,7 @@ class ActivityController extends Controller
             
             // ผูกของรางวัลเข้ากับวงล้อ ของหน้าcreate_activity
             foreach ($request->input('rewards', []) as $rewardId => $item) {
-                $wheel->rewards()->attach($rewardId, [
-                    'quantity_selected' => $item['qty'],
-                ]);
+                $wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty'],]);
             }
 
             // บันทึกและ return Event ลง database ของหน้าcreate_activity
@@ -157,9 +148,8 @@ class ActivityController extends Controller
             ]);
         });
 
-        // เปลี่ยนไปหน้ารายละเอียดกิจกรรมเมื่อทำเสร็จ ของหน้าcreate_activity
-        return redirect()
-            ->route('admin.activity.detail', $event->event_id);
+        // เปลี่ยนไปหน้ารายละเอียดกิจกรรมview_detailsเมื่อทำเสร็จ ของหน้าcreate_activity
+        return redirect()->route('admin.activity.detail', $event->event_id);
     }
 
     
@@ -170,11 +160,13 @@ class ActivityController extends Controller
         $event = $this->getEvent($eventId);
 
         // กันเหนียวอีกชั้น เผื่อมีคนเปิดฟอร์มค้างไว้แล้วกิจกรรมหมดเวลาไปแล้วระหว่างนั้น
-        $isexpired = $event->status !== 'open' || Carbon::now()->greaterThanOrEqualTo(Carbon::parse($event->register_close_at));
+        $now = Carbon::now();
+        $closeat = Carbon::parse($event->register_close_at);
+
+        $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
 
         if ($isexpired) {
-            return redirect()
-                ->route('admin.activity.detail', $event->event_id);
+            return redirect()->route('admin.activity.detail', $event->event_id);
         }
 
         $data = $request->validate([
@@ -233,15 +225,13 @@ class ActivityController extends Controller
                 $event->wheel->rewards()->detach();
 
                 foreach ($request->input('rewards', []) as $rewardId => $item) {
-                    $event->wheel->rewards()->attach($rewardId, [
-                        'quantity_selected' => $item['qty'],
+                    $event->wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty'],
                     ]);
                 }
             }
         });
 
-        return redirect()
-            ->route('admin.activity.detail', $event->event_id);
+        return redirect()->route('admin.activity.detail', $event->event_id);
     }
 
 
@@ -263,10 +253,7 @@ class ActivityController extends Controller
 
         $remainingseconds = $isexpired ? 0 : (int) $now->diffInSeconds($closeat);
 
-        return view('admin.view_details',[
-            'event' => $event,
-            'remainingseconds' => $remainingseconds,
-            'isexpired' => $isexpired,
+        return view('admin.view_details',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,
         ]);
             
     }
@@ -289,8 +276,7 @@ class ActivityController extends Controller
             $event->delete();
         });
         
-        return redirect()
-        ->route('admin.assessment');
+        return redirect()->route('admin.assessment');
     }
 
 
@@ -302,11 +288,10 @@ class ActivityController extends Controller
 
         // สร้างชื่อไฟล์จากชื่อกิจกรรม แปลงอักขระที่ไม่เหมาะสมออกกันปัญหาไฟล์เสีย
         $safeTitle = preg_replace('/[^\p{L}\p{N}_\-]/u', '_', $event->title);
-        $filename = '' . $safeTitle . '.png';
+        $filename = 'QRCode-' . $safeTitle . '.png';
 
         return response(QrCode::format('png')->size(600)->generate($url))
-            ->header('Content-Type', 'image/png')
-            ->header('Content-Disposition', 'attachment; filename="qrcode-' . $filename . '"');
+        ->header('Content-Type', 'image/png')->header('Content-Disposition', 'attachment; filename='. $filename .'');
     }
 
 
