@@ -207,8 +207,8 @@
                     <div class="framedateorganize">
                         <p class="messagedateorganize">รายการรางวัลทั้งหมด</p>
                         <span class="dateorganize"> 
-                            @foreach($event->wheel->rewards as $reward)
-                            {{ $reward->name }} {{ $reward->pivot->quantity_selected }}{{ !$loop->last ? ', ' : '' }}
+                            @foreach($event->wheel->rewards as $index => $reward)
+                                {{ $index + 1 }}.{{ $reward->name }} {{ $reward->pivot->quantity_selected }} ชิ้น {{ number_format($reward->rate , 1) }}% {{ !$loop->last ? ', ' : '' }}
                             @endforeach
                         </span>
                     </div>

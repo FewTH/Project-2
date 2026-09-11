@@ -93,15 +93,18 @@
             <h1 class="open-assessment-1" id="open_assessment_1">1</h1>
             <p class="open-assessment-2">เปิดอยู่</p>
         </div>
-        <div class="btn-build-activityurgent">
-            <a href="{{ url('admin/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
-        </div>
-        
+      
     </div>
 
+
+    <div class="frame-search-activity-2">
         <div class="frame-search-activity">
             <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
         </div>
+          <div class="btn-build-activityurgent">
+            <a href="{{ url('admin/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
+        </div>
+    </div>
 
     <div class="card-Container" id="cardContainer">
         @forelse($events as $event)

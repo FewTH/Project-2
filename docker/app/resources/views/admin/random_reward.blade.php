@@ -124,7 +124,7 @@
         <div class="framesectionluckywinner">
             <div class="sectionluckywinner">
             <img src="{{ asset('admin/img/รูปของหัวข้อผู้โชคดีล่าสุด.png') }}" alt="รูปของหัวข้อผู้โชคดีล่าสุด" class="img-sectionluckywinner">
-            <p class="messagesectionluckywinner">ผู้โชคดีล่าสุด 6 คน</p>
+            <p class="messagesectionluckywinner">ผู้โชคดีล่าสุด 6คน</p>
             </div>
 
             <hr class="linesectionluckywinner">
@@ -157,25 +157,17 @@
                 <img src="{{ asset('admin/img/รูปของโอกาสออกของรางวัล.png') }}" alt="รูปของโอกาสออกของรางวัล" class="img-sectionchanceleavereward">
                 <p class="messagesectionchanceleavereward">โอกาสออกของรางวัล</p>
             </div>
-            <hr class="linesectionluckywinner">
-
+            <hr class="linesectionluckywinner-1">
+            @foreach($event->wheel->rewards as $reward)
             <div class="framenameprizes">
                 <div class="pointnameprefixreward"></div>
-                <p class="messagenameprizes">ดินสอ</p>
+                <p class="messagenameprizes">{{ $reward->name }}</p>
                 <div class="percentnameprizes-1">
-                    <span class="percentnameprizes">50%</span>
+                    <span class="percentnameprizes">{{ number_format($reward->rate , 1) }}%</span>
                 </div>
             </div>
             <hr class="linesectionluckywinner-1">
-
-            <div class="framenameprizes">
-                <div class="pointnameprefixreward"></div>
-                <p class="messagenameprizes">ยางลบ</p>
-                <div class="percentnameprizes-1">
-                    <span class="percentnameprizes">40%</span>
-                </div>
-            </div>
-            <hr class="linesectionluckywinner-1">
+            @endforeach
         </div>
     </div>
 

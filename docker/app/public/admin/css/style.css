@@ -340,7 +340,7 @@
   /*กรอบรวมของผู้ใช้ ทำแบบประเมิน สุ่มทั้งหมด รอรับของขวัญ*/
   .alluser_frames-1{
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     width: 100%;
     min-width: 950px;
     margin-top: 30px;
@@ -350,7 +350,7 @@
   /*กรอบของผู้ใช้*/
   .alluser_frames{
     background-color: #fdfbf5;
-    width: 330px;
+    flex: 1 1 330px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -378,7 +378,7 @@
   /*กรอบของผู้ทำแบบประเมิน*/
   .assessmentframe{
     background-color: #fdfbf5;
-    width: 330px;
+    flex: 1 1 330px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -406,7 +406,7 @@
   /*กรอบของสุ่มทั้งหมด*/
   .randomall{
     background-color: #fdfbf5;
-    width: 330px;
+    flex: 1 1 330px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -434,7 +434,7 @@
   /*กรอบของรอรับของขวัญ*/
   .framewaitreceiveaward{
     background-color: #fdfbf5;
-    width: 330px;
+    flex: 1 1 330px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -463,12 +463,11 @@
   /*กรอบของกราฟ*/
   .chart-wrap{
     background-color: #fdfbf5;
-    flex: 2;
+    flex: 1 1 650px;
     height: 580px;
     margin-top: 100px;
     border-radius: 15px;
     box-shadow: 0 8px 14px rgba(0,0,0,0.22);
-    min-width: 680px;
   }
 
 
@@ -486,7 +485,7 @@
   /*กอรบของขวัญยอดนิยม*/
   .framesmost_popular{
     background-color: #fdfbf5;
-    min-width: 675px;
+    flex: 1 1 650px;
     height: 580px;
     border-radius: 20px;
     margin-top: 100px;
@@ -580,6 +579,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: auto;
     width: 330px;
   }
 
@@ -672,6 +672,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: auto;
     width: 330px;
   }
 
@@ -763,10 +764,11 @@
 
   /*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เช็นหนังสือ*/
   .black-frame-book-1{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 310px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: auto;
+    width: 310px;
   }
 
 
@@ -861,6 +863,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-left: auto;
     width: 305px;
   }
 
@@ -1958,12 +1961,15 @@
     display: block;
   }
 
+
   /*กรอบของกิจกรรมทั้งหมดจนถึงปุ่มสร้างกิจกรรมด่วน*/
   .activity-Closed-Open{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     padding: 30px 30px 0px 50px;
-    gap: 60px;
+    width: 100%;
+    gap: 20px;
   }
 
   /*กรอบของตัวเลขกิจกรรมทั้งหมด*/
@@ -1971,7 +1977,7 @@
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
     border-radius: 15px;
-    width: 300px;
+    flex: 1 1 300px;
     height: 140px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
@@ -2002,7 +2008,7 @@
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
     border-radius: 15px;
-    width: 300px;
+    flex: 1 1 300px;
     height: 140px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
@@ -2033,7 +2039,7 @@
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
     border-radius: 15px;
-    width: 300px;
+    flex: 1 1 300px;
     height: 140px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
@@ -2063,7 +2069,6 @@
   .btn-build-activityurgent{
     position: relative;
     margin-left: auto;
-    margin-bottom: auto;
     background-color: #a8731d;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -2113,14 +2118,20 @@
     padding: 0px 10px 0px 0px;
   }
 
+  .frame-search-activity-2{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 30px 10px 50px;
+    top: 10px;
+  }
+
   /*กรอบของค้นหารายชื่อกิจกรรม*/
   .frame-search-activity{
     position: relative;
     display: flex;
     align-items: center;
     background-color: #ffffff;
-    margin-left: 50px;
-    margin-top: 50px;
     width: 600px;
     border-radius: 15px;
     border: 2px solid #d39b00;
@@ -2175,7 +2186,7 @@
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
     width: 100%;
-    max-width: 700px;
+    flex: 1 1 600px;
     margin-left: 50px;
     margin-top: 40px;
     padding: 0px 15px 30px 20px;
@@ -2419,6 +2430,7 @@
     display: flex;
     grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
+    padding: 0px 40px 0px 0px;
   }
 
 
@@ -3323,8 +3335,10 @@
   .frame4frame{
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin-top: 30px;
     flex-wrap: wrap;
+    gap: 20px;
   }
 
   /*กรอบของลงทะเบียนแล้ว*/
@@ -3334,7 +3348,8 @@
     flex-direction: column;
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 25px 150px 0px 25px;
+    padding: 25px 0px 0px 25px;
+    flex: 1 1 200px;
     height: 120px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3360,9 +3375,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    flex: 1 1 200px;
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 25px 200px 0px 25px;
+    padding: 25px 0px 0px 25px;
     height: 120px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3388,9 +3404,10 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    flex: 1 1 200px;
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 25px 165px 0px 25px;
+    padding: 25px 0px 0px 25px;
     height: 120px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3418,7 +3435,8 @@
     flex-direction: column;
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 25px 135px 0px 25px;
+    padding: 25px 0px 0px 25px;
+    flex: 1 1 200px;
     height: 120px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3443,6 +3461,7 @@
   .frameQRcoderegisteractivity{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     margin-top: 30px;
     flex-wrap: wrap;
     gap: 20px;  
@@ -3453,7 +3472,7 @@
     border: 2px solid #d39b00;
     background-color: #FCF6E5;
     border-radius: 20px;
-    width: 640px;
+    flex: 1 1 400px;
     padding: 0px 20px 0px 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
@@ -3574,8 +3593,7 @@
     border: 2px solid #d39b00;
     background-color: #FCF6E5;
     border-radius: 20px;
-    width: 640px;
-    height: 500px;
+    flex: 1 1 400px;
     padding: 0px 20px 20px 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
@@ -3769,8 +3787,7 @@
   /*กรอบของคุมกรอบวงล้อสุ่มรายชื้อ กรอบวงล้อสุ่มของรางวัล ปุ่มสุ่มรางวัล*/
   .framesmallnameofwheel{
     background-color: #FCF6E5;
-    flex: 1 1 400px;
-    min-width: 400px;
+    flex: 1 1 500px;
     height: 700px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3842,6 +3859,7 @@
     background-color: #ccc;
     border-radius: 50px;
     transition: 0.3s;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.22);
   }
 
   /*เอฟเฟ็กต์วงกลมเอาไว้เลื่อนซ้ายขวา*/
@@ -3877,8 +3895,7 @@
   /*กรอบหัวข้อวงล้อสุ่มของรางวัล*/
   .framesmallrandomreward{
     background-color: #ff00d00c;
-    flex: 1 1 400px;
-    min-width: 400px;
+    flex: 1 1 500px;
     height: 700px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -3942,10 +3959,10 @@
     padding: 0px 80px;
     height: 75px;
     border-radius: 20px;
-    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
     cursor: pointer;
     gap: 10px;
     overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
 
   /*เอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/
@@ -3987,6 +4004,7 @@
   /*กรอบของผู้โชคดีล่าสุดกับโอกาสออกของรางวัล*/
   .frameluckywinner{
     display: flex;
+    align-items: flex-start;
     margin-top: 40px;
     width: 100%;
     gap: 40px;
@@ -3996,7 +4014,6 @@
   /*กรอบของผู้โชคดีล่าสุด*/
   .framesectionluckywinner{
     flex: 1 1 400px;
-    min-width: 400px;
     background-color: #fdfbf5;
     border: 2px solid #d39b00;
     padding: 10px 20px 15px 20px;
@@ -4073,7 +4090,6 @@
   /*กรอบของโอกาสออกของรางวัล*/
   .framechanceleavereward{
     flex: 1 1 400px;
-    min-width: 400px;
     background-color: #fdfbf5;
     border: 2px solid #d39b00;
     padding: 10px 20px 15px 20px;
@@ -4510,6 +4526,8 @@
     background-color: #FFFFFF;
     border: 3px solid #d39b00;
     width: 250px;
+    flex: 1 1 250px;
+    min-width: 250px;
     height:210px;
     border-radius: 10px;
     padding: 20px;
@@ -4528,7 +4546,8 @@
   .frameReward_Box {
     background-color: #ffffff;
     border: 3px solid #d39b00;
-    width: 250px;
+    flex: 1 1 250px;
+    min-width: 250px;
     height:210px;
     border-radius: 10px;
     padding: 20px;
@@ -4747,10 +4766,19 @@
     z-index: 1;
   }
 
+  .User_Information-1{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+  }
+  
   /*ข้อมูลผู้ใช้*/
   .User_Information {
     background-color: #fdfbf5;
-    flex: 3;
+    flex: 3 1 500px;
+    min-width: 500px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.22);
     border-radius: 15px;
     padding-bottom: 60px;
@@ -5055,8 +5083,9 @@
   /*เปลี่ยนรหัสผ่าน*/
   .Change_password {
     background-color: #fdfbf5;
-    flex: 2;
-    height: 370px;
+    flex: 2 1 350px;
+    min-width: 400px;
+    padding: 0px 0px 50px 0px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.22);
     border-radius: 15px;
     margin-top: 60px;
@@ -5662,11 +5691,9 @@
   .frame-grey-1{
     background-color: #fdfbf5;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1050px;
+    flex-direction: column; 
     border-radius: 20px;
-    padding: 10px 0px 30px 0px;
+    padding: 10px 150px 30px 150px;
     box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
   }
 
@@ -5674,6 +5701,7 @@
   .sectionassessment-1{
     font-size: 25px;
     font-weight: 800;
+    width: 100%;
   }
 
   /*กรอบของแบบประเมิน*/
@@ -5681,7 +5709,6 @@
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
     padding: 0px 30px 30px 30px;
-    width: 1000px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;

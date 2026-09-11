@@ -1206,9 +1206,9 @@ body.no-scroll {
 /*กรอบของสุ่มทั้งหมด*/
 .profile-right {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 15px;
-  align-items: center;
 }
 
 /*กล่องสุ่มทั้งหมด*/
@@ -1772,10 +1772,19 @@ body.no-scroll {
   z-index: 1;
 }
 
+.User_Information-1{
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+}
+  
 /*ข้อมูลผู้ใช้*/
 .User_Information {
-  background-color: #ffffff;
-  flex: 3;
+  background-color: #fdfbf5;
+  flex: 1 1 500px;
+  min-width: 500px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
   padding-bottom: 60px;
@@ -2102,8 +2111,9 @@ body.no-scroll {
 /*เปลี่ยนรหัสผ่าน*/
 .Change_password {
   background-color: #fdfbf5;
-  flex: 2;
-  height: 370px;
+  flex: 1 1 350px;
+  min-width: 400px;
+  padding: 0px 0px 60px 0px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
   margin-top: 60px;

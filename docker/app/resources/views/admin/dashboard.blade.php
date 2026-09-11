@@ -89,69 +89,69 @@
 
 <!--กรอบรวมของผู้ใช้ ทำแบบประเมิน สุ่ม รอรับของขวัญ-->
 <div class="alluser_frames-1">
-<!--กรอบผู้ใช้งานทั้งหมด-->
-<div class="alluser_frames">
-    <!--ผู้ใช้งานทั้งหมด-->
-    <div class="All_users">
-        <h4>ผู้ใช้ทั้งหมด</h4>
+    <!--กรอบผู้ใช้งานทั้งหมด-->
+    <div class="alluser_frames">
+        <!--ผู้ใช้งานทั้งหมด-->
+        <div class="All_users">
+            <h4>ผู้ใช้ทั้งหมด</h4>
+        </div>
+        <!--ตัวเลขบอกจำนวนคน-->
+        <div class="Userfigures">
+            <h2 id="user_figures">150</h2>
+        </div>
+        <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
+        <div class="Addnumbers_users">
+            <p id="add_numbers_users">↗ +38 คนวันนี้</p>
+        </div>
     </div>
-    <!--ตัวเลขบอกจำนวนคน-->
-    <div class="Userfigures">
-        <h2 id="user_figures">150</h2>
-    </div>
-    <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
-    <div class="Addnumbers_users">
-        <p id="add_numbers_users">↗ +38 คนวันนี้</p>
-    </div>
-</div>
 
-<!--กรอบการทำแบบประเมิน-->
-<div class="assessmentframe">
-    <!--ทำแบบประเมินแล้ว-->
-    <div class="frame">
-        <h4>ทำแบบประเมินแล้ว</h4>
+    <!--กรอบการทำแบบประเมิน-->
+    <div class="assessmentframe">
+        <!--ทำแบบประเมินแล้ว-->
+        <div class="frame">
+            <h4>ทำแบบประเมินแล้ว</h4>
+        </div>
+        <!--ตัวเลขบอกจำนวนแบบประเมินที่ทำแล้ว-->
+        <div class="Numberframe">
+            <h2 id="number_frame">120</h2>
+        </div>
+        <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
+        <div class="Addnumbers">
+            <p id="add_numbers">↗ +81 % ของผู้ใช้ทั้งหมด</p>
+        </div>
     </div>
-    <!--ตัวเลขบอกจำนวนแบบประเมินที่ทำแล้ว-->
-    <div class="Numberframe">
-        <h2 id="number_frame">120</h2>
-    </div>
-    <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
-    <div class="Addnumbers">
-        <p id="add_numbers">↗ +81 % ของผู้ใช้ทั้งหมด</p>
-    </div>
-</div>
 
-<!--กรอบสุ่มทั้งหมด-->
-<div class="randomall">
-    <!--สุ่มทั้งหมด-->
-    <div class="Random_all">
-        <h4>สุ่มทั้งหมด</h4>
+    <!--กรอบสุ่มทั้งหมด-->
+    <div class="randomall">
+        <!--สุ่มทั้งหมด-->
+        <div class="Random_all">
+            <h4>สุ่มทั้งหมด</h4>
+        </div>
+        <!--ตัวเลขสุ่ม-->
+        <div class="numberrandom">
+            <h2 id="Number_random">100</h2>
+        </div>
+        <!--ตัวเลขบอกการสุ่มเมื่อวานก่อน-->
+        <div class="numberotherday">
+            <p id="number_other_day">↗ +18 % เมื่อวานก่อน</p>
+        </div>
     </div>
-    <!--ตัวเลขสุ่ม-->
-    <div class="numberrandom">
-        <h2 id="Number_random">100</h2>
-    </div>
-    <!--ตัวเลขบอกการสุ่มเมื่อวานก่อน-->
-    <div class="numberotherday">
-        <p id="number_other_day">↗ +18 % เมื่อวานก่อน</p>
-    </div>
-</div>
 
-<!--กรอบรอรับของขวัญ-->
-<div class="framewaitreceiveaward">
-    <!--รอรับของขวัญ-->
-    <div class="waitreceiveaward">
-        <h4>รอรับของขวัญ</h4>
+    <!--กรอบรอรับของขวัญ-->
+    <div class="framewaitreceiveaward">
+        <!--รอรับของขวัญ-->
+        <div class="waitreceiveaward">
+            <h4>รอรับของขวัญ</h4>
+        </div>
+        <!--ตัวเลขรับของขวัญ-->
+        <div class="numberaward">
+            <h2 id="Number_award">35</h2>
+        </div>
+        <!--ต้องติดตามของขวัญที่ยังไม่ได้รับ-->
+        <div class="followaward" id="followaward_box">
+            <p id="Follow_award">1 ต้องติดตาม</p>
+        </div>
     </div>
-    <!--ตัวเลขรับของขวัญ-->
-    <div class="numberaward">
-        <h2 id="Number_award">35</h2>
-    </div>
-    <!--ต้องติดตามของขวัญที่ยังไม่ได้รับ-->
-    <div class="followaward" id="followaward_box">
-        <p id="Follow_award">1 ต้องติดตาม</p>
-    </div>
-</div>
 </div>
   <!--ชิ่อหัวข้อสุ่มรายวัน-->
 <div class="chart-wrap">
