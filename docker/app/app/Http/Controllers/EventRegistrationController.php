@@ -28,18 +28,10 @@ class EventRegistrationController extends Controller
         $now = Carbon::now();
         $closeat = Carbon::parse($event->register_close_at);
 
-        if ($event->status !== 'open') {
-            $isexpired = true;
-        } else {
-            $isexpired = $now->gte($closeat);
-        }
-
+        $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
+        $event->isexpired = $isexpired;
         $remainingseconds = $isexpired ? 0 : (int) $now->diffInSeconds($closeat);
-        return view('user.register_event',[
-            'event' => $event,
-            'remainingseconds' => $remainingseconds,
-            'isexpired' => $isexpired,
-        ]);
+        return view('user.register_event',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,]);
     }
 
     //บันทึกการลงทะเบียนเข้าร่วมกิจกรรม
@@ -70,7 +62,7 @@ class EventRegistrationController extends Controller
         ]);
 
 
-        //เปิด transaction เตรียมเช็คสถานะ+จำนวนคน
+        //การสร้างเซฟพอยต์เพื่อความปลอดภัยของข้อมูล
         DB::beginTransaction();
 
         try {

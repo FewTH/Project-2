@@ -2766,6 +2766,7 @@
     margin-right: 30px;
     text-decoration: none;
     border: 2px solid #D97757;
+    background: none;
     padding: 0px 40px;
     height: 50px;
     border-radius: 18px;
@@ -3751,17 +3752,387 @@
 
 
 
+  /*ส่วนของหน้า random_reward.blade.php*/
+  /*กรอบใหม่ปคุมทั้ง 2 วงล้อและปุ่มสุ่ม*/
+  .framebigofWheel{
+    background-color: #fdfbf5;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px 30px 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /*กรอบของคุมกรอบวงล้อสุ่มรายชื้อ กรอบวงล้อสุ่มของรางวัล ปุ่มสุ่มรางวัล*/
+  .framesmallnameofwheel{
+    background-color: #FCF6E5;
+    flex: 1 1 400px;
+    min-width: 400px;
+    height: 700px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบหัวข้อวงล้อสุ่มรายชื่อ*/
+  .framewheelname-quantityname{
+    display: flex;
+    align-items: center;
+    background-color: #F3D577;
+    border-radius: 20px;
+    padding: 0px 15px;
+    border-radius: 20px 20px 0 0;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ข้อความวงล้อสุ่มรายชื่อ*/
+  .messageframewheelname{
+    color: #6d4300;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*กรอบข้อความจำนวนของรายชื่อ*/
+  .messagequantityname-1{
+    margin-left: auto;
+  }
+
+  /*ข้อความจำนวนของรายชื่อ*/
+  .messagequantityname{
+    color: #6d4300;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  /*กรอบของปุ่มกับข้อความปิด/เปิดสุ่มรายชื่อ*/
+  .on-offlistnamesRandom{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0px 20px;
+    gap: 10px;
+  }
+
+  /*กรอบปุ่มปิดเปิด*/
+  .on-offlistnamesRandom-1{
+    position: relative;
+    display: inline-block;
+    width: 74px;
+    height: 34px;
+  }
+
+  /*ซ้อนปุ่มเก่าไม่ให้เห็น*/
+  .btn-on-offlistnamesRandom{
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /*พื้นหลังปุ่มปิด/เปิด*/
+  .on-offlistnamesRandom-2{
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0; 
+    bottom: 0;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 50px;
+    transition: 0.3s;
+  }
+
+  /*เอฟเฟ็กต์วงกลมเอาไว้เลื่อนซ้ายขวา*/
+  .on-offlistnamesRandom-2::before {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    height: 28px;
+    width: 28px;
+    left: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /*ตอนกดติ๊กเปิดจะเป็นสีเขียว*/
+  .btn-on-offlistnamesRandom:checked + .on-offlistnamesRandom-2 {
+    background-color: #2ecc71;
+  }
+
+  /*ความกว้างของปุ่มตอนกดเปิด*/
+  .btn-on-offlistnamesRandom:checked + .on-offlistnamesRandom-2::before {
+    transform: translateX(40px);
+  }
+
+  /*ข้อความปิด/เปิดสุ่มรายชื่อ*/
+  .messagebtn-on-offlistnamesRandom{
+    color: #6d4300;
+    font-size: 16px;
+  }
+
+  /*กรอบหัวข้อวงล้อสุ่มของรางวัล*/
+  .framesmallrandomreward{
+    background-color: #ff00d00c;
+    flex: 1 1 400px;
+    min-width: 400px;
+    height: 700px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
 
 
+  /*กรอบหัวข้อวงล้อสุ่มของรางวัล กับจำนวนของรายชื่อ*/
+  .framemessagerandomreward{
+    display: flex;
+    align-items: center;
+    background-color: #ff00d069;
+    border-radius: 20px;
+    padding: 0px 15px;
+    border-radius: 20px 20px 0 0;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
 
+  /*หัวข้อวงล้อสุ่มของรางวัล*/
+  .messagerandomreward{
+    color: #96007ad7;
+    font-size: 21px;
+    font-weight: 600;
+  }
 
+  /*กรอบของข้อความจำนวนของรายชื่อ*/
+  .messagequantityrandomreward-1{
+    margin-left: auto;
+  }
 
+  /*ข้อความจำนวนของรายชื่อ*/
+  .messagequantityrandomreward{
+    color: #96007ae5;
+    font-size: 18px;
+    font-weight: 500;
+  }
 
+  /*ข้อความปิด/เปิดสุ่มของรางวัล*/
+  .messagebtn-no-offrandomreward{
+    color: #96007ad7;
+    font-size: 16px;
+  }
 
+  /*กรอบของปุ่มสุ่มรางวัล*/
+  .btnstartRandomreward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 100%; 
+  }
 
+  /*ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward{
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-top: 10px;
+    background: none;
+    border: 3px solid #a37800;
+    padding: 0px 80px;
+    height: 75px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    gap: 10px;
+    overflow: hidden;
+  }
 
+  /*เอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward::before{
+    content: "";
+    background-color: rgba(150, 101, 22, 0.048);
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
 
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/  
+  .btn-startRandomreward:hover::before{
+    width: 600px;
+    height: 600px;
+  }
 
+  /*รูปของปุ่มกดสุ่มรางวัล*/
+  .img-btn-startRandomreward{
+    position: relative;
+    top: 5px;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มกดสุ่มรางวัล*/
+  .messagebtn-startRandomreward{
+    font-size: 25px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบของผู้โชคดีล่าสุดกับโอกาสออกของรางวัล*/
+  .frameluckywinner{
+    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  /*กรอบของผู้โชคดีล่าสุด*/
+  .framesectionluckywinner{
+    flex: 1 1 400px;
+    min-width: 400px;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 10px 20px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบหัวข้อผู้โชคดีล่าสุด*/
+  .sectionluckywinner{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*หัวข้อผู้โชคดีล่าสุด*/
+  .messagesectionluckywinner{
+    color: #8A5B10;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*เส้นระหว่างหัวข้อกับผู้โชคดี*/
+  .linesectionluckywinner{
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของชื่อผู้โชคดี*/
+  .framenameluckywinner{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*กรอบของเลขหน้าชื่อผู้โชคดี*/
+  .framenumberluckywinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d39b00;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  /*เลขหน้าชื่อผู้โชคดี*/
+  .framenumberluckywinner-1{
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  /*ข้อความชื่อผู้โชคดี*/
+  .nameluckywinner{
+    font-size: 18px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
+  /*กรอบข้อความของรางวัล*/
+  .framePrizes{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    background-color: #a8731d;
+    padding: 0px 20px;
+    height: 35px;
+    border-radius: 30px;
+  }
+
+  /*ข้อความของรางวัล*/
+  .rawardname{
+    color: #ffffff;
+  }
+
+  /*กรอบของโอกาสออกของรางวัล*/
+  .framechanceleavereward{
+    flex: 1 1 400px;
+    min-width: 400px;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 10px 20px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบหัวข้อของโอกาสออกของรางวัล*/
+  .sectionchanceleavereward{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*หัวข้อของโอกาสออกของรางวัล*/
+  .messagesectionchanceleavereward{
+    color: #8A5B10;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*กรอบชื่อของรางวัล*/
+  .framenameprizes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  /*จุดหน้าชื่อของรางวัล*/
+  .pointnameprefixreward{
+    background-color: #C1440E;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+  }
+  
+  /*ชื่อของรางวัล*/
+  .messagenameprizes{
+    font-size: 18px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
+  /*กรอบเปอร์เช็นของรางวัล*/
+  .percentnameprizes-1{
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  /*ตัวเลขเปอร์เช็นของรางวัล*/
+  .percentnameprizes{
+    font-size: 18px;
+    color: #5381EC;
+    font-weight: 600;
+  }
+
+  .linesectionluckywinner-1{
+    border: 1px solid #d39b00;
+    margin-top: -4px;
+  }
 
 
 
@@ -6951,7 +7322,11 @@
     margin-bottom: 20px;
     margin-right: 20px
   }
-
+/* แต่งป็อปอัพของหน้าจัดการวงล้อ */
+.pop-up-background{
+  display: flex;
+  justify-content: center;
+}
 
 
 

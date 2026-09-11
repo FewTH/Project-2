@@ -87,6 +87,23 @@
     </div>
     </div>
     
+    {{-- ส่วนป็อบอัพ --}}
+    <div class="pop-up-background">
+        <div class="header-popup-spn">
+            <img src="{{asset('admin/img/โลโก้รางวัลป็อปอัป.png')}}" alt="โลโก้รางวัลป็อปอัป">
+            <span>เพิ่มวงล้อรางวัลไปยังแบบประเมิน</span>
+        </div>
+        <div class="wheel-name">
+            <h4 class="topic-wheel-sub">วงล้อที่สร้างใหม่</h4>
+        </div>
+        <div class="topic-assess">
+            <span>รายการแบบประเมิน</span>
+            <span>สถานะ</span>
+            <div class="assess-list" id="assess-tabel-list">
+                
+            </div>
+        </div>
+    </div>
 
     <!-- ส่วนเมนูsidebar -->
     <div class="container2">

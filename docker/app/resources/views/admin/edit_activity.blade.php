@@ -111,7 +111,7 @@
                             <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
                                 <p class="btndelet-10">-</p>
                             </button>
-                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" min="1" max="{{ $reward->quantity_reward }}" {{ $isSelected ? '' : 'disabled' }} >
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" max="{{ $reward->quantity_reward }}" {{ $isSelected ? '' : 'disabled' }} >
                             <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
                             <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $isSelected ? 'checked' : '' }}>
                         </div>

@@ -127,7 +127,7 @@
                 <div class="frameactivitytime-1">
                     <div class="frmemsectionCreated">
                         <p class="messagesectionactivity">{{ $event->title }}</p>
-                        <span class="messagesectionactivity-1">สร้างเมื่อ {{ $event->created_at->format('d M Y') }}</span>
+                        <span class="messagesectionactivity-1">สร้างเมื่อ {{ $event->created_at->format('d M Y : H:i:s') }}</span>
                     </div>
                     <div class="framemessageoffregister-time">
                         <p class="messageoffregister">ปิด Register ใน</p>

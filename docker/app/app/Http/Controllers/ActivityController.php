@@ -197,14 +197,12 @@ class ActivityController extends Controller
             // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน (กัน error ตอนอ้าง $reward->name)
             if (!$reward) {
                 return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"
-                ])->withInput();
+                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"])->withInput();
             }
 
             if ($item['qty'] > $reward->quantity_reward){
                    return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"
-                ])->withInput();          
+                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"])->withInput();          
             }
         }
 
@@ -253,8 +251,7 @@ class ActivityController extends Controller
 
         $remainingseconds = $isexpired ? 0 : (int) $now->diffInSeconds($closeat);
 
-        return view('admin.view_details',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,
-        ]);
+        return view('admin.view_details',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,]);
             
     }
     

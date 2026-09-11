@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
 
     // ระบบจัดการวงล้อสุ่ม
     Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
+    Route::get('/assessments/list',[AssessmentController::class,'list'])->name('admin.assessments.list');
     // Route::get('/edituser', function () {
     //     return view('admin.edituser');
     // });
