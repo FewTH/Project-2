@@ -40,24 +40,18 @@ class EventRegistrationController extends Controller
         $event = $this->getevent($eventId);
 
         $data = $request->validate([
-            'full_name' => 'required|string|max:200',
-            'email' => [
-                        'required',
-                        'email:rfc,dns',
-                        'max:200',
-
-                        //เช็คว่า email นี้เคยลงทะเบียนกิจกรรมนี้แล้วหรือยัง
-                        Rule::unique('event_registrations', 'email')->where(function ($query) use ($event){
-                        return $query->where('event_id', $event->event_id);
-        }),
+            'full_name' => [
+                            'required',
+                            'string',
+                            'max:200',
+                                Rule::unique('event_registrations', 'full_name')->where(function ($query) use ($eventId) {
+                                return $query->where('event_id', $eventId);
+                }),
             ],
-
 
         ], [
             'full_name.required' => 'กรุณากรอกชื่อ-นามสกุลด้วย',
-            'email.required' => 'กรุณากรอกอีเมลด้วย',
-            'email.email' => 'กรุณากรอกอีเมลที่ถูกต้องและมีอยู่จริง',
-            'email.unique' => 'อีเมลนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว',
+            'full_name.unique' => 'ชื่อนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว',
 
         ]);
 
@@ -88,11 +82,20 @@ class EventRegistrationController extends Controller
                 return back()->withErrors(['limitmax' => 'ลงทะเบียนเต็มจำนวนแล้ว']);
             }
 
+            //กันเหนียวอีกชั้น เผื่อมีคนส่งฟอร์มพร้อมกันด้วยชื่อเดียวกัน
+            $isduplicate = EventRegistration::where('event_id', $event->event_id)
+                ->where('full_name', $data['full_name'])
+                ->exists();
+
+            if ($isduplicate) {
+                DB::rollBack();
+                return back()->withErrors(['full_name' => 'ชื่อนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว']);
+            }
+
             $registration = new EventRegistration();
             $registration->event_id = $event->event_id;
             $registration->user_id = Auth::id() ?? 1;
             $registration->full_name = $data['full_name'];
-            $registration->email = $data['email'];
             $registration->registered_at = now();
             $registration->save();
 

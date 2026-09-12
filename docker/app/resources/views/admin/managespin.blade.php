@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
     <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
     <title>จัดการวงล้อสุ่ม</title>
@@ -88,22 +89,38 @@
     </div>
     
     {{-- ส่วนป็อบอัพ --}}
-    <div class="pop-up-background">
-        <div class="header-popup-spn">
-            <img src="{{asset('admin/img/โลโก้รางวัลป็อปอัป.png')}}" alt="โลโก้รางวัลป็อปอัป">
-            <span>เพิ่มวงล้อรางวัลไปยังแบบประเมิน</span>
-        </div>
+    <div class="pop-up-background" id="assessmentModal">
+        <div class="pop-up-content">
+            <div class="header-popup-spn">
+                <img src="{{asset('admin/img/โลโก้รางวัลป็อปอัป.png')}}" class="logo-popup-topic" alt="โลโก้รางวัลป็อปอัป">
+                <span class="text-assess">เพิ่มวงล้อรางวัลไปยังแบบประเมิน</span>
+                <img src="{{asset('admin/img/กากบาท.png')}}" class="x-button" id="closeModalBtn" alt="กากบาท">
+            </div>
         <div class="wheel-name">
             <h4 class="topic-wheel-sub">วงล้อที่สร้างใหม่</h4>
+            <h4 class="wheel-sum-value" id="wheelSumtext">วงล้อรางวัล <span id="wheelItemCount"></span>รายการ (<span id="wheeItemnames"></span>)</h4>
         </div>
+        {{-- หัวข้ออธิบาย --}}
+        <div class="descrip">
+            <h4 class="wheel-sumary">เลือกแบบประเมินที่ต้องการ</h4>
+            <p class="wheel-sum" id="wheelSummary">แสดงเฉพาะแบบประเมินที่ยังไม่มีวงล้อ</p>
+        </div>
+        {{-- หัวข้อในตาราง --}}
         <div class="topic-assess">
-            <span>รายการแบบประเมิน</span>
-            <span>สถานะ</span>
-            <div class="assess-list" id="assess-tabel-list">
-                
-            </div>
+            <span class="name-topic-assess">รายการแบบประเมิน</span>
+            <span class="sts-topic-assess">สถานะ</span>
+        </div>
+        {{-- ไว้แสดงรายการแบบประเมิน --}}
+        <div class="all-assess-list" id="assessmentListBody">
+            
+        </div>
+        {{-- ปุ่ม --}}
+        <div class="modal-footer-btn">
+            <button type="button" class="confirm-btn" id="confirmAssessmentBtn">บันทึก</button>
+            <button type="button" class="not-confirm-btn" id="cancelAssessmentBtn">ยกเลิก</button>
         </div>
     </div>
+</div>
 
     <!-- ส่วนเมนูsidebar -->
     <div class="container2">

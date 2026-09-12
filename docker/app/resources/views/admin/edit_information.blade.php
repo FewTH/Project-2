@@ -84,13 +84,6 @@
             <p class="savesuccesschangepassword-error">{{ $message }}</p> 
         @enderror
         </div>
-        <div class="email-user-1">
-            <label class="typeemail-user-1" for="Compose_email_1"> อีเมล </label> <br>
-            <input type="email" name="email" class="input-email-user-1" id="Compose_email_1" value="{{ $user->email }}" autocomplete="email">
-        @error('email')
-            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
-        @enderror
-        </div>
         <div class="phone_number-1">
             <label class="typephone_number-1" for="Enter_phonenumber_1"> เบอร์โทร </label> <br>
             <input type="tel" name='phone' class="input-phonenumber-1" id="Enter_phonenumber_1" value="{{ $user->phone }}" autocomplete="tel">

@@ -101,7 +101,7 @@
         </div>
         <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
         <div class="Addnumbers_users">
-            <p id="add_numbers_users">↗ +38 คนวันนี้</p>
+            <p id="add_numbers_users"> +38 คนวันนี้</p>
         </div>
     </div>
 
@@ -117,7 +117,7 @@
         </div>
         <!--ตัวเลขบอกว่าเพิ่มกี่คนในวันนี้-->
         <div class="Addnumbers">
-            <p id="add_numbers">↗ +81 % ของผู้ใช้ทั้งหมด</p>
+            <p id="add_numbers"> +81 % ของผู้ใช้ทั้งหมด</p>
         </div>
     </div>
 
@@ -133,7 +133,7 @@
         </div>
         <!--ตัวเลขบอกการสุ่มเมื่อวานก่อน-->
         <div class="numberotherday">
-            <p id="number_other_day">↗ +18 % เมื่อวานก่อน</p>
+            <p id="number_other_day"> +18 % เมื่อวานก่อน</p>
         </div>
     </div>
 
@@ -149,7 +149,7 @@
         </div>
         <!--ต้องติดตามของขวัญที่ยังไม่ได้รับ-->
         <div class="followaward" id="followaward_box">
-            <p id="Follow_award">1 ต้องติดตาม</p>
+            <p id="Follow_award">+15 เมื่อวานก่อน</p>
         </div>
     </div>
 </div>

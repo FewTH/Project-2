@@ -59,7 +59,7 @@
             <h1 class="sectionchangepassword">เปลี่ยนรหัสผ่าน</h1>
             <p class="messagchangepassword">เปลี่ยนรหัสผ่านใหม่ของคุณได้ที่นี่</p>
 
-          <form id="savesuccesschangepassword_1" action="{{ url('user/change_password') }}" method="POST">
+          <form id="savesuccesschangepassword_1" action="{{ url('manager/change_password') }}" method="POST">
           @csrf
         @if (session('success'))
         <div class="savesuccesschangepassword" id="save_successchangepassword">

@@ -99,15 +99,6 @@
                             <p class="savesuccessimage-error-1">{{ $message }}</p>
                     @enderror
 
-                <label class="framedataframeworkname" for="dataframe_workemail">
-                    <p class="messagename">อีเมล</p>
-                    <span class="asteriskdataframe">*</span>
-                </label>
-                <input type="email" name="email" class="dataframeworkfullname" value="{{ old('email') }}" placeholder="กรอบอีเมล" autocomplete="email" id="dataframe_workemail">
-                @error('email')
-                        <p class="savesuccessimage-error-1">{{ $message }}</p>
-                @enderror
-                
                 <button type="submit" class="btn-registerparticipate">
                     <p class="messageregisterparticipate">ลงทะเบียนเข้าร่วม</p>
                 </button>
@@ -131,7 +122,6 @@
                 </div>
                 <div class="fullnameRegistrant">
                     <p class="fullnameRegistrant-1">{{ $registration->full_name }}</p>
-                    <span class="emailparticipants">{{ $registration->email }}</span>
                 </div>
                 <div class="timepersonRegistrant">
                     <span class="timepersonRegistrant-1">{{ $registration->registered_at->format('H:i') }} น.</span>

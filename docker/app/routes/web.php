@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AssessmentController;
 use App\Http\Controllers\WheelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -51,14 +52,14 @@ Route::prefix('admin')->group(function () {
 
     // ระบบจัดการวงล้อสุ่ม
     Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
-    Route::get('/assessments/list',[AssessmentController::class,'list'])->name('admin.assessments.list');
-    // Route::get('/edituser', function () {
+    Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
+    Route::post('/managespin/store', [WheelController::class, 'store'])->name('admin.managespin.store');
+
     //     return view('admin.edituser');
     // });
 
     // ระบบจัดการกิจกรรม
     Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
-
     Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
     Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
@@ -88,9 +89,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/edit_activity/{id}', [ActivityController::class, 'editactivity'])->name('admin.activity.editactivity');
     Route::put('/edit_activity/{id}', [ActivityController::class, 'updateactivity'])->name('admin.activity.updateactivity');
 
+
     Route::get('/random_reward/{id}', [ActivityController::class, 'randomReward'])->name('admin.random_reward');
+    Route::post('/random-reward/{eventId}/save-result', [ActivityController::class, 'saveRandomResult'])->name('admin.random-reward.save-result');
 
-
+    
     Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
 });
 

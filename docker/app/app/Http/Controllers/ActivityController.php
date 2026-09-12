@@ -6,6 +6,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\Event;
 use App\Models\Reward;
 use App\Models\spin_wheels;
+use App\Models\EventRegistration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,20 +21,50 @@ class ActivityController extends Controller
         return Event::with(['wheel.rewards.category', 'registrations'])->findOrFail($eventId);
     }
 
-
-    // แสดงฟอร์มสร้างกิจกรรม ของหน้าcreate_activity
+     // แสดงฟอร์มสร้างกิจกรรม ของหน้าcreate_activity
     public function create()
     {
         return view('admin.create_activity');
     }
-
 
     // แสดงหน้าเว็บสุ่มรางวัล หน้าrandom_reward
     public function randomreward($eventId)
     {
         $event = $this->getEvent($eventId);
 
-        return view('admin.random_reward', ['event' => $event]);
+       $nameData = $event->registrations->where('is_drawn', false)->map(fn($r) => [
+            'id' => $r->registration_id,
+            'label' => $r->full_name,
+            'percent' => 1
+        ])
+        ->values();
+        
+        $rewardData = $event->wheel
+            ? $event->wheel->rewards
+                ->filter(fn($r) => ($r->pivot->quantity_selected ?? 0) > 0)
+                ->map(fn($r) => [
+                'id' => $r->reward_id,
+                'label' => $r->name,
+                'percent' => $r->rate ?? 0,
+                'quantity' => $r->pivot->quantity_selected ?? 0
+            ])
+                ->values()
+            : collect();
+
+        // ดึงผู้โชคดีล่าสุด 6 คน พร้อมชื่อรางวัลจริงจาก reward_id ที่บันทึกไว้ตอนสุ่ม
+        $latestwinners = $event->registrations()
+            ->where('is_drawn', true)
+            ->with('reward')
+            ->orderByDesc('drawn_at')
+            ->take(6)
+            ->get();
+
+        return view('admin.random_reward', [
+            'event' => $event,
+            'nameData' => $nameData,
+            'rewardData' => $rewardData,
+            'latestwinners' => $latestwinners,
+        ]);
     }
 
 
@@ -287,8 +318,7 @@ class ActivityController extends Controller
         $safeTitle = preg_replace('/[^\p{L}\p{N}_\-]/u', '_', $event->title);
         $filename = 'QRCode-' . $safeTitle . '.png';
 
-        return response(QrCode::format('png')->size(600)->generate($url))
-        ->header('Content-Type', 'image/png')->header('Content-Disposition', 'attachment; filename='. $filename .'');
+        return response(QrCode::format('png')->size(600)->generate($url))->header('Content-Type', 'image/png')->header('Content-Disposition', 'attachment; filename='. $filename .'');
     }
 
 
@@ -300,6 +330,39 @@ class ActivityController extends Controller
         $event->update(['status' => 'closed']);
 
         return back();
+    }
+
+
+    // บันทึกผลการสุ่มรางวัล ของหน้า random_reward (เรียกจาก JS หลังวงล้อหมุนเสร็จ)
+    public function saveRandomResult(Request $request, $eventId)
+    {
+        $event = $this->getEvent($eventId);
+
+        $data = $request->validate([
+            'registration_id' => 'nullable|integer',
+            'reward_id'       => 'nullable|integer',
+        ]);
+
+        DB::transaction(function () use ($data, $event) {
+
+            // mark ว่ารายชื่อนี้ถูกสุ่มไปแล้ว (ทำเฉพาะตอนมี registration_id ส่งมาจริง)
+            if (!empty($data['registration_id'])) {
+                EventRegistration::where('registration_id', $data['registration_id'])->where('event_id', $event->event_id)->update([
+                        'is_drawn' => 1,
+                        'drawn_at' => now(),
+                        'reward_id' => $data['reward_id'] ?? null,
+                    ]);
+            }
+
+            // ลดจำนวนของรางวัลที่เหลือลง 1 (ทำเฉพาะตอนมี reward_id ส่งมาจริง และยังมีของเหลืออยู่)
+            if (!empty($data['reward_id']) && $event->wheel) {
+                $event->wheel->rewards()->wherePivot('reward_id', $data['reward_id'])->wherePivot('quantity_selected', '>', 0)->updateExistingPivot($data['reward_id'], [
+                    'quantity_selected' => DB::raw('quantity_selected - 1'),
+                    ]);
+            }
+        });
+
+        return response()->json(['success' => true]);
     }
 
 }

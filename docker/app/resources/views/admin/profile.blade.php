@@ -188,11 +188,6 @@
             <label class="FirstNameLastName"> ชื่อ-นามสกุล </label>
             <input type="text" id="Enter_firstname_lastname" value="{{ $user->full_name }}" class="input-FirstName-LastName" autocomplete="name" disabled>
         </div>
-        <!--อีเมลผู้ใช้-->
-        <div class="email-user">
-            <label class="typeemail-user"> อีเมล </label>
-            <input type="email" id="Compose_email"  value="{{ $user->email }}" class="input-email-user" autocomplete="email" disabled>
-        </div>
         <!--เบอร์โทร-->
         <div class="phone_number">
             <label class="typephone_number"> เบอร์โทร </label>

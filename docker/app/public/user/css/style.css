@@ -7,7 +7,7 @@
 body {
   margin: 0;
   font-family: 'Chakra Petch', sans-serif;
-  background-color: #fdfbf4;
+  background-color: #f8f8f6;
   min-width: 1000px;
 }
 
@@ -1783,8 +1783,7 @@ body.no-scroll {
 /*ข้อมูลผู้ใช้*/
 .User_Information {
   background-color: #fdfbf5;
-  flex: 1 1 500px;
-  min-width: 500px;
+  flex: 2 1 450px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
   padding-bottom: 60px;
@@ -2112,7 +2111,6 @@ body.no-scroll {
 .Change_password {
   background-color: #fdfbf5;
   flex: 1 1 350px;
-  min-width: 400px;
   padding: 0px 0px 60px 0px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;

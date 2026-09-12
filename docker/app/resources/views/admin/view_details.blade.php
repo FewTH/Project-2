@@ -232,7 +232,6 @@
                     </div>
                     <div class="frmaename-emailparticipants">
                         <p class="nameparticipants">{{ $registration->full_name }}</p>
-                        <span class="emailparticipants">{{ $registration->email }}</span>
                     </div>
                     <div class="frametimeparticipants">
                         <p class="timeparticipants">{{ $registration->registered_at->format('H:i') }} น.</p>

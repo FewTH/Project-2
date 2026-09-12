@@ -13,4 +13,17 @@ class WheelController extends Controller
         $rewards = Reward::with('category')->orderByDesc('reward_id')->get();
         return view('admin.managespin', compact('rewards'));
     }
+
+    public function store(Request $request)
+    {
+
+        $items = $request->input('items');
+        $assessmentIds = $request->input('assessment_ids');
+
+
+        return response()->json([
+        'success' => true,
+        'message' => 'บันทึกวงล้อสำเร็จ'
+        ]);
+    }
 }

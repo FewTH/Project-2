@@ -14,12 +14,16 @@ class EventRegistration extends Model
         'event_id',
         'user_id',
         'full_name',
-        'email',
         'registered_at',
+        'is_drawn',
+        'drawn_at',
+        'reward_id',
     ];
 
     protected $casts = [
         'registered_at' => 'datetime',
+        'drawn_at' => 'datetime',
+        'is_drawn' => 'boolean',
     ];
     
     public function event()
@@ -30,6 +34,11 @@ class EventRegistration extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    public function reward()
+    {
+        return $this->belongsTo(Reward::class, 'reward_id', 'reward_id');
     }
 }
 

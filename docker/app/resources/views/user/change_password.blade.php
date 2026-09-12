@@ -61,7 +61,6 @@
 
           <form id="savesuccesschangepassword_1" action="{{ url('user/change_password') }}" method="POST">
             @csrf
-          @csrf
         @if (session('success'))
         <div class="savesuccesschangepassword" id="save_successchangepassword">
             <p class="savesuccess-changepassword"> {{ session('success') }} </p>

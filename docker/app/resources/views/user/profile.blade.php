@@ -126,14 +126,14 @@
 <!--หน้า Pop-up สำหรับอัปโหลดรูป-->
 <div class="popup">
      <dialog id="image-popup" class="popup-box" data-open="{{ session('open_popup') || session('error') || $errors->any() ? 'true' : 'false' }}">
-        <form action="{{ url('admin/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
+        <form action="{{ url('user/profile') }}" method="POST" enctype="multipart/form-data" id="profileForm">
         @csrf
         
         <button type="button" class="btn-close-1" id="btn_close_1">
             <p class="btn-close-popup">x</p>
         </button>
             
-        <img src="{{ asset('admin/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
+        <img src="{{ asset('user/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
         <h2 class="Change-photo">เปลี่ยนรูปโปรไฟล์</h2>
         <p class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</p>
           
@@ -179,11 +179,6 @@
         <div class="FirstName-LastName">
             <label class="FirstNameLastName"> ชื่อ-นามสกุล </label>
             <input type="text" id="Enter_firstname_lastname" value="{{ $user->full_name }}" class="input-FirstName-LastName" autocomplete="name" disabled>
-        </div>
-        <!--อีเมลผู้ใช้-->
-        <div class="email-user">
-            <label class="typeemail-user"> อีเมล </label>
-            <input type="email" id="Compose_email"  value="{{ $user->email }}" class="input-email-user" autocomplete="email" disabled>
         </div>
         <!--เบอร์โทร-->
         <div class="phone_number">

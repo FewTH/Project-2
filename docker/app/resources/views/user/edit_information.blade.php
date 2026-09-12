@@ -58,7 +58,7 @@
         <h1 class="sectioneditinformation">แก้ไขข้อมูล</h1>
         <p class="messageditinformation">แก้ไขข้อมูลเดิมของคุณได้ที่นี่</p>
         
-        <form id="save_success_1" action="{{ url('admin/edit_information') }}" method="POST">
+        <form id="save_success_1" action="{{ url('user/edit_information') }}" method="POST">
         @csrf
         @if(session('success'))
         <div class="savesuccess" id="save_success">
@@ -76,13 +76,6 @@
             <label class="FirstNameLastName-1" for="Enter_firstname_lastname_1">ชื่อ-นามสกุล</label> <br>
             <input type="text" name="full_name" class="input-FirstName-LastName-1" id="Enter_firstname_lastname_1" value="{{ $user->full_name }}" autocomplete="name">
         @error('full_name')
-            <p class="savesuccesschangepassword-error">{{ $message }}</p> 
-        @enderror
-        </div>
-        <div class="email-user-1">
-            <label class="typeemail-user-1" for="Compose_email_1"> อีเมล </label> <br>
-            <input type="email" name="email" class="input-email-user-1" id="Compose_email_1" value="{{ $user->email }}" autocomplete="email">
-        @error('email')
             <p class="savesuccesschangepassword-error">{{ $message }}</p> 
         @enderror
         </div>

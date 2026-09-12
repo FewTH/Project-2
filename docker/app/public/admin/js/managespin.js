@@ -130,4 +130,118 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // วาดวงล้อเปล่าไว้ตั้งแต่โหลดหน้าครั้งแรก
     drawWheel();
+
+    // ส่วนของpopup
+const assessmentModal = document.getElementById('assessmentModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const confirmAssessmentBtn = document.getElementById('confirmAssessmentBtn');
+const cancelAssessmentBtn = document.getElementById('cancelAssessmentBtn');
+const wheelItemCountn1 = document.getElementById('wheelItemCount');
+const wheelItemnamesn1 = document.getElementById('wheeItemnames');
+const assessmentListBodyn1 = document.getElementById('assessmentListBody');
+
+// ปุ่มบันทึกตรวงล้อ
+savebtn.addEventListener('click',async function(){
+    // ฟังก์ชันนี้จะเอารางวัลที่เราเลือกไว้มาแสดงด้านบนป็อปอัป
+    const rewardsArray = Array.from(selectedRe.values()); 
+    wheelItemCountn1.textContent = rewardsArray.length;
+    wheelItemnamesn1.textContent = rewardsArray.map(r=>r.name).join(',');
+    // ดึงแบบประเมินที่ยังไม่ถูกเพิ่มวงล้อ
+    try{
+        const res = await fetch('/admin/assessments/available');
+        const assessments = await res.json();
+        renderAssessmentList(assessments);
+    }
+    catch(err){
+        alert('ไม่สามารถโหลดรายแการแบบประเมินได้')
+        console.error(err);
+        return;
+    }
+    // เปิดป้อปอัป
+    assessmentModal.style.display = 'flex';
 });
+// checkbox 
+function renderAssessmentList(assessments) {
+    assessmentListBodyn1.innerHTML = ''; // เคลียร์ของเก่าก่อนทุกครั้ง
+
+    if (assessments.length === 0) {
+        assessmentListBodyn1.innerHTML = '<p class="no-data">ไม่มีแบบประเมินที่สามารถผูกได้ในขณะนี้</p>';
+        return;
+    }
+
+    assessments.forEach(a => {
+        const row = document.createElement('div');
+        row.className = 'assess-row';
+        row.innerHTML = `
+            <div class="assess-row-info">
+                <input type="checkbox" class="assessment-checkbox" value="${a.id}">
+                <div>
+                    <p class="assess-name">${a.name}</p>
+                    <p class="assess-meta">สร้างโดย: ${a.created_by} • เปิดรับถึง: ${a.closed_at}</p>
+                </div>
+            </div>
+            <span class="assess-status">เปิดอยู่</span>
+        `;
+        assessmentListBodyn1.appendChild(row);
+    });
+}
+
+// ฟังก์ชันปิดปอปอัป
+closeModalBtn.addEventListener('click', closeAssessmentModal);
+cancelAssessmentBtn.addEventListener('click', closeAssessmentModal);
+function closeAssessmentModal(){
+    assessmentModal.style.display = 'none';
+}
+
+// กดบันทึกแล้วบันทึกจริงใน myadmin
+confirmAssessmentBtn.addEventListener('click', async function () {
+    const checkedBoxes = document.querySelectorAll('.assessment-checkbox:checked');
+    const assessmentIds = Array.from(checkedBoxes).map(cb => parseInt(cb.value));
+
+    if (assessmentIds.length === 0) {
+        alert('กรุณาเลือกอย่างน้อย 1 แบบประเมิน');
+        return;
+    }
+
+    // เตรียมข้อมูลของรางวัลที่เลือกไว้ในวงล้อ
+    const items = Array.from(selectedRe.values()).map(r => ({
+        reward_id: parseInt(r.id),
+        quantity_selected: r.qty
+    }));
+
+    try {
+        const res = await fetch('/admin/managespin/store', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                items: items,
+                assessment_ids: assessmentIds
+            })
+        });
+        
+        // ตรวจสอบว่า Server ตอบกลับมาสำเร็จหรือไม่ (HTTP 200 OK)
+        if (!res.ok) {
+            alert(`เกิดข้อผิดพลาดจาก Server (HTTP Status: ${res.status})`);
+            return;
+        }
+
+        const data = await res.json();
+
+        if (data.success) {
+            alert('บันทึกวงล้อสำเร็จ');
+            closeAssessmentModal();
+            window.location.reload(); // รีเฟรชหน้าให้ล้างค่าที่เลือกไว้ทั้งหมด
+        } else {
+            alert('เกิดข้อผิดพลาด: ' + (data.message || 'ไม่ทราบสาเหตุ'));
+        }
+    } catch (err) {
+        alert('ไม่สามารถบันทึกวงล้อได้ กรุณาลองใหม่');
+        console.error(err);
+    }
+});
+});
+
+

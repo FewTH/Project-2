@@ -26,4 +26,9 @@ class spin_wheels extends Model
     {
         return $this->hasOne(Event::class, 'wheel_id', 'wheel_id');
     }
+
+    public function assessments()
+    {
+        return $this->hasMany(WheelAssessment::class, 'wheel_id', 'wheel_id');
+    }
 }

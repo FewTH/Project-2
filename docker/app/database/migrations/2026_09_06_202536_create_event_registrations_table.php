@@ -14,11 +14,14 @@ return new class extends Migration
             $eventregistrations->unsignedBigInteger('event_id');
             $eventregistrations->unsignedBigInteger('user_id')->nullable();
             $eventregistrations->string('full_name', 200);
-            $eventregistrations->string('email', 200)->nullable();
             $eventregistrations->timestamp('registered_at')->useCurrent();
+            $eventregistrations->boolean('is_drawn')->default(false);
+            $eventregistrations->timestamp('drawn_at')->nullable();
+            $eventregistrations->unsignedBigInteger('reward_id')->nullable();
 
             $eventregistrations->foreign('event_id')->references('event_id')->on('events')->onDelete('cascade');
             $eventregistrations->foreign('user_id')->references('user_id')->on('users')->onDelete('set null');
+            $eventregistrations->foreign('reward_id')->references('reward_id')->on('reward')->onDelete('set null');
         });
     }
 

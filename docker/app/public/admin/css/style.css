@@ -454,7 +454,7 @@
 
   /*เปอร์เซ็นสุ่มทั้งหมด*/
   .followaward{
-    color: #F44336;
+    color: #4CAF50;
     font-size: 17px;
     margin-left: 40px;
 
@@ -2185,9 +2185,7 @@
   .frame-activity-assessment{
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    width: 100%;
-    flex: 1 1 600px;
-    margin-left: 50px;
+    width: 710px;
     margin-top: 40px;
     padding: 0px 15px 30px 20px;
     border-radius: 20px;
@@ -2430,7 +2428,8 @@
     display: flex;
     grid-template-columns: repeat(2, 1fr);
     flex-wrap: wrap;
-    padding: 0px 40px 0px 0px;
+    padding: 0px 40px 0px 50px;
+    gap: 25px;
   }
 
 
@@ -3858,7 +3857,7 @@
     cursor: pointer;
     background-color: #ccc;
     border-radius: 50px;
-    transition: 0.3s;
+    transition: 0.2s;
     box-shadow: 0px 4px 10px rgba(0,0,0,0.22);
   }
 
@@ -3872,7 +3871,7 @@
     left: 3px;
     background-color: #ffffff;
     border-radius: 50%;
-    transition: 0.3s;
+    transition: 0.2s;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   }
 
@@ -3891,6 +3890,27 @@
     color: #6d4300;
     font-size: 16px;
   }
+
+  /*กรอบของวงล้อสุ่มรายชื่อ*/
+  .namecanvas{
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+ .namecanvas-1{
+   position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid #ffbf00;
+    z-index: 2;
+ }
+
 
   /*กรอบหัวข้อวงล้อสุ่มของรางวัล*/
   .framesmallrandomreward{
@@ -3938,6 +3958,28 @@
     color: #96007ad7;
     font-size: 16px;
   }
+
+  /*กรอบของวงล้อสุ่มของรางวัล*/
+  .rewardcanvas{
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /*ลูกศรชี้ของวงล้อสุ่มของรางวัล*/
+  .rewardcanvas-1{
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid #ff00d0;
+    z-index: 2;
+  }
+
 
   /*กรอบของปุ่มสุ่มรางวัล*/
   .btnstartRandomreward{
@@ -3998,8 +4040,189 @@
     font-weight: 600;
     color: #8A5B10;
     position: relative;
+    padding: 0;
+    margin: auto;
     z-index: 1;
   }
+
+  /*กรอบpopupผู้โชคดีได้รับรางวัล*/
+  .popupluckywinner-10{
+    border: none;
+    background-color: #fdfbf5;
+    border-radius: 20px;
+    padding: 0px 0px 30px 0px;
+    width: 550px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    z-index: 5;
+  }
+  .popupluckywinner-10.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+  /*กรอบหัวข้อผู้โชคดีได้รับรางวัล*/
+  .framepopupluckywinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fcecc3;
+    padding: 30px 0px 0px 0px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.22);
+    height: 110px;
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  /*หัวข้อผู้โชคดีได้รับรางวัล*/
+  .message-popupluckywinner{
+    position: relative;
+    bottom: 8px;
+    color: #8A5B10;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  /*กรอบรูป ชื่อผู้ที่ได้รับรางวัล*/
+  .frameimg-userpopupluckywinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  /*ข้อความผู้ที่ได้รับรางวัล*/
+  .messageuserpopupluckywinner{
+    margin-top: 20px;
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /*ชื่อผู้ที่ได้รับรางวัล*/
+ .messageuserpopupluckywinner-1{
+  margin-top: 10px;
+  color: #745500;
+  font-size: 30px;
+  font-weight: 900;
+ }
+
+ /*กรอบเส้นระหว่างชื่อผู้ที่ได้รับรางวัลกับรางวัลที่ได้รับ*/
+ .linemessageuserpopupluckywinner{
+  margin-top: 15px;
+  padding: 0px 20px 0px 20px;
+ }
+
+ /*เส้นระหว่างชื่อผู้ที่ได้รับรางวัลกับรางวัลที่ได้รับ*/
+ .linemessageuserpopupluckywinner-1{
+  border: 1px dashed #d39b00;
+ }
+
+ /*กรอบใหญ่รูปกล่องรางวัลกับรางวัลที่ได้รับ*/
+ .frameprizes-1{
+  padding: 15px 20px 20px 20px;
+
+ }
+
+ /*กรอบเล็กรูปกล่องรางวัลกับรางวัลที่ได้รับ*/
+ .frameprizes{
+    display: flex;
+    align-items: center;
+    border: 1px solid #d39b00;
+    padding: 5px 20px 5px 20px;
+    border-radius: 15px;
+    gap: 10px;
+ }
+ 
+  /*กรอบรูปกล่องรางวัล*/
+ .frameimgprizes{
+  border: 1px solid #d39b00;
+  padding: 4px 4px;
+  border-radius: 7px;
+ }
+
+ /*รูปกล่องรางวัล*/
+ .img-prizes{
+  position: relative;
+  top: 2px;
+ }
+
+ /*ข้อความรางวัลที่ได้รับ*/
+ .messagerewardreceived-1{
+  font-size: 20px;
+  font-weight: 600;
+  color: #4e4e4e;
+ }
+
+  /*กรอบข้อความของรางวัล*/
+  .messagerewardreceived{
+    margin-left: auto;
+  }
+
+  /*ข้อความของรางวัล*/
+ .messagerewardreceived-2{
+  font-size: 22px;
+  font-weight: 600;
+  color: #c1650e;
+ }
+
+ /*กรอบของปุ่มกดปิดpopup*/
+ .framebtn-offpopupluckywinner{
+  padding: 5px 20px 0px 20px;
+ }
+
+ /*ปุ่มกดปิดpopup*/
+ .offpopupluckywinner{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  background-color: #a8731d;
+  border-radius: 20px;
+  height: 60px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+ }
+  
+ .offpopupluckywinner::before{
+  content: "";
+  background-color: #96651644;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+ }
+
+
+ .offpopupluckywinner:hover::before{
+  width: 600px;
+  height: 600px;
+ }
+
+ /*ข้อความปุ่มกดปิดpopup*/
+ .messageoffpopupluckywinner{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+ }
+  
+
+
+
+
 
   /*กรอบของผู้โชคดีล่าสุดกับโอกาสออกของรางวัล*/
   .frameluckywinner{
@@ -4086,6 +4309,21 @@
   .rawardname{
     color: #ffffff;
   }
+
+  .wheel-disabled {
+    opacity: 0.35;
+    filter: grayscale(60%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  .warnnothaveluckywinner{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
 
   /*กรอบของโอกาสออกของรางวัล*/
   .framechanceleavereward{
@@ -4771,14 +5009,13 @@
     align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
   }
   
   /*ข้อมูลผู้ใช้*/
   .User_Information {
     background-color: #fdfbf5;
-    flex: 3 1 500px;
-    min-width: 500px;
+    flex: 2 1 450px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.22);
     border-radius: 15px;
     padding-bottom: 60px;
@@ -5082,10 +5319,11 @@
 
   /*เปลี่ยนรหัสผ่าน*/
   .Change_password {
+    position: relative;
+    left: 10px;
     background-color: #fdfbf5;
-    flex: 2 1 350px;
-    min-width: 400px;
-    padding: 0px 0px 50px 0px;
+    flex: 1 1 430px;
+    padding: 0px 0px 60px 0px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.22);
     border-radius: 15px;
     margin-top: 60px;
@@ -7291,10 +7529,10 @@
     overflow: hidden;
   } */
   .main-wheel-spn {
-      background-color: #FFFDF0; /* สีพื้นหลังของการ์ด */
+      background-color: #FFFDF0;
       border: 2px solid #a8731d;
       border-radius: 16px;
-      overflow: hidden;          /* สำคัญ! ตัดขอบแถบสีดำด้านล่างไม่ให้ล้นมุมโค้ง */
+      overflow: hidden; 
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -7351,17 +7589,162 @@
   }
 /* แต่งป็อปอัพของหน้าจัดการวงล้อ */
 .pop-up-background{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+}
+.pop-up-content{
+  background-color: #FCF6E5;
+  border: 1px solid #a8731d;
+  width: 650px;
+  height: 440px;
+  margin-left: 400px;
+  border-radius: 10px;
+  /* overflow: hidden; */
+}
+/* ส่วนheader */
+.header-popup-spn{
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #a8731d;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 10px;
+  color: #FCF6E5;
+}
+/* โลโก้รางวัล */
+.logo-popup-topic{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  /* margin-top: 20px;
+  margin-left: 20px; */
+} 
+/* ปุ่มกากบาท */
+.x-button{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-left: 320px;
+  cursor: pointer;
+}
+/* หัวข้อด้านบน */
+.text-assess{
+   /* margin-top: 20px; */
+   font-size: large;
+   font-weight: bold;
+   margin-left: 10px;
+}
+/* ส่วนวงล้อที่สร้างใหม่ */
+.wheel-name{
+  padding-left: 10px; 
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.wheel-sum-value{
+  margin: 0;
+  padding: 0;
+}
+.topic-wheel-sub{
+  margin: 0;
+  padding: 0;
+}
+/* ส่วนของหัวข้อเลือกแบบประเมินที่ต้องการ */
+.descrip{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.wheel-sum{
+  margin: 0;
+  padding: 0;
+}
+.wheel-sumary{
+  margin: 0;
+  padding: 0;
+}
+/* หัวข้อสถานะกับแบบประเมิน */
+.topic-assess{
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns:2fr 0fr;
+  width: 600px;
+  height: 100px;
+  background-color:  #a8731d;
+  color: #ffffff;
+  margin: 30px auto 0 auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.name-topic-assess{
+  margin-left: 50px;
+}
+.sts-topic-assess{
+  margin-right: 50px;
+}
+/* ปุ่มป้อปอัป */
+.modal-footer-btn{
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 0 10px;
+  margin-top: 30px;
+}
+.confirm-btn{
+  background-color: #a8731d;
+  color: #fdfbf5;
+  width: 90px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+.not-confirm-btn{
+  background-color: #c22b3a;
+  border: none;
+  color: #ffffff;
+  width: 90px;
+  height: 50px;
+  border-radius: 10px;
+}
+/* จัดระเบียบแบบประเมินที่ยังเป็นแค่mockup */
+.all-assess-list{
+  max-height: 250px;           
+  overflow-y: auto;            
+  padding-right: 5px;
+}
+.assess-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+}
+.assess-row-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
+.assess-name {
+    margin: 0;
+    font-weight: bold;
+}
 
-
-
-
-
-
-
+.assess-meta {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    color: #666;
+}
 
 
 
