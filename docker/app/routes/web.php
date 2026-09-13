@@ -48,7 +48,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
     Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
     Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
-    Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update'); 
+    Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
+    // Route::get('/editreward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit');
+    // Route::put('/editreward/{id}',[RewardController::class,'update'])->name('admin.reward.update');
 
     // ระบบจัดการวงล้อสุ่ม
     Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
@@ -66,10 +68,7 @@ Route::prefix('admin')->group(function () {
     // Route::get('/managereward', function () {
     //     return view('admin.managereward');
     // });
-
-    // Route::get('/addreward', function () {
-    //     return view('admin.addreward');
-    // });
+    
 
     Route::get('/view_details/{id}', [ActivityController::class, 'showviewdetails'])->name('admin.activity.detail');
     Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');

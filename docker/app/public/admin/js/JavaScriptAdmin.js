@@ -626,8 +626,9 @@ function createwheel(canvasId, items) {
     //ไม่ให้ชนกับขอบ
     const radius = centerX - 5;
 
-    //รัศมีของวงกลมสีขาว (รู) ตรงกลางวงล้อ ตามหน้าตาที่ออกแบบไว้
+   //เอาไว้ให้มันขยายหรือลดวงล้อเล็กๆสีขาวข้างใน
     const holeRadius = radius * 0.22;
+ 
 
     //สีของวงล้อสุ่มทั้ง 2 วง
     const colorList = ['#4A90D9', '#2ecc71', '#f1c40f', '#e67e22', '#e74c3c', '#e91e8c', '#9b59b6', '#5dade2'];
@@ -637,76 +638,6 @@ function createwheel(canvasId, items) {
     for (let i = 0; i < items.length; i++) {
         totalpercent = totalpercent + items[i].percent;
     }
-
-    //ฟังก์ชันตัดข้อความยาวๆให้ขึ้นบรรทัดใหม่ ไม่ให้ล้นออกจากชิ้นวงล้อ
-    //ทำทีละขั้น: 1) แยกข้อความเป็นคำๆ 2) ลองต่อคำทีละคำ 3) ถ้ายาวเกินให้ขึ้นบรรทัดใหม่
-    function wraptext(text, maxwidth) {
-        const words = text.split(' ');
-        const lines = [];
-        let currentline = '';
-
-        for (let i = 0; i < words.length; i++) {
-            const oneword = words[i];
-
-            //ลองเอาบรรทัดปัจจุบัน มาต่อกับคำใหม่ดูก่อนว่ายาวแค่ไหน
-            let testline = '';
-            if (currentline === '') {
-                testline = oneword;
-            } else {
-                testline = currentline + ' ' + oneword;
-            }
-
-            const testwidth = ctx.measureText(testline).width;
-
-            //ถ้าต่อแล้วยาวเกิน และก่อนหน้านี้มีข้อความอยู่แล้ว ให้ขึ้นบรรทัดใหม่
-            if (testwidth > maxwidth && currentline !== '') {
-                lines.push(currentline);
-                currentline = oneword;
-            } else {
-                currentline = testline;
-            }
-        }
-
-        //อย่าลืมเก็บบรรทัดสุดท้ายที่เหลือค้างอยู่ด้วย
-        if (currentline !== '') {
-            lines.push(currentline);
-        }
-
-        //ถ้ายังมีคำเดียวที่ยาวเกินไปอยู่ ให้ตัดเป็นตัวอักษรแทน
-        const finallines = [];
-
-        for (let i = 0; i < lines.length; i++) {
-            const oneline = lines[i];
-            const linewidth = ctx.measureText(oneline).width;
-
-            //ถ้าบรรทัดนี้ไม่ยาวเกินอยู่แล้ว ก็เก็บไปเลยไม่ต้องตัดอะไร
-            if (linewidth <= maxwidth) {
-                finallines.push(oneline);
-                continue;
-            }
-
-            //ถ้ายาวเกิน ให้ตัดทีละตัวอักษรแทน
-            let piece = '';
-            for (let c = 0; c < oneline.length; c++) {
-                const onechar = oneline[c];
-                const testpiece = piece + onechar;
-                const piecewidth = ctx.measureText(testpiece).width;
-
-                if (piecewidth > maxwidth && piece !== '') {
-                    finallines.push(piece);
-                    piece = onechar;
-                } else {
-                    piece = testpiece;
-                }
-            }
-            if (piece !== '') {
-                finallines.push(piece);
-            }
-        }
-
-        return finallines;
-    }
-
 
     //ฟังก์ชันวาดวงล้อ เรียกใหม่ทุกครั้งตอนหมุน เพื่อให้เห็น animation
     function draw(currentrotation) {
@@ -719,7 +650,7 @@ function createwheel(canvasId, items) {
         //ล้างภาพเก่าก่อนวาดใหม่
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        //ถ้าไม่มีข้อมูลให้สุ่มแล้ว (หมดหรือยังไม่เคยมีเลย) วาดวงกลมสีขาวเต็มวงค้างไว้แทนพื้นที่ว่าง
+        //ถ้าไม่มีข้อมูลให้สุ่มแล้วหรือหมดให้วาดวงกลมสีขาวเต็มวงค้างไว้แทนพื้นที่ว่างด้วย
         if (items.length === 0) {
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
@@ -749,39 +680,38 @@ function createwheel(canvasId, items) {
             ctx.fillStyle = colorList[colorindex];
             ctx.fill();
 
-
-            //เขียนข้อความลงไปในชิ้นส่วนวงล้อ (แนวนอนเสมอ ไม่หมุนตามชิ้นวงล้อ ตามหน้าตาที่ออกแบบไว้)
-            const textradius = (radius + holeRadius) / 2;
-            const textx = centerX + Math.cos(midangle) * textradius;
-            const texty = centerY + Math.sin(midangle) * textradius;
-
-            ctx.fillStyle = 'white';
-            ctx.font = 'bold 20px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-
             //ถ้าชิ้นนี้มีจำนวนคงเหลือ (quantity) ให้ต่อท้ายชื่อไปด้วย เช่น "สมุด (2)"
             let displaylabel = item.label;
             if (item.quantity !== undefined) {
                 displaylabel = item.label + ' (' + item.quantity + ')';
             }
 
-            //คำนวณความกว้างสูงสุดที่ข้อความควรมีตามขนาดของชิ้นวงล้อ แล้วตัดบรรทัดถ้ายาวเกิน
-            let maxtextwidth = slicesize * textradius * 0.85;
-            if (maxtextwidth < 40) {
-                maxtextwidth = 40;
-            }
+            //หมุนแกนวาดภาพให้ตรงกับมุมกึ่งกลางของชิ้นนี้ ทำให้ข้อความวิ่งตามแนวรัศมี ไม่ทับชิ้นข้างๆ
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(midangle);
 
-            const lines = wraptext(displaylabel, maxtextwidth);
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
 
-            const lineheight = 18;
-            const starty = texty - ((lines.length - 1) * lineheight) / 2;
+            //ความยาวที่มีให้ข้อความ คือระยะจากรูตรงกลางไปเกือบถึงขอบวงล้อ
+            const maxtextwidth = radius - holeRadius - 15;
 
-            for (let lineindex = 0; lineindex < lines.length; lineindex++) {
-                const oneline = lines[lineindex];
-                const oneliney = starty + lineindex * lineheight;
-                ctx.fillText(oneline, textx, oneliney);
-            }
+            //จำกัดขนาดฟอนต์สูงสุดตามความกว้างของชิ้น (มุมเปิดของชิ้น) ตรงจุดใกล้รูตรงกลาง
+            //กันไม่ให้ตัวหนังสือสูงเกินจนไปชนชิ้นข้างบน-ล่างของตัวเอง
+            let maxfontbyheight = slicesize * (holeRadius + 40);
+            if (maxfontbyheight = 20){}
+
+            let fontsize = Math.floor(maxfontbyheight);
+            
+            ctx.font = 'bold ' + fontsize + 'px Chakra Petch, sans-serif';
+            
+  
+            //วาดข้อความให้ปลายข้อความอยู่ใกล้ขอบวงล้อ (ห่างจากขอบนิดหน่อย)
+            ctx.fillText(displaylabel, radius - 25, 0);
+
+            ctx.restore();
 
             //ขยับไปวาดชิ้นส่วนวงล้อถัดไป
             anglesofar = anglesofar + slicesize;
@@ -1148,7 +1078,6 @@ function updatewheeldimstate(toggleId, canvasId) {
 //ผูกไว้กับวงล้อรายชื่อ และวงล้อของรางวัล
 updatewheeldimstate('btn_on_offlistnamesRandom', 'name_canvas');
 updatewheeldimstate('btn_no_offrandomreward', 'reward_canvas');
-
 
 
 

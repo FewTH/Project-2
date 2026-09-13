@@ -71,7 +71,7 @@
                         <img src="{{ asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png') }}" alt="รูปลองชื่อวงล้อสุ่มรายชื่อ" class="img-framewheelname-quantityname">
                         <p class="messageframewheelname">วงล้อสุ่มรายชื่อ</p>
                         <div class="messagequantityname-1">
-                            <span class="messagequantityname">จำนวนของรายชื่อ {{ $event->registrations->count() }} รายการ</span>
+                            <span class="messagequantityname">จำนวนเริ่มต้นรายชื่อ {{ $event->registrations->count() }} วงล้อ</span>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
 
                     <div class="namecanvas">
                         <div class="namecanvas-1"></div>
-                        <canvas id="name_canvas" width="500" height="500"></canvas>
+                        <canvas id="name_canvas" width="540" height="540"></canvas>
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@
                         <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward">
                         <p class="messagerandomreward">วงล้อสุ่มของรางวัล</p>
                         <div class="messagequantityrandomreward-1">
-                            <span class="messagequantityrandomreward">จำนวนของรายชื่อ {{ $event->wheel->rewards->count() }} รายการ</span>
+                            <span class="messagequantityrandomreward">จำนวนเริ่มต้นรางวัล {{ $event->wheel->rewards->count() }} วงล้อ</span>
                         </div>
                     </div>
 
@@ -109,7 +109,7 @@
 
                     <div class="rewardcanvas">
                         <div class="rewardcanvas-1"></div>
-                        <canvas id="reward_canvas" width="500" height="500"></canvas>
+                        <canvas id="reward_canvas" width="540" height="540"></canvas>
                     </div>
                 </div>
 
@@ -173,7 +173,7 @@
                         <p class="rawardname">{{ $winner->reward->name ?? '-' }}</p>
                     </div>
                 </div>
-
+                <hr class="linesectionluckywinner">
                     @empty
                         <p class="warnnothaveluckywinner">ยังไม่มีผู้โชคดี</p>
                     @endforelse
