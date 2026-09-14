@@ -607,14 +607,9 @@ let rewardwheel = null;
 function createwheel(canvasId, items) {
     const canvas = document.getElementById(canvasId);
 
-    //ถ้าไม่เจอ canvas เลย ก็ไม่ต้องทำต่อ
+    //เช็คว่ามี canvas จริงมั้ย
     if (!canvas) {
         return null;
-    }
-
-    //ถ้าไม่มี items เลยตั้งแต่แรก ให้เป็น array ว่างแทน null/undefined กันโค้ดข้างล่าง error
-    if (!items) {
-        items = [];
     }
 
     const ctx = canvas.getContext('2d');
@@ -622,18 +617,15 @@ function createwheel(canvasId, items) {
     //หาจุดกึ่งกลางของวงกลม และรัศมี
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
-
-    //ไม่ให้ชนกับขอบ
-    const radius = centerX - 5;
-
-   //เอาไว้ให้มันขยายหรือลดวงล้อเล็กๆสีขาวข้างใน
+    const radius = centerX - 8;
+    //เอาไว้ให้มันขยายหรือลดวงล้อเล็กๆสีขาวข้างใน
     const holeRadius = radius * 0.22;
  
 
     //สีของวงล้อสุ่มทั้ง 2 วง
     const colorList = ['#4A90D9', '#2ecc71', '#f1c40f', '#e67e22', '#e74c3c', '#e91e8c', '#9b59b6', '#5dade2'];
 
-    //รวมเปอร์เซ็นต์ทั้งหมดไว้ก่อน เอาไปคำนวณสัดส่วนของแต่ละชิ้น
+    //เอาเปอร์เช็นต์ของทุกรายการที่กรอกไป แล้วมาบวกสะสมให้ครบทุกรายการเพื่อจะเอาไปคำนวนใช้งานได้จริง
     let totalpercent = 0;
     for (let i = 0; i < items.length; i++) {
         totalpercent = totalpercent + items[i].percent;

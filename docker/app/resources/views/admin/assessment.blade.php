@@ -178,7 +178,6 @@
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">
 
-
         <div class="sectionassessment" data-status="open" data-random="false">
             <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
             <div class="frameinformation-assessment">
@@ -191,31 +190,28 @@
                 </div>
                     <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
                     <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
+                      <button class="assessment-open-1">
+                    <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
+                    </button>
+            </template>
+
+            <template id="Enterrandom">
+                <a href="{{ url('admin/spinwhell') }}" class="enter-random">
+                    <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
+                    <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
+                </a>
+            </template>
+
+            <template id="Viewhistory">
+                <a href="{{ url('admin/history_random') }}" class="view-history">
+                    <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                </a>
+            </template> 
                 </div>
             </div>
         </div>
-    
-    
-    <template id="Assessmentopen1">
-        <button class="assessment-open-1">
-            <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
-            </button>
-    </template>
-
-    <template id="Enterrandom">
-        <a href="{{ url('admin/spinwhell') }}" class="enter-random">
-            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
-            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
-        </a>
-    </template>
-
-    <template id="Viewhistory">
-        <a href="{{ url('admin/history_random') }}" class="view-history">
-            <p class="message-view-history">ดูประวัติการสุ่ม</p>
-        </a>
-    </template> 
     </div>
-</div>
+
 
 <dialog class="assignevaluation" id="assign_evaluation" >
     <div class="framephotomessage-evaluation">

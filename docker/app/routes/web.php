@@ -8,18 +8,23 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RewardController;
 use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// ส่วนloginและ route ไปตามrole
+    Route::get('/user/loginuser',[AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login',[AuthController::class,'login'])->name('login.submit');
+    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 // ส่วนของ Admin 
 Route::prefix('admin')->group(function () {
     
     // Dashboard & Profile
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
-    });
+    })->name('admin.dashboard');
 
     // Route::get('/edituser', function () {
     //     return view('admin.edituser');
@@ -49,8 +54,6 @@ Route::prefix('admin')->group(function () {
     Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
     Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
     Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
-    // Route::get('/editreward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit');
-    // Route::put('/editreward/{id}',[RewardController::class,'update'])->name('admin.reward.update');
 
     // ระบบจัดการวงล้อสุ่ม
     Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
@@ -113,15 +116,15 @@ Route::prefix('user')->group(function () {
 
     Route::get('/home', function () {
         return view('user.home');
-    });
+    })->name('user.home');
 
     Route::get('/spin', function () {
         return view('user.spin');
     });
 
-    Route::get('/loginuser', function () {
-        return view('user.loginuser');
-    });
+    // Route::get('/loginuser', function () {
+    //     return view('user.loginuser');
+    // });
 
     Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');//->middleware('auth');
     Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');//->middleware('auth');
