@@ -25,7 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        View::share('user', Auth::user() ?? User::find(1));
+        View::composer('*', function ($view) {
+            $view->with('user', Auth::user());
+        });
         View::share('rewards', Reward::orderByDesc('reward_id')->get());
     }
 }

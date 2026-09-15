@@ -45,7 +45,7 @@ class AuthController extends Controller
             };
         }
         return back()->withErrors([
-            'username'=>'ชื่อผู้ใช้ไม่ถูกต้อง',
+            'username'=>'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
         ])->onlyInput('username');
     }
     // ไว้ออกจากระบบ

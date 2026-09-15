@@ -620,7 +620,9 @@ function createwheel(canvasId, items) {
     const radius = centerX - 8;
     //เอาไว้ให้มันขยายหรือลดวงล้อเล็กๆสีขาวข้างใน
     const holeRadius = radius * 0.22;
- 
+
+    //เก็บมุมหมุนล่าสุดของวงล้อนี้ไว้(แก้ปัญหาวงล้อเด้งกลับตำแหน่งเดิม)
+    let wheelrotation = 0;
 
     //สีของวงล้อสุ่มทั้ง 2 วง
     const colorList = ['#4A90D9', '#2ecc71', '#f1c40f', '#e67e22', '#e74c3c', '#e91e8c', '#9b59b6', '#5dade2'];
@@ -634,15 +636,10 @@ function createwheel(canvasId, items) {
     //ฟังก์ชันวาดวงล้อ เรียกใหม่ทุกครั้งตอนหมุน เพื่อให้เห็น animation
     function draw(currentrotation) {
 
-        //ถ้าไม่ส่งมุมมา ให้เริ่มที่ 0
-        if (currentrotation === undefined) {
-            currentrotation = 0;
-        }
-
         //ล้างภาพเก่าก่อนวาดใหม่
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        //ถ้าไม่มีข้อมูลให้สุ่มแล้วหรือหมดให้วาดวงกลมสีขาวเต็มวงค้างไว้แทนพื้นที่ว่างด้วย
+        //ถ้ารายการหมดแล้วให้วาดวงกลมสีขาวเปล่าๆไว้แทนแล้ว return ออกมาเลยไม่ต้องทำต่อ
         if (items.length === 0) {
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
@@ -651,12 +648,12 @@ function createwheel(canvasId, items) {
             return;
         }
 
+        //วาดทีละส่วนของวงล้อ เริ่มต้นวาดมุมปัจจุบันจะขยับไปเรื่อยๆทุกครั้งที่วาด
         let anglesofar = currentrotation;
-
         for (let i = 0; i < items.length; i++) {
 
-            const item = items[i];
 
+            const item = items[i];
             //คำนวณว่าชิ้นนี้ควรกว้างเท่าไหร่
             const slicesize = (item.percent / totalpercent) * 2 * Math.PI;
             const midangle = anglesofar + slicesize / 2;
@@ -672,14 +669,15 @@ function createwheel(canvasId, items) {
             ctx.fillStyle = colorList[colorindex];
             ctx.fill();
 
-            //ถ้าชิ้นนี้มีจำนวนคงเหลือ (quantity) ให้ต่อท้ายชื่อไปด้วย เช่น "สมุด (2)"
+            //เอาไว้โชว์ชื่อกับจำนวนของรางวัล"
             let displaylabel = item.label;
             if (item.quantity !== undefined) {
                 displaylabel = item.label + ' (' + item.quantity + ')';
             }
 
-            //หมุนแกนวาดภาพให้ตรงกับมุมกึ่งกลางของชิ้นนี้ ทำให้ข้อความวิ่งตามแนวรัศมี ไม่ทับชิ้นข้างๆ
+            //บันทึกค่าปัจจุบันไว้กู้คืนได้ทีหลัง
             ctx.save();
+            //ย้ายจุดอ้างอิงไปที่ค่าตรงกลาง
             ctx.translate(centerX, centerY);
             ctx.rotate(midangle);
 
@@ -687,22 +685,20 @@ function createwheel(canvasId, items) {
             ctx.textAlign = 'right';
             ctx.textBaseline = 'middle';
 
-            //ความยาวที่มีให้ข้อความ คือระยะจากรูตรงกลางไปเกือบถึงขอบวงล้อ
-            const maxtextwidth = radius - holeRadius - 15;
-
-            //จำกัดขนาดฟอนต์สูงสุดตามความกว้างของชิ้น (มุมเปิดของชิ้น) ตรงจุดใกล้รูตรงกลาง
-            //กันไม่ให้ตัวหนังสือสูงเกินจนไปชนชิ้นข้างบน-ล่างของตัวเอง
+            
+            //กันไม่ให้ตัวหนังสือสูงเกินความใหญ่ของชิ้นส่วนวงล้อแต่ละวง
             let maxfontbyheight = slicesize * (holeRadius + 40);
-            if (maxfontbyheight = 20){}
+            if (maxfontbyheight > 20){
+                maxfontbyheight = 20
+            }
 
-            let fontsize = Math.floor(maxfontbyheight);
-            
-            ctx.font = 'bold ' + fontsize + 'px Chakra Petch, sans-serif';
-            
-  
-            //วาดข้อความให้ปลายข้อความอยู่ใกล้ขอบวงล้อ (ห่างจากขอบนิดหน่อย)
-            ctx.fillText(displaylabel, radius - 25, 0);
+            ctx.font = 'bold ' + maxfontbyheight + 'px Chakra Petch, sans-serif';
 
+
+                //เอาไว้ขยับข้อความไปข้างในวงจะไม่ได้ไม่ชนกรอบ
+                ctx.fillText(displaylabel, radius - 25, 0);
+
+            //คืนค่าสถานะ canvas กลับไปเป็นก่อนหน้าsave()
             ctx.restore();
 
             //ขยับไปวาดชิ้นส่วนวงล้อถัดไป
@@ -718,8 +714,6 @@ function createwheel(canvasId, items) {
 
 
     //ฟังก์ชันสุ่มว่าจะได้ชิ้นไหน โดยดูจากเปอร์เซ็นต์
-    //หลักการ: สุ่มเลขขึ้นมาเลขนึงในช่วง 0 ถึง totalpercent แล้วไล่บวกเปอร์เซ็นต์ของแต่ละชิ้นไปเรื่อยๆ
-    //ชิ้นไหนที่บวกแล้วเลขสุ่มตกอยู่ในช่วงนั้น ก็คือชิ้นที่ถูกสุ่มได้
     function pickrandomitem() {
         const randomnumber = Math.random() * totalpercent;
         let countup = 0;
@@ -732,7 +726,7 @@ function createwheel(canvasId, items) {
             }
         }
 
-        //เผื่อกรณีปัดเศษพลาด ให้เอาตัวสุดท้ายไปเลย
+        //เผื่อกรณีปัดเศษพลาดให้เอาตัวสุดท้ายไปเลย
         const lastindex = items.length - 1;
         return items[lastindex];
     }
@@ -741,7 +735,7 @@ function createwheel(canvasId, items) {
     //ฟังก์ชันหมุนวงล้อ พอหมุนเสร็จแล้วจะเรียก callback ที่ชื่อ onfinish พร้อมส่งผู้ชนะกลับไปให้
     function spin(onfinish) {
 
-        //สุ่มไว้ล่วงหน้าเลยว่าใครชนะ แล้วค่อยหมุนวงล้อไปให้หยุดตรงจุดนั้น
+        //ความจริงคือได้ผลสุ่มตั้งแต่ตรงนี้แล้ว ที่วงล้อสุ่มเป็นแค่animationเฉยๆ
         const winner = pickrandomitem();
 
         //หามุมเริ่มต้นของชิ้นที่ชนะ โดยไล่บวกขนาดของชิ้นก่อนหน้าไปเรื่อยๆ จนเจอชิ้นที่ชนะ
@@ -757,11 +751,24 @@ function createwheel(canvasId, items) {
         const winnerslicesize = (winner.percent / totalpercent) * 2 * Math.PI;
         const winnermiddleangle = anglebeforewinner + (winnerslicesize / 2);
 
-        //หมุนหลายรอบก่อน แล้วค่อยไปหยุดตรงชิ้นที่ชนะ (ลบด้วย PI/2 เพราะเข็มชี้อยู่ด้านบน)
+        //หมุน 5 รอบ
         const spinrounds = 5;
-        const finalangle = (spinrounds * 2 * Math.PI) + (-Math.PI / 2 - winnermiddleangle);
 
-        const spinduration = 4000; //หมุน 4 วินาที
+        //ทำให้ชีของรางวัลได้ตรงจุด
+        const targetangle = -Math.PI/2  - winnermiddleangle;
+
+        //หาระยะที่ต้องหมุนเพิ่มจากตำแหน่งปัจจุบัน ให้ไปตรงเป้าหมายพอดี
+        let diff = (targetangle - wheelrotation) % (2 * Math.PI);
+        if (diff < 0) {
+            diff = diff + 2 * Math.PI;
+        }
+
+        //มุมเริ่มต้นของการหมุน
+        const startrotation = wheelrotation;
+        const finalangle = startrotation + (spinrounds * 2 * Math.PI) + diff;
+
+        const spinduration = 3000;
+        //ทำเวลาเป็นnullไว้ก่อนถ้ามีการเปลี่ยนแปลงจะเก็บเวลาแรกไว้
         let starttime = null;
 
         function animate(timestamp) {
@@ -778,27 +785,31 @@ function createwheel(canvasId, items) {
                 progress = 1;
             }
 
-            //ทำให้ช่วงท้ายค่อยๆ ช้าลง ดูเป็นธรรมชาติกว่าหมุนเร็วคงที่
-            const slowdown = 1 - Math.pow(1 - progress, 3);
+            //ทำให้ช่วงท้ายค่อยๆ ช้าลง
+            const slowdown = 1 - Math.pow (1 - progress, 3);
 
-            draw(finalangle * slowdown);
+            //จะวาดภาพใหม่ ทุกครั้งที่มีการสุ่ม
+            draw(startrotation + (finalangle - startrotation) * slowdown);
 
             if (progress < 1) {
                 //ยังหมุนไม่เสร็จ วาดเฟรมถัดไป
                 requestAnimationFrame(animate);
             } else {
+                //จำตำแหน่งล่าสุดไว้ ให้รอบต่อไปหมุนต่อจากตรงนี้ ไม่เด้งกลับที่เดิม
+                wheelrotation = finalangle;
+
                 //หมุนเสร็จแล้ว บอกผลลัพธ์กลับไป
                 if (onfinish) {
                     onfinish(winner);
                 }
             }
         }
-
+        //สั่งให้กดเริ่มเพื่อให้ animate ทำงานครั้งแรกหรอ
         requestAnimationFrame(animate);
     }
 
 
-    //ฟังก์ชันเอาไว้ลดจำนวนของรางวัลที่สุ่มได้ลง 1 ถ้าหมดแล้วให้ลบออกจากวงล้อเลย
+    //ฟังก์ชันเอาไว้ลดจำนวนของรางวัลที่สุ่มได้ลง 1 ถ้าหมดแล้วให้ลบออกจากวงล้อเลย เอาไว้ใช้กันวงล้อของรางวัล
     function reduceandremove(winneritem) {
 
         //ถ้าไม่มี quantity เก็บไว้ (เช่นวงล้อรายชื่อ) ก็ไม่ต้องทำอะไร
@@ -822,12 +833,12 @@ function createwheel(canvasId, items) {
             }
         }
 
-        //วาดวงล้อใหม่ให้ตรงกับข้อมูลล่าสุด (ตัวเลขลดลง หรือชิ้นหายไปแล้ว)
-        draw(0);
+        //วาดวงล้อใหม่ให้ตรงกับข้อมูลล่าสุด
+        draw(wheelrotation);
     }
 
 
-    //ฟังก์ชันเอาไว้ลบรายชื่อที่ถูกสุ่มได้ออกจากวงล้อเลยทันที (ใช้กับวงล้อรายชื่อ ที่สุ่มได้แค่ครั้งเดียวต่อคน)
+    //ฟังก์ชันเอาไว้ลบรายชื่อที่ถูกสุ่มได้ออกจากวงล้อเลยทันที เอาไว้ใช่กับวงล้อรายชื่อ
     function removeitem(winneritem) {
 
         const index = items.indexOf(winneritem);
@@ -842,14 +853,14 @@ function createwheel(canvasId, items) {
         }
 
         //วาดวงล้อใหม่ให้ตรงกับข้อมูลล่าสุด (ชื่อที่สุ่มไปแล้วหายไปแล้ว)
-        draw(0);
+        draw(wheelrotation);
     }
 
-
-    //วาดวงล้อครั้งแรกไว้ก่อน (ยังไม่หมุน)
+  //วาดวงล้อครั้งแรกไว้ก่อนตอนยังไม่กดสุ่ม
     draw(0);
 
-    //ส่งฟังก์ชัน spin, reduceandremove และ removeitem ออกไปให้ข้างนอกเรียกใช้ได้
+  
+    //ส่งฟังก์ชันออกไปให้ข้างนอกเรียกใช้ได้
     return {
         spin: spin,
         reduceandremove: reduceandremove,
@@ -858,41 +869,38 @@ function createwheel(canvasId, items) {
 }
 
 
-//สร้างวงล้อทั้ง 2 วงตอนโหลดหน้าเสร็จ
-//nameData กับ rewardData มาจาก script ที่ฝังไว้ในไฟล์ blade ก่อนไฟล์นี้
+//เช็คว่ารายชื่อกับของรางวัลที่ได้รับจาก blade.php มีอยู่จริงมั้ยถ้ามีจริงก็จะเอาข้อมูลมาสร้างวงล้อสุ่ม
 if (typeof nameData !== 'undefined') {
     namewheel = createwheel('name_canvas', nameData);
 }
-
 if (typeof rewardData !== 'undefined') {
     rewardwheel = createwheel('reward_canvas', rewardData);
 }
 
 
 //ปุ่มกดเริ่มสุ่มรางวัล
-const btnStartRandom = document.getElementById('btn_startRandomreward');
+const btnstartRandom = document.getElementById('btn_startRandomreward');
 
-if (btnStartRandom) {
+if (btnstartRandom) {
 
-    btnStartRandom.addEventListener('click', function () {
+    btnstartRandom.addEventListener('click', function () {
 
-        //เช็ค toggle ปิด/เปิดของแต่ละวงล้อ ว่าตอนนี้เปิดให้สุ่มอันไหนบ้าง
-        const nametoggle = document.getElementById('btn_on_offlistnamesRandom');
-        const rewardtoggle = document.getElementById('btn_no_offrandomreward');
+        //เช็คปิด/เปิดของแต่ละวงล้อ ว่าตอนนี้เปิดให้สุ่มอันไหนบ้าง
+        const btnonofflistnamesRandom = document.getElementById('btn_on_offlistnamesRandom');
+        const btnnooffrandomreward = document.getElementById('btn_no_offrandomreward');
 
-        //เช็คทีละเงื่อนไขว่าวงล้อรายชื่อควรหมุนมั้ย
-        //ต้องเปิด toggle ไว้ + มีวงล้ออยู่จริง + ยังมีรายชื่อเหลือให้สุ่ม
+
+        //ตั้งค่าเริ่มต้นไว้ก่อน flase วงล้อรายชื่อ
         let shouldspinname = false;
-        if (nametoggle && nametoggle.checked) {
+        if (btnonofflistnamesRandom && btnonofflistnamesRandom.checked) {
             if (namewheel && nameData.length > 0) {
                 shouldspinname = true;
             }
         }
 
-        //เช็คทีละเงื่อนไขว่าวงล้อของรางวัลควรหมุนมั้ย
-        //ต้องเปิด toggle ไว้ + มีวงล้ออยู่จริง + ยังมีของรางวัลเหลือให้สุ่ม
+        //ตั้งค่าเริ่มต้นไว้ก่อน flase วงล้อของรางวัล
         let shouldspinreward = false;
-        if (rewardtoggle && rewardtoggle.checked) {
+        if (btnnooffrandomreward && btnnooffrandomreward.checked) {
             if (rewardwheel && rewardData.length > 0) {
                 shouldspinreward = true;
             }
@@ -904,7 +912,7 @@ if (btnStartRandom) {
         }
 
         //ปิดปุ่มไว้กันคนกดซ้ำระหว่างวงล้อกำลังหมุน
-        btnStartRandom.disabled = true;
+        btnstartRandom.disabled = true;
 
         //ตัวแปรไว้เก็บผลลัพธ์ของแต่ละวง
         let nameresult = null;
@@ -925,22 +933,23 @@ if (btnStartRandom) {
 
             finishedwheelcount = finishedwheelcount + 1;
 
-            //รอให้ครบตามจำนวนวงล้อที่สั่งหมุนในรอบนี้ ค่อยแสดงผลรวม
+            //เช็คว่าหมุนครบยังถ้าครบแล้วก็ให้เปิดใช้งานปุ่ม
             if (finishedwheelcount !== totalwheelstospin) {
                 return;
             }
 
-            btnStartRandom.disabled = false;
+            btnstartRandom.disabled = false;
 
-            //ลบ/ลดจำนวนเฉพาะวงล้อที่สุ่มได้ผลจริงในรอบนี้
+            //ลบชิ้นส่วนรายชื่อไปเลย
             if (nameresult) {
                 namewheel.removeitem(nameresult);
             }
+            //ลดจำนวนทีละ1และเช็คว่าหมดยังถ้าหมดแล้วค่อยลบออกจากชิ้นส่วนของรางวัล
             if (rewardresult) {
                 rewardwheel.reduceandremove(rewardresult);
             }
 
-            //บันทึกผลจริงที่ backend ทันทีที่มีผลอย่างน้อย 1 วง ไม่ว่าจะสุ่มวงเดียวหรือทั้งคู่ก็ตาม
+            //เช็คว่ารอบนี้มีผลการสุ่มเกิดขึ้นจริงอย่างน้อย 1 อย่างมั้ย
             let hasanyresult = false;
             if (nameresult || rewardresult) {
                 hasanyresult = true;
@@ -970,16 +979,15 @@ if (btnStartRandom) {
                         reward_id: rewardIdToSend
                     })
                 })
-                    .catch(function (error) {
-                        console.error('บันทึกผลไม่สำเร็จ:', error);
-                    });
             }
 
+            //พอสุ่มเสร็จpopupก็จะเปิดออกมา
             showwinnerpopup(nameresult, rewardresult);
         }
 
-        //สั่งหมุนเฉพาะวงล้อที่เปิด toggle ไว้เท่านั้น
+        //สั่งหมุนเฉพาะวงล้อที่เปิดไว้เท่านั้น
         if (shouldspinname) {
+            //สั่งหมุนวงล้อ พร้อมส่ง callback function เข้าไป
             namewheel.spin(function (winner) {
                 nameresult = winner;
                 onewheelfinished();
@@ -998,30 +1006,14 @@ if (btnStartRandom) {
 //ฟังก์ชันเปิด popup แสดงผู้โชคดีหลังวงล้อหมุนเสร็จ แทนการใช้ alert()
 function showwinnerpopup(nameresult, rewardresult) {
 
-    const popup = document.getElementById('popup_luckywinner');
-    if (!popup) {
-        //เผื่อไม่มี popup ในหน้า ก็ยัง fallback เป็น alert() เดิมไว้กันพัง
-        let namelabel = '-';
-        if (nameresult) {
-            namelabel = nameresult.label;
-        }
+    const popupluckywinner = document.getElementById('popup_luckywinner');
 
-        let rewardlabel = '-';
-        if (rewardresult) {
-            rewardlabel = rewardresult.label;
-        }
-
-        alert('ผู้โชคดี: ' + namelabel + '\nได้รับรางวัล: ' + rewardlabel);
-        return;
-    }
-
-    //ถ้ารอบนี้ไม่ได้สุ่มรายชื่อ (toggle ปิดอยู่) ให้โชว์ข้อความแทนว่าไม่มีรายชื่อ
+    //ถ้ารอบนี้ไม่ได้สุ่มรายชื่อเพราะปิดอยู่ ให้โชว์ข้อความแทนว่าไม่มีรายชื่อ
     let nametext = '-- ไม่มีรายชื่อ --';
     if (nameresult) {
         nametext = nameresult.label;
     }
 
-    //ถ้ารอบนี้ไม่ได้สุ่มของรางวัล (toggle ปิดอยู่) ให้โชว์ข้อความแทนว่าไม่มีของรางวัล
     let rewardtext = '-- ไม่มีของรางวัล --';
     if (rewardresult) {
         rewardtext = rewardresult.label;
@@ -1030,8 +1022,7 @@ function showwinnerpopup(nameresult, rewardresult) {
     document.getElementById('messageuser_popupluckywinner_1').textContent = nametext;
     document.getElementById('message_rewardreceived_2').textContent = rewardtext;
 
-    //ใช้ openDialog ที่มี animation อยู่แล้วในไฟล์นี้
-    openDialog(popup);
+    openDialog(popupluckywinner);
 }
 
 //ปุ่มกดปิด popup ผู้โชคดี
@@ -1041,36 +1032,39 @@ if (offpopupluckywinner) {
     offpopupluckywinner.addEventListener('click', function () {
         closeDialog(document.getElementById('popup_luckywinner'));
     });
-}   
-
-//ฟังก์ชันเอาไว้ทำให้วงล้อจางลงเมื่อกด toggle ปิด และกลับมาชัดเมื่อกด toggle เปิด
-function updatewheeldimstate(toggleId, canvasId) {
-    const toggle = document.getElementById(toggleId);
-    const canvas = document.getElementById(canvasId);
-
-    if (!toggle || !canvas) {
-        return;
-    }
-
-    function refreshdim() {
-        if (toggle.checked) {
-            canvas.classList.remove('wheel-disabled');
-        } else {
-            canvas.classList.add('wheel-disabled');
-        }
-    }
-
-    //เช็คสถานะทันทีตอนโหลดหน้า เผื่อ toggle ถูกปิดไว้ตั้งแต่แรก
-    refreshdim();
-
-    //เช็คใหม่ทุกครั้งที่มีการกด toggle
-    toggle.addEventListener('change', refreshdim);
 }
 
-//ผูกไว้กับวงล้อรายชื่อ และวงล้อของรางวัล
-updatewheeldimstate('btn_on_offlistnamesRandom', 'name_canvas');
-updatewheeldimstate('btn_no_offrandomreward', 'reward_canvas');
+//ฟังก์ชันเอาไว้ทำให้วงล้อจางลงเมื่อกด ปิด และกลับมาชัดเมื่อกด เปิดของรายชื่อ
+const btnonofflistnamesRandom = document.getElementById('btn_on_offlistnamesRandom');
+const namecanvas = document.getElementById('name_canvas');
 
+if(btnonofflistnamesRandom && namecanvas){
+    function openoffwheellistname(){
+        if(btnonofflistnamesRandom.checked){
+            namecanvas.classList.remove('wheel-disabled');
+        }else{
+            namecanvas.classList.add('wheel-disabled');
+        }
+    }
+    openoffwheellistname()
+    btnonofflistnamesRandom.addEventListener('change', openoffwheellistname);
+}
+
+//ฟังก์ชันเอาไว้ทำให้วงล้อจางลงเมื่อกด ปิด และกลับมาชัดเมื่อกด เปิดของรางวัล
+const btnnooffrandomreward = document.getElementById('btn_no_offrandomreward');
+const rewardcanvas = document.getElementById('reward_canvas');
+
+if(btnnooffrandomreward && rewardcanvas){
+    function openoffwheellistreward(){
+        if(btnnooffrandomreward.checked){
+            rewardcanvas.classList.remove('wheel-disabled');
+        } else{
+            rewardcanvas.classList.add('wheel-disabled');
+        }
+    }
+    openoffwheellistreward()
+    btnnooffrandomreward.addEventListener('change', openoffwheellistreward);
+}
 
 
 });

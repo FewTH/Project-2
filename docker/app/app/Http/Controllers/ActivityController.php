@@ -36,28 +36,19 @@ class ActivityController extends Controller
             'id' => $r->registration_id,
             'label' => $r->full_name,
             'percent' => 1
-        ])
-        ->values();
+        ])->values();
         
         $rewardData = $event->wheel
             ? $event->wheel->rewards
-                ->filter(fn($r) => ($r->pivot->quantity_selected ?? 0) > 0)
-                ->map(fn($r) => [
+                ->filter(fn($r) => ($r->pivot->quantity_selected ?? 0) > 0)->map(fn($r) => [
                 'id' => $r->reward_id,
                 'label' => $r->name,
                 'percent' => $r->rate ?? 0,
                 'quantity' => $r->pivot->quantity_selected ?? 0
-            ])
-                ->values()
-            : collect();
+            ])->values(): collect();
 
         // ดึงผู้โชคดีล่าสุด 6 คน พร้อมชื่อรางวัลจริงจาก reward_id ที่บันทึกไว้ตอนสุ่ม
-        $latestwinners = $event->registrations()
-            ->where('is_drawn', true)
-            ->with('reward')
-            ->orderByDesc('drawn_at')
-            ->take(6)
-            ->get();
+        $latestwinners = $event->registrations()->where('is_drawn', true)->with('reward')->orderByDesc('drawn_at')->take(6)->get();
 
         return view('admin.random_reward', [
             'event' => $event,

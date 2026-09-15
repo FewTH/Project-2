@@ -12,7 +12,7 @@
         <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper-1">
     <a href="{{ url('manager/profile') }}" class="btn-user">
-        @if($user->profile_image)
+        @if($user?->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
         <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">

@@ -11,7 +11,7 @@
     <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
-        @if($user->profile_image)
+        @if($user?->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
         <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
@@ -188,29 +188,32 @@
                         <p class="message-status">เปิดอยู่</p>
                     </div>
                 </div>
+
+
                     <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
                     <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
-                      <button class="assessment-open-1">
-                    <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
-                    </button>
-            </template>
+                        <template id="Viewhistory">
+                            <button class="assessment-open-1">
+                                <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
+                            </button>
+                        </template>
+                    <template id="Enterrandom">
+                        <a href="{{ url('admin/spinwhell') }}" class="enter-random">
+                            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
+                            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
+                        </a>
+                    </template>
 
-            <template id="Enterrandom">
-                <a href="{{ url('admin/spinwhell') }}" class="enter-random">
-                    <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
-                    <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
-                </a>
-            </template>
 
-            <template id="Viewhistory">
-                <a href="{{ url('admin/history_random') }}" class="view-history">
-                    <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                </a>
-            </template> 
+                    <a href="{{ url('admin/history_random') }}" class="view-history">
+                        <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                    </a>
+                </template> 
                 </div>
             </div>
         </div>
-    </div>
+   
+
 
 
 <dialog class="assignevaluation" id="assign_evaluation" >

@@ -13,7 +13,7 @@ class ProfileController extends Controller
     //เอาไว้ดึงข้อมูลuserมาใช้งานซ้ำ
     private function getUser()
     {
-        return Auth::user() ?? User::find(1);
+        return Auth::user();
     }
 
 
@@ -156,8 +156,7 @@ class ProfileController extends Controller
 
         $user->update(['profile_image' => $savenewphoto] );
 
-        return back()->with('success', '✓ เปลี่ยนรูปภาพใหม่สำเร็จแล้ว')
-                     ->with('open_popup', true);
+        return back()->with('success', '✓ เปลี่ยนรูปภาพใหม่สำเร็จแล้ว')->with('open_popup', true);
 
     }
 

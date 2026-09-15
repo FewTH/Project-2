@@ -11,7 +11,7 @@
 <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper-1">
     <a href="{{ url('admin/profile') }}" class="btn-user">
-        @if($user->profile_image)
+        @if($user?->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @else
         <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
@@ -67,7 +67,7 @@
     <div class="profile-left">
         <!--รูปภาพผู้ใช้-->
         <div class="photo_user">
-        @if ($user->profile_image)
+        @if ($user?->profile_image)
             <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปภาพผู้ใช้" class="photo_user-img-1" id="photo_user_img_2">
         @else
             <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปภาพผู้ใช้" class="photo_user-img" id="photo_user_img_1">

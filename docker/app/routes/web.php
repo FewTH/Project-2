@@ -19,7 +19,7 @@ Route::get('/', function () {
     Route::post('/login',[AuthController::class,'login'])->name('login.submit');
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 // ส่วนของ Admin 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     
     // Dashboard & Profile
     Route::get('/dashboard', function () {
@@ -97,10 +97,15 @@ Route::prefix('admin')->group(function () {
 
     
     Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
+
+
+    Route::get('/button_senditgmail', function () {
+        return view('admin.button_senditgmail');
+    });
 });
 
 // ส่วนของ User (ผู้ใช้งานทั่วไป)
-Route::prefix('user')->group(function () {
+Route::prefix('user')->middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'userProfile']); 
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
@@ -126,13 +131,13 @@ Route::prefix('user')->group(function () {
     //     return view('user.loginuser');
     // });
 
-    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');//->middleware('auth');
-    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');//->middleware('auth');
+    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
+    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
 });
 
 
 //ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
-Route::prefix('manager')->group(function () {
+Route::prefix('manager')->middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'managerProfile']);
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
 

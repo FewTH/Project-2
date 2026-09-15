@@ -2374,78 +2374,6 @@ body.no-scroll {
   background-color: #FCD53F;
   justify-content: right;
 }
-/* ตัวบอดี้ของหน้าล็อกอิน */
-/* login box */
-.login-box{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 30px;
-  margin: auto;
-  margin-top: 30px;
-  border-radius: 20px;
-  background-color: #d9dada;
-  width: 400px;
-}
-.buulogonobg{
-  padding: 60px 50px;
-}
-/* ข้อความlogin */
-.logintext1{
-  margin-bottom: 5px;
-}
-.logintext2{
-  font-weight: 500;
-  margin-top: 5px;
-}
-/* หัวข้อที่ให้กรอกอีเมล */
-.emailtext{
-  margin-right: 95px;
-  margin-bottom: 10px;
-  font-weight: 700;
-  font-size: medium;
-}
-/* หัวข้อที่ให้กรอกรหัสผ่าน */
-.passtext{
-  margin-right: 130px;
-  margin-bottom: 10px;
-  font-weight: 700;
-  font-size: medium;
-}
-/* email */
-.email-box{
-  border-radius: 10px;
-  width: 300px;
-  height: 30px;
-}
-/* password */
-.passwd-box{
-  border-radius: 10px;
-  width: 300px;
-  height: 30px;
-}
-/* ปุ่มจดจำฉัน */
-.rememberbox{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 77%;
-  margin-top: 5px;
-  margin-bottom: 20px;
-}
-/* ตกแต่งปุ่มล็อกอิน */
-.login-btn{
-  font-weight: 500;
-  font-size: medium;
-  color: #FFFFFF;
-  border-color: #FCD53F;
-  background-color: #FCD53F;
-  margin-top: 20px;
-  border-radius: 10px;
-  width: 300px;
-  height: 50px;
-}
 /* ตกแต่งหน้า Home ทั้งหมด */
 .popular-reward{
   border-radius: 10px;
@@ -2908,4 +2836,71 @@ body.no-scroll {
 .test-content2{
   display: flex;
   justify-content: center;
+}
+/* แต่งหน้าlogin */
+/* คำอธิบายด้านบน */
+.descripppy{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #a8731d;;
+}
+/* boxหลัก */
+.login-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 30px;
+  margin: auto;
+  margin-top: 60px;
+  border-radius: 20px;
+  background-color: #fdfbf5;
+  border: 3px solid #d39b00;
+  width: 600px;
+}
+/* ส่วนช่องusername */
+.usrname-log-in{
+  margin-top: 5px;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #a8731d;
+}
+/* ช่องpassword */
+.passwdlog-main-box{
+  margin-top: 20px;
+}
+.passwd-log-in{
+  margin-top: 5px;
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #a8731d;
+}
+/* จดจำฉัน */
+.remember-main-box{
+  margin-top: 10px;
+}
+.remember-txt{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+/* ปุ่มlogin */
+.login-btn{
+  font-weight: 500;
+  font-size: medium;
+  color: #FFFFFF;
+  border: none;
+  background-color: #a8731d;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
 }
