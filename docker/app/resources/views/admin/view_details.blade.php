@@ -170,9 +170,10 @@
                         </div>
                         <hr class="lineQRcode">
                         <div class="img-QRcode">
-                            {!! QrCode::size(300)->generate(url('user/register_event/' . $event->event_id)) !!}
+                            <div class="img-QRcode-1">
+                                {!! QrCode::size(300)->generate(url('user/register_event/' . $event->event_id)) !!}
+                            </div>
                         </div>
-
                         <div class="framerecordshare">
                            <a href="{{ route('admin.activity.qrcode.download', $event->event_id) }}" class="btn-recordQrcode" id="btn_recordQrcode">
                                 <img src="{{ asset('admin/img/รูปของปุ่มบันทึก.png') }}" alt="รูปของปุ่มบันทึก" class="img-recordQrcode">

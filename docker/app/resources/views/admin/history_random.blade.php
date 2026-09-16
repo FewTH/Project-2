@@ -99,7 +99,7 @@
                 <div class="framereceivedlistname">
                     <div class="numberreceivelistname">
                        <p class="numberreceivelistname-1">12</p> 
-                        <div class="imgnumberreceivelistname">
+                        <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                 <div class="framernotacceptingyet">
                      <div class="numbernotacceptingyetlistname">
                        <p class="numbernotacceptingyetlistname-1">18</p> 
-                        <div class="imgnumbernotacceptingyetlistname">
+                        <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                     <img src="{{ asset('admin/img/รูปของหัวข้อรายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของหัวข้อรายชื่อผู้ได้รับรางวัล">
                     <p class="messagesectionlistnamerecipientreward">รายชื่อผู้ได้รับรางวัล</p>
                 </div>
-                <hr class="linesectionlistnamerecipientreward">
+                <hr class="linesectionlistnamerecipientreward1">
 
                 <div class="framebutton-sectionlistnamerecipientreward">
                     <button type="button" id="button_allsection" class="button-section">
@@ -164,32 +164,36 @@
                         <p class="circlenumbername">1</p>
                     </div>
                     <div class="username-listname">
-                        <span class="messageusername-listname">สมชายใจดี</span>
+                        <p class="messageusername-listname">สมชายใจดี</p>
                         <span class="messageusername-listname-1">#AB-2026-0001</span>
                     </div>
                     <div class="framereward-listname">
-                        <p class="messagereward-listname">ดินสอ</p>
-                    </div>
-                    <div class="framerstatusreward-listname">
-                        <p class="messagestatusreward-listname">รับแล้ว</p>
+                        <div class="framereward-listname-1">
+                            <p class="messagereward-listname">ดินสอ</p>
+                        </div>
+                        <div class="framerstatusreward-listname" id="framerstatusreward_listname">
+                            <p class="messagestatusreward-listname">รับแล้ว</p>
+                        </div>
                     </div>
                 </button>
                 <hr class="linesectionlistnamerecipientreward">
 
 
                  <button class="btn-openpopupname" id="btn_openpopupname">
-                    <div class=""framecirclenumbername>
+                    <div class="framecirclenumbername">
                         <p class="circlenumbername">1</p>
                     </div>
                     <div class="username-listname">
-                        <span class="messageusername-listname">สมชายใจดี</span>
+                        <p class="messageusername-listname">สมชายใจดี</p>
                         <span class="messageusername-listname-1">#AB-2026-0001</span>
                     </div>
                     <div class="framereward-listname">
-                        <p class="messagereward-listname">ดินสอ</p>
-                    </div>
-                    <div class="framerstatusreward-listname">
-                        <p class="messagestatusreward-listname">รับแล้ว</p>
+                        <div class="framereward-listname-1">
+                            <p class="messagereward-listname">ดินสอ</p>
+                        </div>
+                        <div class="framerstatusreward-listname1"  id="framerstatusreward_listname">
+                            <p class="messagestatusreward-listname1">ยังไม่รับ</p>
+                        </div>
                     </div>
                 </button>
                 <hr class="linesectionlistnamerecipientreward">
