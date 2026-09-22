@@ -19,16 +19,15 @@ Route::get('/', function () {
     Route::post('/login',[AuthController::class,'login'])->name('login.submit');
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 // ส่วนของ Admin 
-Route::prefix('admin')->middleware('auth')->group(function () {
+// Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('role:admin')->group(function () {
     
     // Dashboard & Profile
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
-    // Route::get('/edituser', function () {
-    //     return view('admin.edituser');
-    // });
+    
 
     Route::get('/profile', [ProfileController::class, 'adminProfile']);
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
@@ -60,17 +59,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
     Route::post('/managespin/store', [WheelController::class, 'store'])->name('admin.managespin.store');
 
-    //     return view('admin.edituser');
-    // });
+    
 
     // ระบบจัดการกิจกรรม
     Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
     Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
     Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
-    // Route::get('/managereward', function () {
-    //     return view('admin.managereward');
-    // });
+    
     
 
     Route::get('/view_details/{id}', [ActivityController::class, 'showviewdetails'])->name('admin.activity.detail');
@@ -105,7 +101,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 // ส่วนของ User (ผู้ใช้งานทั่วไป)
-Route::prefix('user')->middleware('auth')->group(function () {
+// Route::prefix('user')->middleware('auth')->group(function () {
+Route::prefix('user')->middleware('role:user')->group(function () {
     Route::get('/profile', [ProfileController::class, 'userProfile']); 
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
@@ -127,9 +124,7 @@ Route::prefix('user')->middleware('auth')->group(function () {
         return view('user.spin');
     });
 
-    // Route::get('/loginuser', function () {
-    //     return view('user.loginuser');
-    // });
+    
 
     Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
     Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
@@ -137,7 +132,8 @@ Route::prefix('user')->middleware('auth')->group(function () {
 
 
 //ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
-Route::prefix('manager')->middleware('auth')->group(function () {
+// Route::prefix('manager')->middleware('auth')->group(function () {
+Route::prefix('manager')->middleware('role:manager')->group(function () {
     Route::get('/profile', [ProfileController::class, 'managerProfile']);
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
 

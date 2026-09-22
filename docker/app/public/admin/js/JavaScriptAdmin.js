@@ -46,6 +46,10 @@ butactivity.addEventListener('click', function() {
 });
 }
 
+if (butactivity){
+    moveBulb(butactivity);
+}
+
 //ปุ่มกดแบบประเมินของหน้า assessment.blade.php
 const btnrate = document.getElementById('btn_rate')
 
@@ -804,7 +808,7 @@ function createwheel(canvasId, items) {
                 }
             }
         }
-        //สั่งให้กดเริ่มเพื่อให้ animate ทำงานครั้งแรกหรอ
+        //สั่งให้กดเริ่มเพื่อให้ animate ทำงานครั้งแรกเสมอ
         requestAnimationFrame(animate);
     }
 
@@ -1065,6 +1069,104 @@ if(btnnooffrandomreward && rewardcanvas){
     openoffwheellistreward()
     btnnooffrandomreward.addEventListener('change', openoffwheellistreward);
 }
+
+
+
+
+
+
+
+
+
+//ส่วนของหน้า history_random.blade.php
+//ปุ่มเปิด popup พบรายชื่อผู้ได้รับรางวัล
+const btnopenpopupname = document.getElementById('btn_openpopupname');
+
+if (btnopenpopupname){
+    btnopenpopupname.addEventListener('click', function(){
+        openDialog(document.getElementById('popuplistname_awardrecipient'));
+    });
+}
+
+//ปุ่มปิด popup พบรายชื่อผู้ได้รับรางวัล
+const btnoffpopuplistnameawardrecipient = document.getElementById('btn_offpopuplistnameawardrecipient');
+
+if (btnoffpopuplistnameawardrecipient){
+    btnoffpopuplistnameawardrecipient.addEventListener('click', function(){
+        closeDialog(document.getElementById('popuplistname_awardrecipient'));
+    });
+}
+
+
+const buttonallsection = document.getElementById('button_allsection');
+
+if (buttonallsection){
+    buttonallsection.addEventListener('click', function(){
+        document.getElementById('messagebutton_allsection').classList.add('active');
+        document.getElementById('messagebutton_receivedsection').classList.remove('active');
+        document.getElementById('messagebutton_notacceptingyetsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_allsection').classList.add('active');
+        document.getElementById('circlenumberbutton_receivedsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_notacceptingyetsection').classList.remove('active');
+        document.getElementById('numberbutton_allsection').classList.add('active');
+        document.getElementById('numberbutton_receivedsection').classList.remove('active');
+        document.getElementById('numberbutton_notacceptingyetsection').classList.remove('active');
+        lineorange(document.getElementById('button_allsection'));
+    });
+}
+
+if(buttonallsection){
+    lineorange(buttonallsection);
+}
+
+
+const buttonreceivedsection = document.getElementById('button_receivedsection');
+
+if (buttonreceivedsection){
+    buttonreceivedsection.addEventListener('click', function(){
+        document.getElementById('messagebutton_receivedsection').classList.add('active');
+        document.getElementById('messagebutton_allsection').classList.remove('active');
+        document.getElementById('messagebutton_notacceptingyetsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_receivedsection').classList.add('active');
+        document.getElementById('circlenumberbutton_allsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_notacceptingyetsection').classList.remove('active');
+        document.getElementById('numberbutton_receivedsection').classList.add('active');
+        document.getElementById('numberbutton_allsection').classList.remove('active');
+        document.getElementById('numberbutton_notacceptingyetsection').classList.remove('active');
+        lineorange(document.getElementById('button_receivedsection'));
+    });
+}
+
+
+const buttonnotacceptingyetsection = document.getElementById('button_notacceptingyetsection');
+
+
+if(buttonnotacceptingyetsection){
+    buttonnotacceptingyetsection.addEventListener('click', function(){
+        document.getElementById('messagebutton_notacceptingyetsection').classList.add('active');
+        document.getElementById('messagebutton_receivedsection').classList.remove('active');
+        document.getElementById('messagebutton_allsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_notacceptingyetsection').classList.add('active');
+        document.getElementById('circlenumberbutton_receivedsection').classList.remove('active');
+        document.getElementById('circlenumberbutton_allsection').classList.remove('active');
+        document.getElementById('numberbutton_notacceptingyetsection').classList.add('active');
+        document.getElementById('numberbutton_receivedsection').classList.remove('active');
+        document.getElementById('numberbutton_allsection').classList.remove('active');
+        lineorange(document.getElementById('button_notacceptingyetsection'));
+    });
+}
+
+
+function lineorange(button1) {
+    const orange = document.getElementById('yellow_linesection');
+    orange.style.marginLeft = button1.offsetLeft + 'px';
+
+}
+
+
+
+
+
 
 
 });

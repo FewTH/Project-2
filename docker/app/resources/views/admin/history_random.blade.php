@@ -128,9 +128,9 @@
                 <div class="framebutton-sectionlistnamerecipientreward">
                     <button type="button" id="button_allsection" class="button-section">
                         <div class="framebutton-allsectionlistnamerecipientreward">
-                            <p class="messagebutton-section" id="messagebutton_allsection">ทั้งหมด</p>
-                            <div class="circlenumberbutton-section" id="circlenumberbutton_allsection">
-                                <p class="numberbutton-section" id="numberbutton_allsection">30</p>
+                            <p class="messagebutton-section active" id="messagebutton_allsection">ทั้งหมด</p>
+                            <div class="circlenumberbutton-section active" id="circlenumberbutton_allsection">
+                                <p class="numberbutton-section active" id="numberbutton_allsection">30</p>
                             </div>
                         </div>
                     </button>
@@ -146,7 +146,7 @@
 
                      <button type="button" id="button_notacceptingyetsection" class="button-section">
                         <div class="framebutton-allsectionlistnamerecipientreward">
-                            <p class="messagebutton-section" id="messagebutton_notacceptingyetsection">ยังไม่ได้รับ</p>
+                            <p class="messagebutton-section" id="messagebutton_notacceptingyetsection">ยังไม่รับ</p>
                             <div class="circlenumberbutton-section" id="circlenumberbutton_notacceptingyetsection">
                                 <p class="numberbutton-section" id="numberbutton_notacceptingyetsection">18</p>
                             </div>
@@ -159,51 +159,83 @@
                     <div class="yellowlinesection" id="yellow_linesection"></div>
                 </div>
 
-                <button class="btn-openpopupname" id="btn_openpopupname">
-                    <div class=""framecirclenumbername>
-                        <p class="circlenumbername">1</p>
-                    </div>
-                    <div class="username-listname">
-                        <p class="messageusername-listname">สมชายใจดี</p>
-                        <span class="messageusername-listname-1">#AB-2026-0001</span>
-                    </div>
-                    <div class="framereward-listname">
-                        <div class="framereward-listname-1">
-                            <p class="messagereward-listname">ดินสอ</p>
-                        </div>
-                        <div class="framerstatusreward-listname" id="framerstatusreward_listname">
-                            <p class="messagestatusreward-listname">รับแล้ว</p>
-                        </div>
-                    </div>
-                </button>
-                <hr class="linesectionlistnamerecipientreward">
-
-
-                 <button class="btn-openpopupname" id="btn_openpopupname">
+                 <button class="btn-openpopupname" id="btn_openpopupname" data-status="not-received">
                     <div class="framecirclenumbername">
                         <p class="circlenumbername">1</p>
                     </div>
                     <div class="username-listname">
                         <p class="messageusername-listname">สมชายใจดี</p>
-                        <span class="messageusername-listname-1">#AB-2026-0001</span>
+                        <span class="messageusername-listname-1">#AB-2026-0008</span>
                     </div>
                     <div class="framereward-listname">
                         <div class="framereward-listname-1">
                             <p class="messagereward-listname">ดินสอ</p>
                         </div>
-                        <div class="framerstatusreward-listname1"  id="framerstatusreward_listname">
-                            <p class="messagestatusreward-listname1">ยังไม่รับ</p>
+                        <div class="framerstatusreward-listname1" data-status="not-received">
+                            <p class="messagestatusreward-listname1" id="messagestatusreward_listname_1">ยังไม่รับ</p>
                         </div>
                     </div>
                 </button>
                 <hr class="linesectionlistnamerecipientreward">
 
             </div>
-
-
-
-
     </div>
+
+    <dialog class="popuplistnameawardrecipient" id="popuplistname_awardrecipient">
+        <div class="img-popuplistnameawardrecipient">
+            <img src="{{ asset('admin/img/รูปของpopupรายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของpopupรายชื่อผู้ได้รับรางัวล" class="img-popuplistnameawardrecipient-1">
+        </div>
+
+        <div class="framemessagepopuplistnameawardrecipient" id="messagepopuplistname_awardrecipient">
+            <p class="messagepopuplistnameawardrecipient-1">พบรายชื่อผู้รับรางวัล</p>
+        </div>
+
+        <div class="framenamerecipientreward">
+            <img src="{{ asset('admin/img/รูปของชื่อผู้รับหน้าpopup.png') }}" alt="รูปของชื่อผู้รับหน้าpopup">
+            <div class="framemessagenamerecipientreward">
+                <p class="messagenamerecipientreward">ชื่อผู้รับ</p>
+                <span class="messagenamerecipientreward-1">วิภา รักเรียน</span>
+            </div>
+        </div>
+
+        <div class="frameQRcodepopup">
+            <img src="{{ asset('admin/img/รูปของQRcodepopup.png') }}" alt="รูปของQRcodepopup">
+            <div class="framemessageQRcodepopup">
+                <p class="messagenamerecipientreward">รหัส QR Code</p>
+                <span class="messagenamerecipientreward-1">#AB-2026-0008</span>
+            </div>
+        </div>
+        
+        <div class="frameprizesreceived">
+            <div class="frameimgprizesreceived">
+                <img src="{{ asset('admin/img/รูปถ้วยรางวัลของรางวัลที่ได้รับ popupผู้ได้รับรางวัล.png') }}" alt="รูปถ้วยรางวัลของรางวัลที่ได้รับ popupผู้ได้รับรางวัล">
+            </div>
+            <div class="framemessageprizesreceived">
+                <p class="framemessage-prizesreceived">ของรางวัลที่ได้รับ</p>
+                <span class="framemessage-prizesreceived-1">ดินสอ</span>
+            </div>
+        </div>
+
+        <hr class="lineframeQRcodepopup">
+
+        <div class="framenotyetreceiveitems" id="framenotyet_receiveitems">
+            <img src="{{ asset('admin/img/รูปนาฬิกายังไม่ได้รับของ.png') }}" alt="รูปนาฬิกายังไม่ได้รับของ">
+            <p class="messagenotyetreceiveitems">ยังไม่ได้รับของ</p>
+        </div>
+    
+        <div class="btn-off-submitpopuplistnameawardrecipient">
+            <button type="button" class="btn-offpopuplistnameawardrecipient" id="btn_offpopuplistnameawardrecipient">
+                <p class="messagebtn-offpopuplistnameawardrecipient">ปิด</p>
+            </button>
+            <button type="submit" class="btn-submitpopuplistnameawardrecipient">
+                <img src="{{ asset('admin/img/ติกถูกของปุ่มยืนยันรับของ.png') }}" alt="ติกถูกของปุ่มยืนยันรับของ">
+                <p class="messagebtn-submitpopuplistnameawardrecipient">ยืนยันรับของ</p>
+            </button>
+        </div>
+    </dialog>
+
+
+
 </div>
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
 </body>
