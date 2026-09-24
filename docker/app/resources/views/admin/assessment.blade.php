@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +70,7 @@
         </button>
         <button class="btn-rate" id="btn_rate">
             <h3 class="btn-rate-1">แบบประเมิน</h3>
-            <p class="number-rate" id="number_rate">3</p>
+            <p class="number-rate" id="number_rate">{{ $assessments->count() }}</p>
         </button>
     </div>
 
@@ -156,15 +156,15 @@
         <div class="framealloffon-assessment">
             <button class="frameall-assessment active" id="frameall_assessment">
                 <p class="all-assessment active" id="all_assessment">ทั้งหมด</p>
-                <span class="allnumber-assessment active" id="allnumber_assessment">(0)</span>
+                <span class="allnumber-assessment active" id="allnumber_assessment">({{ $assessments->count() }})</span>
             </button>
             <button class="frameoff-assessment" id="frameoff_assessment">
                 <p class="off-assessment" id="off_assessment">ปิดแล้ว</p>
-                <span class="offnumber-assessment" id="offnumber_assessment">(0)</span>
+                <span class="offnumber-assessment" id="offnumber_assessment">({{ $assessments->where('is_open',0)->count() }})</span>
             </button>
             <button class="farmeon-assessment" id="farmeon_assessment">
                 <p class="on-assessment" id="on_assessment">เปิดอยู่</p>
-                <span class="onnumber-assessment" id="onnumber_assessment">(0)</span>
+                <span class="onnumber-assessment" id="onnumber_assessment">({{ $assessments->where('is_open',1)->count() }})</span>
             </button>
         </div>
         <div class="frame-assign-assessment">
@@ -177,8 +177,55 @@
     
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">
+        @forelse($assessments as $assessment)
+        <div class="sectionassessment" 
+            data-status="{{ $assessment->is_open ? 'open' : 'closed' }}"
+            data-random="{{ $assessment->wheelAssessment ? 'true' : 'false' }}">
+        
+            <p class="sectionassessment-1">{{ $assessment->name }}</p>
 
-        <div class="sectionassessment" data-status="open" data-random="false">
+            <div class="frameinformation-assessment">
+                <div class="framesection-status">
+                    <h3 class="section-assessment">{{$assessment->name}}</h3>
+                    <div class="frame-status">
+                        <p class="point-status"></p>
+                        <p class="message-status">{{$assessment->is_open ? 'เปิดอยู่' : 'ปิดแล้ว'}}</p>
+                    </div>
+                </div>
+                <p class="message-assessment">
+                    @if($assesment->wheelAssessment)
+                    รางวัล{{ $assessment->wheelAssessment->wheel->rewards->pluck('name')->join(' ')}}
+                    @else
+                        ยังไม่ได้บันทึกวงล้อ
+                    @endif
+                </p>
+                <p class="message-create-by">
+                    สร้างโดย: {{$assessment->create_by_name ?? '-'}}
+                    ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
+                </p>
+                @if($assessment->wheelAssessment)
+                {{-- กรณีที่เราบันทึกวงล้อแล้วตัวแบบประเมินจะมีปุ่มเข้าสู่การสุ่มเพิ่มขึ้นมา --}}
+                <a href="{{url('admin/spinwheel')}}" class="enter-random">
+                    <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
+                    <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
+                </a>
+                <a href="{{url('admin/history_random')}}" class="view-history">
+                    <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                </a>
+                @else
+                {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
+                <a href="{{url('admin/managespin')}}" class="assessment-open-1">
+                    <p class="message-assessment-open">ยังไม่ได้บันทึกวงล้อ คลิกเพื่อสร้าง</p>
+                </a>
+                @endif
+            </div>
+        </div>
+        @empty
+        <div class="nothaveactivity">
+            <p class="nothaveactivity-1">ยังไม่มีแบบประเมินในตอนนี้</p>
+        </div>
+        @endforelse
+        {{-- <div class="sectionassessment" data-status="open" data-random="false">
             <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
             <div class="frameinformation-assessment">
                 <div class="framesection-status">
@@ -187,10 +234,10 @@
                         <p class="point-status"></p>
                         <p class="message-status">เปิดอยู่</p>
                     </div>
-                </div>
+                </div> --}}
 
 
-                    <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
+                    {{-- <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
                     <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
                         <template id="Viewhistory">
                             <button class="assessment-open-1">
@@ -202,15 +249,15 @@
                             <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
                             <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
                         </a>
-                    </template>
+                    </template> --}}
 
 
-                    <a href="{{ url('admin/history_random') }}" class="view-history">
+                    {{-- <a href="{{ url('admin/history_random') }}" class="view-history">
                         <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                    </a>
-                </template> 
-                </div>
-            </div>
+                    </a> --}}
+                {{-- </template>  --}}
+                {{-- </div> --}}
+            {{-- </div> --}}
         </div>
    
 

@@ -1439,8 +1439,10 @@
     padding-top: 8px;
   }
 
+
   /*ข้อความแสดงerrorว่าบันทึกรหัสผ่านไม่สำเสร็จของหน้าเปลี่ยนรหัสผ่าน*/
   .savesuccesschangepassword-error{
+     margin-right: auto;
     font-size: 18px;
     color: #c22b3a;
     margin-left: 5px;
@@ -4885,11 +4887,10 @@
 
   /*สถานะ รับแล้ว สีเขียน*/
   .framerstatusreward-listname1[data-status="received"] {
-    background-color: #DFF5EC;
-    border-color: #7FD1AE;
+    background-color: #7fd1ae79;
   }
   .framerstatusreward-listname1[data-status="received"] .messagestatusreward-listname1 {
-      color: #2E9E6B;
+      color: #008d4e;
   }
 
   /*สถานะยังไม่ได้รับ สีส้ม*/
@@ -5058,7 +5059,7 @@
     justify-content: center;
     background: none;
     border: 2px solid #d39b00;
-    width: 170px;
+    width: 150px;
     height: 60px;
     border-radius: 20px;
     cursor: pointer;
@@ -5093,7 +5094,7 @@
     z-index: 1;
   }
 
-
+  /*กรอบปุ่มกดยืนยันรับของ*/
   .btn-submitpopuplistnameawardrecipient{
     position: relative;
     display: flex;
@@ -5101,7 +5102,7 @@
     justify-content: center;
     border: none;
     background-color: #a8731d;
-    width: 210px;
+    width: 230px;
     height: 60px;
     border-radius: 20px;
     cursor: pointer;
@@ -5128,6 +5129,13 @@
     height: 500px;
   }
 
+  .img-btn-submitpopuplistnameawardrecipient{
+    position: relative;
+    top: 1px;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มกดยืนยันรับของ*/
   .messagebtn-submitpopuplistnameawardrecipient{
     font-size: 20px;
     font-weight: 600;

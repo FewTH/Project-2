@@ -46,10 +46,6 @@ butactivity.addEventListener('click', function() {
 });
 }
 
-if (butactivity){
-    moveBulb(butactivity);
-}
-
 //ปุ่มกดแบบประเมินของหน้า assessment.blade.php
 const btnrate = document.getElementById('btn_rate')
 
@@ -1097,7 +1093,7 @@ if (btnoffpopuplistnameawardrecipient){
     });
 }
 
-
+/*ปุ่มกดทั้งหมด*/
 const buttonallsection = document.getElementById('button_allsection');
 
 if (buttonallsection){
@@ -1111,15 +1107,15 @@ if (buttonallsection){
         document.getElementById('numberbutton_allsection').classList.add('active');
         document.getElementById('numberbutton_receivedsection').classList.remove('active');
         document.getElementById('numberbutton_notacceptingyetsection').classList.remove('active');
+
+
         lineorange(document.getElementById('button_allsection'));
+
+        allreceivednotreceivedhistory_random('all');
     });
 }
 
-if(buttonallsection){
-    lineorange(buttonallsection);
-}
-
-
+/*ปุ่มกดรับแล้ว*/
 const buttonreceivedsection = document.getElementById('button_receivedsection');
 
 if (buttonreceivedsection){
@@ -1133,11 +1129,15 @@ if (buttonreceivedsection){
         document.getElementById('numberbutton_receivedsection').classList.add('active');
         document.getElementById('numberbutton_allsection').classList.remove('active');
         document.getElementById('numberbutton_notacceptingyetsection').classList.remove('active');
+
+
         lineorange(document.getElementById('button_receivedsection'));
+
+        allreceivednotreceivedhistory_random('received');
     });
 }
 
-
+/*ปุ่มกดยังไม่ได้รับ*/
 const buttonnotacceptingyetsection = document.getElementById('button_notacceptingyetsection');
 
 
@@ -1152,16 +1152,115 @@ if(buttonnotacceptingyetsection){
         document.getElementById('numberbutton_notacceptingyetsection').classList.add('active');
         document.getElementById('numberbutton_receivedsection').classList.remove('active');
         document.getElementById('numberbutton_allsection').classList.remove('active');
+
+
         lineorange(document.getElementById('button_notacceptingyetsection'));
+
+        allreceivednotreceivedhistory_random('not-received');
     });
 }
 
-
+//เส้นใต้ปุ่มกดให้มันขยับตาม
 function lineorange(button1) {
     const orange = document.getElementById('yellow_linesection');
     orange.style.marginLeft = button1.offsetLeft + 'px';
 
 }
+
+//กดปุ่ม ทั้งหมด รับแล้ว ยังไม่รับแล้วให้สถานะไปแสดงในหน้านั้น
+function allreceivednotreceivedhistory_random(status){
+
+    const btnopenpopupname = document.querySelectorAll('.btn-openpopupname');
+
+    for (let i = 0; i < btnopenpopupname.length; i++){
+        const btnopenpopupname1 = btnopenpopupname[i];
+        const btnopenpopupnamestatus = btnopenpopupname1.dataset.status;
+
+        if(status === 'all'){
+            btnopenpopupname1.style.display = '';
+        } else if (btnopenpopupnamestatus === status){
+            btnopenpopupname1.style.display = '';
+        } else{
+            btnopenpopupname1.style.display = 'none';
+        }
+
+    }
+}
+
+
+function updatenumberlistname(){
+
+    const numberalllistname1 = document.getElementById('numberalllistname_1');
+    if(!numberalllistname1){
+        return;
+    }
+
+
+    const btnopenpopupname = document.querySelectorAll('.btn-openpopupname');
+
+    let allhistoryrandom = 0;
+    let receivedhistoryrandom = 0;
+    let notreceivedhistoryrandom = 0;
+
+    for (let i = 0; i < btnopenpopupname.length; i++){
+        const btnopenpopupname1 = btnopenpopupname[i];
+        const btnopenpopupnamestatus = btnopenpopupname1.dataset.status;
+
+            allhistoryrandom++;
+        if (btnopenpopupnamestatus === 'received'){
+            receivedhistoryrandom++;
+        } else if (btnopenpopupnamestatus === 'not-received'){
+            notreceivedhistoryrandom++;
+        }else{
+            console.warn('พบสถานะที่ไม่รู้จัก', btnopenpopupnamestatus, btnopenpopupname1);
+        }
+        
+    }
+
+    //เปลี่ยนตัวเลขของกรอบเฉยๆที่ไม่ใช่ปุ่ม
+    numberalllistname1.textContent = allhistoryrandom;
+    const numberreceivelistname1 = document.getElementById('numberreceivelistname_1');
+    numberreceivelistname1.textContent = receivedhistoryrandom;
+    const numbernotacceptingyetlistname1 = document.getElementById('numbernotacceptingyetlistname_1');
+    numbernotacceptingyetlistname1.textContent = notreceivedhistoryrandom;
+
+
+    //อันนี้เปลี่ยนตัวเลขของปุ่มทั้งหมด รับแล้ว ยังไม่ได้รับ ให้มีตัวเลขข้อมูลจริงๆ
+    const numberbuttonallsection = document.getElementById('numberbutton_allsection');
+    numberbuttonallsection.textContent = allhistoryrandom;
+    const numberbuttonreceivedsection = document.getElementById('numberbutton_receivedsection');
+    numberbuttonreceivedsection.textContent = receivedhistoryrandom;
+    const numberbuttonnotacceptingyetsection = document.getElementById('numberbutton_notacceptingyetsection');
+    numberbuttonnotacceptingyetsection.textContent = notreceivedhistoryrandom;
+
+}
+updatenumberlistname()
+
+
+
+
+
+
+
+
+
+
+//ฟังก์ชันเอาไว้เปลี่ยนสีกับข้อความสถานะของรางวัล ตอนกดยืนยันรับของ
+function updatecolorwithmessagestatus(statusold, statusnew){
+    let message = '';
+
+    if (statusnew === 'received'){
+        message = 'รับแล้ว';
+    } else {
+        message = 'ยังไม่รับ';
+    }
+
+    statusold.dataset.status = statusnew;
+
+    const messagestatusrewardlistname1 = statusold.querySelector('.messagestatusreward-listname1');
+    messagestatusrewardlistname1.textContent = message;
+}
+
 
 
 

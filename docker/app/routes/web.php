@@ -134,7 +134,7 @@ Route::prefix('user')->middleware('role:user')->group(function () {
 //ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
 // Route::prefix('manager')->middleware('auth')->group(function () {
 Route::prefix('manager')->middleware('role:manager')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'managerProfile']);
+    Route::get('/profile', [ProfileController::class, 'managerProfile'])->name('manager.profile');
     Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
     Route::get('/edit_information', [ProfileController::class, 'managerEditForm']); 

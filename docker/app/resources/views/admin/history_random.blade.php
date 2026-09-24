@@ -88,7 +88,7 @@
             <div class="frameallreceivednotacceptingyet">
                 <div class="framealllistname">
                     <div class="numberalllistname">
-                       <p class="numberalllistname-1">30</p> 
+                       <p class="numberalllistname-1" id="numberalllistname_1">30</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของทั้งหมดหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของทั้งหมดหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -98,7 +98,7 @@
 
                 <div class="framereceivedlistname">
                     <div class="numberreceivelistname">
-                       <p class="numberreceivelistname-1">12</p> 
+                       <p class="numberreceivelistname-1" id="numberreceivelistname_1">12</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -108,7 +108,7 @@
 
                 <div class="framernotacceptingyet">
                      <div class="numbernotacceptingyetlistname">
-                       <p class="numbernotacceptingyetlistname-1">18</p> 
+                       <p class="numbernotacceptingyetlistname-1" id="numbernotacceptingyetlistname_1">18</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="username-listname">
                         <p class="messageusername-listname">สมชายใจดี</p>
-                        <span class="messageusername-listname-1">#AB-2026-0008</span>
+                        <span class="messageusername-listname-1">AB-2026-0008</span>
                     </div>
                     <div class="framereward-listname">
                         <div class="framereward-listname-1">
@@ -174,6 +174,7 @@
                         <div class="framerstatusreward-listname1" data-status="not-received">
                             <p class="messagestatusreward-listname1" id="messagestatusreward_listname_1">ยังไม่รับ</p>
                         </div>
+                        
                     </div>
                 </button>
                 <hr class="linesectionlistnamerecipientreward">
@@ -228,7 +229,7 @@
                 <p class="messagebtn-offpopuplistnameawardrecipient">ปิด</p>
             </button>
             <button type="submit" class="btn-submitpopuplistnameawardrecipient">
-                <img src="{{ asset('admin/img/ติกถูกของปุ่มยืนยันรับของ.png') }}" alt="ติกถูกของปุ่มยืนยันรับของ">
+                <img src="{{ asset('admin/img/ติกถูกของปุ่มยืนยันรับของ.png') }}" alt="ติกถูกของปุ่มยืนยันรับของ" class="img-btn-submitpopuplistnameawardrecipient">
                 <p class="messagebtn-submitpopuplistnameawardrecipient">ยืนยันรับของ</p>
             </button>
         </div>

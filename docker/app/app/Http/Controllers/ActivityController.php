@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\EventRegistration;
+use App\Models\Assessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -71,8 +72,15 @@ class ActivityController extends Controller
             $closeat = Carbon::parse($event->register_close_at);
             $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
         });
-
-            return view('admin.assessment', ['events' => $events]);
+        // ดึงแบบประเมินทั้งหมดกับวงล้อที่บันทึกไว้
+        $assessments = Assessment::with('wheelAssessment.wheel.rewrads')
+            ->orderBy('create_at', 'desc')
+            ->get();
+        // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php
+        return view('admin.assessment',[
+            'event'=>$event,
+            'assessment'=>$assessments,
+        ]);
     }
 
 

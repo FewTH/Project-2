@@ -39,7 +39,7 @@ class AuthController extends Controller
             // เมื่อloginแล้วจะแยกไปตามrole
             return match($user->role){
                 'admin' => redirect()->route('admin.dashboard'),
-                'manager' => redicrect()->route('manager.profile'),
+                'manager' => redirect()->route('manager.profile'),
                 'user' => redirect()->route('user.home'),
                 default => redirect('/'),
             };
