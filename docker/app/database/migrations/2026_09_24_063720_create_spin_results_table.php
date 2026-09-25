@@ -18,6 +18,7 @@ return new class extends Migration
             $spinresults->foreignId('assessment_id')->constrained('assessments', 'assessment_id');
             $spinresults->string('qr_code', 500)->unique();
             $spinresults->string('winner_name', 255);
+            $spinresults->string('winner_email', 255)->nullable();
             $spinresults->enum('receive_status', ['received', 'not-received'])->default('not-received');
             $spinresults->dateTime('receive_deadline')->nullable();
             $spinresults->dateTime('received_at')->nullable();

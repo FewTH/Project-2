@@ -1,149 +1,149 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AssessmentController;
-use App\Http\Controllers\WheelController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RewardController;
-use App\Http\Controllers\EventRegistrationController;
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\SpinresultController;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\AssessmentController;
+    use App\Http\Controllers\WheelController;
+    use App\Http\Controllers\ProfileController;
+    use App\Http\Controllers\UserController;
+    use App\Http\Controllers\RewardController;
+    use App\Http\Controllers\EventRegistrationController;
+    use App\Http\Controllers\ActivityController;
+    use App\Http\Controllers\AuthController;
+    use App\Http\Controllers\SpinresultController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-// ส่วนloginและ route ไปตามrole
-    Route::get('/user/loginuser',[AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login',[AuthController::class,'login'])->name('login.submit');
-    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-// ส่วนของ Admin 
-// Route::prefix('admin')->middleware('auth')->group(function () {
-Route::prefix('admin')->middleware('role:admin')->group(function () {
-    
-    // Dashboard & Profile
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    // ส่วนloginและ route ไปตามrole
+        Route::get('/user/loginuser',[AuthController::class, 'showLoginForm'])->name('login');
+        Route::post('/login',[AuthController::class,'login'])->name('login.submit');
+        Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+    // ส่วนของ Admin 
+    // Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::prefix('admin')->middleware('role:admin')->group(function () {
+        
+        // Dashboard & Profile
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
 
-    
+        
 
-    Route::get('/profile', [ProfileController::class, 'adminProfile']);
-    Route::post('/profile', [ProfileController::class, 'uploadimg']);
+        Route::get('/profile', [ProfileController::class, 'adminProfile']);
+        Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
-    Route::get('/edit_information', [ProfileController::class, 'adminEditForm']); 
-    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
+        Route::get('/edit_information', [ProfileController::class, 'adminEditForm']); 
+        Route::post('/edit_information', [ProfileController::class, 'editinformation']);
 
-    Route::get('/change_password', [ProfileController::class, 'adminchangePassword']); 
-    Route::post('/change_password', [ProfileController::class, 'changePassword']);
+        Route::get('/change_password', [ProfileController::class, 'adminchangePassword']); 
+        Route::post('/change_password', [ProfileController::class, 'changePassword']);
 
-    // ระบบจัดการผู้ใช้งาน UserController
-    Route::get('/manageuser', [UserController::class, 'index'])->name('admin.manageuser');  // เม็ดตอดนี้ก็ประมาณว่า แสดงหน้าจัดการผู้ใช้เลยใช้เม็ดตอด get
-    Route::get('/adduser', [UserController::class, 'create'])->name('admin.adduser'); // อันนี้ก็แสดงฟอร์มเพิ่มผู้ใช้
-    Route::post('/manageuser/store', [UserController::class, 'store'])->name('admin.user.store'); // อันนี้จะเป็นการบันทึกข้อมูลลงดาต้าเบสบน myadmin เลยใช้ post และ store
-    Route::delete('/manageuser/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy'); // อันนี้ก็ตรงตัวคือลบผู้ใช้
-    Route::get('/manageuser/{id}/edit', [UserController::class, 'edit'])->name('admin.user.edit'); // อันนี้คือแสดงแบบฟอร์มแก้ไขผู้ใช้
-    Route::put('/manageuser/{id}', [UserController::class, 'update'])->name('admin.user.update'); // อันนี้คือการที่ เราบันทึกข้อมูลใหม่ที่แก้ไขทับข้อมูลเก่าเลยใช้ เม็ดตอดput
+        // ระบบจัดการผู้ใช้งาน UserController
+        Route::get('/manageuser', [UserController::class, 'index'])->name('admin.manageuser');  // เม็ดตอดนี้ก็ประมาณว่า แสดงหน้าจัดการผู้ใช้เลยใช้เม็ดตอด get
+        Route::get('/adduser', [UserController::class, 'create'])->name('admin.adduser'); // อันนี้ก็แสดงฟอร์มเพิ่มผู้ใช้
+        Route::post('/manageuser/store', [UserController::class, 'store'])->name('admin.user.store'); // อันนี้จะเป็นการบันทึกข้อมูลลงดาต้าเบสบน myadmin เลยใช้ post และ store
+        Route::delete('/manageuser/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy'); // อันนี้ก็ตรงตัวคือลบผู้ใช้
+        Route::get('/manageuser/{id}/edit', [UserController::class, 'edit'])->name('admin.user.edit'); // อันนี้คือแสดงแบบฟอร์มแก้ไขผู้ใช้
+        Route::put('/manageuser/{id}', [UserController::class, 'update'])->name('admin.user.update'); // อันนี้คือการที่ เราบันทึกข้อมูลใหม่ที่แก้ไขทับข้อมูลเก่าเลยใช้ เม็ดตอดput
 
-    // ระบบจัดการของรางวัล
-    Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
-    Route::post('/addreward', [RewardController::class, 'store'])->name('admin.reward.store');
-    Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
-    Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
-    Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
-    Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
+        // ระบบจัดการของรางวัล
+        Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
+        Route::post('/addreward', [RewardController::class, 'store'])->name('admin.reward.store');
+        Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
+        Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
+        Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
+        Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
 
-    // ระบบจัดการวงล้อสุ่ม
-    Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
-    Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
-    Route::post('/managespin/store', [WheelController::class, 'store'])->name('admin.managespin.store');
+        // ระบบจัดการวงล้อสุ่ม
+        Route::get('/managespin', [WheelController::class, 'index'])->name('admin.managespin');
+        Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
+        Route::post('/managespin/store', [WheelController::class, 'store'])->name('admin.managespin.store');
 
-    
+        
 
-    // ระบบจัดการกิจกรรม
-    Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
-    Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
-    Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
+        // ระบบจัดการกิจกรรม
+        Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
+        Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
+        Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
-    
-    
+        
+        
 
-    Route::get('/view_details/{id}', [ActivityController::class, 'showviewdetails'])->name('admin.activity.detail');
-    Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');
-    Route::delete('/activity/{event}', [ActivityController::class, 'deletedata'])->name('admin.activity.deletedata');
+        Route::get('/view_details/{id}', [ActivityController::class, 'showviewdetails'])->name('admin.activity.detail');
+        Route::post('/close_register/{id}', [ActivityController::class, 'closeRegister'])->name('admin.activity.close');
+        Route::delete('/activity/{event}', [ActivityController::class, 'deletedata'])->name('admin.activity.deletedata');
 
 
-    Route::get('/managespin', [WheelController::class, 'index']);
+        Route::get('/managespin', [WheelController::class, 'index']);
 
-    Route::get('/spinwhell', function () {
-        return view('admin.spinwhell');
+        Route::get('/spinwhell', function () {
+            return view('admin.spinwhell');
+        });
+
+
+
+        Route::get('/history_random/{assessment_id}', [SpinresultController::class, 'index'])->name('admin.history_random');
+        Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('admin.spinresult.receive');
+
+
+
+        Route::get('/edit_activity/{id}', [ActivityController::class, 'editactivity'])->name('admin.activity.editactivity');
+        Route::put('/edit_activity/{id}', [ActivityController::class, 'updateactivity'])->name('admin.activity.updateactivity');
+
+
+        Route::get('/random_reward/{id}', [ActivityController::class, 'randomReward'])->name('admin.random_reward');
+        Route::post('/random-reward/{eventId}/save-result', [ActivityController::class, 'saveRandomResult'])->name('admin.random-reward.save-result');
+
+        
+        Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
+
+
+        Route::get('/button_senditgmail', function () {
+            return view('admin.button_senditgmail');
+        });
+    });
+
+    // ส่วนของ User (ผู้ใช้งานทั่วไป)
+    // Route::prefix('user')->middleware('auth')->group(function () {
+    Route::prefix('user')->middleware('role:user')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'userProfile']); 
+        Route::post('/profile', [ProfileController::class, 'uploadimg']);
+
+        Route::get('/contact', function () {
+            return view('user.contact');
+        });
+
+        Route::get('/edit_information', [ProfileController::class, 'userEditForm']);
+        Route::post('/edit_information', [ProfileController::class, 'editinformation']);
+
+        Route::get('/change_password', [ProfileController::class, 'userchangePassword']);
+        Route::post('/change_password', [ProfileController::class, 'changePassword']);
+
+        Route::get('/home', function () {
+            return view('user.home');
+        })->name('user.home');
+
+        Route::get('/spin', function () {
+            return view('user.spin');
+        });
+
+        
+
+        Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
+        Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
     });
 
 
+    //ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
+    // Route::prefix('manager')->middleware('auth')->group(function () {
+    Route::prefix('manager')->middleware('role:manager')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'managerProfile'])->name('manager.profile');
+        Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
-    Route::get('/history_random', [SpinresultController::class, 'index'])->name('admin.history_random');
-    Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('admin.spinresult.receive');
+        Route::get('/edit_information', [ProfileController::class, 'managerEditForm']); 
+        Route::post('/edit_information', [ProfileController::class, 'editinformation']);
 
-
-
-    Route::get('/edit_activity/{id}', [ActivityController::class, 'editactivity'])->name('admin.activity.editactivity');
-    Route::put('/edit_activity/{id}', [ActivityController::class, 'updateactivity'])->name('admin.activity.updateactivity');
-
-
-    Route::get('/random_reward/{id}', [ActivityController::class, 'randomReward'])->name('admin.random_reward');
-    Route::post('/random-reward/{eventId}/save-result', [ActivityController::class, 'saveRandomResult'])->name('admin.random-reward.save-result');
-
-    
-    Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
-
-
-    Route::get('/button_senditgmail', function () {
-        return view('admin.button_senditgmail');
+        Route::get('/change_password', [ProfileController::class, 'managerchangePassword']); 
+        Route::post('/change_password', [ProfileController::class, 'changePassword']);
     });
-});
-
-// ส่วนของ User (ผู้ใช้งานทั่วไป)
-// Route::prefix('user')->middleware('auth')->group(function () {
-Route::prefix('user')->middleware('role:user')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'userProfile']); 
-    Route::post('/profile', [ProfileController::class, 'uploadimg']);
-
-    Route::get('/contact', function () {
-        return view('user.contact');
-    });
-
-    Route::get('/edit_information', [ProfileController::class, 'userEditForm']);
-    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
-
-    Route::get('/change_password', [ProfileController::class, 'userchangePassword']);
-    Route::post('/change_password', [ProfileController::class, 'changePassword']);
-
-    Route::get('/home', function () {
-        return view('user.home');
-    })->name('user.home');
-
-    Route::get('/spin', function () {
-        return view('user.spin');
-    });
-
-    
-
-    Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
-    Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
-});
-
-
-//ส่วนของ manager (ผู้จัดการวงล้อสุ่ม)
-// Route::prefix('manager')->middleware('auth')->group(function () {
-Route::prefix('manager')->middleware('role:manager')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'managerProfile'])->name('manager.profile');
-    Route::post('/profile', [ProfileController::class, 'uploadimg']);
-
-    Route::get('/edit_information', [ProfileController::class, 'managerEditForm']); 
-    Route::post('/edit_information', [ProfileController::class, 'editinformation']);
-
-    Route::get('/change_password', [ProfileController::class, 'managerchangePassword']); 
-    Route::post('/change_password', [ProfileController::class, 'changePassword']);
-});

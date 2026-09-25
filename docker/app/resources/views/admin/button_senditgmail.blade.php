@@ -59,9 +59,23 @@
 </div> 
 <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
 <div class="main-content-1">
-    <div class="My_Profile">
-        <h1>ส่งอีเมลให้ผู้ได้รางวัล</h1>
+<div class="framedashboard">
+    <div class="Overview_Dashboard">
+        <h1>ส่งอีเมลให้ผู้ได้รับรางวัล</h1>
     </div>
+    <div class="sendallemails">
+        <button type="button" class="btn-sendallemails1" id="btn_sendallemails1">
+            <img src="{{ asset('admin/img/รูปของปุ่มส่งอีเมลทั้งหมด.png') }}" alt="รูปของปุ่มส่งอีเมลทั้งหมด">
+            <p class="sendallemails1">ส่งอีเมลทั้งหมด</p>
+        </button>
+    </div>
+</div>
+
+    <div>
+        
+    </div>
+
+
 
 
     

@@ -209,7 +209,7 @@
                     <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
                     <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
                 </a>
-                <a href="{{url('admin/history_random')}}" class="view-history">
+                <a href="{{ route('admin.history_random', $assessment->assessment_id) }}" class="view-history">
                     <p class="message-view-history">ดูประวัติการสุ่ม</p>
                 </a>
                 @else

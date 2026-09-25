@@ -60,8 +60,11 @@
 
     <div class="main-content-1">
         <div class="My_Profile">
-            <h1>ศูนย์กลางสุ่มรางวัล</h1>
+            <h1>ศูนย์กลางสุ่มรางวัล </h1>
+            <p class="messagelistactivities">{{ $event->title }}</p>
         </div>
+
+
 
 
             <div class="framebigofWheel">

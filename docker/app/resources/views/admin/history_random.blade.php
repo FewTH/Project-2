@@ -60,6 +60,7 @@
 <div class="main-content-1">
     <div class="My_Profile">
         <h1>รายชื่อผู้ได้รับรางวัล</h1>
+        <p class="messagelistactivities">{{ $assessment->name }}</p>
     </div>
 
     <!--กรอบใหญ่-->
@@ -69,11 +70,6 @@
                 <div class="framesearchsenditgmail-5">
                     <div class="framesearchsenditgmail">
                         <input type="text" id="frame_searchsenditgmail" class="btn-framesearchsenditgmail" placeholder="ค้นหาชื่อ หรือ รหัส QRCode">
-                        <div class="btnimg-framesearchsenditgmail-1">
-                            <button type="button" class="btnimg-framesearchsenditgmail" id="btnimg_framesearchsenditgmail">
-                                <img src="{{ asset('admin/img/รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม.png') }}" alt="รูปปุ่มค้นหน้าหน้าแบบประเมินกิจกรรม" class="img-framesearchsenditgmail">
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="btn-senditgmail">
@@ -88,7 +84,7 @@
             <div class="frameallreceivednotacceptingyet">
                 <div class="framealllistname">
                     <div class="numberalllistname">
-                       <p class="numberalllistname-1" id="numberalllistname_1">30</p> 
+                       <p class="numberalllistname-1" id="numberalllistname_1">0</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของทั้งหมดหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของทั้งหมดหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -98,7 +94,7 @@
 
                 <div class="framereceivedlistname">
                     <div class="numberreceivelistname">
-                       <p class="numberreceivelistname-1" id="numberreceivelistname_1">12</p> 
+                       <p class="numberreceivelistname-1" id="numberreceivelistname_1">0</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของรับแล้วหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -108,7 +104,7 @@
 
                 <div class="framernotacceptingyet">
                      <div class="numbernotacceptingyetlistname">
-                       <p class="numbernotacceptingyetlistname-1" id="numbernotacceptingyetlistname_1">18</p> 
+                       <p class="numbernotacceptingyetlistname-1" id="numbernotacceptingyetlistname_1">0</p> 
                         <div class="imgnumberalllistname">
                             <img src="{{ asset('admin/img/รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล.png') }}" alt="รูปของยังไม่ได้รับหน้ารายชื่อผู้ได้รับรางวัล">
                         </div>
@@ -181,11 +177,12 @@
                             <p class="messagereward-listname">{{ $item->reward->name ?? '-' }}</p>
                         </div>  
                         <div class="framerstatusreward-listname1" data-status="{{ $item->receive_status === 'received' ? 'received' : 'not-received' }}">
-                            <p class="messagestatusreward-listname1" id="messagestatusreward_listname_1">{{ $item->receive_status === 'received' ? 'รับแล้ว' : 'ยังไม่รับ' }}</p>
+                            <p class="messagestatusreward-listname1">{{ $item->receive_status === 'received' ? 'รับแล้ว' : 'ยังไม่รับ' }}</p>
                         </div>
                         
                     </div>
                 </button>
+
                 @endforeach
             </div>
     </div>
@@ -211,7 +208,7 @@
             <img src="{{ asset('admin/img/รูปของQRcodepopup.png') }}" alt="รูปของQRcodepopup">
             <div class="framemessageQRcodepopup">
                 <p class="messagenamerecipientreward">รหัส QR Code</p>
-                <span class="messagenamerecipientreward-1" id="popuplistname_QrCode">#AB-2026-0008</span>
+                <span class="messagenamerecipientreward-1" id="popuplistname_QrCode">AB-2026-0008</span>
             </div>
         </div>
         
@@ -254,8 +251,6 @@
         </div>
     </form>
     </dialog>
-
-
 
 </div>
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>

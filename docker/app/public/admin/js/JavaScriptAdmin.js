@@ -1265,14 +1265,6 @@ function updatenumberlistname(){
 updatenumberlistname()
 
 
-
-
-
-
-
-
-
-
 //ฟังก์ชันเอาไว้เปลี่ยนสีกับข้อความสถานะของรางวัล ตอนกดยืนยันรับของ
 function updatecolorwithmessagestatus(statusold, statusnew){
     let message = '';
@@ -1287,6 +1279,64 @@ function updatecolorwithmessagestatus(statusold, statusnew){
 
     const messagestatusrewardlistname1 = statusold.querySelector('.messagestatusreward-listname1');
     messagestatusrewardlistname1.textContent = message;
+}
+
+//ช่องค้นหา + สแกน Qrcode
+const framesearchsenditgmail = document.getElementById('frame_searchsenditgmail');
+
+if(framesearchsenditgmail){
+
+    //โฟกัสช่องค้นหาอัตโนมัติตอนเปิดหน้า พร้อมยิงสแกนได้ทันที
+    framesearchsenditgmail.focus();
+
+    //พิมทีละตัว กรองรายชื่อที่แสดงในหน้า
+    framesearchsenditgmail.addEventListener('input', function(){
+        const framesearchsenditgmail1 = framesearchsenditgmail.value.trim().toLowerCase();
+        const btnopenpopupname = document.querySelectorAll('.btn-openpopupname');
+
+        for (let i = 0; i < btnopenpopupname.length; i++){
+            const btnopenpopupname1 = btnopenpopupname[i];
+            const listname_name = btnopenpopupname1.dataset.name.toLowerCase();
+            const listname_qrcode = btnopenpopupname1.dataset.qr.toLowerCase();
+
+            if (listname_name.includes(framesearchsenditgmail1) || listname_qrcode.includes(framesearchsenditgmail1)){
+                btnopenpopupname1.style.display = '';
+            } else{
+                btnopenpopupname1.style.display = 'none';
+            }
+        }
+    });
+    framesearchsenditgmail.addEventListener('keydown', function(event){
+    if(event.key === 'Enter'){
+        //กันฟอร์มถูก submit โดยไม่ตั้งใจ
+        event.preventDefault();
+
+        const scanqrcode = framesearchsenditgmail.value.trim().toLowerCase();
+        const btnopenpopupname = document.querySelectorAll('.btn-openpopupname');
+
+        let found = null;
+
+        for (let i = 0; i < btnopenpopupname.length; i++){
+            const btnopenpopupname1 = btnopenpopupname[i];
+            const listname_qrcode = btnopenpopupname1.dataset.qr.toLowerCase();
+
+            if (listname_qrcode === scanqrcode){
+                found = btnopenpopupname1;
+                break;
+            }
+        }
+
+        if (found){
+            //เจอรหัสตรงกัน เปิด popup ให้เลยทันที
+            found.click();
+            //เคลียร์ช่องค้นหา เตรียมสแกนคนต่อไป
+            framesearchsenditgmail.value = '';
+        }else{
+            framesearchsenditgmail.value = '';
+        }
+    }
+});
+
 }
 
 
