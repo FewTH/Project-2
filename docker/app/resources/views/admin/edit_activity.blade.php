@@ -68,6 +68,7 @@
                 <p class="messagecreateactivity-1">แก้ไขกิจกรรม</p>
                 <span class="create-QR">สร้าง QR แล้วให้ผู้เข้าร่วม scan ลงทะเบียนในงานได้เลย</span>
             </div>
+
             <form id="frame_blackactivity_1" action="{{ route('admin.activity.updateactivity', $event->event_id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -82,6 +83,9 @@
                     </div>
                     <input type="text" name="title" class="framepimactivity-nam" value="{{ old('title', $event->title) }}" id="frame_pim_activitynam">
                 </label>
+                @error(('title'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
                 <div class="framemessagedatetime">
                     <p class="dateactivity">วันที่จัดกิจกรรม <span class="asteriskdateactivity">*</span></p>
                     <p class="closingtime-Register">เวลาปิด Register <span class="asteriskdateactivity">*</span></p>
@@ -90,9 +94,23 @@
                     <input type="date" name="event_date" value="{{ old('event_date', \Carbon\Carbon::parse($event->register_close_at)->format('Y-m-d')) }}" class="framedatemonthyear" id="framedate_month_year">
                     <input type="time" name="register_close_time" value="{{ old('register_close_time', \Carbon\Carbon::parse($event->register_close_at)->format('H:i')) }}" class="framedatemonthyear" id="time_offregister">
                 </div>
+                <div class="savesuccesschangepassword-error-1-1">
+                @error(('event_date'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
+                @error(('register_close_time'))
+                    <div class="savesuccesschangepassword-error-2">{{ $message }}</div>
+                @enderror
+                </div>  
                 <div class="framechoosereward-1">
                     <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
                 </div>
+                @error(('rewards'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
+                @error(('rewards.*.qty'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
 
                  @foreach($rewards as $reward)
                 @php
@@ -130,6 +148,9 @@
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
                     <input type="number" name="max_participants"  value="{{ old('max_participants', $event->max_participants) }}" class="framenumberquantity" id="frame_number_quantity">
                 </div>
+                @error(('max_participants'))
+                 <div class="savesuccesschangepassword-error-1-2-3">{{ $message }}</div>
+                @enderror
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
                     <p class="messagebuildandQR">สร้างกิจกรรมและ QR code</p>
