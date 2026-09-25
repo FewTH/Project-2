@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Reward;
 use App\Models\Assessment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,10 @@ class SpinresultFactory extends Factory
      */
     public function definition(): array
     {
+        // สุ่มสถานะก่อน แล้วให้ received_at / checked_by_user_id ผูกตามสถานะนี้เสมอ
+        // (กันไม่ให้เกิดข้อมูลขัดแย้งกันเอง เช่น received แต่ไม่มีคนยืนยัน)
+        $status = fake()->randomElement(['received', 'not-received']);
+
         return [
             // ดึง reward_id ที่มีอยู่จริงมาสุ่ม (ห้ามมั่วเลขเอง เพราะ id ไม่เรียงต่อกัน)
             'reward_id' => Reward::inRandomOrder()->value('reward_id'),
@@ -31,29 +36,19 @@ class SpinresultFactory extends Factory
 
             'winner_name' => fake('th_TH')->name(),
 
-            // สุ่มสถานะ 3 แบบ ให้น้ำหนักใกล้เคียงของจริง (ส่วนใหญ่ pending)
-            'receive_status' => fake()->randomElement([
-                'pending', 'pending', 'pending',
-                'received', 'received',
-                'expired',
-            ]),
+            'receive_status' => $status,
 
             'receive_deadline' => fake()->dateTimeBetween('now', '+7 days'),
-            'receive_location' => 'จุดรับของ อาคาร 1 ชั้น 1',
 
-            // received_at จะมีค่าก็ต่อเมื่อสถานะเป็น received เท่านั้น (ตั้งใน state ด้านล่าง)
-            'received_at' => null,
+            // มีค่าก็ต่อเมื่อสถานะเป็น received เท่านั้น
+            'received_at' => $status === 'received'
+                ? fake()->dateTimeBetween('-3 days', 'now')
+                : null,
+
+            // admin ที่กดยืนยัน มีค่าก็ต่อเมื่อ received เท่านั้น
+            'checked_by_user_id' => $status === 'received'
+                ? User::inRandomOrder()->value('user_id')
+                : null,
         ];
-    }
-
-    /**
-     * สถานะ "รับแล้ว" - ให้ received_at มีค่าจริง
-     */
-    public function received(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'receive_status' => 'received',
-            'received_at' => fake()->dateTimeBetween('-3 days', 'now'),
-        ]);
     }
 }

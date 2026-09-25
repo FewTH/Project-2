@@ -12,6 +12,6 @@ class WheelAssessment extends Model
 
     public function wheel()
     {
-        return $this->belongTo(spin_wheels::class, 'wheel_id','wheel_id');
+        return $this->belongsTo(spin_wheels::class, 'wheel_id','wheel_id');
     }
 }

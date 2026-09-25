@@ -8,6 +8,7 @@ use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\WheelItem;
 use App\Models\WheelAssessment;
+use Illuminate\Support\Facades\DB;
 
 class WheelController extends Controller
 {
@@ -20,10 +21,10 @@ class WheelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'items'=>'required|array|min2',
+            'items'=>'required|array|min:2',
             'items.*.reward_id'=>'required|exists:reward,reward_id',
-            'items.*.quantity_selected'=>'required|integer|min1',
-            'assessment_ids'=>'required|array|min1',
+            'items.*.quantity_selected'=>'required|integer|min:1',
+            'assessment_ids'=>'required|array|min:1',
             'assessment_ids.*'=>'required|integer|exists:assessments,assessment_id',
         ]);
 
@@ -45,7 +46,7 @@ class WheelController extends Controller
             }
             // เชื่อมวงล้่อทีสร้างเข้ากับแบบประเมิน
             foreach($request->assessment_ids as $assessmentId){
-                WheeelAssessment::create([
+                WheelAssessment::create([
                     'wheel_id' =>$wheel->wheel_id,
                     'assessment_id'=>$assessmentId,
                 ]);
@@ -56,7 +57,7 @@ class WheelController extends Controller
                 'message' => 'บันทึกวงล้อสำเร็จ'
         ]);
         }
-        catch(\Exception $e){
+        catch(\Throwable $e){
             return response()->json([
                 'success'=> false,
                 'message'=>$e->getMessage()

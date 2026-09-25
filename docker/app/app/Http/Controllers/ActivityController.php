@@ -8,6 +8,7 @@ use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\EventRegistration;
 use App\Models\Assessment;
+use App\Models\WheelAssessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,13 +74,13 @@ class ActivityController extends Controller
             $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
         });
         // ดึงแบบประเมินทั้งหมดกับวงล้อที่บันทึกไว้
-        $assessments = Assessment::with('wheelAssessment.wheel.rewrads')
-            ->orderBy('create_at', 'desc')
+        $assessments = Assessment::with('WheelAssessment.wheel.rewards')
+            ->orderBy('created_at', 'desc')
             ->get();
         // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php
         return view('admin.assessment',[
-            'event'=>$event,
-            'assessment'=>$assessments,
+            'events'=>$events,
+            'assessments'=>$assessments,
         ]);
     }
 

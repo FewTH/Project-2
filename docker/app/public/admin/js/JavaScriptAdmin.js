@@ -1076,13 +1076,41 @@ if(btnnooffrandomreward && rewardcanvas){
 
 //ส่วนของหน้า history_random.blade.php
 //ปุ่มเปิด popup พบรายชื่อผู้ได้รับรางวัล
-const btnopenpopupname = document.getElementById('btn_openpopupname');
+const btnopenpopupname = document.querySelectorAll('.btn-openpopupname');
 
-if (btnopenpopupname){
-    btnopenpopupname.addEventListener('click', function(){
-        openDialog(document.getElementById('popuplistname_awardrecipient'));
-    });
-}
+    for (let i = 0; i < btnopenpopupname.length; i++){
+        const btnopenpopupname1 = btnopenpopupname[i];
+
+        btnopenpopupname1.addEventListener('click', function(){
+
+            //เอาข้อมูลไปแสดงใน popup
+            document.getElementById('popuplistname_name').textContent = btnopenpopupname1.dataset.name;
+            document.getElementById('popuplistname_QrCode').textContent =  btnopenpopupname1.dataset.qr;
+            document.getElementById('popuplistname_reward').textContent = btnopenpopupname1.dataset.reward;
+            document.getElementById('messagenotyetreceiveitems_2').textContent = btnopenpopupname1.dataset.receivedAt;
+
+
+            //บอกฟอร์มว่าตอนกดยืนยัน ให้ส่งข้อมูลมาที่แถวนี้
+            document.getElementById('form_receive').action = btnopenpopupname1.dataset.action;
+
+            const status = btnopenpopupname1.dataset.status;
+            const btnsubmitpopuplistnameawardrecipient = document.getElementById('btn_submitpopuplistnameawardrecipient');
+            const framenotyetreceiveitems = document.getElementById('framenotyet_receiveitems');
+            const framenotyetreceiveitems1 = document.getElementById('framenotyet_receiveitems_1');
+     
+
+            if(status === 'received'){
+                btnsubmitpopuplistnameawardrecipient.style.display = 'none';
+                framenotyetreceiveitems.style.display = 'none';
+                framenotyetreceiveitems1.style.display = '';
+            }else {
+                btnsubmitpopuplistnameawardrecipient.style.display = '';
+                framenotyetreceiveitems.style.display = '';
+                framenotyetreceiveitems1.style.display = 'none';
+            }
+            openDialog(document.getElementById('popuplistname_awardrecipient'))
+        });
+    }
 
 //ปุ่มปิด popup พบรายชื่อผู้ได้รับรางวัล
 const btnoffpopuplistnameawardrecipient = document.getElementById('btn_offpopuplistnameawardrecipient');
@@ -1187,7 +1215,7 @@ function allreceivednotreceivedhistory_random(status){
     }
 }
 
-
+//นับจำนวนของคนที่ได้รางวัล ทั้งหมด รับแล้ว ยังไม้รับ
 function updatenumberlistname(){
 
     const numberalllistname1 = document.getElementById('numberalllistname_1');

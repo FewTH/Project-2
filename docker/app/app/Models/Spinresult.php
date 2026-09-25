@@ -16,10 +16,15 @@ class Spinresult extends Model
         'winner_name',
         'receive_status',
         'receive_deadline',
-        'receive_location',
         'received_at',
         'assessment_id',
+        'checked_by_user_id',
         ];
+
+    protected $casts = [
+        'received_at' => 'datetime',
+        'receive_deadline' => 'datetime',
+    ];
 
     public function reward()
     {
@@ -30,4 +35,13 @@ class Spinresult extends Model
     {
         return $this->belongsTo(Assessment::class, 'assessment_id', 'assessment_id');
     }
+
+    // user ที่กดยืนยันรับของ
+    public function checkedbyuserid()
+    {
+        return $this->belongsTo(User::class, 'checked_by_user_id', 'user_id');
+    }
+
+
+
 }

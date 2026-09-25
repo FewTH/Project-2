@@ -9,6 +9,7 @@ use App\Http\Controllers\RewardController;
 use App\Http\Controllers\EventRegistrationController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SpinresultController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -80,9 +81,12 @@ Route::prefix('admin')->middleware('role:admin')->group(function () {
         return view('admin.spinwhell');
     });
 
-    Route::get('/history_random', function () {
-        return view('admin.history_random');
-    });
+
+
+    Route::get('/history_random', [SpinresultController::class, 'index'])->name('admin.history_random');
+    Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('admin.spinresult.receive');
+
+
 
     Route::get('/edit_activity/{id}', [ActivityController::class, 'editactivity'])->name('admin.activity.editactivity');
     Route::put('/edit_activity/{id}', [ActivityController::class, 'updateactivity'])->name('admin.activity.updateactivity');

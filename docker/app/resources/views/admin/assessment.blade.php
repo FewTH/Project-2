@@ -193,8 +193,8 @@
                     </div>
                 </div>
                 <p class="message-assessment">
-                    @if($assesment->wheelAssessment)
-                    รางวัล{{ $assessment->wheelAssessment->wheel->rewards->pluck('name')->join(' ')}}
+                    @if($assessment -> WheelAssessment)
+                    รางวัล{{ $assessment -> WheelAssessment->wheel->rewards->pluck('name')->join(' ')}}
                     @else
                         ยังไม่ได้บันทึกวงล้อ
                     @endif

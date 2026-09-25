@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WheelAssessment;
+use App\Models\Assessment;
 
 class AssessmentController extends Controller
 {
@@ -20,7 +21,7 @@ class AssessmentController extends Controller
         // ];
 
         // เอาเฉพาะอันที่ยังไม่เคยถูกเพิ่มวงล้อออกมา
-        $available = Assessment::whereNotIn('assessment_id',$useIds)
+        $available = Assessment::whereNotIn('assessment_id',$usedAssessmentIds)
         ->where('is_open',1)
         ->get()
         ->map(fn($a)=>[

@@ -158,27 +158,35 @@
                 <div class="graylinesection">
                     <div class="yellowlinesection" id="yellow_linesection"></div>
                 </div>
+                
+                @foreach($spinresults as $index => $item)
+                 <button class="btn-openpopupname"
+                        data-status="{{ $item->receive_status === 'received' ? 'received' : 'not-received' }}"
+                        data-name="{{ $item->winner_name }}"
+                        data-qr="{{ $item->qr_code }}" 
+                        data-reward="{{ $item->reward->name ?? '-' }}"
+                        data-received-at="{{ $item->received_at ? $item->received_at->format('d/m/Y H:i') : '' }}"
+                        data-action="{{ route('admin.spinresult.receive', $item->result_id) }}"
+                        >
 
-                 <button class="btn-openpopupname" id="btn_openpopupname" data-status="not-received">
                     <div class="framecirclenumbername">
-                        <p class="circlenumbername">1</p>
+                        <p class="circlenumbername">{{ $index + 1}}</p>
                     </div>
                     <div class="username-listname">
-                        <p class="messageusername-listname">สมชายใจดี</p>
-                        <span class="messageusername-listname-1">AB-2026-0008</span>
+                        <p class="messageusername-listname">{{ $item->winner_name }}</p>
+                        <span class="messageusername-listname-1">{{ $item->qr_code }}</span>
                     </div>
                     <div class="framereward-listname">
                         <div class="framereward-listname-1">
-                            <p class="messagereward-listname">ดินสอ</p>
-                        </div>
-                        <div class="framerstatusreward-listname1" data-status="not-received">
-                            <p class="messagestatusreward-listname1" id="messagestatusreward_listname_1">ยังไม่รับ</p>
+                            <p class="messagereward-listname">{{ $item->reward->name ?? '-' }}</p>
+                        </div>  
+                        <div class="framerstatusreward-listname1" data-status="{{ $item->receive_status === 'received' ? 'received' : 'not-received' }}">
+                            <p class="messagestatusreward-listname1" id="messagestatusreward_listname_1">{{ $item->receive_status === 'received' ? 'รับแล้ว' : 'ยังไม่รับ' }}</p>
                         </div>
                         
                     </div>
                 </button>
-                <hr class="linesectionlistnamerecipientreward">
-
+                @endforeach
             </div>
     </div>
 
@@ -195,7 +203,7 @@
             <img src="{{ asset('admin/img/รูปของชื่อผู้รับหน้าpopup.png') }}" alt="รูปของชื่อผู้รับหน้าpopup">
             <div class="framemessagenamerecipientreward">
                 <p class="messagenamerecipientreward">ชื่อผู้รับ</p>
-                <span class="messagenamerecipientreward-1">วิภา รักเรียน</span>
+                <span class="messagenamerecipientreward-1" id="popuplistname_name">วิภา รักเรียน</span>
             </div>
         </div>
 
@@ -203,7 +211,7 @@
             <img src="{{ asset('admin/img/รูปของQRcodepopup.png') }}" alt="รูปของQRcodepopup">
             <div class="framemessageQRcodepopup">
                 <p class="messagenamerecipientreward">รหัส QR Code</p>
-                <span class="messagenamerecipientreward-1">#AB-2026-0008</span>
+                <span class="messagenamerecipientreward-1" id="popuplistname_QrCode">#AB-2026-0008</span>
             </div>
         </div>
         
@@ -213,7 +221,7 @@
             </div>
             <div class="framemessageprizesreceived">
                 <p class="framemessage-prizesreceived">ของรางวัลที่ได้รับ</p>
-                <span class="framemessage-prizesreceived-1">ดินสอ</span>
+                <span class="framemessage-prizesreceived-1" id="popuplistname_reward">ดินสอ</span>
             </div>
         </div>
 
@@ -223,16 +231,28 @@
             <img src="{{ asset('admin/img/รูปนาฬิกายังไม่ได้รับของ.png') }}" alt="รูปนาฬิกายังไม่ได้รับของ">
             <p class="messagenotyetreceiveitems">ยังไม่ได้รับของ</p>
         </div>
+
+        <div class="framenotyetreceiveitems-1" id="framenotyet_receiveitems_1">
+            <img src="{{ asset('admin/img/รูปรับของแล้วของpopupพบรายชื่อผู้รับรางวัล.png') }}" alt="รูปรับของแล้วของpopupพบรายชื่อผู้รับรางวัล">
+            <div class="messagenotyetreceiveitems-3">
+                <p class="messagenotyetreceiveitems-1">รับของเมื่อ</p>
+                <span class="messagenotyetreceiveitems-1" id="messagenotyetreceiveitems_2"></span>
+            </div>
+        </div>
+
     
+    <form id="form_receive" method="POST">
+        @csrf
         <div class="btn-off-submitpopuplistnameawardrecipient">
             <button type="button" class="btn-offpopuplistnameawardrecipient" id="btn_offpopuplistnameawardrecipient">
                 <p class="messagebtn-offpopuplistnameawardrecipient">ปิด</p>
             </button>
-            <button type="submit" class="btn-submitpopuplistnameawardrecipient">
+            <button type="submit" class="btn-submitpopuplistnameawardrecipient" id="btn_submitpopuplistnameawardrecipient">
                 <img src="{{ asset('admin/img/ติกถูกของปุ่มยืนยันรับของ.png') }}" alt="ติกถูกของปุ่มยืนยันรับของ" class="img-btn-submitpopuplistnameawardrecipient">
                 <p class="messagebtn-submitpopuplistnameawardrecipient">ยืนยันรับของ</p>
             </button>
         </div>
+    </form>
     </dialog>
 
 

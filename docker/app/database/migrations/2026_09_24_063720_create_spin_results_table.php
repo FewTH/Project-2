@@ -18,10 +18,10 @@ return new class extends Migration
             $spinresults->foreignId('assessment_id')->constrained('assessments', 'assessment_id');
             $spinresults->string('qr_code', 500)->unique();
             $spinresults->string('winner_name', 255);
-            $spinresults->enum('receive_status', ['pending', 'received', 'expired'])->default('pending');
+            $spinresults->enum('receive_status', ['received', 'not-received'])->default('not-received');
             $spinresults->dateTime('receive_deadline')->nullable();
-            $spinresults->string('receive_location', 300)->nullable();
             $spinresults->dateTime('received_at')->nullable();
+            $spinresults->foreignId('checked_by_user_id')->nullable()->constrained('users', 'user_id');
             $spinresults->timestamps();
             
         });

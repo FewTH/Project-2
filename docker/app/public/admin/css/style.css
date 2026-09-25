@@ -4683,6 +4683,7 @@
     margin-top: 40px;
     background-color: #FCF6E5;
     border-radius: 20px;
+    padding: 0px 0px 20px 0px;
     border: 2px solid #d39b00;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
@@ -4697,7 +4698,7 @@
 
   /*หัวข้อรายชื่อผู้ได้รับรางวัล*/
   .messagesectionlistnamerecipientreward{
-    font-size: 25px;
+    font-size: 26px;
     font-weight: 900;
     color: #8A5B10;
   }
@@ -4711,6 +4712,7 @@
 
   .framebutton-sectionlistnamerecipientreward{
     position: relative;
+
   }
 
   /*ปุ่มทั้ง 3 ปุ่มคือทั้งหมด รับแล้ว ยังไม่ได้รับ*/
@@ -4732,7 +4734,7 @@
 
   /*ข้อความของปุ่มทั้ง 3*/
   .messagebutton-section{
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 600;
     color: #6b6b6b;
   }
@@ -4746,8 +4748,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: #6b6b6b59;
     position: relative;
@@ -4795,9 +4797,8 @@
     align-items: center;
     padding: 0px 35px;
     gap: 15px;
-    position: relative;
-    bottom: 15px;
-  }
+    border-bottom: 2px solid #d39b00;
+}
 
   /*ตัวเลขหน้ารายชื่อผู้ได้รับรางวัล*/
   .circlenumbername{
@@ -4814,10 +4815,10 @@
 
   /*กรอบของชื่อกับรหัสQRcode*/
   .username-listname{
-    display: flex;
+     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
   }
 
   /*ชื่อผู้ได้รับรางวัล*/
@@ -5037,6 +5038,31 @@
     gap: 10px;
   }
 
+  .framenotyetreceiveitems-1{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #7fd1ae79;
+    border: 1px solid #008d4e;;
+    height: 50px;
+    border-radius: 20px;
+    padding: 0px 20px;
+    gap: 10px;
+  }
+
+  .messagenotyetreceiveitems-3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .messagenotyetreceiveitems-1{
+    font-size: 18px;
+    font-weight: 600;
+    color: #008d4e;
+  }
+
   /*ข้อความยังไม่ได้รับของ*/
   .messagenotyetreceiveitems{
     font-size: 18px;
@@ -5048,7 +5074,7 @@
   .btn-off-submitpopuplistnameawardrecipient{
     margin-top: 25px;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
   }
 
   /*กรอบของปุ่มปิด*/
@@ -5059,9 +5085,8 @@
     justify-content: center;
     background: none;
     border: 2px solid #d39b00;
-    width: 150px;
-    height: 60px;
     border-radius: 20px;
+    width: 100%;
     cursor: pointer;
     overflow: hidden;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -5102,9 +5127,9 @@
     justify-content: center;
     border: none;
     background-color: #a8731d;
-    width: 230px;
-    height: 60px;
     border-radius: 20px;
+    width: 100%;
+    min-width: 210px;
     cursor: pointer;
     overflow: hidden;
     gap: 10px;
