@@ -66,7 +66,6 @@
             <img src="{{ asset('admin/img/รูปโลโกมหาลัย.png') }}" alt="รูปโลโกมหาลัย" class="img-university">
             <div class="messagecreateactivity">
                 <p class="messagecreateactivity-1">แก้ไขกิจกรรม</p>
-                <span class="create-QR">สร้าง QR แล้วให้ผู้เข้าร่วม scan ลงทะเบียนในงานได้เลย</span>
             </div>
 
             <form id="frame_blackactivity_1" action="{{ route('admin.activity.updateactivity', $event->event_id) }}" method="POST">
@@ -75,7 +74,7 @@
             <div class="frameblackactivity">
                 <div class="framesettings">
                     <p class="messagesettings">ตั้งค่ากิจกรรม</p>
-                    <span class="fill-information">กรอกข้อมูลด้านล่าง ระบบจะสร้าง QR code ให้อัตโนมัติ</span>
+                    <span class="fill-information">กรอกข้อมูลด้านล่าง ระบบจะแก้ไขให้อัตโนมัติ</span>
                 </div>
                 <label class="frameactivity-name">
                     <div class="activity-name-1">
@@ -152,7 +151,7 @@
                  <div class="savesuccesschangepassword-error-1-2-3">{{ $message }}</div>
                 @enderror
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
-                    <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
+                    <img src="{{ asset('admin/img/รูปแก้ไขข้อมูลของหน้าแก้ไขกิจกรรม.png') }}" alt="รูปแก้ไขข้อมูลของหน้าแก้ไขกิจกรรม" class="buildandQR">
                     <p class="messagebuildandQR">แก้ไขกิจกรรม</p>
                 </button>
             </form>

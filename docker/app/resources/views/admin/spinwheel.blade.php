@@ -20,7 +20,6 @@
     </a>
     </div>
     <div class="random-reward">
-
         <div class="top-name-assessment">
             <h4 class="assessment-title-name">{{$assessment->name}}</h4>
             <span class="assess-status">{{$assessment->is_open ? 'open' : 'closed'}}
@@ -35,6 +34,7 @@
         <div class="text-wheel">
             <h3 class="text-topic">สุ่มของรางวัล</h3>
         </div>
+        {{-- แสดงวงล้อที่ผูกกับแบบประเมิน --}}
         <div class="wheel-assessment-rewards">
             <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
             <div class="wheel-pointer"></div>

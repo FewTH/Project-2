@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // อ่านข้อมูลจากตัวแปร global ที่ Blade เตรียมไว้ให้
     const rewardData = window.rewardWheelData || [];
 
-    const canvas = document.getElementById('rewardWheelCanvas');
+    const canvas = document.getElementById('wheelrewardCanvas');
     const ctx = canvas.getContext('2d');
     const colors = ['#6c5ce7', '#00b894', '#fdcb6e', '#e17055', '#0984e3', '#d63031', '#e84393', '#00cec9'];
 

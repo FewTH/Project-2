@@ -70,7 +70,7 @@
                 <!--วงล้อสุ่มรายชื่อ-->
                 <div class="framesmallnameofwheel" id="framesmall_nameofwheel">
                     <div class="framewheelname-quantityname">
-                        <img src="{{ asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png') }}" alt="รูปลองชื่อวงล้อสุ่มรายชื่อ" class="img-framewheelname-quantityname">
+                        <img src="{{ asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png') }}" alt="รูปของชื่อวงล้อสุ่มรายชื่อ" class="img-framewheelname-quantityname">
                         <p class="messageframewheelname">วงล้อสุ่มรายชื่อ</p>
                         <div class="messagequantityname-1">
                             <span class="messagequantityname">จำนวนเริ่มต้นรายชื่อ {{ $event->registrations->count() }} วงล้อ</span>

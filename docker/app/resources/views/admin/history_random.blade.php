@@ -193,7 +193,7 @@
         </div>
 
         <div class="framemessagepopuplistnameawardrecipient" id="messagepopuplistname_awardrecipient">
-            <p class="messagepopuplistnameawardrecipient-1">รายชื่อผู้รับรางวัล</p>
+            <p class="messagepopuplistnameawardrecipient-1">รายชื่อผู้ได้รับรางวัล</p>
         </div>
 
         <div class="framenamerecipientreward">

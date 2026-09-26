@@ -7365,8 +7365,7 @@
   }
 
   .buildandQR{
-    width: 25px;
-    height: 25px;
+
     position: relative;
     z-index: 1;
   }
@@ -8636,8 +8635,28 @@
   border-radius: 10px;
   color: #FFFFFF;
 }
-
-
-
-
+/* แต่งวงล้อที่ผูกกับแบบประเมิน */
+/* กรอบด้านบน */
+.random-reward{
+  background-color: #FCF6E5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 800px;
+  border: 1px solid #a8731d;
+  border-radius: 10px;
+  margin-left: 200px;
+  margin-top: 100px;
+}
+.top-name-assessment{
+  margin-left: 10px;
+}
+.assessment-summary-sub{
+  margin-left: 10px;
+}
+/* ส่วนวงล้อ */
+.wheel-box-main{
+  display: flex;
+  justify-content: center;
+}
 
