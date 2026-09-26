@@ -66,7 +66,6 @@
 
 
 
-
             <div class="framebigofWheel">
                 <!--วงล้อสุ่มรายชื่อ-->
                 <div class="framesmallnameofwheel" id="framesmall_nameofwheel">

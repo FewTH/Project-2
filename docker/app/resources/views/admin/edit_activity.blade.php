@@ -153,7 +153,7 @@
                 @enderror
                 <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
                     <img src="{{ asset('admin/img/รูปของปุ่มสร้างกิจกรรมและ QR code.png') }}" alt="รูปของปุ่มสร้างกิจกรรมและ QR code" class="buildandQR">
-                    <p class="messagebuildandQR">สร้างกิจกรรมและ QR code</p>
+                    <p class="messagebuildandQR">แก้ไขกิจกรรม</p>
                 </button>
             </form>
         </div>

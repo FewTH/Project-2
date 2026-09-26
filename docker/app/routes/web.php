@@ -29,7 +29,9 @@
         })->name('admin.dashboard');
 
         
-
+        Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
+            ->name('admin.assessment.random');
+            
         Route::get('/profile', [ProfileController::class, 'adminProfile']);
         Route::post('/profile', [ProfileController::class, 'uploadimg']);
 

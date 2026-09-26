@@ -33,4 +33,17 @@ class AssessmentController extends Controller
 
         return response()->json($available);
     }
+    public function randomreward($id)
+    {
+        $assessment=Assessment::with('wheelAssessment.wheel.rewards')->findOrfail($id);
+        // ถ้าแบบประเมินนี้ยังไม่มีวงล้อจะแสดงข้อความไม่พบวงล้อ
+        if(!$assessment->wheelAssessment){
+            return back()->with('error', 'แบบประเมินนี้ไม่พบวงล้อรางวัล');
+        }
+        $wheel = $assessment->wheelAssessment->wheel;
+        return view('admin.spinwheel',[
+            'assessment' => $assessment,
+            'wheel' => $wheel,
+        ]);
+    }
 }

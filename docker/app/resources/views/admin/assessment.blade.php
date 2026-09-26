@@ -205,7 +205,7 @@
                 </p>
                 @if($assessment->wheelAssessment)
                 {{-- กรณีที่เราบันทึกวงล้อแล้วตัวแบบประเมินจะมีปุ่มเข้าสู่การสุ่มเพิ่มขึ้นมา --}}
-                <a href="{{url('admin/spinwheel')}}" class="enter-random">
+                <a href="{{route('admin.assessment.random',$assessment->assessment_id)}}" class="enter-random">
                     <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
                     <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
                 </a>

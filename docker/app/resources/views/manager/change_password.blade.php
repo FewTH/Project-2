@@ -80,7 +80,7 @@
             @enderror
         </div>
         <div class="passwordcurrent">
-            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรห้สผ่านใหม่</label> <br>
+            <label class="type-passwordcurrent-1" for="Type_passwordcurrent_1">เปลี่ยนรหัสผ่านใหม่</label> <br>
             <div class="img-eye-password">
             <input type="password" class="input-passwordcurrent-1" id="Type_passwordcurrent_1" name="new_password"  autocomplete="new-password">
             <button type="button" class="img-eye" id="img_eye_2">
