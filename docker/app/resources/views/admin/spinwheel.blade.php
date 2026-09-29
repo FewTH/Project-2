@@ -43,12 +43,11 @@
             <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
             <div class="wheel-pointer"></div>
         </div>
-
-        <div class="spin-wheelassess-btn">
+    </div>
+    <div class="spin-wheelassess-btn">
             <button type="button" id="spinassessmentBtn" class="spin-assessment-btn">
                 <span class="play-icon">▶สุ่มรางวัล</span>
             </button>
-        </div>
     </div>
 
     {{-- ส่วนรายละเอียดแบบประเมิน(Footer) --}}

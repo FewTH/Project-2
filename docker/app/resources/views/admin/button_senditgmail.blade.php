@@ -65,7 +65,7 @@
     </div>
     <div class="sendallemails">
         <button type="button" class="btn-sendallemails1" id="btn_sendallemails1">
-            <img src="{{ asset('admin/img/รูปของปุ่มส่งอีเมลทั้งหมด.png') }}" alt="รูปของปุ่มส่งอีเมลทั้งหมด">
+            <img src="{{ asset('admin/img/รูปของปุ่มส่งอีเมลทั้งหมด.png') }}" alt="รูปของปุ่มส่งอีเมลทั้งหมด" class="btn-imgsendallemails1">
             <p class="sendallemails1">ส่งอีเมลทั้งหมด</p>
         </button>
     </div>
@@ -76,93 +76,93 @@
             <p class="numberallbuttonsenditgmail" id="numberallbutton_senditgmail">30</p>
             <span class="messageallbuttonsenditgmail">ทั้งหมด</span>
         </div>
-        <div class="framesentbuttonsenditgmail">
+        <div class="frameallbuttonsenditgmail">
             <p class="numbersentbuttonsenditgmail" id="numbersentbutton_senditgmail">26</p>
-            <span class="messagesentbuttonsenditgmail">ส่งแล้ว</span>
+            <span class="messageallbuttonsenditgmail">ส่งแล้ว</span>
         </div>
-        <div class="framedeliveryfailedbuttonsenditgmail">
+        <div class="frameallbuttonsenditgmail">
             <p class="numberdeliveryfailedbuttonsenditgmail" id="numberdeliveryfailedbutton_senditgmail">4</p>
-            <span class="messagedeliveryfailedbuttonsenditgmail">ส่งไม่สำเร็จ</span>
+            <span class="messageallbuttonsenditgmail">ส่งไม่สำเร็จ</span>
         </div>
     </div>
 
-    <div class="framebiglistnamerecipientreward">
-        <div class="framemessagelistnamerecipientreward">
-            <p class="pointlistnamerecipientreward"></p>
-            <p class="messagelistnamerecipientreward">ประวัตการส่ง QrCode</p>
-        </div>
-            <hr class="linemessagelistnamerecipientreward">
-        <div class="framemessagelistnamerecipientreward-1">
-            <div class="framecirclenumberlistnamerecipientreward">
-                <p class="circlenumberlistnamerecipientreward">1</p>
-            </div>
-            <div class="framelistnamegmaildateassessment">
-                <p class="messagelistnamegmaildateassessment">กิตติภพ รัตนวิจิตร</p>
-                <p class="messagegmaildateassessment">kittiphop.rat@gmail.com</p>
-                <span class="messagedateassessment">ประเมินเมื่อ 20:15:03 น. 20 พ.ค. 2569 </span>
-            </div>
-            <div class="framesenttogmail">
-                <img src="{{ asset('admin/img/รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล.png') }}" alt="รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล">
-                <p class="messagesenttogmail">ส่งแล้ว</p>
-            </div>
-        </div>   
-        <hr class="linemessagelistnamerecipientreward">
+    <div class="framebiglistnamerecipientreward-1">
+            <div class="framebiglistnamerecipientreward">
+                <div class="framemessagelistnamerecipientreward">
+                    <p class="pointlistnamerecipientreward"></p>
+                    <p class="messagelistnamerecipientreward">ประวัตการส่ง QrCode</p>
+                </div>
+                    <hr class="linemessagelistnamerecipientreward">
+                <div class="framemessagelistnamerecipientreward-1">
+                    <div class="framecirclenumberlistnamerecipientreward">
+                        <p class="circlenumberlistnamerecipientreward">1</p>
+                    </div>
+                    <div class="framelistnamegmaildateassessment">
+                        <p class="messagelistnamegmaildateassessment">กิตติภพ รัตนวิจิตร</p>
+                        <p class="messagegmaildateassessment">kittiphop.rat@gmail.com</p>
+                        <span class="messagedateassessment">ประเมินเมื่อ 20:15:03 น. 20 พ.ค. 2569 </span>
+                    </div>
+                    <div class="framesenttogmail">
+                        <img src="{{ asset('admin/img/รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล.png') }}" alt="รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล">
+                        <p class="messagesenttogmail">ส่งแล้ว</p>
+                    </div>
+                </div>   
+                <hr class="linemessagelistnamerecipientreward-1">
+            
 
-
-        <div class="framemessagelistnamerecipientreward-1">
-            <div class="framecirclenumberlistnamerecipientreward">
-                <p class="circlenumberlistnamerecipientreward">3</p>
-            </div>
+            <div class="framemessagelistnamerecipientreward-1">
+                <div class="framecirclenumberlistnamerecipientreward">
+                    <p class="circlenumberlistnamerecipientreward">3</p>
+                </div>
             <div class="framelistnamegmaildateassessment">
-                <p class="messagelistnamegmaildateassessment">จิรภัทร อัศวเดชากุล</p>
-                <p class="messagegmaildateassessment">jiraphat.asawa@gmail.com</p>
-                <span class="messagedateassessment">ประเมินเมื่อ 13:32:46 น. 21 พ.ค. 2569 </span>
-            </div>
-            <div class="frameerrorgmail">
-                <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="รูปแจ้งเตือนส่ง email ล้มเหลว">
-                <p class="messageerrorgmail">ล้มเหลว</p>
-            </div>
-            <button type="button" id="btn_Resend" class="btn-Resend">
+                    <p class="messagelistnamegmaildateassessment">จิรภัทร อัศวเดชากุล</p>
+                    <p class="messagegmaildateassessment">jiraphat.asawa@gmail.com</p>
+                    <span class="messagedateassessment">ประเมินเมื่อ 13:32:46 น. 21 พ.ค. 2569 </span>
+                </div>
+                <div class="frameerrorgmail">
+                    <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="รูปแจ้งเตือนส่ง email ล้มเหลว">
+                    <p class="messageerrorgmail">ล้มเหลว</p>
+                </div>
+                <button type="button" id="btn_Resend" class="btn-Resend">
                 <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
-                <p class="messagebtn-Resend">ส่งใหม่</p>
+                    <p class="messagebtn-Resend">ส่งใหม่</p>
+                </button>
+            </div>   
+            <hr class="linemessagelistnamerecipientreward-1">
+        </div>
+    
+        <div class="framelistthatfailed">
+            <p class="messagelistthatfailed">รายการที่ล้มเหลว</p>
+            <hr class="linemessagelistnamerecipientreward">
+            <div class="framelistnamethatfailed">
+                <p class="pointlistnamethatfailed"></p>
+                <span class="messagelistnamethatfailed">จิรภัทร อัศวเดชากุล</span>
+            </div>
+            <button type="button" id="btn_Resend_1" class="btn-Resend1">
+                <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
+                <p class="messagebtn-Resend1">ส่งใหม่</p>
             </button>
-        </div>   
-        <hr class="linemessagelistnamerecipientreward">
-    </div>
+            <hr class="linemessagelistnamerecipientreward-2">
 
 
-    <div class="framelistthatfailed">
-        <p class="messagelistthatfailed">รายการที่ล้มเหลว</p>
-        <hr class="linemessagelistnamerecipientreward">
-        <div class="framelistnamethatfailed">
-            <p class="pointlistnamethatfailed"></p>
-            <span class="messagelistnamethatfailed">จิรภัทร อัศวเดชากุล</span>
+            <div class="framelistnamethatfailed">
+                <p class="pointlistnamethatfailed"></p>
+                <span class="messagelistnamethatfailed">กัญญาวีร์ อนันต์โชคชัย</span>
+            </div>
+            <button type="button" id="btn_Resend_1" class="btn-Resend1">
+                <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
+                <p class="messagebtn-Resend1">ส่งใหม่</p>
+            </button>
+            <hr class="linemessagelistnamerecipientreward-2">
+
+
+
+            <button type="button" class="btn-resendallthatfailed" id="btn_resendallthatfailed">
+                <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
+                <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
+            </button>
         </div>
-        <button type="button" id="btn_Resend_1" class="btn-Resend1">
-            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
-            <p class="messagebtn-Resend1">ส่งใหม่</p>
-        </button>
-        <hr class="linemessagelistnamerecipientreward">
-
-
-        <div class="framelistnamethatfailed">
-            <p class="pointlistnamethatfailed"></p>
-            <span class="messagelistnamethatfailed">กัญญาวีร์ อนันต์โชคชัย</span>
-        </div>
-        <button type="button" id="btn_Resend_1" class="btn-Resend1">
-            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
-            <p class="messagebtn-Resend1">ส่งใหม่</p>
-        </button>
-        <hr class="linemessagelistnamerecipientreward">
-
-
-
-        <button type="button" class="btn-resendallthatfailed" id="btn_resendallthatfailed">
-            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
-            <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
-        </button>
     </div>
-
 
 
     
