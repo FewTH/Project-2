@@ -19,7 +19,9 @@
         <span>Admin</span>
     </a>
     </div>
-    <div class="random-reward">
+
+    {{-- ส่วนรายละเอียดแบบประเมิน(header) --}}
+    <div class="random-reward-header">
         <div class="top-name-assessment">
             <h4 class="assessment-title-name">{{$assessment->name}}</h4>
             <span class="assess-status">{{$assessment->is_open ? 'open' : 'closed'}}
@@ -30,6 +32,8 @@
             วงล้อรางวัล:{{$wheel->rewards->pluck('name')->join(', ')}}
         </p>
     </div>
+
+    {{-- ส่วนวงล้อ --}}
     <div class="wheel-box-main">
         <div class="text-wheel">
             <h3 class="text-topic">สุ่มของรางวัล</h3>
@@ -39,12 +43,15 @@
             <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
             <div class="wheel-pointer"></div>
         </div>
+
+        <div class="spin-wheelassess-btn">
+            <button type="button" id="spinassessmentBtn" class="spin-assessment-btn">
+                <span class="play-icon">▶สุ่มรางวัล</span>
+            </button>
+        </div>
     </div>
-    <div class="spin-wheelassess-btn">
-        <button type="button" id="spinassessmentBtn" class="spin-assessment-btn">
-            <span class="play-icon">▶สุ่มรางวัล</span>
-        </button>
-    </div>
+
+    {{-- ส่วนรายละเอียดแบบประเมิน(Footer) --}}
     <div class="bottom-name-assessment">
         <h4 class="assessment-title-name-bottom">{{$assessment->name}}</h4>
         <span class="assess-status-bottom">{{$assessment->is_open ? 'open' : 'closed'}}
@@ -55,6 +62,13 @@
             ปิดรับคำตอบ: {{ $assessment->closed_at?->format('d M Y') ?? '-' }}
         </p>
     </div>
+
+    <script>
+        window.rewardWheelData = @json($wheel->rewards->map(fn($r)=>[
+            'label' => $r->name,
+            'weight' => $r->rate*$r->pivot->quantity_selected,
+        ]));
+    </script>
     <script src="{{ asset('admin/js/assessmentrandomreward.js') }}"></script>
 </body>
 </html>

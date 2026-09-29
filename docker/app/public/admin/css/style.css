@@ -4693,7 +4693,6 @@
 
   .framebutton-sectionlistnamerecipientreward{
     position: relative;
-
   }
 
   /*ปุ่มทั้ง 3 ปุ่มคือทั้งหมด รับแล้ว ยังไม่ได้รับ*/
@@ -5151,6 +5150,38 @@
     position: relative;
     z-index: 1;
   }
+
+
+
+
+
+
+
+
+
+
+
+  /*ส่วนของหน้า button_senditgmail.blade.php*/
+  .frameallsentdeliveryfailed{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .frameallbuttonsenditgmail{
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8637,7 +8668,7 @@
 }
 /* แต่งวงล้อที่ผูกกับแบบประเมิน */
 /* กรอบด้านบน */
-.random-reward{
+.random-reward-header{
   background-color: #FCF6E5;
   display: flex;
   justify-content: center;
@@ -8648,9 +8679,18 @@
   margin-left: 200px;
   margin-top: 100px;
 }
+/* ชื่อและสถานะแบบประเมิน */
 .top-name-assessment{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
   margin-left: 10px;
 }
+/* สถานะแบบประเมิน */
+.assess-status{
+  margin-top: 20px;
+}
+/* ข้อความสรุปรายการรางวัลในวงล้อ */
 .assessment-summary-sub{
   margin-left: 10px;
 }
@@ -8658,5 +8698,24 @@
 .wheel-box-main{
   display: flex;
   justify-content: center;
+  background-color: #FCF6E5;
+  border: 1px solid #a8731d;
+  margin-left: 200px;
+  margin-top: 10px;
+  width: 800px;
+  height: 600px;
+  border-radius: 10px;
+}
+/* ส่วนรายละเอียดแบบประเมิน(Footer) */
+.bottom-name-assessment{
+  background-color: #FCF6E5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 800px;
+  border: 1px solid #a8731d;
+  border-radius: 10px;
+  margin-left: 200px;
+  margin-top: 10px;
 }
 

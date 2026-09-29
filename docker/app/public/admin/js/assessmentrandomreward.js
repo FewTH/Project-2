@@ -1,15 +1,18 @@
+console.log('assessmentrandomreward.js โหลดแล้ว');
 document.addEventListener('DOMContentLoaded', function () {
 
-    // อ่านข้อมูลจากตัวแปร global ที่ Blade เตรียมไว้ให้
+    // อ่านข้อมูลจากตัวแปรที่มีใน spinwheel.blade
     const rewardData = window.rewardWheelData || [];
 
     const canvas = document.getElementById('wheelrewardCanvas');
+    // กำหนดรูปแบบให้เป็นแบบวงกลม
     const ctx = canvas.getContext('2d');
     const colors = ['#6c5ce7', '#00b894', '#fdcb6e', '#e17055', '#0984e3', '#d63031', '#e84393', '#00cec9'];
 
+    //สร้างวงล้อ
     function drawWheel() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+        // ถ้าไม่มีรายการรางวัลในวงล้อเลยจะให้เป็นสีเทา
         if (rewardData.length === 0) {
             ctx.beginPath();
             ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 10, 0, 2 * Math.PI);
@@ -51,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     drawWheel();
-
+    console.log('drawWheel ถูกเรียกแล้ว', rewardData, canvas);
     // ---------- ปุ่มสุ่มรางวัล ----------
-    document.getElementById('spinBtn').addEventListener('click', function () {
+    document.getElementById('spinassessmentBtn').addEventListener('click', function () {
         // ส่วนนี้จะเขียนต่อทีหลัง
     });
 

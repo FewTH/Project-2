@@ -179,7 +179,6 @@
                         <div class="framerstatusreward-listname1" data-status="{{ $item->receive_status === 'received' ? 'received' : 'not-received' }}">
                             <p class="messagestatusreward-listname1">{{ $item->receive_status === 'received' ? 'รับแล้ว' : 'ยังไม่รับ' }}</p>
                         </div>
-                        
                     </div>
                 </button>
 
