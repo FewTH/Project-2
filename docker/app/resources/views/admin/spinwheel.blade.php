@@ -34,20 +34,31 @@
     </div>
 
     {{-- ส่วนวงล้อ --}}
-    <div class="wheel-box-main">
+    <div class="all-wheel-background">
+    <div class="wheel-reward-box">
         <div class="text-wheel">
-            <h3 class="text-topic">สุ่มของรางวัล</h3>
-        </div>
+            <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+            <p class="text-topic">วงล้อสุ่มของรางวัล</p>
+            <div class="num-reward-box">
+                <span class="num-reward-wheel">จำนวนรางวัลทั้งหมด</span>
+            </div>
+        </div> 
         {{-- แสดงวงล้อที่ผูกกับแบบประเมิน --}}
+        <label class="toggle-switch">
+            <input type="checkbox" id="toggle-wheel" checked>
+            <span class="toggle-slider"></span>
+        </label>
         <div class="wheel-assessment-rewards">
             <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
             <div class="wheel-pointer"></div>
         </div>
     </div>
-    <div class="spin-wheelassess-btn">
-            <button type="button" id="spinassessmentBtn" class="spin-assessment-btn">
-                <span class="play-icon">▶สุ่มรางวัล</span>
-            </button>
+    <div class="btnstartRandomreward">
+        <button type="button" class="btn-startRandomreward" id="spinassessmentBtn">
+            <img src="{{ asset('admin/img/รูปของปุ่มเรื่มสุ่มรางวัล.png') }}" alt="รูปของปุ่มเรื่มสุ่มรางวัล" class="img-btn-startRandomreward">
+            <p class="messagebtn-startRandomreward">สุ่มรางวัล</p>
+        </button>
+    </div>
     </div>
 
     {{-- ส่วนรายละเอียดแบบประเมิน(Footer) --}}
@@ -61,6 +72,44 @@
             ปิดรับคำตอบ: {{ $assessment->closed_at?->format('d M Y') ?? '-' }}
         </p>
     </div>
+
+    {{-- ปุ่มเมนู --}}
+    <div class="container-assessment">
+        <!-- โลโกมหาลัย -->
+        <div class="img-Logo">
+            <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    </div>
+    <!-- ปุ่มเมนู -->
+    <div class="btn-Sidebar-assessment">
+        <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard-assessment">
+            <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ด" class="btn-Dashboard-img-assessment">
+            <span>แดชบอร์ด</span>
+        </a>
+        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards-assess">
+            <img src="{{ asset('admin/img/รูปจัดการรางวัล.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img-assess">
+            <span>จัดการรางวัล</span>
+        </a>
+        <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users">
+            <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img">
+            <span>จัดการผู้ใช้</span>
+        </a>
+        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel">
+            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img">
+            <span>จัดการวงล้อสุ่ม</span>
+        </a>
+        <a href="{{ url('admin/assessment') }}" class="btn-Assessment-assess">
+            <img src="{{ asset('admin/img/รุปแบบประเมินกิจกรรมสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-assess">
+            <span>แบบประเมิน/กิจกรรม</span>
+        </a>
+    </div>
+    <!-- ปุ่มกดออกจากระบบ -->
+    <div class="btn-logout-wrapper">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout">
+            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
+            <span>ออกจากระบบ</span>
+        </a>
+    </div>
+    </div> 
 
     <script>
         window.rewardWheelData = @json($wheel->rewards->map(fn($r)=>[

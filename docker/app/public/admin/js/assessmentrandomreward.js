@@ -1,4 +1,3 @@
-console.log('assessmentrandomreward.js โหลดแล้ว');
 document.addEventListener('DOMContentLoaded', function () {
 
     // อ่านข้อมูลจากตัวแปรที่มีใน spinwheel.blade
@@ -51,7 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             startAngle += sliceAngle;
         });
+        // วงกลมขาวตรงกลางวงล้อ
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.22,0,2*Math.PI);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
     }
+    document.getElementById('toggle-wheel').addEventListener('change',function(){
+        const spinBtn = document.getElementById('spinassessmentBtn');
+        spinBtn.disabled = !this.ariaChecked;
+    });
 
     drawWheel();
     console.log('drawWheel ถูกเรียกแล้ว', rewardData, canvas);
