@@ -9157,10 +9157,25 @@
   display: flex;
   flex-direction: column;
 }
+/* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล */
 .wheel-assessment-rewards{
+  position: relative;
   display: flex;
   justify-content: center;
   margin-top: 10px;
+}
+/* สร้างเข็มแหลมๆบนวงล้อรางวัล */
+.wheel-pointer{
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 24px solid #ec4899;
+  z-index: 10;
 }
 .text-wheel{
   display: flex;
