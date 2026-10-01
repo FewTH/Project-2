@@ -37,17 +37,24 @@
     <div class="all-wheel-background">
     <div class="wheel-reward-box">
         <div class="text-wheel">
-            <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
-            <p class="text-topic">วงล้อสุ่มของรางวัล</p>
-            <div class="num-reward-box">
-                <span class="num-reward-wheel">จำนวนรางวัลทั้งหมด</span>
+            <div class="logo-topic">
+                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+                <p class="text-topic">วงล้อสุ่มของรางวัล</p>
             </div>
-        </div> 
+            <div class="num-reward-box">
+                <span class="num-reward-wheel">
+                    จำนวนรางวัลทั้งหมด ({{ $wheel->rewards->sum('pivot.quantity_selected') }})
+                </span>
+            </div>
+        </div>
         {{-- แสดงวงล้อที่ผูกกับแบบประเมิน --}}
-        <label class="toggle-switch">
-            <input type="checkbox" id="toggle-wheel" checked>
-            <span class="toggle-slider"></span>
-        </label>
+        <div class="toggle-main-box">
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-wheel" checked>
+                <span class="toggle-slider"></span>
+            </label>
+            <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
+        </div>
         <div class="wheel-assessment-rewards">
             <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
             <div class="wheel-pointer"></div>
@@ -111,11 +118,17 @@
     </div>
     </div> 
 
+    @php
+        $rewardWheelDataArr = $wheel->rewards->map(function ($r){
+            return [
+                'label' => $r->name,
+                'weight' => $r->rate*$r->pivot->quantity_selected,
+                'quantity' => $r->pivot->quantity_selected,
+            ];
+        });
+    @endphp
     <script>
-        window.rewardWheelData = @json($wheel->rewards->map(fn($r)=>[
-            'label' => $r->name,
-            'weight' => $r->rate*$r->pivot->quantity_selected,
-        ]));
+        window.rewardWheelData = @json($rewardWheelDataArr);
     </script>
     <script src="{{ asset('admin/js/assessmentrandomreward.js') }}"></script>
 </body>

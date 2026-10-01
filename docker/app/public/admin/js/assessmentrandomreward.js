@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ctx.fillStyle = '#fff';
             ctx.font = '14px sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText(reward.label, 0, 0);
+            ctx.fillText(`${reward.label} (${reward.quantity})`, 0, 0);
             ctx.restore();
 
             startAngle += sliceAngle;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     document.getElementById('toggle-wheel').addEventListener('change',function(){
         const spinBtn = document.getElementById('spinassessmentBtn');
-        spinBtn.disabled = !this.ariaChecked;
+        spinBtn.disabled = !this.checked;
     });
 
     drawWheel();

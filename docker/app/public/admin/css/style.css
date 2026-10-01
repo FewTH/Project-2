@@ -5269,6 +5269,7 @@
 
   .framebiglistnamerecipientreward-1{
     display: flex;
+    align-items: flex-start;
     width: 100%;
     gap: 20px;
     margin-top: 30px;
@@ -5279,7 +5280,7 @@
   .framebiglistnamerecipientreward{
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 0px 20px;
+    padding: 0px 20px 20px 20px;
     border-radius: 20px;
     flex: 5 1 550px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -5330,9 +5331,8 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    position: relative;
-    bottom: 20px;
   }
+
 
   /*ตัวเลขข้างหน้าชื่อผู้ได้รางวัลประวัตการส่ง QrCode*/
   .circlenumberlistnamerecipientreward{
@@ -5342,8 +5342,8 @@
 
   /*กรอบของชื่อ อีเมล ประเมินเมื่อของผู้ได้รับรางวัล*/
   .framelistnamegmaildateassessment{
-    position: relative;
-    bottom: 20px;
+    display: flex;
+    flex-direction: column;
   }
 
   /*ชื่อของผู้ได้รับรางวัล*/
@@ -5358,23 +5358,17 @@
     font-size: 18px;
     font-weight: 600;
     color: #4e4e4e;
-    position: relative;
-    bottom: 15px;
   }
 
   /*ประเมินเมื่อของผู้ได้รับรางวัล*/
   .messagedateassessment{
     font-size: 15px;
     color: #4e4e4e;
-    position: relative;
-    bottom: 20px;
   }
 
   /*เส้นของชื่อของผู้ได้รับรางวัล*/
   .linemessagelistnamerecipientreward-1{
     border: 1px solid #d39b00;
-    position: relative;
-    bottom: 30px;
   }
 
   /*กรอบของส่งแล้ว*/
@@ -5387,8 +5381,6 @@
     background-color: #7fd1ae79;
     border-radius: 20px;
     height: 40px;
-    position: relative;
-    bottom: 20px;
   }
 
   /*ข้อความของกรอบของส่งแล้ว*/
@@ -5397,7 +5389,7 @@
    font-size: 18px;
   }
 
-
+  /*กรอบข้อความล้มเหลว*/
   .frameerrorgmail{
     margin-left: auto;
     display: flex;
@@ -5407,48 +5399,212 @@
     background-color: #ffc3c3;
     border-radius: 20px;
     height: 40px;
-    position: relative;
-    bottom: 20px;
   }
 
-
+  /*ข้อความล้มเหลว*/
   .messageerrorgmail{
    color: #E80F0D;
    font-size: 18px;
   }
 
+  /*ปุ่มส่งใหม่*/
+  .btn-Resend{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 55px;
+    border-radius: 30px;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
 
+   
+  .btn-Resend::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
 
+ .btn-Resend:hover::before{
+  width: 300px;
+  height: 300px;
+ }
 
+  /*รูปของปุ่มส่งใหม่*/
+  .imgbtn-Resend{
+    position: relative;
+    z-index: 1;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /*ข้อความปุ่มส่งใหม่*/
+  .messagebtn-Resend{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
 
   /*กรอบของรายการที่ล้มเหลว*/
   .framelistthatfailed{
     background-color: #FCF6E5;
     border: 2px solid #d39b00;
-    padding: 0px 20px 20px 20px;
+    padding: 0px 20px 40px 20px;
     border-radius: 20px;
     flex: 1 1 450px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
+
+  /*กรอบของจุดหน้าชื่อผู้ได้รับรางวัล ชื่อผู้ได้รับรางวัล ปุ่มส่งใหม่*/
+  .framelistnamethatfailed{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*จุดหน้าชื่อผู้ได้รับรางวัล*/
+  .pointlistnamethatfailed{
+    background-color: #C1440E;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  /*ชื่อผู้ได้รับรางวัล*/
+  .messagelistnamethatfailed{
+    font-size: 21px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+  
+  /*ปุ่มส่งใหม่*/
+  .btn-Resend1{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    position: relative;
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 40px;
+    border-radius: 30px;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .btn-Resend1::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+ .btn-Resend1:hover::before{
+  width: 300px;
+  height: 300px;
+ }
+
+  /*รูปของปุ่มส่งใหม่*/
+  .imgbtn-Resend1{
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มส่งใหม่*/
+  .messagebtn-Resend1{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*เส้นของรายชื่อรายการที่ล้มเหลว*/
+  .linemessagelistnamerecipientreward-2{
+    border: 1px solid #d39b00;
+  }
+
+
+  .btn-resendallthatfailed{
+    position: relative;
+    top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    border-radius: 20px;
+    height: 55px;
+    width: 100%;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .btn-resendallthatfailed::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+  .btn-resendallthatfailed:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+
+  .messagebtn-resendallthatfailed{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8987,26 +9143,28 @@
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   display: flex;
-  margin: 20px auto;
+  margin: 10px auto;
 }
 .wheel-reward-box{
   background-color: #ff00d00c;
-  border: 1px solid #a8731d;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   height: 600px;
   border-radius: 10px;
   overflow: hidden;
   padding: 0;
   width: 700px;
+  height: 650px;
   display: flex;
   flex-direction: column;
 }
 .wheel-assessment-rewards{
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .text-wheel{
   display: flex;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.17);
   background-color: #ff00d069;
   color: #88016fe5;
   padding: 0px 10px;
@@ -9014,17 +9172,29 @@
   font-size: large;
   gap: 5px;
 }
+/* ส่วนรูปของรางวัล */
+.logo-topic{
+  display: flex;
+  margin-top: 5px;
+}
+.num-reward-box{
+  margin-left: auto;
+  padding: 20px 10px;
+  font-size: medium;
+  font-weight: 500;
+}
 /* ส่วนรายละเอียดแบบประเมิน(Footer) */
 .bottom-name-assessment{
   background-color: #FCF6E5;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  flex: 1 1 500px;
+  width: 800px;
   border: 1px solid #a8731d;
   border-radius: 10px;
   margin-left: 400px;
-  margin-top: 10px;
+  margin-top: 100px;
+  
 }
 /* แต่งปุ่มสุ่ม */
 .spin-wheelassess-btn{
@@ -9038,4 +9208,56 @@
   border-radius: 10px;
   color: #ffffff;
   border: none;
+}
+/* ปุ่มเปิดเปิด */
+.toggle-main-box{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+  color: #96007ad7;
+}
+/* ปรับตำแหน่งและขนาดของปุ่ม */
+.toggle-switch{
+  position: relative;
+  display: inline-block;
+  width: 74px;
+  height: 34px;
+  flex-shrink: 0;
+}
+/* ลบปุ่มที่เป็นเช็กบ็อกอันเก่าไป */
+.toggle-switch input{
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+/* ปรับแต่งตัวปุ่มสีขาววงกลมด้านในตัว toggle */
+.toggle-slider::before{
+  content: "";
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  left: 3px;
+  bottom: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.toggle-switch input:checked + .toggle-slider{
+  background-color: #00E676;
+}
+.toggle-switch input:checked + .toggle-slider::before{
+  transform: translateX(40px);
 }
