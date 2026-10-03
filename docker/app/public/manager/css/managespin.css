@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+  /*ป้องกันกล่องส้น*/
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: #f8f8f6;
+    min-width: 1000px;
+  }
+  
+  /*ทำให้เวลาเปิด popup แล้วไม่สามารถเลื่อนได้*/
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+/*โปรไฟล์ผู้ใช้*/
+  .btn-user-wrapper {
+    background-color: #F3D577;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+    min-width: 1000px;
+    z-index: 10;
+  }
+
+/*ชื่อผู้ใช้*/
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8A5B10;
+  font-weight: 1000;
+  font-size: 20px;
+  padding: 6px 0px 6px 0px;
+  margin-right: 35px;
+}
+
+/*รูปโปรไฟล์ผู้ใช้*/
+.btn-user-img {
+  width: 50px;
+  height: 50px;
+  background-color: #8A5B10;
+  border: 3px solid #d39b00;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/*แถบเมนูด้านซ้าย*/
+.Top_frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
+}
+
+/*หน้าต่างเมนู*/
+.container-1 {
+  background-color: #fdfbf4;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 250px;
+}
+
+/*โลโก้ BUULIB*/
+.img-Logo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Home-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 30px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Home-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Random-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Random-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการผู้ใช้*/
+.btn-Contact-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการผู้ใช้*/
+.btn-Contact-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+/*กรอบชื่อปุ่มออกจากระบบ*/
+.btn-logout-wrapper {
+  margin-top: auto;
+}
+
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d39b00;
+  width: 250px;
+  height: 55px;
+  text-decoration: none;
+  color: #D31313;
+  font-weight: 1000;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+/* หน้าจัดการวงล้อสุ่ม */
+  .main-spn-box{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  /* จัดตกแต่งหัวข้อ */
+  .wheel-mainspn-topic{
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 300px;
+    margin-top: 100px;
+    color: #2563EB;
+  }
+  /* จัดการบอกหลักรายการางวัล */
+  .reward-spn-list{
+    background-color: #FCF6E5;
+    border: 2px solid #a8731d;
+    border-radius: 10px;
+    width: 990px;
+    margin-top: 60px;
+    margin-left: 300px;
+  }
+  /* จัดการบ็อกหัวข้อรางวัล */
+  .topic-spn-list{
+    display: grid;
+    border-bottom: 1px solid #FCD535;
+    grid-template-columns:2fr 1.2fr 2fr 1fr;
+    margin-left: 10px;
+  }
+  .reward-wheel-1 {
+      border-bottom: 1px solid #FCD535;
+      display: grid;
+      grid-template-columns: 2fr 1.3fr 2fr 1fr; 
+      align-items: center;
+      padding: 15px 20px;
+  }
+  /* กล่องค้นหา */
+  .search-box-spn{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .search-spn-input{
+    border-radius: 10px;
+    width: 240px;
+    height: 45px;
+    background-color: #a3701e;
+    border: 1px solid #000;
+  }
+  .search-spn-icon{
+    position: relative;
+    right: 35px;
+    cursor: pointer;
+  }
+  /* แต่งบ็อกวงล้อ */
+  /* .main-wheel-spn{
+    display: flex;
+    justify-content: center;
+    background-color: #FCF6E5;
+    border: 2px solid #a8731d;
+    border-radius: 10px;
+    margin-top: 50px;
+    width: 700px;
+    margin-left: 40px;
+    overflow: hidden;
+  } */
+  .main-wheel-spn {
+      background-color: #FFFDF0;
+      border: 2px solid #a8731d;
+      border-radius: 16px;
+      overflow: hidden; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 750px;
+      box-sizing: border-box;
+      margin-top: 57px;
+      margin-left: 50px;
+  }
+  /* ปุ่มบันทึกและยกเลิกวงล้อ */
+  .btn-manage-wheel{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 12px;
+    padding: 15px 20px;
+    width: 100%;
+    background-color: #000;
+  }
+  .submit-wheel-reward{
+    width: 100px;
+    height: 50px;
+    background-color: #FCD535;
+    border-radius: 10px;
+    color: #000000;
+    border: none;
+  }
+  .cancle-wheel-btn{
+    width: 100px;
+    height: 50px;
+    background-color: #D31313;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+  }
+  /* จัดตำแหน่งวงล้อสุ่ม */
+  .wheel-spn-main{
+    display: flex;
+    justify-content: center;
+  }
+  .claerall-selected{
+    display: flex;
+    align-items: center;
+    width: 150px;
+    font-weight: bold;
+    font-size: large;
+    justify-content: center;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 10px;
+    background-color: #d39b00;
+    margin-left: 800px;
+    margin-bottom: 20px;
+    margin-right: 20px
+  }
+/* แต่งป็อปอัพของหน้าจัดการวงล้อ */
+.pop-up-background{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none;
+}
+.pop-up-content{
+  background-color: #FCF6E5;
+  border: 1px solid #a8731d;
+  width: 650px;
+  height: 440px;
+  margin-left: 400px;
+  border-radius: 10px;
+  /* overflow: hidden; */
+}
+/* ส่วนheader */
+.header-popup-spn{
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: #a8731d;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 10px;
+  color: #FCF6E5;
+}
+/* โลโก้รางวัล */
+.logo-popup-topic{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  /* margin-top: 20px;
+  margin-left: 20px; */
+} 
+/* ปุ่มกากบาท */
+.x-button{
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-left: 320px;
+  cursor: pointer;
+}
+/* หัวข้อด้านบน */
+.text-assess{
+   /* margin-top: 20px; */
+   font-size: large;
+   font-weight: bold;
+   margin-left: 10px;
+}
+/* ส่วนวงล้อที่สร้างใหม่ */
+.wheel-name{
+  padding-left: 10px; 
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.wheel-sum-value{
+  margin: 0;
+  padding: 0;
+}
+.topic-wheel-sub{
+  margin: 0;
+  padding: 0;
+}
+/* ส่วนของหัวข้อเลือกแบบประเมินที่ต้องการ */
+.descrip{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.wheel-sum{
+  margin: 0;
+  padding: 0;
+}
+.wheel-sumary{
+  margin: 0;
+  padding: 0;
+}
+/* หัวข้อสถานะกับแบบประเมิน */
+.topic-assess{
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns:2fr 0fr;
+  width: 600px;
+  height: 100px;
+  background-color:  #a8731d;
+  color: #ffffff;
+  margin: 30px auto 0 auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.name-topic-assess{
+  margin-left: 50px;
+}
+.sts-topic-assess{
+  margin-right: 50px;
+}
+/* ปุ่มป้อปอัป */
+.modal-footer-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 10px;
+  margin-top: 30px;
+}
+.confirm-btn{
+  background-color: #a8731d;
+  color: #fdfbf5;
+  width: 90px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+}
+.not-confirm-btn{
+  background-color: #c22b3a;
+  border: none;
+  color: #ffffff;
+  width: 90px;
+  height: 50px;
+  border-radius: 10px;
+}
+/* จัดระเบียบแบบประเมินที่ยังเป็นแค่mockup */
+.all-assess-list{
+  max-height: 250px;           
+  overflow-y: auto;            
+  padding-right: 5px;
+}
+.assess-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+}
+.assess-row-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.assess-name {
+    margin: 0;
+    font-weight: bold;
+}
+
+.assess-meta {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    color: #666;
+}

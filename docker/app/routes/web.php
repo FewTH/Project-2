@@ -148,4 +148,12 @@
 
         Route::get('/change_password', [ProfileController::class, 'managerchangePassword']); 
         Route::post('/change_password', [ProfileController::class, 'changePassword']);
+
+        // ระบบจัดการวงล้อสุ่ม
+        Route::get('/managespin', [WheelController::class, 'index'])->name('manager.managespin');
+        // Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
+        Route::post('/managespin/store', [WheelController::class, 'store'])->name('manager.managespin.store');
+
+        // แบบประเมินและกิจกรรม
+        
     });

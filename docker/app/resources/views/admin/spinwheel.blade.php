@@ -67,6 +67,14 @@
         </button>
     </div>
     </div>
+    {{-- ส่วนของpopup ตอนที่สุ่มได้รางวัลแล้วจะโชว์ขึ้นมา --}}
+    <div class="spin-result-popup" id="SpinResultPopup" style="display: none;">
+        <div class="spin-result-box">
+            <h2 class="text-congrat">ยินดีด้วย!!</h2>
+            <p class="spin-result-name" id="spinResultName"></p>
+            <button type="button" class="congrat-btn" id="closeSpinResultBTN">ตกลง</button>
+        </div>
+    </div>
 
     {{-- ส่วนรายละเอียดแบบประเมิน(Footer) --}}
     <div class="bottom-name-assessment">

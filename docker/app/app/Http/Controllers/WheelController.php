@@ -15,7 +15,10 @@ class WheelController extends Controller
     public function index()
     {
         $rewards = Reward::with('category')->orderByDesc('reward_id')->get();
-        return view('admin.managespin', compact('rewards'));
+        // สร้างตัวแปรนี้มาเพื่อใช้เช็คว่าผู้ใช้งานคือrole อะไรจะได้returnไปได้ถูกrole
+        $view = (auth()->user()->role === 'manager')? 'manager.managespin' : 'admin.managespin';
+
+        return view($view, compact('rewards'));
     }
 
     public function store(Request $request)

@@ -63,6 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         startAngle += sliceAngle;
         });
+
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.22,0,2*Math.PI);
+        ctx.fillStyle = '#ffffff';
+        ctx.fill();
     }
     // ส่วนี้ไว้อัปเดตจำนวนที่เลือก
     function updateUI(){
@@ -146,6 +151,8 @@ savebtn.addEventListener('click',async function(){
     const rewardsArray = Array.from(selectedRe.values()); 
     wheelItemCountn1.textContent = rewardsArray.length;
     wheelItemnamesn1.textContent = rewardsArray.map(r=>r.name).join(',');
+    
+    const fetchUrl = window.wheelConfig?.availableAssessmentsUrl || '/admin/assessment/available';
     // ดึงแบบประเมินที่ยังไม่ถูกเพิ่มวงล้อ
     try{
         const res = await fetch('/admin/assessments/available');
@@ -209,8 +216,9 @@ confirmAssessmentBtn.addEventListener('click', async function () {
         quantity_selected: r.qty
     }));
 
+    const storeUrl = window.wheelConfig?.storeUrl || '/admin/managespin/store';
     try {
-        const res = await fetch('/admin/managespin/store', {
+        const res = await fetch(storeUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

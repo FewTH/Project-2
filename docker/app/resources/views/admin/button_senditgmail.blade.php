@@ -8,7 +8,6 @@
     <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
 </head>
 <body>
-    <body>
     <!-- ชื่อผู้ใช้งาน -->
 <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
@@ -131,6 +130,7 @@
             <hr class="linemessagelistnamerecipientreward-1">
         </div>
     
+
         <div class="framelistthatfailed">
             <p class="messagelistnamerecipientreward">รายการที่ล้มเหลว</p>
             <hr class="linemessagelistnamerecipientreward">

@@ -16,7 +16,7 @@
         @else
         <img src="{{ asset('user/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
         @endif
-        <span>manager</span>
+        <span>Manager</span>
    </a>
 </div>
 <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
@@ -32,11 +32,11 @@
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
         </a>
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Random-1">
+        <a href="{{ url('manager/managespin') }}" class="btn-Random-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Contact-1">
+        <a href="{{ url('manager/assessment') }}" class="btn-Contact-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูรายการกิจกรรม.png') }}" alt="รูปปุ่มเมนูรายการกิจกรรม" class="btn-Contact-img-1">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>

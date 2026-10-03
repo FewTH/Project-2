@@ -37,4 +37,55 @@ class SpinresultController extends Controller
         return back();
     }
 
+    //แสดงหน้าส่งอีเมลให้ผู้ได้รับรางวัล
+    public function senditgmail($assessment_id)
+    {
+        //ดึงข้อมูลผลการสุ่มทั้งหมดของแบบประเมินนี้ พร้อมกับข้อมูลของรางวัลที่ผูกกันไว้
+        $spinresults = Spinresult::with('reward')->where('assessment_id', $assessment_id)->latest()->get();
+
+        //หาข้อมูลแบบประเมินนี้ เอาไว้แสดงชื่อบนลิงค์หน้าเว็บ
+        $assessment = Assessment::findOrFail($assessment_id);
+
+        //กรองเฉพาะรายการที่ส่งล้มเหลว เอาไว้โชว์ในกล่องรายการที่ล้มเหลว
+        $failedlist = $spinresults->where('email_status', 'failed');
+
+        return view('admin.senditgmail',[
+            'spinresults' => $spinresults,
+            'assessment' => $assessment,
+            'failedlist' => $failedlist,
+        ]);
+    }
+    
+    //ส่งอีเมลใหม่ทีละรายการ (ปุ่ม "ส่งใหม่")
+    public function resendone(Request $request, $id)
+    {
+        $spinresults = Spinresult::findOrFail($id);
+
+        //ตรงนี้จะใส่ logic ส่งอีเมลจริงทีหลัง ตอนนี้ขอจำลองว่าส่งสำเร็จไปก่อน
+        $spinresults->update([
+            'email_status' => 'sent',
+            'email_sent_at' => now(),
+        ]);
+
+        return back();
+    }
+
+    //ส่งอีเมลทั้งหมดที่ล้มเหลวอีกครั้ง (ปุ่ม "ส่งใหม่ทั้งหมดที่ล้มเหลว")
+    public function resendallfailed(Request $request, $assessment_id)
+    {
+        $failedlist = Spinresult::where('assessment_id', $assessment_id)
+            ->where('email_status', 'failed')
+            ->get();
+
+        foreach ($failedlist as $item) {
+            //ตรงนี้จะใส่ logic ส่งอีเมลจริงทีหลัง ตอนนี้ขอจำลองว่าส่งสำเร็จไปก่อน
+            $item->update([
+                'email_status' => 'sent',
+                'email_sent_at' => now(),
+            ]);
+        }
+
+        return back();
+    }
+
 }
