@@ -132,10 +132,5 @@ const uploadPhotoInput = document.getElementById('uploadphoto');
         });
     }
 
-
-
-
-
-
     
 });

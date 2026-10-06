@@ -10,6 +10,7 @@
     use App\Http\Controllers\ActivityController;
     use App\Http\Controllers\AuthController;
     use App\Http\Controllers\SpinresultController;
+    use App\Models\Spinresult;
 
     Route::get('/', function () {
         return view('welcome');
@@ -155,5 +156,39 @@
         Route::post('/managespin/store', [WheelController::class, 'store'])->name('manager.managespin.store');
 
         // แบบประเมินและกิจกรรม
+        Route::get('/assessment', [ActivityController::class, 'managerIndex'])->name('manager.assessment');
+
+        Route::get('/create_activity', [ActivityController::class, 'managerCreate'])->name('manager.create_activity');
+        Route::post('/create_activity', [ActivityController::class, 'managerStore'])->name('manager.create_activity.store');
+
+        Route::get('/view_details/{id}', [ActivityController::class, 'managerShowDetails'])->name('manager.activity.detail');
+        Route::post('/close_register/{id}', [ActivityController::class, 'managerCloseRegister'])->name('manager.activity.close');
+        Route::delete('/activity/{event}', [ActivityController::class, 'managerDelete'])->name('manager.activity.deletedata');
+
+        Route::get('/edit_activity/{id}', [ActivityController::class, 'managerEdit'])->name('manager.activity.editactivity');
+        Route::put('/edit_activity/{id}', [ActivityController::class, 'managerUpdate'])->name('manager.activity.updateactivity');
+
+        Route::get('/random_reward/{id}', [ActivityController::class, 'managerRandomReward'])->name('manager.random_reward');
+        Route::post('/random-reward/{eventId}/save-result', [ActivityController::class, 'saveRandomResult'])->name('manager.random-reward.save-result');
         
+        Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('manager.activity.qrcode.download');
+
+        Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])->name('manager.assessment.random');
+
+        Route::get('/history_random/{assessment_id}', [SpinresultController::class, 'managerindex'])->name('manager.history_random');
+        Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('manager.spinresult.receive');
+
+
+        Route::get('/button_senditgmail', function () {
+            return view('manager.button_senditgmail');
+        });
     });
+
+
+    //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
+   if (app()->environment('local')) {
+    Route::get('/preview-email', function () {
+        $spinresult = \App\Models\Spinresult::first();
+        return new \App\Mail\RewardNotification($spinresult);
+    });
+}

@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Spinresult;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpinresultController extends Controller
 {
+    //แสดงหน้ารายชื่อผู้ได้รับรางวัล manager
+    public function managerindex($assessmentId)
+    {
+        return $this->index($assessmentId, 'manager');
+    }
+
     //แสดงหน้ารายชื่อผู้ได้รับรางวัล
-    public function index($assessment_id)
+    public function index($assessment_id, $role = 'admin')
     {
         //ดึงข้อมูลผลการสุ่มทั้งหมด พร้อมกับข้อมูลของรางวัลที่ผูกกันไว้
         $spinresults = Spinresult::with('reward')->where('assessment_id', $assessment_id)->latest()->get();
@@ -17,9 +24,11 @@ class SpinresultController extends Controller
         //หาข้อมูลแบบประเมินนี้ เอาไว้แสดงชื่อบนลิงค์หน้าเว็บเป็น id
         $assessment = Assessment::findOrFail($assessment_id);
 
-        return view('admin.history_random',[
+        return view($role . '.history_random', [
+            'assessment'  => $assessment,
             'spinresults' => $spinresults,
-            'assessment' => $assessment,
+            'prefix'      => $role,
+            'user'        => Auth::user(),
         ]);
     }
 
@@ -73,9 +82,7 @@ class SpinresultController extends Controller
     //ส่งอีเมลทั้งหมดที่ล้มเหลวอีกครั้ง (ปุ่ม "ส่งใหม่ทั้งหมดที่ล้มเหลว")
     public function resendallfailed(Request $request, $assessment_id)
     {
-        $failedlist = Spinresult::where('assessment_id', $assessment_id)
-            ->where('email_status', 'failed')
-            ->get();
+        $failedlist = Spinresult::where('assessment_id', $assessment_id)->where('email_status', 'failed')->get();
 
         foreach ($failedlist as $item) {
             //ตรงนี้จะใส่ logic ส่งอีเมลจริงทีหลัง ตอนนี้ขอจำลองว่าส่งสำเร็จไปก่อน

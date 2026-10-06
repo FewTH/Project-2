@@ -215,7 +215,7 @@
                 @else
                 {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
                 <a href="{{url('admin/managespin')}}" class="assessment-open-1">
-                    <p class="message-assessment-open">ยังไม่ได้บันทึกวงล้อ คลิกเพื่อสร้าง</p>
+                    <p class="message-assessment-open">คลิกเพื่อสร้างวงล้อ</p>
                 </a>
                 @endif
             </div>
@@ -225,39 +225,6 @@
             <p class="nothaveactivity-1">ยังไม่มีแบบประเมินในตอนนี้</p>
         </div>
         @endforelse
-        {{-- <div class="sectionassessment" data-status="open" data-random="false">
-            <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
-            <div class="frameinformation-assessment">
-                <div class="framesection-status">
-                    <h3 class="section-assessment">แบบประเมิน - BUU Book Fair 2569</h3>
-                    <div class="frame-status">
-                        <p class="point-status"></p>
-                        <p class="message-status">เปิดอยู่</p>
-                    </div>
-                </div> --}}
-
-
-                    {{-- <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
-                    <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
-                        <template id="Viewhistory">
-                            <button class="assessment-open-1">
-                                <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
-                            </button>
-                        </template>
-                    <template id="Enterrandom">
-                        <a href="{{ url('admin/spinwhell') }}" class="enter-random">
-                            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
-                            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
-                        </a>
-                    </template> --}}
-
-
-                    {{-- <a href="{{ url('admin/history_random') }}" class="view-history">
-                        <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                    </a> --}}
-                {{-- </template>  --}}
-                {{-- </div> --}}
-            {{-- </div> --}}
         </div>
    
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('manager/css/managespin.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/css/assessment.css') }}">
     <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
     <title>แบบประเมิน/กิจกรรม</title>
 </head>
@@ -38,8 +38,8 @@
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('manager/assessment') }}" class="btn-Contact-1">
-            <img src="{{ asset('manager/img/รูปปุ่มเมนูรายการกิจกรรม.png') }}" alt="รูปปุ่มเมนูรายการกิจกรรม" class="btn-Contact-img-1">
+        <a href="{{ url('manager/assessment') }}" class="btn-Assessment-assess">
+            <img src="{{ asset('admin/img/รุปแบบประเมินกิจกรรมสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-assess">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>
     </div>
@@ -99,7 +99,7 @@
             <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
         </div>
           <div class="btn-build-activityurgent">
-            <a href="{{ url('admin/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
+            <a href="{{ url('manager/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
         </div>
     </div>
 
@@ -132,7 +132,7 @@
             <div class="register">
                 <p class="register-1">{{ $event->registrations->count() }} คนลงทะเบียนแล้ว</p>
                 <div class="view-details">
-                    <a href="{{ route('admin.activity.detail', $event->event_id) }}" class="view-details-1">ดูรายละเอียด</a>
+                    <a href="{{ route('manager.activity.detail', $event->event_id) }}" class="view-details-1">ดูรายละเอียด</a>
                 </div>
             </div>
         </div>
@@ -162,12 +162,6 @@
             <button class="farmeon-assessment" id="farmeon_assessment">
                 <p class="on-assessment" id="on_assessment">เปิดอยู่</p>
                 <span class="onnumber-assessment" id="onnumber_assessment">({{ $assessments->where('is_open',1)->count() }})</span>
-            </button>
-        </div>
-        <div class="frame-assign-assessment">
-            <button class="btn-assign-assessment"  id="btn_assign_assessment">
-                <img src="{{ asset('admin/img/รูปของปุ่มมอบหมายแบบประเมิน.png') }}" alt="รูปของปุ่มมอบหมายแบบประเมิน" class="img-assign-assessment">
-                <p class="message-assign-assessment">มอบหมายแบบประเมิน</p>
             </button>
         </div>
     </div>
@@ -202,11 +196,11 @@
                 </p>
                 @if($assessment->wheelAssessment)
                 {{-- กรณีที่เราบันทึกวงล้อแล้วตัวแบบประเมินจะมีปุ่มเข้าสู่การสุ่มเพิ่มขึ้นมา --}}
-                <a href="{{route('admin.assessment.random',$assessment->assessment_id)}}" class="enter-random">
+                <a href="{{route('manager.assessment.random',$assessment->assessment_id)}}" class="enter-random">
                     <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
                     <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
                 </a>
-                <a href="{{ route('admin.history_random', $assessment->assessment_id) }}" class="view-history">
+                <a href="{{ route('manager.history_random', $assessment->assessment_id) }}" class="view-history">
                     <p class="message-view-history">ดูประวัติการสุ่ม</p>
                 </a>
                 @else
@@ -258,57 +252,11 @@
         </div>
    
 
-<dialog class="assignevaluation" id="assign_evaluation" >
-    <div class="framephotomessage-evaluation">
-        <img src="{{ asset('admin/img/รูปของมอบหมายแบบประเมิน.png') }}" alt="รูปของมอบหมายแบบประเมิน" class="photo-evaluation">
-        <p class="message-evaluation">มอบหมายแบบประเมิน</p>
-        <button class="close-button" id="close_button">     
-            <p class="message-close-button">x</p>
-        </button>
-    </div>
-    
-    <p class="message-choose">เลือกแบบประเมินและตำแหน่งที่ต้องการมอบหมาย</p>
-    <form id="frame-choose-evaluation">
-    <div class="message-choose-evaluation-1">
-        <p class="message-evaluation-1">แบบประเมิน</p>
-        <select name="evaluationformid" id="Evaluation_formid" class="evaluation-formid">
-            <option  value="" disabled selected >— เลือกแบบประเมิน —</option>
-            <option value="1" class="assessmentform">แบบประเมินความพึงพอใจ BUU Book Fair 2569</option>
-            <option value="2">แบบประเมินบุคคลากรในห้องสมุดประจำปี 2569</option>
-            <option value="3">แบบประเมินความพึงพอใจความสะอาดของห้องสมุด</option>
-        </select>
-    </div>
-
-        <div class="assigngivemanager">
-            <p class="message-assigngivemanager">มอบหมายให้ผู้จัดการ</p>     
-            <div class="frame-checkbox-name">
-                <label class="message-checkbox-name">
-                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="1" >ศุภากร วงศ์
-                </label>
-                <label class="message-checkbox-name">
-                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="2" >วชิรวัทย์
-                </label>
-            </div>
-        </div>
-
-    <hr class="linepopupevaluation">
-    <div class="btn-cancel-btn-confirm">
-        <button type="button" class="btn-cancel-evaluation" id="btn_cancel_evaluation1">
-           <spna class="btn-cancel-evaluation-1">ยกเลิก</spna>
-        </button>
-        <button type="submit" class="btn-confirm-evaluation" id="btn_confirm_evaluation"  disabled>
-            <spna class="btn-confirm-evaluation-1">ยืนยันการมอบหมาย</spna>
-        </button>
-
-    </div>
-    </form>
-</dialog>
-
 </div>
 
 
 
-    <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
+    <script src="{{ asset('manager/js/assessment.js') }}"></script>
 
 </body>
 </html>

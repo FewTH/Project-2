@@ -1740,3 +1740,3332 @@ body.no-scroll {
   position: relative;
   z-index: 2;
 }
+
+
+
+
+
+
+ /*ส่วนของหน้า create_activity.blade.php*/
+ /*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
+  .btn-Assessment-assess {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FCD53F;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  }
+
+  /*รูปปุ่มแบบประเมิน/กิจกรรม*/
+  .btn-Assessment-img-assess {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    margin-left: 5px;
+  }
+  /*กรอบสีเทาคุมส่วนสร้างกิจรรมเอาไว้*/
+  .createactivity{
+    color: #5381EC;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .grayframeactivity {
+    background-color: #fdfbf5;
+    width: 100%;
+    min-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบคุมlogo กับข้อมูลการสร้างกิจกรรม*/
+  .framecreateactivity{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 0px 60px 0px;
+  }
+
+  /*กรอบข้อความสร้างกิจกรรม กับ สร้าง QR */
+  .messagecreateactivity{
+    display: flex;
+    flex-direction: column;
+    width: 830px;
+  }
+
+  /*ข้อความสร้างกิจกรรม*/
+  .messagecreateactivity-1{
+    color: #745500;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  /*ข้อความสร้าง QR*/
+  .create-QR{
+    font-size: 16px;
+    position: relative;
+    bottom: 20px;
+  }
+
+  /*กรอบของตั้งค่ากิจกรรม*/
+  .frameblackactivity{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 10px 30px 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*ข้อความตั้งค่ากิจกรรม*/
+  .messagesettings{
+    font-size: 22px;
+    font-weight: 600;
+    color: #8A5B10;
+  }
+
+  /*ข้อความกรอกข้อมูล*/
+  .fill-information{
+    color: #000000;
+    font-size: 16px;
+    position: relative;
+    bottom: 10px;
+  }
+
+  /*ข้อความชื่อกิจกรรม*/
+  .messageactivity-name{
+    font-size: 18px;
+    color: #8A5B10;
+    margin-top: 20px;
+    font-weight: 600;
+  }
+
+  /*ข้อความเครื่องหมาย**/
+  .asteriskactivity{
+    color: #ff0000;
+    font-size: 18px;
+  }
+
+  /*กรอบเอาไว้พิมชื่อกิจกรรม*/
+  .framepimactivity-nam{
+    outline: none;
+    background-color: #fdfbf5;
+    padding: 15px 20px;
+    width: 800px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    font-size: 16px;
+    color: #4e4e4e;
+  }
+
+  /*กรอบของข้อความวันที่จัดกิจกรรม เวลาปิด Register*/
+  .framemessagedatetime{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  /*ข้อความวันที่จัดกิจกรรม*/
+  .dateactivity{
+    font-size: 18px;
+    color: #8A5B10;
+    font-weight: 600;
+  }
+
+  /*ดอกจันของข้อความวันที่จัดกิจกรรม*/
+  .asteriskdateactivity{
+    color: #ff0000;
+    font-size: 18px;
+  }
+
+  /*ข้อความเวลาปิด Register*/
+  .closingtime-Register{
+    position: relative;
+    right: 230px;
+    color: #8A5B10;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  /*กรอบของที่เอาไว้เลือกวันกับเวลา*/
+  .frameweardate{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /*กรอบของที่เอาไว้เลือกวันเดือนปี*/
+  .framedatemonthyear{
+    background-color: #fdfbf5;
+    width: 380px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    color: #4e4e4e;
+    outline: none;
+  }
+
+  /*ข้อความเลือกของรางวัล*/
+  .messagechoosereward{
+    font-size: 18px;
+    color: #8A5B10;
+    margin-top: 25px;
+    font-weight: 600;
+  }
+
+  /*ดอกจันของข้อความเลือกของรางวัล*/
+  .asteriskchoosereward{
+    color: #ff0000;
+    font-size: 18px;
+  }
+
+  /*กรอบของข้อมูลตัวเลือก*/
+  .framebtn-chooserewardall{
+    padding: 0px 0px 20px 0px;
+  }
+
+
+  .btn-showmore{
+    display: none;
+  }
+
+
+  /*กรอบทั้งหมดของที่เอาไว้เลือกของรางวัล*/
+  .framechooserewardall{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    width: 100%;
+    height: 70px;
+    border-radius: 15px;
+    padding: 0px 20px;
+    gap: 20px;
+  }
+
+  /*ข้อความดินสอ*/
+  .messagepencil{
+    font-size: 18px;
+    font-weight: 600;
+    color: #8A5B10;
+  }
+
+  /*ข้อความเครื่องเขียน*/
+  .messagestationery{
+    position: relative;
+    bottom: 14px;
+    color: #4e4e4e;
+  }
+
+  /*เปอร์เช็นของในกรอบเลือกของรางวัล*/
+  .percentpencil{
+    color: #8A5B10;
+    font-size: 18px;
+  }
+
+  .framemessage2 {
+    width: 100px;
+  }
+
+  /*กรอบของปุ่มบวกลบกับปุ่มติกถูก*/
+  .btn-plus-delete-checkbox{
+    display: flex;
+    align-items: center;
+  }
+
+  /*ปุ่มลบ*/
+  .btndelete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #d39b00;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    left: 8px;
+    border-radius: 8px 0px 0px 8px;
+    cursor: pointer;
+  }
+
+  .btndelet-10{
+    font-size: 35px;
+    position: relative;
+    bottom: 1px;
+  }
+
+
+  /*กรอบของตัวเลขเพิ่มลด*/
+  .btndelete-1{
+    text-align: center;
+    width: 40px;
+    height: 35px;
+    border: none;
+    outline: none;
+    border: 2px solid #d39b00;
+  }
+  /*ลบตัวเพิ่มกดเดิมในกรอบของตัวเลขเพิ่มลด*/
+  .btndelete-1::-webkit-outer-spin-button,
+  .btndelete-1::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+  }
+
+  /*ปุ่มบวก*/
+  .btnplus{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    border: 2px solid #d39b00;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    right: 8px;
+    border-radius: 0px 8px 8px 0px;
+    cursor: pointer;
+  }
+
+  /*ปุ่มเอาไว้ติ๊ก*/
+  .btn-checkbox{
+    margin-left: 29px;
+    position: relative;
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #d39b00;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /*พิ้นหลังปุ่มเอาไว้ติ๊ก*/
+  .btn-checkbox:checked{
+    background-color: #d39b0098;
+  }
+
+  /*ทำให้กดแล้วมีติ๊กถูกขึ้นของปุ่มเอาไว้ติ๊ก*/
+  .btn-checkbox:checked::after{
+    content: "";
+    position: absolute;
+    top: 12%;
+    left: 32%;
+    width: 6px;
+    height: 12px;
+    border: 1px solid #ffffff;
+    border-width: 0px 3px 3px 0px;
+    transform: rotate(45deg);
+  }
+
+  /*ปุ่มกดแสดงเพิ่มเติม*/
+  .showmore{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 0px 30px;
+    height: 30px;
+    border-radius: 12px;
+    border: 2px solid #d39b00;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดแสดงเพิ่มเติม*/
+  .showmore::before{
+    content: "";
+    background-color: #d39b0028;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+  /*กรอบวงกลมทำเอฟเฟ็กต์ปุ่มกดแสดงเพิ่มเติม*/
+  .showmore:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+  /*ข้อความแสดงเพิ่มเติม*/
+  .messageshowmore{
+    font-size: 15px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบของจจำนวนผู้เข้าร่วมสูงสุด*/
+  .frameandquantity{
+    padding: 0px 0px 30px 0px;
+  }
+
+  /*ข้อความจำนวนผู้เข้าร่วมสูงสุด*/
+  .messagequantity{
+    font-size: 18px;
+    color: #8A5B10;
+    font-weight: 600;
+  }
+
+  /*ปุ่มกดแสดงน้อยลง*/
+  .showmore-1{
+    position: relative;
+    display: none;
+    align-items: center;
+    margin-left: auto;
+    padding: 0px 30px;
+    height: 30px;
+    border-radius: 12px;
+    border: 2px solid #d39b00;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดแสดงน้อยลง*/
+  .showmore-1::before{
+    content: "";
+    background-color: #d39b0028;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+  /*กรอบวงกลมทำเอฟเฟ็กต์ปุ่มกดแสดงน้อยลง*/
+  .showmore-1:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+
+  /*กรอบเอาไว้พิมของจำนวนผู้เข้าร่วมสูงสุด*/
+  .framenumberquantity{
+    outline: none;
+    background-color: #fdfbf5;
+    padding: 15px 20px;
+    width: 800px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    font-size: 16px;
+    color: #4e4e4e;
+  }
+  /*ลบตัวเพิ่มกดเดิมในกรอบของจำนวนผู้เข้าร่วมสูงสุด*/
+  .framenumberquantity::-webkit-outer-spin-button,
+  .framenumberquantity::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  .submitbuildandQR{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a8731d;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+    gap: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+
+  .submitbuildandQR::before{
+    content: "";
+    background-color: #966516;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+
+  .submitbuildandQR:hover::before{
+    width: 1000px;
+    height: 1000px;
+  }
+
+  .buildandQR{
+    position: relative;
+    z-index: 1;
+  }
+
+  .messagebuildandQR{
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 900;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  
+
+
+
+
+    /*ส่วนของหน้า view_details.blade.php*/
+  /*กรอบใหญ่ของข้อมูล*/
+  .framelargest{
+    padding: 30px 30px 30px 30px;
+    background-color: #fdfbf5;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบของปุ่มย้อนกลับ แก้ไข ปิดRegister*/
+  .frameback-correct-offRegister{
+    display: flex;
+  }
+
+
+  /*ปุ่มลบกิจกรรม*/
+  .deleteRegister{
+    margin-left: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    text-decoration: none;
+    border: 2px solid #D97757;
+    background: none;
+    padding: 0px 40px;
+    height: 50px;
+    border-radius: 18px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มลบกิจกรรม*/
+  .deleteRegister::before{
+    content: "";
+    background-color: #d9785711;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมของเอฟเฟ็กต์ของปุ่มลบกิจกรรม*/
+  .deleteRegister:hover::before{
+    width: 300px;
+    height: 300px;
+  }
+
+  /*ข้อความของปุ่มลบกิจกรรม*/
+  .message-deleteRegister{
+    color: #C4634A;
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /*กรอบpopup ของ ยืนยันลบกิจกรรม*/
+  .popupdeleteRegister{
+    background-color: #fdfbf5;
+    width: 450px;
+    padding: 30px 40px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .popupdeleteRegister.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+  /*กรอบของรูปลบกิจกรรม*/
+  .imgpopupdeleteRegister{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  /*กรอบของข้อความลบกิจกรรม*/
+  .message-popupdeleteRegister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*หัวข้อลบกิจกรรม*/
+  .message-confirmdeleteRegister{
+    font-size: 25px;
+    font-weight: 600;
+    color: #A32D2D;
+  }
+
+  /*ข้อความแจ้งเตือนลบกิจกรรม*/
+  .messagewarndeleteactivity{
+    font-size: 18px;
+    color: #6b4b0c;
+  }
+
+  /*กรอบบอของปุ่มยืนยันกับยกเลิก*/
+  .btn-confirmdeletion-1{
+    display: flex;
+    margin-top: 30px;
+  }
+
+  /*ปุ่มยืนยันลบ*/
+  .btn-confirmdeletion{
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #A32D2D;
+    border: none;
+    padding: 0px 50px;
+    height: 65px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มยืนยันลบ*/
+  .btn-confirmdeletion::before{
+    content: "";
+    background-color: rgb(153, 40, 40);
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*วงกลมเอฟเฟ็กต์ของปุ่มยืนยันลบ*/
+  .btn-confirmdeletion:hover::before{
+    width: 400px;
+    height: 400px;
+  }
+
+  /*ข้อความของปุ่มยืนยันลบ*/
+  .btn-confirmdeletion-2{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มยกเลิก*/
+  .btn-canceldeletion{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+    background: none;
+    border: 2px solid #d39b00;
+    padding: 0px 55px;
+    height: 65px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มยกเลิก*/
+  .btn-canceldeletion::before{
+    content: "";
+    background-color: #d39b000e;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+
+  }
+
+  /*วงกลมเอฟเฟ็กต์ของปุ่มยกเลิก*/
+  .btn-canceldeletion::before{
+    width: 400px;
+    height: 400px;
+  }
+
+  /*ข้อความของปุ่มยกเลิก*/
+  .btn-canceldeletion-1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+
+
+
+
+
+  /*ปุ่มแก้ไขข้อมูล*/
+  .edit-activity{
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    text-decoration: none;
+    border: 2px solid #d39b00;
+    padding: 0px 40px;
+    height: 50px;
+    border-radius: 18px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มแก้ไขข้อมูล*/
+  .edit-activity::before{
+    content: "";
+    background-color: #d39b000e;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมของปุ่มเอฟเฟ็กต์ของปุ่มแก้ไขข้อมูล*/
+  .edit-activity:hover::before{
+    width: 300px;
+    height: 300px;
+  }
+
+  /*ข้อความของปุ่มแก้ไขข้อมูล*/
+  .message-edit-activity{
+    color: #8A5B10;
+    font-size: 17px;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มปิด Register*/
+  .offRegister{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a8731d;
+    border: none;
+    height: 50px;
+    padding: 0px 40px;
+    border-radius: 18px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มปิด Register*/
+  .offRegister::before{
+    content: "";
+    background-color: #96651644;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมของปุ่มเอฟเฟ็กต์ของปุ่มปิด Register*/
+  .offRegister:hover::before{
+    width: 300px;
+    height: 300px;
+  }
+
+  /*ข้อความของปุ่มปิด Register*/
+  .message-offRegister{
+    position: relative;
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: 600;
+    z-index: 1;
+  }
+
+  /*กรอบpopup ของ ยืนยันปิด Register*/
+  .popupoffRegister{
+    background-color: #fdfbf5;
+    width: 450px;
+    padding: 30px 40px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .popupoffRegister.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /*กรอบของรูปปิด Register*/
+  .imgpopupoffRegister{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  /*กรอบของข้อความปิด Register*/
+  .messageconfirmoffRegister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*หัวข้อปิด Register*/
+  .message-confirmoffRegister{
+    font-size: 25px;
+    font-weight: 600;
+    color: #8A5B10;
+  }
+
+  /*ข้อความแจ้งเตือนปิด Register*/
+  .messagewarn{
+    font-size: 18px;
+    color: #6b4b0c;
+  }
+
+  /*กรอบบอของปุ่มยืนยันกับยกเลิก*/
+  .btn-confirm-cancel{
+    display: flex;
+    margin-top: 30px;
+  }
+
+  /*ปุ่มยืนยัน*/
+  .btnconfirmoffRegister{
+    position: relative;
+    background-color: #a8731d;
+    border: none;
+    padding: 0px 65px;
+    height: 65px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มยืนยัน*/
+  .btnconfirmoffRegister::before{
+    content: "";
+    background-color: #96651644;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*วงกลมเอฟเฟ็กต์ของปุ่มยืนยัน*/
+  .btnconfirmoffRegister:hover::before{
+    width: 400px;
+    height: 400px;
+  }
+
+  /*ข้อความของปุ่มยืนยัน*/
+  .btnconfirmoffRegister-1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มยกเลิก*/
+  .canceloffRegister{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+    background: none;
+    border: 2px solid #d39b00;
+    padding: 0px 55px;
+    height: 65px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มยกเลิก*/
+  .canceloffRegister::before{
+    content: "";
+    background-color: #d39b000e;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*วงกลมเอฟเฟ็กต์ของปุ่มยกเลิก*/
+  .canceloffRegister:hover::before{
+    width: 400px;
+    height: 400px;
+  }
+
+  /*ข้อความของปุ่มยกเลิก*/
+  .canceloffRegister-1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบลองลงมาของกิจกรรม*/
+  .frameactivitytime{
+    padding: 40px 80px 0px 80px;
+  }
+
+  /*กรอบของหัวข้อกิจกรรมจนถึงเวลาปิด Register*/
+  .frameactivitytime-1{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 5px 30px 0px 30px;
+    height: 160px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*หัวข้อของกิจกรรม*/
+  .messagesectionactivity{
+    color: #8A5B10;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  /*ข้อความของสร้างเมื่อไหร่*/
+  .messagesectionactivity-1{
+    position: relative;
+    bottom: 15px;
+    font-size: 18px;
+  }
+
+  /*กรอบของข้อความปิด Register กับ เวลา*/
+  .framemessageoffregister-time{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /*กรอบของข้อความปิด Register*/
+  .messageoffregister{
+    position: relative;
+    top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+  /*กรอบของข้อความเวลา*/
+  .numbertime{
+    color: #5381EC;
+    font-size: 40px;
+    position: relative;
+    bottom: 30px;
+  }
+
+  /*กรอบของปุ่มเริ่มสุ่มรางวัล*/
+  .btn-randomreward{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: #4A9B8E;
+    margin-top: 30px;
+    border-radius: 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    gap: 40px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+  .btn-randomreward:disabled{
+    cursor: auto;
+    background-color: #4a9b8e80;
+  }
+
+  /*เอฟเฟ็กต์กรอบของปุ่มเริ่มสุ่มรางวัล*/
+  .btn-randomreward::before{
+    content: "";
+    background-color: #48a596;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+  }
+  .btn-randomreward:disabled:before{
+    background: none;
+  }
+
+  /*วงกลมของเอฟเฟ็กต์กรอบของปุ่มเริ่มสุ่มรางวัล*/
+  .btn-randomreward:hover::before{
+    width: 1600px;
+    height: 1600px;
+  }
+
+  /*รูปภาพถ้วยรางวัลของปุ่มเริ่มสุ่มรางวัล*/
+  .img-trophy{
+    height: 35px;
+    position: relative;
+    z-index: 1;
+    
+  }
+  .btn-randomreward:disabled .img-trophy{
+    opacity: 0.5;
+  }
+
+  /*ข้อความของปุ่มเริ่มสุ่มรางวัล*/
+  .messagestartrandom{
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-randomreward:disabled .messagestartrandom{
+    color: #ffffff9f;
+  }
+
+  /*รูปภาพของปุ่มเริ่มสุ่มรางวัล*/
+  .img-arrowstartrandom{
+    height: 25px;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-randomreward:disabled .img-arrowstartrandom{
+    opacity: 0.5;
+  }
+
+  /*กรอบของลงทะเบียนแล้ว รับสูงสุด สถานะ เวลาปิด*/
+  .frame4frame{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /*กรอบของลงทะเบียนแล้ว*/
+  .framenumbermessageregister{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 25px 0px 0px 25px;
+    flex: 1 1 200px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ตัวเลขของลงทะเบียนแล้ว*/
+  .numberregister{
+    color: #8A5B10;
+    font-size: 40px;
+  }
+
+  /*ข้อความของลงทะเบียนแล้ว*/
+  .messageregister{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*กรอบของตัวเลขกับข้อความรับสูงสุด*/
+  .framenumbermessagereceiveupto{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 1 200px;
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 25px 0px 0px 25px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ตัวเลขของรับสูงสุด*/
+  .numberreceiveupto{
+    color: #8A5B10;
+    font-size: 40px;
+  }
+
+  /*ข้อความของรับสูงสุด*/
+  .messagereceiveupto{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*กรอบของตัวเลขกับข้อความสถานะ*/
+  .framemessagenomessagestatus{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 1 200px;
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 25px 0px 0px 25px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ตัวเลขของสถานะ*/
+  .messageno{
+    color: #8A5B10;
+    font-size: 35px;
+  }
+
+  /*ข้อความของสถานะ*/
+  .messagestatus{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    bottom: 30px;
+  }
+
+  /*กรอบของตัวเลขกับข้อความเวลาปิด*/
+  .framenumbertimemessagestimeoff{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 25px 0px 0px 25px;
+    flex: 1 1 200px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ตัวเลขของเวลาปิด*/
+  .numbertime-1{
+    color: #8A5B10;
+    font-size: 35px;
+  }
+
+  /*ข้อความของวลาปิด*/
+  .messagestimeoff{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+    position: relative;
+    bottom: 30px;
+  }
+
+  /*กรอบของQR code ลงทะเบียน ข้อมูลกิจกรรม*/
+  .frameQRcoderegisteractivity{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;  
+  }
+
+  /*กรอบเล็กของQR code ลงทะเบียน ข้อมูลกิจกรรม*/
+  .frameQRcoderegister-1{
+    border: 2px solid #d39b00;
+    background-color: #FCF6E5;
+    border-radius: 20px;
+    flex: 1 1 400px;
+    padding: 0px 20px 0px 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบหัวข้อQR code ลงทะเบียน กับ Scan ได้เลย*/
+  .frmaemessageQRcoderegistermessagescan{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  /*ข้อความQR code ลงทะเบียน*/
+  .messageQRcoderegister{
+    font-size: 20px;
+    font-weight: 800;
+    color: #8A5B10;
+  }
+
+  /*กรอบข้อความScan ได้เลย*/
+  .frmaemessagescan{
+    display: flex;
+    align-items: center;
+    background-color: #a8731d;
+    padding: 0px 20px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  /*ข้อความScan ได้เลย*/
+  .messagescan{
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .lineQRcode{
+    border: 1px solid #d39b00;
+  }
+
+  .img-QRcode{
+    display: flex;
+    justify-content: center;
+  }
+
+  /*กรอบของรูป QRcode*/
+  .img-QRcode-1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border: 2px solid #d39b00;
+    padding: 15px 0px;
+    width: 340px;
+    border-radius: 20px;
+    box-shadow: 0px ;
+  }
+
+  .img-QRcode svg {
+    border-radius: 10px;
+    box-shadow: 0 8px 14px rgba(0,0,0,0.1);
+  }
+
+  /*กรอบของปุ่มบันทึก กับ แชร์*/
+  .framerecordshare{
+    padding: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /*ปุ่มบันทึก*/
+  .btn-recordQrcode{
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 3px solid #9C6F2E;
+    width: 100%;
+    height: 55px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    gap: 15px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ปุ่มบันทึก*/
+  .btn-recordQrcode::before{
+    content: "";
+    background-color: #9c6e2e10;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มบันทึก*/
+  .btn-recordQrcode:hover::before{
+    width: 1000px;
+    height: 1000px;
+  }
+
+  /*รูปของปุ่มบันทึก*/
+  .img-recordQrcode{
+    width: 23px;
+    height: 27px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มบันทึก*/
+  .message-recordQrcode{
+    color: #8d6227;
+    font-size: 23px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /*กรอบของข้อมูลกิจกรรม*/
+  .frameQRcoderegister-2{
+    border: 2px solid #d39b00;
+    background-color: #FCF6E5;
+    border-radius: 20px;
+    flex: 1 1 400px;
+    padding: 0px 20px 20px 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+
+  /*กรอบของข้อมูลกิจกรรมกับทั้งหมด*/
+  .messageactivity{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /*ข้อความของข้อมูลกิจกรรม*/
+  .messageactivity-1{
+    font-size: 20px;
+    font-weight: 800;
+    color: #8A5B10;
+  }
+
+  /*กรอบของทั้งหมด*/
+  .frmaemessagescan-1{
+    display: flex;
+    align-items: center;
+    background-color: #a8731d;
+    padding: 0px 20px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  /*ข้อความของทั้งหมด*/
+  .messagescan-1{
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /*เส้นระหว่างหัวข้อกับวันที่จัดกิจกรรม*/
+  .lineactivity{
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบทั้งหมดของข้อมูลกิจกรรม*/
+  .framedateorganize{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  /*ข้อความทั้งหมดของกรอบข้อมูลกิจกรรม*/
+  .messagedateorganize{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+    min-width: 220px;
+  }
+
+  /*ข้อมูลทั้งหมดของกรอบข้อมูลกิจกรรม*/
+  .dateorganize{
+    font-size: 18px;
+    font-weight: 600;
+    color: #8A5B10;
+    gap: 5px;
+  }
+
+  /*กรอบของรายชื่อผู้ลงทะเบียน*/
+  .framelistnamesregister{
+    margin-top: 30px;
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    border-radius: 20px;
+    padding: 10px 20px 20px 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบของรายชื่อผู้ลงทะเบียน กับ จำนวนคน*/
+  .framelistnamesregister-1{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*จุดข้างหน้าของข้อความรายชื่อผู้ลงทะเบียน*/
+  .pointlistnamesregister{
+    background-color: #C4634A;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+
+  /*ข้อความรายชื่อผู้ลงทะเบียน*/
+  .messagelistnamesregiste{
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /*กรอบตัวเลขกับข้อความจำนวนคน*/
+  .framequantitypeople{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    border: 2px solid #8A5B10;
+    padding: 0px 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+
+  /*ตัวเลขกับข้อความจำนวนคน*/
+  .numberquantitypeople{
+    color: #d39b00;
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  /*เส้นระหว่างรายชื่อผู้ลงทะเบียนกับชื่อของผู้เข้าร่วม*/
+  .linequantitypeople{
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของชื่อของผู้เข้าร่วม*/
+  .frameinformationparticipants{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*กรอบของเลขลำดับ*/
+  .framenumberpeople{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d39b00;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+  }
+
+  /*ตัวเลขลำดับ*/
+  .numberpeople{
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+
+  /*ชื่อของผู้เข้าร่วม*/
+  .nameparticipants{
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  /*อีเมลของผู้เข้าร่วม*/
+  .emailparticipants{
+    color: #4e4e4e;
+    position: relative;
+    bottom: 15px;
+  }
+
+  /*กรอบของเวลาผู้เข้าร่วม*/
+  .frametimeparticipants{
+    padding: 0px 20px 0px 0px;
+    margin-left: auto;
+  }
+
+  /*ข้อความของเวลาผู้เข้าร่วม*/
+  .timeparticipants{
+    font-size: 20px;
+    color: #4e4e4e;
+  }
+
+
+
+    /*ส่วนของหน้า random_reward.blade.php*/
+  .messagelistactivities{
+    font-size: 25px;
+    font-weight: 600;
+    color: #d39b00;
+  }
+
+
+  /*กรอบใหม่ปคุมทั้ง 2 วงล้อและปุ่มสุ่ม*/
+  .framebigofWheel{
+    background-color: #fdfbf5;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px 30px 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  /*กรอบของคุมกรอบวงล้อสุ่มรายชื้อ กรอบวงล้อสุ่มของรางวัล ปุ่มสุ่มรางวัล*/
+  .framesmallnameofwheel{
+    background-color: #FCF6E5;
+    flex: 1 1 500px;
+    height: 800px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบหัวข้อวงล้อสุ่มรายชื่อ*/
+  .framewheelname-quantityname{
+    display: flex;
+    align-items: center;
+    background-color: #f5cc53;
+    border-radius: 20px;
+    padding: 0px 15px;
+    border-radius: 20px 20px 0 0;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ข้อความวงล้อสุ่มรายชื่อ*/
+  .messageframewheelname{
+    color: #6d4300;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*กรอบข้อความจำนวนของรายชื่อ*/
+  .messagequantityname-1{
+    margin-left: auto;
+  }
+
+  /*ข้อความจำนวนของรายชื่อ*/
+  .messagequantityname{
+    color: #6d4300;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  /*กรอบของปุ่มกับข้อความปิด/เปิดสุ่มรายชื่อ*/
+  .on-offlistnamesRandom{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0px 20px;
+    gap: 10px;
+  }
+
+  /*กรอบปุ่มปิดเปิด*/
+  .on-offlistnamesRandom-1{
+    position: relative;
+    display: inline-block;
+    width: 74px;
+    height: 34px;
+  }
+
+  /*ซ้อนปุ่มเก่าไม่ให้เห็น*/
+  .btn-on-offlistnamesRandom{
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /*พื้นหลังปุ่มปิด/เปิด*/
+  .on-offlistnamesRandom-2{
+    position: absolute;
+    top: 0; 
+    left: 0;
+    right: 0; 
+    bottom: 0;
+    cursor: pointer;
+    background-color: #ccc;
+    border-radius: 50px;
+    transition: 0.2s;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.22);
+  }
+
+  /*เอฟเฟ็กต์วงกลมเอาไว้เลื่อนซ้ายขวา*/
+  .on-offlistnamesRandom-2::before {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    height: 28px;
+    width: 28px;
+    left: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /*ตอนกดติ๊กเปิดจะเป็นสีเขียว*/
+  .btn-on-offlistnamesRandom:checked + .on-offlistnamesRandom-2 {
+    background-color: #2ecc71;
+  }
+
+  /*ความกว้างของปุ่มตอนกดเปิด*/
+  .btn-on-offlistnamesRandom:checked + .on-offlistnamesRandom-2::before {
+    transform: translateX(40px);
+  }
+
+  /*ข้อความปิด/เปิดสุ่มรายชื่อ*/
+  .messagebtn-on-offlistnamesRandom{
+    color: #6d4300;
+    font-size: 16px;
+  }
+
+  /*กรอบของวงล้อสุ่มรายชื่อ*/
+  .namecanvas{
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+ .namecanvas-1{
+   position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid #00E676;
+    z-index: 2;
+ }
+
+
+  /*กรอบหัวข้อวงล้อสุ่มของรางวัล*/
+  .framesmallrandomreward{
+    background-color: #ff00d00c;
+    flex: 1 1 500px;
+    height: 800px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+
+  /*กรอบหัวข้อวงล้อสุ่มของรางวัล กับจำนวนของรายชื่อ*/
+  .framemessagerandomreward{
+    display: flex;
+    align-items: center;
+    background-color: #ff00d069;
+    border-radius: 20px;
+    padding: 0px 15px;
+    border-radius: 20px 20px 0 0;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*หัวข้อวงล้อสุ่มของรางวัล*/
+  .messagerandomreward{
+    color: #96007ad7;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*กรอบของข้อความจำนวนของรายชื่อ*/
+  .messagequantityrandomreward-1{
+    margin-left: auto;
+  }
+
+  /*ข้อความจำนวนของรายชื่อ*/
+  .messagequantityrandomreward{
+    color: #88016fe5;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  /*ข้อความปิด/เปิดสุ่มของรางวัล*/
+  .messagebtn-no-offrandomreward{
+    color: #96007ad7;
+    font-size: 16px;
+  }
+
+  /*กรอบของวงล้อสุ่มของรางวัล*/
+  .rewardcanvas{
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /*ลูกศรชี้ของวงล้อสุ่มของรางวัล*/
+  .rewardcanvas-1{
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid #ff00d0;
+    z-index: 2;
+  }
+
+
+  /*กรอบของปุ่มสุ่มรางวัล*/
+  .btnstartRandomreward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 100%; 
+  }
+
+  /*ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward{
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-top: 10px;
+    background: none;
+    border: 3px solid #a37800;
+    padding: 0px 80px;
+    height: 75px;
+    border-radius: 20px;
+    cursor: pointer;
+    gap: 12px;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward::before{
+    content: "";
+    background-color: rgba(150, 101, 22, 0.048);
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/  
+  .btn-startRandomreward:hover::before{
+    width: 600px;
+    height: 600px;
+  }
+
+  /*รูปของปุ่มกดสุ่มรางวัล*/
+  .img-btn-startRandomreward{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มกดสุ่มรางวัล*/
+  .messagebtn-startRandomreward{
+    font-size: 25px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    padding: 0;
+    margin: auto;
+    z-index: 1;
+  }
+
+  /*กรอบpopupผู้โชคดีได้รับรางวัล*/
+  .popupluckywinner-10{
+    border: none;
+    background-color: #fdfbf5;
+    border-radius: 20px;
+    padding: 0px 0px 30px 0px;
+    width: 550px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    z-index: 5;
+  }
+  .popupluckywinner-10.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+  /*กรอบหัวข้อผู้โชคดีได้รับรางวัล*/
+  .framepopupluckywinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #fcecc3;
+    padding: 30px 0px 0px 0px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.22);
+    height: 110px;
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  /*หัวข้อผู้โชคดีได้รับรางวัล*/
+  .message-popupluckywinner{
+    position: relative;
+    bottom: 8px;
+    color: #8A5B10;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  /*กรอบรูป ชื่อผู้ที่ได้รับรางวัล*/
+  .frameimg-userpopupluckywinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  /*ข้อความผู้ที่ได้รับรางวัล*/
+  .messageuserpopupluckywinner{
+    margin-top: 20px;
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /*ชื่อผู้ที่ได้รับรางวัล*/
+ .messageuserpopupluckywinner-1{
+  margin-top: 10px;
+  color: #745500;
+  font-size: 30px;
+  font-weight: 900;
+ }
+
+ /*กรอบเส้นระหว่างชื่อผู้ที่ได้รับรางวัลกับรางวัลที่ได้รับ*/
+ .linemessageuserpopupluckywinner{
+  margin-top: 15px;
+  padding: 0px 20px 0px 20px;
+ }
+
+ /*เส้นระหว่างชื่อผู้ที่ได้รับรางวัลกับรางวัลที่ได้รับ*/
+ .linemessageuserpopupluckywinner-1{
+  border: 1px dashed #d39b00;
+ }
+
+ /*กรอบใหญ่รูปกล่องรางวัลกับรางวัลที่ได้รับ*/
+ .frameprizes-1{
+  padding: 15px 20px 20px 20px;
+
+ }
+
+ /*กรอบเล็กรูปกล่องรางวัลกับรางวัลที่ได้รับ*/
+ .frameprizes{
+    display: flex;
+    align-items: center;
+    border: 1px solid #d39b00;
+    padding: 5px 20px 5px 20px;
+    border-radius: 15px;
+    gap: 10px;
+ }
+ 
+  /*กรอบรูปกล่องรางวัล*/
+ .frameimgprizes{
+  border: 1px solid #d39b00;
+  padding: 4px 4px;
+  border-radius: 7px;
+ }
+
+ /*รูปกล่องรางวัล*/
+ .img-prizes{
+  position: relative;
+  top: 2px;
+ }
+
+ /*ข้อความรางวัลที่ได้รับ*/
+ .messagerewardreceived-1{
+  font-size: 20px;
+  font-weight: 600;
+  color: #4e4e4e;
+ }
+
+  /*กรอบข้อความของรางวัล*/
+  .messagerewardreceived{
+    margin-left: auto;
+  }
+
+  /*ข้อความของรางวัล*/
+ .messagerewardreceived-2{
+  font-size: 22px;
+  font-weight: 600;
+  color: #c1650e;
+ }
+
+ /*กรอบของปุ่มกดปิดpopup*/
+ .framebtn-offpopupluckywinner{
+  padding: 5px 20px 0px 20px;
+ }
+
+ /*ปุ่มกดปิดpopup*/
+ .offpopupluckywinner{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: none;
+  background-color: #a8731d;
+  border-radius: 20px;
+  height: 60px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  overflow: hidden;
+ }
+  
+ .offpopupluckywinner::before{
+  content: "";
+  background-color: #96651644;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s;
+ }
+
+
+ .offpopupluckywinner:hover::before{
+  width: 600px;
+  height: 600px;
+ }
+
+ /*ข้อความปุ่มกดปิดpopup*/
+ .messageoffpopupluckywinner{
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+ }
+  
+
+
+
+
+
+  /*กรอบของผู้โชคดีล่าสุดกับโอกาสออกของรางวัล*/
+  .frameluckywinner{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 40px;
+    width: 100%;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  /*กรอบของผู้โชคดีล่าสุด*/
+  .framesectionluckywinner{
+    flex: 1 1 400px;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 10px 20px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบหัวข้อผู้โชคดีล่าสุด*/
+  .sectionluckywinner{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*หัวข้อผู้โชคดีล่าสุด*/
+  .messagesectionluckywinner{
+    color: #8A5B10;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*เส้นระหว่างหัวข้อกับผู้โชคดี*/
+  .linesectionluckywinner{
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของชื่อผู้โชคดี*/
+  .framenameluckywinner{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*กรอบของเลขหน้าชื่อผู้โชคดี*/
+  .framenumberluckywinner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d39b00;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+  /*เลขหน้าชื่อผู้โชคดี*/
+  .framenumberluckywinner-1{
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  /*ข้อความชื่อผู้โชคดี*/
+  .nameluckywinner{
+    font-size: 18px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
+  /*กรอบข้อความของรางวัล*/
+  .framePrizes{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    background-color: #a8731d;
+    padding: 0px 20px;
+    height: 35px;
+    border-radius: 30px;
+  }
+
+  /*ข้อความของรางวัล*/
+  .rawardname{
+    color: #ffffff;
+  }
+
+  .wheel-disabled {
+    opacity: 0.35;
+    filter: grayscale(60%);
+    transition: opacity 0.3s ease, filter 0.3s ease;
+  }
+
+  .warnnothaveluckywinner{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
+
+  /*กรอบของโอกาสออกของรางวัล*/
+  .framechanceleavereward{
+    flex: 1 1 400px;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 10px 20px 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบหัวข้อของโอกาสออกของรางวัล*/
+  .sectionchanceleavereward{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*หัวข้อของโอกาสออกของรางวัล*/
+  .messagesectionchanceleavereward{
+    color: #8A5B10;
+    font-size: 21px;
+    font-weight: 600;
+  }
+
+  /*กรอบชื่อของรางวัล*/
+  .framenameprizes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  /*จุดหน้าชื่อของรางวัล*/
+  .pointnameprefixreward{
+    background-color: #C1440E;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+  }
+  
+  /*ชื่อของรางวัล*/
+  .messagenameprizes{
+    font-size: 18px;
+    color: #4e4e4e;
+    font-weight: 600;
+  }
+
+  /*กรอบเปอร์เช็นของรางวัล*/
+  .percentnameprizes-1{
+    margin-left: auto;
+    margin-right: 20px;
+  }
+
+  /*ตัวเลขเปอร์เช็นของรางวัล*/
+  .percentnameprizes{
+    font-size: 18px;
+    color: #5381EC;
+    font-weight: 600;
+  }
+
+  .linesectionluckywinner-1{
+    border: 1px solid #d39b00;
+    margin-top: -4px;
+  }
+
+
+
+  /*ส่วนของหน้า history_random.blade.php*/
+  /*กรอบใหญ่ของหน้านี้*/
+  .framebiglistname{
+    background-color: #fdfbf5;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    padding: 50px 40px 45px 40px;
+    border-radius: 20px;
+  }
+
+  /*กรอบของปุ่มค้นหากับปุ่มส่งอีเมลให้ผู้ได้รางวัลชั้นที่1*/
+  .framesearchsenditgmail-5{
+    width: 800px;
+  }
+
+  /*กรอบของปุ่มค้นหากับปุ่มส่งอีเมลให้ผู้ได้รางวัลชั้นที่2*/
+  .framesearchbtn-senditgmail{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  /*กรอบของปุ่มค้นหา*/
+  .framesearchsenditgmail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 400px;
+  height: 50px;
+  background-color: #ffffff;
+  border: 2px solid #d39b00;
+  border-radius: 15px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+   .framesearchsenditgmail::before{
+    content: "";
+    background-color: #ececec77;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+   }
+   .framesearchsenditgmail:hover::before{
+    width: 800px;
+    height: 200px;
+   }
+
+
+  /* ช่องพิมพ์ข้อความค้นหา*/
+  .btn-framesearchsenditgmail {
+    width: 100%;
+    height: 100%;
+    padding: 0px 50px 0px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4e4e4e;
+    outline: none;
+    background: none;
+    border: none;
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /*กรอบปุ่มส่งอีเมลให้ผู้ได้รับรางวัล*/
+  .btn-senditgmail{
+    margin-left: auto;
+  }
+
+  /*ปุ่มส่งอีเมลให้ผู้ได้รับรางวัล*/
+  .btn-senditgmail-1{
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    background-color: #a8731d;
+    padding: 2px 30px;
+    gap: 10px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .btn-senditgmail-1::before{
+    content: "";
+    background-color: #96651644;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-senditgmail-1:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+  /*รูปของปุ่มส่งอีเมลให้ผู้ได้รับรางวัล*/
+  .img-btn-senditgmail{
+    position: relative;
+    z-index: 1;
+  }
+
+
+  /*ข้อความปุ่มส่งอีเมลให้ผู้ได้รับรางวัล*/
+  .messagebtn-senditgmail{
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบของทั้งหมด รับแล้ว ยังไม่รับ*/
+  .frameallreceivednotacceptingyet{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+  }
+
+  /*กรอบของทั้งหมด*/
+  .framealllistname{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    padding: 0px 30px 0px 30px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบตัวเลขกับรูปภาพทั้งหมด*/
+  .numberalllistname{
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*ตัวเลขทั้งหมด*/
+  .numberalllistname-1{
+    font-size: 50px;
+    font-weight: 900;
+    color: #4A9B8E;
+  }
+
+  /*ข้อความของทั้งหมด*/
+  .messagealllistname{
+    position: relative;
+    bottom: 75px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*กรอบของรูปภาพทั้ง 3 กรอบ*/
+  .imgnumberalllistname{
+    margin-left: auto;
+  }
+
+
+  /*กรอบของรับแล้ว*/
+  .framereceivedlistname{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    padding: 0px 30px 0px 30px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบตัวเลขกับรูปภาพรับแล้ว*/
+  .numberreceivelistname{
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*ตัวเลขรับแล้ว*/
+  .numberreceivelistname-1{
+    font-size: 50px;
+    font-weight: 900;
+    color: #34C759;
+  }
+
+  /*ข้อความของรับแล้ว*/
+  .messagereceivelistname{
+    position: relative;
+    bottom: 75px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*กรอบของยังไม่รับ*/
+  .framernotacceptingyet{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    padding: 0px 30px 0px 30px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบตัวเลขกับรูปภาพยังไม่รับ*/
+  .numbernotacceptingyetlistname{
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*ตัวเลขยังไม่รับ*/
+  .numbernotacceptingyetlistname-1{
+    font-size: 50px;
+    font-weight: 900;
+    color: #FFCC00;
+  }
+
+  /*ข้อความของยังไม่รับ*/
+  .messagenotacceptingyetlistname{
+    position: relative;
+    bottom: 75px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*กรอบของรายชื่อผู้ได้รับรางวัล*/
+  .framerlistnamerecipientreward{
+    margin-top: 40px;
+    background-color: #FCF6E5;
+    border-radius: 20px;
+    padding: 0px 0px 20px 0px;
+    border: 2px solid #d39b00;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบของรูปภาพกับหัวข้อรายชื่อผู้ได้รับรางวัล*/
+  .framersectionlistnamerecipientreward{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
+  }
+
+  /*หัวข้อรายชื่อผู้ได้รับรางวัล*/
+  .messagesectionlistnamerecipientreward{
+    font-size: 26px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*เส้นระหว่างหัวข้อกับรายชื่อ*/
+  .linesectionlistnamerecipientreward1{
+    border: 1px solid #d39b00;
+    position: relative;
+    bottom: 20px;
+  }
+
+  .framebutton-sectionlistnamerecipientreward{
+    position: relative;
+  }
+
+  /*ปุ่มทั้ง 3 ปุ่มคือทั้งหมด รับแล้ว ยังไม่ได้รับ*/
+  .button-section{
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0px 20px;
+    position: relative;
+    bottom: 15px;
+  }
+
+  /*กรอบของปุ่มทั้ง 3*/
+  .framebutton-allsectionlistnamerecipientreward{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*ข้อความของปุ่มทั้ง 3*/
+  .messagebutton-section{
+    font-size: 25px;
+    font-weight: 600;
+    color: #6b6b6b;
+  }
+
+  .messagebutton-section.active{
+    color: #e78f00;
+  }
+
+  /*กรอบของตัวเลขทั้ง 3 ปุ่ม*/
+  .circlenumberbutton-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #6b6b6b59;
+    position: relative;
+    bottom: 3px;
+  }
+
+  .circlenumberbutton-section.active{
+    background-color: #995e00;
+  }
+
+  /*ตัวเลขทั้ง 3 ปุ่ม*/
+  .numberbutton-section{
+    font-size: 16px;
+    font-weight: 600;
+    color: #6b6b6b;
+  }
+
+  .numberbutton-section.active{
+    color: #e78f00;
+  }
+
+
+  /*เส้นสีเทาเอาไว้เปลี่ยนตอนกดปุ่ม*/
+  .graylinesection{
+    width: 100%;
+    height: 3px;
+    background-color: #6b6b6b;
+    position: relative;
+    bottom: 20px;
+  }
+
+  /*เส้นสีส้มเอาไว้เปลี่ยนตอนกดปุ่ม*/
+  .yellowlinesection{
+    width: 160px;
+    height: 3px;
+    background-color: #e78f00;
+  }
+
+  /*ปุ่มกดเปิด popup ของรายชื่อ*/
+  .btn-openpopupname{
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 35px;
+    gap: 15px;
+    border-bottom: 2px solid #d39b00;
+}
+
+  /*ตัวเลขหน้ารายชื่อผู้ได้รับรางวัล*/
+  .circlenumbername{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: #d39b00;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+  }
+
+  /*กรอบของชื่อกับรหัสQRcode*/
+  .username-listname{
+     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  /*ชื่อผู้ได้รับรางวัล*/
+  .messageusername-listname{
+    font-size: 21px;
+    font-weight: 600;
+    color: #4e4e4e;
+    position: relative;
+    bottom: 5px;
+  }
+
+  /*รหัสQRcode*/
+  .messageusername-listname-1{
+    font-size: 15px;
+    color: #4e4e4e;
+    position: relative;
+    bottom: 15px;
+  }
+
+  /*เส้นตรงรายชื่อผู้ได้รับรางวัล*/
+  .linesectionlistnamerecipientreward{
+    border: 1px solid #d39b00;
+    position: relative;
+    bottom: 30px;
+  }
+
+  /*กรอบของรางวัลที่ได้กับ สถานะ*/
+  .framereward-listname{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 15px;
+  }
+
+  /*กรอบของรางวัลที่ได้*/
+  .framereward-listname-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a8731d;
+    padding: 0px 30px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  /*ข้อความของรางวัลที่ได้*/
+  .messagereward-listname{
+    font-size: 18px;
+    color: #ffffff;
+  }
+
+  /*กรอบสถานะการรับของรางวัล ยังไม่ได้รับ*/
+  .framerstatusreward-listname1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 30px;
+    min-width: 120px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  /*สถานะการรับของรางวัล ยังไม่ได้รับ*/
+  .messagestatusreward-listname1{
+    font-size: 18px;
+  }
+
+  /*สถานะ รับแล้ว สีเขียน*/
+  .framerstatusreward-listname1[data-status="received"] {
+    background-color: #7fd1ae79;
+  }
+  .framerstatusreward-listname1[data-status="received"] .messagestatusreward-listname1 {
+      color: #008d4e;
+  }
+
+  /*สถานะยังไม่ได้รับ สีส้ม*/
+  .framerstatusreward-listname1[data-status="not-received"] {
+    background-color: #fce2bb;
+  }
+  .framerstatusreward-listname1[data-status="not-received"] .messagestatusreward-listname1 {
+      color: #B26200;
+  }
+
+  /*กรอบpopupพบรายชื่อผู้รับรางวัล*/
+  .popuplistnameawardrecipient{
+    border: none;
+    background-color: #fdfbf5;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    padding: 40px 30px 30px 30px;
+    width: 450px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 2;
+  }
+  .popuplistnameawardrecipient.show{
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /*กรอบรูปของpopupพบรายชื่อผู้รับรางวัล*/
+  .img-popuplistnameawardrecipient{
+    display: flex;
+    justify-content: center;
+  }
+
+  /*กรอบของข้อความพบรายชื่อผู้รับรางวัล*/
+  .framemessagepopuplistnameawardrecipient{
+    display: flex;
+    justify-content: center;
+  }
+
+  /*ข้อความพบรายชื่อผู้รับรางวัล*/
+  .messagepopuplistnameawardrecipient-1{
+    font-size: 25px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*กรอบของชื่อผู้รับรางวัล*/
+  .framenamerecipientreward{
+    display: flex;
+    align-items: center;
+    border: 1px solid #d39b00;
+    padding: 0px 20px;
+    gap: 15px;
+    border-radius: 20px;
+    background-color: #FCF7EA;
+  }
+
+  /*ข้อความชื่อผู้รับ รหัส QR Code*/
+  .messagenamerecipientreward{
+    font-size: 18px;
+    color: #5A4322;
+  }
+
+  /*ข้อความชื่อผู้รับ กับรหัสQRcode*/
+  .messagenamerecipientreward-1{
+    position: relative;
+    bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4A3820;
+  }
+
+  /*กรอบของQRcode*/
+  .frameQRcodepopup{
+    display: flex;
+    align-items: center;
+    border: 1px solid #d39b00;
+    padding: 0px 20px;
+    gap: 15px;
+    border-radius: 20px;
+    background-color: #FCF7EA;
+    margin-top: 25px;
+  }
+
+  /*กรอบของของรางวัลที่ได้รับ*/
+  .frameprizesreceived{
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+    border: 1px solid #d39b00;
+    background-color: #FCEFC9;
+    border-radius: 20px;
+    padding: 0px 20px;
+    gap: 15px;
+  }
+
+  /*กรอบรูปของรางวัลที่ได้รับ*/
+  .frameimgprizesreceived{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d39b00;
+    background-color: #fdfbf5;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+  }
+
+  /*ข้อความของรางวัลที่ได้รับ*/
+  .framemessage-prizesreceived{
+    position: relative;
+    bottom: 5px;
+    font-size: 18px;
+    color: #5A4322;
+  }
+
+  /*ข้อความชื่อของรางวัล*/
+  .framemessage-prizesreceived-1{
+    position: relative;
+    bottom: 15px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #6B4423;
+  }
+
+  /*เส้นระหว่าง กรอบของรางวัลที่ได้รับกับ กรอบยังไม่ได้รับของ*/
+  .lineframeQRcodepopup{
+    margin-top: 25px;
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของยังไม่ได้รับของ*/
+  .framenotyetreceiveitems{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    border: 1px solid #d39b00;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #FCF6E5;
+    gap: 10px;
+  }
+
+  .framenotyetreceiveitems-1{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #7fd1ae79;
+    border: 1px solid #008d4e;;
+    height: 50px;
+    border-radius: 20px;
+    padding: 0px 20px;
+    gap: 10px;
+  }
+
+  .messagenotyetreceiveitems-3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .messagenotyetreceiveitems-1{
+    font-size: 18px;
+    font-weight: 600;
+    color: #008d4e;
+  }
+
+  /*ข้อความยังไม่ได้รับของ*/
+  .messagenotyetreceiveitems{
+    font-size: 18px;
+    font-weight: 600;
+    color: #8A5B10;
+  }
+
+  /*กรอบของปุ่ม ปิด กับ ยืนยันรับของ*/
+  .btn-off-submitpopuplistnameawardrecipient{
+    margin-top: 25px;
+    display: flex;
+    gap: 20px;
+  }
+
+  /*กรอบของปุ่มปิด*/
+  .btn-offpopuplistnameawardrecipient{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 2px solid #d39b00;
+    border-radius: 20px;
+    width: 100%;
+    height: 65px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  .btn-offpopuplistnameawardrecipient::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    border-radius: 50%;
+  }
+
+  .btn-offpopuplistnameawardrecipient:hover::before{
+    width: 300px;
+    height: 300px;
+  }
+
+  /*ข้อความของปุ่มปิด*/
+  .messagebtn-offpopuplistnameawardrecipient{
+    font-size: 20px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบปุ่มกดยืนยันรับของ*/
+  .btn-submitpopuplistnameawardrecipient{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #a8731d;
+    border-radius: 20px;
+    width: 100%;
+    height: 65px;
+    min-width: 210px;
+    cursor: pointer;
+    overflow: hidden;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  .btn-submitpopuplistnameawardrecipient::before{
+    content: "";
+    background-color: #96651644;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    border-radius: 50%;
+  }
+
+  .btn-submitpopuplistnameawardrecipient:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+  .img-btn-submitpopuplistnameawardrecipient{
+    position: relative;
+    top: 1px;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มกดยืนยันรับของ*/
+  .messagebtn-submitpopuplistnameawardrecipient{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+
+
+
+
+
+
+
+
+   /*ส่วนของหน้า button_senditgmail.blade.php*/
+  .frameallsentdeliveryfailed{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+   /*กรอบของหัวข้อเว็บ แดชบอร์ดภาพรวม ปุ่ม วัน สัปดาห์ เดือน*/
+  .framedashboard{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  /*ชื่อแดชบอร์ดภาพรวม*/
+  .Overview_Dashboard{
+    color: #5381EC;
+    font-size: 20px;
+    min-width: 350px;
+  }
+
+  /*ปุ่มส่งอีเมลทั้งหมด*/
+  .btn-sendallemails1{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0px 40px;
+    gap: 10px;
+    background-color: #a8731d;
+    border: none;
+    border-radius: 20px;
+    height: 60px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .btn-sendallemails1::before{
+    content: "";
+    background-color: #966516;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    border-radius: 50%;
+  }
+
+  .btn-sendallemails1:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+  /*รูปของปุ่มส่งอีเมลทั้งหมด*/
+  .btn-imgsendallemails1{
+    position: relative;
+    top: 2px;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มส่งอีเมลทั้งหมด*/
+  .sendallemails1{
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบของทั้งหมด ส่งแล้ว ส่งไม่สำเร็จ*/
+  .frameallbuttonsenditgmail{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    flex: 1 1 300px;
+    border-radius: 20px;
+    padding: 0px 30px 0px 30px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*ตัวเลขของกรอบทั้งหมด*/
+  .numberallbuttonsenditgmail{
+    font-size: 50px;
+    font-weight: 900;
+    color: #4A9B8E;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*ข้อความของกรอบทั้งหมด ส่งแล้ว ส่งไม่สำเร็จ*/
+  .messageallbuttonsenditgmail{
+    position: relative;
+    bottom: 75px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*ตัวหนังสือของกรอบส่งแล้ว*/
+  .numbersentbuttonsenditgmail{
+    font-size: 50px;
+    font-weight: 900;
+    color: #44a300;
+    position: relative;
+    bottom: 40px;
+  }
+
+  /*ตัวหนังสือของกรอบส่งไม่สำเร็จ*/
+  .numberdeliveryfailedbuttonsenditgmail{
+    font-size: 50px;
+    font-weight: 900;
+    color: #e20000;
+    position: relative;
+    bottom: 40px;
+  }
+
+  .framebiglistnamerecipientreward-1{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    gap: 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  /*กรอบของประวัตการส่ง QrCode */
+  .framebiglistnamerecipientreward{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 0px 20px 20px 20px;
+    border-radius: 20px;
+    flex: 5 1 550px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบของจุดกับประวัตการส่ง QrCode*/
+  .framemessagelistnamerecipientreward{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*จุดข้างหน้าหัวข้อประวัตการส่ง QrCode*/
+  .pointlistnamerecipientreward{
+    width: 15px;
+    height: 15px;
+    background-color: #C1440E;
+    border-radius: 50%;
+  }
+
+  /*หัวข้อประวัตการส่ง QrCode*/
+  .messagelistnamerecipientreward{
+    font-size: 25px;
+    font-weight: 900;
+    color: #8A5B10;
+  }
+
+  /*เส้นใต้หัวข้อประวัตการส่ง QrCode*/
+  .linemessagelistnamerecipientreward{
+    position: relative;
+    bottom: 10px;
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของชื่อผู้ได้รางวัลประวัตการส่ง QrCode*/
+  .framemessagelistnamerecipientreward-1{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*ชื่อผู้ได้รางวัลประวัตการส่ง QrCode*/
+  .framecirclenumberlistnamerecipientreward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d39b00;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+
+
+  /*ตัวเลขข้างหน้าชื่อผู้ได้รางวัลประวัตการส่ง QrCode*/
+  .circlenumberlistnamerecipientreward{
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  /*กรอบของชื่อ อีเมล ประเมินเมื่อของผู้ได้รับรางวัล*/
+  .framelistnamegmaildateassessment{
+    display: flex;
+    flex-direction: column;
+  }
+
+  /*ชื่อของผู้ได้รับรางวัล*/
+  .messagelistnamegmaildateassessment{
+    font-size: 21px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+  /*อีเมลของผู้ได้รับรางวัล*/
+  .messagegmaildateassessment{
+    font-size: 18px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+  /*ประเมินเมื่อของผู้ได้รับรางวัล*/
+  .messagedateassessment{
+    font-size: 15px;
+    color: #4e4e4e;
+  }
+
+  /*เส้นของชื่อของผู้ได้รับรางวัล*/
+  .linemessagelistnamerecipientreward-1{
+    border: 1px solid #d39b00;
+  }
+
+  /*กรอบของส่งแล้ว*/
+  .framesenttogmail{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
+    background-color: #7fd1ae79;
+    border-radius: 20px;
+    height: 40px;
+  }
+
+  /*ข้อความของกรอบของส่งแล้ว*/
+  .messagesenttogmail{
+   color: #008d4e;
+   font-size: 18px;
+  }
+
+  /*กรอบข้อความล้มเหลว*/
+  .frameerrorgmail{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
+    background-color: #ffc3c3;
+    border-radius: 20px;
+    height: 40px;
+  }
+
+  /*ข้อความล้มเหลว*/
+  .messageerrorgmail{
+   color: #E80F0D;
+   font-size: 18px;
+  }
+
+  /*ปุ่มส่งใหม่*/
+  .btn-Resend{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 55px;
+    border-radius: 30px;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+   
+  .btn-Resend::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+ .btn-Resend:hover::before{
+  width: 300px;
+  height: 300px;
+ }
+
+  /*รูปของปุ่มส่งใหม่*/
+  .imgbtn-Resend{
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มส่งใหม่*/
+  .messagebtn-Resend{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*กรอบของรายการที่ล้มเหลว*/
+  .framelistthatfailed{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 0px 20px 40px 20px;
+    border-radius: 20px;
+    flex: 1 1 450px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*กรอบของจุดหน้าชื่อผู้ได้รับรางวัล ชื่อผู้ได้รับรางวัล ปุ่มส่งใหม่*/
+  .framelistnamethatfailed{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /*จุดหน้าชื่อผู้ได้รับรางวัล*/
+  .pointlistnamethatfailed{
+    background-color: #C1440E;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
+  /*ชื่อผู้ได้รับรางวัล*/
+  .messagelistnamethatfailed{
+    font-size: 21px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+  
+  /*ปุ่มส่งใหม่*/
+  .btn-Resend1{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    position: relative;
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 40px;
+    border-radius: 30px;
+    gap: 10px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .btn-Resend1::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+ .btn-Resend1:hover::before{
+  width: 300px;
+  height: 300px;
+ }
+
+  /*รูปของปุ่มส่งใหม่*/
+  .imgbtn-Resend1{
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความปุ่มส่งใหม่*/
+  .messagebtn-Resend1{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*เส้นของรายชื่อรายการที่ล้มเหลว*/
+  .linemessagelistnamerecipientreward-2{
+    border: 1px solid #d39b00;
+  }
+
+
+  .btn-resendallthatfailed{
+    position: relative;
+    top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    border-radius: 20px;
+    height: 55px;
+    width: 100%;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .btn-resendallthatfailed::before{
+    content: "";
+    background-color: #d39b000a;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+    border-radius: 50%;
+  }
+
+  .btn-resendallthatfailed:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+
+  .messagebtn-resendallthatfailed{
+    font-size: 18px;
+    color: #8A5B10;
+    position: relative;
+    z-index: 1;
+  }

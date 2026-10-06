@@ -33,8 +33,38 @@
         </p>
     </div>
 
-    {{-- ส่วนวงล้อ --}}
+    {{-- พื้นหลังของวงล้อทั้งหมด --}}
     <div class="all-wheel-background">
+        {{-- ส่วนวงล้อรายชื่อของคนที่ทำแบบประเมิน --}}
+    <div class="respondent-box">
+        <div class="background-respondent-header">
+            <div class="logo-topic-respondent">
+                <img src="{{asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของวงล้อรายชื่อ">
+                <p class="text-res-header">วงล้อสุ่มรายชื่อ</p>
+            </div>
+            <div class="num-respondent-box">
+                <span class="num-respondent-wheel">
+                    จำนวนรายชื่อทั้งหมด ({{ $respondents->count() }})
+                </span>
+            </div>
+        </div>
+        {{-- ส่วนของปุ่มเปิด/ปิดวงล้อรายชื่อ --}}
+        <div class="toggle-main-box">
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-wheel" checked>
+                <span class="toggle-slider"></span>
+            </label>
+            <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
+        </div>
+        {{-- แสดงวงล้อรายชื่อของผูัที่ทำแบบประเมิน --}}
+        <div class="respondent-main-wheel">
+            <canvas id="wheelNameCanvas" width="500" height="500"></canvas>
+            <div class="respondent-wheel-pointer"></div>
+        </div>
+    </div>
+
+
+        {{-- ส่วนวงล้อรางวัล --}}
     <div class="wheel-reward-box">
         <div class="text-wheel">
             <div class="logo-topic">
@@ -129,6 +159,7 @@
     @php
         $rewardWheelDataArr = $wheel->rewards->map(function ($r){
             return [
+                'id' => $r->reward_id,
                 'label' => $r->name,
                 'weight' => $r->rate*$r->pivot->quantity_selected,
                 'quantity' => $r->pivot->quantity_selected,

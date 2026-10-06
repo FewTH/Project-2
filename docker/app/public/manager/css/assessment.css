@@ -1,0 +1,1408 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+/*ป้องกันกล่องส้น*/
+* {
+  box-sizing: border-box;
+}
+ 
+body {
+  margin: 0;
+  font-family: 'Chakra Petch', sans-serif;
+  background-color: #f8f8f6;
+  min-width: 1000px;
+}
+
+/*ทำให้เวลาเปิด popup แล้วไม่สามารถเลื่อนได้*/
+body.no-scroll {
+  overflow: hidden;
+}
+/*เอาไว้ควบคุมส่วนกลางของเว็บ*/
+.main-content {
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/*โปรไฟล์ผู้ใช้*/
+.btn-user-wrapper-1 {
+  background-color: #F3D577;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  right: 0;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  min-width: 1000px;
+  z-index: 15;
+}
+/*โปรไฟล์ผู้ใช้*/
+  .btn-user-wrapper {
+    background-color: #F3D577;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+    min-width: 1000px;
+    z-index: 10;
+  }
+
+/*ชื่อผู้ใช้*/
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8A5B10;
+  font-weight: 1000;
+  font-size: 20px;
+  padding: 6px 0px 6px 0px;
+  margin-right: 35px;
+}
+
+/*รูปโปรไฟล์ผู้ใช้*/
+.btn-user-img {
+  width: 50px;
+  height: 50px;
+  background-color: #8A5B10;
+  border: 3px solid #d39b00;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+/*แถบเมนูด้านซ้าย*/
+.Top_frame {
+  position: fixed;
+  z-index: 25;
+}
+
+/*หน้าต่างเมนู*/
+.container-1 {
+  background-color: #fdfbf4;
+  height: 100vh;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  width: 250px;
+}
+
+/*โลโก้ BUULIB*/
+.img-Logo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* ปุ่มเมนูแดชบอร์ด */
+.btn-Home-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 30px;
+}
+
+/*รูปปุ่มแดชบอร์ด*/
+.btn-Home-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มจัดการรางวัล*/
+.btn-Random-1 {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8C8D8D;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 15px;
+  margin-top: 10px;
+}
+
+/*รูปปุ่มจัดการรางวัล*/
+.btn-Random-img-1 {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+/*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
+  .btn-Assessment-assess {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FCD53F;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 15px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  }
+
+  /*รูปปุ่มแบบประเมิน/กิจกรรม*/
+  .btn-Assessment-img-assess {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    margin-left: 5px;
+  }
+
+/*กรอบชื่อปุ่มออกจากระบบ*/
+.btn-logout-wrapper {
+  margin-top: auto;
+}
+
+/*ชื่อปุ่มออกจากระบบ*/
+.btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d39b00;
+  width: 250px;
+  height: 55px;
+  text-decoration: none;
+  color: #D31313;
+  font-weight: 1000;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+/*รูปปุ่มออกจากระบบ*/
+.btn-logout-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+  /*หัวข้อแบบประเมินของหน้าแบบประเมิน/กิจกรรม*/
+  .sectionlist{
+    color: #5381EC;
+    width: 100%;
+    font-size: 20px;
+  }
+
+  /*กรอบของปุ่มรายการกิจกรรมกับแบบประเมิน*/
+  .btn-activity-rate{
+    margin-top: 40px;
+    position: relative;
+    bottom: 18px;
+    display: flex;
+    gap: 60px;
+  }
+
+  /*ปุ่มกดรายการกิจกรรม*/
+  .btn-activity{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 60px;
+    padding: 0px 30px;
+    border-radius: 15px;
+    border: none;
+    background: none;
+    overflow: hidden;
+    gap: 20px;
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดรายการกิจกรรม*/
+  .btn-activity::before{
+    content: "";
+    background-color: #e9e7e7;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  /*กรอบเอฟเฟ็กต์ปุ่มกดรายการกิจกรรม*/
+  .btn-activity:hover::before{
+    width: 300px;
+    height: 150px;
+  } 
+
+
+  /*ปุ่มตัวอักษรรายการกิจกรรม*/
+  .btn-activity-1{
+    color: #8C8D8D;
+    font-size: 23px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มตัวอักษรรายการกิจกรรมใช้เป็นสี js*/
+  .btn-activity.active .btn-activity-1{ 
+    color: #000;
+  }
+
+  /*ปุ่มตัวเลขรายการกิจกรรม*/
+  .number-activity{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8C8D8D;
+    color: #ffffff;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 100px;
+    border: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มตัวเลขรายการกิจกรรมเอาไว้ไปดึงใช้ใน js*/
+  .number-activity.active {
+    background-color: #FCD53F;
+    border: 0.4px solid #8C8D8D;
+    color: #000;
+  }
+
+  /*กรอบปุ่มตัวเลข-อักษรแบบประเมิน*/
+  .btn-rate{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 60px;
+    padding: 0px 30px;
+    border-radius: 15px;
+    border: none;
+    background: none;
+    overflow: hidden;
+    gap: 20px;
+  }
+
+
+
+
+  /*เอฟเฟ็กต์ปุ่มตัวเลข-อักษรแบบประเมิน*/
+  .btn-rate::before{
+    content: "";
+    background-color: #e9e7e7;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+  }
+
+  /*กรอบเอฟเฟ็กต์ปุ่มตัวเลข-อักษรแบบประเมิน*/
+  .btn-rate:hover::before{
+    width: 300px;
+    height: 150px;
+  }
+
+  /*ปุ่มตัวอักษรแบบประเมิน*/
+  .btn-rate-1{
+    color: #8C8D8D;
+    font-size: 23px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-rate.active .btn-rate-1{
+    color: #000000;
+  }
+
+  /*ปุ่มตัวเลขแบบประเมิน*/
+  .number-rate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8C8D8D;
+    color: #ffffff;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .number-rate.active{
+    background-color: #FCD53F;
+    border: 0.4px solid #8C8D8D;
+    color: #000;
+  }
+
+
+  /*หลอดเอาไว้กดลิงค์เปลี่ยนหน้าไปพร้อมรายการกิจกรรมกับและแบบประเมิน*/
+  .bulb-black{
+    background-color: #1C1C1E;
+    width: 100%;
+    height: 5px;
+    position: relative;
+    bottom: 20px;
+    border-radius: 15px;
+    min-width: 800px;
+  }
+
+  /*หลอดสีเหลืองเอาไว้กดลิงค์เปลี่ยนหน้าไปพร้อมรายการกิจกรรมกับและแบบประเมิน*/
+  .bulb-yellow{
+    background-color: #FCD53F;
+    width: 300px;
+    height: 5px;
+    border-radius: 15px;
+  }
+
+
+  /*กรอบสีเทา*/
+  .frame-grey{
+    width: 100%;
+    background-color: #fdfbf5;
+    border-radius: 20px;
+    padding: 0px 0px 35px 0px;
+    min-width: 800px;
+    display: none;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*เอาไว้โชว์หน้าตอนเข้าหน้าเว็บ*/
+  .frame-grey.active{
+    display: block;
+  }
+
+
+  /*กรอบของกิจกรรมทั้งหมดจนถึงปุ่มสร้างกิจกรรมด่วน*/
+  .activity-Closed-Open{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px 30px 0px 50px;
+    width: 100%;
+    gap: 20px;
+  }
+
+  /*กรอบของตัวเลขกิจกรรมทั้งหมด*/
+  .all-activities{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    border-radius: 15px;
+    flex: 1 1 300px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*ตัวเลขของกิจกรรมทั้งหมด*/
+  .activities-number-assessment{
+    color: #3ac4ad;
+    font-size: 50px;
+    font-weight: 900;
+    position: relative;
+    bottom: 25px;
+    left: 30px;
+    min-width: 140px;
+  }
+
+  /*ตัวอักษรของกิจกรรมทั้งหมด*/
+  .activities-assessment{
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 900;
+    position: relative;
+    bottom: 50px;
+    left: 30px;
+  }
+
+  /*กรอบของตัวเลขปิดแล้ว*/
+  .Closed-assessment{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    border-radius: 15px;
+    flex: 1 1 300px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*ตัวเลขของปิดแล้ว*/
+  .Closed-assessment-1{
+    color: #FF453A;
+    font-size: 50px;
+    font-weight: 900;
+    position: relative;
+    bottom: 25px;
+    left: 30px;
+  }
+
+  /*ตัวอักษรของปิดแล้ว*/
+  .Closed-assessment-2{
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 900;
+    position: relative;
+    bottom: 50px;
+    left: 30px;
+    min-width: 140px;
+  }
+
+  /*กรอบของตัวเลขเปิดอยู่*/
+  .Open-assessment{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    border-radius: 15px;
+    flex: 1 1 300px;
+    height: 140px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*ตัวเลขของเปิดอยู่*/
+  .open-assessment-1{
+    color: #2ec754;
+    font-size: 50px;
+    font-weight: 900;
+    position: relative;
+    bottom: 25px;
+    left: 30px;
+  }
+
+  /*ตัวอักษรของเปิดอยู่*/
+  .open-assessment-2{
+    color: #8A5B10;
+    font-size: 20px;
+    font-weight: 900;
+    position: relative;
+    bottom: 50px;
+    left: 30px;
+    min-width: 140px;
+  }
+
+  /*กรอบของปุ่มสร้างกิจกรรมด่วน*/
+  .btn-build-activityurgent{
+    position: relative;
+    margin-left: auto;
+    background-color: #a8731d;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
+  .btn-build-activityurgent::before{
+    content: "";
+    background-color: #966516;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
+  .btn-build-activityurgent:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+
+  /*ข้อความของปุ่มสร้างกิจกรรมด่วน*/
+  .btn-build-activityurgent-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 40px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
+  /*ปุ่มรูปบวกของสร้างกิจกรรมด่วน*/
+  .btn-plus{
+    position: relative;
+    bottom: 3px;
+    font-size: 40px;
+    padding: 0px 10px 0px 0px;
+  }
+
+  .frame-search-activity-2{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 30px 10px 50px;
+    top: 10px;
+  }
+
+  /*กรอบของค้นหารายชื่อกิจกรรม*/
+  .frame-search-activity{
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    width: 600px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*เอฟเฟ็กต์กรอบของค้นหารายชื่อกิจกรรม*/
+  .frame-search-activity::before{
+    content: "";
+    background-color: #ececec77;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  /*กรอบเอฟเฟ็กต์ของค้นหารายชื่อกิจกรรม*/
+  .frame-search-activity:hover::before{
+    width: 650px;
+    height: 200px;
+  }
+
+  /*ข้อความของค้นหารายชื่อกิจกรรม*/
+  .search-activity{
+    outline: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 600px;
+    color: #4e4e4e;
+    border: none;
+    background: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*รูปของค้นหารายชื่อกิจกรรม*/
+  .img-btn-activity{
+    margin-right: 20px;
+    cursor: pointer;
+    z-index: 1;
+    background: none;
+    border: none;
+  }
+
+  /*กรอบของการสร้างกิจกรรมด่วน*/
+  .frame-activity-assessment{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    flex: 1 1 500px;
+    margin-top: 40px;
+    padding: 0px 15px 30px 20px;
+    border-radius: 20px;
+    border-left: 30px solid var(--activity-color, #a8731d);
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*กรอบของหัวข้อความกับข้อความปิดแล้ว*/
+  .framecontentactivity{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /*หัวข้อความ*/
+  .headingactivity{
+    color: #8A5B10;
+    font-size: 25px;
+  }
+
+  /*กรอบของสถานะปิดแล้ว*/
+  .frameclosed{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    border: 2px solid #d39b00;
+    width: 100px;
+    height: 30px;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
+  .frameclosed::before{
+    content: "";
+    background-color: #d39b0015;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  .frameclosed.is-open::before{
+    background-color: #17a34a1f;
+  }
+
+  /*กรอบวงกลมของเอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
+  .frameclosed:hover::before{
+    width: 100px;
+    height: 100px;
+  }
+
+  /*จุดของสถานะ*/
+  .pointclosed{
+    background-color: #5381EC;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความปิดแล้ว*/
+  .closed, .open{
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+  .closed{
+    color: #5381EC;
+  }
+
+
+  /*ข้อความเวลาสร้าง*/
+  .messagecreationtime{
+    color: #4e4e4e;
+    position: relative;
+    bottom: 30px;
+  }
+
+  /*เส้นระหว่างสร้างเมื่อกับผู้เข้าร่วม*/
+  .lineactivity-1{
+    border: 2px solid #d39b00;
+    position: relative;
+    bottom: 10px;
+  }
+
+  /*กรอบของผู้เข้าร่วมสูงสุด กับ หมดเวลา*/
+  .maximumnumber_outtime{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  /*ข้อความของผู้เข้าร่วมสูงสุด*/
+  .maximumnumber{
+    color: #c57a01;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  /*ข้อความของหมดเวลา*/
+  .outtime{
+    color: #c57a01;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  /*กรอบของดินสอ สมุดโน้ต แบตสำรอง*/
+  .framerank-1-2-3{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*กรอบของดินสอ*/
+  .framerank-1-assessment{
+    position: relative;
+    background-color: #a8731d;
+    border-radius: 20px;
+    padding: 0px 60px;
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของกรอบของดินสอ*/
+  .framerank-1-assessment::before{
+    content: "";
+    background-color: #966516;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, heigth 0.1s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดินสอ*/
+  .framerank-1-assessment:hover::before{
+    width: 200px;
+    height: 200px;
+  }
+
+  /*ข้อความของกรอบของดินสอ*/
+  .rank-1-assessment{
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*เส้นของส่วนกรอบดินสอ กับ คนลงทะเบียน*/
+  .lineactivity-2{
+    margin-top: 30px;
+    border: 2px solid #d39b00;
+  }
+
+  /*กรอบของคนลงทะเบียน กับ ปุ่มดูรายละเอียด*/
+  .register{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  /*ข้อความคนลงทะเบียนแล้ว*/
+  .register-1{
+    color: #4e4e4e;
+    font-size: 20px;
+  }
+
+  /*กรอบของดูรายละเอียด*/
+  .view-details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid #d39b00;
+    border-radius: 15px;
+    width: 270px;
+    height: 60px;
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
+  .view-details::before{
+    content: "";
+    background-color: #d39b0011;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
+  .view-details:hover::before{
+    width: 300px;
+    height: 300px;
+  }
+
+  /*ข้อความของกรอบของดูรายละเอียด*/
+  .view-details-1{
+    border: none;
+    color: #8A5B10;
+    padding: 30px 80px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    z-index: 1;
+  }
+
+  .nothaveactivity{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nothaveactivity-1{
+    font-size: 20px;
+    font-weight: 600;
+    color: #4e4e4e;
+  }
+
+
+  /*อันนี้ของกรอบเอาไว้รอclone*/
+  .card-Container{
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    padding: 0px 40px 0px 50px;
+    gap: 25px;
+  }
+
+
+  /*กรอบของข้อมูลทั้งหมดของปุ่มแบบประเมินเอาไว้กดปิด*/
+  .frame-evaluation{
+    display: none;
+    width: 100%;
+  }
+  /*กรอบของข้อมูลทั้งหมดของปุ่มแบบประเมินเอาไว้โชว์ข้อมูล*/
+  .frame-evaluation.active{
+    display: block;
+  }
+
+  /*กรอบของกรอบค้นหาถึง ปุ่มมอบหมายแบบประเมิน*/
+  .frame-search-activity-1{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /*กรอบค้นหา*/
+  .search-activity-1{
+    position: relative;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    width: 600px;
+    min-width: 250px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+  }
+
+  /*เอฟเฟ็กต์ของกรอบค้นหา*/
+  .search-activity-1::before{
+    content: "";
+    background-color: #ececec77;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของกรอบค้นหา*/
+  .search-activity-1:hover::before{
+    width: 650px;
+    height: 200px;
+  }
+
+  /*ข้อความของกรอบค้นหา*/
+  .search-activity-2{
+    outline: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: 600;
+    width: 600px;
+    color: #4e4e4e;
+    border: none;
+    background: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*รูปของกรอบค้นหา*/
+  .img-btn-activity-2{
+    margin-right: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  /*กรอบของทั้งหมด ปิดแล้ว เปิดอยู่*/
+  .framealloffon-assessment{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*กรอบของปุ่มทั้งหมด*/
+  .frameall-assessment{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 2px solid #8C8D8D;
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+  /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
+  .frameall-assessment.active{
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 50px;
+  }
+  /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
+  .frameall-assessment::before{
+    content: "";
+    background-color: #8c8d8d18;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
+  .frameall-assessment.active::before{
+    background-color: #d39b0015;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์กรอบของปุ่มทั้งหมด*/
+  .frameall-assessment:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+  /*ข้อความของปุ่มทั้งหมด*/
+  .all-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 5px;
+    color: #8C8D8D;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .all-assessment.active{
+    color: #8A5B10;
+  }
+
+  /*ตัวเลขของปุ่มทั้งหมด*/
+  .allnumber-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    color: #8C8D8D;
+    position: relative;
+    top: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ตัวเลขของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .allnumber-assessment.active{
+    color: #8A5B10;
+  }
+
+  /*กรอบของปุ่มปิดแล้ว*/
+  .frameoff-assessment{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 2px solid #8C8D8D;
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
+  .frameoff-assessment.active{
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 50px;
+  }
+
+  /*เอฟเฟ็กต์กรอบของปุ่มปิดแล้ว*/
+  .frameoff-assessment::before{
+    content: "";
+    background-color: #8c8d8d18;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
+  .frameoff-assessment.active::before{
+    background-color: #d39b0015;
+  }
+
+  /*กรอบวงลอมเอฟเฟ็กต์กรอบของปุ่มปิดแล้ว*/
+  .frameoff-assessment:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+
+  /*ข้อความของปุ่มปิดแล้ว*/
+  .off-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 5px;
+    color: #8C8D8D;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .off-assessment.active{
+    color: #8A5B10;
+  }
+
+  /*ตัวเลขของปุ่มปิดแล้ว*/
+  .offnumber-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    color: #8C8D8D;
+    position: relative;
+    top: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ตัวเลขของปุ่มปิดแล้ว เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .offnumber-assessment.active{
+    color: #8A5B10;
+  }
+
+
+  /*กรอบของปุ่มปิดแล้ว*/
+  .farmeon-assessment{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 2px solid #8C8D8D;
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอาไว้ดึงสีไปเปลี่ยนใน js*/
+  .farmeon-assessment.active{
+    border: 2px solid #d39b00;
+    background-color: #fdfbf5;
+    height: 50px;
+  }
+
+  /*เอฟเฟ็กต์กรอบของปุ่มเปิดอยู่*/
+  .farmeon-assessment::before{
+    content: "";
+    background-color: #8c8d8d18;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*เอฟเฟ็กต์กรอบของปุ่มทั้งหมด เอาไว้ดึงไปเปลี่ยนสี js*/
+  .farmeon-assessment.active::before{
+    background-color: #d39b0015;
+  }
+
+  /*กรอบวงลอมเอฟเฟ็กต์กรอบของปุ่มเปิดอยู่*/
+  .farmeon-assessment:hover::before{
+    width: 250px;
+    height: 250px;
+  }
+
+  /*ข้อความของปุ่มเปิดอยู่*/
+  .on-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 5px;
+    color: #8C8D8D;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ตัวเลขของปุ่มเปิดอยู่ เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .on-assessment.active{
+    color: #8A5B10;
+  }
+
+  /*ตัวเลขของปุ่มเปิดอยู่*/
+  .onnumber-assessment{
+    font-size: 16px;
+    font-weight: 600;
+    color: #8C8D8D;
+    position: relative;
+    top: 1px;
+    z-index: 1;
+  }
+
+  /*ตัวเลขของปุ่มเปิดอยู่ เอาไว้ดึงไปเปลี่ยนสีข้อความใน js*/
+  .onnumber-assessment.active{
+    color: #8A5B10;
+  }
+
+  /*กรอบคุมแบบประเมินทั้งหมด*/
+  .frame-grey-1{
+    background-color: #fdfbf5;
+    display: flex;
+    flex-direction: column; 
+    border-radius: 20px;
+    padding: 10px 150px 30px 150px;
+    box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
+  }
+
+  /*หัวข้อข้างบนแบบประเมิน*/
+  .sectionassessment-1{
+    font-size: 25px;
+    font-weight: 800;
+    width: 100%;
+  }
+
+  /*กรอบของแบบประเมิน*/
+  .frameinformation-assessment{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 0px 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
+  }
+
+  /*กรอบของหัวข้อแบบประเมิน กับ กรอบเปิดอยู่*/
+  .framesection-status{
+    display: flex;
+    align-items: center;
+  }
+
+  /*หัวข้อแบบประเมิน*/
+  .section-assessment{
+    font-size: 25px;
+  }
+
+  /*กรอบเปิดอยู่*/
+  .frame-status{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 0px 30px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .frame-status::before{
+    content: "";
+    background-color: #d39b0015;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  .frame-status:hover::before{
+    width: 200px;
+    height: 200px;
+  }
+
+  /*จุดวงกลมเปิดอยู่*/
+  .point-status{
+    background-color: #5381EC;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความเปิดอยู่*/
+  .message-status{
+    font-size: 16px;
+    font-weight: 600;
+    color: #5381EC;
+    padding-left: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความผู้เข้าร่วมประเมิน*/
+  .message-assessment{
+    position: relative;
+    bottom: 25px;
+    font-size: 18px;
+  }
+
+  /*ข้อความสร้างโคย*/
+  .message-created-by{
+    position: relative;
+    bottom: 40px;
+    font-size: 18px;
+  }
+
+  /*กรอบของปุ่มแบบประเมินยังเปิดอยู่*/
+  .assessment-open-1{
+    width: 100%;
+    display: block;
+    margin: auto;
+    border: none;
+    border-radius: 20px;
+    background-color: #E5E7EB;
+    cursor: not-allowed;
+  }
+
+  /*ข้อความของแบบประเมินยังเปิดอยู่*/
+  .message-assessment-open{
+    font-size: 16px;
+    font-weight: 900;
+    color: #6B7280;
+  }
+
+  /*ปุ่มของการสุ่มรางวัล*/
+  .enter-random{
+    position: relative;
+    bottom: 20px;
+    align-self: center;
+    background-color: #FCD53F;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 80px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มของการสุ่มรางวัล*/
+  .enter-random::before{
+    content: "";
+    background-color: #ffce0b;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของปุ่มของการสุ่มรางวัล*/
+  .enter-random:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+  /*รูปของปุ่มของการสุ่มรางวัล*/
+  .img-enter-random{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มของการสุ่มรางวัล*/
+  .message-enter-random{
+    color: #000;
+    font-size: 16px;
+    font-weight: 900;
+    padding-left: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history{
+    position: relative;
+    bottom: 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history::before{
+    content: "";
+    background-color: #000;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history:hover::before{
+    width: 1500px;
+    height: 1500px;
+  }
+
+  /*ข้อความของปุ่มกดดูประวัตการสุ่ม*/
+  .message-view-history{
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+

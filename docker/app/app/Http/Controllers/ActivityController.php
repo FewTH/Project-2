@@ -8,7 +8,6 @@ use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\EventRegistration;
 use App\Models\Assessment;
-use App\Models\WheelAssessment; //dwdwdwwdd
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,23 +22,86 @@ class ActivityController extends Controller
         return Event::with(['wheel.rewards.category', 'registrations'])->findOrFail($eventId);
     }
 
-     // แสดงฟอร์มสร้างกิจกรรม ของหน้าcreate_activity
-    public function create()
+
+    // ส่วนของ admin ไม่ต้องมี wrapper เพราะ route เรียกเมธอดข้างล่างตรง ๆ ได้เลย ($role จะเป็น admin ให้เอง)
+    // ส่วนของ manager
+    //แสดงหน้ารายการกิจกรรมของ manager
+    public function managerIndex()
     {
-        return view('admin.create_activity');
+        return $this->index('manager');
+    }
+
+    //แสดงฟอร์มสร้างกิจกรรมของ manager
+    public function managerCreate()
+    {
+        return $this->create('manager');
+    }
+
+    //บันทึกกิจกรรมใหม่ของ manager
+    public function managerStore(Request $request)
+    {
+        return $this->store($request, 'manager');
+    }
+
+    //แสดงหน้ารายละเอียดกิจกรรมของ manager
+    public function managerShowDetails($eventId)
+    {
+        return $this->showviewdetails($eventId, 'manager');
+    }
+
+    //แสดงฟอร์มแก้ไขกิจกรรมของ manager
+    public function managerEdit($eventId)
+    {
+        return $this->editactivity($eventId, 'manager');
+    }
+
+    //บันทึกการแก้ไขกิจกรรมของ manager
+    public function managerUpdate(Request $request, $eventId)
+    {
+        return $this->updateactivity($request, $eventId, 'manager');
+    }
+
+    //ลบกิจกรรมของ manager
+    public function managerDelete($eventId)
+    {
+        return $this->deletedata($eventId, 'manager');
+    }
+
+    //แสดงหน้าสุ่มรางวัลของ manager
+    public function managerRandomReward($eventId)
+    {
+        return $this->randomReward($eventId, 'manager');
+    }
+
+    //ปิด Register ของ manager (closeRegister ใช้ back() ได้ทั้ง admin และ manager)
+    public function managerCloseRegister($eventId)
+    {
+        return $this->closeRegister($eventId);
+    }
+
+
+    // ส่วนที่ admin กับ manager ใช้ร่วมกัน ($role จะเป็น admin หรือ manager เอาไว้บอกว่าจะใช้ view กับ redirect ไปทางไหน ถ้าไม่ส่งมาจะเป็น admin)
+    // แสดงฟอร์มสร้างกิจกรรม ของหน้าcreate_activity
+    public function create($role = 'admin')
+    {
+        return view($role . '.create_activity', [
+            'rewards' => Reward::with('category')->get(),
+            'prefix' => $role,
+            'user' => Auth::user(),
+        ]);
     }
 
     // แสดงหน้าเว็บสุ่มรางวัล หน้าrandom_reward
-    public function randomreward($eventId)
+    public function randomReward($eventId, $role = 'admin')
     {
         $event = $this->getEvent($eventId);
 
-       $nameData = $event->registrations->where('is_drawn', false)->map(fn($r) => [
+        $nameData = $event->registrations->where('is_drawn', false)->map(fn($r) => [
             'id' => $r->registration_id,
             'label' => $r->full_name,
             'percent' => 1
         ])->values();
-        
+
         $rewardData = $event->wheel
             ? $event->wheel->rewards
                 ->filter(fn($r) => ($r->pivot->quantity_selected ?? 0) > 0)->map(fn($r) => [
@@ -47,46 +109,52 @@ class ActivityController extends Controller
                 'label' => $r->name,
                 'percent' => $r->rate ?? 0,
                 'quantity' => $r->pivot->quantity_selected ?? 0
-            ])->values(): collect();
+            ])->values() : collect();
 
         // ดึงผู้โชคดีล่าสุด 6 คน พร้อมชื่อรางวัลจริงจาก reward_id ที่บันทึกไว้ตอนสุ่ม
         $latestwinners = $event->registrations()->where('is_drawn', true)->with('reward')->orderByDesc('drawn_at')->take(6)->get();
 
-        return view('admin.random_reward', [
+        return view($role . '.random_reward', [
             'event' => $event,
             'nameData' => $nameData,
             'rewardData' => $rewardData,
             'latestwinners' => $latestwinners,
+            'prefix' => $role,
+            'user' => Auth::user(),
         ]);
     }
 
 
     //แสดงหน้ารายการกิจกรรมทั้งหมด ของหน้าแบบประเมิน/กิจกรรมassessment
-    public function index()
+    public function index($role = 'admin')
     {
         $events = Event::with(['wheel.rewards', 'registrations'])->orderBy('created_at', 'desc')->get();
 
-            $now = Carbon::now();
+        $now = Carbon::now();
 
         // เช็คแต่ละกิจกรรมว่าหมดเวลาไปแล้วหรือยัง เอาไปแสดงสถานะให้ตรงกับหน้าview_details
         $events->each(function ($event) use ($now) {
             $closeat = Carbon::parse($event->register_close_at);
             $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
         });
+
         // ดึงแบบประเมินทั้งหมดกับวงล้อที่บันทึกไว้
-        $assessments = Assessment::with('WheelAssessment.wheel.rewards') //dwdwdwd
+        $assessments = Assessment::with('WheelAssessment.wheel.rewards')
             ->orderBy('created_at', 'desc')
             ->get();
-        // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php
-        return view('admin.assessment',[
-            'events'=>$events,
-            'assessments'=>$assessments,
+
+        // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php admin กับ manager
+        return view($role . '.assessment', [
+            'events'      => $events,
+            'assessments' => $assessments,
+            'prefix'      => $role,
+            'user'        => Auth::user(),
         ]);
     }
 
 
     //แสดงฟอร์มแก้ไขกิจกรรม เอาข้อมูลเดิมมาโชว์ในฟอร์ม ของหน้าedit_activity
-    public function editactivity($eventId)
+    public function editactivity($eventId, $role = 'admin')
     {
         $event = $this->getEvent($eventId);
 
@@ -98,20 +166,24 @@ class ActivityController extends Controller
 
         // ถ้าปิดไปแล้ว ไม่ให้เข้าหน้าแก้ไข ส่งกลับไปหน้ารายละเอียด
         if ($isexpired) {
-            return redirect()->route('admin.activity.detail', $event->event_id);
+            return redirect()->route($role . '.activity.detail', $event->event_id);
         }
-
 
         //ดึงของรางวัลที่เลือกไว้แล้ว เอาไปติ๊กในหน้าแก้ไขกิจกรรมอัตโนมัติ ของหน้าedit_activity
         $selectedrewards = $event->wheel
-            ? $event->wheel->rewards->pluck('pivot.quantity_selected', 'reward_id')->toArray(): [];
+            ? $event->wheel->rewards->pluck('pivot.quantity_selected', 'reward_id')->toArray() : [];
 
-        return view('admin.edit_activity',['event' => $event,'selectedrewards' => $selectedrewards,]);
+       return view($role . '.edit_activity', [
+            'event' => $event,
+            'selectedrewards' => $selectedrewards,
+            'prefix' => $role,
+            'user' => Auth::user(),
+        ]);
     }
 
 
     // บันทึกกิจกรรมใหม่ ของหน้าcreate_activity
-    public function store(Request $request)
+    public function store(Request $request, $role = 'admin')
     {
         $data = $request->validate([
             'title'               => 'required|string|max:300',
@@ -124,7 +196,7 @@ class ActivityController extends Controller
             'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
             'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
             'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
-            'max_participants.min'        => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+            'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
             'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
             'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
             'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
@@ -162,10 +234,10 @@ class ActivityController extends Controller
                 'is_active'  => 1,
                 'created_by' => Auth::id() ?? 1,
             ]);
-            
+
             // ผูกของรางวัลเข้ากับวงล้อ ของหน้าcreate_activity
             foreach ($request->input('rewards', []) as $rewardId => $item) {
-                $wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty'],]);
+                $wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty']]);
             }
 
             // บันทึกและ return Event ลง database ของหน้าcreate_activity
@@ -174,19 +246,18 @@ class ActivityController extends Controller
                 'title'             => $data['title'],
                 'register_close_at' => $registercloseat,
                 'max_participants'  => $data['max_participants'],
-                'status'            => 'open', 
+                'status'            => 'open',
                 'created_by'        => Auth::id() ?? 1,
             ]);
         });
 
         // เปลี่ยนไปหน้ารายละเอียดกิจกรรมview_detailsเมื่อทำเสร็จ ของหน้าcreate_activity
-        return redirect()->route('admin.activity.detail', $event->event_id);
+        return redirect()->route($role . '.activity.detail', $event->event_id);
     }
 
-    
 
     // บันทึกการแก้ไขข้อมูล กิจกรรม ของหน้า edit_activity
-    public function updateactivity(Request $request, $eventId)
+    public function updateactivity(Request $request, $eventId, $role = 'admin')
     {
         $event = $this->getEvent($eventId);
 
@@ -197,7 +268,7 @@ class ActivityController extends Controller
         $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
 
         if ($isexpired) {
-            return redirect()->route('admin.activity.detail', $event->event_id);
+            return redirect()->route($role . '.activity.detail', $event->event_id);
         }
 
         $data = $request->validate([
@@ -211,7 +282,7 @@ class ActivityController extends Controller
             'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
             'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
             'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
-            'max_participants.min'        => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+            'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
             'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
             'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
             'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
@@ -220,7 +291,6 @@ class ActivityController extends Controller
         // ถ้าไม่กรอกจำนวนผู้เข้าร่วมมา ให้เป็น 1 ไปต่อไป ของหน้า edit_activity
         $data['max_participants'] = $data['max_participants'] ?? 1;
 
-
         // ตรวจสอบของรางวัลฝั่ง server อีกรอบ เผื่อมีคนมาเปลี่ยนแปลงข้อมูลหน้าบ้าน ของหน้า edit_activity
         foreach ($data['rewards'] as $rewardId => $item) {
             $reward = Reward::find($rewardId);
@@ -228,25 +298,26 @@ class ActivityController extends Controller
             // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน (กัน error ตอนอ้าง $reward->name)
             if (!$reward) {
                 return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"])->withInput();
+                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"
+                ])->withInput();
             }
 
-            if ($item['qty'] > $reward->quantity_reward){
-                   return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"])->withInput();          
+            if ($item['qty'] > $reward->quantity_reward) {
+                return back()->withErrors([
+                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"
+                ])->withInput();
             }
         }
-
 
         $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
         unset($data['rewards'], $data['event_date'], $data['register_close_time']);
 
-        DB::transaction(function () use ($data, $request, $registercloseat, $event){
-            
+        DB::transaction(function () use ($data, $request, $registercloseat, $event) {
+
             $event->update([
-                'title' => $data['title'],
+                'title'             => $data['title'],
                 'register_close_at' => $registercloseat,
-                'max_participants' => $data['max_participants'],
+                'max_participants'  => $data['max_participants'],
             ]);
 
             // ลบของรางวัลเดิมก่อน แล้วผูกของรางวัลใหม่เข้าไปแทน
@@ -254,57 +325,55 @@ class ActivityController extends Controller
                 $event->wheel->rewards()->detach();
 
                 foreach ($request->input('rewards', []) as $rewardId => $item) {
-                    $event->wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty'],
-                    ]);
+                    $event->wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty']]);
                 }
             }
         });
 
-        return redirect()->route('admin.activity.detail', $event->event_id);
+        return redirect()->route($role . '.activity.detail', $event->event_id);
     }
 
 
-
-
-
-
-
     // แสดงหน้ารายละเอียดกิจกรรม ของหน้าview_details
-    public function showviewdetails($eventId)
-    {   
+    public function showviewdetails($eventId, $role = 'admin')
+    {
         $event = $this->getEvent($eventId);
 
         $now = Carbon::now();
         $closeat = Carbon::parse($event->register_close_at);
 
-
         $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
 
         $remainingseconds = $isexpired ? 0 : (int) $now->diffInSeconds($closeat);
 
-        return view('admin.view_details',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,]);
-            
+       return view($role . '.view_details', [
+            'event' => $event,
+            'remainingseconds' => $remainingseconds,
+            'isexpired' => $isexpired,
+            'prefix' => $role,
+            'user' => Auth::user(),
+        ]);
     }
-    
+
 
     // ลบกิจกรรม พร้อมข้อมูลที่เกี่ยวข้องทั้งหมดและกลับไปหน้าassessment ของหน้าview_details
-    public function deletedata($eventId)
+    public function deletedata($eventId, $role = 'admin')
     {
         $event = $this->getEvent($eventId);
 
-        DB::transaction(function () use ($event){
+        DB::transaction(function () use ($event) {
 
             $event->registrations()->delete();
 
-            if($event->wheel){
+            if ($event->wheel) {
                 $event->wheel->rewards()->detach();
                 $event->wheel->delete();
             }
-            
+
             $event->delete();
         });
-        
-        return redirect()->route('admin.assessment');
+
+        return redirect()->route($role . '.assessment');
     }
 
 
@@ -318,9 +387,10 @@ class ActivityController extends Controller
         $safeTitle = preg_replace('/[^\p{L}\p{N}_\-]/u', '_', $event->title);
         $filename = 'QRCode-' . $safeTitle . '.png';
 
-        return response(QrCode::format('png')->size(600)->generate($url))->header('Content-Type', 'image/png')->header('Content-Disposition', 'attachment; filename='. $filename .'');
+        return response(QrCode::format('png')->size(600)->generate($url))
+            ->header('Content-Type', 'image/png')
+            ->header('Content-Disposition', 'attachment; filename=' . $filename . '');
     }
-
 
 
     // ปิด Register กิจกรรม ของหน้าview_details
@@ -347,17 +417,22 @@ class ActivityController extends Controller
 
             // mark ว่ารายชื่อนี้ถูกสุ่มไปแล้ว (ทำเฉพาะตอนมี registration_id ส่งมาจริง)
             if (!empty($data['registration_id'])) {
-                EventRegistration::where('registration_id', $data['registration_id'])->where('event_id', $event->event_id)->update([
-                        'is_drawn' => 1,
-                        'drawn_at' => now(),
+                EventRegistration::where('registration_id', $data['registration_id'])
+                    ->where('event_id', $event->event_id)
+                    ->update([
+                        'is_drawn'  => 1,
+                        'drawn_at'  => now(),
                         'reward_id' => $data['reward_id'] ?? null,
                     ]);
             }
 
             // ลดจำนวนของรางวัลที่เหลือลง 1 (ทำเฉพาะตอนมี reward_id ส่งมาจริง และยังมีของเหลืออยู่)
             if (!empty($data['reward_id']) && $event->wheel) {
-                $event->wheel->rewards()->wherePivot('reward_id', $data['reward_id'])->wherePivot('quantity_selected', '>', 0)->updateExistingPivot($data['reward_id'], [
-                    'quantity_selected' => DB::raw('quantity_selected - 1'),
+                $event->wheel->rewards()
+                    ->wherePivot('reward_id', $data['reward_id'])
+                    ->wherePivot('quantity_selected', '>', 0)
+                    ->updateExistingPivot($data['reward_id'], [
+                        'quantity_selected' => DB::raw('quantity_selected - 1'),
                     ]);
             }
         });

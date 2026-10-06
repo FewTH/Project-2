@@ -5,58 +5,54 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>สุ่มของรางวัล</title>
-        <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('manager/css/style.css') }}">
         <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
     </head>
     <body>
         <!-- ชื่อผู้ใช้งาน -->
-    <div class="btn-user-wrapper">
-        <a href="{{ url('admin/profile') }}" class="btn-user">
+        <div class="btn-user-wrapper">
+        <a href="{{ url('manager/profile') }}" class="btn-user">
             @if($user?->profile_image)
             <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
             @else
-            <img src="{{ asset('admin/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+            <img src="{{ asset('manager/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
             @endif
-            <span>Admin</span>
-        </a>
-    </div>
-    <!--กรอบของเมนูปิดแท็กตรงออกจากระบบ-->
-    <div class="container-assessment">
-        <!-- โลโกมหาลัย -->
-        <div class="img-Logo">
-            <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
-    </div>
-    <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar-assessment">
-        <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard-assessment">
-            <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ด" class="btn-Dashboard-img-assessment">
-            <span>แดชบอร์ด</span>
-        </a>
-        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards-assess">
-            <img src="{{ asset('admin/img/รูปจัดการรางวัล.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img-assess">
-            <span>จัดการรางวัล</span>
-        </a>
-        <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users">
-            <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img">
-            <span>จัดการผู้ใช้</span>
-        </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img">
-            <span>จัดการวงล้อสุ่ม</span>
-        </a>
-        <a href="{{ url('admin/assessment') }}" class="btn-Assessment-assess">
-            <img src="{{ asset('admin/img/รุปแบบประเมินกิจกรรมสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-assess">
-            <span>แบบประเมิน/กิจกรรม</span>
-        </a>
-    </div>
-    <!-- ปุ่มกดออกจากระบบ -->
-    <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout">
-            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
-            <span>ออกจากระบบ</span>
+            <span>Manager</span>
         </a>
         </div>
-    </div> 
+
+        <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
+    <div class="Top_frame">
+        <div class="container-1">
+    <!-- โลโกมหาลัย -->
+    <div class="img-Logo">
+            <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    </div>
+    <!-- ปุ่มเมนู -->
+    <div class="btn-Sidebar">
+            <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+                <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
+                <span>จัดการรางวัล</span>
+            </a>
+            <a href="{{ url('manager/managespin') }}" class="btn-Random-1">
+                <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
+                <span>จัดการวงล้อสุ่ม</span>
+            </a>
+            <a href="{{ url('manager/assessment') }}" class="btn-Assessment-assess">
+                <img src="{{ asset('admin/img/รุปแบบประเมินกิจกรรมสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-assess">
+                <span>แบบประเมิน/กิจกรรม</span>
+            </a>
+        </div>
+            <!-- ปุ่มกดออกจากระบบ -->
+            <div class="btn-logout-wrapper">
+                <a href="{{ url('user/loginuser') }}" class="btn-logout">
+                    <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
+                    <span>ออกจากระบบ </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
 
     <div class="main-content-1">
         <div class="My_Profile">

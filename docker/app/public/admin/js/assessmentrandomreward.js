@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     // อ่านข้อมูลจากตัวแปรที่มีใน spinwheel.blade
-    const rewardData = window.rewardWheelData || [];
+    let rewardData = window.rewardWheelData || [];
 
     const canvas = document.getElementById('wheelrewardCanvas');
     // กำหนดรูปแบบให้เป็นแบบวงกลม
@@ -67,5 +67,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('spinassessmentBtn').addEventListener('click', function () {
         // ส่วนนี้จะเขียนต่อทีหลัง
     });
-
+    
 });

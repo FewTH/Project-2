@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แก้ไขกิจกรรม</title>
+    <link rel="stylesheet" href="{{ asset('manager/css/style.css') }}">
+    <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
+</head>
+<body>
+    <!-- ชื่อผู้ใช้งาน -->
+    <div class="btn-user-wrapper">
+    <a href="{{ url('manager/profile') }}" class="btn-user">
+        @if($user?->profile_image)
+        <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @else
+        <img src="{{ asset('manager/img/รูปuser.png') }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
+        @endif
+        <span>Manager</span>
+    </a>
+    </div>
+
+    <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
+<div class="Top_frame">
+    <div class="container-1">
+   <!-- โลโกมหาลัย -->
+   <div class="img-Logo">
+        <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+   </div>
+   <!-- ปุ่มเมนู -->
+   <div class="btn-Sidebar">
+        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+            <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
+            <span>จัดการรางวัล</span>
+        </a>
+        <a href="{{ url('manager/managespin') }}" class="btn-Random-1">
+            <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
+            <span>จัดการวงล้อสุ่ม</span>
+        </a>
+        <a href="{{ url('manager/assessment') }}" class="btn-Assessment-assess">
+            <img src="{{ asset('admin/img/รุปแบบประเมินกิจกรรมสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-assess">
+            <span>แบบประเมิน/กิจกรรม</span>
+        </a>
+    </div>
+        <!-- ปุ่มกดออกจากระบบ -->
+        <div class="btn-logout-wrapper">
+            <a href="{{ url('user/loginuser') }}" class="btn-logout">
+                <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
+                <span>ออกจากระบบ </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="main-content-1">
+    <div class="createactivity">
+        <h1>แก้ไขกิจกรรม</h1>
+    </div>
+
+    <div class="grayframeactivity">
+        <div class="framecreateactivity">
+            <img src="{{ asset('admin/img/รูปโลโกมหาลัย.png') }}" alt="รูปโลโกมหาลัย" class="img-university">
+            <div class="messagecreateactivity">
+                <p class="messagecreateactivity-1">แก้ไขกิจกรรม</p>
+            </div>
+
+            <form id="frame_blackactivity_1" action="{{ route('manager.activity.updateactivity', $event->event_id) }}" method="POST">
+                @csrf
+                @method('PUT')
+            <div class="frameblackactivity">
+                <div class="framesettings">
+                    <p class="messagesettings">ตั้งค่ากิจกรรม</p>
+                    <span class="fill-information">กรอกข้อมูลด้านล่าง ระบบจะแก้ไขให้อัตโนมัติ</span>
+                </div>
+                <label class="frameactivity-name">
+                    <div class="activity-name-1">
+                        <p class="messageactivity-name">ชื่อกิจกรรม <span class="asteriskactivity">*</span></p>
+                    </div>
+                    <input type="text" name="title" class="framepimactivity-nam" value="{{ old('title', $event->title) }}" id="frame_pim_activitynam">
+                </label>
+                @error(('title'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
+                <div class="framemessagedatetime">
+                    <p class="dateactivity">วันที่จัดกิจกรรม <span class="asteriskdateactivity">*</span></p>
+                    <p class="closingtime-Register">เวลาปิด Register <span class="asteriskdateactivity">*</span></p>
+                </div>
+                <div class="frameweardate">
+                    <input type="date" name="event_date" value="{{ old('event_date', \Carbon\Carbon::parse($event->register_close_at)->format('Y-m-d')) }}" class="framedatemonthyear" id="framedate_month_year">
+                    <input type="time" name="register_close_time" value="{{ old('register_close_time', \Carbon\Carbon::parse($event->register_close_at)->format('H:i')) }}" class="framedatemonthyear" id="time_offregister">
+                </div>
+                <div class="savesuccesschangepassword-error-1-1">
+                @error(('event_date'))
+                    <div class="savesuccesschangepassword-error-1">{{ $message }}</div>
+                @enderror
+                @error(('register_close_time'))
+                    <div class="savesuccesschangepassword-error-2">{{ $message }}</div>
+                @enderror
+                </div>  
+                <div class="framechoosereward-1">
+                    <p class="messagechoosereward">เลือกของรางวัล <span class="asteriskchoosereward">*</span></p>
+                </div>
+                @error(('rewards'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
+                @error(('rewards.*.qty'))
+                    <div class="savesuccesschangepassword-error-1-2">{{ $message }}</div>
+                @enderror
+
+                 @foreach($rewards as $reward)
+                @php
+                    $isSelected = isset($selectedrewards[$reward->reward_id]);
+                    $selectedQty = $selectedrewards[$reward->reward_id] ?? 1;
+                @endphp
+                <div class="framebtn-chooserewardall {{ $loop->index >= 8? 'btn-showmore' : '' }}">
+                    <div class="framechooserewardall">
+                        <div class="framemessage2">
+                            <p class="messagepencil">{{ $reward->name }}</p>
+                            <span class="messagestationery">{{ $reward->category->name }}</span>
+                        </div>
+                            <p class="percentpencil">{{ $reward->quantity_reward }}</p>
+                            <p class="percentpencil">{{ number_format($reward->rate, 1) }} %</p>
+                        <div class="btn-plus-delete-checkbox">
+                            <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
+                                <p class="btndelet-10">-</p>
+                            </button>
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" max="{{ $reward->quantity_reward }}" {{ $isSelected ? '' : 'disabled' }} >
+                            <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $isSelected ? 'checked' : '' }}>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+                    <button type="button" class="showmore" id="show_more">
+                        <p class="messageshowmore" >แสดงเพิ่มเติม</p>
+                    </button>
+                    <button type="button" class="showmore-1" id="show_less" >
+                        <p class="messageshowmore">แสดงน้อยลง</p>
+                    </button>
+
+                <div class="frameandquantity">
+                    <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
+                    <input type="number" name="max_participants"  value="{{ old('max_participants', $event->max_participants) }}" class="framenumberquantity" id="frame_number_quantity">
+                </div>
+                @error(('max_participants'))
+                 <div class="savesuccesschangepassword-error-1-2-3">{{ $message }}</div>
+                @enderror
+                <button type="submit" id="submit_buildandQR" class="submitbuildandQR">
+                    <img src="{{ asset('admin/img/รูปแก้ไขข้อมูลของหน้าแก้ไขกิจกรรม.png') }}" alt="รูปแก้ไขข้อมูลของหน้าแก้ไขกิจกรรม" class="buildandQR">
+                    <p class="messagebuildandQR">แก้ไขกิจกรรม</p>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
+</body>
+</html>

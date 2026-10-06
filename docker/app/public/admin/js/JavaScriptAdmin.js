@@ -968,7 +968,8 @@ if (btnstartRandom) {
                     rewardIdToSend = rewardresult.id;
                 }
 
-                fetch(`/admin/random-reward/${eventId}/save-result`, {
+                const roleprefix = window.location.pathname.split('/')[1];
+                fetch(`/${roleprefix}/random-reward/${eventId}/save-result`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
