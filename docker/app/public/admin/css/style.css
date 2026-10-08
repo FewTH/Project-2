@@ -9107,7 +9107,9 @@
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   display: flex;
   margin: 10px auto;
+  gap: 20px;
 }
+/* พื้นหลังอันหลักของวงล้อรางวัล */
 .wheel-reward-box{
   background-color: #ff00d00c;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -9119,6 +9121,80 @@
   height: 650px;
   display: flex;
   flex-direction: column;
+}
+/* พื้นหลังอันหลักของวงล้อรายชื่อ */
+.respondent-box{
+  display: flex;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  width: 700px;
+  height: 650px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+/* ส่วนบนของบ็อกวงล้อรายชื่อ */
+.background-respondent-header{
+  display: flex;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.17);
+  background-color: #f5cc53;
+  color: #6d4300;
+  padding: 0px 10px;
+  font-weight: bold;
+  font-size: large;
+  gap: 5px;
+}
+/* จัดระเบียบข้อความส่วนบนของวงล้อรายชื่อ */
+.logo-topic-respondent{
+  display: flex;
+  margin-top: 5px;
+}
+/* จัดตำแหน่งข้อความจำนวนรายชื่อในวงล้อ */
+.num-respondent-box{
+  margin-left: auto;
+  padding: 20px 10px;
+  font-size: medium;
+  font-weight: 500;
+}
+/* แต่งปุ่มเปิด-ปิดวงล้อรายชื่อ */
+.toggle-main-namebox{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+  color: #6d4300;
+}
+/* เข็มแหลมๆบนวงล้อรายชื่อ */
+.respondent-wheel-pointer{
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 24px solid #f5cc53;
+  z-index: 100;
+}
+/* จัดระเบียบวงล้อรายชื่อ */
+.respondent-main-wheel{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+/* อนิเมชันตอนหมุนวงล้อรายชื่อ */
+#wheelNameCanvas{
+  transition: tranform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+
+/* อนิเมชันตอนหมุนวงล้อรางวัล */
+#wheelrewardCanvas{
+  transition: tranform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 /* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล */
 .wheel-assessment-rewards{

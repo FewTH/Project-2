@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('admin/css/style.css')}}">
     <title>สุ่มรางวัลแบบประเมิน</title>
 </head>
@@ -35,11 +36,12 @@
 
     {{-- พื้นหลังของวงล้อทั้งหมด --}}
     <div class="all-wheel-background">
-        {{-- ส่วนวงล้อรายชื่อของคนที่ทำแบบประเมิน --}}
+
+    {{-- ส่วนวงล้อรายชื่อของคนที่ทำแบบประเมิน --}}
     <div class="respondent-box">
         <div class="background-respondent-header">
             <div class="logo-topic-respondent">
-                <img src="{{asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของวงล้อรายชื่อ">
+                <img src="{{asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของวงล้อรายชื่อ" width="50" height="50">
                 <p class="text-res-header">วงล้อสุ่มรายชื่อ</p>
             </div>
             <div class="num-respondent-box">
@@ -49,7 +51,7 @@
             </div>
         </div>
         {{-- ส่วนของปุ่มเปิด/ปิดวงล้อรายชื่อ --}}
-        <div class="toggle-main-box">
+        <div class="toggle-main-namebox">
             <label class="toggle-switch">
                 <input type="checkbox" id="toggle-wheel" checked>
                 <span class="toggle-slider"></span>
@@ -165,9 +167,17 @@
                 'quantity' => $r->pivot->quantity_selected,
             ];
         });
+        $nameWheelDataArr = $respondents->map(function ($r){
+            return [
+                'id' => $r->respondent_id,
+                'label' => $r->full_name,
+            ];
+        });
     @endphp
     <script>
         window.rewardWheelData = @json($rewardWheelDataArr);
+        window.nameWheelData = @json($nameWheelDataArr);
+        window.assessmentId = {{ $assessment->assessment_id }};
     </script>
     <script src="{{ asset('admin/js/assessmentrandomreward.js') }}"></script>
 </body>

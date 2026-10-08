@@ -33,6 +33,9 @@
         Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
             ->name('admin.assessment.random');
             
+        Route::post('/assessment/{id}/spin', [AssessmentController::class, 'spin'])
+            ->name('admin.assessment.spin');
+            
         Route::get('/profile', [ProfileController::class, 'adminProfile']);
         Route::post('/profile', [ProfileController::class, 'uploadimg']);
 
