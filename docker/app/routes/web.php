@@ -105,9 +105,9 @@
         Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('admin.activity.qrcode.download');
 
 
-        Route::get('/button_senditgmail', function () {
-            return view('admin.button_senditgmail');
-        });
+        Route::get('/button_senditgmail/{assessment_id}', [SpinresultController::class, 'senditgmail'])->name('admin.senditgmail');
+        Route::post('/senditgmail/resend/{id}', [SpinresultController::class, 'resendone'])->name('admin.senditgmail.resendone');
+        Route::post('/senditgmail/{assessment_id}/resend-all-failed', [SpinresultController::class, 'resendallfailed'])->name('admin.senditgmail.resendallfailed');
     });
 
     // ส่วนของ User (ผู้ใช้งานทั่วไป)
@@ -189,9 +189,7 @@
 
 
     //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
-   if (app()->environment('local')) {
-    Route::get('/preview-email', function () {
-        $spinresult = \App\Models\Spinresult::first();
-        return new \App\Mail\RewardNotification($spinresult);
-    });
-}
+   Route::get('/preview-email', function () {
+    $spinresult = \App\Models\Spinresult::with('reward')->first();
+    return new \App\Mail\RewardNotification($spinresult);
+});

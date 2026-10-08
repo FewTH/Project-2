@@ -2,12 +2,11 @@
 
 namespace App\Mail;
 
+use App\Models\Spinresult;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class RewardNotification extends Mailable
 {
@@ -17,6 +16,9 @@ class RewardNotification extends Mailable
 
     public function build()
     {
-        return $this->subject('คุณได้รับรางวัล')->view('email.reward-notification')->with(['spinresult' => $this->spinresult])->attach(storage_path('app/public/qrcodes/' . $this->spinresult->qr_code . '.png'), ['as' => 'qrcode.png','mime' => 'image/png', ]);
+        //สร้างรูป QR จากค่า qr_code ตอนกดส่ง
+        $qrimage = (string) QrCode::format('png')->size(300)->generate($this->spinresult->qr_code);
+
+        return $this->subject('คุณได้รับรางวัล')->view('email.reward-notification')->with(['spinresult' => $this->spinresult,'qrimage' => $qrimage,]);
     }
 }

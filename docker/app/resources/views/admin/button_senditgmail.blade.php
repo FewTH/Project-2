@@ -92,74 +92,68 @@
                     <p class="messagelistnamerecipientreward">ประวัตการส่ง QrCode</p>
                 </div>
                     <hr class="linemessagelistnamerecipientreward">
-                <div class="framemessagelistnamerecipientreward-1">
+
+                @foreach($spinresults as $index => $item)
+                <div class="framemessagelistnamerecipientreward-1" data-status="{{ $item->email_status }}">
                     <div class="framecirclenumberlistnamerecipientreward">
-                        <p class="circlenumberlistnamerecipientreward">1</p>
+                        <p class="circlenumberlistnamerecipientreward">{{ $index + 1 }}</p>
                     </div>
                     <div class="framelistnamegmaildateassessment">
-                        <span class="messagelistnamegmaildateassessment">กิตติภพ รัตนวิจิตร</span>
-                        <span class="messagegmaildateassessment">kittiphop.rat@gmail.com</span>
-                        <span class="messagedateassessment">ประเมินเมื่อ 20:15:03 น. 20 พ.ค. 2569 </span>
+                        <span class="messagelistnamegmaildateassessment">{{ $item->winner_name }}</span>
+                        <span class="messagegmaildateassessment">{{ $item->winner_email }}</span>
+                        <span class="messagedateassessment">ประเมินเมื่อ {{ $item->created_at->format('H:i:s') }} น. {{ $item->created_at->format('d/m/Y') }} </span>
                     </div>
+                    @if($item->email_status === 'sent')
                     <div class="framesenttogmail">
                         <img src="{{ asset('admin/img/รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล.png') }}" alt="รูปติกถูกของกรอบส่งแล้วหน้าส่งอีเมลให้ผู้ได้รับรางวัล">
                         <p class="messagesenttogmail">ส่งแล้ว</p>
                     </div>
+                    @elseif($item->email_status === 'failed')
+                    <div class="frameerrorgmail">
+                        <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="">
+                        <p class="messageerrorgmail">ล้มเหลว</p>
+                    </div>
+                    <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-Resend">
+                            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend">
+                            <p class="messagebtn-Resend">ส่งใหม่</p>
+                        </button>
+                    </form>
+                    @endif
                 </div>   
                 <hr class="linemessagelistnamerecipientreward-1">
-            
-
-            <div class="framemessagelistnamerecipientreward-1">
-                <div class="framecirclenumberlistnamerecipientreward">
-                    <p class="circlenumberlistnamerecipientreward">2</p>
-                </div>
-            <div class="framelistnamegmaildateassessment">
-                    <span class="messagelistnamegmaildateassessment">จิรภัทร อัศวเดชากุล</span>
-                    <span class="messagegmaildateassessment">jiraphat.asawa@gmail.com</span>
-                    <span class="messagedateassessment">ประเมินเมื่อ 13:32:46 น. 21 พ.ค. 2569 </span>
-                </div>
-                <div class="frameerrorgmail">
-                    <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="รูปแจ้งเตือนส่ง email ล้มเหลว">
-                    <p class="messageerrorgmail">ล้มเหลว</p>
-                </div>
-                <button type="button" id="btn_Resend" class="btn-Resend">
-                <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่" class="imgbtn-Resend">
-                    <p class="messagebtn-Resend">ส่งใหม่</p>
-                </button>
-            </div>   
-            <hr class="linemessagelistnamerecipientreward-1">
-        </div>
-    
+                @endforeach
+            </div>
 
         <div class="framelistthatfailed">
             <p class="messagelistnamerecipientreward">รายการที่ล้มเหลว</p>
             <hr class="linemessagelistnamerecipientreward">
+
+            @forelse($failedlist as $item)
             <div class="framelistnamethatfailed">
                 <p class="pointlistnamethatfailed"></p>
-                <span class="messagelistnamethatfailed">จิรภัทร อัศวเดชากุล</span>
-                <button type="button" id="btn_Resend_1" class="btn-Resend1">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่" class="imgbtn-Resend1">
+                <span class="messagelistnamethatfailed">{{ $item->winner_name }}</span>
+            <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn-Resend1">
+                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
                     <p class="messagebtn-Resend1">ส่งใหม่</p>
                 </button>
+            </form>
             </div>
             <hr class="linemessagelistnamerecipientreward-2">
+            @empty
+                <p class="messagelistnamethatfailed">ไม่มีรายการที่ส่งล้มเหลว</p>
+            @endforelse
 
-
-            <div class="framelistnamethatfailed">
-                <p class="pointlistnamethatfailed"></p>
-                <span class="messagelistnamethatfailed">กัญญาวีร์ อนันต์โชคชัย</span>
-                <button type="button" id="btn_Resend_1" class="btn-Resend1">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่">
-                    <p class="messagebtn-Resend1">ส่งใหม่</p>
+            <form action="{{ route('admin.senditgmail.resendallfailed', $assessment->assessment_id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn-resendallthatfailed">
+                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
+                    <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
                 </button>
-            </div>
-            <hr class="linemessagelistnamerecipientreward-2">
-
-            <button type="button" class="btn-resendallthatfailed" id="btn_resendallthatfailed">
-                <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="รูปของปุ่มส่งใหม่" class="imgbtn-Resend1">
-                <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
-            </button>
-        </div>
+            </form>
     </div>
 
 

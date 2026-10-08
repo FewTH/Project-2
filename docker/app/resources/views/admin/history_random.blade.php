@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="btn-senditgmail">
-                    <a href="{{ url('admin/button_senditgmail' ) }}" class="btn-senditgmail-1">
+                    <a href="{{ route('admin.senditgmail', $assessment->assessment_id) }}" class="btn-senditgmail-1">
                         <img src="{{ asset('admin/img/รูปปุ่มกดเปลี่ยนหน้าของดูgmailที่จะส่ง.png') }}" alt="รูปปุ่มกดเปลี่ยนหน้าของดูgmailที่จะส่ง" class="img-btn-senditgmail">
                         <p class="messagebtn-senditgmail">ส่งอีเมลให้ผู้ได้รางวัล</p>
                     </a>

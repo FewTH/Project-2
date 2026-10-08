@@ -1347,4 +1347,16 @@ if(framesearchsenditgmail){
 
 
 
+
+
+
+//ส่วนของ button_senditgmail.blade.php
+
+
+
+
+
+
+
+
 });

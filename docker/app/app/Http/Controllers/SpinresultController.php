@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Spinresult;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
+use App\Mail\RewardNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 class SpinresultController extends Controller
@@ -58,7 +60,7 @@ class SpinresultController extends Controller
         //กรองเฉพาะรายการที่ส่งล้มเหลว เอาไว้โชว์ในกล่องรายการที่ล้มเหลว
         $failedlist = $spinresults->where('email_status', 'failed');
 
-        return view('admin.senditgmail',[
+        return view('admin.button_senditgmail',[
             'spinresults' => $spinresults,
             'assessment' => $assessment,
             'failedlist' => $failedlist,
