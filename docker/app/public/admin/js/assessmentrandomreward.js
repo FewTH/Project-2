@@ -129,11 +129,14 @@ document.addEventListener('DOMContentLoaded', function () {
         nameCtx.fill();
     }
     
-    document.getElementById('toggle-wheel').addEventListener('change',function(){
+    document.getElementById('toggle-name-wheel').addEventListener('change',function(){
         const spinBtn = document.getElementById('spinassessmentBtn');
         spinBtn.disabled = !this.checked;
     });
-
+    document.getElementById('toggle-reward-wheel').addEventListener('change',function(){
+        const spinBtn = document.getElementById('spinassessmentBtn');
+        spinBtn.disabled = !this.checked;
+    });
     drawWheel();
     drawNameWheel();
 
@@ -170,8 +173,13 @@ document.addEventListener('DOMContentLoaded', function () {
             nameCanvas.style.transform = `rotate(${nameRotation}deg)`;
 
             setTimeout(()=>{
-                rewardData = remanining_rewards;
-                nameData = remanining_respondents;
+
+                document.getElementById('spinResultName').textContent = data.winner_name;
+                document.getElementById('spinResultReward').textContent = data.winner_reward_label;
+                document.getElementById('spinResultPopup').style.display = 'flex';
+                
+                rewardData = data.remaining_rewards;
+                nameData = data.remaining_respondents;
                 
                 [canvas, nameCanvas].forEach(c =>{
                     c.style.transition = 'none';
@@ -186,9 +194,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 [canvas, nameCanvas].forEach(c=>{
                     c.style.transition='transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
                 });
-                document.getElementById('spinResultName').textContent=data.winner_name;
-                document.getElementById('spinResultReward').textContent=data.winner_reward_label;
-                document.getElementById('spinResultPopup').style.display = 'flex';
 
                 btn.disabled=rewardData.length === 0 || nameData.length === 0;
             },4000);
@@ -199,6 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     document.getElementById('closeSpinResultBTN').addEventListener('click', function () {
-        document.getElementById('SpinResultPopup').style.display='none';
+        document.getElementById('spinResultPopup').style.display='none';
     });
 });

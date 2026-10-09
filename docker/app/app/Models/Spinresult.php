@@ -14,6 +14,7 @@ class Spinresult extends Model
         'reward_id',
         'qr_code',
         'winner_name',
+        'winner_email',
         'receive_status',
         'receive_deadline',
         'received_at',

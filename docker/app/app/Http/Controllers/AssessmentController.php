@@ -100,6 +100,7 @@ class AssessmentController extends Controller
         return Spinresult::create([
             'reward_id' => $winnerReward->reward_id,
             'assessment_id'=> $assessment->assessment_id,
+            'qr_code' => (string) Str::uuid(), //เป็นการสร้าง qr_codeแบบจำลองไว้ก่อน
             'winner_name'=> $winnerRespondent->full_name,
             'winner_email'=> $winnerRespondent->email,
             'receive_status' => 'not-received',
@@ -117,10 +118,10 @@ class AssessmentController extends Controller
         'quantity_selected' => $r->pivot->quantity_selected, 
     ])->values();
     // ****
-    $remainingRespondents = AssessmentRespondent::where('assessment_id'->$id)
+    $remainingRespondents = AssessmentRespondent::where('assessment_id', $assessment->assessment_id)
         ->where('is_drawn',0)
         ->get()
-        ->map(fn($r) =>['id'=>$r->respondent_id,'label'=>$r->full_name])
+        ->map(fn($r) => ['id' => $r->respondent_id,'label' => $r->full_name])
         ->values();
     
     return response()->json([

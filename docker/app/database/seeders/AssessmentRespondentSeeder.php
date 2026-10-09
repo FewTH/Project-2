@@ -13,10 +13,10 @@ class AssessmentRespondentSeeder extends Seeder
      */
     public function run(): void
     {
-        $names = ['Ronaldo Cr7','Leo Messi','Eden Hazard','Ishow Speed'];
+        $names = ['Ronaldo Cr6.5','Leo MessitheGoaT','Eden HazardTheGoaT2','Ishow SpeedNooob','Carlos Baleba','Mykhylo Mudryk','Roberto Carlos','Franchesko Totti'];
         foreach ($names as $name) {
             AssessmentRespondent::create([
-                'assessment_id' => 1,
+                'assessment_id' => 3,
                 'full_name' => $name,
                 'email' => null,
             ]);

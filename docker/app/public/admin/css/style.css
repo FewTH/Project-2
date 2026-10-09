@@ -9205,13 +9205,13 @@
 }
 /* อนิเมชันตอนหมุนวงล้อรายชื่อ */
 #wheelNameCanvas{
-  transition: tranform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 
 
 /* อนิเมชันตอนหมุนวงล้อรางวัล */
 #wheelrewardCanvas{
-  transition: tranform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 /* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล */
 .wheel-assessment-rewards{
@@ -9331,4 +9331,23 @@
 }
 .toggle-switch input:checked + .toggle-slider::before{
   transform: translateX(40px);
+}
+/* ป็อปอัป */
+.spin-result-popup{
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spin-result-box{
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  min-width: 300px;
 }

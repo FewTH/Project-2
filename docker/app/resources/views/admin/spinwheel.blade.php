@@ -53,7 +53,7 @@
         {{-- ส่วนของปุ่มเปิด/ปิดวงล้อรายชื่อ --}}
         <div class="toggle-main-namebox">
             <label class="toggle-switch">
-                <input type="checkbox" id="toggle-wheel" checked>
+                <input type="checkbox" id="toggle-name-wheel" checked>
                 <span class="toggle-slider"></span>
             </label>
             <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
@@ -82,7 +82,7 @@
         {{-- แสดงวงล้อที่ผูกกับแบบประเมิน --}}
         <div class="toggle-main-box">
             <label class="toggle-switch">
-                <input type="checkbox" id="toggle-wheel" checked>
+                <input type="checkbox" id="toggle-reward-wheel" checked>
                 <span class="toggle-slider"></span>
             </label>
             <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
@@ -100,10 +100,11 @@
     </div>
     </div>
     {{-- ส่วนของpopup ตอนที่สุ่มได้รางวัลแล้วจะโชว์ขึ้นมา --}}
-    <div class="spin-result-popup" id="SpinResultPopup" style="display: none;">
+    <div class="spin-result-popup" id="spinResultPopup" style="display: none;">
         <div class="spin-result-box">
             <h2 class="text-congrat">ยินดีด้วย!!</h2>
             <p class="spin-result-name" id="spinResultName"></p>
+            <p>ได้รับรางวัล: <span id="spinResultReward" style="color:#ec4899; font-weight:bold;"></span></p>
             <button type="button" class="congrat-btn" id="closeSpinResultBTN">ตกลง</button>
         </div>
     </div>
@@ -159,14 +160,16 @@
     </div> 
 
     @php
-        $rewardWheelDataArr = $wheel->rewards->map(function ($r){
+        $rewardWheelDataArr = $wheel->rewards
+            ->filter(fn($r) => $r->pivot->quantity_selected > 0)
+            ->map(function($r){
             return [
                 'id' => $r->reward_id,
                 'label' => $r->name,
                 'weight' => $r->rate*$r->pivot->quantity_selected,
                 'quantity' => $r->pivot->quantity_selected,
             ];
-        });
+        })->values();
         $nameWheelDataArr = $respondents->map(function ($r){
             return [
                 'id' => $r->respondent_id,
