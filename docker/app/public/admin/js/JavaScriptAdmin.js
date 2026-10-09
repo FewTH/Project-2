@@ -1351,8 +1351,40 @@ if(framesearchsenditgmail){
 
 
 //ส่วนของ button_senditgmail.blade.php
+function updatenumberstatussendemail(){
+    const numberallbuttonsenditgmail = document.getElementById('numberallbutton_senditgmail');
+    if (!numberallbuttonsenditgmail){
+        return;
+    }
 
 
+    const framemessagelistnamerecipientreward1 = document.querySelectorAll('.framemessagelistnamerecipientreward-1');
+
+    let allemail = 0;
+    let sentemail = 0;
+    let failedemail = 0;
+
+    for (let i = 0; i < framemessagelistnamerecipientreward1.length; i++){
+        const framemessagelistnamerecipientreward2 = framemessagelistnamerecipientreward1[i];
+        const framemessagelistnamerecipientreward3 = framemessagelistnamerecipientreward2.dataset.status;
+
+        allemail++;
+
+        if(framemessagelistnamerecipientreward3 === 'sent'){
+            sentemail++;
+        }else if (framemessagelistnamerecipientreward3 === 'failed'){
+            failedemail++;
+        }
+    }    
+
+
+    numberallbuttonsenditgmail.textContent = allemail;
+    const numbersentbuttonsenditgmail = document.getElementById('numbersentbutton_senditgmail');
+    numbersentbuttonsenditgmail.textContent = sentemail;
+    const numberdeliveryfailedbuttonsenditgmail = document.getElementById('numberdeliveryfailedbutton_senditgmail');
+    numberdeliveryfailedbuttonsenditgmail.textContent = failedemail;
+}
+updatenumberstatussendemail();
 
 
 

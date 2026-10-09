@@ -63,7 +63,7 @@ class AssessmentController extends Controller
         }
 
         // ไว้เช็ครายชื่อที่ยังเหลืออยู่
-        $availableRespondents = AssessRespondent::where('assessment_id',$id)
+        $availableRespondents = AssessmentRespondent::where('assessment_id',$id)
             ->where('is_drawn',0)
             ->get();
         if ($availableRespondents->isEmpty()){
@@ -75,15 +75,15 @@ class AssessmentController extends Controller
         $cumulative = 0;
         $winnerReward = null;
         foreach ($availableRewards as $reward){
-            $cumulative += $reward->rate**$reward->pivot->quantity_selected;
+            $cumulative += $reward->rate * $reward->pivot->quantity_selected;
             if($randomPoint <= $cumulative){
                 $winnerReward = $reward;
-                back;
+                break;
             }
         }
         $winnerReward = $winnerReward ?? $availableRewards->last();
         // อันนี้จะสุ่มรายชื่อผู้ทำแบบประเมินนั้นๆ
-        $winnerRespondent = $winnerRespondent ->random();
+        $winnerRespondent = $availableRespondents->random();
         
         $spinResult = DB::transaction(function () use ($wheel,$winnerReward,$winnerRespondent,$assessment){
             // อันนี้จะเป็นส่วนที่คอยลดจำนวนรางวัลในวงล้อทุกครั้งที่มีการกดสุ่ม
@@ -117,7 +117,7 @@ class AssessmentController extends Controller
         'quantity_selected' => $r->pivot->quantity_selected, 
     ])->values();
     // ****
-    $remainingRespondents = AssessmentRespondent::where('assessment_id'->$assessment_id)
+    $remainingRespondents = AssessmentRespondent::where('assessment_id'->$id)
         ->where('is_drawn',0)
         ->get()
         ->map(fn($r) =>['id'=>$r->respondent_id,'label'=>$r->full_name])

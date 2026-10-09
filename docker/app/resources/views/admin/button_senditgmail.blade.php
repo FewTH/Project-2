@@ -63,10 +63,13 @@
         <h1>ส่งอีเมลให้ผู้ได้รับรางวัล</h1>
     </div>
     <div class="sendallemails">
-        <button type="button" class="btn-sendallemails1" id="btn_sendallemails1">
+        <form action="{{ route('admin.senditgmail.sendall', $assessment->assessment_id) }}" method="POST">
+        @csrf
+        <button type="submit" class="btn-sendallemails1" id="btn_sendallemails1">
             <img src="{{ asset('admin/img/รูปของปุ่มส่งอีเมลทั้งหมด.png') }}" alt="รูปของปุ่มส่งอีเมลทั้งหมด" class="btn-imgsendallemails1">
             <p class="sendallemails1">ส่งอีเมลทั้งหมด</p>
         </button>
+        </form>
     </div>
 </div>
 
@@ -110,7 +113,7 @@
                     </div>
                     @elseif($item->email_status === 'failed')
                     <div class="frameerrorgmail">
-                        <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="">
+                        <img src="{{ asset('admin/img/รูปแจ้งเตือนส่ง email ล้มเหลว.png') }}" alt="/รูปแจ้งเตือนส่ง email ล้มเหลว">
                         <p class="messageerrorgmail">ล้มเหลว</p>
                     </div>
                     <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST">
@@ -120,6 +123,10 @@
                             <p class="messagebtn-Resend">ส่งใหม่</p>
                         </button>
                     </form>
+                    @else
+                    <div class="frameerrorgmail-1">
+                        <p class="messageerrorgmail-1">ยังไม่ได้ส่ง</p>
+                    </div>
                     @endif
                 </div>   
                 <hr class="linemessagelistnamerecipientreward-1">
@@ -156,15 +163,7 @@
             </form>
     </div>
 
-
-    
-
-
-
-    
-
-
-
+    </div>
 </div>
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
 </body>

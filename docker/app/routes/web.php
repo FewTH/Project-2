@@ -108,6 +108,16 @@
         Route::get('/button_senditgmail/{assessment_id}', [SpinresultController::class, 'senditgmail'])->name('admin.senditgmail');
         Route::post('/senditgmail/resend/{id}', [SpinresultController::class, 'resendone'])->name('admin.senditgmail.resendone');
         Route::post('/senditgmail/{assessment_id}/resend-all-failed', [SpinresultController::class, 'resendallfailed'])->name('admin.senditgmail.resendallfailed');
+        Route::post('/senditgmail/{assessment_id}/send-all', [SpinresultController::class, 'sendall'])->name('admin.senditgmail.sendall');
+
+
+        
+
+            //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
+        Route::get('/preview-email', function () {
+            $spinresult = \App\Models\Spinresult::with('reward')->first();
+            return new \App\Mail\RewardNotification($spinresult);
+        });
     });
 
     // ส่วนของ User (ผู้ใช้งานทั่วไป)
@@ -186,10 +196,3 @@
             return view('manager.button_senditgmail');
         });
     });
-
-
-    //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
-   Route::get('/preview-email', function () {
-    $spinresult = \App\Models\Spinresult::with('reward')->first();
-    return new \App\Mail\RewardNotification($spinresult);
-});

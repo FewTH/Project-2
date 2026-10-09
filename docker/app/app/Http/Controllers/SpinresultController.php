@@ -70,13 +70,19 @@ class SpinresultController extends Controller
     //ส่งอีเมลใหม่ทีละรายการ (ปุ่ม "ส่งใหม่")
     public function resendone(Request $request, $id)
     {
-        $spinresults = Spinresult::findOrFail($id);
+        $spinresults = Spinresult::with('reward')->findOrFail($id);
 
-        //ตรงนี้จะใส่ logic ส่งอีเมลจริงทีหลัง ตอนนี้ขอจำลองว่าส่งสำเร็จไปก่อน
-        $spinresults->update([
-            'email_status' => 'sent',
-            'email_sent_at' => now(),
-        ]);
+        try {
+            Mail::to($spinresults->winner_email)->send(new RewardNotification($spinresults));
+
+            $spinresults->update([
+                'email_status' => 'sent',
+                'email_sent_at' => now(),
+            ]);
+        } catch (\Exception $e) {
+            $spinresults->update(['email_status' => 'failed']);
+            \Log::error('ส่งอีเมลล้มเหลว: ' . $spinresults->winner_email . ' - ' . $e->getMessage());
+        }
 
         return back();
     }
@@ -84,14 +90,47 @@ class SpinresultController extends Controller
     //ส่งอีเมลทั้งหมดที่ล้มเหลวอีกครั้ง (ปุ่ม "ส่งใหม่ทั้งหมดที่ล้มเหลว")
     public function resendallfailed(Request $request, $assessment_id)
     {
-        $failedlist = Spinresult::where('assessment_id', $assessment_id)->where('email_status', 'failed')->get();
+        $failedlist = Spinresult::with('reward')
+            ->where('assessment_id', $assessment_id)
+            ->where('email_status', 'failed')
+            ->get();
 
         foreach ($failedlist as $item) {
-            //ตรงนี้จะใส่ logic ส่งอีเมลจริงทีหลัง ตอนนี้ขอจำลองว่าส่งสำเร็จไปก่อน
-            $item->update([
-                'email_status' => 'sent',
-                'email_sent_at' => now(),
-            ]);
+            try {
+                Mail::to($item->winner_email)->send(new RewardNotification($item));
+
+                $item->update([
+                    'email_status' => 'sent',
+                    'email_sent_at' => now(),
+                ]);
+            } catch (\Exception $e) {
+                \Log::error('ส่งอีเมลล้มเหลว: ' . $item->winner_email . ' - ' . $e->getMessage());
+            }
+        }
+
+        return back();
+    }
+
+    //ส่งอีเมลให้ทุกคนที่ยังไม่ได้ส่ง (ปุ่ม "ส่งอีเมลทั้งหมด")
+    public function sendall(Request $request, $assessment_id)
+    {
+        $pendinglist = Spinresult::with('reward')
+            ->where('assessment_id', $assessment_id)
+            ->where('email_status', 'pending')
+            ->get();
+
+        foreach ($pendinglist as $item) {
+            try {
+                Mail::to($item->winner_email)->send(new RewardNotification($item));
+
+                $item->update([
+                    'email_status' => 'sent',
+                    'email_sent_at' => now(),
+                ]);
+            } catch (\Exception $e) {
+                $item->update(['email_status' => 'failed']);
+                \Log::error('ส่งอีเมลล้มเหลว: ' . $item->winner_email . ' - ' . $e->getMessage());
+            }
         }
 
         return back();
