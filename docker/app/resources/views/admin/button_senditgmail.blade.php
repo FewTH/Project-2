@@ -141,7 +141,7 @@
             <div class="framelistnamethatfailed">
                 <p class="pointlistnamethatfailed"></p>
                 <span class="messagelistnamethatfailed">{{ $item->winner_name }}</span>
-            <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST">
+            <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST" class="btn-Resend0">
                 @csrf
                 <button type="submit" class="btn-Resend1">
                     <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">

@@ -5505,10 +5505,12 @@
     color: #4e4e4e;
   }
 
-  
+  .btn-Resend0{
+    margin-left: auto;
+  }
+
   /*ปุ่มส่งใหม่*/
   .btn-Resend1{
-    margin-left: auto;
     display: flex;
     align-items: center;
     padding: 0px 20px;

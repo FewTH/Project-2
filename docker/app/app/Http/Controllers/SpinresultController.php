@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Mail\RewardNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SpinresultController extends Controller
 {
@@ -39,11 +40,7 @@ class SpinresultController extends Controller
     {
         //หาแถวผลการสุ่มที่จะอัพเดทแล้วให้มันบันทึกสถานะใหม่ลงไป
         $spinresults = Spinresult::findOrFail($id);
-        $spinresults->update([
-            'receive_status' => 'received',
-            'received_at' => now(),
-
-        ]);
+        $spinresults->update(['receive_status' => 'received','received_at' => now(),]);
 
         return back();
     }
@@ -60,29 +57,60 @@ class SpinresultController extends Controller
         //กรองเฉพาะรายการที่ส่งล้มเหลว เอาไว้โชว์ในกล่องรายการที่ล้มเหลว
         $failedlist = $spinresults->where('email_status', 'failed');
 
-        return view('admin.button_senditgmail',[
-            'spinresults' => $spinresults,
-            'assessment' => $assessment,
-            'failedlist' => $failedlist,
-        ]);
+        return view('admin.button_senditgmail', ['spinresults' => $spinresults,'assessment' => $assessment,'failedlist' => $failedlist,]);
     }
-    
+
+
+    //ส่วนของการส่งอีเมล
+
+    //เช็คว่าอีเมลนี้ส่งได้ไหม ถ้าส่งได้ return true ถ้าส่งไม่ได้ return false
+    private function isEmailUsable($email)
+    {
+        //ถ้าอีเมลว่างก็ส่งไม่ได้
+        if ($email == '') {
+            return false;
+        }
+
+        //เช็ครูปแบบอีเมลกับเช็คว่าโดเมนหลัง @ มีอยู่จริงไหม (เช็คชื่อหน้า @ ไม่ได้)
+        $check = Validator::make(['email' => $email],['email' => 'email:rfc,dns']);
+
+        if ($check->fails()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    //ส่งอีเมลให้ผู้ชนะ 1 คน แล้วบันทึกสถานะลง database (sent หรือ failed)
+    private function sendReward($item)
+    {
+        //ตัดช่องว่างหน้าหลังอีเมลออกก่อน
+        $email = trim($item->winner_email);
+
+        //ถ้าอีเมลส่งไม่ได้ให้ขึ้นล้มเหลวเลย ไม่ต้องลองส่ง
+        if (!$this->isEmailUsable($email)) {
+            $item->update(['email_status' => 'failed']);
+            return;
+        }
+
+        //ลองส่งอีเมลจริง ใช้ try catch เอาไว้กันเว็บพังตอนส่งไม่ผ่าน
+        try {
+            Mail::to($email)->send(new RewardNotification($item));
+
+            //ส่งสำเร็จบันทึกว่าส่งแล้วพร้อมเวลา (ส่งแล้วไม่ได้แปลว่าถึงผู้รับ ถ้าชื่อหน้า @ ผิดเมลจะตีกลับเข้ากล่องคนส่ง)
+            $item->update(['email_status' => 'sent','email_sent_at' => now(),]);
+        } catch (\Exception $e) {
+            //ส่งไม่สำเร็จบันทึกว่าล้มเหลว
+            $item->update(['email_status' => 'failed']);
+        }
+    }
+
     //ส่งอีเมลใหม่ทีละรายการ (ปุ่ม "ส่งใหม่")
     public function resendone(Request $request, $id)
     {
         $spinresults = Spinresult::with('reward')->findOrFail($id);
 
-        try {
-            Mail::to($spinresults->winner_email)->send(new RewardNotification($spinresults));
-
-            $spinresults->update([
-                'email_status' => 'sent',
-                'email_sent_at' => now(),
-            ]);
-        } catch (\Exception $e) {
-            $spinresults->update(['email_status' => 'failed']);
-            \Log::error('ส่งอีเมลล้มเหลว: ' . $spinresults->winner_email . ' - ' . $e->getMessage());
-        }
+        $this->sendReward($spinresults);
 
         return back();
     }
@@ -90,23 +118,11 @@ class SpinresultController extends Controller
     //ส่งอีเมลทั้งหมดที่ล้มเหลวอีกครั้ง (ปุ่ม "ส่งใหม่ทั้งหมดที่ล้มเหลว")
     public function resendallfailed(Request $request, $assessment_id)
     {
-        $failedlist = Spinresult::with('reward')
-            ->where('assessment_id', $assessment_id)
-            ->where('email_status', 'failed')
-            ->get();
+        //เอาเฉพาะรายการที่สถานะ failed ของแบบประเมินนี้
+        $failedlist = Spinresult::with('reward')->where('assessment_id', $assessment_id)->where('email_status', 'failed')->get();
 
-        foreach ($failedlist as $item) {
-            try {
-                Mail::to($item->winner_email)->send(new RewardNotification($item));
-
-                $item->update([
-                    'email_status' => 'sent',
-                    'email_sent_at' => now(),
-                ]);
-            } catch (\Exception $e) {
-                \Log::error('ส่งอีเมลล้มเหลว: ' . $item->winner_email . ' - ' . $e->getMessage());
-            }
-        }
+        //วนส่งทีละคน
+        foreach ($failedlist as $item) {$this->sendReward($item);}
 
         return back();
     }
@@ -114,26 +130,12 @@ class SpinresultController extends Controller
     //ส่งอีเมลให้ทุกคนที่ยังไม่ได้ส่ง (ปุ่ม "ส่งอีเมลทั้งหมด")
     public function sendall(Request $request, $assessment_id)
     {
-        $pendinglist = Spinresult::with('reward')
-            ->where('assessment_id', $assessment_id)
-            ->where('email_status', 'pending')
-            ->get();
+        //เอาเฉพาะรายการที่สถานะ pending (ยังไม่ได้ส่ง) ของแบบประเมินนี้
+        $pendinglist = Spinresult::with('reward')->where('assessment_id', $assessment_id)->where('email_status', 'pending')->get();
 
-        foreach ($pendinglist as $item) {
-            try {
-                Mail::to($item->winner_email)->send(new RewardNotification($item));
-
-                $item->update([
-                    'email_status' => 'sent',
-                    'email_sent_at' => now(),
-                ]);
-            } catch (\Exception $e) {
-                $item->update(['email_status' => 'failed']);
-                \Log::error('ส่งอีเมลล้มเหลว: ' . $item->winner_email . ' - ' . $e->getMessage());
-            }
-        }
+        //วนส่งทีละคน
+        foreach ($pendinglist as $item) {$this->sendReward($item);}
 
         return back();
     }
-
 }

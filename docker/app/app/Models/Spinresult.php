@@ -20,6 +20,8 @@ class Spinresult extends Model
         'received_at',
         'assessment_id',
         'checked_by_user_id',
+        'email_status',
+        'email_sent_at',
         ];
 
     protected $casts = [
