@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.disabled = true;
         
         try {
-            const res = await fetch(`/admin/assessment/${assessmentId}/spin`, {
+            const res = await fetch(window.spinUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

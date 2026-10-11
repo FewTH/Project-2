@@ -20,19 +20,20 @@
         <span>Manager</span>
     </a>
     </div>
+
     <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
-<div class="Top_frame">
-    <div class="container-1">
-   <!-- โลโกมหาลัย -->
-   <div class="img-Logo">
-        <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
-   </div>
-   <!-- ปุ่มเมนู -->
-   <div class="btn-Sidebar">
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
-            <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
-            <span>จัดการรางวัล</span>
-        </a>
+    <div class="Top_frame">
+        <div class="container-1">
+            <!-- โลโกมหาลัย -->
+            <div class="img-Logo">
+                <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+            </div>
+        <!-- ปุ่มเมนู -->
+        <div class="btn-Sidebar">
+            <a href="{{ url('manager/managereward') }}" class="btn-Home-1">
+                <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
+                <span>จัดการรางวัล</span>
+            </a>
         <a href="{{ url('manager/managespin') }}" class="btn-Random-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการวงล้อสุ่ม.png') }}" alt="รูปปุ่มเมนูจัดการวงล้อสุ่ม" class="btn-Random-img-1">
             <span>จัดการวงล้อสุ่ม</span>

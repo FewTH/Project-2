@@ -29,7 +29,7 @@
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        
+        // อันนี้ก็ส่วนของหน้าสุ่มวงล้อที่ผูกกับแบบประเมินเหมือนกัน
         Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
             ->name('admin.assessment.random');
             
@@ -165,8 +165,17 @@
 
         // ระบบจัดการวงล้อสุ่ม
         Route::get('/managespin', [WheelController::class, 'index'])->name('manager.managespin');
-        // Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
+        Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('manager.assessments.available');
         Route::post('/managespin/store', [WheelController::class, 'store'])->name('manager.managespin.store');
+
+        // ส่วนจัดการรางวัล
+        // ระบบจัดการของรางวัล
+        // Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
+        Route::post('/addreward', [RewardController::class, 'store'])->name('admin.reward.store');
+        Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
+        Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
+        // Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
+        // Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
 
         // แบบประเมินและกิจกรรม
         Route::get('/assessment', [ActivityController::class, 'managerIndex'])->name('manager.assessment');
@@ -187,6 +196,12 @@
         Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('manager.activity.qrcode.download');
 
         Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])->name('manager.assessment.random');
+        
+        Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
+            ->name('manager.assessment.random');
+            
+        Route::post('/assessment/{id}/spin', [AssessmentController::class, 'spin'])
+            ->name('manager.assessment.spin');
 
         Route::get('/history_random/{assessment_id}', [SpinresultController::class, 'managerindex'])->name('manager.history_random');
         Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('manager.spinresult.receive');

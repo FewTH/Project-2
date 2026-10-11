@@ -41,7 +41,10 @@ class AssessmentController extends Controller
         $respondents = AssessmentRespondent::where('assessment_id',$id)
             ->where('is_drawn',0)
             ->get();
-        return view('admin.spinwheel',[
+        
+        // เป็นการให้ตัวแปรนี้เก็บค่า role ของผู้ใช้และเมื่อมีการเรียกใช้หน้านี้ก็จะถูกเช็คว่าคนที่เรียกใช้อยู่ในrole อะไร
+        $view = auth()->user()->role === 'manager' ? 'manager.spinwheel' : 'admin.spinwheel';
+        return view($view,[
             'assessment' => $assessment,
             'wheel' => $wheel,
             'respondents' => $respondents, //เพิ่มให้มันส่งผู้ตอบแบบประเมินมาด้วย

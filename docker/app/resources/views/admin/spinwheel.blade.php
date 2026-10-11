@@ -65,7 +65,6 @@
         </div>
     </div>
 
-
         {{-- ส่วนวงล้อรางวัล --}}
     <div class="wheel-reward-box">
         <div class="text-wheel">
@@ -181,6 +180,7 @@
         window.rewardWheelData = @json($rewardWheelDataArr);
         window.nameWheelData = @json($nameWheelDataArr);
         window.assessmentId = {{ $assessment->assessment_id }};
+        window.spinUrl = "{{ route('admin.assessment.spin', $assessment->assessment_id) }}";
     </script>
     <script src="{{ asset('admin/js/assessmentrandomreward.js') }}"></script>
 </body>

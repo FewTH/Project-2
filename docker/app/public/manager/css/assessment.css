@@ -83,6 +83,8 @@ body.no-scroll {
 /*แถบเมนูด้านซ้าย*/
 .Top_frame {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 25;
 }
 
@@ -1406,3 +1408,334 @@ body.no-scroll {
     z-index: 1;
   }
 
+/* แต่งวงล้อที่ผูกกับแบบประเมิน */
+/* กรอบด้านบน */
+.random-reward-header{
+  background-color: #FCF6E5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 800px;
+  border: 1px solid #a8731d;
+  border-radius: 10px;
+  margin-left: 400px;
+  margin-top: 100px;
+}
+/* ชื่อและสถานะแบบประเมิน */
+.top-name-assessment{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+/* สถานะแบบประเมิน */
+.assess-status{
+  margin-top: 20px;
+}
+/* ข้อความสรุปรายการรางวัลในวงล้อ */
+.assessment-summary-sub{
+  margin-left: 10px;
+}
+/* ส่วนวงล้อ */
+.all-wheel-background{
+  width: fit-content;
+  flex: 1 1 500px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 800px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  display: flex;
+  margin: 10px auto;
+  gap: 20px;
+}
+/* พื้นหลังอันหลักของวงล้อรางวัล */
+.wheel-reward-box{
+  background-color: #ff00d00c;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  height: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  width: 700px;
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+}
+/* พื้นหลังอันหลักของวงล้อรายชื่อ */
+.respondent-box{
+  display: flex;
+  flex-direction: column;
+  background-color: #FCF6E5;
+  width: 700px;
+  height: 650px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+/* ส่วนบนของบ็อกวงล้อรายชื่อ */
+.background-respondent-header{
+  display: flex;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.17);
+  background-color: #f5cc53;
+  color: #6d4300;
+  padding: 0px 10px;
+  font-weight: bold;
+  font-size: large;
+  gap: 5px;
+}
+/* จัดระเบียบข้อความส่วนบนของวงล้อรายชื่อ */
+.logo-topic-respondent{
+  display: flex;
+  margin-top: 5px;
+}
+/* จัดตำแหน่งข้อความจำนวนรายชื่อในวงล้อ */
+.num-respondent-box{
+  margin-left: auto;
+  padding: 20px 10px;
+  font-size: medium;
+  font-weight: 500;
+}
+/* แต่งปุ่มเปิด-ปิดวงล้อรายชื่อ */
+.toggle-main-namebox{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+  color: #6d4300;
+}
+/* เข็มแหลมๆบนวงล้อรายชื่อ */
+.respondent-wheel-pointer{
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 24px solid #f5cc53;
+  z-index: 100;
+}
+/* จัดระเบียบวงล้อรายชื่อ */
+.respondent-main-wheel{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+/* อนิเมชันตอนหมุนวงล้อรายชื่อ */
+#wheelNameCanvas{
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+
+
+/* อนิเมชันตอนหมุนวงล้อรางวัล */
+#wheelrewardCanvas{
+  transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
+/* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล */
+.wheel-assessment-rewards{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+/* สร้างเข็มแหลมๆบนวงล้อรางวัล */
+.wheel-pointer{
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 24px solid #ec4899;
+  z-index: 10;
+}
+.text-wheel{
+  display: flex;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.17);
+  background-color: #ff00d069;
+  color: #88016fe5;
+  padding: 0px 10px;
+  font-weight: bold;
+  font-size: large;
+  gap: 5px;
+}
+/* ส่วนรูปของรางวัล */
+.logo-topic{
+  display: flex;
+  margin-top: 5px;
+}
+.num-reward-box{
+  margin-left: auto;
+  padding: 20px 10px;
+  font-size: medium;
+  font-weight: 500;
+}
+/* ส่วนรายละเอียดแบบประเมิน(Footer) */
+.bottom-name-assessment{
+  background-color: #FCF6E5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 800px;
+  border: 1px solid #a8731d;
+  border-radius: 10px;
+  margin-left: 400px;
+  margin-top: 100px;
+  
+}
+/* แต่งปุ่มสุ่ม */
+.spin-wheelassess-btn{
+  display: flex;
+  justify-content: center;
+}
+.spin-assessment-btn{
+  width: 150px;
+  height: 70px;
+  background-color: #a8731d;
+  border-radius: 10px;
+  color: #ffffff;
+  border: none;
+}
+/* ปุ่มเปิดเปิด */
+.toggle-main-box{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+  gap: 10px;
+  color: #96007ad7;
+}
+/* ปรับตำแหน่งและขนาดของปุ่ม */
+.toggle-switch{
+  position: relative;
+  display: inline-block;
+  width: 74px;
+  height: 34px;
+  flex-shrink: 0;
+}
+/* ลบปุ่มที่เป็นเช็กบ็อกอันเก่าไป */
+.toggle-switch input{
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-slider{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+/* ปรับแต่งตัวปุ่มสีขาววงกลมด้านในตัว toggle */
+.toggle-slider::before{
+  content: "";
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  left: 3px;
+  bottom: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.toggle-switch input:checked + .toggle-slider{
+  background-color: #00E676;
+}
+.toggle-switch input:checked + .toggle-slider::before{
+  transform: translateX(40px);
+}
+/* ป็อปอัป */
+.spin-result-popup{
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spin-result-box{
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  min-width: 300px;
+}
+/*กรอบของปุ่มสุ่มรางวัล*/
+  .btnstartRandomreward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 100%; 
+  }
+
+  /*ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward{
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-top: 10px;
+    background: none;
+    border: 3px solid #a37800;
+    padding: 0px 80px;
+    height: 75px;
+    border-radius: 20px;
+    cursor: pointer;
+    gap: 12px;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/
+  .btn-startRandomreward::before{
+    content: "";
+    background-color: rgba(150, 101, 22, 0.048);
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มกดสุ่มรางวัล*/  
+  .btn-startRandomreward:hover::before{
+    width: 600px;
+    height: 600px;
+  }
+
+  /*รูปของปุ่มกดสุ่มรางวัล*/
+  .img-btn-startRandomreward{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มกดสุ่มรางวัล*/
+  .messagebtn-startRandomreward{
+    font-size: 25px;
+    font-weight: 600;
+    color: #8A5B10;
+    position: relative;
+    padding: 0;
+    margin: auto;
+    z-index: 1;
+  }

@@ -22,14 +22,14 @@
     </div>
 
     <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
-<div class="Top_frame">
-    <div class="container-1">
-   <!-- โลโกมหาลัย -->
-   <div class="img-Logo">
+    <div class="Top_frame">
+        <div class="container-1">
+    <!-- โลโกมหาลัย -->
+    <div class="img-Logo">
         <img src="{{ asset('user/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
-   </div>
-   <!-- ปุ่มเมนู -->
-   <div class="btn-Sidebar">
+    </div>
+    <!-- ปุ่มเมนู -->
+    <div class="btn-Sidebar">
         <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
@@ -184,14 +184,14 @@
                     </div>
                 </div>
                 <p class="message-assessment">
-                    @if($assessment -> WheelAssessment)
-                    รางวัล{{ $assessment -> WheelAssessment->wheel->rewards->pluck('name')->join(' ')}}
+                    @if($assessment -> wheelAssessment)
+                        รางวัล: {{ $assessment -> wheelAssessment->wheel->rewards->pluck('name')->unique()->join(', ')}}
                     @else
                         ยังไม่ได้บันทึกวงล้อ
                     @endif
                 </p>
-                <p class="message-create-by">
-                    สร้างโดย: {{$assessment->create_by_name ?? '-'}}
+                <p class="message-created-by">
+                    สร้างโดย: {{$assessment->created_by_name ?? '-'}}
                     ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
                 </p>
                 @if($assessment->wheelAssessment)
@@ -205,7 +205,7 @@
                 </a>
                 @else
                 {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
-                <a href="{{url('admin/managespin')}}" class="assessment-open-1">
+                <a href="{{url('manager/managespin')}}" class="assessment-open-1">
                     <p class="message-assessment-open">ยังไม่ได้บันทึกวงล้อ คลิกเพื่อสร้าง</p>
                 </a>
                 @endif
