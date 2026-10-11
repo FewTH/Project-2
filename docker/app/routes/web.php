@@ -207,7 +207,9 @@
         Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('manager.spinresult.receive');
 
 
-        Route::get('/button_senditgmail', function () {
-            return view('manager.button_senditgmail');
-        });
+
+        Route::get('/button_senditgmail/{assessment_id}', [SpinresultController::class, 'managersenditgmail'])->name('manager.senditgmail');
+        Route::post('/senditgmail/resend/{id}', [SpinresultController::class, 'resendone'])->name('manager.senditgmail.resendone');
+        Route::post('/senditgmail/{assessment_id}/resend-all-failed', [SpinresultController::class, 'resendallfailed'])->name('manager.senditgmail.resendallfailed');
+        Route::post('/senditgmail/{assessment_id}/send-all', [SpinresultController::class, 'sendall'])->name('manager.senditgmail.sendall');
     });

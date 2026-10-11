@@ -4855,6 +4855,24 @@ body.no-scroll {
     border: 1px solid #d39b00;
   }
 
+  .frameerrorgmail-1{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 20px;
+    background-color: #E5E7EB;
+    border-radius: 20px;
+    height: 40px;
+  }
+
+  .messageerrorgmail-1{
+    font-size: 16px;
+    font-weight: 600;
+    color: #6B7280;
+  }
+
+
   /*กรอบของส่งแล้ว*/
   .framesenttogmail{
     margin-left: auto;
@@ -4972,7 +4990,10 @@ body.no-scroll {
     color: #4e4e4e;
   }
 
-  
+  .btn-Resend0{
+    margin-left: auto;
+  }
+
   /*ปุ่มส่งใหม่*/
   .btn-Resend1{
     margin-left: auto;

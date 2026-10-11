@@ -45,8 +45,14 @@ class SpinresultController extends Controller
         return back();
     }
 
+    //แสดงหน้าส่งอีเมล manager
+    public function managersenditgmail($assessment_id)
+    {
+        return $this->senditgmail($assessment_id, 'manager');
+    }
+
     //แสดงหน้าส่งอีเมลให้ผู้ได้รับรางวัล
-    public function senditgmail($assessment_id)
+    public function senditgmail($assessment_id, $role = 'admin')
     {
         //ดึงข้อมูลผลการสุ่มทั้งหมดของแบบประเมินนี้ พร้อมกับข้อมูลของรางวัลที่ผูกกันไว้
         $spinresults = Spinresult::with('reward')->where('assessment_id', $assessment_id)->latest()->get();
@@ -57,7 +63,7 @@ class SpinresultController extends Controller
         //กรองเฉพาะรายการที่ส่งล้มเหลว เอาไว้โชว์ในกล่องรายการที่ล้มเหลว
         $failedlist = $spinresults->where('email_status', 'failed');
 
-        return view('admin.button_senditgmail', ['spinresults' => $spinresults,'assessment' => $assessment,'failedlist' => $failedlist,]);
+        return view($role . '.button_senditgmail', ['spinresults' => $spinresults,'assessment' => $assessment,'failedlist' => $failedlist,'prefix' => $role,'user' => Auth::user(),]);
     }
 
 
