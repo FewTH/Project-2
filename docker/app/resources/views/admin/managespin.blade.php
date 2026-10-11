@@ -159,12 +159,12 @@
         </a>
     </div>
 </div>
-{{-- <script>
+<script>
     window.wheelConfig = {
-        availableAssessmentsUrl: "{{ route('admin.assessment.available') }}",
+        availableAssessmentsUrl: "{{ route('admin.assessments.available') }}",
         storeUrl: "{{ route('admin.managespin.store')}}"
     };
-</script> --}}
+</script>
 <script src="{{ asset('admin/js/managespin.js') }}"></script>
 </body>
 </html>

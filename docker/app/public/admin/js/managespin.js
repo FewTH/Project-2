@@ -152,10 +152,15 @@ savebtn.addEventListener('click',async function(){
     wheelItemCountn1.textContent = rewardsArray.length;
     wheelItemnamesn1.textContent = rewardsArray.map(r=>r.name).join(',');
     
-    const fetchUrl = window.wheelConfig?.availableAssessmentsUrl || '/admin/assessment/available';
+    const fetchUrl = window.wheelConfig?.availableAssessmentsUrl || (isAdmin ? '/admin/assessments/available' : '/manager/assessments/available');
     // ดึงแบบประเมินที่ยังไม่ถูกเพิ่มวงล้อ
     try{
-        const res = await fetch('/admin/assessments/available');
+        // ใช้เพื่อเมื่อมีการเรียกใช้ต่าง role กัน
+        const res = await fetch(fetchUrl);
+        // เช็คสถานะก่อน
+        if (!res.ok){
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const assessments = await res.json();
         renderAssessmentList(assessments);
     }
@@ -216,7 +221,7 @@ confirmAssessmentBtn.addEventListener('click', async function () {
         quantity_selected: r.qty
     }));
 
-    const storeUrl = window.wheelConfig?.storeUrl || '/admin/managespin/store';
+    const storeUrl = window.wheelConfig?.storeUrl || (isAdmin ? '/admin/managespin/store' : '/manager/managespin/store')
     try {
         const res = await fetch(storeUrl, {
             method: 'POST',

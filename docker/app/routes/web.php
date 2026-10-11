@@ -168,12 +168,12 @@
         Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('manager.assessments.available');
         Route::post('/managespin/store', [WheelController::class, 'store'])->name('manager.managespin.store');
 
-        // ส่วนจัดการรางวัล
+        
         // ระบบจัดการของรางวัล
         // Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
-        Route::post('/addreward', [RewardController::class, 'store'])->name('admin.reward.store');
-        Route::get('/managereward', [RewardController::class, 'index'])->name('admin.managereward');
-        Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('admin.reward.destroy');
+        Route::post('/addreward', [RewardController::class, 'store'])->name('manager.reward.store');
+        Route::get('/managereward', [RewardController::class, 'index'])->name('manager.managereward');
+        Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('manager.reward.destroy');
         // Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
         // Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
 

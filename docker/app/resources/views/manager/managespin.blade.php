@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('manager/css/managespin.css') }}">
     <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
     <title>จัดการวงล้อ</title>
@@ -153,12 +154,12 @@
         </div>
     </div>
 </div>
-{{-- <script>
+<script>
     window.wheelConfig = {
-        availableAssessmentsUrl: "{{ route('manager.assessment.available') }}",
+        availableAssessmentsUrl: "{{ route('manager.assessments.available') }}",
         storeUrl: "{{ route('manager.managespin.store')}}"
     };
-</script> --}}
+</script>
 <script src="{{ asset('admin/js/managespin.js') }}"></script>
 </body>
 </html>
