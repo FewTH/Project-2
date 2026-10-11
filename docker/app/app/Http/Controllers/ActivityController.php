@@ -85,7 +85,6 @@ class ActivityController extends Controller
     public function create($role = 'admin')
     {
         return view($role . '.create_activity', [
-            'rewards' => Reward::with('category')->get(),
             'prefix' => $role,
             'user' => Auth::user(),
         ]);
