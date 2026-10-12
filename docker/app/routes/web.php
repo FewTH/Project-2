@@ -170,12 +170,12 @@
 
         
         // ระบบจัดการของรางวัล
-        // Route::get('/addreward', [RewardController::class, 'create'])->name('admin.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
+        Route::get('/addreward', [RewardController::class, 'create'])->name('manager.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
         Route::post('/addreward', [RewardController::class, 'store'])->name('manager.reward.store');
         Route::get('/managereward', [RewardController::class, 'index'])->name('manager.managereward');
         Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('manager.reward.destroy');
-        // Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('admin.reward.edit'); 
-        // Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('admin.reward.update');
+        Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('manager.reward.edit'); 
+        Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('manager.reward.update');
 
         // แบบประเมินและกิจกรรม
         Route::get('/assessment', [ActivityController::class, 'managerIndex'])->name('manager.assessment');
