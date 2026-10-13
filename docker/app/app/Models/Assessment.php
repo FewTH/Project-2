@@ -8,7 +8,7 @@ class Assessment extends Model
 {
     protected $table = 'assessments';
     protected $primaryKey = 'assessment_id';
-    protected $fillable = ['name','created_by_name','closed_at','is_open'];
+    protected $fillable = ['name','created_by_name','closed_at','is_open','assigned_to',];
     protected function casts(): array
     {
         return[

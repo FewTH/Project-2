@@ -486,7 +486,7 @@
   .framesmost_popular{
     background-color: #fdfbf5;
     flex: 1 1 650px;
-    height: 580px;
+    height: 560px;
     border-radius: 20px;
     margin-top: 100px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -532,46 +532,17 @@
     border-radius: 12px;
   }
 
-  /*ชื่อหัวข้อดินสอ*/
-  .pencil{
-    display: flex;
-    position: relative;
-    right: 15px;
-    bottom: 20px;
-  }
-
-  /*รูปดินสอ*/
-  .img-pencil-1{
-    width: 30px;
-    height: 30px;
-    position: relative;
-    right: 45px;
-    top: 35px
+  .pencil1{
+    font-size: 25px;
+    font-weight: 900;
   }
 
   /*จำนวนครั้งที่สุ่มของดินสอ*/
   .timeallpancil {
-    position: relative;
-    right: 80px;
-    top: 20px;
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
     font-size: 17px;
-  }
-
-  /*จุดตรงกลางครั้ง · ตั้งค่าดินสอ*/
-  .point-1 {
-    font-size: 25px;
-    position: relative;
-    right: 80px;
-    top: 20px;
-  }
-
-  /*เปอร์เช็น ตั้งค่าดินสอ*/
-  .settingspencil{
-    position: relative;
-    right: 80px;
-    top: 20px;
-    font-size: 17px;
-    min-width: 60px;
   }
 
   /*กรอบของหลอดเปอร์เซ็นกับเลขเปอร์เช็นดินสอ*/
@@ -615,38 +586,19 @@
     gap: 15px;
   }
 
-
-  /*กรอบสีดำเงิน*/
-  .blueframe{
-    background-color: #2563EB;
-    min-width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin-top: 10px;
-  }
-
   /*ชื่อหัวข้อสมุด*/
   .notebook{
     display: flex;
     position: relative;
-    right: 20px;
+    left: 8px;
     bottom: 10px;
-    font-size: 17px;
-  }
-
-  /*รูปสมุด*/
-  .img-notebook-1{
-    width: 38px;
-    height: 38px;
-    position: relative;
-    right: 45px;
-    top: 29px;
+    font-size: 19px;
   }
 
   /*จำนวนครั้งที่สุ่มของสมุด*/
   .timeallnotebook{
     position: relative;
-    right: 75px;
+    right: 50px;
     top: 25px;
     font-size: 17px;
   }
@@ -655,13 +607,13 @@
   .point-2 {
     font-size: 25px;
     position: relative;
-    right: 75px;
+    right: 50px;
     top: 25px;
   }
 
   .settingsnotebook{
     position: relative;
-    right: 75px;
+    right: 50px;
     top: 25px;
     font-size: 17px;
     min-width: 60px;
@@ -710,37 +662,20 @@
     gap: 15px;
   } 
 
-  /*กรอบสีเขียว*/
-  .greenframe{
-    background-color: #10B981;
-    min-width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin-top: 10px;
-  }
 
   /*ชื่อหัวข้อหนังสือ*/
   .book{
     display: flex;
     position: relative;
-    right: 20px;
+    left: 8px;
     bottom: 10px;
-    font-size: 17px;
-  }
-
-  /*รูปหนังสือ*/
-  .img-book-1{
-    width: 38px;
-    height: 38px;
-    position: relative;
-    right: 45px;
-    top: 29px;
+    font-size: 19px;
   }
 
   /*จำนวนครั้งที่สุ่มของหนังสือ*/
   .timeallbook{
     position: relative;
-    right: 100px;
+    right: 75px;
     top: 25px;
     font-size: 17px;
   }
@@ -749,14 +684,14 @@
   .point-3{
     font-size: 25px;
     position: relative;
-    right: 100px;
+    right: 75px;
     top: 25px;
   } 
 
   /*เปอร์เช็น ตั้งค่าหนังสือ*/
   .settingsbook{
     position: relative;
-    right: 100px;
+    right: 75px;
     top: 25px;
     font-size: 17px;
     min-width: 60px;
@@ -803,39 +738,21 @@
     padding: 15px 0px 0px 0px;
   }
 
-  /*กรอบสีส้ม*/
-  .orangeframe{
-    background-color: #FF9800;
-    min-width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin-left: 30px;
-    margin-top: 10px;
-  }
-
   /*ชื่อหัวข้อแบตสำรอง*/
   .powerbank{
     display: flex;
     position: relative;
-    right: 20px;
-    bottom: 10px;
-    font-size: 17px;
+    left: 40px;
+    bottom: 20px;
+    font-size: 19px;
     min-width: 140px;
   }
 
-  /*รูปแบตสำรอง*/
-  .img-powerbank-1{
-    width: 38px;
-    height: 38px;
-    position: relative;
-    right: 43px;
-    top: 33px;
-  }
 
   /*จำนวนครั้งที่สุ่มของแบตสำรอง*/
   .timeallpowerbank{
     position: relative;
-    right: 140px;
+    right: 115px;
     top: 25px;
     font-size: 17px;
   }
@@ -845,14 +762,14 @@
   .point-4{
     font-size: 25px;
     position: relative;
-    right: 135px;
-    top: 15px;
+    right: 115px;
+    top: 10px;
   }
 
   /*เปอร์เซ็น ตั้งค่าแบตสำรอง*/
   .settingspowerbank{
     position: relative;
-    right: 135px;
+    right: 115px;
     top: 25px;
     font-size: 17px;
     min-width: 60px;

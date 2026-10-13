@@ -233,9 +233,45 @@ updatenumberassessment();
 const btnassignassessment = document.getElementById('btn_assign_assessment');
 
 if (btnassignassessment){
-    btnassignassessment.addEventListener('click', function(){
-        openDialog(document.getElementById('assign_evaluation'));
-    })
+    btnassignassessment.addEventListener('click', async function(){
+    try {
+        // เรียกแบบประเมินที่ยังไม่ผูกแบบประเมิน
+        const res = await fetch('/admin/asessments/unassigned');
+        if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลได้');
+        const data = await res.json();
+
+        // เพิ่มข้อมูลแบบประเมินลงใน dropdown 
+        evaluationFormSelect.innerHTML = '<option value="" disabled selected>- เลือกแบบประเมิน -</option>';
+        data.assessments.forEach(a => {
+          const option = document.createElement('option');
+          option.value = a.id;
+          option.textContent = a.name;
+          evaluationFormSelect.appendChild(option);  
+        });
+
+        // เพิ่มรายชื่อmanager ลงใน popup
+        checkboxContainer.innerHTML = '';
+        if(data.managers.length === 0){
+            checkboxContainer.innerHTML = '<p style="color: gray; font-size: 14px;">ไม่พบผู้จัดการในระบบ</p>';
+        }else{
+            data.managers.forEach(m =>{
+                const label = document.createElement('label');
+                label.className = 'message-checkbox-name';
+                label.innerHTML = `<input type="checkbox" class="checkboxgivemanager" name="position[]" value="${m.id}"> ${m.name}`;
+                checkboxContainer.appendChild(label);
+            });
+        }
+        // รีเซ็ตปุ่ม
+        updatastatusbtnconfirmevaluation();
+
+        // เปิด dialog
+        openDialog(assignEvaluationModal);
+    }catch (err){
+        alert('ไม่สามารถโหลดข้อมูลได้')
+        console.error(err);
+    }
+        // openDialog(document.getElementById('assign_evaluation'));
+    });
 }
 
 //ปุ่มกดปิด popup มอบหมายแบบประเมิน  assessment.blade.php
@@ -347,6 +383,7 @@ if(showmore && showless){
     });
 
 }
+const assignEvaluationModal = document.getElementById('assign_evaluation');
 
 
 

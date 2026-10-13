@@ -9,6 +9,7 @@ use App\Models\AssessmentRespondent;
 use App\Models\Spinresult;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class AssessmentController extends Controller
 {
@@ -137,5 +138,45 @@ class AssessmentController extends Controller
         'remaining_respondents' => $remainingRespondents,
     ]);
     }
+    // ฟังก์ชันนี้ก็ประมาณว่าดึงแบบบประเมินที่ยังไม่มีวงล้อทั้งหมดมาแสดงที่popupพร้อมรายชื่อmanager
+    public function getAssignData()
+    {
+        // สร้างตัวแปรนี้มาเพื่อดักจับแบบประเมินที่ผูกวงล้อแล้ว
+        $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->toArray();
 
+        // ส่วนนี้จะดึงแบบประเมินที่ยังไม่ได้ผูกวงล้อและยังไม่ได้ถูกมอบหมาย
+        $assessments = Assessment::whereNoIn('assessment_id', $usedAssessmentIds)
+            ->whereNull('assigned_to')
+            ->where('is_open', 1)
+            ->get();
+
+            // ดึงรายชื่อคนที่เป็น manager ในระบบทั้งหมดมา
+            $managers = User::where('role', 'manager')->get();
+
+            return response()->json([
+                'assessments' => $assessments,
+                'managers' => $managers
+            ]);
+    }
+    // บันทึกการมอบหมายแบบประเมินลงดาต้าเบส
+    public function storeAssignment(Request $request)
+    {
+        // ยืนยันว่าข้อมูลครบไหม
+        $request->validate([
+            'assessment_id' => 'required|exists:assessments,assessment_id',
+            'manager_id' => 'required|exists:users,user_id',
+        ]);
+
+       $assessment = Assessment::findOrFail($request->assessment_id);
+        // บันทึกคนที่รับผิดชอบลง assigned_to
+        $assessment->update([
+            'assigned_to' => $request->manager_id
+        ]);
+
+        // คืนค่าว่าบันทึกสำเร็จ
+        return response()->json([
+            'success' => true,
+            'message' => 'มอบหมายแบบประเมินสำเร็จ'
+         ]);
+    }
 }

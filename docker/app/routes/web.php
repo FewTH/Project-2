@@ -10,7 +10,9 @@
     use App\Http\Controllers\ActivityController;
     use App\Http\Controllers\AuthController;
     use App\Http\Controllers\SpinresultController;
+    use App\Http\Controllers\DashboardController;
     use App\Models\Spinresult;
+    
 
     Route::get('/', function () {
         return view('welcome');
@@ -66,7 +68,9 @@
         Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('admin.assessments.available');
         Route::post('/managespin/store', [WheelController::class, 'store'])->name('admin.managespin.store');
 
-        
+        // ส่วนเพิ่มผู้รับผิดชอบแบบประเมินที่ยังไม่ได้ผูกวงล้อให้กับ manager
+        Route::get('/assessments/unassigned', [AssessmentController::class, 'getAssignData'])->name('admin.assessments.unassigned');
+        Route::post('/assessments/assign', [AssessmentController::class, 'storeAssignment'])->name('admin.assessments.assign');
 
         // ระบบจัดการกิจกรรม
         Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
@@ -111,6 +115,7 @@
         Route::post('/senditgmail/{assessment_id}/send-all', [SpinresultController::class, 'sendall'])->name('admin.senditgmail.sendall');
 
 
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         
 
             //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
