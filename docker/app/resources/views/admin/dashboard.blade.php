@@ -152,6 +152,20 @@
                 <p id="Follow_award">+ {{ $newevents }} สร้างใหม่ในช่วงนี้</p>
             </div>
         </div>
+         <div class="framewaitreceiveaward">
+            <!--รอรับของขวัญ-->
+            <div class="waitreceiveaward">
+                <h4>กิจกรรมที่เปิดอยู่</h4>
+            </div>
+            <!--ตัวเลขรับของขวัญ-->
+            <div class="numberaward">
+                <h2 id="Number_award">{{ $openevents }}</h2>
+            </div>
+            <!--ต้องติดตามของขวัญที่ยังไม่ได้รับ-->
+            <div class="followaward" id="followaward_box">
+                <p id="Follow_award">+ {{ $newevents }} สร้างใหม่ในช่วงนี้</p>
+            </div>
+        </div>
     </div>
     <!--ชิ่อหัวข้อสุ่มรายวัน-->
     <div class="chart-wrap">

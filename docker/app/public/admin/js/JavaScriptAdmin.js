@@ -114,6 +114,10 @@ updatenumberactivity();
 
 
 //ปุ่มทั้งหมดของหน้า assessment.blade.php
+const evaluationFormSelect = document.getElementById('Evaluation_formid');
+const checkboxContainer = document.querySelector('.frame-checkbox-name');
+const evaluationFormelement = document.getElementById('frame-choose-evaluation');
+const assignEvaluationModal = document.getElementById('assign_evaluation');
 const frameallassessment =  document.getElementById('frameall_assessment');
 
 if(frameallassessment){
@@ -236,7 +240,7 @@ if (btnassignassessment){
     btnassignassessment.addEventListener('click', async function(){
     try {
         // เรียกแบบประเมินที่ยังไม่ผูกแบบประเมิน
-        const res = await fetch('/admin/asessments/unassigned');
+        const res = await fetch('/admin/assessments/unassigned');
         if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลได้');
         const data = await res.json();
 
@@ -266,67 +270,124 @@ if (btnassignassessment){
 
         // เปิด dialog
         openDialog(assignEvaluationModal);
-    }catch (err){
+    }catch (err) {
         alert('ไม่สามารถโหลดข้อมูลได้')
         console.error(err);
     }
         // openDialog(document.getElementById('assign_evaluation'));
     });
 }
-
 //ปุ่มกดปิด popup มอบหมายแบบประเมิน  assessment.blade.php
 const closebutton = document.getElementById('close_button');
 
 if (closebutton){
     closebutton.addEventListener('click', function(){
-        closeDialog(document.getElementById('assign_evaluation'));
+        closeDialog(assignEvaluationModal);
     });
 }
 
 
 //การกดปุ่มยืนยันตอนเลือกทุกอย่างเสร็จใน popup มอบหมายแบบประเมิน assessment.blade.php
-const Evaluationformid = document.getElementById('Evaluation_formid');
+// const Evaluationformid = document.getElementById('Evaluation_formid');
 const btnconfirmevaluation = document.getElementById('btn_confirm_evaluation');
-const checkboxgivemanager = document.querySelectorAll('.checkboxgivemanager');
+// const checkboxgivemanager = document.querySelectorAll('.checkboxgivemanager');
 
     function updatastatusbtnconfirmevaluation(){
-        const Evaluationformid_1  = Evaluationformid.value;
+        // const Evaluationformid_1  = Evaluationformid.value;
+        const assessmentId  = evaluationFormSelect.value;
+        const checkboxes = document.querySelectorAll('.checkboxgivemanager');
 
-
-        let selectedcountname = 0;
+        let selectedCount = 0;
         
-        for (let i = 0; i < checkboxgivemanager.length; i++){
-            const checkboxgivemanager_1 = checkboxgivemanager[i];
-            if (checkboxgivemanager_1.checked){
-                selectedcountname++;
-            }
-        }
-        if (Evaluationformid_1 !== '' &&  selectedcountname > 0){
+        // for (let i = 0; i < checkboxgivemanager.length; i++){
+        //     const checkboxgivemanager_1 = checkboxgivemanager[i];
+        //     if (checkboxgivemanager_1.checked){
+        //         selectedcountname++;
+        //     }
+        // }
+
+        checkboxes.forEach(cb => {
+            if (cb.checked) selectedCount++;
+        });
+
+        if (assessmentId !== '' &&  selectedCount > 0){
             btnconfirmevaluation.disabled = false;
         }else{
             btnconfirmevaluation.disabled = true;
         }
 }
-if(Evaluationformid && btnconfirmevaluation){
-Evaluationformid.addEventListener('change', updatastatusbtnconfirmevaluation);
-checkboxgivemanager.forEach(function (checkbox){
-    checkbox.addEventListener('change', updatastatusbtnconfirmevaluation);
-});
+// if(Evaluationformid && btnconfirmevaluation){
+// Evaluationformid.addEventListener('change', updatastatusbtnconfirmevaluation);
+// checkboxgivemanager.forEach(function (checkbox){
+//     checkbox.addEventListener('change', updatastatusbtnconfirmevaluation);
+// });
 
-updatastatusbtnconfirmevaluation()
+// updatastatusbtnconfirmevaluation()
+// }
+
+// คอยจับการเปลี่ยนแปลงของตัวcheckbox
+if (evaluationFormSelect) {
+    evaluationFormSelect.addEventListener('change', updatastatusbtnconfirmevaluation);
 }
+document.addEventListener('change', function(e){
+    if (e.target && e.target.classList.contains('checkboxgivemanager')){
+        updatastatusbtnconfirmevaluation();
+    }
+});
 
 //ปุ่มเอาไว้กดยกเลิกข้อความในpopup มอบหมายแบบประเมิน
 const btncancelevaluation1 = document.getElementById('btn_cancel_evaluation1');
 
 if (btncancelevaluation1){
     btncancelevaluation1.addEventListener('click', function(){
-       document.getElementById('frame-choose-evaluation').reset();
+       evaluationFormelement.reset();
         updatastatusbtnconfirmevaluation();
     });
 }
 
+// ปุ่มยืนยันการมอบหมายแล้วบันทึกลงดาต้าเบส
+if (evaluationFormelement) {
+    evaluationFormelement.addEventListener('submit', async function(e){
+        e.preventDefault();
 
+        const assessmentId = evaluationFormSelect.value;
+        const checkedManager = document.querySelector('.checkboxgivemanager:checked');
+
+        // ถ้าไม่มีการเลือกแบบประเมินหรือmanager เลยจะแจ้งเตือนข้อความนี้
+        if (!assessmentId || !checkedManager){
+            alert('โปรดเลือกแบบประเมินและผู้รับผิดชอบ');
+            return;
+        }
+        // ดึงค่าหลังจากการเช็คว่ามีค่าแล้วแน่นอน
+        const managerId = checkedManager.value;
+
+        try {
+        const res = await fetch('/admin/assessments/assign',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body:JSON.stringify({
+                assessment_id: assessmentId,
+                manager_id: managerId
+            })
+        });
+        // กรณีที่เพิ่มผู้รับผิดชอบสำเร็จจะแจ้งข้อความนี้มา
+        const data = await res.json();
+        if (data.success){
+            alert('มอบหมายแบบประเมินสำเร็จ');
+            closeDialog(assignEvaluationModal);
+            window.location.reload(); //รีเฟชจอครั้งนึงเพื่ออัปเดตข้อมูลพวกแบบประเมินกับรายชื่อ
+        } else {
+            alert('เกิดข้อผิดพลาด: '+(data.message || 'ไม่ทราบสาเหตุ'));
+        }
+        } catch (err) {
+            alert('ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่');
+            console.error(err);
+        }
+    });  
+}
 //ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
 const framesearchactivity = document.getElementById('frame_search_activity');
 
@@ -383,7 +444,6 @@ if(showmore && showless){
     });
 
 }
-const assignEvaluationModal = document.getElementById('assign_evaluation');
 
 
 

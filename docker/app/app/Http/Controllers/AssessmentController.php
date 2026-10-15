@@ -10,6 +10,7 @@ use App\Models\Spinresult;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Event;
 
 class AssessmentController extends Controller
 {
@@ -145,18 +146,49 @@ class AssessmentController extends Controller
         $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->toArray();
 
         // ส่วนนี้จะดึงแบบประเมินที่ยังไม่ได้ผูกวงล้อและยังไม่ได้ถูกมอบหมาย
-        $assessments = Assessment::whereNoIn('assessment_id', $usedAssessmentIds)
+        $assessments = Assessment::whereNotIn('assessment_id', $usedAssessmentIds)
             ->whereNull('assigned_to')
             ->where('is_open', 1)
-            ->get();
+            ->get()
+            ->map(fn($a) => [
+            'id' => $a->assessment_id,
+            'name' => $a->name,
+            'created_by' => $a->created_by_name,
+            'closed_at' => $a->closed_at ? \Carbon\Carbon::parse($a->closed_at)->format('d M Y') : '-',
+        ]);
 
             // ดึงรายชื่อคนที่เป็น manager ในระบบทั้งหมดมา
-            $managers = User::where('role', 'manager')->get();
+            $managers = User::where('role', 'manager')->get()->map(fn($m)=>[
+                'id' => $m->user_id,
+                'name' => $m->full_name,
+            ]);
 
             return response()->json([
                 'assessments' => $assessments,
                 'managers' => $managers
             ]);
+    }
+    public function index()
+    {
+        // ส่วนนี้ใช้เพื่อเช็ค role ของผู้ใช้
+        $user = auth()->user();
+        if ($user->role === 'manager') {
+            // ทำให้managerจะเห็นแค่แบบประเมมินที่ถูกadminมอบหมาสยให้เท่านั้น
+            $assessments = Assessment::with('wheelAssessment.wheel.rewards')
+                ->where('assigned_to', $user->user_id)
+                ->get();
+
+                $events = Event::with('wheel.rewards','registrations')->get();
+                
+                $view = 'manager.assessment';
+        }else {
+            // Admin จะเห็นแบบประเมินทั้งหมด
+            $assessments = Assessment::with('wheelAssessment.wheel.rewards')->get();
+            $events = Event::with('wheel.rewards', 'registrations')->get();
+
+            $view = 'admin.assessment';
+        }
+        return view($view, compact('assessments', 'events','user'));
     }
     // บันทึกการมอบหมายแบบประเมินลงดาต้าเบส
     public function storeAssignment(Request $request)

@@ -14,6 +14,7 @@
     use App\Models\Spinresult;
     
 
+
     Route::get('/', function () {
         return view('welcome');
     });
@@ -26,11 +27,7 @@
     // Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('admin')->middleware('role:admin')->group(function () {
         
-        // Dashboard & Profile
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
-
+    
         // อันนี้ก็ส่วนของหน้าสุ่มวงล้อที่ผูกกับแบบประเมินเหมือนกัน
         Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
             ->name('admin.assessment.random');
@@ -172,18 +169,17 @@
         Route::get('/managespin', [WheelController::class, 'index'])->name('manager.managespin');
         Route::get('/assessments/available', [AssessmentController::class, 'availableAssessments'])->name('manager.assessments.available');
         Route::post('/managespin/store', [WheelController::class, 'store'])->name('manager.managespin.store');
-
         
         // ระบบจัดการของรางวัล
-        Route::get('/addreward', [RewardController::class, 'create'])->name('manager.addreward'); // อันนี้แสดงฟอร์มเพิ่มรางวัล
+        Route::get('/addreward', [RewardController::class, 'create'])->name('manager.addreward'); 
         Route::post('/addreward', [RewardController::class, 'store'])->name('manager.reward.store');
         Route::get('/managereward', [RewardController::class, 'index'])->name('manager.managereward');
         Route::delete('/managereward/{id}', [RewardController::class, 'destroy'])->name('manager.reward.destroy');
         Route::get('/managereward/{id}/edit', [RewardController::class, 'edit'])->name('manager.reward.edit'); 
         Route::put('/managereward/{id}', [RewardController::class, 'update'])->name('manager.reward.update');
 
-        // แบบประเมินและกิจกรรม
-        Route::get('/assessment', [ActivityController::class, 'managerIndex'])->name('manager.assessment');
+        // แบบประเมินและกิจกรรม (ให้ชี้มาที่ AssessmentController@index เพื่อกรองตาม assigned_to)
+        Route::get('/assessment', [AssessmentController::class, 'index'])->name('manager.assessment');
 
         Route::get('/create_activity', [ActivityController::class, 'managerCreate'])->name('manager.create_activity');
         Route::post('/create_activity', [ActivityController::class, 'managerStore'])->name('manager.create_activity.store');
@@ -200,18 +196,12 @@
         
         Route::get('/qrcode/{id}/download', [ActivityController::class, 'downloadQrCode'])->name('manager.activity.qrcode.download');
 
+        // ฟังก์ชันสุ่มและจัดการแบบประเมินของ Manager
         Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])->name('manager.assessment.random');
-        
-        Route::get('/assessment/{id}/random', [AssessmentController::class, 'randomReward'])
-            ->name('manager.assessment.random');
-            
-        Route::post('/assessment/{id}/spin', [AssessmentController::class, 'spin'])
-            ->name('manager.assessment.spin');
+        Route::post('/assessment/{id}/spin', [AssessmentController::class, 'spin'])->name('manager.assessment.spin');
 
         Route::get('/history_random/{assessment_id}', [SpinresultController::class, 'managerindex'])->name('manager.history_random');
         Route::post('/spinresult/{id}/receive', [SpinresultController::class, 'receive'])->name('manager.spinresult.receive');
-
-
 
         Route::get('/button_senditgmail/{assessment_id}', [SpinresultController::class, 'managersenditgmail'])->name('manager.senditgmail');
         Route::post('/senditgmail/resend/{id}', [SpinresultController::class, 'resendone'])->name('manager.senditgmail.resendone');

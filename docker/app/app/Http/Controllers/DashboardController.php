@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Reward;
 use App\Models\User;
 use App\Models\AssessmentRespondent;
+use App\Models\EventRewardDraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,7 +61,7 @@ class DashboardController extends Controller
         $totalassessed = AssessmentRespondent::count();
         $assessedtoday = AssessmentRespondent::where('created_at', '>=', $thisstart)->count();
 
-        //กรอบที่ 3 สุ่มทั้งหมดรวมทั้งสองหน้าเทียบช่วงล่าสุดกับช่วงก่อนหน้า
+        //กรอบที่ 3 สุ่มทั้งหมดรวมทุกหน้าเทียบช่วงล่าสุดกับช่วงก่อนหน้า
         $totalspin = $this->countspin($start);
         $spinthis = $this->countspin($thisstart);
         $spinlast = $this->countspin($laststart, $lastend);
@@ -91,7 +92,7 @@ class DashboardController extends Controller
             }
             $values[] = $this->countspin($bstart, $bend);
         }
-        //ของขวัญยอดนิยม รวมจำนวนครั้งที่สุ่มได้ของแต่ละรางวัลจากสองตาราง
+        //ของขวัญยอดนิยม รวมจำนวนครั้งที่สุ่มได้ของแต่ละรางวัลจากสามตาราง
         $counts = [];
 
         $fromspin = Spinresult::selectRaw('reward_id, COUNT(*) as times')
@@ -106,10 +107,23 @@ class DashboardController extends Controller
             ->groupBy('reward_id')
             ->pluck('times', 'reward_id');
 
+        //สุ่มรางวัลอย่างเดียวที่ไม่มีรายชื่อ (เก็บไว้ที่ event_reward_draws)
+        $fromdraw = EventRewardDraw::selectRaw('reward_id, COUNT(*) as times')
+            ->where('drawn_at', '>=', $start)
+            ->groupBy('reward_id')
+            ->pluck('times', 'reward_id');
+
         foreach ($fromspin as $rewardid => $times) {
             $counts[$rewardid] = $times;
         }
         foreach ($fromevent as $rewardid => $times) {
+            if (isset($counts[$rewardid])) {
+                $counts[$rewardid] += $times;
+            } else {
+                $counts[$rewardid] = $times;
+            }
+        }
+        foreach ($fromdraw as $rewardid => $times) {
             if (isset($counts[$rewardid])) {
                 $counts[$rewardid] += $times;
             } else {
@@ -180,18 +194,21 @@ class DashboardController extends Controller
         ]);
     }
 
-    //นับจำนวนการสุ่มของทั้งสองหน้า ช่วงเวลาเป็น [from, to] คือรวมทั้ง from และ to
+    //นับจำนวนการสุ่มของทุกหน้า (assessment อยู่ spin_results, random_reward อยู่ event_registrations, สุ่มรางวัลล้วนอยู่ event_reward_draws)
+    //ช่วงเวลาเป็น [from, to] คือรวมทั้ง from และ to
     private function countspin($from, $to = null)
     {
         $a = Spinresult::where('created_at', '>=', $from);
         $b = EventRegistration::where('is_drawn', 1)->where('drawn_at', '>=', $from);
+        $c = EventRewardDraw::where('drawn_at', '>=', $from);
 
         if ($to) {
             $a->where('created_at', '<=', $to);
             $b->where('drawn_at', '<=', $to);
+            $c->where('drawn_at', '<=', $to);
         }
 
-        return $a->count() + $b->count();
+        return $a->count() + $b->count() + $c->count();
     }
 
     //คำนวณว่าเพิ่มขึ้นหรือลดลงกี่เปอร์เซ็นต์ เทียบกับช่วงก่อนหน้า

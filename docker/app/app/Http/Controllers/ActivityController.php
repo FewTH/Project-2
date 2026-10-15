@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\EventRegistration;
+use App\Models\EventRewardDraw;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -433,6 +434,15 @@ class ActivityController extends Controller
                     ->updateExistingPivot($data['reward_id'], [
                         'quantity_selected' => DB::raw('quantity_selected - 1'),
                     ]);
+            }
+
+            // สุ่มรางวัลอย่างเดียว ไม่มีรายชื่อ เก็บผลไว้ที่ตารางนี้ เอาไว้นับในแดชบอร์ด
+            if (empty($data['registration_id']) && !empty($data['reward_id'])) {
+                EventRewardDraw::create([
+                    'event_id'  => $event->event_id,
+                    'reward_id' => $data['reward_id'],
+                    'drawn_at'  => now(),
+                ]);
             }
         });
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>แบบประเมิน/กิจกรรม</title>
     <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
     <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
@@ -200,7 +201,7 @@
                     @endif
                 </p>
                 <p class="message-create-by">
-                    สร้างโดย: {{$assessment->create_by_name ?? '-'}}
+                    สร้างโดย: {{$assessment->created_by_name ?? '-'}}
                     ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
                 </p>
                 @if($assessment->wheelAssessment)
@@ -243,42 +244,32 @@
     <form id="frame-choose-evaluation">
     <div class="message-choose-evaluation-1">
         <p class="message-evaluation-1">แบบประเมิน</p>
+        {{-- จะเติม option ด้วย JS ที่เขียนไว้อัตโนมัต --}}
         <select name="evaluationformid" id="Evaluation_formid" class="evaluation-formid">
-            <option  value="" disabled selected >— เลือกแบบประเมิน —</option>
-            <option value="1" class="assessmentform">แบบประเมินความพึงพอใจ BUU Book Fair 2569</option>
-            <option value="2">แบบประเมินบุคคลากรในห้องสมุดประจำปี 2569</option>
-            <option value="3">แบบประเมินความพึงพอใจความสะอาดของห้องสมุด</option>
+            <option value="" disabled selected>- กำลังโหลดข้อมูล -</option>
         </select>
     </div>
 
         <div class="assigngivemanager">
             <p class="message-assigngivemanager">มอบหมายให้ผู้จัดการ</p>     
-            <div class="frame-checkbox-name">
-                <label class="message-checkbox-name">
-                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="1" >ศุภากร วงศ์
-                </label>
-                <label class="message-checkbox-name">
-                    <input type="checkbox" class="checkboxgivemanager" name="position[]" value="2" >วชิรวัทย์
-                </label>
+            <div class="frame-checkbox-name" id="checkboxContainer">
+                {{-- เติมรายชื่อ manager ที่เขียนไว้ใน JS อัติโนมัต  --}}
+                <p class="loading-text">กำลังโหลดรายชื่อManager...</p>
             </div>
         </div>
 
     <hr class="linepopupevaluation">
     <div class="btn-cancel-btn-confirm">
         <button type="button" class="btn-cancel-evaluation" id="btn_cancel_evaluation1">
-           <spna class="btn-cancel-evaluation-1">ยกเลิก</spna>
+           <span class="btn-cancel-evaluation-1">ยกเลิก</span>
         </button>
         <button type="submit" class="btn-confirm-evaluation" id="btn_confirm_evaluation"  disabled>
-            <spna class="btn-confirm-evaluation-1">ยืนยันการมอบหมาย</spna>
+            <span class="btn-confirm-evaluation-1">ยืนยันการมอบหมาย</span>
         </button>
-
     </div>
     </form>
 </dialog>
-
 </div>
-
-
 
     <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
 </body>
