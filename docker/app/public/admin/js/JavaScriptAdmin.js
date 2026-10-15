@@ -1488,4 +1488,29 @@ updatenumberstatussendemail();
 
 
 
+
+//ส่วนของหน้า dashboard.blade.php
+//ปุ่มเปลี่ยนช่วงเวลาของหน้า dashboard
+const buttonday = document.getElementById('button-day');
+const buttonweek = document.getElementById('button-week');
+const buttonmonth = document.getElementById('button-month');
+
+if (buttonday){
+    buttonday.addEventListener('click', function(){
+        window.location.href = '?range=day';
+    });
+}
+if (buttonweek){
+    buttonweek.addEventListener('click', function(){
+        window.location.href = '?range=week';
+    });
+}
+if (buttonmonth){
+    buttonmonth.addEventListener('click', function(){
+        window.location.href = '?range=month';
+    });
+}
+
+
+
 });

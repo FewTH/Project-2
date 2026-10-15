@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Reward;
 use App\Models\User;
 use App\Models\AssessmentRespondent;
+use App\Models\Assessment;
 use App\Models\EventRewardDraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,6 +72,10 @@ class DashboardController extends Controller
         $openevents = Event::where('status', 'open')->where('register_close_at', '>', now())->count();
         $newevents = Event::where('created_at', '>=', $thisstart)->count();
         
+        //กรอบที่ 5 แบบประเมินที่เปิดอยู่ กับที่เพิ่มเข้ามาใหม่ในช่วงนี้
+        $openassess = Assessment::where('is_open', 1)->count();
+        $newassess = Assessment::where('created_at', '>=', $thisstart)->count();
+
         //ข้อมูลกราฟ วนทีละช่วงแล้วนับจำนวนการสุ่ม ช่วงไหนไม่มีข้อมูลจะได้ 0
         $labels = [];
         $values = [];
@@ -191,6 +196,8 @@ class DashboardController extends Controller
             'emailsent' => $emailsent,
             'emailfailed' => $emailfailed,
             'emailpending' => $emailpending,
+            'openassess' => $openassess,
+            'newassess' => $newassess,
         ]);
     }
 

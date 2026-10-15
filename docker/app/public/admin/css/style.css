@@ -350,7 +350,7 @@
   /*กรอบของผู้ใช้*/
   .alluser_frames{
     background-color: #fdfbf5;
-    flex: 1 1 300px;
+    flex: 1 1 280px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -378,7 +378,7 @@
   /*กรอบของผู้ทำแบบประเมิน*/
   .assessmentframe{
     background-color: #fdfbf5;
-    flex: 1 1 300px;
+    flex: 1 1 280px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -406,7 +406,7 @@
   /*กรอบของสุ่มทั้งหมด*/
   .randomall{
     background-color: #fdfbf5;
-    flex: 1 1 300px;
+    flex: 1 1 280px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
@@ -434,7 +434,7 @@
   /*กรอบของรอรับของขวัญ*/
   .framewaitreceiveaward{
     background-color: #fdfbf5;
-    flex: 1 1 300px;
+    flex: 1 1 280px;
     height: 235px;
     border-radius: 20px;
     box-shadow: 0 6px 14px rgba(0,0,0,0.22);
