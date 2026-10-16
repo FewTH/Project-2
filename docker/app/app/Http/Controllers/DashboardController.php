@@ -35,6 +35,7 @@ class DashboardController extends Controller
             $lastend = now()->subDay()->endOfDay();
             $newtext = 'คนวันนี้';
             $comparetext = 'จากเมื่อวาน';
+            $thistext = 'วันนี้';
         }elseif ($range == 'week'){
             $amount = 8;
             $charttitle = 'การสุ่มรายสัปดาห์ — 8 สัปดาห์ล่าสุด';
@@ -44,6 +45,7 @@ class DashboardController extends Controller
             $lastend = now()->subWeek()->endOfWeek();
             $newtext = 'คนสัปดาห์นี้';
             $comparetext = 'จากสัปดาห์ก่อน';
+            $thistext = 'สัปดาห์นี้';
         }else{
             $amount = 6;
             $charttitle = 'การสุ่มรายเดือน — 6 เดือนล่าสุด';
@@ -53,6 +55,7 @@ class DashboardController extends Controller
             $lastend = now()->startOfMonth()->subMonthNoOverflow()->endOfMonth();
             $newtext = 'คนเดือนนี้';
             $comparetext = 'จากเดือนก่อน';
+            $thistext = 'เดือนนี้';
         }
         //กรอบที่ 1 ผู้ใช้ทั้งหมดนับทุก role กับคนที่เพิ่มมาใหม่ในช่วงนี้
         $totalusers = User::count();
@@ -198,6 +201,8 @@ class DashboardController extends Controller
             'emailpending' => $emailpending,
             'openassess' => $openassess,
             'newassess' => $newassess,
+            'spinthis' => $spinthis,
+            'thistext' => $thistext,
         ]);
     }
 

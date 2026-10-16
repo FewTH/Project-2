@@ -134,7 +134,7 @@
             </div>
             <!--ตัวเลขบอกการสุ่มเมื่อวานก่อน-->
             <div class="numberotherday">
-                <p id="number_other_day"> {{ $spinchange >= 0 ? '+ ' : '- ' }}{{ abs($spinchange) }} % {{ $comparetext }}</p>
+                <p id="number_other_day">สุ่ม{{ $thistext }} {{ $spinthis }} ครั้ง</p>
             </div>
         </div>
 
@@ -317,10 +317,10 @@
         <hr class="blackline-5">
     <div class="randomtoday-1">
         <div class="randomtoday">
-            <p>การสุ่มวันนี้</p>
+            <p>การสุ่ม{{ $thistext }}</p>
         </div>
         <div class="fromyesterday" id="from_yesterday">
-            <h4 class="from_yesterday-1" id="from_yesterday1">{{ $spinchange >= 0 ? '↗ +' : '↘ ' }}{{ $spinchange }} % {{ $comparetext }}   </h4>
+            <h4 class="from_yesterday-1" id="from_yesterday1">{{ number_format($spinthis) }} ครั้ง</h4>
         </div>
         </div>
     </div>
@@ -330,6 +330,7 @@
 <script>
     const chartLabels = @json($labels);
     const chartValues = @json($values);
+    const chartRange = @json($range);
 </script>
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
     </body>

@@ -1516,6 +1516,16 @@ if (buttonmonth){
 const graphcanvas = document.getElementById('graph');
 
 if (graphcanvas && typeof chartLabels !== 'undefined'){
+
+    //ค่าสูงสุดของแกน y และระยะห่างของเส้นตาราง แยกตามช่วง
+    const yconfig = {
+        day:   { max: 100,  step: 20 },
+        week:  { max: 500,  step: 100 },
+        month: { max: 1000, step: 200 }
+    };
+    const currentrange = (typeof chartRange !== 'undefined') ? chartRange : 'day';
+    const ysetting = yconfig[currentrange] || yconfig.day;
+
     new Chart(graphcanvas, {
         type: 'line',
         data: {
@@ -1540,10 +1550,10 @@ if (graphcanvas && typeof chartLabels !== 'undefined'){
             scales: {
                 y: {
                     beginAtZero: true,
-                    suggestedMax: 100,
+                    suggestedMax: ysetting.max,
                     ticks: {
                         precision: 0,
-                        stepSize: 20
+                        stepSize: ysetting.step
                     }
                 }
             }

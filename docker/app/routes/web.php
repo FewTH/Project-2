@@ -71,6 +71,8 @@
 
         // ระบบจัดการกิจกรรม
         Route::get('/assessment', [AssessmentController::class, 'index'])->name('admin.assessment');
+
+        Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
         Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
         Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
@@ -180,6 +182,8 @@
 
         // แบบประเมินและกิจกรรม (ให้ชี้มาที่ AssessmentController@index เพื่อกรองตาม assigned_to)
         Route::get('/assessment', [AssessmentController::class, 'index'])->name('manager.assessment');
+
+        Route::get('/assessment', [ActivityController::class, 'managerIndex'])->name('manager.assessment');
 
         Route::get('/create_activity', [ActivityController::class, 'managerCreate'])->name('manager.create_activity');
         Route::post('/create_activity', [ActivityController::class, 'managerStore'])->name('manager.create_activity.store');
