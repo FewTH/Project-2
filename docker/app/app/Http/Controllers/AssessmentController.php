@@ -182,8 +182,8 @@ class AssessmentController extends Controller
                 
                 $view = 'manager.assessment';
         }else {
-            // Admin จะเห็นแบบประเมินทั้งหมด
-            $assessments = Assessment::with('wheelAssessment.wheel.rewards')->get();
+            // Admin จะเห็นแบบประเมินที่ยังไม่ถูกมอบหมายทำแบบนี้เพราะไม่อยากให้Admin สับสน
+            $assessments = Assessment::with('wheelAssessment.wheel.rewards')->whereNull('assigned_to')->get();
             $events = Event::with('wheel.rewards', 'registrations')->get();
 
             $view = 'admin.assessment';

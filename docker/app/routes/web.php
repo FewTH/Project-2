@@ -70,7 +70,7 @@
         Route::post('/assessments/assign', [AssessmentController::class, 'storeAssignment'])->name('admin.assessments.assign');
 
         // ระบบจัดการกิจกรรม
-        Route::get('/assessment', [ActivityController::class, 'index'])->name('admin.assessment');
+        Route::get('/assessment', [AssessmentController::class, 'index'])->name('admin.assessment');
         Route::get('/create_activity', [ActivityController::class, 'create'])->name('admin.create_activity');
         Route::post('/create_activity', [ActivityController::class, 'store'])->name('admin.create_activity.store');
 
