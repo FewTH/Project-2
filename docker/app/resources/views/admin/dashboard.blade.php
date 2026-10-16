@@ -65,13 +65,14 @@
             <h1>แดชบอร์ดภาพรวม</h1>
         </div>
     <!--ปุ่มกดวัน สัปดาห์ เดือน -->
-        <div class="ButtonDate">
-            <div class="btn-day" id="button-day">
-            <button type="button" class="btn-day-1">วัน</button>
-            </div>
-            <button type="button" class="btn-week" id="button-week">สัปดาห์</button>
-            <button type="button" class="btn-month" id="button-month">เดือน</button>
-        </div>
+    @php
+    $range = request('range', 'day'); // ถ้าไม่มีค่า ให้เป็น day
+    @endphp
+    <div class="ButtonDate">
+        <button type="button" class="btn-date {{ $range === 'day' ? 'active' : '' }}" id="button-day">วัน</button>
+        <button type="button" class="btn-date {{ $range === 'week' ? 'active' : '' }}" id="button-week">สัปดาห์</button>
+        <button type="button" class="btn-date {{ $range === 'month' ? 'active' : '' }}" id="button-month">เดือน</button>
+    </div>
     </div>
     <div id="dashboard_error" class="dashboard-error">
         <div class="dashboard-error-1">
@@ -173,7 +174,9 @@
         <div class="sectionrandom">
             <h2 id="sectionrandom-1">{{ $charttitle }}</h2>
         </div>
-        <canvas class="graph-1" id="graph"></canvas>
+         <div class="graph-box">
+            <canvas id="graph"></canvas>
+        </div>
     </div>
     <!--กรอบของขวัญยอดนิยมปิดแท็บตรงแบตสำรอง-->
     <div class="framesmost_popular">
@@ -323,6 +326,11 @@
     </div>
     </div>
     </div>
-        <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+    const chartLabels = @json($labels);
+    const chartValues = @json($values);
+</script>
+<script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
     </body>
     </html>

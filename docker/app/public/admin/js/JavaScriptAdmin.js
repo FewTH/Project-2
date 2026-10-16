@@ -1512,5 +1512,71 @@ if (buttonmonth){
 }
 
 
+//วาดกราฟเส้นการสุ่มตามช่วงเวลา
+const graphcanvas = document.getElementById('graph');
+
+if (graphcanvas && typeof chartLabels !== 'undefined'){
+    new Chart(graphcanvas, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'จำนวนการสุ่ม',
+                data: chartValues,
+                borderColor: '#10B981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 100,
+                    ticks: {
+                        precision: 0,
+                        stepSize: 20
+                    }
+                }
+            }
+        }
+    });
+}
+
+//ปุ่มกดวันของหน้า dashboard
+const btnday = document.getElementById('button-day')
+
+if (btnday){
+btnday.addEventListener('click', function() {
+    window.location.href = '/admin/dashboard?range=day';
+});
+}
+
+//ปุ่มกดสัปดาห์ของหน้า dashboard
+const btnweek = document.getElementById('button-week')
+
+if (btnweek){
+btnweek.addEventListener('click', function() {
+    window.location.href = '/admin/dashboard?range=week';
+});
+}
+
+//ปุ่มกดเดือนของหน้า dashboard
+const btnmonth = document.getElementById('button-month')
+
+if (btnmonth){
+btnmonth.addEventListener('click', function() {
+    window.location.href = '/admin/dashboard?range=month';
+});
+}
+
 
 });

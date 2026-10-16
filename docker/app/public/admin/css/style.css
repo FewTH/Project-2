@@ -181,84 +181,63 @@
   }
 
   /*ปุ่มกดวัน สัปดาห์ เดือน*/
+  /*ปุ่มกดวัน สัปดาห์ เดือน*/
   .ButtonDate{
     background-color: rgba(184, 177, 164, 0.363);
     border-radius: 10px;
     display: flex;
     flex-wrap: nowrap;
+    gap: 4px;
+    padding: 0;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
 
-  /*ปุ่มวัน*/
-  .btn-day{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /*ปุ่มทุกปุ่ม*/
+  .btn-date{
     position: relative;
-    background-color: #a8731d;
+    min-width: 100px;
+    height: 45px;
+    padding: 0 30px;
+    border: none;
     border-radius: 10px;
+    background: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    z-index: 5;
     overflow: hidden;
+    z-index: 1;
+    transition: background-color 0.3s, color 0.3s;
   }
 
-  /*เอฟเฟ็กต์ของปุ่มวัน*/
-  .btn-day::before{
+  /*เอฟเฟ็กต์วงกลมตอน hover*/
+  .btn-date::before{
     content: "";
-    background-color: #966516;
-    width: 0px;
-    height: 0px;
     position: absolute;
     left: 50%;
     top: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.08);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
+    z-index: -1;
   }
 
-  /*กรอบวงกลมเอฟเฟ็กต์ของปุ่มวัน*/
-  .btn-day:hover::before{
+  .btn-date:hover::before{
     width: 150px;
     height: 150px;
   }
 
-  /*ข้อความปุ่มวัน*/
-  .btn-day-1{
+  /*ปุ่มที่ถูกเลือก*/
+  .btn-date.active{
+    background-color: #a8731d;
     color: #ffffff;
-    padding: 11px 40px;
-    border: none;
-    background: none;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
   }
 
-  /*ปุ่มสัปดาห์*/
-  .btn-week{
-    background: none;
-    border: none;
-    min-width: 100px;
-    height: 45px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    left: 5px;
-  }
-
-  /*ปุ่มเดือน*/
-  .btn-month{
-    background: none;
-    border: none;
-    min-width: 100px;
-    height: 45px;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
+  .btn-date.active::before{
+    background-color: #966516;
   }
 
   /*กรอบเปิดปิดerrorแจ้งตื่นเวลาดึงข้อมูล database ไม่ได้*/
@@ -479,6 +458,17 @@
     align-items: center;
     margin-left: 30px;
     flex-shrink: 0;
+  }
+
+  /*กรอบคุมขนาดกราฟ */
+  .graph-box{
+    position: relative;
+    height: 500px;
+    padding: 0px 30px 20px 30px;
+  }
+
+  .chart-wrap{
+    overflow: hidden;
   }
 
 
