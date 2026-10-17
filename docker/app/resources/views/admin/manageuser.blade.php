@@ -80,13 +80,13 @@
 
 
     <!-- ส่วนเมนูsidebar -->
-    <div class="container2">
+    <div class="container3">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo2">
-        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    <div class="img-Logo3">
+        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img3">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar3">
         <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard3">
             <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img3">
             <span>แดชบอร์ด</span>
