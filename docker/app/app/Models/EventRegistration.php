@@ -18,6 +18,7 @@ class EventRegistration extends Model
         'is_drawn',
         'drawn_at',
         'reward_id',
+        'drawn_by',
     ];
 
     protected $casts = [

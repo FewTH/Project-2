@@ -423,6 +423,7 @@ class ActivityController extends Controller
                         'is_drawn'  => 1,
                         'drawn_at'  => now(),
                         'reward_id' => $data['reward_id'] ?? null,
+                        'drawn_by'  => Auth::user()->user_id,
                     ]);
             }
 
@@ -442,6 +443,7 @@ class ActivityController extends Controller
                     'event_id'  => $event->event_id,
                     'reward_id' => $data['reward_id'],
                     'drawn_at'  => now(),
+                    'drawn_by'  => Auth::user()->user_id,
                 ]);
             }
         });

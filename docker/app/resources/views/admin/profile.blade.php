@@ -19,13 +19,14 @@
         <span>Admin</span>
     </a>
 </div>
+
 <div class="container-1">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo">
-       <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    <div class="img-Logo-1">
+       <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img-1">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar-1">
         <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard-1">
             <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ด" class="btn-Dashboard-img-1">
             <span>แดชบอร์ด</span>
@@ -55,6 +56,7 @@
         </a>
     </div>
 </div>
+
 <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
 <div class="main-content-1">
     <!-- ชื่อโปรไฟล์-->  

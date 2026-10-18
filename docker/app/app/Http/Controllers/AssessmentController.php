@@ -8,6 +8,7 @@ use App\Models\Spinresult;
 use App\Models\AssessmentAssignment;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Event;
@@ -119,6 +120,7 @@ class AssessmentController extends Controller
         return Spinresult::create([
             'reward_id' => $winnerReward->reward_id,
             'assessment_id'=> (int) $id,
+            'drawn_by' => Auth::user()->user_id,
             'qr_code' => (string) Str::uuid(), //เป็นการสร้าง qr_codeแบบจำลองไว้ก่อน
             'winner_name'=> $winnerRespondent->full_name,
             'winner_email'=> $winnerRespondent->email,

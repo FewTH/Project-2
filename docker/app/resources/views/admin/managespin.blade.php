@@ -27,12 +27,14 @@
 
     <div class="main-spn-box">
         <div class="reward-spn-list">
+            <div class="Ttopic-wheel">
+                <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
+            </div>
             {{-- ช่องค้นหารางวัล --}}
             <div class="search-box-spn">
                 <input type="text" class="search-spn-input">
                 <img src="{{ asset('admin/img/search.png')}}" class="search-spn-icon" alt="รูปแว่นขยาย">
             </div>
-            <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
         {{-- หัวข้อด้านบน --}}
         <div class="topic-spn-list">
             <h4 class="spn-name">ชื่อรางวัล</h4>
@@ -53,9 +55,11 @@
 
             {{-- ปุ่มเพิ่มกับลดจำนวนของรางวัล --}}
             <div class="select-re-qnty">
-                <button type="button" class="qnty-plus">+</button>
-                <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
-                <button type="button" class="qnty-minus">-</button>
+                <div class="quantity-stepper">
+                    <button type="button" class="qnty-plus">+</button>
+                    <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
+                    <button type="button" class="qnty-minus">-</button>
+                </div>
                 <input type="checkbox" class="reward-check-box" id="reward-{{$reward->reward_id}}">
                 <label for="reward-{{$reward->reward_id}}" class="checkbx-reward"></label>
             </div>

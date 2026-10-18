@@ -60,7 +60,9 @@ class SpinresultController extends Controller
         $spinresults = Spinresult::with('reward')->where('assessment_id', $assessment_id)->latest()->get();
 
         //หาข้อมูลแบบประเมินนี้ เอาไว้แสดงชื่อบนลิงค์หน้าเว็บ
-        $assessment = Assessment::findOrFail($assessment_id);
+        $assessment = app(AssessmentApi::class)->find((int) $assessment_id);
+
+        abort_if(!$assessment, 404);
 
         //กรองเฉพาะรายการที่ส่งล้มเหลว เอาไว้โชว์ในกล่องรายการที่ล้มเหลว
         $failedlist = $spinresults->where('email_status', 'failed');

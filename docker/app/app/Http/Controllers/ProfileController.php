@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Spinresult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -16,12 +18,36 @@ class ProfileController extends Controller
         return Auth::user();
     }
 
+    //นับจำนวนครั้งที่ผู้ใช้คนนี้กดสุ่ม ใช้กับ admin และ manager
+    //รวม 3 ที่: สุ่มแบบประเมิน (spin_results), สุ่มกิจกรรมที่มีรายชื่อ (event_registrations), สุ่มกิจกรรมเฉพาะรางวัล (event_reward_draws)
+    private function drawsBy($user)
+    {
+        return Spinresult::where('drawn_by', $user->user_id)->count()
+             + DB::table('event_registrations')->where('drawn_by', $user->user_id)->count()
+             + DB::table('event_reward_draws')->where('drawn_by', $user->user_id)->count();
+    }
+
+    //นับจำนวนรางวัลที่ผู้ใช้คนนี้ได้ (จับจากอีเมลผู้ชนะ)
+    private function rewardsWon($user)
+    {
+        if (empty($user->email)) {
+            return 0;
+        }
+
+        return Spinresult::where('winner_email', $user->email)->count();
+    }
+
 
     //ส่วนของ user
-    //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ user
+    //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ user (มีแค่จำนวนรางวัลที่ได้)
     public function userProfile()
     {
-        return view('user.profile', ['user' => $this->getUser()]);
+        $user = $this->getUser();
+
+        return view('user.profile', [
+            'user'       => $user,
+            'rewardsWon' => $this->rewardsWon($user),
+        ]);
     }
 
     //แสดงข้อมูลหน้าแก้ไขข้อมูล user
@@ -41,17 +67,22 @@ class ProfileController extends Controller
     //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ admin
     public function adminProfile()
     {
-        return view('admin.profile', ['user' => $this->getUser()]);
+        $user = $this->getUser();
+
+        return view('admin.profile', [
+            'user'       => $user,
+            'totalDraws' => $this->drawsBy($user),
+            'rewardsWon' => $this->rewardsWon($user),
+        ]);
     }
 
     //แสดงข้อมูลหน้าแก้ไขข้อมูล admin
     public function adminEditForm()
     {
-
         return view('admin.edit_information', ['user' => $this->getUser()]);
     }
 
-     //แสดงข้อมูลหน้าเปลี่ยนรหัสผ่าน admin
+    //แสดงข้อมูลหน้าเปลี่ยนรหัสผ่าน admin
     public function adminchangePassword()
     {
         return view('admin.change_password', ['user' => $this->getUser()]);
@@ -62,7 +93,13 @@ class ProfileController extends Controller
     //แสดงข้อมูลโปรไฟล์ของผู้ใช้ของ manager
     public function managerProfile()
     {
-        return view('manager.profile',['user' => $this->getUser()]);
+        $user = $this->getUser();
+
+        return view('manager.profile', [
+            'user'       => $user,
+            'totalDraws' => $this->drawsBy($user),
+            'rewardsWon' => $this->rewardsWon($user),
+        ]);
     }
 
     //แสดงข้อมูลหน้าแก้ไขข้อมูล manager
@@ -76,12 +113,12 @@ class ProfileController extends Controller
     {
         return view('manager.change_password', ['user' => $this->getUser()]);
     }
-    
+
 
     // ส่วนของ user admin ใช่ร่วมกัน
     // บันทึกข้อมูลที่แก้ไข
-    public function editinformation(Request $request) 
-    {   
+    public function editinformation(Request $request)
+    {
         // เอาไว้ลบขีดออกก่อนเพื่อมีคนใส่มาเดียวค่ามันเพี้ยน
         if ($request->filled('phone')){
             $cleandash = str_replace(['-', ' '], '', $request['phone']);
@@ -98,7 +135,7 @@ class ProfileController extends Controller
                 'phone.digits' => 'เบอร์โทรต้องมีความยาว 10 ตัวอักษร',
         ]);
 
-      
+
         //หาuser ที่จะแก้ไขแล้วให้มันอัพเดทข้อมูลใน database แล้วส่ง return กลับมา
         $user = $this->getUser();
         $user->update($data);
@@ -106,7 +143,7 @@ class ProfileController extends Controller
     }
 
     // บันทึกการเปลี่ยนรหัสผ่าน
-    public function changePassword(Request $request) 
+    public function changePassword(Request $request)
     {
         $request->validate([
             'current_password' => 'required',

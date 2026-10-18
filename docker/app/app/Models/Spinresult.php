@@ -22,6 +22,7 @@ class Spinresult extends Model
         'checked_by_user_id',
         'email_status',
         'email_sent_at',
+        'drawn_by',
         ];
 
     protected $casts = [
@@ -45,6 +46,11 @@ class Spinresult extends Model
         return $this->belongsTo(User::class, 'checked_by_user_id', 'user_id');
     }
 
+    // user ที่กดสุ่ม
+    public function drawnbyuser()
+    {
+    return $this->belongsTo(User::class, 'drawn_by', 'user_id');
+    }
 
 
 }
