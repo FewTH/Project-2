@@ -69,43 +69,42 @@
     </div>
     </form>
 </div>
-
-<!-- ส่วนเมนูsidebar -->
-    <div class="container2">
+    <!-- ส่วนเมนูsidebar -->
+    <div class="container-mngrewrd">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo2">
-        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    <div class="img-Logo-mngrewrd">
+        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img-mngrewrd">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
-        <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard2">
-            <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img2">
+    <div class="btn-Sidebar-mngrewrd">
+        <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard-mngrewrd">
+            <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img-mngrewrd">
             <span>แดชบอร์ด</span>
         </a>
-        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards2">
-            <img src="{{ asset('admin/img/รูปจัดการรางวัลสีดำ.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img2">
+        <a href="{{ url('admin/managereward') }}" class="btn-Manage_Rewards-mngrewrd">
+            <img src="{{ asset('admin/img/รูปจัดการรางวัลสีดำ.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Manage_Rewards-img-mngrewrd">
             <span>จัดการรางวัล</span>
         </a>
-        <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users2">
-            <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img2">
+        <a href="{{ url('admin/manageuser') }}" class="btn-Manage_users-mngrewrd">
+            <img src="{{ asset('admin/img/รูปจัดการผู้ใช้.png') }}" alt="รูปติดต่อเรา" class="btn-Manage_users-img-mngrewrd">
             <span>จัดการผู้ใช้</span>
         </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel2">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img2">
+        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel-mngrewrd">
+            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img-mngrewrd">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('admin/assessment') }}" class="btn-Assessment2">
-            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img2">
+        <a href="{{ url('admin/assessment') }}" class="btn-Assessment-mngrewrd">
+            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img-mngrewrd">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout2">
-            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img2">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout">
+            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
             <span>ออกจากระบบ </span>
         </a>
     </div>
-</div>
-</body>
+    </div>
+
 </html>

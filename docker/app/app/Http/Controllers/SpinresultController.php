@@ -6,6 +6,7 @@ use App\Models\Spinresult;
 use App\Models\Assessment;
 use Illuminate\Http\Request;
 use App\Mail\RewardNotification;
+use App\Services\AssessmentApi;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -21,11 +22,12 @@ class SpinresultController extends Controller
     //แสดงหน้ารายชื่อผู้ได้รับรางวัล
     public function index($assessment_id, $role = 'admin')
     {
-        //ดึงข้อมูลผลการสุ่มทั้งหมด พร้อมกับข้อมูลของรางวัลที่ผูกกันไว้
         $spinresults = Spinresult::with('reward')->where('assessment_id', $assessment_id)->latest()->get();
 
-        //หาข้อมูลแบบประเมินนี้ เอาไว้แสดงชื่อบนลิงค์หน้าเว็บเป็น id
-        $assessment = Assessment::findOrFail($assessment_id);
+        //หาแบบประเมินจาก API (ไม่ได้อยู่ในตาราง assessments แล้ว)
+        $assessment = app(AssessmentApi::class)->find((int) $assessment_id);
+
+        abort_if(!$assessment, 404);
 
         return view($role . '.history_random', [
             'assessment'  => $assessment,

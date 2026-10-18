@@ -4,45 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WheelAssessment;
-use App\Models\Assessment;
-use App\Models\AssessmentRespondent;
 use App\Models\Spinresult;
+use App\Models\AssessmentAssignment;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Event;
+// ประกาศเพื่อให้controller ไปเรียก Api มาได้
+use App\Services\AssessmentApi;
+
 
 class AssessmentController extends Controller
 {
-    public function availableAssessments()
+    private function attachWheels($list)
     {
-        // ดึงรายชื่อ assessment_id ที่ถูกผูกกับวงล้อไปแล้ว (ทุกวงล้อ ไม่ใช่แค่วงล้อนี้)
-        $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->toArray();
+        $wheels = WheelAssessment::with('wheel.rewards')
+            ->whereIn('assessment_id', $list->pluck('assessment_id'))
+            ->get()->keyBy('assessment_id');
+
+        return $list->each(function ($a) use ($wheels) {
+            $a->wheelAssessment = $wheels->get($a->assessment_id);
+            $a->WheelAssessment = $a->wheelAssessment;
+        });
+    }
+    
+    public function availableAssessments(AssessmentApi $api)
+    {
+        // ดึงรายชื่อ assessment_id ที่ถูกผูกกับวงล้อไปแล้ว
+        $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->all();
         
         // เอาเฉพาะอันที่ยังไม่เคยถูกเพิ่มวงล้อออกมา
-        $available = Assessment::whereNotIn('assessment_id',$usedAssessmentIds)
-        ->where('is_open',1)
-        ->get()
+        $available = $api->all()
+        ->filter(fn($a) => $a->is_open && !in_array($a->assessment_id, $usedAssessmentIds))
         ->map(fn($a)=>[
             'id'=>$a->assessment_id,
             'name'=>$a->name,
             'created_by'=>$a->created_by_name,
             'closed_at'=>$a->closed_at?->format('d M Y'),
-        ]);
+        ])->values();
 
         return response()->json($available);
     }
-    public function randomreward($id)
+    public function randomreward($id, AssessmentApi $api)
     {
-        $assessment=Assessment::with('wheelAssessment.wheel.rewards')->findOrfail($id);
-        // ถ้าแบบประเมินนี้ยังไม่มีวงล้อจะแสดงข้อความไม่พบวงล้อ
-        if(!$assessment->wheelAssessment){
-            return back()->with('error', 'แบบประเมินนี้ไม่พบวงล้อรางวัล');
+        $assessment = $api->find((int) $id);
+        abort_if(!$assessment, 404); 
+        $assessment = $this->attachWheels(collect([$assessment]))->first();
+        
+        // ถ้าไม่มีวงล้อในแบบประเมินจะแสดงข้อความตามนี้
+        if (!$assessment->wheelAssessment) {
+            return back()->with('error', 'แบบประเมินนี้ยังไม่มีวงล้อรางวัล');
         }
         $wheel = $assessment->wheelAssessment->wheel;
-        $respondents = AssessmentRespondent::where('assessment_id',$id)
-            ->where('is_drawn',0)
-            ->get();
+        $respondents = $api->respondents((int) $id)->where('is_drawn', 0)->values();
         
         // เป็นการให้ตัวแปรนี้เก็บค่า role ของผู้ใช้และเมื่อมีการเรียกใช้หน้านี้ก็จะถูกเช็คว่าคนที่เรียกใช้อยู่ในrole อะไร
         $view = auth()->user()->role === 'manager' ? 'manager.spinwheel' : 'admin.spinwheel';
@@ -53,13 +68,13 @@ class AssessmentController extends Controller
         ]);
     }
     // ฟังก์ชันนี้ทำหลายอย่างมากตั้งแต่สุ่มวงล้อแล้วลดจำนวนรางวัลกับบันทึกลงดา้ตาเบส
-    public function spin($id)
+    public function spin($id, AssessmentApi $api)
     {
-        $assessment = Assessment::with('wheelAssessment.wheel.rewards')->findOrFail($id);
-        if (!$assessment->wheelAssessment){
-            return response()->json(['success'=>false,'message'=>'ไม่พบวงล้อรางวัล'],422);
+        $wheelAssessment = WheelAssessment::with('wheel.rewards')->where('assessment_id', $id)->first();
+        if (!$wheelAssessment) {
+            return response()->json(['success' => false, 'message' => 'ไม่พบวงล้อรางวัล'], 422);
         }
-        $wheel = $assessment->wheelAssessment->wheel;
+        $wheel = $wheelAssessment->wheel;
         
         //อันนี้ไว้ตรวจดูของรางวัลในวงล้อ
         $availableRewards = $wheel->rewards->filter(fn($r)=>$r->pivot->quantity_selected > 0);
@@ -68,15 +83,14 @@ class AssessmentController extends Controller
         }
 
         // ไว้เช็ครายชื่อที่ยังเหลืออยู่
-        $availableRespondents = AssessmentRespondent::where('assessment_id',$id)
-            ->where('is_drawn',0)
-            ->get();
+        $availableRespondents = $api->respondents((int) $id)->where('is_drawn',0)->values();
+        
         if ($availableRespondents->isEmpty()){
             return response()->json(['success'=> false, 'message'=>'รายชื่อถูกสุ่มหมดแล้ว'],422);
         }
         // อันนี้จะเป็นส่วนของการสุ่ม
         $totalWeight = $availableRewards->sum(fn($r)=> $r->rate * $r->pivot->quantity_selected);
-        $randomPoint = mt_rand(1,(int) ($totalWeight*100))/100;
+        $randomPoint = mt_rand(1, max(1, (int) ($totalWeight * 100))) / 100;
         $cumulative = 0;
         $winnerReward = null;
         foreach ($availableRewards as $reward){
@@ -90,21 +104,21 @@ class AssessmentController extends Controller
         // อันนี้จะสุ่มรายชื่อผู้ทำแบบประเมินนั้นๆ
         $winnerRespondent = $availableRespondents->random();
         
-        $spinResult = DB::transaction(function () use ($wheel,$winnerReward,$winnerRespondent,$assessment){
+        $spinResult = DB::transaction(function () use ($wheel,$winnerReward,$winnerRespondent,$id){
             // อันนี้จะเป็นส่วนที่คอยลดจำนวนรางวัลในวงล้อทุกครั้งที่มีการกดสุ่ม
             $wheel -> rewards()->updateExistingPivot($winnerReward->reward_id, [
                 'quantity_selected'=>$winnerReward->pivot->quantity_selected -1,
             ]);
 
         // อันนี้เป็นการอัพเดตค่าผู้ที่ทำแบบประเมินว่าคนที่ถูกสุ่มได้จะมีสถานะเป็น is_drawn เป็น 1
-        $winnerRespondent->update([
-            'is_drawn'=> 1,
-            'drawn_at'=> now(),
-        ]);
+        // $winnerRespondent->update([
+        //     'is_drawn'=> 1,
+        //     'drawn_at'=> now(),
+        // ]);
 
         return Spinresult::create([
             'reward_id' => $winnerReward->reward_id,
-            'assessment_id'=> $assessment->assessment_id,
+            'assessment_id'=> (int) $id,
             'qr_code' => (string) Str::uuid(), //เป็นการสร้าง qr_codeแบบจำลองไว้ก่อน
             'winner_name'=> $winnerRespondent->full_name,
             'winner_email'=> $winnerRespondent->email,
@@ -113,6 +127,16 @@ class AssessmentController extends Controller
             'checked_by_user_id' => null,
         ]);
     });
+
+    // บันทึกผลสำเร็จแล้วค่อยแจ้ง API ถ้าเจ๊งให้เก็บ log ไว้
+     try {
+        $api->markDrawn($winnerRespondent->respondent_id);
+     }catch (\Throwable $e){
+        \Log::error('markDrawn failed',[
+            'respondent_id' => $winnerRespondent->respondent_id,
+            'error' => $e->getMessage(),
+        ]);
+     }
     // อันนี้ประมาณว่าส่งข้อมูลที่เหลือหลังจากสุ่มกลับไปวาดวงล้อใหม่
     $remainingRewards = $wheel->rewards()->get()
     ->filter(fn($r) => $r->pivot->quantity_selected > 0)
@@ -123,9 +147,8 @@ class AssessmentController extends Controller
         'quantity_selected' => $r->pivot->quantity_selected, 
     ])->values();
     // ****
-    $remainingRespondents = AssessmentRespondent::where('assessment_id', $assessment->assessment_id)
-        ->where('is_drawn',0)
-        ->get()
+    $remainingRespondents = $availableRespondents
+        ->where('respondent_id', '!=', $winnerRespondent->respondent_id)
         ->map(fn($r) => ['id' => $r->respondent_id,'label' => $r->full_name])
         ->values();
     
@@ -140,22 +163,22 @@ class AssessmentController extends Controller
     ]);
     }
     // ฟังก์ชันนี้ก็ประมาณว่าดึงแบบบประเมินที่ยังไม่มีวงล้อทั้งหมดมาแสดงที่popupพร้อมรายชื่อmanager
-    public function getAssignData()
+    public function getAssignData(AssessmentApi $api)
     {
         // สร้างตัวแปรนี้มาเพื่อดักจับแบบประเมินที่ผูกวงล้อแล้ว
-        $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->toArray();
+        $used = WheelAssessment::pluck('assessment_id')
+        ->merge(AssessmentAssignment::pluck('assessment_id'))
+        ->all();
 
         // ส่วนนี้จะดึงแบบประเมินที่ยังไม่ได้ผูกวงล้อและยังไม่ได้ถูกมอบหมาย
-        $assessments = Assessment::whereNotIn('assessment_id', $usedAssessmentIds)
-            ->whereNull('assigned_to')
-            ->where('is_open', 1)
-            ->get()
-            ->map(fn($a) => [
-            'id' => $a->assessment_id,
-            'name' => $a->name,
+        $assessments = $api->all()
+        ->filter(fn($a) => $a->is_open && !in_array($a->assessment_id, $used))
+        ->map(fn($a) => [
+            'id'         => $a->assessment_id,
+            'name'       => $a->name,
             'created_by' => $a->created_by_name,
-            'closed_at' => $a->closed_at ? \Carbon\Carbon::parse($a->closed_at)->format('d M Y') : '-',
-        ]);
+            'closed_at'  => $a->closed_at ? $a->closed_at->format('d M Y') : '-',
+        ])->values();
 
             // ดึงรายชื่อคนที่เป็น manager ในระบบทั้งหมดมา
             $managers = User::where('role', 'manager')->get()->map(fn($m)=>[
@@ -168,49 +191,55 @@ class AssessmentController extends Controller
                 'managers' => $managers
             ]);
     }
-    public function index()
-    {
-        // ส่วนนี้ใช้เพื่อเช็ค role ของผู้ใช้
-        $user = auth()->user();
-        if ($user->role === 'manager') {
-            // ทำให้managerจะเห็นแค่แบบประเมมินที่ถูกadminมอบหมาสยให้เท่านั้น
-            $assessments = Assessment::with('wheelAssessment.wheel.rewards')
-                ->where('assigned_to', $user->user_id)
-                ->get();
 
-                $events = Event::with('wheel.rewards','registrations')->get();
-                
-                $view = 'manager.assessment';
-        }else {
-            // Admin จะเห็นแบบประเมินที่ยังไม่ถูกมอบหมายทำแบบนี้เพราะไม่อยากให้Admin สับสน
-            $assessments = Assessment::with('wheelAssessment.wheel.rewards')
-                ->whereNull('assigned_to')
-                ->get();
-            $events = Event::with('wheel.rewards', 'registrations')->get();
+    public function index(AssessmentApi $api)
+{
+    $user = auth()->user();
+    $assignments = AssessmentAssignment::pluck('assigned_to', 'assessment_id');
+    $all = $api->all();
 
-            $view = 'admin.assessment';
-        }
-        return view($view, compact('assessments', 'events','user'));
+    if ($user->role === 'manager') {
+        // manager เห็นเฉพาะแบบประเมินที่ admin มอบหมายให้
+        $assessments = $all->filter(fn($a) => ($assignments[$a->assessment_id] ?? null) == $user->user_id)->sortByDesc('assessment_id')->values();
+        $view = 'manager.assessment';
+    } else {
+        // admin เห็นแบบประเมินที่ยังไม่ถูกมอบหมาย
+        $assessments = $all->filter(fn($a) => !isset($assignments[$a->assessment_id]))->sortByDesc('assessment_id')->values();
+        $view = 'admin.assessment';
     }
+    $assessments = $this->attachWheels($assessments);
+
+    $events = Event::with('wheel.rewards', 'registrations')->orderBy('created_at', 'desc')->get();
+
+    $now = Carbon::now();
+    $events->each(function ($event) use ($now) {
+        $closeat = Carbon::parse($event->register_close_at);
+        $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
+    });
+
+    return view($view, compact('assessments', 'events', 'user'));
+}
+    
+    
     // บันทึกการมอบหมายแบบประเมินลงดาต้าเบส
-    public function storeAssignment(Request $request)
+        public function storeAssignment(Request $request, AssessmentApi $api)
     {
-        // ยืนยันว่าข้อมูลครบไหม
         $request->validate([
-            'assessment_id' => 'required|exists:assessments,assessment_id',
-            'manager_id' => 'required|exists:users,user_id',
+            'assessment_id' => 'required|integer',            // ตัด exists:assessments ออก
+            'manager_id'    => 'required|exists:users,user_id',
         ]);
 
-       $assessment = Assessment::findOrFail($request->assessment_id);
-        // บันทึกคนที่รับผิดชอบลง assigned_to
-        $assessment->update([
-            'assigned_to' => $request->manager_id
-        ]);
+    // เช็กว่าแบบประเมินมีอยู่จริงใน API
+    abort_if(!$api->find((int) $request->assessment_id), 404);
 
-        // คืนค่าว่าบันทึกสำเร็จ
+    AssessmentAssignment::updateOrCreate(
+        ['assessment_id' => $request->assessment_id],
+        ['assigned_to'   => $request->manager_id]
+    );
+
         return response()->json([
             'success' => true,
-            'message' => 'มอบหมายแบบประเมินสำเร็จ'
-         ]);
+            'message' => 'มอบหมายแบบประเมินสำเร็จ',
+        ]);
     }
 }

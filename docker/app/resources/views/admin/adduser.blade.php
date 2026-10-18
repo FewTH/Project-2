@@ -65,13 +65,13 @@
 </div>
     
 <!-- ส่วนเมนูsidebar -->
-    <div class="container2">
+    <div class="container3">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo2">
-        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    <div class="img-Logo3">
+        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img3">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar3">
         <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard3">
             <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img3">
             <span>แดชบอร์ด</span>
@@ -84,19 +84,19 @@
             <img src="{{ asset('admin/img/รูปจัดการผู้ใช้สีดำ.png') }}" alt="รูปจัดการผู้ใช้" class="btn-Manage_users-img3">
             <span>จัดการผู้ใช้</span>
         </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img">
+        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel3">
+            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img3">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('admin/assessment') }}" class="btn-Assessment">
-            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img">
+        <a href="{{ url('admin/assessment') }}" class="btn-Assessment3">
+            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img3">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout2">
-            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img2">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout">
+            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
             <span>ออกจากระบบ </span>
         </a>
     </div>

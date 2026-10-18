@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    // ส่วน Api แบบประเมิน
+    'assessment' => [
+        'url' => env('ASSESSMENT_API_URL'),
+        'client_id' => env('ASSESSMENT_API_CLIENT_ID'),
+        'client_secret' => env('ASSESSMENT_API_CLIENT_SECRET'),
+        'user' => env('ASSESSMENT_API_USER'),
+    ],
+
 ];
