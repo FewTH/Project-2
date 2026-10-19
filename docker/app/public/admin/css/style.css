@@ -8208,32 +8208,41 @@
     text-decoration: none;
   }
   /* หน้าจัดการผู้ใช้ */
-  .manageuser-box{
+  /* .manageuser-box{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
+    width: 100%;
+  } */
+  .manageuser-box {
+  padding: 30px 40px;
+  margin-left: 280px;
+  margin-top: 20px; /* เว้นระยะจากแถบด้านบนลงมา */
+  box-sizing: border-box;
   }
   /* หน้าจัดการผู้ใช้ทั้งหมด */
   /* บ็อกหลักของรายชื่อผู้ใช้ทั้งหมด */
   .manageusr-mainbox{
-    background-color: #000000;
-    width: 70%;
+    background-color: #FFFFFF;
+    width: 100%;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-direction: column;
-    margin-top: 5%;
-    left: 2%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
   /* หัวข้อในตารางรายชื่อ */
   .usr-topic{
-    color: #FCD53F;
+    color: #102A50;
     display: grid;
     grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #8A5B10;
+    background-color: #E8F0FB;
+    border-radius: 10px;
   }
   /* ปรับตำแหน่งหัวข้อ ผู้ใช้ */
   .topic-name-usr{
@@ -8251,48 +8260,108 @@
     height: 50px;
     font-size: medium;
     font-weight: bold;
-    position: relative;
-    left: 87%;
-    top: 110px;
+    position: absolute;
+    right: 24px;
+    top: 20px;
     text-decoration: none;
   }
   /* กล่องเสิร์ชรายชื่อ */
   .search-usr-box{
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-top: 20px;
+    margin-left: 2px;
     display: flex;
+    align-items: center;
   }
   .usr-searchbox{
     border-radius: 10px;
-    background-color: #000000;
-    border-color: #EF9F27;
+    background-color: #E8F0FB;
+    border: none;
     color: #A2A2A5;
-    width: 27%;
+    width: 400px;
     height: 50px;
     font-size: 17px;
+    outline: none;
   }
   /* ไอคอนแว่นขยาย */
   .search-usr-png{
     width: 30px;
     height: 30px;
     position: relative;
-    top: 10px;
+    /* top: 10px; */
     right: 40px;
+    pointer-events: none;
   }
-  /* หัวข้อย่อย */
+  /* หัวข้อย่อยรายชื่อผู้ใช้ทั้งหมด */
   .sub-manageuser{
-    position: relative;
-    color: #FFFFFF;
-    left: 24px;
+    margin-bottom: 10px;
+    color: #183153;
+    margin-left: 5px;
   }
+  .sub-manageuser h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
   /* จัดตำแหน่งหัวข้อหลัก */
   .manageusr-title{
     display: flex;
-    position: absolute;
-    color: #4A86E8;
-    left: 15%;
-    top: 10%;
+    justify-content: flex-start;
+    align-items: center;
+    color: #5381EC;
+    font-size: 18px;
+    margin-bottom: 20px;
+    margin-top: 60px;
   }
+  /* list-user */
+  .user-1{
+    display: grid;
+    grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
+    color: #183153;
+    border-bottom:2px solid  #E8F0FB;
+    padding: 10px 10px;
+    align-items: center;
+  }
+
+  /* แต่งพื้นหลังตรง role ของผู้ใช้ */
+  .role-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+/* สไตล์สีสำหรับแต่ละ Role */
+.role-admin {
+  background-color: #F3E8FF;
+  color: #7C3AED;
+}
+.role-manager {
+  background-color: #FEF3C7;
+  color: #D97706;
+}
+.role-user {
+  background-color: #EFF6FF;
+  color: #2563EB;
+}
+
+  .name1{
+    margin-left: 15px;
+  }
+  .manage-btn3{
+    display: flex;
+    align-items: center;
+  }
+  .delete-btn-action{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+
   /* แต่งหน้าเพิ่มชื่อผู้ใช้ */
   .name-usr-box{
     font-size: large;
@@ -8396,24 +8465,6 @@
     height: 650px;
     margin: auto;
     margin-top: 150px;
-  }
-  /* list-user */
-  .user-1{
-    display: grid;
-    grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
-    color: #E1F5EE;
-    border-bottom:1px solid  #6b4b0c;
-    padding: 10px 10px;
-  }
-  .name1{
-    margin-left: 15px;
-  }
-  .manage-btn3{
-    display: flex;
-  }
-  .delete-btn-action{
-    background: none;
-    border: none;
   }
 
 
@@ -8973,6 +9024,10 @@
     padding: 5px 10px;
     color: #000000;
     background-color: #C4A5FF;
+  }
+  .wonglor-text{
+    font-size: large;
+    font-weight: bold;
   }
   /* ปุ่มบันทึกและยกเลิกวงล้อ */
   .btn-manage-wheel{

@@ -75,11 +75,19 @@
     
     {{-- วงล้อสุ่ม --}}
     <div class="main-wheel-spn">
-        <div class="spn-wheel-topic">
-            <h4>วงล้อสุ่มรางวัล</h4>
-            {{-- ตัวนับจำนวนราง --}}
-             <span>จำนวนของรางวัล <span id="slected-count">0</span> รายการ</span>
+        <div class="text-wheel">
+            <div class="logo-topic">
+                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+                <p class="wonglor-text">วงล้อสุ่มของรางวัล</p>
+            </div>
+            <div class="num-reward-box">
+                <span class="num-reward-wheel">
+                    จำนวนรางวัลทั้งหมด <span id="slected-count">0</span>
+                </span>
+            </div>
         </div>
+
+
         {{-- ตัววงล้อ --}}
         <div class="wheel-spn-main">
             <canvas id="wheel-spn-reward" width="500" height="500"></canvas>

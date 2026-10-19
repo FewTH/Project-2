@@ -226,6 +226,7 @@ confirmAssessmentBtn.addEventListener('click', async function () {
         const res = await fetch(storeUrl, {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },

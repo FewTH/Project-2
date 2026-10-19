@@ -28,9 +28,9 @@ class WheelController extends Controller
             'items.*.reward_id'=>'required|exists:reward,reward_id',
             'items.*.quantity_selected'=>'required|integer|min:1',
             'assessment_ids'=>'required|array|min:1',
-            'assessment_ids.*'=>'required|integer|exists:assessments,assessment_id',
+            'assessment_ids.*'=>'required|integer',
         ]);
-
+    
         try{
             DB::transaction(function()use($request){
                 //สร้างวงล้อ

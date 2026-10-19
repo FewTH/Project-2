@@ -19,15 +19,21 @@
         <span>Admin</span>
     </a>
     </div>
+
+
     <div class="manageuser-box">
-        <h1 class="manageusr-title">จัดการสิทธิ์ผู้ใช้งาน</h1>
+        <div class="manageusr-title">
+            <h1>จัดการสิทธิ์ผู้ใช้งาน</h1>
+        </div>
         <!-- บ็อกหลักรายชื่อผู้ใช้ -->
         <div class="manageusr-mainbox">
-            <h3 class="sub-manageuser">รายชื่อผู้ใช้ทั้งหมด</h3>
+            <div class="sub-manageuser">
+                <h3>รายชื่อผู้ใช้ทั้งหมด</h3>
+            </div>
 
             <a href="{{ route('admin.adduser') }}" class="add-usr-btn">
-                <img src="img/ไอคอนบวก.png" alt="ไอคอนเพิ่มผู้ใช้งาน">
-                <span>เพิ่มผู้ใช้งานใหม่</span>
+                {{-- <img src="img/ไอคอนบวก.png" alt="ไอคอนเพิ่มผู้ใช้งาน"> --}}
+                <span>+เพิ่มผู้ใช้งานใหม่</span>
             </a>
             @if(session('success'))
                 <div class="alert-success">
@@ -53,7 +59,15 @@
                 <div class="user-1">
                     <h3 class="name1">{{ $user->full_name }}</h3>
                     <h3 class="email1">{{ $user->email }}</h3>
-                    <h3 class="auth1">{{ $user->role }}</h3>
+                    <div class="auth1">
+                        @if($user->role === 'admin')
+                            <span class="role-badge role-admin">admin</span>
+                        @elseif($user->role === 'manager')
+                            <span class="role-badge role-manager">manager</span>
+                        @else
+                            <span class="role-badge role-user">user</span>
+                        @endif
+                    </div>
                     <h3 class="sts1">{{ $user->is_active ? 'ใช้งานอยู่' : 'ปิดใช้งาน' }}</h3>
                     <div class="manage-btn3">
                         <!-- ปุ่มแก้ไข -->
