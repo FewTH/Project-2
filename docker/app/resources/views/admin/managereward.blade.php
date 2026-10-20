@@ -23,30 +23,34 @@
     <!-- ส่วนเนื้อหาหลัก (Detail) -->
         <div class="detail">
             <!-- หัวข้อหลัก -->
-            <h1 class="maintitle-name">จัดการรางวัล</h1>
-            
-            <div class="searchbox">
+            <div class="judkarnlangwun-text">
+                <h1>จัดการรางวัล</h1>
+            </div>
+
+            <div class="btn-top-rewardbox">
+            {{-- ช่องค้นหา --}}
                 <div class="input-wrapper">
                     <input type="text" class="search-box" placeholder="ค้นหารายการรางวัล">
                     <img src="img/search.png" alt="search-icon" class="search-icon">
                 </div>
-            </div>
+            
             <!-- ปุ่มเพิ่มของรางวัล -->
-                <div class="addbutton">
+                {{-- <div class="addbutton"> --}}
                     <button type="button" class="addreward">
                     <a href="{{ url('admin/addreward') }}" class="addreward-btn">
-                        <img src="img/ไอคอนบวก.png" alt="plusicon" class="plus-icon">
-                        <span class="addrwdtext">เพิ่มของรางวัล</span>
+                        {{-- <img src="img/ไอคอนบวก.png" alt="plusicon" class="plus-icon"> --}}
+                        <span class="addrwdtext">+ เพิ่มของรางวัล</span>
                     </a>
                     </button>
-                </div>
+                {{-- </div> --}}
+            </div>
         <div class="reward-list">
             <div class="topic-rewardlist">
-                <h4 class="topic1">ชื่อของรางวัล</h4>
-                <h4 class="topic2">หมวดหมู่</h4>
-                <h4 class="topic3">อัตราการออก</h4>
-                <h4 class="topic4">จำนวน</h4>
-                <h4 class="topic5">จัดการ</h4>
+                <h3 class="topic1">ชื่อของรางวัล</h3>
+                <h3 class="topic2">หมวดหมู่</h3>
+                <h3 class="topic3 text-center">อัตราการออก</h3>
+                <h3 class="topic4 text-center">จำนวน</h3>
+                <h3 class="topic5 text-center">จัดการ</h3>
             </div>
     <div class="reward-list-name">
     <!-- รายการของรางวัลชิ้นที่ 1 -->
@@ -54,10 +58,10 @@
         <div class="reward-1">
             <h3 class="name_re1">{{ $reward->name }}</h3>
             <h3 class="category_re1">{{ $reward->category->name }}</h3>
-            <h3 class="rate_re1">{{ $reward->rate }}</h3>
-            <h3 class="quantity_re1">{{ $reward->quantity_reward }}</h3>
+            <h3 class="rate_re1 text-center">{{ $reward->rate }}%</h3>
+            <h3 class="quantity_re1 text-center">{{ $reward->quantity_reward }}</h3>
 
-        <div class="manage-btn3">
+        <div class="manage-btn3 justify-center">
              <!-- ปุ่มแก้ไข -->
             <a href="{{ route('admin.reward.edit', $reward->reward_id) }}">
                 <img src="{{ asset('admin/img/editicon.png') }}" alt="รูปปุ่มแก้ไข" class="edit-icon3">
