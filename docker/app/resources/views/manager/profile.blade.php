@@ -99,7 +99,7 @@
             </div>
             <!--การสุ่มทั้งหมด-->
             <div class="Random_number">
-                <h1 id="Random_numberaward">0</h1>
+                <h1 id="Random_numberaward">{{ $totalDraws }}</h1>
             </div>
             <!--ชื่อสุ่มทั้งหมด-->
             <div class="all_random">
@@ -113,7 +113,7 @@
             </div>
             <!--จำนวนรางวัลที่ได้-->
             <div class="Number_of_Reward">
-                <h1 id="number_ofaward">0</h1>
+                <h1 id="number_ofaward">{{ $rewardsWon }}</h1>
             </div>
             <!--ชื่อจำนวนของรางวัล-->
             <div class="Award_Name">

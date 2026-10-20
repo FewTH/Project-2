@@ -92,20 +92,6 @@
     </div> 
     <!-- ฝั่งขวาปิดแท็กตรงชื่อจำนวนของรางวัล--->
     <div class="profile-right">
-        <div class="framerandom_all">
-            <!--สุ่มทั้งหมด-->
-            <div class="random_all"> 
-                <img src="{{ asset('user/img/รูปลูกเต๋า.png') }}" alt="รูปลูกเต๋า" class="random_all-img">
-            </div>
-            <!--การสุ่มทั้งหมด-->
-            <div class="Random_number">
-                <h1 id="Random_numberaward">0</h1>
-            </div>
-            <!--ชื่อสุ่มทั้งหมด-->
-            <div class="all_random">
-                <h4>สุ่มทั้งหมด</h4>
-            </div>
-        </div>
         <div class="frameReward_Box">
             <!--รูปของรางวัล-->
             <div class="Reward_Box">
@@ -113,7 +99,7 @@
             </div>
             <!--จำนวนรางวัลที่ได้-->
             <div class="Number_of_Reward">
-                <h1 id="number_ofaward">0</h1>
+                <h1 id="number_ofaward">{{ $rewardsWon }}</h1>
             </div>
             <!--ชื่อจำนวนของรางวัล-->
             <div class="Award_Name">
