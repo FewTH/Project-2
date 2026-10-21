@@ -64,145 +64,169 @@
 }
 
 /*หน้าต่างเมนู*/
-.container-1 {
-  background-color: #fdfbf4;
+/* เมนูSidebar หน้าจัดการรางวัล */
+  .container-1 {
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
   height: 100vh;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  padding: 20px 14px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  width: 250px;
+  top: 0px;
+  z-index: 11;
+  font-family: 'Kanit', sans-serif;
 }
 
-/*โลโก้ BUULIB*/
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
 .img-Logo {
-  display: flex;
-  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
 }
 
-/* ปุ่มเมนูแดชบอร์ด */
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #718096; 
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar a img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
+
+.btn-Sidebar a:hover img {
+  opacity: 1;
+}
+
+/* เมนูที่กำลังใช้งานอยู่  */
 .btn-managereward1 {
-  display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FCD53F;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
-    color: #000000;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 20px 15px;
-    margin-left: 5px;
-    margin-right: 10px;
-    margin-top: 20px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  background-color: #FEFCBF !important;
+  color: #0f0f0f !important;          
+  font-weight: bold !important;
+  box-shadow: none !important;
+  position: relative;
+  border-radius: 10px !important;
+  padding-right: 50px !important;
 }
 
-/*รูปปุ่มแดชบอร์ด*/
-.btn-Home-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
+.btn-managereward1 img {
+  opacity: 1 !important;
 }
 
-/*ชื่อปุ่มจัดการรางวัล*/
-.btn-Random-1 {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 10px;
+/* แถบสีทองบ่งบอกสถานะด้านขวา */
+.btn-managereward1::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background-color: #D69E2E;
+  border-radius: 4px 0 0 4px;
 }
 
-/*รูปปุ่มจัดการรางวัล*/
-.btn-Random-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
-  .btn-Assessment-assess {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 10px 22px;
-  margin-top: 10px;
-  }
-
-  /*รูปปุ่มแบบประเมิน/กิจกรรม*/
-  .btn-Assessment-img-assess {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-    margin-left: 5px;
-  }
-
-/*กรอบชื่อปุ่มออกจากระบบ*/
+/*  ปุ่มออกจากระบบด้านล่าง */
 .btn-logout-wrapper {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
   margin-top: auto;
 }
 
-/*ชื่อปุ่มออกจากระบบ*/
 .btn-logout {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #d39b00;
-  width: 250px;
-  height: 55px;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
   text-decoration: none;
-  color: #D31313;
-  font-weight: 1000;
   font-size: 20px;
-  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-/*รูปปุ่มออกจากระบบ*/
 .btn-logout-img {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
+}
+
+.btn-logout:hover {
+  background-color: #FED7D7;
 }
 
 .detail {
-      /* padding: 30px 40px; */
-      /* box-sizing: border-box; */
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      padding-top: 60px;
+      padding: 30px 40px;
+      box-sizing: border-box;
+      margin-left: 280px;
   }
 
   /* หัวข้อจัดการรางวัล */
   .maintitle-name {
-      color: #4A86E8;
-      font-size: 28px;
-      font-weight: bold;
-      position: absolute;
-      margin-right: 65%;
-      top: 100px;
-      margin-left: 100px;
-      
-  }
-  .searchbox {
+      width: 100%;
       display: flex;
-      margin-top: 200px;
+      justify-content: flex-start;
       align-items: center;
-      margin-right: 650px;
+      color: #5381EC;
+      font-size: 18px;
+      margin-bottom: 20px;
+      margin-top: 80px;
+  }
+  .btn-top-rewardbox {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: space-between;
       margin-bottom: 10px;
   }
 
@@ -214,13 +238,14 @@
 
   /* ช่องพิมพ์ค้นหาสีดำ */
   .search-box {
-      width: 400px;
+      width: 100%;
       height: 55px;
-      background-color: #000000;
-      color: #FCD53F;
+      background-color: #8EC5FF;
+      color: #000000;
       border: none;
       border-radius: 8px;
-      padding: 10px 40px 10px 15px;
+      padding-left: 15px;
+      padding-right: 40px;
       font-size: large;
       outline: none;
       box-sizing: border-box;
@@ -231,17 +256,18 @@
       top: 50%;
       transform: translateY(-50%);
       width: 16px;
+      pointer-events: none;
   }
 
   /* ปุ่มเพิ่มของรางวัล */
-  .addbutton{
+  /* .addbutton{
       display: flex;
       justify-content: flex-end;
       width: 300px;                
       margin-top: 10px;
       margin-bottom: 15px;
       margin-left: 700px;
-  }
+  } */
   .addreward-btn{
       border-radius: 10px;
       color: #000000;
@@ -249,34 +275,39 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-
+      box-sizing: border-box;
   }
   .addreward {
-      background-color: #FCD535;
+      background-color: #2563EB;
+      border: none;
       border-radius: 8px;
       display: flex;
       cursor: pointer;
+      transition: background-color 0.2s;
+  }
+  .addreward:hover {
+    background-color: #8EC5FF;
   }
 
-  .plus-icon {
+  /* .plus-icon {
       width: 14px;
       height: 14px;
       margin-right: 10px;
-  }
+  } */
 
   .addrwdtext {
-      color: #000000;
+      color: #FFFFFF;
       font-weight: bold;
       font-size: large;
   }
 
   .reward-list {
       margin-bottom: 100px;
-      width: 60%;
-      background-color: #f2ebaa;
+      width: 100%;
+      background-color: #FFFFFF;
       border-radius: 10px;
-      border-color: #000000;
-      border: 1px solid #000000;
+      box-sizing: border-box;
+      box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
   /* จัดการแสดงรายการของรางวัล */
   .reward-list-name{
@@ -290,10 +321,20 @@
       display: grid;
       grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
       padding: 0 20px 12px 20px;
-      color: #000000;
+      background-color: #E8F0FB;
+      color: #183153;
+      padding-top: 10px;
       font-weight: bold;
       font-size: larger;
-      border-bottom: 2px solid #000;
+      border-bottom: 1px solid #E8F0FB;
+      margin: 0;
+  }
+  /* ปรับตำแหน่งหัวข้อ */
+  .text-center{
+    text-align: center;
+  }
+  .justify-center{
+    justify-content: center;
   }
 
   .topic-rewardlist {
@@ -306,18 +347,12 @@
       grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr; 
       align-items: center;
       padding: 15px 20px;
-      border-bottom: 2px solid #FCD535;
+      border-bottom: 1px solid #E8F0FB;
   }
-
-  .box-reward1 {
-      display: grid;
-      /* grid-template-co 2.5fr 1.5fr 2fr 1fr 1fr; */
-      align-items: center;
-      background-color: #262626;
-      color: #ffffff;
-      border-radius: 12px;
-      padding: 18px 20px;
-      
+  .reward-1 h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: normal;
   }
   .no-data{
     display: flex;

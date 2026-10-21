@@ -81,125 +81,152 @@ body.no-scroll {
 }
 
 /*แถบเมนูด้านซ้าย*/
-.Top_frame {
+/* .Top_frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
+} */
+
+/* เมนูSidebar หน้าจัดการรางวัล */
+  .container-1 {
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
+  height: 100vh;
+  padding: 20px 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
+  z-index: 11;
+  font-family: 'Kanit', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 25;
 }
 
-/*หน้าต่างเมนู*/
-.container-1 {
-  background-color: #fdfbf4;
-  height: 100vh;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
+.img-Logo {
+  text-align: center;
+  margin-bottom: 24px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: fixed;
-  width: 250px;
+  gap: 30px;
 }
-
-/*โลโก้ BUULIB*/
-.img-Logo {
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-}
-
-/* ปุ่มเมนูแดชบอร์ด */
-.btn-Home-1 {
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
+  color: #718096; 
   font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 30px;
-}
-
-/*รูปปุ่มแดชบอร์ด*/
-.btn-Home-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มจัดการรางวัล*/
-.btn-Random-1 {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
   font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
 }
 
-/*รูปปุ่มจัดการรางวัล*/
-.btn-Random-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar a img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
 }
 
-/*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
-  .btn-Assessment-assess {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FCD53F;
-    border-radius: 40px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 20px;
-    color: #000000;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 15px 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 15px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  }
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
 
-  /*รูปปุ่มแบบประเมิน/กิจกรรม*/
-  .btn-Assessment-img-assess {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-    margin-left: 5px;
-  }
+.btn-Sidebar a:hover img {
+  opacity: 1;
+}
 
-/*กรอบชื่อปุ่มออกจากระบบ*/
+/* เมนูที่กำลังใช้งานอยู่  */
+.btn-Assessment-assess {
+  background-color: #FEFCBF !important;
+  color: #0f0f0f !important;          
+  font-weight: bold !important;
+  box-shadow: none !important;
+  position: relative;
+  border-radius: 10px !important;
+  padding-right: 50px !important;
+}
+
+.btn-Assessment-assess img {
+  opacity: 1 !important;
+}
+
+/* แถบสีทองบ่งบอกสถานะด้านขวา */
+.btn-Assessment-assess::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background-color: #D69E2E;
+  border-radius: 4px 0 0 4px;
+}
+
+/*  ปุ่มออกจากระบบด้านล่าง */
 .btn-logout-wrapper {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
   margin-top: auto;
 }
 
-/*ชื่อปุ่มออกจากระบบ*/
 .btn-logout {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #d39b00;
-  width: 250px;
-  height: 55px;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
   text-decoration: none;
-  color: #D31313;
-  font-weight: 1000;
   font-size: 20px;
-  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
-/*รูปปุ่มออกจากระบบ*/
 .btn-logout-img {
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
+}
+
+.btn-logout:hover {
+  background-color: #FED7D7;
 }
 
   /*หัวข้อแบบประเมินของหน้าแบบประเมิน/กิจกรรม*/

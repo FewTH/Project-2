@@ -60,12 +60,14 @@
 
     <div class="main-spn-box">
         <div class="reward-spn-list">
-            {{-- ช่องค้นหารางวัล --}}
-            <div class="search-box-spn">
-                <input type="text" class="search-spn-input">
-                <img src="{{ asset('admin/img/search.png')}}" class="search-spn-icon" alt="รูปแว่นขยาย">
+            <div class="Ttopic-wheel">
+                <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
             </div>
-            <h4 class="descrip-title">เลือกของรางวัลจากคลัง</h4>
+        {{-- ช่องค้นหารางวัล --}}
+        <div class="search-box-spn">
+            <input type="text" class="search-spn-input">
+            <img src="{{ asset('admin/img/search.png')}}" class="search-spn-icon" alt="รูปแว่นขยาย">
+        </div>
         {{-- หัวข้อด้านบน --}}
         <div class="topic-spn-list">
             <h4 class="spn-name">ชื่อรางวัล</h4>
@@ -86,9 +88,11 @@
 
             {{-- ปุ่มเพิ่มกับลดจำนวนของรางวัล --}}
             <div class="select-re-qnty">
-                <button type="button" class="qnty-plus">+</button>
-                <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
-                <button type="button" class="qnty-minus">-</button>
+                <div class="quantity-stepper">
+                    <button type="button" class="qnty-plus">+</button>
+                    <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
+                    <button type="button" class="qnty-minus">-</button>
+                </div>
                 <input type="checkbox" class="reward-check-box" id="reward-{{$reward->reward_id}}">
                 <label for="reward-{{$reward->reward_id}}" class="checkbx-reward"></label>
             </div>
@@ -104,11 +108,18 @@
     
     {{-- วงล้อสุ่ม --}}
     <div class="main-wheel-spn">
-        <div class="spn-wheel-topic">
-            <h4>วงล้อสุ่มรางวัล</h4>
-            {{-- ตัวนับจำนวนราง --}}
-             <span>จำนวนของรางวัล <span id="slected-count">0</span> รายการ</span>
+        <div class="text-wheel">
+            <div class="logo-topic">
+                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+                <p class="wonglor-text">วงล้อสุ่มของรางวัล</p>
+            </div>
+            <div class="num-reward-box">
+                <span class="num-reward-wheel">
+                    จำนวนรางวัลทั้งหมด <span id="slected-count">0</span>
+                </span>
+            </div>
         </div>
+
         {{-- ตัววงล้อ --}}
         <div class="wheel-spn-main">
             <canvas id="wheel-spn-reward" width="500" height="500"></canvas>

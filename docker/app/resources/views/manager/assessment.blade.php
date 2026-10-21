@@ -22,7 +22,6 @@
     </div>
 
     <!--กล่องครอบเมนูปิดแท็กตรงปุ่มออกจากระบบ-->
-    <div class="Top_frame">
         <div class="container-1">
     <!-- โลโกมหาลัย -->
     <div class="img-Logo">
@@ -51,7 +50,6 @@
             </a>
         </div>
     </div>
-</div>
     
     <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
 <div class="main-content">
