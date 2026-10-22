@@ -43,4 +43,13 @@ return [
         'user' => env('ASSESSMENT_API_USER'),
     ],
 
+    // ส่วนAPI User Account
+    'apilib' => [
+        'url' => env('APILIB_URL'),
+        'client_id' => env('APILIB_CLIENT_ID'),
+        'client_secret' => env('APILIB_CLIENT_SECRET'),
+        'provision_key' => env('APILIB_PROVISION_KEY'),
+        'user' => env('APILIB_USER'),
+    ],
+
 ];

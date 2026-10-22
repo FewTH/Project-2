@@ -25,7 +25,7 @@ class RewardController extends Controller
             'category_id'     => $request->category_id,
             'rate'         => $request->rate,
             'quantity_reward' => $request->quantity_reward ,
-            'created_by' => 1,
+            'created_by' => auth()->id(),
         ]);
         
         // สร้างตัวแปรนี้มาเพื่อเอาไว้เช็ค role ว่ามี request มาจาก role อะไร

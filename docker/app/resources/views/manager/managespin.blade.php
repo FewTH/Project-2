@@ -53,9 +53,10 @@
         </div>
     </div>
 </div>
-
+{{-- บ็อกหลักที่ครอบเนื้อหาทั้งหมด --}}
+    <div class="manage-wheel-container">
     <div class="wheel-mainspn-topic">
-        <h1 class="main-spn-topic">จัดการวงล้อสุ่ม</h1>
+        <h1>จัดการวงล้อสุ่ม</h1>
     </div>
 
     <div class="main-spn-box">
@@ -65,7 +66,7 @@
             </div>
         {{-- ช่องค้นหารางวัล --}}
         <div class="search-box-spn">
-            <input type="text" class="search-spn-input">
+            <input type="text" class="search-spn-input" placeholder="ค้นหารายการางวัล">
             <img src="{{ asset('admin/img/search.png')}}" class="search-spn-icon" alt="รูปแว่นขยาย">
         </div>
         {{-- หัวข้อด้านบน --}}
@@ -129,6 +130,7 @@
             <button type="button" class="submit-wheel-reward" id="submit-btn-wheel">บันทึก</button>
             <button type="button" class="cancle-wheel-btn" id="cancle-btn-wheel">ยกเลิก</button>
         </div>
+    </div>
     </div>
     </div>
     

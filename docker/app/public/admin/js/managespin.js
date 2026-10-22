@@ -172,6 +172,30 @@ savebtn.addEventListener('click',async function(){
     // เปิดป้อปอัป
     assessmentModal.style.display = 'flex';
 });
+
+// ช่องค้นหา
+    const searchin = document.querySelector('.search-spn-input');
+
+    if (searchin) {
+        searchin.addEventListener('input', function(e){
+            const keyboard = e.target.value.toLowerCase().trim(); //ใช้ทำให้ข้อมูลที่พิมพ์บังคับเป็นพิมพ์เล็ก
+            const rewardRows = document.querySelectorAll('.reward-wheel-1'); // ดึงของรางวัลทั้งหมด
+
+            rewardRows.forEach(row => {
+                // ดึงรางวัลจาก data-name ที่เก็บค่ารางวัลใน .blade.php
+                const rewardName = row.dataset.name ? row.dataset.name.toLowerCase() : '';
+                // เงื่อนไขจะแสดงเมื่อคำที่พิมพ์ตรงกับรางวัลที่มีในระบบ
+                if (rewardName.includes(keyboard)) {
+                    // ประมาณว่าถ้าเจอคำที่ค้นหาจะเอารายการรางวัลที่ซ่อนไว้ออกมาแสดง
+                    row.classList.remove('is-hidden');
+                } else {
+                    // แต่ถ้าไม่เจอก็จะซ่อนรายการรางวัลทั้งกหมด
+                    row.classList.add('is-hidden');
+                }
+            })
+        })
+    }
+
 // checkbox 
 function renderAssessmentList(assessments) {
     assessmentListBodyn1.innerHTML = ''; // เคลียร์ของเก่าก่อนทุกครั้ง
@@ -236,7 +260,7 @@ confirmAssessmentBtn.addEventListener('click', async function () {
             })
         });
         
-        // ตรวจสอบว่า Server ตอบกลับมาสำเร็จหรือไม่ (HTTP 200 OK)
+        // ตรวจสอบว่า Server ตอบกลับมาสำเร็จหรือไม่
         if (!res.ok) {
             alert(`เกิดข้อผิดพลาดจาก Server (HTTP Status: ${res.status})`);
             return;
