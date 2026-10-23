@@ -32,8 +32,8 @@
             <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img4">
             <span>หน้าหลัก</span>
         </a>
-        <a href="{{ url('user/spin') }}" class="btn-Random4">
-            <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img4">
+        <a href="{{ url('user/spin') }}" class="btn-Random2">
+            <img src="{{ asset('user/img/Randomสีดำ.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img2">
             <span>สุ่มของรางวัล</span>
         </a>
         <a href="{{ url('user/contact') }}" class="btn-Contact4">
@@ -54,8 +54,51 @@
 <div class="main-content-1">
     <!-- ชื่อโปรไฟล์-->  
     <div class="My_Profile">
-        <h1>โปรไฟล์ของฉัน</h1>
+        <h1>ผลการสุ่ม</h1>
     </div>
+
+   @forelse($history as $item)
+    @if($item->reward)
+    <div class="framebigrandomresult">
+        <p class="sectionrandomresult">ยินดีด้วย คุณได้รับรางวัล</p>
+        <p class="reward-name">เรียน คุณ <span class="reward-name1">{{ $item->winner_name }}</span></p>
+        <div class="framemessagereceiverewards">
+            <span class="messagereceiverewards">คุณได้รับรางวัลจาการสุ่มรางวัล กรุณาแสดง QR Code ด้านล่าง</span>
+            <span class="messagereceiverewards">เพื่อรับของรางวัล</span>
+        </div>
+        <hr class="linemessagereceiverewards">
+        <div class="framenamereward">
+            <p class="messagenamereward">รางวัล</p>
+            <p class="namereward">{{ $item->reward->name }}</p>
+        </div>
+        <hr class="linemessagereceiverewards">
+        <div class="framecodereceiveitems">
+            <p class="messagecodereceiveitems">รหัสรับรางวัล</p>
+            <p class="codereceiveitems">{{ $item->qr_code }}</p>
+        </div>
+        <div class="reward-qr">
+            {!! QrCode::size(300)->generate($item->qr_code) !!}
+            <p>สแกนหรือแสดง QR Code นี้ที่จุดรับรางวัล</p>
+        </div>
+    </div>
+    @else
+    <div class="framebigrandomresult">
+        <p class="sectionrandomresult">ขอบคุณที่ร่วมกิจกรรม</p>
+        <p class="reward-name">เรียน คุณ <span class="reward-name1">{{ $item->winner_name }}</span></p>
+        <p class="messagereceiverewards">คุณถูกสุ่มรายชื่อในรอบนี้ แต่กิจกรรมนี้ไม่มีของรางวัล ขอบคุณที่เข้าร่วมกิจกรรม</p>
+    </div>
+    @endif
+@empty
+    <div class="framebigrandomresult">
+        @if($isDrawn)
+            <p class="sectionrandomresult">ขอบคุณที่ร่วมกิจกรรม</p>
+            <p class="messagereceiverewards">การสุ่มรอบนี้เสร็จสิ้นแล้ว ครั้งนี้คุณไม่ได้อยู่ในรายชื่อผู้ถูกสุ่ม ขอบคุณที่เข้าร่วมกิจกรรม</p>
+        @else
+            <p class="sectionrandomresult">ยังไม่มีผลการสุ่ม</p>
+            <p class="messagereceiverewards">รายการนี้ยังไม่ได้สุ่มรางวัล กรุณารอประกาศผลจากผู้ดูแลระบบ</p>
+        @endif
+    </div>
+@endforelse
 </div>
 </body>
 </html>

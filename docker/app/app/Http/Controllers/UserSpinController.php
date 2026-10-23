@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use App\Services\AssessmentApi;
 use App\Models\Spinresult;
 
@@ -24,23 +23,10 @@ class UserSpinController extends Controller
 
         $email = strtolower(trim((string) $user->email));
 
-        // log ชั่วคราว: ดู email ที่ login และจำนวนแบบประเมินที่ API ส่งมา
-        Log::info('spin debug', [
-            'user_email'  => $email,
-            'assessments' => $allAssessments->count(),
-        ]);
-
         $userAssessments = [];
 
         foreach ($allAssessments as $assessment) {
             $respondents = $this->assessmentApi->respondents($assessment->assessment_id);
-
-            // log ชั่วคราว: ดูรายชื่อ email ผู้ตอบของแต่ละแบบประเมิน
-            Log::info('spin respondents', [
-                'assessment_id' => $assessment->assessment_id,
-                'count'         => $respondents->count(),
-                'emails'        => $respondents->pluck('email')->all(),
-            ]);
 
             $matchedRespondent = $respondents->first(
                 fn($r) => strtolower(trim((string) $r->email)) === $email
@@ -59,11 +45,21 @@ class UserSpinController extends Controller
 
     public function history($id)
     {
-        $history = \App\Models\Spinresult::with('reward')
+        $user  = Auth::user();
+        $email = strtolower(trim((string) $user->email));
+
+        $history = Spinresult::with('reward')
             ->where('assessment_id', $id)
-            ->where('user_id', auth()->id())
+            ->whereRaw('LOWER(TRIM(winner_email)) = ?', [$email])
+            ->latest()
             ->get();
 
-        return view('user.history_random_spin', compact('history'));
+        $respondent = $this->assessmentApi->respondents((int) $id)
+            ->first(fn($r) => strtolower(trim((string) $r->email)) === $email);
+
+        $isDrawn = (bool) ($respondent->is_drawn ?? false)
+            || Spinresult::where('assessment_id', $id)->exists();
+
+        return view('user.history_random_spin', compact('history', 'user', 'isDrawn'));
     }
 }

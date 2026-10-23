@@ -59,7 +59,7 @@
             </p>
 
             <a href="{{ route('user.spin.history', $assessment->assessment_id) }}" class="view-history">
-                <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                <p class="message-view-history">ดูผลการสุ่ม</p>
             </a>
         </div>
     </div>
