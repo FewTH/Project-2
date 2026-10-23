@@ -27,97 +27,145 @@ body.no-scroll {
 }
 
 /*หน้าต่างเมนู*/
-.container {
-  background-color: #fdfbf4;
-  width: 250px;
+/* เมนูSidebar หน้าจัดการรางวัล */
+  .container-contact{
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
   height: 100vh;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  padding: 20px 14px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  z-index: 6;
-}
-
-/*โปรไฟล์ผู้ใช้*/
-.btn-user-wrapper {
-  background-color: #F3D577;
+  top: 0px;
+  z-index: 11;
+  font-family: 'Kanit', sans-serif;
   position: fixed;
   top: 0;
-  left: 0px;
-  right: 0;
-  height: 57px;
-  display: flex;
-  justify-content: flex-end;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  z-index: 5;
-  min-width: 1000px;
+  left: 0;
+  z-index: 25;
 }
 
-/*ชื่อปุ่มหน้าหลัก*/
-.btn-Home {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-}
-
-/*รูปปุ่มหน้าหลัก*/
-.btn-Home-img {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มสุ่มของรางวัล*/
-.btn-Random {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 10px;
-}
-
-/*รูปปุ่มสุ่มของรางวัล*/
-.btn-Random-img {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มติดต่อเรา*/
-.btn-Contact {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #000000;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  background-color: #FCD53F;
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
+.img-Logo-contact {
+  text-align: center;
+  margin-bottom: 24px;
   margin-top: 20px;
-  margin-left: 10px;
-  padding-left: 5px;
-  max-width: 230px;
-  max-height: 70px;
-  border-radius: 40px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  display: flex;
+  justify-content: center;
+}
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
 }
 
-/*รูปปุ่มติดต่อเรา*/
-.btn-Contact-img {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar-contact {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar-contact a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #718096; 
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar-contact a img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar-contact a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
+
+.btn-Sidebar-contact a:hover img {
+  opacity: 1;
+}
+
+/* เมนูที่กำลังใช้งานอยู่  */
+.btn-Contact3 {
+  background-color: #FEFCBF !important;
+  color: #0f0f0f !important;          
+  font-weight: bold !important;
+  box-shadow: none !important;
+  position: relative;
+  border-radius: 10px !important;
+  padding-right: 50px !important;
+}
+
+.btn-Contact3 img {
+  opacity: 1 !important;
+}
+
+/* แถบสีทองบ่งบอกสถานะด้านขวา */
+.btn-Contact3::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background-color: #D69E2E;
+  border-radius: 4px 0 0 4px;
+}
+
+/*  ปุ่มออกจากระบบด้านล่าง */
+.btn-logout-wrapper3 {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
+  margin-top: auto;
+}
+
+.btn-logout3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn-logout3-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
+}
+
+.btn-logout3:hover {
+  background-color: #FED7D7;
 }
 
 /*หัวข้อของหน้าเว็บ สำนักหอสมุดมหาวิทยาลัยบูรพา (BUULIB) */
@@ -890,7 +938,44 @@ body.no-scroll {
 }
 
 
+/*โปรไฟล์ผู้ใช้*/
+  .btn-user-wrapper {
+    background-color: #F3D577;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    right: 0;
+    height: 57px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+    min-width: 1000px;
+    z-index: 10;
+  }
 
+/*ชื่อผู้ใช้*/
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #8A5B10;
+  font-weight: 1000;
+  font-size: 20px;
+  padding: 6px 0px 6px 0px;
+  margin-right: 35px;
+}
+
+/*รูปโปรไฟล์ผู้ใช้*/
+.btn-user-img {
+  width: 50px;
+  height: 50px;
+  background-color: #8A5B10;
+  border: 3px solid #d39b00;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
 
 /*ส่วนของหน้า Profile.html*/
 /*เอาไว้ควบคุมส่วนกลางของเว็บ*/
@@ -947,113 +1032,122 @@ body.no-scroll {
 /*แถบเมนูด้านซ้าย*/
 .Top_frame {
   position: fixed;
-    z-index: 16;
+  z-index: 16;
 }
 
 /*หน้าต่างเมนู*/
-.container-1 {
-  background-color: #fdfbf4;
+/* เมนูSidebar หน้าโปรไฟล์ */
+  .container-profile{
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
   height: 100vh;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  padding: 20px 14px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  width: 250px;
+  top: 0px;
+  z-index: 11;
+  font-family: 'Kanit', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
 }
 
-/*โลโก้ BUULIB*/
-.img-Logo{
-  padding: 20px 0px 26px 0px;
-}
-
-/* ปุ่มเมนูแดชบอร์ด */
-.btn-Home-1 {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 30px;
-}
-
-/*รูปปุ่มแดชบอร์ด*/
-.btn-Home-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มจัดการรางวัล*/
-.btn-Random-1 {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 10px;
-}
-
-/*รูปปุ่มจัดการรางวัล*/
-.btn-Random-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*ชื่อปุ่มจัดการผู้ใช้*/
-.btn-Contact-1 {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 10px;
-}
-
-/*รูปปุ่มจัดการผู้ใช้*/
-.btn-Contact-img-1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-
-/*กรอบชื่อปุ่มออกจากระบบ*/
-.btn-logout-wrapper {
-  margin-top: auto;
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
+.img-Logo {
+  text-align: center;
+  margin-bottom: 24px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 }
-
-/*ชื่อปุ่มออกจากระบบ*/
-  .btn-logout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #d39b00;
-  width: 250px;
-  height: 55px;
-  text-decoration: none;
-  color: #D31313;
-  font-weight: 1000;
-  font-size: 20px;
-  border-radius: 5px;
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
 }
 
-/*รูปปุ่มออกจากระบบ*/
-.btn-logout-img {
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar-profile {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar-profile a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #718096; 
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar-profile a img {
   width: 40px;
   height: 40px;
-  margin-right: 15px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar-profile a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
+
+.btn-Sidebar-profile a:hover img {
+  opacity: 1;
+}
+
+/*  ปุ่มออกจากระบบด้านล่าง */
+.btn-logout-wrapper4 {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
+  margin-top: auto;
+}
+
+.btn-logout4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn-logout4-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
+}
+
+.btn-logout4:hover {
+  background-color: #FED7D7;
 }
 
 /*โปรไฟล์*/
@@ -2444,76 +2538,147 @@ body.no-scroll {
   justify-content: center;
 }
 /* Sidebar ของHome */
-/*หน้าต่างเมนู*/
-.container-home {
-  background-color: #fdfbf4;
+/* เมนูSidebar หน้าจัดการรางวัล */
+  .container-home {
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
   height: 100vh;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  padding: 20px 14px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
   position: fixed;
-  top: 0%;
-  width: 250px;
+  top: 0px;
   z-index: 11;
+  font-family: 'Kanit', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
 }
-/*โลโก้ BUULIB*/
-.img-Logo-home{
-  padding: 20px 0px 26px 0px;
+
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
+.img-Logo-home {
+  text-align: center;
+  margin-bottom: 24px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
-/*ชื่อปุ่มหน้าหลัก*/
-.btn-Home1{
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar-home {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar-home a {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #000000;
-  font-weight: bold;
+  color: #718096; 
   font-size: 20px;
-  padding: 20px 0px;
-  background-color: #FCD53F;
-  margin-top: 20px;
-  margin-left: 10px;
-  padding-left: 5px;
-  max-width: 230px;
-  max-height: 70px;
-  border-radius: 40px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  position: relative;
-  bottom: 10px;
-}
-/*รูปปุ่มหน้าหลัก*/
-.btn-homelogo-img1 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
 }
 
-/*กรอบชื่อปุ่มออกจากระบบ*/
-.btn-logout-wrapper{
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar-home a img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar-home a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
+
+.btn-Sidebar-home a:hover img {
+  opacity: 1;
+}
+
+/* เมนูที่กำลังใช้งานอยู่  */
+.btn-Home1 {
+  background-color: #FEFCBF !important;
+  color: #0f0f0f !important;          
+  font-weight: bold !important;
+  box-shadow: none !important;
+  position: relative;
+  border-radius: 10px !important;
+  padding-right: 50px !important;
+}
+
+.btn-Home1 img {
+  opacity: 1 !important;
+}
+
+/* แถบสีทองบ่งบอกสถานะด้านขวา */
+.btn-Home1::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background-color: #D69E2E;
+  border-radius: 4px 0 0 4px;
+}
+
+/*  ปุ่มออกจากระบบด้านล่าง */
+.btn-logout-wrapper1 {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
   margin-top: auto;
 }
 
-/*ชื่อปุ่มออกจากระบบ*/
-.btn-logout1{
+.btn-logout1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #d39b00;
-  width: 250px;
-  height: 55px;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
   text-decoration: none;
-  color: #D31313;
-  font-weight: 1000;
   font-size: 20px;
-  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
-/*รูปปุ่มออกจากระบบ*/
-.btn-logout-img1{
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
+
+.btn-logout1-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
 }
+
+.btn-logout1:hover {
+  background-color: #FED7D7;
+}
+
 /* แต่งหน้า Home ทั้งหมด */
 .main-content{
   display: flex;
@@ -2659,104 +2824,145 @@ body.no-scroll {
 }
 /* Sidebar ของSpin */
 /*หน้าต่างเมนูของหน้า Spin*/
-.container-spin {
-  background-color: #fdfbf4;
+/* เมนูSidebar หน้าจัดการรางวัล */
+  .container-spin {
+  background-color: #FAFAFA;
+  border-right: 1px solid #c7c4c4;
+  width: 280px;
+  height: 100vh;
+  padding: 20px 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0px;
   z-index: 11;
-  width: 250px;       
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-  position: absolute;
-  top: 0%;
-  left: 0%;
+  font-family: 'Kanit', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
 }
 
-/*โลโก้ BUULIB*/
-.img-Logo-spin{
-  width: 150px;
-  height:250px;
-  display: flex;
-  align-items: center;
-  margin-left: 30px;
-}
-/*ชื่อปุ่มหน้าหลัก*/
-.btn-Home-2{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-
-}
-/*รูปปุ่มหน้าหลัก*/
-.btn-Home-img-2 {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-/*ชื่อปุ่มสุ่มของรางวัล*/
-.btn-Random2{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #000000;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  background-color: #FCD53F;
+/* บ็อกหลักของโลโก้มหาวิทยาลัย */
+.img-Logo-home {
+  text-align: center;
+  margin-bottom: 24px;
   margin-top: 20px;
-  margin-left: 10px;
-  padding-left: 5px;
-  max-width: 230px;
-  max-height: 70px;
-  border-radius: 40px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
-}
-/*รูปปุ่มสุ่มของรางวัล*/
-.btn-Random-img2{
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
-  margin-left: 15px;
-}
-/*ชื่อปุ่มติดต่อเรา*/
-.btn-Contact-2{
   display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8C8D8D;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 20px 15px;
-  margin-top: 20px;
-}
-/*รูปปุ่มติดต่อเรา*/
-.btn-Contact-img-2{
-  width: 50px;
-  height: 50px;
-  margin-right: 15px; 
-  margin-left: 15px;
-}
-/*ชื่อปุ่มออกจากระบบ*/
-.btn-logout2{
-  display:  flex;
-  align-items: center;
   justify-content: center;
-  margin-top: 900px;
-  border: 1px solid #d39b00;
-  width: 248px;
-  height: 50px;
-  text-decoration: none;   
-  color: #D31313;           
-  font-weight: 1000;
-  font-size: 20px;
 }
-/*รูปปุ่มออกจากระบบ*/
-.btn-logout-img2{
+/* โลโก้มหาวิทยาลัยเหมือนกัน */
+.Logo-img {
+  max-width: 150px;
+  height: auto;
+}
+
+/* กลุ่มปุ่มเมนูด้านในทั้งหมด */
+.btn-Sidebar-spin {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* ตัวรองที่คลุมเมนูทั้งหมด */
+.btn-Sidebar-spin a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #718096; 
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px 14px;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
+/* ปรับขนาดไอคอนของทุกเมนูให้พอดี */
+.btn-Sidebar-spin a img {
   width: 40px;
   height: 40px;
-  margin-right: 15px;
+  margin-right: 12px;
+  margin-left: 0;
+  object-fit: contain;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+/* เอฟเฟกต์ตอนเอาเม้าชี้ค้างไว้ */
+.btn-Sidebar-spin a:hover {
+  background-color: #EDF2F7;
+  color: #1A202C;
+}
+
+.btn-Sidebar-spin a:hover img {
+  opacity: 1;
+}
+
+/* เมนูที่กำลังใช้งานอยู่  */
+.btn-Random2 {
+  background-color: #FEFCBF !important;
+  color: #0f0f0f !important;          
+  font-weight: bold !important;
+  box-shadow: none !important;
+  position: relative;
+  border-radius: 10px !important;
+  padding-right: 50px !important;
+}
+
+.btn-Random2 img {
+  opacity: 1 !important;
+}
+
+/* แถบสีทองบ่งบอกสถานะด้านขวา */
+.btn-Random2::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background-color: #D69E2E;
+  border-radius: 4px 0 0 4px;
+}
+
+/*  ปุ่มออกจากระบบด้านล่าง */
+.btn-logout-wrapper {
+  padding-top: 15px;
+  border-top: 1px solid #c7c4c4;
+  margin-top: auto;
+}
+
+.btn-logout2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  color: #E53E3E;
+  background-color: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn-logout2-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  margin-left: 0;
+  object-fit: contain;
+}
+
+.btn-logout2:hover {
+  background-color: #FED7D7;
 }
 /* ส่วนของเมนูศูนย์กลางสุ่มของรางวัล */
 .Topic-main-spin{
@@ -2837,6 +3043,230 @@ body.no-scroll {
   display: flex;
   justify-content: center;
 }
+
+  /*กรอบคุมแบบประเมินทั้งหมด*/
+  .frame-grey-1{
+    background-color: #fdfbf5;
+    display: flex;
+    flex-direction: column; 
+    border-radius: 20px;
+    padding: 10px 150px 30px 150px;
+    box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
+  }
+
+  /*หัวข้อข้างบนแบบประเมิน*/
+  .sectionassessment-1{
+    font-size: 25px;
+    font-weight: 800;
+    width: 100%;
+  }
+
+  /*กรอบของแบบประเมิน*/
+  .frameinformation-assessment{
+    background-color: #FCF6E5;
+    border: 2px solid #d39b00;
+    padding: 0px 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 8px 14px  rgba(0,0,0,0.22);
+  }
+
+  /*กรอบของหัวข้อแบบประเมิน กับ กรอบเปิดอยู่*/
+  .framesection-status{
+    display: flex;
+    align-items: center;
+  }
+
+  /*หัวข้อแบบประเมิน*/
+  .section-assessment{
+    font-size: 25px;
+  }
+
+  /*กรอบเปิดอยู่*/
+  .frame-status{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    background-color: #fdfbf5;
+    border: 2px solid #d39b00;
+    padding: 0px 30px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .frame-status::before{
+    content: "";
+    background-color: #d39b0015;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.1s, height 0.1s;
+  }
+
+  .frame-status:hover::before{
+    width: 200px;
+    height: 200px;
+  }
+
+  /*จุดวงกลมเปิดอยู่*/
+  .point-status{
+    background-color: #5381EC;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความเปิดอยู่*/
+  .message-status{
+    font-size: 16px;
+    font-weight: 600;
+    color: #5381EC;
+    padding-left: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความผู้เข้าร่วมประเมิน*/
+  .message-assessment{
+    position: relative;
+    bottom: 25px;
+    font-size: 18px;
+  }
+
+  /*ข้อความสร้างโคย*/
+  .message-created-by{
+    position: relative;
+    bottom: 40px;
+    font-size: 18px;
+  }
+
+  /*กรอบของปุ่มแบบประเมินยังเปิดอยู่*/
+  .assessment-open-1{
+    width: 100%;
+    display: block;
+    margin: auto;
+    border: none;
+    border-radius: 20px;
+    background-color: #E5E7EB;
+    cursor: not-allowed;
+  }
+
+  /*ข้อความของแบบประเมินยังเปิดอยู่*/
+  .message-assessment-open{
+    font-size: 16px;
+    font-weight: 900;
+    color: #6B7280;
+  }
+
+  /*ปุ่มของการสุ่มรางวัล*/
+  .enter-random{
+    position: relative;
+    bottom: 20px;
+    align-self: center;
+    background-color: #FCD53F;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 80px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ของปุ่มของการสุ่มรางวัล*/
+  .enter-random::before{
+    content: "";
+    background-color: #ffce0b;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ของปุ่มของการสุ่มรางวัล*/
+  .enter-random:hover::before{
+    width: 500px;
+    height: 500px;
+  }
+
+  /*รูปของปุ่มของการสุ่มรางวัล*/
+  .img-enter-random{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ข้อความของปุ่มของการสุ่มรางวัล*/
+  .message-enter-random{
+    color: #000;
+    font-size: 16px;
+    font-weight: 900;
+    padding-left: 15px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /*ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history{
+    position: relative;
+    bottom: 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*เอฟเฟ็กต์ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history::before{
+    content: "";
+    background-color: #000;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  /*กรอบวงกลมเอฟเฟ็กต์ปุ่มกดดูประวัตการสุ่ม*/
+  .view-history:hover::before{
+    width: 1500px;
+    height: 1500px;
+  }
+
+  /*ข้อความของปุ่มกดดูประวัตการสุ่ม*/
+  .message-view-history{
+    font-size: 16px;
+    font-weight: 900;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+
+
 /* แต่งหน้าlogin */
 /* คำอธิบายด้านบน */
 .descripppy{

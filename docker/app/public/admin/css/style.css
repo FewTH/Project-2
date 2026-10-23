@@ -1925,7 +1925,7 @@
   /*กรอบสีเทา*/
   .frame-grey{
     width: 100%;
-    background-color: #fdfbf5;
+    background-color: #ffffff;
     border-radius: 20px;
     padding: 0px 0px 35px 0px;
     min-width: 800px;
@@ -1951,8 +1951,8 @@
 
   /*กรอบของตัวเลขกิจกรรมทั้งหมด*/
   .all-activities{
-    background-color: #FCF6E5;
-    border: 2px solid #d39b00;
+    background-color: #EAF1FF;
+    border: 2px solid #3563E0;
     border-radius: 15px;
     flex: 1 1 300px;
     height: 140px;
@@ -1961,7 +1961,7 @@
 
   /*ตัวเลขของกิจกรรมทั้งหมด*/
   .activities-number-assessment{
-    color: #3ac4ad;
+    color: #2F4FA8;
     font-size: 50px;
     font-weight: 900;
     position: relative;
@@ -1972,7 +1972,7 @@
 
   /*ตัวอักษรของกิจกรรมทั้งหมด*/
   .activities-assessment{
-    color: #8A5B10;
+    color: #1F2A44;
     font-size: 20px;
     font-weight: 900;
     position: relative;
@@ -1982,8 +1982,8 @@
 
   /*กรอบของตัวเลขปิดแล้ว*/
   .Closed-assessment{
-    background-color: #FCF6E5;
-    border: 2px solid #d39b00;
+    background-color: #FFECEC;
+    border: 2px solid #F0605D;
     border-radius: 15px;
     flex: 1 1 300px;
     height: 140px;
@@ -1992,7 +1992,7 @@
 
   /*ตัวเลขของปิดแล้ว*/
   .Closed-assessment-1{
-    color: #FF453A;
+    color: #C23532;
     font-size: 50px;
     font-weight: 900;
     position: relative;
@@ -2002,7 +2002,7 @@
 
   /*ตัวอักษรของปิดแล้ว*/
   .Closed-assessment-2{
-    color: #8A5B10;
+    color: #1F2A44;
     font-size: 20px;
     font-weight: 900;
     position: relative;
@@ -2013,8 +2013,8 @@
 
   /*กรอบของตัวเลขเปิดอยู่*/
   .Open-assessment{
-    background-color: #FCF6E5;
-    border: 2px solid #d39b00;
+    background-color: #E8F8EE;
+    border: 2px solid #2EBD6B;
     border-radius: 15px;
     flex: 1 1 300px;
     height: 140px;
@@ -2023,7 +2023,7 @@
 
   /*ตัวเลขของเปิดอยู่*/
   .open-assessment-1{
-    color: #2ec754;
+    color: #14854A;
     font-size: 50px;
     font-weight: 900;
     position: relative;
@@ -2033,7 +2033,7 @@
 
   /*ตัวอักษรของเปิดอยู่*/
   .open-assessment-2{
-    color: #8A5B10;
+    color: #1F2A44;
     font-size: 20px;
     font-weight: 900;
     position: relative;
@@ -2046,8 +2046,8 @@
   .btn-build-activityurgent{
     position: relative;
     margin-left: auto;
-    background-color: #a8731d;
-    border-radius: 20px;
+    background-color: #3563E0;
+    border-radius: 15px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
     overflow: hidden;
   }
@@ -2055,7 +2055,7 @@
   /*เอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
   .btn-build-activityurgent::before{
     content: "";
-    background-color: #966516;
+    background-color: #1250fc;
     width: 0px;
     height: 0px;
     position: absolute;
@@ -2063,13 +2063,13 @@
     top: 50%;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
+    transition: width 0.2s, height 0.2s;
   }
 
   /*กรอบวงกลมเอฟเฟ็กต์ของปุ่มสร้างกิจกรรมด่วน*/
   .btn-build-activityurgent:hover::before{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
   }
 
 
@@ -2078,7 +2078,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 40px;
+    padding: 2px 50px;
     font-size: 15px;
     font-weight: 600;
     text-decoration: none;
@@ -2112,7 +2112,7 @@
     background-color: #ffffff;
     width: 600px;
     border-radius: 15px;
-    border: 2px solid #d39b00;
+    border: 2px solid #cacaca;
     overflow: hidden;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
@@ -2161,8 +2161,7 @@
 
   /*กรอบของการสร้างกิจกรรมด่วน*/
   .frame-activity-assessment{
-    background-color: #FCF6E5;
-    border: 2px solid #d39b00;
+    background-color: #FFFFFF;
     flex: 1 1 500px;
     margin-top: 40px;
     padding: 0px 15px 30px 20px;
@@ -2197,6 +2196,35 @@
     height: 30px;
     gap: 8px;
     overflow: hidden;
+  }
+
+    /* ===== ป้ายสถานะ: ปิด = แดง, เปิดอยู่ = เขียว ===== */
+  .frame-activity-assessment[data-status="closed"] .frameclosed {
+    background-color: #FEE2E2;
+    border-color: #fc9292;
+  }
+  .frame-activity-assessment[data-status="closed"] .frameclosed::before {
+    background-color: #ef444411;
+  }
+  .frame-activity-assessment[data-status="closed"] .pointclosed {
+    background-color: #DC2626;
+  }
+  .frame-activity-assessment[data-status="closed"] .closed {
+    color: #B91C1C;
+  }
+
+  .frame-activity-assessment[data-status="open"] .frameclosed {
+    background-color: #D1FAE5;
+    border-color: #10B981;
+  }
+  .frame-activity-assessment[data-status="open"] .frameclosed::before {
+    background-color: #10B98122;
+  }
+  .frame-activity-assessment[data-status="open"] .pointclosed {
+    background-color: #047857;
+  }
+  .frame-activity-assessment[data-status="open"] .closed {
+    color: #047857;
   }
 
   /*เอฟเฟ็กต์กรอบของสถานะปิดแล้ว*/
@@ -2253,7 +2281,7 @@
 
   /*เส้นระหว่างสร้างเมื่อกับผู้เข้าร่วม*/
   .lineactivity-1{
-    border: 2px solid #d39b00;
+    border: 2px solid #E3E8F5;
     position: relative;
     bottom: 10px;
   }
@@ -2289,30 +2317,17 @@
   /*กรอบของดินสอ*/
   .framerank-1-assessment{
     position: relative;
-    background-color: #a8731d;
+    background-color: var(--rank-color, #a8731d);
     border-radius: 20px;
     padding: 0px 60px;
     overflow: hidden;
   }
 
-  /*เอฟเฟ็กต์ของกรอบของดินสอ*/
-  .framerank-1-assessment::before{
-    content: "";
-    background-color: #966516;
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.1s, heigth 0.1s;
-  }
+  /* กำหนดสีแต่ละอันตามลำดับ */
+  .framerank-1-2-3 .framerank-1-assessment:nth-child(1){ --rank-color: #E0A526; } 
+  .framerank-1-2-3 .framerank-1-assessment:nth-child(2){ --rank-color: #94A3B8; }
+  .framerank-1-2-3 .framerank-1-assessment:nth-child(3){ --rank-color: #C2410C; }
 
-  /*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดินสอ*/
-  .framerank-1-assessment:hover::before{
-    width: 200px;
-    height: 200px;
-  }
 
   /*ข้อความของกรอบของดินสอ*/
   .rank-1-assessment{
@@ -2325,7 +2340,7 @@
   /*เส้นของส่วนกรอบดินสอ กับ คนลงทะเบียน*/
   .lineactivity-2{
     margin-top: 30px;
-    border: 2px solid #d39b00;
+    border: 2px solid #E3E8F5;
   }
 
   /*กรอบของคนลงทะเบียน กับ ปุ่มดูรายละเอียด*/
@@ -2348,7 +2363,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    border: 2px solid #d39b00;
+    border: 2px solid #3563E0;
     border-radius: 15px;
     width: 270px;
     height: 60px;
@@ -2358,15 +2373,13 @@
   /*เอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
   .view-details::before{
     content: "";
-    background-color: #d39b0011;
+    background-color: #EAF1FF;
     width: 0px;
     height: 0px;
     position: absolute;
     left: 50%;
     top: 50%;
-    border-radius: 50%;
     transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
   }
 
   /*กรอบวงกลมเอฟเฟ็กต์ของกรอบของดูรายละเอียด*/
@@ -2378,7 +2391,7 @@
   /*ข้อความของกรอบของดูรายละเอียด*/
   .view-details-1{
     border: none;
-    color: #8A5B10;
+    color: #3563E0;
     padding: 30px 80px;
     font-size: 18px;
     font-weight: 600;
@@ -8062,11 +8075,25 @@
       align-items: center;
       padding: 15px 20px;
       border-bottom: 1px solid #E8F0FB;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .reward-1 h3 {
     margin: 0;
     font-size: 17px;
     font-weight: normal;
+  }
+  /* คลาสสำหรับซ่อนแบบค่อยๆ เฟดและหุบลง */
+  .reward-1.is-hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    pointer-events: none;
   }
 
   .box-reward1 {
@@ -8342,6 +8369,20 @@
     border-bottom:2px solid  #E8F0FB;
     padding: 10px 10px;
     align-items: center;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* คลาสสำหรับซ่อนแบบค่อยๆ เฟดและหุบลง */
+  .user-1.is-hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    pointer-events: none;
   }
 
   /* แต่งพื้นหลังตรง role ของผู้ใช้ */

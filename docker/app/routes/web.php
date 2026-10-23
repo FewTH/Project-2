@@ -11,6 +11,7 @@
     use App\Http\Controllers\AuthController;
     use App\Http\Controllers\SpinresultController;
     use App\Http\Controllers\DashboardController;
+    use App\Http\Controllers\UserSpinController;
     use App\Models\Spinresult;
     
 
@@ -144,14 +145,14 @@
             return view('user.home');
         })->name('user.home');
 
-        Route::get('/spin', function () {
-            return view('user.spin');
-        });
+        Route::get('/spin', [UserSpinController::class, 'index'])->name('user.spin');
 
         
 
         Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
         Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
+
+        Route::get('/spin/history/{id}', [UserSpinController::class, 'history'])->name('user.spin.history');
     });
 
 

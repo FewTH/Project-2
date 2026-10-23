@@ -122,5 +122,6 @@
         </a>
     </div>
 </div>
+<script src="{{ asset('admin/js/managereward.js') }}"></script>
 </body>
 </html>

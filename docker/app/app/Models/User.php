@@ -40,4 +40,10 @@ class User extends Authenticatable
     {
         return $this->password_hash;
     }
+    
+    // กันไม่ให้เขียนคอลัม password ที่ไม่มีอยู่ถ้ามีการ rehash
+    public function getAuthPasswordName()
+    {
+        return 'password_hash';
+    }
 }

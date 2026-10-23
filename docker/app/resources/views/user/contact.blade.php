@@ -20,30 +20,30 @@
         </a>
     </div>
 <!--กรอบของเมนูปิดแท็กตรงออกจากระบบ-->
-<div class="container">
+<div class="container-contact">
     <!-- โลโกมหาลัย -->
-   <div class="img-Logo">
+   <div class="img-Logo-contact">
         <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
    </div>
    <!-- ปุ่มเมนู -->
-   <div class="btn-Sidebar">
-        <a href="{{ url('user/home') }}" class="btn-Home">
-            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img">
+   <div class="btn-Sidebar-contact">
+        <a href="{{ url('user/home') }}" class="btn-Home3">
+            <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img3">
             <span>หน้าหลัก</span>
         </a>
-        <a href="{{ url('user/spin') }}" class="btn-Random">
-            <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img">
+        <a href="{{ url('user/spin') }}" class="btn-Random3">
+            <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img3">
             <span>สุ่มของรางวัล</span>
         </a>
-        <a href="{{ url('user/contact') }}" class="btn-Contact">
-            <img src="{{ asset('user/img/Contactสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img">
+        <a href="{{ url('user/contact') }}" class="btn-Contact3">
+            <img src="{{ asset('user/img/Contactสีดำ.png') }}" alt="รูปติดต่อเรา" class="btn-Contact-img3">
             <span>ติดต่อเรา</span>
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
-    <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout">
-            <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
+    <div class="btn-logout-wrapper3">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout3">
+            <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img3">
             <span>ออกจากระบบ </span>
         </a>
     </div>

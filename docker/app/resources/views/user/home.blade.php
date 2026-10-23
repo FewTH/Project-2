@@ -90,19 +90,20 @@
         </div>
         </div>
         </div>
+
     <div class="container-home">
     <!-- โลโกมหาลัย -->
     <div class="img-Logo-home">
         <img src="img/Logo.png" alt="รูปโลโกมหาลัย" class="Logo-img">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar-home">
         <a href="{{ url('user/home') }}" class="btn-Home1">
             <img src="{{ asset('user/img/homelogo1.png') }}" alt="รูปบ้าน" class="btn-homelogo-img1">
             <span>หน้าหลัก</span>
         </a>
 
-        <a href="{{ url('user/spin') }}" class="btn-Random">
+        <a href="{{ url('user/spin') }}" class="btn-Random1">
             <img src="{{ asset('user/img/Random.png') }}" alt="รูปสุ่มของรางวัล" class="btn-Random-img">
             <span>สุ่มของรางวัล</span>
         </a>
@@ -113,7 +114,7 @@
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
-    <div class="btn-logout-wrapper">
+    <div class="btn-logout-wrapper1">
         <a href="{{ url('user/loginuser') }}" class="btn-logout1">
             <img src="img/รูปปุ่มกดออก.png" alt="รูปออกจากระบบ" class="btn-logout-img1">
             <span>ออกจากระบบ </span>

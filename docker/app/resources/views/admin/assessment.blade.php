@@ -109,7 +109,11 @@
 
     <div class="card-Container" id="cardContainer">
         @forelse($events as $event)
-        <div class="frame-activity-assessment" data-status="{{ $event->isexpired ? 'closed' : 'open' }}">
+
+        @php
+        $barColors = ['#2D4DC4', '#E0A526', '#7C5CCF', '#1AA3B5', '#D94A8C', '#E8742A'];
+        @endphp
+        <div class="frame-activity-assessment" data-status="{{ $event->isexpired ? 'closed' : 'open' }}" style="--activity-color: {{ $barColors[$event->event_id % count($barColors)] }}">
             <div class="framecontentactivity">
                 <h4 class="headingactivity">{{ $event->title }}</h4>
                 <div class="frameclosed">

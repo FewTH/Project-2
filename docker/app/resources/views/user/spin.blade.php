@@ -34,25 +34,49 @@
             <button type="button" class="filter-btn" id="not-spin">ยังไม่สุ่ม</button>
         </div>
         <div class="main-spincontent">
-            <h2 class="spin-subtiltle">รายการแบบประเมินที่ทำแล้ว</h2>
-            <div class="test-content2">
-                <div class="spincontent-test1" id="test1">
-                    <h4 class="test101">แบบประเมินความเครียด1</h4>
-                </div>
-                <div class="spincontent-test2" id="test2" >
-                    <h4 class="test101">แบบประเมินความเครียด2</h4>
+    <h2 class="spin-subtiltle">รายการแบบประเมินที่ทำแล้ว</h2>
+
+<div class="frame-grey-1" id="assessment-list">
+    @forelse($assessments as $assessment)
+    <div class="sectionassessment"
+         id="test1-{{ $assessment->assessment_id }}"
+         data-name="{{ $assessment->name }}"
+         data-drawn="{{ $assessment->is_drawn ? '1' : '0' }}">
+
+        <div class="frameinformation-assessment">
+            <div class="framesection-status">
+                <h3 class="section-assessment">{{ $assessment->name }}</h3>
+                <div class="frame-status">
+                    <p class="point-status"></p>
+                    <p class="message-status">
+                        {{ $assessment->is_drawn ? 'สุ่มแล้ว' : 'ยังไม่สุ่ม' }}
+                    </p>
                 </div>
             </div>
+
+            <p class="message-assessment">
+                ปิดรับคำตอบ: {{ $assessment->closed_at ? $assessment->closed_at->format('d M Y') : '-' }}
+            </p>
+
+            <a href="{{ route('user.spin.history', $assessment->assessment_id) }}" class="view-history">
+                <p class="message-view-history">ดูประวัติการสุ่ม</p>
+            </a>
         </div>
     </div>
+    @empty
+    <div class="nothaveactivity">
+        <p class="nothaveactivity-1">ยังไม่มีรายการแบบประเมินที่ถูกทำ</p>
+    </div>
+    @endforelse
+</div>
 
-<div class="container-home">
+<div class="container-spin">
     <!-- โลโกมหาลัย -->
     <div class="img-Logo-home">
         <img src="img/Logo.png" alt="รูปโลโกมหาลัย" class="Logo-img">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar-spin">
         <a href="{{ url('user/home') }}" class="btn-Home-2">
             <img src="{{ asset('user/img/Home.png') }}" alt="รูปบ้าน" class="btn-Home-img-2">
             <span>หน้าหลัก</span>
@@ -70,8 +94,8 @@
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout1">
-            <img src="img/รูปปุ่มกดออก.png" alt="รูปออกจากระบบ" class="btn-logout-img1">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout2">
+            <img src="img/รูปปุ่มกดออก.png" alt="รูปออกจากระบบ" class="btn-logout-img2">
             <span>ออกจากระบบ </span>
         </a>
     </div>

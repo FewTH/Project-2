@@ -41,7 +41,7 @@ class AssessmentApi
 
         for ($attempt = 0; $attempt < 2; $attempt++) {
             $req = Http::timeout(10)->withToken($this->token($uri))->acceptJson();
-            $res = $method === 'POST' ? $req->post($uri, $data) : $req->get($uri);
+            $res = $method === 'POST' ? $req->post($uri, $data) : $req->get($uri, $data);
 
             // token หมดอายุก่อนเวลา ล้างแคชแล้วขอใหม่ 1 ครั้ง
             if ($res->status() === 401 && $attempt === 0) {
@@ -49,7 +49,7 @@ class AssessmentApi
                 continue;
             }
 
-            return $res->throw()->json();
+            return $res->throw()->json() ?? [];
         }
 
         return [];
@@ -98,7 +98,7 @@ class AssessmentApi
                 'email'         => $r['email'] ?? null,
                 'is_drawn'      => (int) ($r['is_drawn'] ?? 0),
             ])
-            ->filter(fn($r) => !empty($r->full_name))
+            ->filter(fn($r) => !empty($r->email))
             ->values();
     }
 
@@ -119,7 +119,15 @@ class AssessmentApi
             'email'         => $u['email'] ?? null,
             'role'          => $u['role'] ?? null,
             'is_active'     => (int) ($u['is_active'] ?? 0),
-            'password_hash' => $u['password_hash'] ?? null,
         ]);
+    }
+
+    // แบบประเมินที่ user ได้ทำแล้ว *********************
+    public function userAssessments(int $userId): Collection
+    {
+        $data = $this->call('GET', '/api/user-assessments',[
+            'user_id' => $userId
+        ]);
+        return collect($data['assessments'] ?? [])->map(fn($a) => $this->normalizeAssessment($a));
     }
 }

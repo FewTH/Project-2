@@ -131,5 +131,6 @@
     </div>
 </div>
 </div>
+    <script src="{{ asset('admin/js/manageuser.js') }}"></script>
 </body>
 </html>
