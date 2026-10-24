@@ -160,7 +160,7 @@
                 </div>
 
                 <hr class="linesectionluckywinner">
-                
+                <div id="latest_winners_list">
                 @forelse($latestwinners as $index => $winner)
                 <div class="framenameluckywinner">
                     <div class="framenumberluckywinner">
@@ -175,6 +175,7 @@
                     @empty
                         <p class="warnnothaveluckywinner">ยังไม่มีผู้โชคดี</p>
                     @endforelse
+                </div>
         </div>
 
             <div class="framechanceleavereward">

@@ -121,6 +121,7 @@
             //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
         Route::get('/preview-email', function () {
             $spinresult = \App\Models\Spinresult::with('reward')->first();
+            $spinresult->setRelation('reward', null); //
             return new \App\Mail\RewardNotification($spinresult);
         });
     });

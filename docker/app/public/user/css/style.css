@@ -473,9 +473,13 @@ body.no-scroll {
   outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   font-size: 15px;
 }
+  .input-username-1:focus{
+    border: 2px solid #d39b00;
+  }
+
 
 /*กรอบชื่อ-นามสกุลของหน้าแก้ไขข้อมูล*/
 .FirstName-LastName-1{
@@ -497,8 +501,11 @@ body.no-scroll {
   outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   font-size: 15px;
+}
+.input-FirstName-LastName-1:focus{
+  border: 2px solid #d39b00;
 }
 
 /*กรอบอีเมลของหน้าแก้ไขข้อมูล*/
@@ -516,22 +523,6 @@ body.no-scroll {
   margin-top: 20px;
 }
 
-/*กรอบเอาไว้พิมอีเมลของหน้าแก้ไขข้อมูล*/
-.input-email-user-1{
-  outline: none;
-  padding: 15px;
-  border-radius: 10px;
-  border: 2px solid #d39b00;
-  font-size: 15px;
-}
-
-/*errorเวลาใส่ Email ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
-.pleasecompleteemail{
-  display: none;
-  color: #F44336;
-  text-align: left;
-  font-size: 15px;
-}
 
 /*กรอบเบอร์โทรของหน้าแก้ไขข้อมูล*/
 .phone_number-1{
@@ -553,8 +544,11 @@ body.no-scroll {
   outline: none;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   font-size: 15px;
+}
+.input-phonenumber-1:focus{
+  border: 2px solid #d39b00;
 }
 
 /*errorเวลาใส่ เบอร์โทร ไม่ถูกต้องของหน้าแก้ไขข้อมูล*/
@@ -793,12 +787,14 @@ body.no-scroll {
 /*กรอบเอาไว้พิมรหัสผ่านปัจจุบันของหน้าเปลี่ยนรหัสผ่าน*/
 .input-passwordcurrent-1{
   outline: none;
-  color: #777777;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   font-size: 15px;
+}
+.input-passwordcurrent-1:focus{
+  border: 2px solid #d39b00;
 }
 
 /*ปุ่มตาเปิดปิดรหัสผ่านของหน้าเปลี่ยนรหัสผ่าน*/
@@ -829,10 +825,9 @@ body.no-scroll {
 
 /*กรอบเอาไว้พิมเปลี่ยนรหัสผ่านครั้งล่าสุดของหน้าเปลี่ยนรหัสผ่าน*/
 .input-password-lasttime-1{
-  cursor: text;
   padding: 15px;
   border-radius: 10px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   font-size: 15px;
 }
 
@@ -1367,8 +1362,8 @@ body.no-scroll {
 /*กรอบ popup ของเปลี่ยนรูปโปรไฟล์*/
 .popup-box{
   background-color: #fdfbf5;
-  width: 900px;
-  padding: 20px 20px 40px 20px;
+  width: 800px;
+  padding: 35px 20px 40px 20px;
   border-radius: 20px;
   opacity: 0;
   transform: scale(0.95);
@@ -1388,27 +1383,25 @@ body.no-scroll {
     display: none;
 }
 
-/*รูปกล้องในpopup เปลี่ยนรูปโปรไฟล์*/
-.img-Camera-icon{
-  width: 260px;
-  height: 130px;
-  padding: 30px 0px 0px 160px;
-  margin-left: 225px;
-}
+  .Change-photo-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-/*หัวข้อpopupเปลี่ยรหัสผ่าน*/
-.Change-photo{
-  padding: 0px 0px 0px 100px;
-  font-size: 28px;
-  margin-left: 235px;
-}
+  /*หัวข้อpopupเปลี่ยรหัสผ่าน*/
+  .Change-photo{
+    font-size: 28px;
+    font-weight: 600;
+  }
 
-/*ข้อความในกรอบpopup*/
-.choosephotonew{
-  padding: 0px 0px 0px 80px;
-  font-size: 19px;
-  margin-left: 230px;
-}
+  /*ข้อความในกรอบpopup*/
+  .choosephotonew{
+    margin-top: 5px;
+    font-size: 16px;
+  }
+
 
 
 /*กรอบแจ้งเตื่อนส่งสำเร็จของรูปโปรไฟล์*/
@@ -1449,10 +1442,7 @@ body.no-scroll {
 /*ส่วนของหน้า register_event.blade.php*/
 /*เอาไว้จัดหน้าให้อยู่ในกรอบของเว็บ*/
 .main-content-register{
-  margin-left: 310px;
-  padding-top: 100px;
-  padding-right: 60px;
-  padding-bottom: 50px;
+  padding: 40px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1477,25 +1467,29 @@ body.no-scroll {
 /*กรอบของหัวข้อกิจกรรม ถึง เวลา*/
 .frmaesectionactivity{
   margin-top: 30px;
-  background-color: #FCF6E5;
-  border: 2px solid #d39b00;
-  padding: 10px 20px 0px 20px;
+  background-color: #EEF4FF;
+  border: 2px solid #BFD0F5;
+  padding: 15px 20px 0px 20px;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
 
+.sectionactivity-1{
+  display: flex;
+  flex-direction: column;
+}
+
 /*หัวข้อกิจรรม*/
 .sectionactivity{
-  color: #8A5B10;
-  font-size: 25px;
+  color: #2A4CB0;
+  font-size: 35px;
   font-weight: 800;
 }
 
 /*ข้อความของลงทะเบียนก่อนหมดเวลา*/
 .messageregisterreward{
   color: #4e4e4e;
-  position: relative;
-  bottom: 10px;
+
   font-weight: 600;
 }
 
@@ -1503,15 +1497,15 @@ body.no-scroll {
 .frametimeactivityreward{
   display: flex;
   justify-content: center;
-  font-size: 22px;
-  color: #5381EC;
+  font-size: 25px;
+  color: #3563E0;
 }
 
 /*กรอบของกรอข้อมูลเพื่อลงทะเบียน*/
 .framedataframework{
   margin-top: 30px;
-  background-color: #FCF6E5;
-  border: 2px solid #d39b00;
+  background-color: #FFFFFF;
+  border: 2px solid #E2E8F0;
   padding: 10px 20px 40px 20px;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -1521,7 +1515,7 @@ body.no-scroll {
 .messagedata_framework{
   font-size: 22px;
   font-weight: 900;
-  color: #745500;
+  color: #8A5B10;
 }
 
 
@@ -1543,11 +1537,38 @@ body.no-scroll {
   padding-top: 8px;
 }
 
+.btn-backhome {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px 0;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    color: #3563E0;
+    background-color: #FFFFFF;
+    border: 2px solid #3563E0;
+    border-radius: 14px;
+    box-sizing: border-box;
+}
+
+.btn-backhome:hover {
+    background: #EAF1FF;
+}
+
 .savesuccessimage-error-1{
   margin-right: auto;
   font-size: 18px;
   color: #c22b3a;
   margin-left: 5px;
+}
+
+.savesuccessimage-error-2{
+  margin-right: auto;
+  font-size: 18px;
+  color: #c22b3a;
+  margin-left: 5px;
+  margin-top: -10px;
 }
 
 .savesuccessimage-errordataframework{
@@ -1585,13 +1606,17 @@ body.no-scroll {
 /*กรอบเอาไว้พิมของชื่อ-นามสกุล กับ อีเมล*/
 .dataframeworkfullname{
   outline: none;
-  color: #777777;
+  color: #1F2A44;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
-  background-color: #fdfbf5;
-  border: 2px solid #d39b00;
+  background-color: #F8FAFF;
+  border: 2px solid #CBD5E1;
   font-size: 15px;
+}
+
+.dataframeworkfullname:focus{
+  border: 2px solid #3563E0;
 }
 
 /*ปุ่มลงทะเบียนเข้าร่วม*/
@@ -1600,12 +1625,12 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
   margin-top: 30px;
   width: 100%;
-  border: 2px solid #9C6F2E;
+  background-color: #E0A526;
   height: 60px;
   border-radius: 20px;
-  background: none;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   cursor: pointer;
   overflow: hidden;
@@ -1635,7 +1660,7 @@ body.no-scroll {
 .messageregisterparticipate{
   font-size: 18px;
   font-weight: 600;
-  color: #8d6227;
+  color: #FFFFFF;
   position: relative;
   z-index: 1;
 }
@@ -1645,8 +1670,8 @@ body.no-scroll {
 .framepersonRegistrant{
   margin-top: 30px;
   border-radius: 20px;
-  border: 2px solid #d39b00;
-  background-color: #FCF6E5;
+  border: 2px solid #E2E8F0;
+  background-color: #FFFFFF;
   padding: 10px 20px 30px 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
 }
@@ -1678,7 +1703,8 @@ body.no-scroll {
   margin-left: auto;
   display: flex;
   align-items: center;
-  border: 2px solid #8A5B10;
+  background-color: #EAF1FF;
+  border: 2px solid #3563E0;
   padding: 0px 40px;
   height: 40px;
   border-radius: 20px;
@@ -1686,7 +1712,7 @@ body.no-scroll {
 
 /*ข้อความจำนวนผู้ลงทะเบียน*/
 .messagenumberpeople{
-  color: #d39b00;
+  color: #2F4FA8;
   font-size: 18px;
   font-weight: 800;
 }
@@ -1694,7 +1720,7 @@ body.no-scroll {
 /*เส้นระหว่างข้อความผู้ลงทะเบียนแล้ว กับ รายชื่อผู้เข้าร่วม*/
 .linepersonRegistrant{
   margin-top: 20px;
-  border: 1px solid #d39b00;
+  border: 1px solid #afb3b6;
 }
 
 /*กรอบของชื่อของผู้เข้าร่วม*/
@@ -1728,6 +1754,7 @@ body.no-scroll {
   font-weight: 600;
 }
 
+
 /*อีเมลของผู้เข้าร่วม*/
 .emailparticipants{
   color: #4e4e4e;
@@ -1748,8 +1775,51 @@ body.no-scroll {
 }
 
 .linepersonRegistrant-1{
-  border: 1px solid #d39b00;
+  border: 1px solid #afb3b6;
 }
+
+
+.reg-empty1{
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.frameimgregister_event{
+  margin-top: 20px;
+  background-color: #F0FBF4;
+  border: 2px solid #b2ebca;
+  border-radius: 20px;
+  padding: 20px 0px 30px 0px;
+}
+
+.frameimgregister_event-1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.messageregister_event{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.messageregister_event-1{
+  font-size: 22px;
+  font-weight: 600;
+  color: #047857;
+}
+
+.messageregister_event-2{
+  margin-top: 5px;
+  font-weight: 600;
+  color: #475569;
+}
+
 
 
 
@@ -1768,7 +1838,7 @@ body.no-scroll {
 .btn-uploadphoto{
   position: relative;
   top: 15px;
-  padding: 25px 0px 20px 0px;
+  padding: 110px 0px 110px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1824,47 +1894,51 @@ body.no-scroll {
   font-size: 16px;
 }
 
-/*ปุ่มยกเลิก*/
-.btn-close-1{
-  display: flex;
-  align-items: center;
-  position: absolute;
-  right: 20px;
-  background-color: #a8731d;
-  padding: 0px 25px;
-  height: 40px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
-  overflow: hidden;
-}
+ /*ปุ่มยกเลิก*/
+  .btn-close-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: 2px solid #9a9c9e;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
 
-.btn-close-1::before{
-  content: "";
-  background-color: #966516;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0px;
-  height: 0px;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s;
-  border-radius: 50%;
-}
+  .btn-close-1::before{
+    content: "";
+     background-color: #e2e8f07c;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+    border-radius: 50%;
+  }
 
-.btn-close-1:hover::before{
-  width: 250px;
-  height: 250px;
-}
+  .btn-close-1:hover::before{
+    width: 250px;
+    height: 250px;
+  }
 
 
-.btn-close-popup{
-  font-size: 25px;
-  color: #ffffff;
-  position: relative;
-  z-index: 1;
-}
+  .btn-close-popup{
+    font-size: 25px;
+    color: #797a7c;
+    position: relative;
+    bottom: 2px;
+    z-index: 1;
+  }
+
 
 .User_Information-1{
   display: flex;
@@ -1876,7 +1950,7 @@ body.no-scroll {
   
 /*ข้อมูลผู้ใช้*/
 .User_Information {
-  background-color: #fdfbf5;
+  background-color: #FFFFFF;
   flex: 2 1 450px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
   border-radius: 15px;
@@ -1911,8 +1985,9 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: #8A5B10;
   font-size: 28px;
-  padding: 10px 25px 0 25px;
+  padding: 10px 35px 0 35px;
 }
 
 /*ปุ่มแก้ไขข้อมูล*/
@@ -1921,8 +1996,8 @@ body.no-scroll {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #ad7924;
-  border-radius: 20px;
+  background-color: #E0A526;
+  border-radius: 30px;
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -1934,7 +2009,7 @@ body.no-scroll {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #a3701e;
+  background-color: #c989003d;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -1951,9 +2026,9 @@ body.no-scroll {
 /*ข้อความของปุ่มแก้ไขข้อมูล*/
 .btn-Edit-information-2 {
   border: none;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 1000;
-  padding: 17px 30px;
+  padding: 15px 50px;
   background: none;
   color: #FFFFFF;
   cursor: pointer;
@@ -2014,7 +2089,7 @@ body.no-scroll {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #a8731d;
+  background-color: #E0A526;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -2026,7 +2101,7 @@ body.no-scroll {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #966516;
+  background-color: #c9890052;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -2060,7 +2135,7 @@ body.no-scroll {
   justify-self: center;
   background-color: #ffffff;
   border-radius: 20px;
-  border: 2px solid #d39b00;
+  border: 2px solid #afb3b6;
   position: relative;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   overflow: hidden;
@@ -2090,7 +2165,7 @@ body.no-scroll {
 .btn-close-Edit-1{
   padding: 15px 50px;
   font-size: 23px;
-  color: #d39b00;
+  color: #9a9fa0;
   cursor: pointer;
   background: none;
   border: none;
@@ -2203,7 +2278,7 @@ body.no-scroll {
 
 /*เปลี่ยนรหัสผ่าน*/
 .Change_password {
-  background-color: #fdfbf5;
+  background-color: #FFFFFF;
   flex: 1 1 350px;
   padding: 0px 0px 60px 0px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.22);
@@ -2213,6 +2288,7 @@ body.no-scroll {
 
 /*รหัสผ่าน*/
 .password {
+  color: #2A4CB0;
   font-size: 28px;
   padding: 20px 25px 0 25px;
 }
@@ -2236,7 +2312,8 @@ body.no-scroll {
 .input-Current_password {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #d39b00;
+  background-color: #F8FAFF;
+  border: 2px solid #BFD0F5;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -2260,7 +2337,8 @@ body.no-scroll {
 .input-Last_updated {
   flex: 1;
   border-radius: 7px;
-  border: 2px solid #d39b00;
+  background-color: #F8FAFF;
+  border: 2px solid #BFD0F5;
   padding: 13px 16px;
   font-size: 15px;
 }
@@ -2272,10 +2350,10 @@ body.no-scroll {
   top: 20px;
   display: flex;
   justify-content: center;
-  width: 150px;
-  background-color: #a8731d;
+  width: 200px;
+  background-color: #3563E0;
   margin-left: auto;
-  border-radius: 15px;
+  border-radius: 25px;
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -2287,7 +2365,7 @@ body.no-scroll {
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #966516;
+  background-color: #1250fc;
   width: 0px;
   height: 0px;
   border-radius: 50%;
@@ -2371,7 +2449,7 @@ body.no-scroll {
   align-items: center;
   justify-content: center;
   position: relative;
-  background-color: #a8731d;
+  background-color: #3563E0;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   overflow: hidden;
@@ -2381,7 +2459,7 @@ body.no-scroll {
 /*เอฟเฟ็กต์วงกลมสีดำ*/
 .btn-change-password::before {
   content: "";
-  background-color: #966516;
+  background-color: #1250fc;
   width: 0px;
   height: 0px;
   position: absolute;
@@ -2420,7 +2498,7 @@ body.no-scroll {
   justify-self: center;
   background-color: #ffffff;
   border-radius: 20px;
-  border: 2px solid #d39b00;
+ border: 2px solid #afb3b6;
   position: relative;
   cursor: pointer;
   box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
@@ -2453,7 +2531,7 @@ body.no-scroll {
   border: none;
   font-weight: 800;
   padding: 15px 50px;
-  color: #d39b00;
+  color: #9a9fa0;
   cursor: pointer;
   position: relative;
   z-index: 2;
@@ -3334,4 +3412,103 @@ body.no-scroll {
   justify-content: center;
   align-items: center;
   gap: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*ส่วนของหน้า history_random_spin.blade.php*/
+/* กรอบเอาไว้จัดหน้า */
+.main-content-5{
+  margin-left: 310px;
+  padding-top: 100px;
+  padding-right: 60px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/*กรอบใหญ่ของผลการสุ่ม*/
+.framebigrandomresult{
+  background-color: #FFFFFF;
+  padding: 15px 30px 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+}
+
+/* หัวข้อยินดีด้วยคุณได้รับรางวัล */
+.sectionrandomresult{
+  font-size: 24px;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* ข้อความเรียนคุณ */
+.reward-name{
+  color: #1F2937; 
+  font-size: 18px;
+}
+.reward-name1{
+  font-weight: 600;
+}
+
+/* ข้อความบอกว่ากรุณาแสดง Qrcode */
+.framemessagereceiverewards{
+  display: flex;
+  flex-direction: column;
+  color: #374151;
+  font-size: 18px;
+}
+
+/* ข้อความบอกเพื่อรับของรางวัล */
+.messagereceiverewards{
+  margin-top: 5px;
+}
+
+/* เส้น */
+.linemessagereceiverewards1{
+  border: 1px solid #d6d7da;
+  margin-top: 20px;
+}
+
+/* ข้อความรางวัล */
+.framenamereward{
+  display: flex;
+  align-items: center;
+  color: #4B5563; 
+  font-size: 18px;
+}
+
+/* ของที่ได้รับ */
+.namereward{
+  margin-left: auto;
+  color: #1F2937; 
+  font-weight: 600; 
+}
+
+/* เส้น */
+.linemessagereceiverewards{
+  border: 1px solid #d6d7da;
+}
+
+.reward-qr{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.reward-qr-1{
+  color: #4B5563;
+  font-size: 14px;
 }

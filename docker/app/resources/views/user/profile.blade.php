@@ -118,10 +118,11 @@
         <button type="button" class="btn-close-1" id="btn_close_1">
             <p class="btn-close-popup">x</p>
         </button>
-            
-        <img src="{{ asset('user/img/รูปกล้องตรงเปลี่ยนรูปโปรไฟล์.png') }}" alt="รูปกล้องตรงเปลี่ยนรูปโปรไฟล์" class="img-Camera-icon"  id="img_Camera_icon">
-        <h2 class="Change-photo">เปลี่ยนรูปโปรไฟล์</h2>
-        <p class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</p>
+
+        <div class="Change-photo-1">
+            <span class="Change-photo">เปลี่ยนรูปโปรไฟล์</span>
+            <span class="choosephotonew">เลือกรูปภาพใหม่จากเครื่องของคุณ</span>
+        </div>
           
         @if (session('success'))
         <div class="savesuccessimage-1">

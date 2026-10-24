@@ -60,6 +60,7 @@
 <div class="main-content-1">
     <div class="My_Profile">
         <h1>รายชื่อผู้ได้รับรางวัล</h1>
+        <p class="messagelistactivities">{{ $assessment->name }}</p>
     </div>
 
     <!--กรอบใหญ่-->

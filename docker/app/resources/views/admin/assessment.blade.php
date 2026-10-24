@@ -97,7 +97,7 @@
       
     </div>
 
-
+    {{-- ช่องค้นหารายการกิจกรรม --}}
     <div class="frame-search-activity-2">
         <div class="frame-search-activity">
             <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
@@ -156,7 +156,7 @@
 <div class="frame-evaluation" id="frame_evaluation">
     <div class="frame-search-activity-1">
         <div class="search-activity-1">
-        <input type=text class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน">
+            <input type=text class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน">
         </div>
         <div class="framealloffon-assessment">
             <button class="frameall-assessment active" id="frameall_assessment">

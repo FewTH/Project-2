@@ -20,6 +20,11 @@ class EventRegistrationController extends Controller
         return $event;
     }
 
+    private function hasRegistered($eventId)
+    {
+        return EventRegistration::where('event_id', $eventId)->where('user_id', Auth::id())->exists();
+    }
+
     //แสดงฟอมลงทะเบียนเข้าร่วมกิจกรรม
     public function create($eventId)
     {
@@ -31,7 +36,7 @@ class EventRegistrationController extends Controller
         $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
         $event->isexpired = $isexpired;
         $remainingseconds = $isexpired ? 0 : (int) $now->diffInSeconds($closeat);
-        return view('user.register_event',['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,]);
+        return view('user.register_event', ['event' => $event,'remainingseconds' => $remainingseconds,'isexpired' => $isexpired,'alreadyRegistered' => $this->hasRegistered($eventId),]);
     }
 
     //บันทึกการลงทะเบียนเข้าร่วมกิจกรรม
@@ -40,21 +45,10 @@ class EventRegistrationController extends Controller
         $event = $this->getevent($eventId);
 
         $data = $request->validate([
-            'full_name' => [
-                            'required',
-                            'string',
-                            'max:200',
-                                Rule::unique('event_registrations', 'full_name')->where(function ($query) use ($eventId) {
-                                return $query->where('event_id', $eventId);
-                }),
-            ],
-
+            'full_name' => ['required', 'string', 'max:200'],
         ], [
             'full_name.required' => 'กรุณากรอกชื่อ-นามสกุลด้วย',
-            'full_name.unique' => 'ชื่อนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว',
-
         ]);
-
 
         //การสร้างเซฟพอยต์เพื่อความปลอดภัยของข้อมูล
         DB::beginTransaction();
@@ -82,19 +76,13 @@ class EventRegistrationController extends Controller
                 return back()->withErrors(['limitmax' => 'ลงทะเบียนเต็มจำนวนแล้ว']);
             }
 
-            //กันเหนียวอีกชั้น เผื่อมีคนส่งฟอร์มพร้อมกันด้วยชื่อเดียวกัน
-            $isduplicate = EventRegistration::where('event_id', $event->event_id)
-                ->where('full_name', $data['full_name'])
-                ->exists();
-
-            if ($isduplicate) {
+            if ($this->hasRegistered($event->event_id)) {
                 DB::rollBack();
-                return back()->withErrors(['full_name' => 'ชื่อนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว']);
+                return back()->withErrors(['full_name' => 'คุณลงทะเบียนกิจกรรมนี้ไปแล้ว']);
             }
-
             $registration = new EventRegistration();
             $registration->event_id = $event->event_id;
-            $registration->user_id = Auth::id() ?? 1;
+            $registration->user_id = Auth::id();
             $registration->full_name = $data['full_name'];
             $registration->registered_at = now();
             $registration->save();
@@ -106,7 +94,7 @@ class EventRegistrationController extends Controller
             return back()->withErrors(['error' => 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง']);
         }
 
-        return back()->with('success', '✓ ลงทะเบียนเข้าร่วมกิจกรรมสำเร็จแล้ว');
+        return back();
 
     }
 

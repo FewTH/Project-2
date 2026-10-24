@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 
 
 class ActivityController extends Controller
@@ -383,13 +384,24 @@ class ActivityController extends Controller
         $event = $this->getEvent($eventId);
         $url = url('user/register_event/' . $event->event_id);
 
-        // สร้างชื่อไฟล์จากชื่อกิจกรรม แปลงอักขระที่ไม่เหมาะสมออกกันปัญหาไฟล์เสีย
-        $safeTitle = preg_replace('/[^\p{L}\p{N}_\-]/u', '_', $event->title);
-        $filename = 'QRCode-' . $safeTitle . '.png';
+        // เก็บตัวอักษร ตัวเลข และเครื่องหมายประกอบ (สระ/วรรณยุกต์ไทย) ไว้ แปลงอย่างอื่นเป็น _
+        // ตัดความยาวไม่ให้ชื่อไฟล์ยาวเกินไป
+        $safeTitle = preg_replace('/[^\p{L}\p{M}\p{N}_\-]/u', '_', $event->title);
+        $safeTitle = mb_substr($safeTitle, 0, 80);
 
-        return response(QrCode::format('png')->size(600)->generate($url))
+        $filename = 'QRCode-' . $safeTitle . '.png';
+        // ชื่อสำรองเป็น ASCII ไว้ให้เบราว์เซอร์เก่าที่อ่านชื่อภาษาไทยไม่ได้
+        $fallback = 'QRCode-event-' . $event->event_id . '.png';
+
+        $png = QrCode::format('png')->size(600)->generate($url);
+
+        return response($png)
             ->header('Content-Type', 'image/png')
-            ->header('Content-Disposition', 'attachment; filename=' . $filename . '');
+            ->header('Content-Disposition', HeaderUtils::makeDisposition(
+                HeaderUtils::DISPOSITION_ATTACHMENT,
+                $filename,
+                $fallback
+            ));
     }
 
 

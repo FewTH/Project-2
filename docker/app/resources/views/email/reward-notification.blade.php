@@ -14,7 +14,9 @@
                 <tr>
                      <td style="padding: 30px 30px 15px 30px;">
 
-                        <p style=" margin: 0 0 16px;font-size: 24px; color: #111827; font-weight: 600;">ยินดีด้วย คุณได้รับรางวัล</p>
+                    @if($spinresult->reward)
+
+                        <p style="margin: 0 0 16px; font-size: 24px; color: #111827; font-weight: 600;">ยินดีด้วย คุณได้รับรางวัล</p>
 
                         <p style="color: #1F2937; font-size: 18px;">เรียน คุณ <span style="font-weight: 600;">{{ $spinresult->winner_name }}</span></p>
 
@@ -23,16 +25,16 @@
                         <hr style="border: 1px solid #d6d7da;">
 
                         <div style="display: flex;">
-                            <p style="color: #4B5563; font-size: 18px;">รางวัล</p>    
+                            <p style="color: #4B5563; font-size: 18px;">รางวัล</p>
                             <div style="margin-left: auto">
-                                <p style="color: #1F2937; font-weight: 600;  font-size: 18px;">{{ $spinresult->reward->name ?? '-' }}</p>
+                                <p style="color: #1F2937; font-weight: 600; font-size: 18px;">{{ $spinresult->reward->name }}</p>
                             </div>
                         </div>
 
                         <hr style="border: 1px solid #d6d7da;">
 
                         <div style="display: flex;">
-                            <p style="color: #4B5563; font-size: 18px;">รหัสรับรางวัล</p>    
+                            <p style="color: #4B5563; font-size: 18px;">รหัสรับรางวัล</p>
                             <div style="margin-left: auto;">
                                 <p style="color: #1F2937; font-weight: 600; font-size: 18px;">{{ $spinresult->qr_code }}</p>
                             </div>
@@ -57,10 +59,19 @@
                             </tr>
                         </table>
 
+                    @else
+
+                        <p style="margin: 0 0 16px; font-size: 24px; color: #111827; font-weight: 600;">ขอบคุณที่ร่วมกิจกรรม</p>
+
+                        <p style="color: #1F2937; font-size: 18px;">เรียน คุณ <span style="font-weight: 600;">{{ $spinresult->winner_name }}</span></p>
+
+                        <p style="color: #374151; font-size: 18px;">คุณถูกสุ่มรายชื่อในรอบนี้ แต่กิจกรรมนี้ไม่มีของรางวัล ขอบคุณที่เข้าร่วมกิจกรรม</p>
+
+                    @endif
+
                     </td>
                 </tr>
             </table>
-            
 
         </td>
     </tr>

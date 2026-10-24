@@ -207,18 +207,19 @@
                     <hr class="lineactivity">
                     <div class="framedateorganize">
                         <p class="messagedateorganize">รายการรางวัลทั้งหมด</p>
-                        <span class="dateorganize"> 
-                            @foreach($event->wheel->rewards as $index => $reward)
-                                {{ $index + 1 }}.{{ $reward->name }} {{ $reward->pivot->quantity_selected }} ชิ้น {{ number_format($reward->rate , 1) }}% {{ !$loop->last ? ', ' : '' }}
-                            @endforeach
-                        </span>
+                        <div class="dateorganize1">
+                             @foreach($event->wheel->rewards as $index => $reward)
+                            <span class="dateorganize2"> 
+                                    {{ $index + 1 }} . {{ $reward->name }} {{ $reward->pivot->quantity_selected }} ชิ้น {{ number_format($reward->rate , 1) }}% 
+                            </span>
+                             @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="framelistnamesregister">
                 <div class="framelistnamesregister-1">
-                    <div class="pointlistnamesregister"></div>
                     <p class="messagelistnamesregiste">รายชื่อผู้ลงทะเบียน</p>
                     <div class="framequantitypeople">
                         <p class="numberquantitypeople">{{ $event->registrations->count() }} คน</p>

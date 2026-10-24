@@ -16,9 +16,17 @@ class RewardNotification extends Mailable
 
     public function build()
     {
-        //สร้างรูป QR จากค่า qr_code ตอนกดส่ง
-        $qrimage = (string) QrCode::format('png')->size(300)->generate($this->spinresult->qr_code);
+        $hasReward = (bool) $this->spinresult->reward;
 
-        return $this->subject('คุณได้รับรางวัล')->view('email.reward-notification')->with(['spinresult' => $this->spinresult,'qrimage' => $qrimage,]);
+        $qrimage = $hasReward
+            ? (string) QrCode::format('png')->size(300)->generate($this->spinresult->qr_code)
+            : null;
+
+        return $this->subject($hasReward ? 'คุณได้รับรางวัล' : 'ขอบคุณที่ร่วมกิจกรรม')
+            ->view('email.reward-notification')
+            ->with([
+                'spinresult' => $this->spinresult,
+                'qrimage'    => $qrimage,
+            ]);
     }
 }

@@ -403,11 +403,47 @@ if(framesearchactivity){
                 return;
 
             const  headingname1 = headingname.textContent.trim().toLowerCase();
+            const match = headingname1.includes(keyword);
 
-            if(headingname1.includes(keyword)){
+            if(match){
                 card.style.display = '';
+                requestAnimationFrame(function(){
+                    card.classList.remove('is-hidden');
+                });
+
             }else{
-                card.style.display = 'none';
+                card.classList.add('is-hidden');
+                setTimeout(function(){
+                    if (card.classList.contains('is-hidden')){
+                        card.style.display = 'none';
+                    }
+                }, 250);
+            }
+        });
+
+    });
+}
+
+//ช่องค้นหารายชื่อแบบประเมิน ในหน้า assessment.blade.php
+const framesearchassessment = document.getElementById('frame_search_activity_2');
+
+if(framesearchassessment){
+    framesearchassessment.addEventListener('keyup', function(){
+        
+        const keywordassessment = framesearchassessment.value.trim().toLowerCase();
+        const frameactivityassessment = document.querySelectorAll('.sectionassessment');
+
+        frameactivityassessment.forEach(function (card){
+            const nameassessment = card.querySelector('.sectionassessment-1');
+            if (!nameassessment)
+                return;
+
+            const  nameassessment1 = nameassessment.textContent.trim().toLowerCase();
+
+            if(nameassessment1.includes(keywordassessment)){
+                card.classList.remove('is-hidden');
+            }else{
+                card.classList.add('is-hidden');
             }
         });
 
@@ -427,8 +463,9 @@ if(showmore && showless){
     showmore.addEventListener('click', function(){
         const btnshowmore = document.querySelectorAll('.btn-showmore');
 
-        btnshowmore.forEach(function (showmore1){
-            showmore1.style.display = 'flex';
+        btnshowmore.forEach(function (showmore1, i){
+            showmore1.style.transitionDelay = (i * 0.03) + 's';
+            showmore1.classList.add('is-open');
         });
         showmore.style.display = 'none';
         showless.style.display = 'flex';
@@ -437,7 +474,8 @@ if(showmore && showless){
     showless.addEventListener('click', function(){
         const btnshowmore = document.querySelectorAll('.btn-showmore');
         btnshowmore.forEach(function (showmore1){
-            showmore1.style.display = 'none';
+            showmore1.style.transitionDelay = '0s';
+            showmore1.classList.remove('is-open');
         });
         showmore.style.display = 'flex';
         showless.style.display = 'none';
@@ -974,6 +1012,66 @@ if (typeof rewardData !== 'undefined') {
     rewardwheel = createwheel('reward_canvas', rewardData);
 }
 
+//เอาผู้โชคดีที่เพิ่มสุ่มได้ไปใส่บนสุดของรายการผู้โชคดีล่าสุด 6 คน โดยไม่ต้องรีเฟรชหน้า
+function addlatestwinner(nameresult, rewardresult) {
+    const latestwinnerslist = document.getElementById('latest_winners_list');
+
+    //ถ้าไม่มีกรอบรายการหรือรอบนนี้สุ่มแต่ของรางวัลไม่มีรายชื่อก็ไม่ต้องทำอะไรเลย
+    if(!latestwinnerslist || !nameresult){
+        return;
+    }
+
+    //ถ้ามีข้อความ ยังไม่มีผู้โชคดี อยู่ให้ลบออกก่อน
+    const warnnothaveluckywinner = latestwinnerslist.querySelector('.warnnothaveluckywinner');
+    if (warnnothaveluckywinner){
+        warnnothaveluckywinner.remove();
+    }
+
+    //ถ้ารอบนี้ปิดสุ่มของรางวัลไว้ ให้โชว์ขีดแทนชื่อรางวัล
+    let rewardtext = '-';
+    if(rewardresult) {
+        rewardtext = rewardresult.label;
+    }
+
+    //สร้างแุถวผู้โชคดีใหม่ เลขลำดับจะใส่ทีหลังตอนเรียงเลย
+    const framenameluckywinner = document.createElement('div');
+    framenameluckywinner.className = 'framenameluckywinner';
+    framenameluckywinner.innerHTML = '<div class="framenumberluckywinner"><p class="framenumberluckywinner-1"></p></div>' + '<p class="nameluckywinner"></p>' + '<div class="framePrizes"><p class="rawardname"></p></div>';
+
+    //ใส่ชื่อกับรางวัลด้วย textContent กันชื่อที่มีอังขระแปลกๆทำให้หน้าพัง
+    framenameluckywinner.querySelector('.nameluckywinner').textContent = nameresult.label;
+    framenameluckywinner.querySelector('.rawardname').textContent = rewardtext;
+
+    //เส้นคั่นใต้แถว
+    const linesectionluckywinner = document.createElement('hr');
+    linesectionluckywinner.className = 'linesectionluckywinner';
+
+    //เอาแถวใหม่ไปไว้บนสุด โดยให้เส้นคั่นอยู่ใต้แถว
+    latestwinnerslist.prepend(linesectionluckywinner);
+    latestwinnerslist.prepend(framenameluckywinner);
+
+    //เก็บไว้แค่ 6 คนล่าสุด คนที่เกินให้ลบทิ้งพร้อมเส้นคั่นของมัน
+    const allwinnerrows = latestwinnerslist.querySelectorAll('.framenameluckywinner');
+
+    for (let i = 0; i < allwinnerrows.length; i++){
+        const winnerrow = allwinnerrows[i];
+
+        if (i >= 6){
+            winnerrow.nextElementSibling.remove();
+            winnerrow.remove();
+
+        }else{
+            //แถวที่ยังอยู่ ใส่เลขลำดังใหม่ 1 2 3
+            winnerrow.querySelector('.framenumberluckywinner-1').textContent = i + 1;
+        }
+    }
+
+}
+
+
+
+
+
 
 //ปุ่มกดเริ่มสุ่มรางวัล
 const btnstartRandom = document.getElementById('btn_startRandomreward');
@@ -1078,6 +1176,8 @@ if (btnstartRandom) {
                     })
                 })
             }
+            //เอาผู้โชคดีไปใส่ในรายการด้านล่างทันที
+            addlatestwinner(nameresult, rewardresult);
 
             //พอสุ่มเสร็จpopupก็จะเปิดออกมา
             showwinnerpopup(nameresult, rewardresult);
@@ -1490,28 +1590,6 @@ updatenumberstatussendemail();
 
 
 //ส่วนของหน้า dashboard.blade.php
-//ปุ่มเปลี่ยนช่วงเวลาของหน้า dashboard
-const buttonday = document.getElementById('button-day');
-const buttonweek = document.getElementById('button-week');
-const buttonmonth = document.getElementById('button-month');
-
-if (buttonday){
-    buttonday.addEventListener('click', function(){
-        window.location.href = '?range=day';
-    });
-}
-if (buttonweek){
-    buttonweek.addEventListener('click', function(){
-        window.location.href = '?range=week';
-    });
-}
-if (buttonmonth){
-    buttonmonth.addEventListener('click', function(){
-        window.location.href = '?range=month';
-    });
-}
-
-
 //วาดกราฟเส้นการสุ่มตามช่วงเวลา
 const graphcanvas = document.getElementById('graph');
 

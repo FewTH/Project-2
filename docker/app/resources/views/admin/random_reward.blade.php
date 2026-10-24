@@ -63,9 +63,6 @@
             <h1>ศูนย์กลางสุ่มรางวัล </h1>
             <p class="messagelistactivities">{{ $event->title }}</p>
         </div>
-
-
-
             <div class="framebigofWheel">
                 <!--วงล้อสุ่มรายชื่อ-->
                 <div class="framesmallnameofwheel" id="framesmall_nameofwheel">
@@ -165,6 +162,7 @@
 
                 <hr class="linesectionluckywinner">
                 
+                <div id="latest_winners_list">
                 @forelse($latestwinners as $index => $winner)
                 <div class="framenameluckywinner">
                     <div class="framenumberluckywinner">
@@ -179,6 +177,7 @@
                     @empty
                         <p class="warnnothaveluckywinner">ยังไม่มีผู้โชคดี</p>
                     @endforelse
+                </div>
         </div>
 
             <div class="framechanceleavereward">

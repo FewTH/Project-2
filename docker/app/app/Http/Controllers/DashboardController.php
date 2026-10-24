@@ -9,9 +9,13 @@ use App\Models\Reward;
 use App\Models\User;
 use App\Models\AssessmentRespondent;
 use App\Models\Assessment;
+use App\Models\AssessmentAssignment;
 use App\Models\EventRewardDraw;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\AssessmentApi;
+use Illuminate\Support\Facades\Cache;
+
 
 class DashboardController extends Controller
 {
@@ -76,9 +80,12 @@ class DashboardController extends Controller
         $newevents = Event::where('created_at', '>=', $thisstart)->count();
         
         //กรอบที่ 5 แบบประเมินที่เปิดอยู่ กับที่เพิ่มเข้ามาใหม่ในช่วงนี้
-        $openassess = Assessment::where('is_open', 1)->count();
-        $newassess = Assessment::where('created_at', '>=', $thisstart)->count();
-
+        $allAssess  = Cache::remember('dash_assessments_all', 60, fn () => app(AssessmentApi::class)->all());
+        $assigned   = AssessmentAssignment::pluck('assessment_id')->all();
+        $openassess = $allAssess->filter(
+            fn ($a) => (int) $a->is_open === 1 && !in_array($a->assessment_id, $assigned)
+        )->count();
+        $newassess  = 0;
         //ข้อมูลกราฟ วนทีละช่วงแล้วนับจำนวนการสุ่ม ช่วงไหนไม่มีข้อมูลจะได้ 0
         $labels = [];
         $values = [];

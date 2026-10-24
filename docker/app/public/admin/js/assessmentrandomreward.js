@@ -128,6 +128,85 @@ document.addEventListener('DOMContentLoaded', function () {
         nameCtx.fillStyle = '#ffffff';
         nameCtx.fill();
     }
+    // เก็บประวัติผู้โชคดีล่าสุด
+    // ส่วนอันนี้จะเป็นแบบบว่าเก็บรายชื่อผู้โชคดีแยกตามแบบประเมินนั้นๆไม่ให้มันรวมกันอะแหละ
+    let storageKey = 'recentWinners_' + assessmentId;
+    //ประกาศว่าให้มันเก็บค่าลงlocalstorage เพื่อไม่ให้ข้อมูลมันหายตอนกดรีเฟรนช
+    let recentWinners = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+    // ฟงก์ชันแสดงผลรายชื่อแบบเรนเดอมา
+    function renderRecentWinners() {
+        const container = document.getElementById('recentWinnersList');
+        if (!container) return;
+
+        if (recentWinners.length === 0) {
+            container.innerHTML = '<p class="footer-no-winner">ยังไม่มีผู้โชคดี</p>';
+            return;
+        }
+
+        let html = '';
+        recentWinners.forEach((winner, idx) => {
+            html += `
+                <div class="footer-winner-row">
+                    <span class="footer-winner-num">${idx + 1}</span>
+                    <span class="footer-winner-name">${winner.name} (ได้รับ: ${winner.reward})</span>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
+
+    // ฟังก์ชันคำนวณและแสดงผลโอกาสออกของรางวัล (เปอร์เซ็นต์)
+    // ฟังก์ชันแสดงรายชื่อรางวัลและอัตราการออก
+    function updateRewardProbabilities() {
+    const container = document.getElementById('rewardProbabilityList');
+    if (!container) return;
+
+    if (!rewardData || rewardData.length === 0) {
+        container.innerHTML = '<p class="no-reward-text">ยังไม่มีรายการรางวัล</p>';
+        return;
+    }
+
+    let html = '';
+    rewardData.forEach((reward) => {
+        html += `
+            <div class="reward-prob-item">
+                <span class="reward-name">${reward.label}</span>
+                <span class="reward-rate">${reward.rate}%</span>
+            </div>
+        `;
+    });
+        container.innerHTML = html;
+    }
+
+    // ฟังก์ชันเพิ่มและแสดงรายชื่อผู้โชคดีล่าสุด
+    function addRecentWinner(winnerName, rewardName) {
+        recentWinners.unshift({ name: winnerName, reward: rewardName });
+        if (recentWinners.length > 3) {
+            recentWinners.pop(); // ตัดออกให้เหลือแค่ 3 คนล่าสุด
+        }
+
+        // บันทึกลงใน localStorage ของเบราว์เซอร์
+        localStorage.setItem(storageKey, JSON.stringify(recentWinners));
+
+        // สั่งให้แสดงผล
+        renderRecentWinners();
+        const container = document.getElementById('recentWinnersList');
+        if (!container) return;
+
+        let html = '';
+        recentWinners.forEach((winner, idx) => {
+            html += `
+                <div class="winner-item">
+                    <span class="winner-index">${idx + 1}. ${winner.name}</span>
+                    <span class="winner-reward">ได้รับ: ${winner.reward}</span>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+    }
+
     
     document.getElementById('toggle-name-wheel').addEventListener('change',function(){
         const spinBtn = document.getElementById('spinassessmentBtn');
@@ -139,6 +218,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     drawWheel();
     drawNameWheel();
+    updateRewardProbabilities(); //แสดงอัตราของรางวัลตั้งแต่เปิดเวง็บเลย
+    renderRecentWinners(); //แสดงรายชื่อเดิมที่เก็บในlocalstorageตอนโหลดหน้าเว็บเ
 
     // คำนวนจุดหมุน
     function calcTargetRotation(currentRotation, wedges, winnerId){
@@ -178,9 +259,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('spinResultReward').textContent = data.winner_reward_label;
                 document.getElementById('spinResultPopup').style.display = 'flex';
                 
+                addRecentWinner(data.winner_name, data.winner_reward_label);
+
                 rewardData = data.remaining_rewards;
                 nameData = data.remaining_respondents;
                 
+                updateRewardProbabilities(); 
+
                 [canvas, nameCanvas].forEach(c =>{
                     c.style.transition = 'none';
                     c.style.transform = 'rotate(0deg)';
@@ -206,4 +291,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('closeSpinResultBTN').addEventListener('click', function () {
         document.getElementById('spinResultPopup').style.display='none';
     });
+
 });

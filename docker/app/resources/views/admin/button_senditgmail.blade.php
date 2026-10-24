@@ -78,11 +78,11 @@
             <p class="numberallbuttonsenditgmail" id="numberallbutton_senditgmail">0</p>
             <span class="messageallbuttonsenditgmail">ทั้งหมด</span>
         </div>
-        <div class="frameallbuttonsenditgmail">
+        <div class="frameallbuttonsenditgmail-1">
             <p class="numbersentbuttonsenditgmail" id="numbersentbutton_senditgmail">0</p>
             <span class="messageallbuttonsenditgmail">ส่งแล้ว</span>
         </div>
-        <div class="frameallbuttonsenditgmail">
+        <div class="frameallbuttonsenditgmail-2">
             <p class="numberdeliveryfailedbuttonsenditgmail" id="numberdeliveryfailedbutton_senditgmail">0</p>
             <span class="messageallbuttonsenditgmail">ส่งไม่สำเร็จ</span>
         </div>
@@ -134,13 +134,13 @@
             </div>
 
         <div class="framelistthatfailed">
-            <p class="messagelistnamerecipientreward">รายการที่ล้มเหลว</p>
+            <p class="messagelistnamerecipientreward-1">รายการที่ล้มเหลว</p>
             <hr class="linemessagelistnamerecipientreward">
 
             @forelse($failedlist as $item)
             <div class="framelistnamethatfailed">
                 <p class="pointlistnamethatfailed"></p>
-                <span class="messagelistnamethatfailed">{{ $item->winner_name }}</span>
+                <span class="messagelistnamethatfailed-1">{{ $item->winner_name }}</span>
             <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST" class="btn-Resend0">
                 @csrf
                 <button type="submit" class="btn-Resend1">
@@ -151,7 +151,9 @@
             </div>
             <hr class="linemessagelistnamerecipientreward-2">
             @empty
+            <div class="messagelistnamethatfailed-1">
                 <p class="messagelistnamethatfailed">ไม่มีรายการที่ส่งล้มเหลว</p>
+            </div>
             @endforelse
 
             <form action="{{ route('admin.senditgmail.resendallfailed', $assessment->assessment_id) }}" method="POST">

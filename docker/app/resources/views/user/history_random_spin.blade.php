@@ -51,7 +51,7 @@
 </div>
 </div> 
 <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
-<div class="main-content-1">
+<div class="main-content-5">
     <!-- ชื่อโปรไฟล์-->  
     <div class="My_Profile">
         <h1>ผลการสุ่ม</h1>
@@ -63,22 +63,31 @@
         <p class="sectionrandomresult">ยินดีด้วย คุณได้รับรางวัล</p>
         <p class="reward-name">เรียน คุณ <span class="reward-name1">{{ $item->winner_name }}</span></p>
         <div class="framemessagereceiverewards">
-            <span class="messagereceiverewards">คุณได้รับรางวัลจาการสุ่มรางวัล กรุณาแสดง QR Code ด้านล่าง</span>
+            <span>คุณได้รับรางวัลจาการสุ่มรางวัล กรุณาแสดง QR Code ด้านล่าง</span>
             <span class="messagereceiverewards">เพื่อรับของรางวัล</span>
+        </div>
+        <hr class="linemessagereceiverewards1">
+        <div class="framenamereward">
+            <p class="messagenamereward">รางวัล</p>
+            <div class="namereward">
+                <p class="namereward2">{{ $item->reward->name }}</p>
+            </div>
         </div>
         <hr class="linemessagereceiverewards">
         <div class="framenamereward">
-            <p class="messagenamereward">รางวัล</p>
-            <p class="namereward">{{ $item->reward->name }}</p>
+            <p class="messagenamereward">รหัสรับรางวัล</p>
+            <div class="namereward">
+                <p class="namereward2">{{ $item->qr_code }}</p>
+            </div>
         </div>
         <hr class="linemessagereceiverewards">
-        <div class="framecodereceiveitems">
-            <p class="messagecodereceiveitems">รหัสรับรางวัล</p>
-            <p class="codereceiveitems">{{ $item->qr_code }}</p>
-        </div>
         <div class="reward-qr">
-            {!! QrCode::size(300)->generate($item->qr_code) !!}
-            <p>สแกนหรือแสดง QR Code นี้ที่จุดรับรางวัล</p>
+            <div>
+                {!! QrCode::size(250)->generate($item->qr_code) !!}
+            </div>
+            <div class="reward-qr-1">
+                <p>สแกนหรือแสดง QR Code นี้ที่จุดรับรางวัล</p>
+            </div>
         </div>
     </div>
     @else

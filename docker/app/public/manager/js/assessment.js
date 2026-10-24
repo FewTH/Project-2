@@ -199,6 +199,7 @@ updatenumberassessment();
 
 
 //ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
+//ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
 const framesearchactivity = document.getElementById('frame_search_activity');
 
 if(framesearchactivity){
@@ -213,13 +214,23 @@ if(framesearchactivity){
                 return;
 
             const  headingname1 = headingname.textContent.trim().toLowerCase();
+            const match = headingname1.includes(keyword);
 
-            if(headingname1.includes(keyword)){
+            if(match){
                 card.style.display = '';
+                requestAnimationFrame(function(){
+                    card.classList.remove('is-hidden');
+                });
+
             }else{
-                card.style.display = 'none';
+                card.classList.add('is-hidden');
+                setTimeout(function(){
+                    if (card.classList.contains('is-hidden')){
+                        card.style.display = 'none';
+                    }
+                }, 250);
             }
         });
 
-    })
+    });
 }
