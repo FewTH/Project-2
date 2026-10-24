@@ -139,6 +139,9 @@
             </div>
         </div>
 
+        {{-- เส้นแบ่งด้านล่างหัวข้อ --}}
+        <hr class="footer-winner-divider">
+
         <div id="rewardProbabilityList" class="footer-probability-list">
             {{-- แสดงผ่านตัว JS --}}
         </div>

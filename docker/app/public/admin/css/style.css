@@ -9576,9 +9576,21 @@
     font-weight: bold;
   }
 /* ส่วนรายละเอียดแบบประเมิน(Footer) */
-.bottom-assessment-container{
+.assessment-footer-container{
+  margin-top: 40px;
   display: flex;
+  align-items: flex-start;
   gap: 20px;
+  flex-wrap: wrap;
+}
+/* พื้นหลังบ็อกรายชื่อผู้โชคดีล่าสุด */
+.footer-winner-card{
+  flex: 1 1 400px;
+  background-color: #fdfbf5;
+  padding: 10px 20px 15px 20px;
+  border-radius: 20px;
+  width: 50%;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
 }
 /* ส่วนบนของบ็อกวงรายชื่อผู้โชคดี */
 .background-respondents-header{
@@ -9587,13 +9599,40 @@
   padding: 10px 20px 15px 20px;
   border-radius: 20px;
 }
-
+.footer-winner-title-wrapper{
+  display: flex;
+  align-items: center; 
+  font-size: 25px;
+  font-weight: 600;
+}
 /* ข้อความรายชื่อผู้โชคดี */
 .respondent-winner-topic{
   color: #8A5B10;
   font-size: 24px;
   font-weight: 600;
 }
+/* บ็อกหลักแสดงรางวัลและอัตราารออก */
+.footer-probability-card{
+  flex: 1 1 400px;
+  background-color: #EEF4FF;
+  padding: 10px 20px 15px 20px;
+  border-radius: 20px;
+  width: 50%;
+  box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+}
+/* หัวข้อของบ็อกรางวัล */
+.footer-probability-header{
+  gap: 10px;
+}
+.footer-probability-title-wrapper{
+  display: flex;
+  align-items: center;
+  color: #3563E0; 
+  font-size: 25px;
+  font-weight: 600;
+}
+
+
 /* ชื่อและสถานะแบบประเมิน */
 .top-name-assessment{
   display: flex;

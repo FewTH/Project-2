@@ -164,16 +164,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!container) return;
 
     if (!rewardData || rewardData.length === 0) {
-        container.innerHTML = '<p class="no-reward-text">ยังไม่มีรายการรางวัล</p>';
+        container.innerHTML = '<p class="footer-no-winner">ยังไม่มีรายการรางวัล</p>';
         return;
     }
 
     let html = '';
     rewardData.forEach((reward) => {
         html += `
-            <div class="reward-prob-item">
-                <span class="reward-name">${reward.label}</span>
-                <span class="reward-rate">${reward.rate}%</span>
+            <div class="footer-probability-row">
+                <span class="footer-probability-label">${reward.label}</span>
+                <span class="footer-probability-value">${reward.rate}%</span>
             </div>
         `;
     });
