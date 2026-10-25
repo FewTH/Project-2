@@ -55,6 +55,8 @@
 </div>
 
 {{-- --------------------------------------------------------------- --}}
+    {{-- กรอบหลักใหญ่ๆที่คอบทุกเนื้อหาไว้ --}}
+    <div class="detail-spinwheel">
     {{-- ส่วนรายละเอียดแบบประเมิน(header) --}}
     <div class="random-reward-header">
         <div class="top-name-assessment">
@@ -63,9 +65,9 @@
                 {{$assessment->is_open ? 'เปิดอยู่' : 'ปิดแล้ว'}}
             </span>
         </div>
-        <p class="assessment-summary-sub">
+        <h4 class="assessment-summary-sub">
             วงล้อรางวัล:{{$wheel->rewards->pluck('name')->join(', ')}}
-        </p>
+        </h4>
     </div>
 
     {{-- พื้นหลังของวงล้อทั้งหมด --}}
@@ -74,7 +76,7 @@
     {{-- ส่วนวงล้อรายชื่อของคนที่ทำแบบประเมิน --}}
     <div class="respondent-box">
         <div class="background-respondent-header">
-            <div class="logo-topic-respondent">
+            <div class="Logo-topic-respondent">
                 <img src="{{asset('manager/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของวงล้อรายชื่อ" width="50" height="50">
                 <p class="text-res-header">วงล้อสุ่มรายชื่อ</p>
             </div>
@@ -125,6 +127,7 @@
             <div class="wheel-pointer"></div>
         </div>
     </div>
+    {{-- ส่วนปุ่มกดสุ่มรางวัล --}}
     <div class="btnstartRandomreward">
         <button type="button" class="btn-startRandomreward" id="spinassessmentBtn">
             <img src="{{ asset('manager/img/รูปของปุ่มเรื่มสุ่มรางวัล.png') }}" alt="รูปของปุ่มเรื่มสุ่มรางวัล" class="img-btn-startRandomreward">
@@ -143,7 +146,7 @@
     </div>
 
     {{-- ส่วนรายละเอียดแบบประเมิน(Footer) --}}
-    <div class="bottom-name-assessment">
+    {{-- <div class="bottom-name-assessment">
         <h4 class="assessment-title-name-bottom">{{$assessment->name}}</h4>
         <span class="assess-status-bottom">{{$assessment->is_open ? 'open' : 'closed'}}
                 {{$assessment->is_open ? 'เปิดอยู่' : 'ปิดแล้ว'}}
@@ -152,6 +155,44 @@
             สร้างโดย: {{ $assessment->created_by_name ?? '-' }} • 
             ปิดรับคำตอบ: {{ $assessment->closed_at?->format('d M Y') ?? '-' }}
         </p>
+    </div> --}}
+    {{-- ส่วนรายละเอียดแบบประเมิน (Footer) --}}
+<div class="assessment-footer-container">
+    {{-- แสดงผู้โชคดีคนล่าสุด --}}
+    <div class="footer-winner-card">
+        <div class="footer-winner-header">
+            <div class="footer-winner-title-wrapper">
+                <img src="{{ asset('admin/img/รูปของหัวข้อผู้โชคดีล่าสุด.png') }}" alt="ไอคอนผู้โชคดี" width="45" height="45">
+                <p class="footer-winner-title">ผู้โชคดี 3 คนล่าสุด</p>
+            </div>
+        </div>
+
+        {{-- เส้นแบ่งด้านล่างหัวข้อ --}}
+        <hr class="footer-winner-divider">
+
+        {{-- ส่วนกล่องแสดงรายชื่อผู้โชคดี --}}
+        <div id="recentWinnersList" class="footer-winner-list">
+            <p class="footer-no-winner">ยังไม่มีผู้โชคดี</p> 
+        </div>
+    </div>
+
+    {{-- บ็อกหลักแสดงอัตรารางวัล --}}
+    <div class="footer-probability-card">
+        <div class="footer-probability-header">
+            <div class="footer-probability-title-wrapper">
+                <img src="{{ asset('admin/img/รูปของโอกาสออกของรางวัล.png') }}" alt="ไอคอนโอกาสรางวัล" width="45" height="45">
+                <p class="footer-probability-title">โอกาสออกของรางวัล</p>
+            </div>
+        </div>
+
+        {{-- เส้นแบ่งด้านล่างหัวข้อ --}}
+        <hr class="footer-winner-divider">
+
+        <div id="rewardProbabilityList" class="footer-probability-list">
+            {{-- แสดงผ่านตัว JS --}}
+        </div>
+    </div>
+    </div>
     </div>
 {{-- -------------------------------------------------------------------------- --}}
     @php
@@ -161,6 +202,7 @@
             return [
                 'id' => $r->reward_id,
                 'label' => $r->name,
+                'rate' => $r->rate,
                 'weight' => $r->rate*$r->pivot->quantity_selected,
                 'quantity' => $r->pivot->quantity_selected,
             ];

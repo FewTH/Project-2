@@ -61,6 +61,7 @@
             </div>
 
             <div class="btn-top-rewardbox">
+                {{-- ช่องค้นหา --}}
                     <div class="input-wrapper">
                         <input type="text" class="search-box" placeholder="ค้นหารายการรางวัล">
                         <img src="{{ asset('admin/img/search.png') }}" alt="search-icon" class="search-icon">
@@ -118,4 +119,5 @@
     </div>
 
 </body>
+<script src="{{asset('manager/js/managereward.js')}}"></script>
 </html>

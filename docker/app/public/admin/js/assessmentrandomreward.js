@@ -147,9 +147,12 @@ document.addEventListener('DOMContentLoaded', function () {
         let html = '';
         recentWinners.forEach((winner, idx) => {
             html += `
-                <div class="footer-winner-row">
-                    <span class="footer-winner-num">${idx + 1}</span>
-                    <span class="footer-winner-name">${winner.name} (ได้รับ: ${winner.reward})</span>
+                <div class="winner-row">
+                    <div class="winner-badge">${idx + 1}</div>
+                <div class="winner-info">
+                    <span class="winner-name">${winner.name}</span>
+                    <span class="winner-reward-text">ได้รับ: ${winner.reward}</span>
+                </div>
                 </div>
             `;
         });
@@ -164,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!container) return;
 
     if (!rewardData || rewardData.length === 0) {
-        container.innerHTML = '<p class="footer-no-winner">ยังไม่มีรายการรางวัล</p>';
+        container.innerHTML = '<p class="no-reward-text">ยังไม่มีรายการรางวัล</p>';
         return;
     }
 
@@ -172,7 +175,10 @@ document.addEventListener('DOMContentLoaded', function () {
     rewardData.forEach((reward) => {
         html += `
             <div class="footer-probability-row">
-                <span class="footer-probability-label">${reward.label}</span>
+                <div class="reward-prob-left">
+                    <span class="reward-dot"></span>
+                    <span class="footer-probability-label">${reward.label}</span>
+                </div>
                 <span class="footer-probability-value">${reward.rate}%</span>
             </div>
         `;

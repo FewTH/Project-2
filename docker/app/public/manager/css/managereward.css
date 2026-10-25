@@ -348,11 +348,25 @@
       align-items: center;
       padding: 15px 20px;
       border-bottom: 1px solid #E8F0FB;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .reward-1 h3 {
     margin: 0;
     font-size: 17px;
     font-weight: normal;
+  }
+  /* คลาสสำหรับซ่อนแบบค่อยๆ เฟดและหุบลง */
+  .reward-1.is-hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+    pointer-events: none;
   }
   .no-data{
     display: flex;

@@ -91,7 +91,7 @@
       
     </div>
 
-
+    {{-- ช่องค้นหากิจจกรรม --}}
     <div class="frame-search-activity-2">
         <div class="frame-search-activity">
             <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
@@ -252,13 +252,7 @@
                 {{-- </div> --}}
             {{-- </div> --}}
         </div>
-   
-
 </div>
-
-
-
     <script src="{{ asset('manager/js/assessment.js') }}"></script>
-
 </body>
 </html>

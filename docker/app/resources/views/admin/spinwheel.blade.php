@@ -116,7 +116,7 @@
     <div class="footer-winner-card">
         <div class="footer-winner-header">
             <div class="footer-winner-title-wrapper">
-                <img src="{{ asset('admin/img/รูปของหัวข้อผู้โชคดีล่าสุด.png') }}" alt="ไอคอนผู้โชคดี" width="30" height="30">
+                <img src="{{ asset('admin/img/รูปของหัวข้อผู้โชคดีล่าสุด.png') }}" alt="ไอคอนผู้โชคดี" width="45" height="45">
                 <p class="footer-winner-title">ผู้โชคดี 3 คนล่าสุด</p>
             </div>
         </div>
@@ -134,7 +134,7 @@
     <div class="footer-probability-card">
         <div class="footer-probability-header">
             <div class="footer-probability-title-wrapper">
-                <img src="{{ asset('admin/img/รูปของโอกาสออกของรางวัล.png') }}" alt="ไอคอนโอกาสรางวัล" width="30" height="30">
+                <img src="{{ asset('admin/img/รูปของโอกาสออกของรางวัล.png') }}" alt="ไอคอนโอกาสรางวัล" width="45" height="45">
                 <p class="footer-probability-title">โอกาสออกของรางวัล</p>
             </div>
         </div>

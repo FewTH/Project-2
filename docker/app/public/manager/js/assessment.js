@@ -199,7 +199,6 @@ updatenumberassessment();
 
 
 //ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
-//ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
 const framesearchactivity = document.getElementById('frame_search_activity');
 
 if(framesearchactivity){
@@ -233,4 +232,30 @@ if(framesearchactivity){
         });
 
     });
+}
+
+//ช่องค้นหารายชื่อแบบประเมิน ในหน้า assessment.blade.php
+const framesearchassessment = document.getElementById('frame_search_activity_2');
+
+if(framesearchassessment){
+    framesearchassessment.addEventListener('keyup', function(){
+        
+        const keywordassessment = framesearchassessment.value.trim().toLowerCase();
+        const frameactivityassessment = document.querySelectorAll('.sectionassessment');
+
+        frameactivityassessment.forEach(function (card){
+            const nameassessment = card.querySelector('.sectionassessment-1');
+            if (!nameassessment)
+                return;
+
+            const  nameassessment1 = nameassessment.textContent.trim().toLowerCase();
+
+            if(nameassessment1.includes(keywordassessment)){
+                card.classList.remove('is-hidden');
+            }else{
+                card.classList.add('is-hidden');
+            }
+        });
+
+    })
 }
