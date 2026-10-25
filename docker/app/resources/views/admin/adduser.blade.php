@@ -20,13 +20,12 @@
     </a>
 </div>
 
-    <!-- ตัวฟอร์มให้ใส่รายละเอียดรางวัล -->
     <div class="add-box-main">
         <h1 class="Topic-adduser">เพิ่มผู้ใช้งาน</h1>
     <form id="add-usr-form" action="{{ route('admin.user.store') }}" method="POST">
     @csrf
 
-    <!-- ช่องกรอกข้อมูลของรางวัล -->
+    <!-- ช่องกรอกข้อมูลของผู้ใช้ -->
     <div class="name-usr-box">
         <label class="name-usr01" for="name-usr-in">ชื่อผู้ใช้ (Username)</label> <br>
         <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username') }}" placeholder="กรอกชื่อของคุณ" required>

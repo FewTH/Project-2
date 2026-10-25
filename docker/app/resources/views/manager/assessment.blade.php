@@ -208,7 +208,7 @@
                 @else
                 {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
                 <a href="{{url('manager/managespin')}}" class="assessment-open-1">
-                    <p class="message-assessment-open">ยังไม่ได้บันทึกวงล้อ คลิกเพื่อสร้าง</p>
+                    <p class="message-assessment-open">คลิกเพื่อสร้างวงล้อ</p>
                 </a>
                 @endif
             </div>

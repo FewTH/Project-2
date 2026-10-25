@@ -1260,7 +1260,7 @@ body.no-scroll {
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 1;
     max-height: 350px;
-    overflow: hidden;
+    overflow: visible;
 }
   /* คลาสสำหรับซ่อนการ์ดแบบค่อยๆแสดงแบบสมูทๆหน่อย */
   .sectionassessment.is-hidden {
@@ -1273,6 +1273,7 @@ body.no-scroll {
     margin-bottom: 0;
     border: none;
     pointer-events: none;
+    overflow: hidden; 
   }
 
   /*กรอบของแบบประเมิน*/
@@ -1364,23 +1365,49 @@ body.no-scroll {
     font-size: 18px;
   }
 
-  /*กรอบของปุ่มแบบประเมินยังเปิดอยู่*/
+ /*กรอบของปุ่มแบบประเมินยังเปิดอยู่*/
   .assessment-open-1{
+    position: relative;
+    bottom: 20px;
     width: 100%;
-    display: block;
+    display: flex;
+    justify-content: center;
     margin: auto;
     border: none;
     border-radius: 20px;
     background-color: #E5E7EB;
-    cursor: not-allowed;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   }
+
+  .assessment-open-1::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #e8ebf0;
+    width: 0px;
+    height: 0%;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+    border-radius: 50%;
+  }
+
+    .assessment-open-1:hover::before{
+      width: 1500px;
+      height: 1500px;
+    }
 
   /*ข้อความของแบบประเมินยังเปิดอยู่*/
   .message-assessment-open{
     font-size: 16px;
     font-weight: 900;
     color: #6B7280;
+    position: relative;
+    z-index: 1;
   }
+
 
   /*ปุ่มของการสุ่มรางวัล*/
   .enter-random{

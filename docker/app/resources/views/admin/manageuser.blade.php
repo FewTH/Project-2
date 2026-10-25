@@ -55,27 +55,27 @@
             </div>
 
             <!-- ลูปแสดงข้อมูลผู้ใช้จากฐานข้อมูล -->
-            @forelse($users as $user)
+            @forelse($users as $u)
                 <div class="user-1">
-                    <h3 class="name1">{{ $user->full_name }}</h3>
-                    <h3 class="email1">{{ $user->email }}</h3>
+                    <h3 class="name1">{{ $u->full_name }}</h3>
+                    <h3 class="email1">{{ $u->email }}</h3>
                     <div class="auth1">
-                        @if($user->role === 'admin')
+                        @if($u->role === 'admin')
                             <span class="role-badge role-admin">admin</span>
-                        @elseif($user->role === 'manager')
+                        @elseif($u->role === 'manager')
                             <span class="role-badge role-manager">manager</span>
                         @else
                             <span class="role-badge role-user">user</span>
                         @endif
                     </div>
-                    <h3 class="sts1">{{ $user->is_active ? 'ใช้งานอยู่' : 'ปิดใช้งาน' }}</h3>
+                    <h3 class="sts1">{{ $u->is_active ? 'ใช้งานอยู่' : 'ปิดใช้งาน' }}</h3>
                     <div class="manage-btn3">
                         <!-- ปุ่มแก้ไข -->
-                        <a href="{{ route('admin.user.edit', $user->user_id) }}">
+                        <a href="{{ route('admin.user.edit', $u->user_id) }}">
                             <img src="{{ asset('admin/img/editicon.png') }}" alt="รูปปุ่มแก้ไข" class="edit-icon3">
                         </a>
                     <!-- ปุ่มลบข้อมูล -->
-                    <form action="{{ route('admin.user.destroy', $user->user_id) }}" method="POST" class="delete-form" onsubmit="return confirm('คุณต้องการลบผู้ใช้คนนี้ใช่หรือไม่');">
+                    <form action="{{ route('admin.user.destroy', $u->user_id) }}" method="POST" class="delete-form" onsubmit="return confirm('คุณต้องการลบผู้ใช้คนนี้ใช่หรือไม่');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="delete-btn-action">
@@ -129,7 +129,6 @@
             <span>ออกจากระบบ </span>
         </a>
     </div>
-</div>
 </div>
     <script src="{{ asset('admin/js/manageuser.js') }}"></script>
 </body>

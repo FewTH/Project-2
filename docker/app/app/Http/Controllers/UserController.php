@@ -58,8 +58,8 @@ class UserController extends Controller
     // แก้ไขผู้ใช้
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.edituser', compact('user'));
+        $editUser = User::findOrFail($id);
+        return view('admin.edituser', compact('editUser'));
     }
 
     // รับข้อมูลที่แก้ไขแล้ว มาบันทึกทับของเดิม
@@ -69,14 +69,14 @@ class UserController extends Controller
 
         $request->validate([
             'username'  => 'required|string|max:255|unique:users,username,' . $id . ',user_id',
-            'full_name' => 'required|string|max:255',
+            // 'full_name' => 'required|string|max:255',
             'email'     => 'required|email|unique:users,email,' . $id . ',user_id',
             'role'      => 'required|string',
         ]);
 
         $user->update([
             'username'  => $request->username,
-            'full_name' => $request->full_name,
+            // 'full_name' => $request->full_name,
             'email'     => $request->email,
             'role'      => $request->role,
         ]);

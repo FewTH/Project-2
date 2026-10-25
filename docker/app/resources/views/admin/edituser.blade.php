@@ -20,51 +20,65 @@
     </a>
 </div>
 
-        <div class="edit-box-main">
-            <h1 class="edit-usr-title">แก้ไขผู้ใช้งาน</h1>
-            <form id="edit-usr-form">
-                {{-- ชื่อผู้ใช้ --}}
-                <div class="name-usr-box">
-                    <label class="name-usr01" for="name-usr-in">ชื่อผู้ใช้ (Username)</label> <br>
-                    <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username') }}" placeholder="กรอกชื่อของคุณ" required>
-                </div>
-                {{-- email --}}
-                <div class="emaill-usr-box">
-                    <label class="emaill-usr01" for="email">อีเมล</label> <br>
-                    <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมลของคุณ" required>
-                </div>
-                {{-- บทบาท --}}
-                <div class="role-usr-box">
-                    <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
-                    <select  class="role_list_01" id="role" name="role" required>
-                        <option value=""> --เลือกบทบาทของคุณ-- </option>
-                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : ''}}>Admin</option>
-                        <option value="Manager" {{old('role')== 'Manager' ? 'selected' : ''}}>Manager</option>
-                        <option value="User" {{old('role')== 'User' ? 'selected' : ''}}>User</option>
-                    </select>     
-                </div>
-                {{-- ปุ่มบันทีกกับยกเลิก --}}
-                <div class="btn-sub_cln">
-                    <button type="submit" class="submit-btn-edtusr">
-                        <span>บันทึก</span>
-                    </button>
+    <div class="edit-box-main">
+        <h1 class="edit-usr-title">แก้ไขผู้ใช้งาน</h1>
+        {{-- เพิ่ม method --}}
+    <form action="{{ route('admin.user.update', $editUser->user_id) }}" method="POST" id="edit-usr-form" autocomplete="off">
+    @csrf
+    @method('PUT') 
 
-                    <a href="{{url ('admin/manageuser')}}" class="cancle-btn-editusr">
-                        <span>ยกเลิก</span>
-                    </a>
-                </div>
-                </form>
-            </div>
+    {{-- ชื่อผู้ใช้ --}}
+    <div class="name-usr-box">
+        <label class="name-usr01" for="username">ชื่อผู้ใช้ (Username)</label> <br>
+        <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username', $editUser->username) }}" placeholder="กรอกชื่อของคุณ" autocomplete="off" required>
+        {{-- <input type="text"  class="name-usr-in" id="username" name="username"
+       value="{{ old('username', $user->username) }}"
+       autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required> --}}
+    </div>
+
+    {{-- email --}}
+    <div class="emaill-usr-box">
+        <label class="emaill-usr01" for="email">อีเมล</label> <br>
+        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email', $editUser->email) }}" placeholder="กรอกอีเมลของคุณ" autocomplete="off" required>
+        {{-- <input type="email" class="emaill-usr-in" id="email" name="email"
+       value="{{ old('email', $user->email) }}"
+       autocomplete="new-password" required> --}}
+    </div>
+    {{-- บทบาท --}}
+    <div class="role-usr-box">
+        <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
+        <select  class="role_list_01" id="role" name="role" required>
+            <option value=""> --เลือกบทบาทของคุณ-- </option>
+            <option value="admin" {{ old('role', $editUser->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+            <option value="manager" {{ old('role', $editUser->role) == 'manager' ? 'selected' : '' }}>Manager</option>
+            <option value="user" {{ old('role', $editUser->role) == 'user' ? 'selected' : '' }}>User</option>
+        </select>     
+        </div>
+        {{-- ปุ่มบันทีกกับยกเลิก --}}
+        <div class="btn-sub_cln">
+        <button type="submit" class="submit-btn-edtusr">
+            <span>บันทึก</span>
+            </button>
+
+            <a href="{{url ('admin/manageuser')}}" class="cancle-btn-editusr">
+                <span>ยกเลิก</span>
+            </a>
+        </div>
+        </form>
+        @if($errors->any())
+            <div class="alert-error">{{ $errors->first() }}</div>
+        @endif
+        </div>
     
 
 <!-- ส่วนเมนูsidebar -->
-    <div class="container2">
+    <div class="container3">
     <!-- โลโกมหาลัย -->
-    <div class="img-Logo2">
-        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img">
+    <div class="img-Logo3">
+        <img src="{{ asset('admin/img/Logo.png') }}" alt="รูปโลโกมหาลัย" class="Logo-img3">
     </div>
     <!-- ปุ่มเมนู -->
-    <div class="btn-Sidebar">
+    <div class="btn-Sidebar3">
         <a href="{{ url('admin/dashboard') }}" class="btn-Dashboard3">
             <img src="{{ asset('admin/img/แดชบอร์ด.png') }}" alt="รูปแดชบอร์ดสีดำ" class="btn-Dashboard-img3">
             <span>แดชบอร์ด</span>
@@ -77,19 +91,19 @@
             <img src="{{ asset('admin/img/รูปจัดการผู้ใช้สีดำ.png') }}" alt="รูปจัดการผู้ใช้" class="btn-Manage_users-img3">
             <span>จัดการผู้ใช้</span>
         </a>
-        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel">
-            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img">
+        <a href="{{ url('admin/managespin') }}" class="btn-Managewheel3">
+            <img src="{{ asset('admin/img/รูปจัดการวงล้อสุ่ม.png') }}" alt="รูปติดต่อเรา" class="btn-Managewheel-img3">
             <span>จัดการวงล้อสุ่ม</span>
         </a>
-        <a href="{{ url('admin/assessment') }}" class="btn-Assessment">
-            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img">
+        <a href="{{ url('admin/assessment') }}" class="btn-Assessment3">
+            <img src="{{ asset('admin/img/รูปแบบประเมินกิจกรรม.png') }}" alt="รูปติดต่อเรา" class="btn-Assessment-img3">
             <span>แบบประเมิน/กิจกรรม</span>
         </a>
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout2">
-            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img2">
+        <a href="{{ url('user/loginuser') }}" class="btn-logout">
+            <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
             <span>ออกจากระบบ </span>
         </a>
     </div>

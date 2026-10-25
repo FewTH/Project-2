@@ -233,7 +233,7 @@ class ActivityController extends Controller
             $wheel = spin_wheels::create([
                 'name'       => $data['title'] . '- วงล้อ',
                 'is_active'  => 1,
-                'created_by' => Auth::id() ?? 1,
+                'created_by' => Auth::id(),
             ]);
 
             // ผูกของรางวัลเข้ากับวงล้อ ของหน้าcreate_activity
@@ -248,7 +248,7 @@ class ActivityController extends Controller
                 'register_close_at' => $registercloseat,
                 'max_participants'  => $data['max_participants'],
                 'status'            => 'open',
-                'created_by'        => Auth::id() ?? 1,
+                'created_by'        => Auth::id(),
             ]);
         });
 

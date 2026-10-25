@@ -204,7 +204,7 @@
                         ยังไม่ได้บันทึกวงล้อ
                     @endif
                 </p>
-                <p class="message-create-by">
+                <p class="message-created-by">
                     สร้างโดย: {{$assessment->created_by_name ?? '-'}}
                     ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
                 </p>
