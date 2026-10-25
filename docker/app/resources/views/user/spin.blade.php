@@ -21,7 +21,7 @@
     </div>
 
 {{-- อันหลักของหน้าสุ่ม --}}
-    <div class="main-content2">
+    <div class="main-content-1">
         <h1 class="Topic-main-spin">ศูนย์กลางสุ่มของขวัญ</h1>
 
         <div class="main-search-spin2">

@@ -9,6 +9,7 @@ use App\Models\spin_wheels;
 use App\Models\EventRegistration;
 use App\Models\EventRewardDraw;
 use App\Models\Assessment;
+// use App\Models\Spinresult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -81,7 +82,7 @@ class ActivityController extends Controller
         return $this->closeRegister($eventId);
     }
 
-
+    
     // ส่วนที่ admin กับ manager ใช้ร่วมกัน ($role จะเป็น admin หรือ manager เอาไว้บอกว่าจะใช้ view กับ redirect ไปทางไหน ถ้าไม่ส่งมาจะเป็น admin)
     // แสดงฟอร์มสร้างกิจกรรม ของหน้าcreate_activity
     public function create($role = 'admin')
@@ -145,9 +146,13 @@ class ActivityController extends Controller
             ->get();
 
         // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php admin กับ manager
+        // id ของแบบประเมินที่มีผลสุ่มอย่างน้อย 1 รายการ
+$spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
+
         return view($role . '.assessment', [
             'events'      => $events,
             'assessments' => $assessments,
+            // 'spunAssessmentIds' => $spunAssessmentIds,
             'prefix'      => $role,
             'user'        => Auth::user(),
         ]);

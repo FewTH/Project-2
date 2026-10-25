@@ -12,6 +12,7 @@
     use App\Http\Controllers\SpinresultController;
     use App\Http\Controllers\DashboardController;
     use App\Http\Controllers\UserSpinController;
+    use App\Http\Controllers\HomeController;
     use App\Models\Spinresult;
     
 
@@ -141,10 +142,9 @@
 
         Route::get('/change_password', [ProfileController::class, 'userchangePassword']);
         Route::post('/change_password', [ProfileController::class, 'changePassword']);
-
-        Route::get('/home', function () {
-            return view('user.home');
-        })->name('user.home');
+        
+        // หน้าhome
+        Route::get('/home', [HomeController::class, 'index'])->name('user.home');
 
         Route::get('/spin', [UserSpinController::class, 'index'])->name('user.spin');
 

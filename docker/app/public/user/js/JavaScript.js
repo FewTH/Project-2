@@ -282,7 +282,18 @@ if (Galleryimgleft && Galleryimgcenter && Galleryimgright && arrowleft && arrowr
 
 
 
+//ปุ่มเปิด/ปิดดูรหัสผ่านหน้า login
+const loginEyeBtn = document.getElementById('img_eye_2');
+const loginEyeIcon = document.getElementById('icon_eye_2');
+const loginPasswd = document.getElementById('passwd-log');
 
+if (loginEyeBtn && loginPasswd && loginEyeIcon) {
+    loginEyeBtn.addEventListener('click', function () {
+        const isPassword = loginPasswd.type === 'password';
+        loginPasswd.type = isPassword ? 'text' : 'password';
+        loginEyeIcon.className = isPassword ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
+    });
+}
 
 
 

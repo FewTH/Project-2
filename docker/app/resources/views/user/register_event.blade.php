@@ -21,7 +21,7 @@
         <div class="frmaesectionactivity">
             <div class="sectionactivity-1">
                 <span class="sectionactivity">{{ $event->title }}</span>
-                <span class="messageregisterreward">ลงทะเบียนก่อนหมดเวลาเพื่อสิทธิ์ลุ้นรางวัล!</span>
+                <span class="messageregisterreward">ลงทะเบียนก่อนหมดเวลาเพื่อสิทธิ์ลุ้นรางวัล</span>
             </div>
             <div class="frametimeactivityreward">
                 <h1 class="numbertime" id="number_time" data-seconds="{{ $remainingseconds }}">00:00</h1>
