@@ -8176,7 +8176,7 @@
   /* หัวข้อตาราง */
   .topic-rewardlist {
       display: grid;
-      grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+      grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
       padding: 0 20px 12px 20px;
       background-color: #E8F0FB;
       color: #183153;
@@ -8201,7 +8201,7 @@
 
   .reward-1 {
       display: grid;
-      grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr; 
+      grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
       align-items: center;
       padding: 15px 20px;
       border-bottom: 1px solid #E8F0FB;
@@ -8417,7 +8417,7 @@
   .usr-topic{
     color: #102A50;
     display: grid;
-    grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
+    grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: #E8F0FB;
@@ -8494,7 +8494,7 @@
   /* list-user */
   .user-1{
     display: grid;
-    grid-template-columns:  2fr 2fr 1.8fr 1.5fr 0.5fr;
+    grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
     color: #183153;
     border-bottom:2px solid  #E8F0FB;
     padding: 10px 10px;
@@ -9299,55 +9299,108 @@
     margin-bottom: 20px;
     margin-right: 20px
   }
-/* แต่งป็อปอัพของหน้าจัดการวงล้อ */
+/* จัดพื้นหลังป๊อปอัพให้อยู่กึ่งกลางจอพอดีเป๊ะ และบังคับให้ทับทุกอย่างด้วย z-index สูงๆ */
 .pop-up-background{
-  position: fixed;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    /* display: flex; */
+    display: none; /* จะถูกเปลี่ยนเป็น flex ด้วย JavaScript ตอนเปิด Modal */
     justify-content: center;
     align-items: center;
-    z-index: 999;
-    display: none;
+    z-index: 9999;
 }
+
+/* ตัวกล่องป๊อปอัพหลัก (ใช้ Flex จัดเรียงด้านใน ไม่ให้เนื้อหาทะลุกรอบ) */
 .pop-up-content{
-  background-color: #FCF6E5;
-  border: 1px solid #a8731d;
-  width: 650px;
-  height: 440px;
-  margin-left: 400px;
-  border-radius: 10px;
-  /* overflow: hidden; */
+    background-color: #FCF6E5;
+    border: 1px solid #a8731d;
+    width: 650px;
+    max-height: 90vh; /* ป้องกันไม่ให้เกินความสูงหน้าจอ */
+    margin-left: 0;   /* เอา margin ซ้ายออก ป้องกันหน้าจอเบี้ยว */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    overflow: hidden; /* ตัดส่วนเกินไม่ให้ทะลุกรอบโค้ง */
+    box-sizing: border-box;
+    padding: 15px;
 }
-/* ส่วนheader */
+
+/* ส่วน Header */
 .header-popup-spn{
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  background-color: #a8731d;
-  height: 60px;
-  overflow: hidden;
-  border-radius: 10px;
-  color: #FCF6E5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* จัดซ้าย-ขวาอัตโนมัติ ปุ่มกากบาทจะไม่เพี้ยน */
+    padding: 0 15px;
+    background-color: #a8731d;
+    height: 55px;
+    border-radius: 8px;
+    color: #FCF6E5;
+    flex-shrink: 0;
 }
+
 /* โลโก้รางวัล */
 .logo-popup-topic{
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  /* margin-top: 20px;
-  margin-left: 20px; */
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 } 
-/* ปุ่มกากบาท */
+
+/* ปุ่มกากบาท (เคลียร์ margin-left เดิมทิ้ง ป้องกันปุ่มตกบรรทัด) */
 .x-button{
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  margin-left: 320px;
-  cursor: pointer;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: 0;
+    cursor: pointer;
+}
+
+/* ส่วนชื่อวงล้อ */
+.wheel-name {
+    margin-top: 10px;
+    flex-shrink: 0;
+}
+
+/* ส่วนหัวข้ออธิบาย */
+.descrip {
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+/* หัวข้อในตาราง */
+.topic-assess{
+    display: flex;
+    justify-content: space-between;
+    background-color: #a8731d;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+    flex-shrink: 0;
+}
+
+/* กล่องแสดงรายการแบบประเมิน (ให้มี Scrollbar เลื่อนดูได้ข้างใน ไม่ล้นป๊อปอัพ) */
+.all-assess-list{
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #d1c29b;
+    border-radius: 6px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+/* ส่วนปุ่มด้านล่าง (บันทึก / ยกเลิก) */
+.modal-footer-btn{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    padding-bottom: 5px;
+    flex-shrink: 0;
 }
 /* หัวข้อด้านบน */
 .text-assess{

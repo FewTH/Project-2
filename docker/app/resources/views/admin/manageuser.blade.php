@@ -47,6 +47,7 @@
             </div>
 
             <div class="usr-topic">
+                <h3 class="topic-info">ลำดับ</h3>
                 <h3 class="topic-name-usr">ผู้ใช้</h3>
                 <h3 class="topic-email-usr">อีเมล</h3>
                 <h3 class="topic-auth-usr">ระดับสิทธิ์</h3>
@@ -57,6 +58,7 @@
             <!-- ลูปแสดงข้อมูลผู้ใช้จากฐานข้อมูล -->
             @forelse($users as $u)
                 <div class="user-1">
+                    <h3 class="numusr-topic">{{ $loop->iteration }}</h3>
                     <h3 class="name1">{{ $u->full_name }}</h3>
                     <h3 class="email1">{{ $u->email }}</h3>
                     <div class="auth1">

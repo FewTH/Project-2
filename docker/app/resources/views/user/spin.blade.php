@@ -41,7 +41,7 @@
     <div class="sectionassessment"
          id="test1-{{ $assessment->assessment_id }}"
          data-name="{{ $assessment->name }}"
-         data-drawn="{{ $assessment->is_drawn ? '1' : '0' }}">
+         data-status="{{ $assessment->is_drawn ? 'spined' : 'not-spin' }}"> <!-- เพิ่มบรรทัดนี้ -->
 
         <div class="frameinformation-assessment">
             <div class="framesection-status">

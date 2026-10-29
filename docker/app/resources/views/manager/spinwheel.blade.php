@@ -31,7 +31,7 @@
     </div>
     <!-- ปุ่มเมนู -->
     <div class="btn-Sidebar">
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+        <a href="{{ url('manager/managereward') }}" class="btn-Home-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
         </a>

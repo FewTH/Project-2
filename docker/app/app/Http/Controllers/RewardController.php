@@ -86,6 +86,7 @@ class RewardController extends Controller
      public function destroy($id)
     {
         $reward = Reward::findOrFail($id);
+        // เป็นsoftdeleteแทน
         $reward->delete();
         // สร้างตัวแปรนี้มาเพื่อเอาไว้เช็ค role ว่ามี request มาจาก role อะไรแล้วส่งค่ากลับไปตาม role ที่ request
         $redirectRoute = (auth()->user()->role === 'manager')? 'manager.managereward' : 'admin.managereward';

@@ -46,6 +46,7 @@
             </div>
         <div class="reward-list">
             <div class="topic-rewardlist">
+                <h3 class="topic-num text-center">ลำดับ</h3>
                 <h3 class="topic1">ชื่อของรางวัล</h3>
                 <h3 class="topic2">หมวดหมู่</h3>
                 <h3 class="topic3 text-center">อัตราการออก</h3>
@@ -56,6 +57,8 @@
     <!-- รายการของรางวัลชิ้นที่ 1 -->
     @forelse($rewards as $reward)
         <div class="reward-1">
+            <!-- เลขรัน -->
+            <h3 class="num_re1 text-center">{{ $loop->iteration }}</h3>
             <h3 class="name_re1">{{ $reward->name }}</h3>
             <h3 class="category_re1">{{ $reward->category->name }}</h3>
             <h3 class="rate_re1 text-center">{{ $reward->rate }}%</h3>

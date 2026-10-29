@@ -96,7 +96,7 @@
         {{-- ปุ่มบันทึกกับลบ --}}
         <div class="btn-manage-wheel">
             <button type="button" class="submit-wheel-reward" id="submit-btn-wheel">บันทึก</button>
-            <button type="button" class="cancle-wheel-btn" id="cancle-btn-wheel">ยกเลิก</button>
+            {{-- <button type="button" class="cancle-wheel-btn" id="cancle-btn-wheel">ยกเลิก</button> --}}
         </div>
     </div>
     </div>

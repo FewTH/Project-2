@@ -11,7 +11,7 @@ class SyncUsersFromApi extends Command
     protected $signature = 'users:sync-api {--apply : เขียนลงฐานข้อมูลจริง (ไม่ใส่ = dry-run)}';
     protected $description = 'นำเข้าผู้ใช้จากระบบแบบประเมิน (เก็บ password_hash ตรง ๆ ไม่ hash ซ้ำ)';
 
-    // แมป role ของ API -> role ในระบบเรา แก้ตรงนี้ได้
+    // เทียบ role
     private const ROLE_MAP = [
         'super admin' => 'admin',
         'admin'       => 'manager',

@@ -17,6 +17,7 @@ return new class extends Migration
         $reward->integer('quantity_reward');      
         $reward->integer('rate');                 
         $reward->timestamps();
+        $reward->softDeletes();
     });
 }
     public function down(): void
