@@ -2137,6 +2137,8 @@ body.no-scroll {
 
   /*กรอบของจจำนวนผู้เข้าร่วมสูงสุด*/
   .frameandquantity{
+    display: flex;
+    flex-direction: column;
     padding: 0px 0px 30px 0px;
   }
 
@@ -2199,6 +2201,56 @@ body.no-scroll {
   .framenumberquantity::-webkit-outer-spin-button,
   .framenumberquantity::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  #frame_number_quantity:disabled { opacity: .6; cursor: auto; background: #f3efe3; }
+  #frame_number_quantity:disabled::placeholder { color: #222; opacity: 1; }
+
+
+  .limit-toggle{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 200px;
+  }
+
+  /* ปุ่มติ๊กถูกของจำกัดจำนวนผู้เข้าร่วม (ให้เหมือนปุ่มติ๊กของรางวัล) */
+  .limit-toggle1{
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 0;
+    border: 2px solid #d39b00;
+    border-radius: 5px;
+    background-color: #fdfbf5;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+  /* ตอนติ๊กแล้ว */
+  .limit-toggle1:checked{
+    background-color: #E0A526;
+    border-color: #E0A526;
+  }
+
+  /* เครื่องหมายถูกสีขาว */
+  .limit-toggle1:checked::after{
+    content: "";
+    position: absolute;
+    top: 2%;
+    left: 32%;
+    width: 6px;
+    height: 12px;
+    border: 1px solid #ffffff;
+    border-width: 0px 3px 3px 0px;
+    transform: rotate(45deg);
+  }
+
+  .namelimit-toggle{
+    font-size: 16px;
   }
 
   .submitbuildandQR{
@@ -3040,6 +3092,100 @@ body.no-scroll {
     align-items: center;
     justify-content: space-between;
   }
+
+    /* ปุ่มขยาย QR */
+  .btn-enlargeQRcode{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2F9E5B;
+    border: none;
+    height: 55px;
+    padding: 0px 70px;
+    border-radius: 30px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-enlargeQRcode:hover{
+      background-color: #1f7a46e3;
+  }
+  .message-enlargeQRcode{
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  /* ให้ปุ่มบันทึกกับปุ่มขยายเรียงกันสวยๆ */
+  .framerecordshare{
+    gap: 10px;
+  }
+
+  /* popup QR ขนาดใหญ่ */
+  .popupenlargeQR{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 40px 50px;
+    width: min(900px, 94vw);
+    max-height: 92vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .popupenlargeQR::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .popupenlargeQR.show{
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .titleenlargeQR{
+    margin: 0;
+    font-size:  40px;
+    color: #1F7A47;
+  }
+  .subtitleenlargeQR{
+    margin: 8px 0 25px 0;
+    font-size: 18px;
+    color: #4e4e4e;
+  }
+  .imgenlargeQR{
+    display: flex;
+    justify-content: center;
+  }
+  .imgenlargeQR svg{
+    width: min(720px, 80vh, 85vw);
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+  .btn-closeenlargeQR{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #9a9c9e;
+    background: none;
+    font-size: 25px;
+    color: #797a7c;
+    cursor: pointer;
+  }
+  .btn-closeenlargeQR:hover{
+    background-color: #f1f5f9;
+  } 
 
   /*ปุ่มบันทึก*/
   .btn-recordQrcode{

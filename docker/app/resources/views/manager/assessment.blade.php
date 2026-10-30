@@ -118,7 +118,7 @@
             <p class="messagecreationtime">สร้างเมื่อ {{ $event->created_at->format('d M Y') }} · ปิด Register {{ \Carbon\Carbon::parse($event->register_close_at)->format('d M Y') }}</p>
             <hr class="lineactivity-1">
             <div class="maximumnumber_outtime">
-                <p class="maximumnumber">ผู้เข้าร่วมสูงสุด {{ $event->max_participants }} คน</p>
+                <p class="maximumnumber">ผู้เข้าร่วมสูงสุด <span class="maximumnumber1">{{ $event->max_participants ?? 'ไม่จำกัด'}}</span> คน</p>
                 <p class="outtime">หมดเวลา {{ \Carbon\Carbon::parse($event->register_close_at)->format('H.i') }} น.</p>
             </div>
             <div class="framerank-1-2-3">

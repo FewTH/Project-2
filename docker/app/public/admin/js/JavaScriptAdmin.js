@@ -484,6 +484,38 @@ if(showmore && showless){
 }
 
 
+//ช่องติ๊กจำกัดจำนวนผู้เข้าร่วม ในหน้า create_activity.blade.php และ edit_activity.blade.php
+//ไม่ติ๊ก = ไม่จำกัดจำนวนคน (ช่องว่างเปล่าเป็น null พิมพ์ไม่ได้) ถ้าติ๊ก = พิมพ์ตัวเลขได้ (เริ่มที่ 1)
+const limitcheckbox = document.getElementById('limit_enabled');
+const limitinput = document.getElementById('frame_number_quantity');
+
+//ฟังก์ชันเอาไว้เปลี่ยนหน้าตาของช่องตัวเลข ตามสถานะที่ติ๊กอยู่
+function updatelimitparticipants(){
+    if (limitcheckbox.checked){
+        //ติ๊กแล้ว เปิดให้พิมพ์ได้ ถ้าช่องยังว่างอยู่ให้เริ่มที่ 1
+        limitinput.disabled = false;
+        if (limitinput.value === ''){
+            limitinput.value = 1;
+        }
+        limitinput.placeholder = '';
+    } else {
+        //ไม่ติ๊ก ล้างค่าให้ว่างแล้วล็อกไว้ ช่องจะโชว์คำว่า ไม่จำกัด แทน
+        limitinput.value = '';
+        limitinput.disabled = true;
+        limitinput.placeholder = 'ไม่จำกัด';
+    }
+}
+
+//เช็คว่ามีช่องพวกนี้อยู่ในหน้านี้จริงมั้ย ถ้าไม่มีให้ข้ามไป
+if (limitcheckbox && limitinput){
+
+    limitcheckbox.addEventListener('change', function(){
+        updatelimitparticipants();
+    });
+
+    //ตั้งค่าหน้าตาให้ตรงกับสถานะตอนเปิดหน้าครั้งแรก
+    updatelimitparticipants();
+}
 
 
 
@@ -579,6 +611,49 @@ const btncanceldeletion = document.getElementById('btn_canceldeletion');
 if(btncanceldeletion){
     btncanceldeletion.addEventListener('click', function(){
         closeDialog(document.getElementById('popup_deleteRegister'))
+    });
+}
+
+
+//ปุ่มกดขยาย QR code ให้เป็นรูปใหญ่ ของหน้า view_details.blade.php
+const btnenlargeqr = document.getElementById('btn_enlarge_qr');
+const popupenlargeqr = document.getElementById('popup_enlarge_qr');
+const enlargeqrbox = document.getElementById('enlarge_qr_box');
+const qrsmall = document.querySelector('.img-QRcode svg');
+
+//ถ้าหน้านี้ไม่มีปุ่มหรือ QR ให้ข้ามไป (กันหน้าอื่นที่ใช้ไฟล์ js เดียวกันพัง)
+if (btnenlargeqr && popupenlargeqr && enlargeqrbox && qrsmall){
+
+    //ฟังก์ชันเปิด popup: ก๊อปปี้ QR ตัวเล็กมาใส่ในกรอบแล้วเปิดขึ้นมา
+    function openenlargeqr(){
+        const qrbig = qrsmall.cloneNode(true);
+
+        //เอาขนาดตายตัวออก ให้ QR ขยายตามกรอบที่ CSS กำหนด
+        qrbig.removeAttribute('width');
+        qrbig.removeAttribute('height');
+
+        enlargeqrbox.innerHTML = '';
+        enlargeqrbox.appendChild(qrbig);
+
+        openDialog(popupenlargeqr);
+    }
+
+    //กดปุ่ม "ขยาย QR" หรือกดที่รูป QR ก็ขยายได้
+    btnenlargeqr.addEventListener('click', openenlargeqr);
+
+    //ปุ่มกากบาทปิด popup
+    const btncloseenlargeqr = document.getElementById('btn_close_enlarge_qr');
+    if (btncloseenlargeqr){
+        btncloseenlargeqr.addEventListener('click', function(){
+            closeDialog(popupenlargeqr);
+        });
+    }
+
+    //กดพื้นที่มืดด้านนอกกล่องก็ปิดได้
+    popupenlargeqr.addEventListener('click', function(event){
+        if (event.target === popupenlargeqr){
+            closeDialog(popupenlargeqr);
+        }
     });
 }
 

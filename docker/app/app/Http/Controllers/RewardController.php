@@ -37,8 +37,8 @@ class RewardController extends Controller
     // ฟังก์ชันนี้คือนำของรางวัลที่สร้างแล้วกลับไปแสดงทีview
     public function index()
     {
-        // เอาผู้ใช้ที่เพิ่งสร้างกลับไปแสดงที่หน้าmanagerewardของแอดมิน
-        $rewards = Reward::with('category')->orderByDesc('reward_id')->get();
+        // กำหนดให้แสดงแค่10รายการเท่านั้น
+        $rewards = Reward::with('category')->orderByDesc('reward_id')->paginate(10);
         // สร้างตัวแปรนี้มาเพื่อเอาไว้เช็ค role ว่ามี request มาจาก role อะไรแล้วส่งค่ากลับไปตาม role ที่ request
         $view = (auth()->user()->role === 'manager')? 'manager.managereward' : 'admin.managereward';
         // ส่งตัวแปร users ไปให้หน้า managereward

@@ -58,7 +58,9 @@
             <!-- ลูปแสดงข้อมูลผู้ใช้จากฐานข้อมูล -->
             @forelse($users as $u)
                 <div class="user-1">
-                    <h3 class="numusr-topic">{{ $loop->iteration }}</h3>
+                    <div class="numusr-topic">
+                        {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
+                    </div>
                     <h3 class="name1">{{ $u->full_name }}</h3>
                     <h3 class="email1">{{ $u->email }}</h3>
                     <div class="auth1">
@@ -92,7 +94,11 @@
                 </div>
             @endforelse
         </div>
-    </div>
+            <!-- ส่วนแสดงปุ่มเปลี่ยนหน้า -->
+            <div class="pagination-container">
+                {{ $users->links('vendor.pagination.custom') }}
+            </div>
+        </div>
 
 
     <!-- ส่วนเมนูsidebar -->

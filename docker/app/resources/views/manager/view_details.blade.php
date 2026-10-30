@@ -143,7 +143,7 @@
                         <p class="messageregister">ลงทะเบียนแล้ว</p>
                     </div>
                     <div class="framenumbermessagereceiveupto">
-                        <h2 class="numberreceiveupto">{{ $event->max_participants }}</h2>
+                        <h2 class="numberreceiveupto">{{ $event->max_participants ?? 'ไม่จำกัด'}}</h2>
                         <p class="messagereceiveupto">รับสูงสุด</p>
                     </div>
                     <div class="framemessagenomessagestatus">
@@ -171,6 +171,10 @@
                             </div>
                         </div>
                         <div class="framerecordshare">
+                            <button type="button" class="btn-enlargeQRcode" id="btn_enlarge_qr">
+                                <img src="{{ asset('admin/img/รูปขยายqrcode.png') }}" alt="รูปขยายqrcode">
+                                <span class="message-enlargeQRcode">ขยาย QR</span>
+                            </button>
                            <a href="{{ route('manager.activity.qrcode.download', $event->event_id) }}" class="btn-recordQrcode" id="btn_recordQrcode">
                                 <img src="{{ asset('admin/img/รูปของปุ่มบันทึก.png') }}" alt="รูปของปุ่มบันทึก" class="img-recordQrcode">
                                 <p class="message-recordQrcode">บันทึก</p>
@@ -243,6 +247,11 @@
     </div>
 
 </div>
+<dialog class="popupenlargeQR" id="popup_enlarge_qr">
+    <h2 class="titleenlargeQR">{{ $event->title }}</h2>
+    <p class="subtitleenlargeQR">สแกน QR code เพื่อลงทะเบียน</p>
+    <div class="imgenlargeQR" id="enlarge_qr_box"></div>
+</dialog>   
 
 <script src="{{ asset('admin/js/JavaScriptAdmin.js') }}"></script>
 </body>

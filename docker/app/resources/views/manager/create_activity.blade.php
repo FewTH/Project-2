@@ -139,7 +139,13 @@
 
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
-                    <input type="number" name="max_participants" value="{{ old('max_participants', 1)}}" class="framenumberquantity" id="frame_number_quantity">
+
+                    <input type="number" name="max_participants" min="1" value="{{ old('limit_enabled') ? old('max_participants', 1) : '' }}" placeholder="ไม่จำกัด" class="framenumberquantity" id="frame_number_quantity" {{ old('limit_enabled') ? '' : 'disabled' }}>
+                                   
+                    <label class="limit-toggle">
+                        <input type="checkbox" name="limit_enabled" class="limit-toggle1" value="1" id="limit_enabled" {{ old('limit_enabled') ? 'checked' : '' }}>
+                        <span class="namelimit-toggle">จำกัดจำนวนผู้เข้าร่วม</span>
+                    </label>
                 </div>
                 @error(('max_participants'))
                  <div class="savesuccesschangepassword-error-1-2-3">{{ $message }}</div>

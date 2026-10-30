@@ -2310,6 +2310,10 @@
     font-weight: 600;
   }
 
+  .maximumnumber1{
+    color: #9e6b18;
+  }
+
   /*ข้อความของหมดเวลา*/
   .outtime{
     color: #c57a01;
@@ -3537,6 +3541,101 @@
     align-items: center;
     justify-content: space-between;
   }
+
+    /* ปุ่มขยาย QR */
+  .btn-enlargeQRcode{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2F9E5B;
+    border: none;
+    height: 55px;
+    padding: 0px 70px;
+    border-radius: 30px;
+    box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn-enlargeQRcode:hover{
+    background-color: #1f7a46e3;
+  }
+  .message-enlargeQRcode{
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+
+  /* ให้ปุ่มบันทึกกับปุ่มขยายเรียงกันสวยๆ */
+  .framerecordshare{
+    gap: 10px;
+  }
+
+  /* popup QR ขนาดใหญ่ */
+  .popupenlargeQR{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 40px 50px;
+    width: min(900px, 94vw);
+    max-height: 92vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0px 8px 25px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .popupenlargeQR::backdrop{
+    background-color: rgba(0,0,0,0.6);
+  }
+
+  .popupenlargeQR.show{
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .titleenlargeQR{
+    margin: 0;
+    font-size: 40px;
+    color: #1F7A47;
+  }
+  .subtitleenlargeQR{
+    margin: 8px 0 25px 0;
+    font-size: 18px;
+    color: #4e4e4e;
+  }
+  .imgenlargeQR{
+    display: flex;
+    justify-content: center;
+  }
+  .imgenlargeQR svg{
+    width: min(720px, 80vh, 85vw);
+    height: auto;
+    border-radius: 20px;
+    padding: 15px;
+  }
+  .btn-closeenlargeQR{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #9a9c9e;
+    background: none;
+    font-size: 25px;
+    color: #797a7c;
+    cursor: pointer;
+  }
+  .btn-closeenlargeQR:hover{
+    background-color: #f1f5f9;
+  } 
 
   /*ปุ่มบันทึก*/
   .btn-recordQrcode{
@@ -7802,6 +7901,8 @@
 
   /*กรอบของจจำนวนผู้เข้าร่วมสูงสุด*/
   .frameandquantity{
+    display: flex;
+    flex-direction: column;
     padding: 0px 0px 30px 0px;
   }
 
@@ -7865,6 +7966,56 @@
   .framenumberquantity::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+
+  #frame_number_quantity:disabled { opacity: .6; cursor: not-allowed; background: #f3efe3; }
+  #frame_number_quantity:disabled::placeholder { color: #222; opacity: 1; }
+
+  .limit-toggle{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 200px;
+  }
+
+  /* ปุ่มติ๊กถูกของจำกัดจำนวนผู้เข้าร่วม (ให้เหมือนปุ่มติ๊กของรางวัล) */
+  .limit-toggle1{
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    margin: 0 10px 0 0;
+    border: 2px solid #d39b00;
+    border-radius: 5px;
+    background-color: #fdfbf5;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+  /* ตอนติ๊กแล้ว */
+  .limit-toggle1:checked{
+    background-color: #E0A526;
+    border-color: #E0A526;
+  }
+
+  /* เครื่องหมายถูกสีขาว */
+  .limit-toggle1:checked::after{
+    content: "";
+    position: absolute;
+    top: 2%;
+    left: 32%;
+    width: 6px;
+    height: 12px;
+    border: 1px solid #ffffff;
+    border-width: 0px 3px 3px 0px;
+    transform: rotate(45deg);
+  }
+
+  .namelimit-toggle{
+    font-size: 16px;
+  }
+
 
   .submitbuildandQR{
     position: relative;
@@ -8145,21 +8296,18 @@
   .addreward:hover {
     background-color: #8EC5FF;
   }
-
   /* .plus-icon {
       width: 14px;
       height: 14px;
       margin-right: 10px;
   } */
-
   .addrwdtext {
       color: #FFFFFF;
       font-weight: bold;
       font-size: large;
   }
-
   .reward-list {
-      margin-bottom: 100px;
+      margin-bottom: 20px;
       width: 100%;
       background-color: #FFFFFF;
       border-radius: 10px;
@@ -8198,7 +8346,7 @@
       margin: 0;
       font-size: 15px;
   }
-
+/* รายการรางวัลหน้าจัดการรางวัล */
   .reward-1 {
       display: grid;
       grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
@@ -8224,6 +8372,51 @@
     margin-bottom: 0;
     border-bottom: none;
     pointer-events: none;
+  }
+  /* ปุ่มเปลี่ยน page ใต้ตารางรางวัล */
+  .pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pager-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pager-list a,
+  .pager-list span {
+    display: inline-block;
+    min-width: 36px;
+    padding: 6px 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    background: #fff;
+    font-size: 14px;
+  }
+  .pager-list a:hover {
+    background: #eee;
+  }
+  /* หน้าปัจจุบัน (ปรับสีให้เข้ากับธีมได้) */
+  .pager-list .active span {
+    background: #5b21b6;
+    border-color: #5b21b6;
+    color: #fff;
+  }
+  /* ปุ่มที่กดไม่ได้ */
+  .pager-list .disabled span {
+    color: #aaa;
+    background: #f5f5f5;
+    cursor: not-allowed;
   }
 
   .box-reward1 {
@@ -8411,6 +8604,7 @@
     padding: 20px;
     box-sizing: border-box;
     position: relative;
+    margin-bottom: 40px;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
   }
   /* หัวข้อในตารางรายชื่อ */

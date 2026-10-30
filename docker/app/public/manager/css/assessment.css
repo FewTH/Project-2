@@ -806,6 +806,11 @@ body.no-scroll {
     font-weight: 600;
   }
 
+  .maximumnumber1{
+    color: #9e6b18;
+  }
+
+
   /*ข้อความของหมดเวลา*/
   .outtime{
     color: #c57a01;

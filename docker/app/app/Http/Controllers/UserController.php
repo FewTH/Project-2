@@ -37,8 +37,8 @@ class UserController extends Controller
     // 
     public function index()
     {
-        // เอาผู้ใช้ที่เพิ่งสร้างกลับไปแสดงที่หน้าmanageuserของแอดมิน
-        $users = User::latest()->get();
+        // เอาผู้ใช้ที่เพิ่งสร้างกลับไปแสดงที่หน้าmanageuserของแอดมินกำหนดแสดงแค่10คน
+        $users = User::latest()->paginate(5);
         // ส่งตัวแปร users ไปให้หน้า manageuser
         return view('admin.manageuser', compact('users'));
     }

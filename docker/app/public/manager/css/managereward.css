@@ -319,7 +319,7 @@
   /* หัวข้อตาราง */
   .topic-rewardlist {
       display: grid;
-      grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr;
+      grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
       padding: 0 20px 12px 20px;
       background-color: #E8F0FB;
       color: #183153;
@@ -344,7 +344,7 @@
 
   .reward-1 {
       display: grid;
-      grid-template-columns: 2.5fr 1.5fr 2fr 1fr 1fr; 
+      grid-template-columns: 0.8fr 2.5fr 1.5fr 1fr 1fr 1.2fr;
       align-items: center;
       padding: 15px 20px;
       border-bottom: 1px solid #E8F0FB;
@@ -367,6 +367,49 @@
     margin-bottom: 0;
     border-bottom: none;
     pointer-events: none;
+  }
+  /* ปุ่มเปลี่ยน page ใต้ตารางรางวัล */
+  .pagination-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .pager-list {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pager-list a,
+  .pager-list span {
+    display: inline-block;
+    min-width: 36px;
+    padding: 6px 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    background: #fff;
+    font-size: 14px;
+  }
+  .pager-list a:hover {
+    background: #eee;
+  }
+  /* หน้าปัจจุบัน (ปรับสีให้เข้ากับธีมได้) */
+  .pager-list .active span {
+    background: #5b21b6;
+    border-color: #5b21b6;
+    color: #fff;
+  }
+  /* ปุ่มที่กดไม่ได้ */
+  .pager-list .disabled span {
+    color: #aaa;
+    background: #f5f5f5;
+    cursor: not-allowed;
   }
   .no-data{
     display: flex;

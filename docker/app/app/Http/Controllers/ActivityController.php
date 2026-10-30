@@ -9,7 +9,7 @@ use App\Models\spin_wheels;
 use App\Models\EventRegistration;
 use App\Models\EventRewardDraw;
 use App\Models\Assessment;
-// use App\Models\Spinresult;
+use App\Models\Spinresult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -147,7 +147,7 @@ class ActivityController extends Controller
 
         // ส่งค่ากับไปที่หน้าโค้ดassessment.blade.php admin กับ manager
         // id ของแบบประเมินที่มีผลสุ่มอย่างน้อย 1 รายการ
-$spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
+        $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
 
         return view($role . '.assessment', [
             'events'      => $events,
@@ -179,9 +179,13 @@ $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
         $selectedrewards = $event->wheel
             ? $event->wheel->rewards->pluck('pivot.quantity_selected', 'reward_id')->toArray() : [];
 
-       return view($role . '.edit_activity', [
+        // เช็คว่ากิจกรรมนี้จำกัดจำนวนผู้เข้าร่วมหรือไม่ (null = ไม่จำกัด)
+        $limited = !is_null($event->max_participants);
+
+        return view($role . '.edit_activity', [
             'event' => $event,
             'selectedrewards' => $selectedrewards,
+            'limited' => $limited,
             'prefix' => $role,
             'user' => Auth::user(),
         ]);
@@ -195,7 +199,8 @@ $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
             'title'               => 'required|string|max:300',
             'event_date'          => 'required|date',
             'register_close_time' => 'required',
-            'max_participants'    => 'nullable|integer|min:1',
+            'limit_enabled'       => 'nullable|boolean',
+            'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
             'rewards'             => 'required|array|min:1',
             'rewards.*.qty'       => 'required|integer|min:1',
         ], [
@@ -203,13 +208,14 @@ $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
             'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
             'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
             'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+            'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
             'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
             'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
             'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
         ]);
 
         // กำหนดจำนวนผู้เข้าร่วมให้เป็น 1 ถ้าไม่มีการกรอกใหม่ ของหน้าcreate_activity
-        $data['max_participants'] = $data['max_participants'] ?? 1;
+        $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
 
         // ตรวจสอบของรางวัลฝั่ง server เผื่อมีคนมาเปลี่ยนแปลงข้อมูลหน้าบ้าน ของหน้าcreate_activity
         foreach ($data['rewards'] as $rewardId => $item) {
@@ -281,7 +287,8 @@ $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
             'title'               => 'required|string|max:300',
             'event_date'          => 'required|date',
             'register_close_time' => 'required',
-            'max_participants'    => 'nullable|integer|min:1',
+            'limit_enabled'       => 'nullable|boolean',
+            'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
             'rewards'             => 'required|array|min:1',
             'rewards.*.qty'       => 'required|integer|min:1',
         ], [
@@ -289,13 +296,14 @@ $spunAssessmentIds = Spinresult::distinct()->pluck('assessment_id')->all();
             'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
             'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
             'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+            'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
             'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
             'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
             'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
         ]);
 
         // ถ้าไม่กรอกจำนวนผู้เข้าร่วมมา ให้เป็น 1 ไปต่อไป ของหน้า edit_activity
-        $data['max_participants'] = $data['max_participants'] ?? 1;
+        $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
 
         // ตรวจสอบของรางวัลฝั่ง server อีกรอบ เผื่อมีคนมาเปลี่ยนแปลงข้อมูลหน้าบ้าน ของหน้า edit_activity
         foreach ($data['rewards'] as $rewardId => $item) {

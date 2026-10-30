@@ -71,7 +71,7 @@ class EventRegistrationController extends Controller
             $registeredcount = EventRegistration::where('event_id', $event->event_id)->count();
 
             //เช็คว่าลงทะเบียนเต็มแล้วหรือยัง
-            if ($registeredcount >= $event->max_participants) {
+            if ($event->max_participants !== null && $registeredcount >= $event->max_participants) {
                 DB::rollBack();
                 return back()->withErrors(['limitmax' => 'ลงทะเบียนเต็มจำนวนแล้ว']);
             }
