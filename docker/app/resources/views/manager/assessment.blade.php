@@ -58,14 +58,20 @@
         <h1>รายการกิจกรรม</h1>
     </div>
 
+    @php $tab = request('tab', 'activity'); @endphp
+
     <div class="btn-activity-rate">
-        <button class="btn-activity active" id="btn_activity">
+        <button class="btn-activity {{ $tab === 'activity' ? 'active' : '' }}" id="btn_activity">
             <h3 class="btn-activity-1">รายการกิจกรรม</h3>
-            <p class="number-activity active" id="number_activity">4</p>
+            <p class="number-activity {{ $tab === 'activity' ? 'active' : '' }}" id="number_activity">
+                {{ $events->total() }}
+            </p>
         </button>
-        <button class="btn-rate" id="btn_rate">
+        <button class="btn-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="btn_rate">
             <h3 class="btn-rate-1">แบบประเมิน</h3>
-            <p class="number-rate" id="number_rate">{{ $assessments->count() }}</p>
+            <p class="number-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="number_rate">
+                {{ $assessments->total() }}
+            </p>
         </button>
     </div>
 
@@ -144,6 +150,11 @@
         </div>
         @endforelse
     </div>
+    <!-- เพิ่มส่วนแสดงปุ่มเปลี่ยนหน้า (Pagination) ของกิจกรรมตรงนี้ -->
+    <div class="pagination-container">
+        {{ $events->appends(array_merge(request()->except('event_page'), ['tab' => 'activity']))
+          ->links('vendor.pagination.custom') }}
+    </div> 
 </div>
     
 <!--กรอบของแบบประเมิน-->
@@ -218,39 +229,11 @@
             <p class="nothaveactivity-1">ยังไม่มีแบบประเมินในตอนนี้</p>
         </div>
         @endforelse
-        {{-- <div class="sectionassessment" data-status="open" data-random="false">
-            <p class="sectionassessment-1">แบบประเมิน - BUU Book Fair 2569</p>
-            <div class="frameinformation-assessment">
-                <div class="framesection-status">
-                    <h3 class="section-assessment">แบบประเมิน - BUU Book Fair 2569</h3>
-                    <div class="frame-status">
-                        <p class="point-status"></p>
-                        <p class="message-status">เปิดอยู่</p>
-                    </div>
-                </div> --}}
-
-
-                    {{-- <p class="message-assessment">ผู้เข้าร่วมประเมิน 8 คน • รางวัล ดินสอ สมุดโน้ต กระเป๋าดินสอ </p>
-                    <p class="message-created-by">สร้างโดย: Admin • ปิดรับคำตอบ: 20 พ.ค. 2569</p>
-                        <template id="Viewhistory">
-                            <button class="assessment-open-1">
-                                <p class="message-assessment-open">แบบประเมินยังเปิดอยู่</p>
-                            </button>
-                        </template>
-                    <template id="Enterrandom">
-                        <a href="{{ url('admin/spinwhell') }}" class="enter-random">
-                            <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของปุ่มเข้าสู้การสุ่มรางวัล" class="img-enter-random">
-                            <p class="message-enter-random">เข้าสู้การสุ่มรางวัล</p>
-                        </a>
-                    </template> --}}
-
-
-                    {{-- <a href="{{ url('admin/history_random') }}" class="view-history">
-                        <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                    </a> --}}
-                {{-- </template>  --}}
-                {{-- </div> --}}
-            {{-- </div> --}}
+        <!-- เพิ่มส่วนแสดงปุ่มแบ่งหน้า -->
+        <div class="pagination-container">
+            {{ $assessments->appends(array_merge(request()->except('assessment_page'), ['tab' => 'assessment']))
+               ->links('vendor.pagination.custom') }}
+        </div>
         </div>
 </div>
     <script src="{{ asset('manager/js/assessment.js') }}"></script>

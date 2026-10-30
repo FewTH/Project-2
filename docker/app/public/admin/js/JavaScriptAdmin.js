@@ -449,6 +449,25 @@ if(framesearchassessment){
 
     })
 }
+    // เป็นการที่เวลากดเปลี่ยนหน้าในแบบประเมินจะไม่รีโหลดหน้าเว็บ
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // ถ้าอยู่ในหน้า Pagination ของแบบประเมิน ให้เปิดแท็บแบบประเมินอัตโนมัติ
+        if (urlParams.has('assessment_page')) {
+            const btnRate = document.getElementById('btn_rate');
+            if (btnRate) {
+                btnRate.click();
+            }
+        } 
+        // ถ้าอยู่ในหน้า Pagination ของกิจกรรม ให้เปิดแท็บรายการกิจกรรมค้างไว้
+        else if (urlParams.has('event_page')) {
+            const btnActivity = document.getElementById('btn_activity');
+            if (btnActivity) {
+                btnActivity.click();
+            }
+        }
+    });
 
 
 

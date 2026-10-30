@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Event;
+// เพิ่มคลาสแบ่งหน้า
+use Illuminate\Pagination\LengthAwarePaginator;
 // ประกาศเพื่อให้controller ไปเรียก Api มาได้
 use App\Services\AssessmentApi;
 
@@ -211,7 +213,23 @@ class AssessmentController extends Controller
     }
     $assessments = $this->attachWheels($assessments);
 
-    $events = Event::with('wheel.rewards', 'registrations')->orderBy('created_at', 'desc')->get();
+    // จัดการจำนวนแบบประเมินที่จะให้แสดงตามจำนวนที่กำหนดแบบแบ่งหน้า
+    $perPage = 10;
+    $assessmentPage = LengthAwarePaginator::resolveCurrentPage('assessment_page');
+    $assessments = new LengthAwarePaginator(
+        $assessments->forPage($assessmentPage, $perPage)->values(),
+        $assessments->count(),
+        $perPage,
+        $assessmentPage,
+        [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+            'pageName' => 'assessment_page'
+        ]
+    );
+
+    $events = Event::with('wheel.rewards', 'registrations')
+        ->orderBy('created_at', 'desc')
+        ->paginate(6, ['*'], 'event_page');
 
     $now = Carbon::now();
     $events->each(function ($event) use ($now) {

@@ -130,7 +130,8 @@ class ActivityController extends Controller
     //แสดงหน้ารายการกิจกรรมทั้งหมด ของหน้าแบบประเมิน/กิจกรรมassessment
     public function index($role = 'admin')
     {
-        $events = Event::with(['wheel.rewards', 'registrations'])->orderBy('created_at', 'desc')->get();
+        // หน้านึงจำกัดการแสดงแค่6กิจกรรมเท่านั้น
+        $events = Event::with(['wheel.rewards', 'registrations'])->orderBy('created_at', 'desc')->paginate(6);
 
         $now = Carbon::now();
 
@@ -397,23 +398,16 @@ class ActivityController extends Controller
         $event = $this->getEvent($eventId);
         $url = url('user/register_event/' . $event->event_id);
 
-        // เก็บตัวอักษร ตัวเลข และเครื่องหมายประกอบ (สระ/วรรณยุกต์ไทย) ไว้ แปลงอย่างอื่นเป็น _
-        // ตัดความยาวไม่ให้ชื่อไฟล์ยาวเกินไป
-        $safeTitle = preg_replace('/[^\p{L}\p{M}\p{N}_\-]/u', '_', $event->title);
-        $safeTitle = mb_substr($safeTitle, 0, 80);
 
-        $filename = 'QRCode-' . $safeTitle . '.png';
-        // ชื่อสำรองเป็น ASCII ไว้ให้เบราว์เซอร์เก่าที่อ่านชื่อภาษาไทยไม่ได้
-        $fallback = 'QRCode-event-' . $event->event_id . '.png';
+        $filename = 'QRCode' . '.png';
 
-        $png = QrCode::format('png')->size(600)->generate($url);
+        $png = QrCode::format('png')->size(800)->generate($url);
 
         return response($png)
             ->header('Content-Type', 'image/png')
             ->header('Content-Disposition', HeaderUtils::makeDisposition(
                 HeaderUtils::DISPOSITION_ATTACHMENT,
-                $filename,
-                $fallback
+                $filename
             ));
     }
 

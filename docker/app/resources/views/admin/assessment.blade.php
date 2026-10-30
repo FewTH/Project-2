@@ -57,6 +57,7 @@
     </a>
     </div>
 </div> 
+
 <!--เอาไว้ควบคุมส่วนกลางของเว็บปิดล่างสุด-->
 <div class="main-content">
 
@@ -64,14 +65,20 @@
         <h1>รายการกิจกรรม</h1>
     </div>
 
+    @php $tab = request('tab', 'activity'); @endphp
+
     <div class="btn-activity-rate">
-        <button class="btn-activity active" id="btn_activity">
+        <button class="btn-activity {{ $tab === 'activity' ? 'active' : '' }}" id="btn_activity">
             <h3 class="btn-activity-1">รายการกิจกรรม</h3>
-            <p class="number-activity active" id="number_activity">4</p>
+            <p class="number-activity {{ $tab === 'activity' ? 'active' : '' }}" id="number_activity">
+                {{ $events->total() }}
+            </p>
         </button>
-        <button class="btn-rate" id="btn_rate">
+        <button class="btn-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="btn_rate">
             <h3 class="btn-rate-1">แบบประเมิน</h3>
-            <p class="number-rate" id="number_rate">{{ $assessments->count() }}</p>
+            <p class="number-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="number_rate">
+                {{ $assessments->total() }}
+            </p>
         </button>
     </div>
 
@@ -149,9 +156,14 @@
             <p class="nothaveactivity-1">ยังไม่มีกิจกรรมในตอนนี้</p>
         </div>
         @endforelse
-    </div>
-</div>
-    
+    </div>  
+    <!-- เพิ่มส่วนแสดงปุ่มเปลี่ยนหน้า (Pagination) ของกิจกรรมตรงนี้ -->
+    <div class="pagination-container">
+        {{ $events->appends(array_merge(request()->except('event_page'), ['tab' => 'activity']))
+          ->links('vendor.pagination.custom') }}
+    </div>  
+</div>  
+
 <!--กรอบของแบบประเมิน-->
 <div class="frame-evaluation" id="frame_evaluation">
     <div class="frame-search-activity-1">
@@ -230,10 +242,13 @@
             <p class="nothaveactivity-1">ยังไม่มีแบบประเมินในตอนนี้</p>
         </div>
         @endforelse
+        <!-- เพิ่มส่วนแสดงปุ่มแบ่งหน้า -->
+        <div class="pagination-container">
+            {{ $assessments->appends(array_merge(request()->except('assessment_page'), ['tab' => 'assessment']))
+               ->links('vendor.pagination.custom') }}
         </div>
+    </div>
    
-
-
 
 <dialog class="assignevaluation" id="assign_evaluation" >
     <div class="framephotomessage-evaluation">
