@@ -117,6 +117,10 @@
 
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+
+        Route::post('registration/{registrationId}/grant', [EventRegistrationController::class, 'grantExtra'])->name('admin.registration.grant');
+        Route::get('registration/{eventId}/count', [EventRegistrationController::class, 'registrationCount'])->name('admin.registration.count');
         
 
             //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
@@ -148,12 +152,14 @@
 
         Route::get('/spin', [UserSpinController::class, 'index'])->name('user.spin');
 
-        
+        Route::get('/spin/history/{id}', [UserSpinController::class, 'history'])->name('user.spin.history');
 
+
+    });
+
+    Route::prefix('user')->group(function () {
         Route::get('/register_event/{eventId}', [EventRegistrationController::class, 'create'])->name('user.register.create');
         Route::post('/register_event/{eventId}', [EventRegistrationController::class, 'store'])->name('user.register.store');
-
-        Route::get('/spin/history/{id}', [UserSpinController::class, 'history'])->name('user.spin.history');
     });
 
 
@@ -213,4 +219,8 @@
         Route::post('/senditgmail/resend/{id}', [SpinresultController::class, 'resendone'])->name('manager.senditgmail.resendone');
         Route::post('/senditgmail/{assessment_id}/resend-all-failed', [SpinresultController::class, 'resendallfailed'])->name('manager.senditgmail.resendallfailed');
         Route::post('/senditgmail/{assessment_id}/send-all', [SpinresultController::class, 'sendall'])->name('manager.senditgmail.sendall');
+
+        Route::post('registration/{registrationId}/grant', [EventRegistrationController::class, 'grantExtra'])->name('manager.registration.grant');
+        Route::get('registration/{eventId}/count', [EventRegistrationController::class, 'registrationCount'])->name('manager.registration.count');
+
     });

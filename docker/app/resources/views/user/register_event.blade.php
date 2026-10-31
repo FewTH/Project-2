@@ -45,6 +45,9 @@
             @csrf
             <div class="framedataframework">
                 <p class="messagedata_framework">กรอกข้อมูลเพื่อลงทะเบียน</p>
+                @if(($extraLeft ?? 0) > 0)
+                    <p class="savesuccessimage-errordataframework" style="color:#1F7A47;">คุณได้รับสิทธิ์ลงทะเบียนเพิ่มอีก {{ $extraLeft }} ครั้ง กดปุ่มด้านล่างได้เลย</p>
+                @endif
 
                 @error('status')
                     <p class="savesuccessimage-errordataframework">{{ $message }}</p>
@@ -61,7 +64,7 @@
                 @error('full_name')
                     <p class="savesuccessimage-error-2">{{ $message }}</p>
                 @enderror
-                <input type="text" name="full_name" class="dataframeworkfullname" value="{{ old('full_name') }}" placeholder="กรอกชื่อ-นามสกุล" autocomplete="name" id="dataframe_workfullname">
+                <input type="text" name="full_name" class="dataframeworkfullname" value="{{ old('full_name', $prefillName ?? '') }}" placeholder="กรอกชื่อ-นามสกุล" autocomplete="name" id="dataframe_workfullname">
 
                 <button type="submit" class="btn-registerparticipate">
                     <p class="messageregisterparticipate">ลงทะเบียนเข้าร่วม</p>
@@ -86,7 +89,8 @@
                     <p class="messatopicpagfullnamee">{{ $index + 1 }}</p>
                 </div>
                 <div class="fullnameRegistrant">
-                    <p class="fullnameRegistrant-1">{{ $registration->full_name }}@if($registration->user_id === auth()->id()) (คุณ) @endif</p>
+                    {{ $registration->full_name }}
+                    @if(in_array($registration->registration_id, $myRegistrationIds ?? [])) (คุณ) @endif
                 </div>
                 <div class="timepersonRegistrant">
                     <span class="timepersonRegistrant-1">{{ $registration->registered_at->format('H:i') }} น.</span>

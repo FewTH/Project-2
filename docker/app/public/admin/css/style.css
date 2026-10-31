@@ -3884,6 +3884,9 @@
     color: #4e4e4e;
   }
 
+  .btn-grant-extra { border: 2px solid #d39b00; background: #fdfbf5; color: #8A5B10; border-radius: 12px; padding: 4px 12px; font-weight: 600; cursor: pointer; }
+  .btn-grant-extra:hover { background: #FFF3D1; }
+
 
 
 

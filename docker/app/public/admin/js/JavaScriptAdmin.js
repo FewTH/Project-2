@@ -33,32 +33,34 @@ document.addEventListener('DOMContentLoaded', function(){
 //ปุ่มกดรายการกิจกรรมของหน้า assessment.blade.php
 const butactivity = document.getElementById('btn_activity')
 
-if (butactivity){
-butactivity.addEventListener('click', function() {
-    document.getElementById('frame_grey').classList.add('active');
-    document.getElementById('frame_evaluation').classList.remove('active');
-    document.getElementById('btn_activity').classList.add('active');
-    document.getElementById('btn_rate').classList.remove('active');
-    document.getElementById('number_activity').classList.add('active');
-    document.getElementById('number_rate').classList.remove('active');
-    document.getElementById('assign_evaluation').close();
-    moveBulb(document.getElementById('btn_activity'));
-});
+if (butactivity) {
+    butactivity.addEventListener('click', function() {
+        document.getElementById('frame_grey').classList.add('active');
+        document.getElementById('frame_evaluation').classList.remove('active');
+        document.getElementById('btn_activity').classList.add('active');
+        document.getElementById('btn_rate').classList.remove('active');
+        document.getElementById('number_activity').classList.add('active');
+        document.getElementById('number_rate').classList.remove('active');
+        document.getElementById('assign_evaluation')?.close();
+        moveBulb(butactivity);
+        setTabUrl('activity');
+    });
 }
 
 //ปุ่มกดแบบประเมินของหน้า assessment.blade.php
-const btnrate = document.getElementById('btn_rate')
+const btnrate = document.getElementById('btn_rate');
 
-if(btnrate){
-btnrate.addEventListener('click', function(){
-    document.getElementById('frame_evaluation').classList.add('active');
-    document.getElementById('frame_grey').classList.remove('active');
-    document.getElementById('btn_rate').classList.add('active');
-    document.getElementById('btn_activity').classList.remove('active');
-    document.getElementById('number_rate').classList.add('active');
-    document.getElementById('number_activity').classList.remove('active');
-    moveBulb(document.getElementById('btn_rate'));
-});
+if (btnrate) {
+    btnrate.addEventListener('click', function() {
+        document.getElementById('frame_evaluation').classList.add('active');
+        document.getElementById('frame_grey').classList.remove('active');
+        document.getElementById('btn_rate').classList.add('active');
+        document.getElementById('btn_activity').classList.remove('active');
+        document.getElementById('number_rate').classList.add('active');
+        document.getElementById('number_activity').classList.remove('active');
+        moveBulb(btnrate);
+        setTabUrl('assessment'); // เพิ่มใหม่
+    });
 }
 
 //สั่งให้หลอดหน้ารายการกิจกรรมคำตามที่เรากดของหน้า assessment.blade.php
@@ -66,6 +68,8 @@ function moveBulb(button) {
     const bule = document.getElementById('bulb_yellow');
     bule.style.marginLeft = button.offsetLeft + 'px';
 }
+const activeTabBtn = document.querySelector('#btn_activity.active, #btn_rate.active');
+if (activeTabBtn) moveBulb(activeTabBtn);
 
 //การเป็นตัวเลขอัตโนมัตของรายการกิจกรรม
 function updatenumberactivity(){
@@ -258,10 +262,17 @@ if (btnassignassessment){
         if(data.managers.length === 0){
             checkboxContainer.innerHTML = '<p style="color: gray; font-size: 14px;">ไม่พบผู้จัดการในระบบ</p>';
         }else{
-            data.managers.forEach(m =>{
-                const label = document.createElement('label');
+            data.managers.forEach(m => {
+            const label = document.createElement('label');
                 label.className = 'message-checkbox-name';
-                label.innerHTML = `<input type="checkbox" class="checkboxgivemanager" name="position[]" value="${m.id}"> ${m.name}`;
+
+            const input = document.createElement('input');
+                input.type = 'radio';
+                input.className = 'checkboxgivemanager';
+                input.name = 'manager';
+                input.value = m.id;
+
+            label.append(input, ' ' + m.name);
                 checkboxContainer.appendChild(label);
             });
         }
@@ -449,25 +460,18 @@ if(framesearchassessment){
 
     })
 }
-    // เป็นการที่เวลากดเปลี่ยนหน้าในแบบประเมินจะไม่รีโหลดหน้าเว็บ
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // ถ้าอยู่ในหน้า Pagination ของแบบประเมิน ให้เปิดแท็บแบบประเมินอัตโนมัติ
-        if (urlParams.has('assessment_page')) {
-            const btnRate = document.getElementById('btn_rate');
-            if (btnRate) {
-                btnRate.click();
-            }
-        } 
-        // ถ้าอยู่ในหน้า Pagination ของกิจกรรม ให้เปิดแท็บรายการกิจกรรมค้างไว้
-        else if (urlParams.has('event_page')) {
-            const btnActivity = document.getElementById('btn_activity');
-            if (btnActivity) {
-                btnActivity.click();
-            }
-        }
-    });
+// จำแท็บไว้ใน URL เวลากดสลับเอง จะได้ไม่หายตอนรีเฟรชหรือ reload หลังมอบหมาย
+function setTabUrl(tab) {
+    const url = new URL(window.location);
+    url.searchParams.set('tab', tab);
+    history.replaceState(null, '', url);
+}
+
+//สั่งให้หลอดหน้ารายการกิจกรรมคำตามที่เรากดของหน้า assessment.blade.php
+function moveBulb(button) {
+    const bule = document.getElementById('bulb_yellow');
+    if (bule) bule.style.marginLeft = button.offsetLeft + 'px';
+}
 
 
 
@@ -676,6 +680,83 @@ if (btnenlargeqr && popupenlargeqr && enlargeqrbox && qrsmall){
     });
 }
 
+
+//เอาไว้อัปเดตรายชื่อผู้ลงทะเบียนของหน้า view_details.blade.php แบบเรียวทาม
+const registrationlist = document.getElementById('registration_list');
+
+if (registrationlist){
+
+    //จำค่าล่าสุดที่เห็น ไว้เทียบว่ามีคนลงเพิ่มหรือยัง
+    let lastcount = null;
+    let lastid = null;
+
+    //ฟังก์ชันดึงหน้าเดิมมาใหม่ แล้วเอาเฉพาะส่วนรายชื่อกับตัวเลขมาแทนของเดิม
+    async function loadregistrationlist(){
+        try {
+            const res = await fetch(window.location.href, { cache: 'no-store' });
+            if (!res.ok){
+                return;
+            }
+
+            const html = await res.text();
+            const newdoc = new DOMParser().parseFromString(html, 'text/html');
+
+            const newlist = newdoc.getElementById('registration_list');
+            if (newlist){
+                registrationlist.innerHTML = newlist.innerHTML;
+            }
+
+            const newnumber = newdoc.querySelector('.numberregister');
+            const oldnumber = document.querySelector('.numberregister');
+            if (newnumber && oldnumber){
+                oldnumber.textContent = newnumber.textContent;
+            }
+        } catch (err){
+            console.warn('อัปเดตรายชื่อไม่สำเร็จ', err);
+        }
+    }
+
+    //ฟังก์ชันถามเซิร์ฟเวอร์แบบเบา ๆ ว่ามีคนลงเพิ่มมั้ย ถ้ามีค่อยดึงรายชื่อใหม่
+    async function checkregistrationchange(){
+
+        //ถ้ากำลังเปิด popup อยู่ ไม่ต้องอัปเดต กันหน้าสะดุด
+        if (document.querySelector('dialog[open]')){
+            return;
+        }
+
+        try {
+            const res = await fetch(registrationlist.dataset.countUrl, {
+                headers: { 'Accept': 'application/json' },
+                cache: 'no-store'
+            });
+            if (!res.ok){
+                return;
+            }
+
+            const data = await res.json();
+
+            //ครั้งแรกแค่จำค่าไว้ ครั้งต่อไปถ้าค่าเปลี่ยนค่อยโหลดรายชื่อใหม่
+            if (lastcount !== null && (data.count !== lastcount || data.last !== lastid)){
+                await loadregistrationlist();
+            }
+            lastcount = data.count;
+            lastid = data.last;
+
+        } catch (err){
+            console.warn('เช็กจำนวนผู้ลงทะเบียนไม่สำเร็จ', err);
+        }
+    }
+
+    //เช็กทุก 1 วินาที (ข้อมูลที่ส่งมีนิดเดียว ไม่หนักเซิร์ฟเวอร์)
+    setInterval(checkregistrationchange, 1000);
+
+    //กลับมาเปิดแท็บนี้อีกครั้ง ให้เช็กทันทีไม่ต้องรอรอบถัดไป
+    document.addEventListener('visibilitychange', function(){
+        if (!document.hidden){
+            checkregistrationchange();
+        }
+    });
+}
 
 
 

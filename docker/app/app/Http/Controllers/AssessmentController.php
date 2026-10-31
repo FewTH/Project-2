@@ -213,6 +213,13 @@ class AssessmentController extends Controller
     }
     $assessments = $this->attachWheels($assessments);
 
+    // นับสถิติจากทุกแบบประเมิน ก่อนตัดแบ่งหน้า
+    $assessmentStats = [
+        'all'    => $assessments->count(),
+        'open'   => $assessments->where('is_open', 1)->count(),
+        'closed' => $assessments->where('is_open', 0)->count(),
+    ];
+
     // จัดการจำนวนแบบประเมินที่จะให้แสดงตามจำนวนที่กำหนดแบบแบ่งหน้า
     $perPage = 10;
     $assessmentPage = LengthAwarePaginator::resolveCurrentPage('assessment_page');
@@ -236,8 +243,14 @@ class AssessmentController extends Controller
         $closeat = Carbon::parse($event->register_close_at);
         $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
     });
+    // อันนี้คือตอนแรกเรากำหนดให้มันแสดงแค่ 6 อันแต่โค้ดส่วนนี้มันจะนับค่าทั้งหมดไม่ใช่แค่เฉพาะหน้านั้นๆ
+    $eventStats = [
+        'all'  => Event::count(),
+        'open' => Event::where('status', 'open')->where('register_close_at', '>', $now)->count(),
+    ];
+    $eventStats['closed'] = $eventStats['all'] - $eventStats['open'];
 
-    return view($view, compact('assessments', 'events', 'user'));
+    return view($view, compact('assessments', 'events', 'user', 'eventStats', 'assessmentStats'));
 }
     
     

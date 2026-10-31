@@ -223,7 +223,7 @@
                 </div>
             </div>
 
-            <div class="framelistnamesregister">
+            <div class="framelistnamesregister" id="registration_list" data-count-url="{{ route('admin.registration.count', $event->event_id) }}">
                 <div class="framelistnamesregister-1">
                     <p class="messagelistnamesregiste">รายชื่อผู้ลงทะเบียน</p>
                     <div class="framequantitypeople">
@@ -231,6 +231,10 @@
                     </div>
                 </div>
                 <hr class="linequantitypeople">
+
+                @php
+                    $grantedByPerson = $event->registrations->groupBy(fn($r) => $r->user_id ? 'u'.$r->user_id : 'g'.$r->guest_token);
+                @endphp
 
                 @foreach($event->registrations as $index => $registration)
                 <div class="frameinformationparticipants">
@@ -243,6 +247,20 @@
                     <div class="frametimeparticipants">
                         <p class="timeparticipants">{{ $registration->registered_at->format('H:i') }} น.</p>
                     </div>
+
+                    @php
+                        $key = $registration->user_id ? 'u'.$registration->user_id : 'g'.$registration->guest_token;
+                        $personRows = $grantedByPerson[$key] ?? collect([$registration]);
+                        $totalGranted = $personRows->sum('extra_granted');
+                    @endphp
+
+                    <form action="{{ route('admin.registration.grant', $registration->registration_id) }}" method="POST" style="margin-left:10px;">
+                        @csrf
+                        <button type="submit" class="btn-grant-extra">+ ให้ลงเพิ่ม</button>
+                        @if($totalGranted > 0)
+                            <small>(ให้สิทธิ์แล้ว {{ $totalGranted }} ครั้ง)</small>
+                        @endif
+                    </form>
                 </div>
                 <hr class="linequantitypeople">
                 @endforeach
