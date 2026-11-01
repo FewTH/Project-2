@@ -71,46 +71,46 @@ function moveBulb(button) {
 const activeTabBtn = document.querySelector('#btn_activity.active, #btn_rate.active');
 if (activeTabBtn) moveBulb(activeTabBtn);
 
-//การเป็นตัวเลขอัตโนมัตของรายการกิจกรรม
-function updatenumberactivity(){
-    //การเช็คว่ามีid นี้อยู่จริงมั้ยถ้ามีให้ทำต่อถ้าไม่มีให้ข้ามไป
-    const activitiesnumberassessment = document.getElementById('activities_number_assessment');
-    if(!activitiesnumberassessment){
-        return
-    }
+// //การเป็นตัวเลขอัตโนมัตของรายการกิจกรรม
+// function updatenumberactivity(){
+//     //การเช็คว่ามีid นี้อยู่จริงมั้ยถ้ามีให้ทำต่อถ้าไม่มีให้ข้ามไป
+//     const activitiesnumberassessment = document.getElementById('activities_number_assessment');
+//     if(!activitiesnumberassessment){
+//         return
+//     }
 
-    const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
+//     const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
 
-    let allactivities = 0;
-    let closed1 = 0;
-    let open1 = 0;
+//     let allactivities = 0;
+//     let closed1 = 0;
+//     let open1 = 0;
 
-    for (let i = 0; i < frameactivityassessment.length; i++) {
-        const frameactivity = frameactivityassessment[i];
-        const frameactivity1 = frameactivity.dataset.status;
+//     for (let i = 0; i < frameactivityassessment.length; i++) {
+//         const frameactivity = frameactivityassessment[i];
+//         const frameactivity1 = frameactivity.dataset.status;
 
-            allactivities++;
-        if (frameactivity1 === 'open'){
-            open1++;
-        }else if (frameactivity1 === 'closed'){
-            closed1++;
-        }else {
-            console.warn('พบสถานะที่ไม่รู้จัก', frameactivity1, frameactivity);
-        }
-    }
+//             allactivities++;
+//         if (frameactivity1 === 'open'){
+//             open1++;
+//         }else if (frameactivity1 === 'closed'){
+//             closed1++;
+//         }else {
+//             console.warn('พบสถานะที่ไม่รู้จัก', frameactivity1, frameactivity);
+//         }
+//     }
 
-    //ตัวเลขเปลี่ยนอัตโนมัตของ กิจกรรมทั้งหมด ปิดแล้ว เปิดอยู่
-    activitiesnumberassessment.textContent= allactivities
-    const closedassessment1 = document.getElementById('Closed_assessment_1');
-    closedassessment1.textContent= closed1
-    const openassessment1 = document.getElementById('open_assessment_1');
-    openassessment1.textContent = open1
+//     //ตัวเลขเปลี่ยนอัตโนมัตของ กิจกรรมทั้งหมด ปิดแล้ว เปิดอยู่
+//     activitiesnumberassessment.textContent= allactivities
+//     const closedassessment1 = document.getElementById('Closed_assessment_1');
+//     closedassessment1.textContent= closed1
+//     const openassessment1 = document.getElementById('open_assessment_1');
+//     openassessment1.textContent = open1
 
-    //ตัวเลขเปลี่ยนอัตโนมัตของรายการกิจกรรม
-    const numberactivity = document.getElementById('number_activity');
-    numberactivity.textContent = allactivities
-}
-updatenumberactivity();
+//     //ตัวเลขเปลี่ยนอัตโนมัตของรายการกิจกรรม
+//     const numberactivity = document.getElementById('number_activity');
+//     numberactivity.textContent = allactivities
+// }
+// updatenumberactivity();
 
 
 
@@ -402,38 +402,55 @@ if (evaluationFormelement) {
 //ช่องค้นหารายชื่อกิจกรรม ในหน้า assessment.blade.php
 const framesearchactivity = document.getElementById('frame_search_activity');
 
-if(framesearchactivity){
-    framesearchactivity.addEventListener('keyup', function(){
-        
-        const keyword = framesearchactivity.value.trim().toLowerCase();
-        const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
-
-        frameactivityassessment.forEach(function (card){
-            const headingname = card.querySelector('.headingactivity');
-            if (!headingname)
-                return;
-
-            const  headingname1 = headingname.textContent.trim().toLowerCase();
-            const match = headingname1.includes(keyword);
-
-            if(match){
-                card.style.display = '';
-                requestAnimationFrame(function(){
-                    card.classList.remove('is-hidden');
-                });
-
-            }else{
-                card.classList.add('is-hidden');
-                setTimeout(function(){
-                    if (card.classList.contains('is-hidden')){
-                        card.style.display = 'none';
-                    }
-                }, 250);
-            }
-        });
-
+if (framesearchactivity) {
+    let searchTimer;
+    framesearchactivity.addEventListener('input', function () {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(function () {
+            framesearchactivity.form.submit();
+        }, 250); // รอให้หยุดพิมพ์ วินาที
     });
+
+    // หลังรีโหลด ให้เคอร์เซอร์กลับมาท้ายคำค้นหา
+    if (framesearchactivity.value) {
+        framesearchactivity.focus();
+        const len = framesearchactivity.value.length;
+        framesearchactivity.setSelectionRange(len, len);
+    }
 }
+
+// if(framesearchactivity){
+//     framesearchactivity.addEventListener('keyup', function(){
+        
+//         const keyword = framesearchactivity.value.trim().toLowerCase();
+//         const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
+
+//         frameactivityassessment.forEach(function (card){
+//             const headingname = card.querySelector('.headingactivity');
+//             if (!headingname)
+//                 return;
+
+//             const  headingname1 = headingname.textContent.trim().toLowerCase();
+//             const match = headingname1.includes(keyword);
+
+//             if(match){
+//                 card.style.display = '';
+//                 requestAnimationFrame(function(){
+//                     card.classList.remove('is-hidden');
+//                 });
+
+//             }else{
+//                 card.classList.add('is-hidden');
+//                 setTimeout(function(){
+//                     if (card.classList.contains('is-hidden')){
+//                         card.style.display = 'none';
+//                     }
+//                 }, 250);
+//             }
+//         });
+
+//     });
+// }
 
 //ช่องค้นหารายชื่อแบบประเมิน ในหน้า assessment.blade.php
 const framesearchassessment = document.getElementById('frame_search_activity_2');
@@ -681,6 +698,40 @@ if (btnenlargeqr && popupenlargeqr && enlargeqrbox && qrsmall){
 }
 
 
+//ช่องค้นหาชื่อผู้ลงทะเบียน ในหน้า view_details.blade.php
+const searchregistration = document.getElementById('search_registration');
+
+//ฟังก์ชันกรองแถวรายชื่อตามคำที่พิมพ์ (ซ่อนแถวที่ไม่ตรงพร้อมเส้นคั่นของมัน)
+function filterregistration(){
+    if (!searchregistration){
+        return;
+    }
+
+    const keyword = searchregistration.value.trim().toLowerCase();
+    const rows = document.querySelectorAll('#registration_list .frameinformationparticipants');
+
+    rows.forEach(function (row){
+        const nameelement = row.querySelector('.nameparticipants');
+        if (!nameelement){
+            return;
+        }
+
+        const match = nameelement.textContent.trim().toLowerCase().includes(keyword);
+        row.classList.toggle('is-hidden', !match);
+
+        //เส้นคั่นใต้แถวต้องซ่อนตามไปด้วย
+        const line = row.nextElementSibling;
+        if (line && line.tagName === 'HR'){
+            line.style.display = match ? '' : 'none';
+        }
+    });
+}
+
+if (searchregistration){
+    searchregistration.addEventListener('input', filterregistration);
+}
+
+
 //เอาไว้อัปเดตรายชื่อผู้ลงทะเบียนของหน้า view_details.blade.php แบบเรียวทาม
 const registrationlist = document.getElementById('registration_list');
 
@@ -706,11 +757,22 @@ if (registrationlist){
                 registrationlist.innerHTML = newlist.innerHTML;
             }
 
+            //เปลี่ยนตัวเลข "X คน" ในหัวกล่องรายชื่อ
+            const newquantity = newdoc.querySelector('.numberquantitypeople');
+            const oldquantity = document.querySelector('.numberquantitypeople');
+            if (newquantity && oldquantity){
+                oldquantity.textContent = newquantity.textContent;
+            }
+
+            //เปลี่ยนตัวเลข "ลงทะเบียนแล้ว" ด้านบน
             const newnumber = newdoc.querySelector('.numberregister');
             const oldnumber = document.querySelector('.numberregister');
             if (newnumber && oldnumber){
                 oldnumber.textContent = newnumber.textContent;
             }
+
+            //โหลดรายชื่อใหม่แล้ว ให้กรองตามคำที่ค้นหาค้างอยู่อีกรอบ
+            filterregistration();
         } catch (err){
             console.warn('อัปเดตรายชื่อไม่สำเร็จ', err);
         }

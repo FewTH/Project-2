@@ -196,7 +196,7 @@ class AssessmentController extends Controller
             ]);
     }
 
-    public function index(AssessmentApi $api)
+    public function index(AssessmentApi $api, Request $request)
 {
     $user = auth()->user();
     $assignments = AssessmentAssignment::pluck('assigned_to', 'assessment_id');
@@ -234,15 +234,28 @@ class AssessmentController extends Controller
         ]
     );
 
-    $events = Event::with('wheel.rewards', 'registrations')
-        ->orderBy('created_at', 'desc')
-        ->paginate(6, ['*'], 'event_page');
+    // พ่วงค่าอื่นๆไปด้วยตอนกดเปลี่ยนหน้า
+    $assessments->appends($request->query());
+
+    // ส่วนsearch ตอนกดเปลี่ยนหน้าก็ยังค้นหาได้หมด
+    $search = $request->input('search');
+    $eventsQuery = Event::with('wheel.rewards', 'registrations')
+        ->orderBy('created_at', 'desc');
+        // ->paginate(6, ['*'], 'event_page')
+        
+    // ค้นหาชื่อกิจกรรมจากฐานข้อมูลทั่วทั้งระบบได้ทุกหน้า
+    if ($search) {
+        $eventsQuery->where('title', 'like', '%' . $search . '%');
+    }
+    $events = $eventsQuery->paginate(6, ['*'], 'event_page')->appends($request->query());
 
     $now = Carbon::now();
     $events->each(function ($event) use ($now) {
         $closeat = Carbon::parse($event->register_close_at);
         $event->isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
     });
+
+
     // อันนี้คือตอนแรกเรากำหนดให้มันแสดงแค่ 6 อันแต่โค้ดส่วนนี้มันจะนับค่าทั้งหมดไม่ใช่แค่เฉพาะหน้านั้นๆ
     $eventStats = [
         'all'  => Event::count(),
@@ -250,7 +263,7 @@ class AssessmentController extends Controller
     ];
     $eventStats['closed'] = $eventStats['all'] - $eventStats['open'];
 
-    return view($view, compact('assessments', 'events', 'user', 'eventStats', 'assessmentStats'));
+    return view($view, compact('assessments', 'events', 'user', 'eventStats', 'assessmentStats', 'search'));
 }
     
     

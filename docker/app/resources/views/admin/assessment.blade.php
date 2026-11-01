@@ -71,13 +71,13 @@
         <button class="btn-activity {{ $tab === 'activity' ? 'active' : '' }}" id="btn_activity">
             <h3 class="btn-activity-1">รายการกิจกรรม</h3>
             <p class="number-activity {{ $tab === 'activity' ? 'active' : '' }}" id="number_activity">
-                {{ $events->total() }}
+                {{ $eventStats['all'] }}
             </p>
         </button>
         <button class="btn-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="btn_rate">
             <h3 class="btn-rate-1">แบบประเมิน</h3>
             <p class="number-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="number_rate">
-                {{ $assessments->total() }}
+                {{ $assessmentStats['all'] }}
             </p>
         </button>
     </div>
@@ -107,14 +107,14 @@
     </div>
 
     {{-- ช่องค้นหารายการกิจกรรม --}}
-    <div class="frame-search-activity-2">
+    <form method="GET" action="{{ route('admin.assessment') }}" class="frame-search-activity-2">
         <div class="frame-search-activity">
-            <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
+            <input type="text" name="search" class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม" value="{{ $search ?? '' }}">
         </div>
           <div class="btn-build-activityurgent">
             <a href="{{ url('admin/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
         </div>
-    </div>
+    </form>
 
     <div class="card-Container" id="cardContainer">
         @forelse($events as $event)

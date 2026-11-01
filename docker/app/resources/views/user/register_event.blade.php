@@ -39,7 +39,11 @@
             </div>
         </div>
 
+            @auth
                 <a href="{{ route('user.home') }}" class="btn-backhome">กลับไปหน้าหลัก</a>
+            @else
+                <a href="{{ route('login') }}" class="btn-backhome">เข้าสู่ระบบ</a>
+            @endauth
         @else
         <form id="framedata_framework" action="{{ route('user.register.store', $event->event_id) }}" method="POST">
             @csrf
@@ -89,8 +93,7 @@
                     <p class="messatopicpagfullnamee">{{ $index + 1 }}</p>
                 </div>
                 <div class="fullnameRegistrant">
-                    {{ $registration->full_name }}
-                    @if(in_array($registration->registration_id, $myRegistrationIds ?? [])) (คุณ) @endif
+                    <p class="fullnameRegistrant-1">{{ $registration->full_name }}@if(in_array($registration->registration_id, $myRegistrationIds ?? [])) (คุณ) @endif</p>
                 </div>
                 <div class="timepersonRegistrant">
                     <span class="timepersonRegistrant-1">{{ $registration->registered_at->format('H:i') }} น.</span>
