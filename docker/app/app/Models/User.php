@@ -22,6 +22,7 @@ class User extends Authenticatable
         'role',
         'is_active',
         'password_changed_at',
+        'auth_source',
     ];
 
     protected $hidden = [
@@ -31,9 +32,15 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'is_active' => 'boolean',
             'password_hash' => 'hashed',
             'password_changed_at' => 'datetime',
         ];
+    }
+
+    public function isApiUser(): bool
+    {
+        return $this->auth_source === 'api';
     }
 
     public function getAuthPassword()

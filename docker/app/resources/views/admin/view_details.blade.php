@@ -223,6 +223,37 @@
                 </div>
             </div>
 
+            <div class="frameassessmenturl">
+                <div class="frmaemessageQRcoderegistermessagescan">
+                    <p class="messageQRcoderegister">QR code แบบประเมิน</p>
+                    <div class="frmaemessagescan">
+                        <p class="messagescan">สแกนหลังสุ่มเสร็จ</p>
+                    </div>
+                </div>
+                <hr class="lineQRcode">
+
+                <form action="{{ route('admin.activity.assessment_url', $event->event_id) }}" method="POST" class="formassessmenturl">
+                    @csrf
+                    <input type="url" name="assessment_url" class="inputassessmenturl"
+                           value="{{ old('assessment_url', $event->assessment_url) }}"
+                           placeholder="วางลิงก์แบบประเมิน เช่น https://forms.gle/...">
+                    <button type="submit" class="btn-saveassessmenturl">สร้าง QR</button>
+                    @if($event->assessment_url)
+                        <button type="submit" name="clear" value="1" class="btn-clearassessmenturl">ล้าง</button>
+                    @endif
+                </form>
+                @error('assessment_url')
+                    <p class="erroassessmenturl">{{ $message }}</p>
+                @enderror
+
+                @if($event->assessment_url)
+                    <div class="imgassessmentqr">
+                        {!! QrCode::size(260)->generate($event->assessment_url) !!}
+                    </div>
+                    <a href="{{ $event->assessment_url }}" target="_blank" rel="noopener" class="linkassessmenturl">เปิดลิงก์แบบประเมิน</a>
+                @endif
+            </div>
+
             <div class="framelistnamesregister">
                 <div class="framelistnamesregister-1">
                     <p class="messagelistnamesregiste">รายชื่อผู้ลงทะเบียน</p>

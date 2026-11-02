@@ -122,6 +122,7 @@
         Route::post('registration/{registrationId}/grant', [EventRegistrationController::class, 'grantExtra'])->name('admin.registration.grant');
         Route::get('registration/{eventId}/count', [EventRegistrationController::class, 'registrationCount'])->name('admin.registration.count');
         
+        Route::post('/activity/{eventId}/assessment_url', [ActivityController::class, 'saveAssessmentUrl'])->name('admin.activity.assessment_url');
 
             //เอาไว้ดูแต่ง css ส่ง email ให้ user ที่ได้รางวัล
         Route::get('/preview-email', function () {
@@ -223,4 +224,5 @@
         Route::post('registration/{registrationId}/grant', [EventRegistrationController::class, 'grantExtra'])->name('manager.registration.grant');
         Route::get('registration/{eventId}/count', [EventRegistrationController::class, 'registrationCount'])->name('manager.registration.count');
 
+        Route::post('/activity/{eventId}/assessment_url', [ActivityController::class, 'saveAssessmentUrl'])->name('manager.activity.assessment_url');
     });

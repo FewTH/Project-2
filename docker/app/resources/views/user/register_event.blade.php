@@ -39,11 +39,11 @@
             </div>
         </div>
 
-            @auth
+            @if(auth()->check() && auth()->user()->role === 'user')
                 <a href="{{ route('user.home') }}" class="btn-backhome">กลับไปหน้าหลัก</a>
-            @else
+            @elseif(!auth()->check())
                 <a href="{{ route('login') }}" class="btn-backhome">เข้าสู่ระบบ</a>
-            @endauth
+            @endif
         @else
         <form id="framedata_framework" action="{{ route('user.register.store', $event->event_id) }}" method="POST">
             @csrf

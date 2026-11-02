@@ -470,4 +470,28 @@ class ActivityController extends Controller
         return response()->json(['success' => true]);
     }
 
+    //บันทึกหรือล้างลิงก์แบบประเมินของกิจกรรม (ใช้ร่วมกันทั้ง admin และ manager)
+    public function saveAssessmentUrl(Request $request, $eventId)
+    {
+        $event = Event::findOrFail($eventId);
+
+        if ($request->has('clear')) {
+            $event->assessment_url = null;
+            $event->save();
+            return back();
+        }
+
+        $request->validate([
+            'assessment_url' => ['required', 'url:http,https', 'max:2000'],
+        ], [
+            'assessment_url.required' => 'กรุณาใส่ลิงก์แบบประเมิน',
+            'assessment_url.url' => 'ลิงก์ไม่ถูกต้อง ต้องขึ้นต้นด้วย http:// หรือ https://',
+        ]);
+
+        $event->assessment_url = $request->input('assessment_url');
+        $event->save();
+
+        return back();
+    }
+
 }

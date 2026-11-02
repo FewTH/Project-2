@@ -3789,6 +3789,69 @@
     color: #1F2A44;
   }
 
+    /*กรอบ QR code แบบประเมิน*/
+  .frameassessmenturl{
+    margin-top: 30px;
+    background-color: #E8F7F1;
+    border-radius: 20px;
+    padding: 0px 20px 20px 20px;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+  .formassessmenturl{
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  .inputassessmenturl{
+    flex: 1;
+    padding: 12px 18px;
+    border: 2px solid #2F9E5B;
+    border-radius: 15px;
+    background: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+  }
+  .btn-saveassessmenturl{
+    border: none;
+    background-color: #2F9E5B;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 0px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  .btn-saveassessmenturl:hover{ background-color: #1f7a46; }
+  .btn-clearassessmenturl{
+    border: 2px solid #D97757;
+    background: #ffffff;
+    color: #C4634A;
+    font-weight: 600;
+    padding: 0px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  .erroassessmenturl{ color: #c22b3a; margin: 8px 0 0 5px; }
+  .imgassessmentqr{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .imgassessmentqr svg{
+    background: #ffffff;
+    padding: 15px;
+    border: 2px solid #2F9E5B;
+    border-radius: 20px;
+  }
+  .linkassessmenturl{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #1F7A47;
+    font-weight: 600;
+  }
+
 
   /*กรอบของรายชื่อผู้ลงทะเบียน*/
   .framelistnamesregister{
