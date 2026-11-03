@@ -64,13 +64,13 @@
         <button class="btn-activity {{ $tab === 'activity' ? 'active' : '' }}" id="btn_activity">
             <h3 class="btn-activity-1">รายการกิจกรรม</h3>
             <p class="number-activity {{ $tab === 'activity' ? 'active' : '' }}" id="number_activity">
-                {{ $events->total() }}
+                {{ $eventStats['all'] }}
             </p>
         </button>
         <button class="btn-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="btn_rate">
             <h3 class="btn-rate-1">แบบประเมิน</h3>
             <p class="number-rate {{ $tab === 'assessment' ? 'active' : '' }}" id="number_rate">
-                {{ $assessments->total() }}
+                {{ $assessmentStats['all'] }}
             </p>
         </button>
     </div>
@@ -80,32 +80,31 @@
     </div>
 
 <!--กรอบของรายการกิจกรรม-->
-<div class="frame-grey active" id="frame_grey">
+<div class="frame-grey {{ $tab === 'activity' ? 'active' : '' }}" id="frame_grey">
     <div class="activity-Closed-Open">
         <div class="all-activities">
-            <h1 class="activities-number-assessment" id="activities_number_assessment">3</h1>
+            <h1 class="activities-number-assessment" id="activities_number_assessment">{{ $eventStats['all'] }}</h1>
             <p class="activities-assessment">กิจกรรมทั้งหมด</p>
         </div>
         <div class="Closed-assessment">
-            <h1 class="Closed-assessment-1" id="Closed_assessment_1">2</h1>
+            <h1 class="Closed-assessment-1" id="Closed_assessment_1">{{ $eventStats['closed'] }}</h1>
             <p class="Closed-assessment-2">ปิดแล้ว</p>
         </div>
         <div class="Open-assessment">
-            <h1 class="open-assessment-1" id="open_assessment_1">1</h1>
+            <h1 class="open-assessment-1" id="open_assessment_1">{{ $eventStats['open'] }}</h1>
             <p class="open-assessment-2">เปิดอยู่</p>
         </div>
-      
     </div>
 
     {{-- ช่องค้นหากิจจกรรม --}}
-    <div class="frame-search-activity-2">
+    <form method="GET" action="{{ route('manager.assessment') }}" class="frame-search-activity-2">
         <div class="frame-search-activity">
-            <input type=text class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม">
+            <input type="text" name="search" class="search-activity" id="frame_search_activity" placeholder="ค้นหารายชื่อกิจกรรม" value="{{ $search ?? '' }}">
         </div>
-          <div class="btn-build-activityurgent">
+        <div class="btn-build-activityurgent">
             <a href="{{ url('manager/create_activity') }}" class="btn-build-activityurgent-1"><span class="btn-plus">+</span> สร้างกิจกรรมด่วน</a>
         </div>
-    </div>
+    </form>
 
     <div class="card-Container" id="cardContainer">
         @forelse($events as $event)
@@ -158,7 +157,7 @@
 </div>
     
 <!--กรอบของแบบประเมิน-->
-<div class="frame-evaluation" id="frame_evaluation">
+<div class="frame-evaluation {{ $tab === 'assessment' ? 'active' : '' }}" id="frame_evaluation">
     <div class="frame-search-activity-1">
         <div class="search-activity-1">
         <input type=text class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน">
@@ -166,15 +165,15 @@
         <div class="framealloffon-assessment">
             <button class="frameall-assessment active" id="frameall_assessment">
                 <p class="all-assessment active" id="all_assessment">ทั้งหมด</p>
-                <span class="allnumber-assessment active" id="allnumber_assessment">({{ $assessments->count() }})</span>
+                <span class="allnumber-assessment active" id="allnumber_assessment">({{ $assessmentStats['all'] }})</span>
             </button>
             <button class="frameoff-assessment" id="frameoff_assessment">
                 <p class="off-assessment" id="off_assessment">ปิดแล้ว</p>
-                <span class="offnumber-assessment" id="offnumber_assessment">({{ $assessments->where('is_open',0)->count() }})</span>
+                <span class="offnumber-assessment" id="offnumber_assessment">({{ $assessmentStats['closed'] }})</span>
             </button>
             <button class="farmeon-assessment" id="farmeon_assessment">
                 <p class="on-assessment" id="on_assessment">เปิดอยู่</p>
-                <span class="onnumber-assessment" id="onnumber_assessment">({{ $assessments->where('is_open',1)->count() }})</span>
+                <span class="onnumber-assessment" id="onnumber_assessment">({{ $assessmentStats['open'] }})</span>
             </button>
         </div>
     </div>

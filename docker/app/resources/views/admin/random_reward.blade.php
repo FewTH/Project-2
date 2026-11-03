@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -82,10 +82,8 @@
                         <p class="messagebtn-on-offlistnamesRandom">ปิด/เปิดสุ่มรายชื่อ</p>
                     </div>
 
-                    <div class="namecanvas">
-                        <div class="namecanvas-1"></div>
-                        <canvas id="name_canvas" width="600" height="600"></canvas>
-                    </div>
+                    <!--แถบสุ่มรายชื่อแบบ CS:GO (การ์ดข้างในสร้างจาก JavaScriptAdmin.js)-->
+                    <div class="roulette" id="name_canvas"></div>
                 </div>
 
                 <!--วงล้อสุ่มของรางวัล-->
@@ -106,10 +104,8 @@
                         <p class="messagebtn-no-offrandomreward">ปิด/เปิดสุ่มของรางวัล</p>
                     </div>
 
-                    <div class="rewardcanvas">
-                        <div class="rewardcanvas-1"></div>
-                        <canvas id="reward_canvas" width="600" height="600"></canvas>
-                    </div>
+                    <!--แถบสุ่มของรางวัลแบบ CS:GO (การ์ดข้างในสร้างจาก JavaScriptAdmin.js)-->
+                    <div class="roulette" id="reward_canvas"></div>
                 </div>
 
                 <div class="btnstartRandomreward">

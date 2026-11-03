@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- ชื่อผู้ใช้งาน -->
-<div class="btn-user-wrapper">
+    <div class="btn-user-wrapper">
     <a href="{{ url('admin/profile') }}" class="btn-user">
         @if($user?->profile_image)
         <img src="{{ asset('storage/'.$user->profile_image) }}" alt="รูปผู้ใช้งาน" class="btn-user-img" id="btn-user-wrapper-img">
@@ -27,23 +27,41 @@
     @csrf
     @method('PUT') 
 
+    {{-- ชื่อ-นามสกุลผู้ใช้ --}}
+    <div class="last-usr-box-editusr">
+        <label class="last-name01" for="full-name">ชื่อ-นามสกุล</label> <br>
+        @if($editUser->isApiUser())
+            <input type="text" class="last-name-in-editusr" id="full-name" value="{{ $editUser->full_name }}" readonly>
+            <small>อัปเดตจากระบบมหาวิทยาลัยอัตโนมัติตอนล็อกอิน</small>
+        @else
+            <input type="text" class="last-name-in-editusr" id="full-name" name="full_name" value="{{ old('full_name', $editUser->full_name) }}" placeholder="กรอกชื่อ-นามสกุล" required>
+        @endif
+    </div>
+
     {{-- ชื่อผู้ใช้ --}}
     <div class="name-usr-box">
         <label class="name-usr01" for="username">ชื่อผู้ใช้ (Username)</label> <br>
-        <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username', $editUser->username) }}" placeholder="กรอกชื่อของคุณ" autocomplete="off" required>
-        {{-- <input type="text"  class="name-usr-in" id="username" name="username"
-       value="{{ old('username', $user->username) }}"
-       autocomplete="off" readonly onfocus="this.removeAttribute('readonly');" required> --}}
+        @if($editUser->isApiUser())
+            <input type="text" class="name-usr-in" id="username" value="{{ $editUser->username }}" readonly>
+            <small>บัญชีมหาวิทยาลัย แก้ชื่อผู้ใช้ไม่ได้</small>
+        @else
+            <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username', $editUser->username) }}" placeholder="กรอกชื่อผู้ใช้" autocomplete="off" required>
+        @endif
     </div>
+    {{-- <div class="name-usr-box">
+        <label class="name-usr01" for="username">ชื่อผู้ใช้ (Username)</label> <br>
+        <input type="text" class="name-usr-in" id="username" name="username" value="{{ old('username', $editUser->username) }}" placeholder="กรอกชื่อของคุณ" autocomplete="off" required>
+    </div> --}}
 
     {{-- email --}}
     <div class="emaill-usr-box">
         <label class="emaill-usr01" for="email">อีเมล</label> <br>
-        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email', $editUser->email) }}" placeholder="กรอกอีเมลของคุณ" autocomplete="off" required>
-        {{-- <input type="email" class="emaill-usr-in" id="email" name="email"
-       value="{{ old('email', $user->email) }}"
-       autocomplete="new-password" required> --}}
+        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email', $editUser->email) }}" placeholder="กรอกอีเมล (ไม่บังคับ)" autocomplete="off">
     </div>
+    {{-- <div class="emaill-usr-box">
+        <label class="emaill-usr01" for="email">อีเมล</label> <br>
+        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email', $editUser->email) }}" placeholder="กรอกอีเมลของคุณ" autocomplete="off" required>
+    </div> --}}
     {{-- บทบาท --}}
     <div class="role-usr-box">
         <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>

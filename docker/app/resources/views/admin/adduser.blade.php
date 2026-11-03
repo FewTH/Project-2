@@ -34,22 +34,22 @@
         <label class="last-name01" for="last-name-in">ชื่อ-นามสกุล</label> <br>
         <input type="text" class="last-name-in" id="full-name" name="full_name" value="{{ old('full_name') }}" placeholder="กรอกชื่อ-นามสกุลของคุณ" required>
     </div>
-    <div class="emaill-usr-box">
+        <div class="emaill-usr-box">
         <label class="emaill-usr01" for="email">อีเมล</label> <br>
-        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมลของคุณ" required>
+        <input type="email" class="emaill-usr-in" id="email" name="email" value="{{ old('email') }}" placeholder="กรอกอีเมล (ไม่บังคับ)">
     </div>
     <div class="role-usr-box">
-        <label class="role-usr01" for="role-usr-in">บทบาท</label> <br>
-        <select  class="role_list_01" id="role" name="role" required>
-            <option value=""> --เลือกบทบาทของคุณ-- </option>
-            <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : ''}}>Admin</option>
-            <option value="Manager" {{old('role')== 'Manager' ? 'selected' : ''}}>Manager</option>
-            <option value="User" {{old('role')== 'User' ? 'selected' : ''}}>User</option>
-        </select>     
+        <label class="role-usr01" for="role">บทบาท</label> <br>
+        <select class="role_list_01" id="role" name="role" required>
+            <option value=""> --เลือกบทบาท-- </option>
+            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+            <option value="manager" {{ old('role') == 'manager' ? 'selected' : '' }}>Manager</option>
+            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+        </select>
     </div>
     <div class="passwd-addusr">
         <label class="passwd-usr-la" for="passwd-addusr-in">รหัสผ่าน</label> <br>
-        <input type="password" class="passwd-addusr-in" id="passwd-addusr-in" name="password" placeholder="กรอกรหัสผ่านของคุณอย่างน้อย 8 ตัว" required>
+        <input type="password" class="passwd-addusr-in" id="passwd-addusr-in" name="password" placeholder="อย่างน้อย 8 ตัว" autocomplete="new-password">
     </div>
      {{-- ปุ่มบันทึกกับปุ่มยกเลิก --}}
     <div class="addusr-botton">
@@ -61,6 +61,9 @@
         </a>
     </div>
 </form>
+@if($errors->any())
+    <div class="alert-error">{{ $errors->first() }}</div>
+@endif
 </div>
     
 <!-- ส่วนเมนูsidebar -->

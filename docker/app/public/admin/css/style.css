@@ -3845,12 +3845,31 @@
     border-radius: 20px;
   }
   .linkassessmenturl{
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: #1F7A47;
-    font-weight: 600;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
   }
+
+  .linkassessmenturl-1{
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0px 50px;
+    background-color: #2F9E5B;
+    box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    border-radius: 30px;
+  }
+
+  .linkassessmenturl-1:hover{ background-color: #1f7a46; }
+
+  .linkassessmenturl-2{
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+
 
 
   /*กรอบของรายชื่อผู้ลงทะเบียน*/
@@ -4023,6 +4042,210 @@
     height: 800px;
     border-radius: 20px;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  /* =====================================================================
+     แถบสุ่มแนวนอนแบบ CS:GO ของหน้า random_reward.blade.php
+     วิธีใช้: เอาไปวางต่อท้ายสุดของไฟล์ style.css
+     ===================================================================== */
+
+  /*ให้กรอบวงล้อทั้ง 2 อันกว้างเต็มแถว เรียงบน-ล่าง และสูงตามเนื้อหา (ทับค่า height: 800px เดิม)*/
+  .framesmallnameofwheel,
+  .framesmallrandomreward{
+    flex: 1 1 100%;
+    min-width: 0; /*กันแถบการ์ดยาวๆ ดันกรอบให้กว้างทะลุจอ*/
+    height: auto;
+    padding-bottom: 24px;
+  }
+
+  /*กรอบแถบสุ่ม*/
+  .roulette{
+    --card-width: 130px;
+    --card-gap: 10px;
+    --card-height: 160px;
+    --marker: #ff2e88;
+    position: relative;
+    margin: 20px 20px 0px 20px;
+    padding: 18px 0px;
+    background: radial-gradient(ellipse at center, #261b52 0%, #130e2c 75%);
+    border: 1px solid #3a2f6b;
+    border-radius: 16px;
+    box-shadow: inset 0px 0px 30px rgba(0,0,0,0.6), 0px 8px 14px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  /*สีลูกศรของแต่ละแถบ ให้เข้ากับสีลูกศรวงล้อเดิม*/
+  .framesmallnameofwheel .roulette{
+    --marker: #00E676;
+  }
+  .framesmallrandomreward .roulette{
+    --marker: #ff00d0;
+  }
+
+  /*ช่องมองการ์ด ขอบซ้ายขวาค่อยๆ จางหาย*/
+  .roulette-viewport{
+    position: relative;
+    contain: inline-size;
+    height: var(--card-height);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  }
+
+  /*แถบเรียงการ์ด*/
+  .roulette-track{
+    display: flex;
+    gap: var(--card-gap);
+    width: max-content;
+    height: 100%;
+    will-change: transform;
+  }
+
+  /*การ์ดแต่ละใบ --rarity คือสีความหายาก ส่งมาจาก js*/
+  .roulette-card{
+    --rarity: #4B69FF;
+    box-sizing: border-box;
+    position: relative;
+    flex: 0 0 var(--card-width);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 8px 14px 8px;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 50% 36%, color-mix(in srgb, var(--rarity) 45%, transparent) 0%, transparent 62%),
+      linear-gradient(180deg, #1e1742 0%, #171233 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    overflow: hidden;
+    user-select: none;
+  }
+
+  /*แถบสีความหายากใต้การ์ด*/
+  .roulette-card::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background-color: var(--rarity);
+    box-shadow: 0px 0px 12px var(--rarity);
+  }
+
+  /*ไอคอนหรือรูปบนการ์ด*/
+  .roulette-card-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    color: var(--rarity);
+    filter: drop-shadow(0px 0px 10px var(--rarity));
+  }
+  .roulette-card-icon svg{
+    width: 44px;
+    height: 44px;
+  }
+  .roulette-card-icon img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /*ชื่อบนการ์ด ยาวเกิน 2 บรรทัดจะตัดเป็น ...*/
+  .roulette-card-name{
+    margin: 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+  }
+
+  /*จำนวนของรางวัลที่เหลือ*/
+  .roulette-card-qty{
+    margin: 0;
+    color: #a9a3cc;
+    font-size: 13px;
+  }
+
+  /*การ์ดที่ได้รางวัล กระพริบเรืองแสง*/
+  .roulette-card.is-winner{
+    border-color: var(--rarity);
+    box-shadow: inset 0px 0px 26px color-mix(in srgb, var(--rarity) 55%, transparent);
+    animation: roulette-win 0.8s ease-in-out 3;
+  }
+  @keyframes roulette-win{
+    0%, 100%{ filter: brightness(1); }
+    50%{ filter: brightness(1.5); }
+  }
+
+  /*เส้นกลางแถบ*/
+  .roulette-line{
+    position: absolute;
+    top: 14px;
+    bottom: 14px;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background-color: var(--marker);
+    box-shadow: 0px 0px 8px var(--marker), 0px 0px 18px var(--marker);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /*ลูกศรบนกับล่าง*/
+  .roulette-marker{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    filter: drop-shadow(0px 0px 6px var(--marker));
+    z-index: 4;
+    pointer-events: none;
+  }
+  .roulette-marker-top{
+    top: 4px;
+    border-top: 16px solid var(--marker);
+  }
+  .roulette-marker-bottom{
+    bottom: 4px;
+    border-bottom: 16px solid var(--marker);
+  }
+
+  /*ข้อความตอนไม่มีรายการให้สุ่ม*/
+  .roulette-empty{
+    display: none;
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    color: #d6d1f2;
+    font-size: 18px;
+    font-weight: 600;
+    z-index: 5;
+  }
+  .roulette.is-empty .roulette-empty{
+    display: flex;
+  }
+  .roulette.is-empty .roulette-track{
+    opacity: 0.2;
+  }
+  .roulette.is-empty .roulette-line,
+  .roulette.is-empty .roulette-marker{
+    opacity: 0.3;
   }
 
   /*กรอบหัวข้อวงล้อสุ่มรายชื่อ*/
@@ -8882,7 +9105,12 @@
     font-weight: bold;
     margin-bottom: 30px;
   }
-
+  .last-name-in{
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+    border:2px solid #ffe748;
+  }
   .emaill-usr-box{
     font-size: large;
     font-weight: bold;
@@ -8959,7 +9187,20 @@
     margin: auto;
     margin-top: 150px;
   }
-
+  .last-usr-box-editusr{
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+.last-name-in-editusr {
+    display: block; 
+    width: 500px;
+    max-width: 100%; 
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid #ffe748;
+    padding: 0 10px; 
+}
 
 
   /* ปุ่มหน้าจัดการผู้ใช้ */

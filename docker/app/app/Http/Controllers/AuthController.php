@@ -10,13 +10,11 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    // ดึงฟอร์ม login มา
     public function showLoginForm()
     {
         return view('user.loginuser');
     }
 
-    // เอาข้อมูลที่กรอกจากฟอร์มมาตรวจ
     public function login(Request $request, ApiLib $apiLib)
     {
         $request->validate([
@@ -24,8 +22,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // ถ้าผู้ใช้พิมพ์ชื่อพร้อม @buu.ac.th ให้ตัดส่วนหลังออก
-        $username = Str::before(trim($request->username), '@');
+        $username = strtolower(Str::before(trim($request->username), '@'));
         $remember = $request->has('remember');
 
         $user = User::where('username', $username)->first();
@@ -38,28 +35,40 @@ class AuthController extends Controller
             return $fail();
         }
 
-        // เช็กว่าบัญชีถูกปิดหรือเปล่า (ก่อนตรวจรหัสผ่าน)
         if (!$user->is_active) {
             return back()->withErrors(['username' => 'บัญชีถูกปิดใช้งาน โปรดติดต่อเจ้าหน้าที่'])
                 ->onlyInput('username');
         }
 
-        if (!empty($user->password_hash)) {
-            // บัญชีที่มีรหัสผ่านในระบบเรา: ตรวจ bcrypt ตามเดิม
+        if ($user->isApiUser()) {
+            // บัญชีมหาวิทยาลัย: ตรวจกับ ApiLib
+            try {
+                $info = $apiLib->login($username, $request->password);
+            } catch (\RuntimeException $e) {
+                return back()->withErrors([
+                    'username' => 'ระบบห้องสมุดไม่พร้อมใช้งานชั่วคราว ลองใหม่อีกครั้ง',
+                ])->onlyInput('username');
+            }
+
+            if ($info === null) {
+                return $fail();
+            }
+
+            // อัปเดตชื่อจาก API ให้ตรงเสมอ (ไม่แตะ role)
+            if (!empty($info['fullname']) && $user->full_name !== $info['fullname']) {
+                $user->update(['full_name' => $info['fullname']]);
+            }
+
+            Auth::login($user, $remember);
+        } else {
+            // บัญชีที่สร้างเองในระบบ (local): ตรวจ bcrypt ตามเดิม
             if (!Auth::attempt(['username' => $username, 'password' => $request->password], $remember)) {
                 return $fail();
             }
-        } else {
-            // บัญชีที่ไม่มีรหัสผ่าน: ตรวจกับบัญชีมหาวิทยาลัยผ่าน ApiLib
-            if (!$apiLib->login($username, $request->password)) {
-                return $fail();
-            }
-            Auth::login($user, $remember);
         }
 
         $request->session()->regenerate();
 
-        // เมื่อ login แล้วจะแยกไปตาม role
         return match ($user->role) {
             'admin'   => redirect()->route('admin.dashboard'),
             'manager' => redirect()->route('manager.profile'),
@@ -68,7 +77,6 @@ class AuthController extends Controller
         };
     }
 
-    // ออกจากระบบ
     public function logout(Request $request)
     {
         Auth::logout();

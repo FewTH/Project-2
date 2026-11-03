@@ -698,6 +698,33 @@ if (btnenlargeqr && popupenlargeqr && enlargeqrbox && qrsmall){
 }
 
 
+//ปุ่มขยาย QR แบบประเมิน ใช้ popup เดียวกับ QR ลงทะเบียน
+const btnenlargeassessmentqr = document.getElementById('btn_enlarge_assessment_qr');
+const assessmentqrsmall = document.querySelector('#assessment_qr_small svg');
+
+if (btnenlargeassessmentqr && assessmentqrsmall && popupenlargeqr && enlargeqrbox){
+    btnenlargeassessmentqr.addEventListener('click', function(){
+        const qrbig = assessmentqrsmall.cloneNode(true);
+        qrbig.removeAttribute('width');
+        qrbig.removeAttribute('height');
+
+        //เปลี่ยนหัวข้อ popup ให้ตรงกับ QR แบบประเมิน
+        const titleelement = popupenlargeqr.querySelector('.titleenlargeQR');
+        const subtitleelement = popupenlargeqr.querySelector('.subtitleenlargeQR');
+        if (titleelement){
+            titleelement.textContent = 'แบบประเมิน';
+        }
+        if (subtitleelement){
+            subtitleelement.textContent = 'สแกน QR code เพื่อทำแบบประเมิน';
+        }
+
+        enlargeqrbox.innerHTML = '';
+        enlargeqrbox.appendChild(qrbig);
+        openDialog(popupenlargeqr);
+    });
+}
+
+
 //ช่องค้นหาชื่อผู้ลงทะเบียน ในหน้า view_details.blade.php
 const searchregistration = document.getElementById('search_registration');
 
@@ -975,172 +1002,278 @@ let namewheel = null;
 let rewardwheel = null;
 
 
-//ฟังก์ชันเอาไว้วาดวงล้อและหมุนตามเปอร์เซ็นต์ของรางวัล
-function createwheel(canvasId, items) {
-    const canvas = document.getElementById(canvasId);
+//ฟังก์ชันสร้างแถบสุ่มแนวนอนแบบเว็บเปิดกล่อง CS:GO (แทนวงล้อกลมแบบเดิม)
+//ใช้ชื่อ createwheel และคืนค่า spin / reduceandremove / removeitem เหมือนเดิม
+//โค้ดปุ่มสุ่ม popup ผู้โชคดี และปุ่มเปิด/ปิด ข้างล่างเลยใช้ต่อได้โดยไม่ต้องแก้
+function createwheel(containerId, items) {
+    const container = document.getElementById(containerId);
 
-    //เช็คว่ามี canvas จริงมั้ย
-    if (!canvas) {
+    //เช็คว่ามีกล่องแถบสุ่มอยู่จริงมั้ย
+    if (!container) {
         return null;
     }
 
-    const ctx = canvas.getContext('2d');
+    //ค่าตั้งต้นของแถบสุ่ม ปรับได้ตามชอบ
+    const CARD_WIDTH = 130;        //ความกว้างการ์ด 1 ใบ (px)
+    const CARD_GAP = 10;           //ช่องว่างระหว่างการ์ด (px)
+    const STEP = CARD_WIDTH + CARD_GAP;
+    const SPIN_CARDS = 55;         //เลื่อนผ่านการ์ดกี่ใบก่อนหยุด ยิ่งเยอะยิ่งเลื่อนไกลและเร็ว
+    const SPIN_DURATION = 5000;    //เวลาเลื่อน (มิลลิวินาที)
+    const SETTLE_DURATION = 450;   //เวลาค่อยๆ เลื่อนเข้ากลางการ์ดหลังหยุด
+    const IDLE_CARDS = 41;         //จำนวนการ์ดตอนยังไม่กดสุ่ม
 
-    //หาจุดกึ่งกลางของวงกลม และรัศมี
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = centerX - 8;
-    //เอาไว้ให้มันขยายหรือลดวงล้อเล็กๆสีขาวข้างใน
-    const holeRadius = radius * 0.22;
+    //ถ้ารายการมี quantity แปลว่าเป็นวงล้อของรางวัล จะใช้สีตามความหายาก
+    const isreward = items.some(function (item) {
+        return item.quantity !== undefined;
+    });
 
-    //เก็บมุมหมุนล่าสุดของวงล้อนี้ไว้(แก้ปัญหาวงล้อเด้งกลับตำแหน่งเดิม)
-    let wheelrotation = 0;
-
-    //สีของวงล้อสุ่มทั้ง 2 วง
+    //สีของวงล้อรายชื่อ (ชุดเดียวกับวงล้อเดิม)
     const colorList = ['#4A90D9', '#2ecc71', '#f1c40f', '#e67e22', '#e74c3c', '#e91e8c', '#9b59b6', '#5dade2'];
 
-    //เอาเปอร์เช็นต์ของทุกรายการที่กรอกไป แล้วมาบวกสะสมให้ครบทุกรายการเพื่อจะเอาไปคำนวนใช้งานได้จริง
+    //สีตามความหายากแบบ CS:GO ยิ่งโอกาสออกน้อยยิ่งได้สีหายาก (maxshare คือ % โอกาสออก)
+    const raritylist = [
+        { maxshare: 3,   color: '#FFD700' }, //ทอง
+        { maxshare: 10,  color: '#EB4B4B' }, //แดง
+        { maxshare: 20,  color: '#D32CE6' }, //ชมพู
+        { maxshare: 40,  color: '#8847FF' }, //ม่วง
+        { maxshare: 100, color: '#4B69FF' }  //น้ำเงิน
+    ];
+
+    //ไอคอนบนการ์ด
+    const ICON_USER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>';
+    const ICON_GIFT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8"/><path d="M12 8v13"/><path d="M12 8S10.5 3 8 3a2.5 2.5 0 0 0 0 5"/><path d="M12 8s1.5-5 4-5a2.5 2.5 0 0 1 0 5"/></svg>';
+
+
+    //สร้างโครงของแถบสุ่มข้างในกล่อง
+    container.innerHTML = '';
+    container.classList.add('roulette');
+    container.style.setProperty('--card-width', CARD_WIDTH + 'px');
+    container.style.setProperty('--card-gap', CARD_GAP + 'px');
+
+    //ช่องมองที่ตัดการ์ดส่วนเกินออก
+    const viewport = document.createElement('div');
+    viewport.className = 'roulette-viewport';
+
+    //แถบที่เรียงการ์ดไว้ เลื่อนซ้ายขวาด้วย transform
+    const track = document.createElement('div');
+    track.className = 'roulette-track';
+    viewport.appendChild(track);
+
+    //เส้นกลางกับลูกศรบนล่าง
+    const line = document.createElement('div');
+    line.className = 'roulette-line';
+
+    const markertop = document.createElement('div');
+    markertop.className = 'roulette-marker roulette-marker-top';
+
+    const markerbottom = document.createElement('div');
+    markerbottom.className = 'roulette-marker roulette-marker-bottom';
+
+    //ข้อความตอนไม่มีรายการให้สุ่ม
+    const emptytext = document.createElement('p');
+    emptytext.className = 'roulette-empty';
+    if (isreward) {
+        emptytext.textContent = 'ไม่มีของรางวัลให้สุ่ม';
+    } else {
+        emptytext.textContent = 'ไม่มีรายชื่อให้สุ่ม';
+    }
+
+    container.append(viewport, line, markertop, markerbottom, emptytext);
+
+
+    //ตัวแปรเก็บสถานะของแถบ
     let totalpercent = 0;
-    for (let i = 0; i < items.length; i++) {
-        totalpercent = totalpercent + items[i].percent;
-    }
+    let cards = [];         //การ์ดที่อยู่ในแถบตอนนี้ เก็บเป็น {element, item}
+    let centerindex = 0;    //ลำดับการ์ดที่อยู่ตรงลูกศรตอนนี้
+    let currentx = 0;       //ตำแหน่งแถบล่าสุด
+    let isspinning = false;
 
-    //ฟังก์ชันวาดวงล้อ เรียกใหม่ทุกครั้งตอนหมุน เพื่อให้เห็น animation
-    function draw(currentrotation) {
 
-        //ล้างภาพเก่าก่อนวาดใหม่
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        //ถ้ารายการหมดแล้วให้วาดวงกลมสีขาวเปล่าๆไว้แทนแล้ว return ออกมาเลยไม่ต้องทำต่อ
-        if (items.length === 0) {
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            return;
-        }
-
-        //วาดทีละส่วนของวงล้อ เริ่มต้นวาดมุมปัจจุบันจะขยับไปเรื่อยๆทุกครั้งที่วาด
-        let anglesofar = currentrotation;
+    //รวมเปอร์เซ็นต์ของทุกรายการ (แปลงเป็นตัวเลขก่อน กันค่าจาก database มาเป็นข้อความ)
+    function recalctotal() {
+        totalpercent = 0;
         for (let i = 0; i < items.length; i++) {
+            totalpercent = totalpercent + (Number(items[i].percent) || 0);
+        }
+    }
 
+    //กำหนดสีให้แต่ละรายการครั้งเดียวตอนเริ่ม สีจะได้ไม่เปลี่ยนไปมาตอนของบางชิ้นหมด
+    recalctotal();
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        let color = colorList[i % colorList.length];
 
-            const item = items[i];
-            //คำนวณว่าชิ้นนี้ควรกว้างเท่าไหร่
-            const slicesize = (item.percent / totalpercent) * 2 * Math.PI;
-            const midangle = anglesofar + slicesize / 2;
-
-            //วาดชิ้นส่วนวงล้อ
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.arc(centerX, centerY, radius, anglesofar, anglesofar + slicesize);
-            ctx.closePath();
-
-            //เลือกสีของชิ้นนี้ ถ้าจำนวนสีไม่พอ ก็จะวนกลับไปใช้สีแรกอีกรอบ
-            const colorindex = i % colorList.length;
-            ctx.fillStyle = colorList[colorindex];
-            ctx.fill();
-
-            //เอาไว้โชว์ชื่อกับจำนวนของรางวัล"
-            let displaylabel = item.label;
-            if (item.quantity !== undefined) {
-                displaylabel = item.label + ' (' + item.quantity + ')';
+        if (isreward && totalpercent > 0) {
+            const share = ((Number(item.percent) || 0) / totalpercent) * 100;
+            for (let r = 0; r < raritylist.length; r++) {
+                if (share <= raritylist[r].maxshare) {
+                    color = raritylist[r].color;
+                    break;
+                }
             }
-
-            //บันทึกค่าปัจจุบันไว้กู้คืนได้ทีหลัง
-            ctx.save();
-            //ย้ายจุดอ้างอิงไปที่ค่าตรงกลาง
-            ctx.translate(centerX, centerY);
-            ctx.rotate(midangle);
-
-            ctx.fillStyle = 'white';
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-
-            
-            //กันไม่ให้ตัวหนังสือสูงเกินความใหญ่ของชิ้นส่วนวงล้อแต่ละวง
-            let maxfontbyheight = slicesize * (holeRadius + 40);
-            if (maxfontbyheight > 20){
-                maxfontbyheight = 20
-            }
-
-            ctx.font = 'bold ' + maxfontbyheight + 'px Chakra Petch, sans-serif';
-
-
-                //เอาไว้ขยับข้อความไปข้างในวงจะไม่ได้ไม่ชนกรอบ
-                ctx.fillText(displaylabel, radius - 25, 0);
-
-            //คืนค่าสถานะ canvas กลับไปเป็นก่อนหน้าsave()
-            ctx.restore();
-
-            //ขยับไปวาดชิ้นส่วนวงล้อถัดไป
-            anglesofar = anglesofar + slicesize;
         }
 
-        //วาดวงกลมสีขาวทับตรงกลาง ให้ดูเป็นรูโดนัทตามหน้าตาที่ออกแบบไว้
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, holeRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = 'white';
-        ctx.fill();
+        item.roulettecolor = color;
     }
 
 
-    //ฟังก์ชันสุ่มว่าจะได้ชิ้นไหน โดยดูจากเปอร์เซ็นต์
+    //ข้อความจำนวนที่เหลือบนการ์ดของรางวัล
+    function quantitytext(quantity) {
+        if (quantity > 0) {
+            return 'เหลือ ' + quantity;
+        }
+        return 'หมดแล้ว';
+    }
+
+    //สร้างการ์ด 1 ใบ
+    function makecard(item) {
+        const card = document.createElement('div');
+        card.className = 'roulette-card';
+        card.style.setProperty('--rarity', item.roulettecolor);
+
+        const icon = document.createElement('div');
+        icon.className = 'roulette-card-icon';
+
+        //ถ้ามีรูปส่งมาด้วย (item.image) ให้ใช้รูปแทนไอคอน
+        if (item.image) {
+            const img = document.createElement('img');
+            img.src = item.image;
+            img.alt = '';
+            icon.appendChild(img);
+        } else if (isreward) {
+            icon.innerHTML = ICON_GIFT;
+        } else {
+            icon.innerHTML = ICON_USER;
+        }
+
+        //ใส่ชื่อด้วย textContent กันชื่อที่มีอักขระแปลกๆ ทำให้หน้าพัง
+        const name = document.createElement('p');
+        name.className = 'roulette-card-name';
+        name.textContent = item.label;
+        name.title = item.label;
+
+        card.append(icon, name);
+
+        if (item.quantity !== undefined) {
+            const quantity = document.createElement('p');
+            quantity.className = 'roulette-card-qty';
+            quantity.textContent = quantitytext(item.quantity);
+            card.appendChild(quantity);
+        }
+
+        return card;
+    }
+
+    //เอารายการไปสร้างเป็นการ์ดเรียงในแถบ
+    function filltrack(list) {
+        const fragment = document.createDocumentFragment();
+        cards = [];
+
+        for (let i = 0; i < list.length; i++) {
+            const element = makecard(list[i]);
+            cards.push({ element: element, item: list[i] });
+            fragment.appendChild(element);
+        }
+
+        track.innerHTML = '';
+        track.appendChild(fragment);
+    }
+
+    //คำนวณว่าต้องเลื่อนแถบไปเท่าไหร่ ให้การ์ดลำดับ index อยู่ตรงลูกศรพอดี
+    //offset คือระยะเยื้องจากกลางการ์ด ใช้ตอนหยุดให้ดูไม่ตรงกลางเป๊ะทุกครั้ง
+    function positionof(index, offset) {
+        return viewport.clientWidth / 2 - (index * STEP + CARD_WIDTH / 2) - offset;
+    }
+
+    //เลื่อนแถบไปตำแหน่ง x
+    function movetrack(x) {
+        currentx = x;
+        track.style.transform = 'translate3d(' + x + 'px, 0, 0)';
+    }
+
+
+    //ฟังก์ชันสุ่มว่าจะได้ชิ้นไหน โดยดูจากเปอร์เซ็นต์ (หลักการเดียวกับวงล้อเดิม)
     function pickrandomitem() {
         const randomnumber = Math.random() * totalpercent;
         let countup = 0;
 
         for (let i = 0; i < items.length; i++) {
-            countup = countup + items[i].percent;
+            countup = countup + (Number(items[i].percent) || 0);
 
-            if (randomnumber <= countup) {
+            if (randomnumber < countup) {
                 return items[i];
             }
         }
 
         //เผื่อกรณีปัดเศษพลาดให้เอาตัวสุดท้ายไปเลย
-        const lastindex = items.length - 1;
-        return items[lastindex];
+        return items[items.length - 1];
     }
 
 
-    //ฟังก์ชันหมุนวงล้อ พอหมุนเสร็จแล้วจะเรียก callback ที่ชื่อ onfinish พร้อมส่งผู้ชนะกลับไปให้
+    //วาดแถบตอนยังไม่กดสุ่ม เรียงทุกรายการวนไปเรื่อยๆ ให้เห็นครบทุกชิ้น
+    function renderidle() {
+        if (items.length === 0) {
+            container.classList.add('is-empty');
+            return;
+        }
+
+        const list = [];
+        for (let i = 0; i < IDLE_CARDS; i++) {
+            list.push(items[i % items.length]);
+        }
+
+        filltrack(list);
+        centerindex = Math.floor(IDLE_CARDS / 2);
+        movetrack(positionof(centerindex, 0));
+    }
+
+
+    //ฟังก์ชันสุ่ม พอเลื่อนเสร็จจะเรียก onfinish พร้อมส่งผู้ชนะกลับไปให้ (เหมือนวงล้อเดิม)
     function spin(onfinish) {
 
-        //ความจริงคือได้ผลสุ่มตั้งแต่ตรงนี้แล้ว ที่วงล้อสุ่มเป็นแค่animationเฉยๆ
+        //ไม่มีรายการเหลือแล้ว ให้ตอบกลับเป็น null ไปเลย ปุ่มสุ่มจะได้ไม่ค้าง
+        if (items.length === 0) {
+            if (onfinish) {
+                onfinish(null);
+            }
+            return;
+        }
+
+        isspinning = true;
+
+        //ได้ผลสุ่มตั้งแต่ตรงนี้แล้ว การเลื่อนแถบเป็นแค่ animation เหมือนวงล้อเดิม
         const winner = pickrandomitem();
 
-        //หามุมเริ่มต้นของชิ้นที่ชนะ โดยไล่บวกขนาดของชิ้นก่อนหน้าไปเรื่อยๆ จนเจอชิ้นที่ชนะ
-        let anglebeforewinner = 0;
-        for (let i = 0; i < items.length; i++) {
-            if (items[i] === winner) {
-                break;
+        //นับว่าครึ่งจอมองเห็นการ์ดได้กี่ใบ
+        const sidecount = Math.ceil(viewport.clientWidth / 2 / STEP) + 1;
+        const startindex = sidecount;
+        const winnerindex = startindex + SPIN_CARDS;
+        const totalcards = winnerindex + sidecount + 5;
+
+        //สร้างแถบใหม่: ช่วงต้นก๊อปการ์ดที่เห็นอยู่ตอนนี้มาวาง ภาพจะต่อเนื่องไม่กระตุก
+        //ช่วงกลางสุ่มตามเปอร์เซ็นต์ (ของหายากจะโผล่ให้เห็นน้อย) แล้ววางผู้ชนะไว้ที่ winnerindex
+        const list = [];
+        for (let i = 0; i < totalcards; i++) {
+            const oldcard = cards[centerindex - startindex + i];
+
+            if (i === winnerindex) {
+                list.push(winner);
+            } else if (i <= startindex * 2 && oldcard) {
+                list.push(oldcard.item);
+            } else {
+                list.push(pickrandomitem());
             }
-            const onesliceofar = (items[i].percent / totalpercent) * 2 * Math.PI;
-            anglebeforewinner = anglebeforewinner + onesliceofar;
         }
 
-        const winnerslicesize = (winner.percent / totalpercent) * 2 * Math.PI;
-        const winnermiddleangle = anglebeforewinner + (winnerslicesize / 2);
+        filltrack(list);
+        movetrack(positionof(startindex, 0));
 
-        //หมุน 5 รอบ
-        const spinrounds = 5;
+        //สุ่มจุดหยุดให้เยื้องซ้ายหรือขวานิดหน่อย แต่ยังอยู่ในการ์ดใบเดียวกัน
+        const maxoffset = CARD_WIDTH / 2 - 12;
+        const randomoffset = (Math.random() * 2 - 1) * maxoffset;
 
-        //ทำให้ชีของรางวัลได้ตรงจุด
-        const targetangle = -Math.PI/2  - winnermiddleangle;
-
-        //หาระยะที่ต้องหมุนเพิ่มจากตำแหน่งปัจจุบัน ให้ไปตรงเป้าหมายพอดี
-        let diff = (targetangle - wheelrotation) % (2 * Math.PI);
-        if (diff < 0) {
-            diff = diff + 2 * Math.PI;
-        }
-
-        //มุมเริ่มต้นของการหมุน
-        const startrotation = wheelrotation;
-        const finalangle = startrotation + (spinrounds * 2 * Math.PI) + diff;
-
-        const spinduration = 3000;
-        //ทำเวลาเป็นnullไว้ก่อนถ้ามีการเปลี่ยนแปลงจะเก็บเวลาแรกไว้
+        const startx = currentx;
+        const endx = positionof(winnerindex, randomoffset);
         let starttime = null;
 
         function animate(timestamp) {
@@ -1150,89 +1283,133 @@ function createwheel(canvasId, items) {
                 starttime = timestamp;
             }
 
-            const timepassed = timestamp - starttime;
-            let progress = timepassed / spinduration;
-
+            let progress = (timestamp - starttime) / SPIN_DURATION;
             if (progress > 1) {
                 progress = 1;
             }
 
-            //ทำให้ช่วงท้ายค่อยๆ ช้าลง
-            const slowdown = 1 - Math.pow (1 - progress, 3);
-
-            //จะวาดภาพใหม่ ทุกครั้งที่มีการสุ่ม
-            draw(startrotation + (finalangle - startrotation) * slowdown);
+            //เร็วตอนแรก แล้วค่อยๆ ช้าลงตอนท้าย
+            const slowdown = 1 - Math.pow(1 - progress, 3);
+            movetrack(startx + (endx - startx) * slowdown);
 
             if (progress < 1) {
-                //ยังหมุนไม่เสร็จ วาดเฟรมถัดไป
                 requestAnimationFrame(animate);
             } else {
-                //จำตำแหน่งล่าสุดไว้ ให้รอบต่อไปหมุนต่อจากตรงนี้ ไม่เด้งกลับที่เดิม
-                wheelrotation = finalangle;
-
-                //หมุนเสร็จแล้ว บอกผลลัพธ์กลับไป
-                if (onfinish) {
-                    onfinish(winner);
-                }
+                settle();
             }
         }
-        //สั่งให้กดเริ่มเพื่อให้ animate ทำงานครั้งแรกเสมอ
+
+        //หยุดแล้วค่อยๆ เลื่อนเข้ากลางการ์ดผู้ชนะ
+        function settle() {
+            const fromx = currentx;
+            const tox = positionof(winnerindex, 0);
+            let settlestart = null;
+
+            function step(timestamp) {
+                if (settlestart === null) {
+                    settlestart = timestamp;
+                }
+
+                let progress = (timestamp - settlestart) / SETTLE_DURATION;
+                if (progress > 1) {
+                    progress = 1;
+                }
+
+                let smooth = 0;
+                if (progress < 0.5) {
+                    smooth = 2 * progress * progress;
+                } else {
+                    smooth = 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                }
+
+                movetrack(fromx + (tox - fromx) * smooth);
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    finish();
+                }
+            }
+
+            requestAnimationFrame(step);
+        }
+
+        //เลื่อนเสร็จแล้ว ไฮไลต์การ์ดผู้ชนะ แล้วบอกผลลัพธ์กลับไป
+        function finish() {
+            centerindex = winnerindex;
+            isspinning = false;
+            cards[winnerindex].element.classList.add('is-winner');
+
+            if (onfinish) {
+                onfinish(winner);
+            }
+        }
+
         requestAnimationFrame(animate);
     }
 
 
-    //ฟังก์ชันเอาไว้ลดจำนวนของรางวัลที่สุ่มได้ลง 1 ถ้าหมดแล้วให้ลบออกจากวงล้อเลย เอาไว้ใช้กันวงล้อของรางวัล
+    //ลบรายการออกจาก items แล้วคำนวณเปอร์เซ็นต์ใหม่
+    function removefromitems(item) {
+        const index = items.indexOf(item);
+        if (index !== -1) {
+            items.splice(index, 1);
+        }
+
+        recalctotal();
+
+        //แถบยังโชว์ผลล่าสุดค้างไว้ ถ้าไม่เหลือรายการแล้วค่อยขึ้นข้อความบอก
+        if (items.length === 0) {
+            container.classList.add('is-empty');
+        }
+    }
+
+
+    //ฟังก์ชันลดจำนวนของรางวัลที่สุ่มได้ลง 1 ถ้าหมดแล้วให้เอาออกจากการสุ่ม ใช้กับวงล้อของรางวัล
     function reduceandremove(winneritem) {
 
-        //ถ้าไม่มี quantity เก็บไว้ (เช่นวงล้อรายชื่อ) ก็ไม่ต้องทำอะไร
+        //ถ้าไม่มี quantity (เช่นวงล้อรายชื่อ) ก็ไม่ต้องทำอะไร
         if (winneritem.quantity === undefined) {
             return;
         }
 
         winneritem.quantity = winneritem.quantity - 1;
 
-        //ถ้าหมดแล้ว ให้ลบชิ้นนี้ออกจาก items เลย
+        //อัปเดตตัวเลข "เหลือ" บนการ์ดทุกใบที่เป็นของรางวัลชิ้นนี้
+        for (let i = 0; i < cards.length; i++) {
+            if (cards[i].item === winneritem) {
+                const quantity = cards[i].element.querySelector('.roulette-card-qty');
+                if (quantity) {
+                    quantity.textContent = quantitytext(winneritem.quantity);
+                }
+            }
+        }
+
         if (winneritem.quantity <= 0) {
-            const index = items.indexOf(winneritem);
-            if (index !== -1) {
-                items.splice(index, 1);
-            }
-
-            //คำนวณ totalpercent ใหม่จากของที่เหลือ กันสัดส่วนวงล้อเพี้ยน
-            totalpercent = 0;
-            for (let i = 0; i < items.length; i++) {
-                totalpercent = totalpercent + items[i].percent;
-            }
+            removefromitems(winneritem);
         }
-
-        //วาดวงล้อใหม่ให้ตรงกับข้อมูลล่าสุด
-        draw(wheelrotation);
     }
 
 
-    //ฟังก์ชันเอาไว้ลบรายชื่อที่ถูกสุ่มได้ออกจากวงล้อเลยทันที เอาไว้ใช่กับวงล้อรายชื่อ
+    //ฟังก์ชันเอารายชื่อที่ถูกสุ่มแล้วออกจากการสุ่มรอบต่อไป ใช้กับวงล้อรายชื่อ
     function removeitem(winneritem) {
-
-        const index = items.indexOf(winneritem);
-        if (index !== -1) {
-            items.splice(index, 1);
-        }
-
-        //คำนวณ totalpercent ใหม่จากของที่เหลือ กันสัดส่วนวงล้อเพี้ยน
-        totalpercent = 0;
-        for (let i = 0; i < items.length; i++) {
-            totalpercent = totalpercent + items[i].percent;
-        }
-
-        //วาดวงล้อใหม่ให้ตรงกับข้อมูลล่าสุด (ชื่อที่สุ่มไปแล้วหายไปแล้ว)
-        draw(wheelrotation);
+        removefromitems(winneritem);
     }
 
-  //วาดวงล้อครั้งแรกไว้ก่อนตอนยังไม่กดสุ่ม
-    draw(0);
 
-  
-    //ส่งฟังก์ชันออกไปให้ข้างนอกเรียกใช้ได้
+    //ย่อขยายหน้าจอแล้วให้การ์ดที่ได้ยังอยู่ตรงลูกศร
+    window.addEventListener('resize', function () {
+        if (!isspinning && cards.length > 0) {
+            movetrack(positionof(centerindex, 0));
+        }
+    });
+
+
+    //วาดแถบครั้งแรกไว้ก่อนตอนยังไม่กดสุ่ม
+    renderidle();
+
+
+    //ส่งฟังก์ชันออกไปให้ข้างนอกเรียกใช้ได้ (ชื่อเดิมทั้งหมด)
     return {
         spin: spin,
         reduceandremove: reduceandremove,

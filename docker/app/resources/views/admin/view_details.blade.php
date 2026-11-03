@@ -234,9 +234,7 @@
 
                 <form action="{{ route('admin.activity.assessment_url', $event->event_id) }}" method="POST" class="formassessmenturl">
                     @csrf
-                    <input type="url" name="assessment_url" class="inputassessmenturl"
-                           value="{{ old('assessment_url', $event->assessment_url) }}"
-                           placeholder="วางลิงก์แบบประเมิน เช่น https://forms.gle/...">
+                    <input type="url" name="assessment_url" class="inputassessmenturl"value="{{ old('assessment_url', $event->assessment_url) }}"placeholder="วางลิงก์แบบประเมิน เช่น https://forms.gle/...">
                     <button type="submit" class="btn-saveassessmenturl">สร้าง QR</button>
                     @if($event->assessment_url)
                         <button type="submit" name="clear" value="1" class="btn-clearassessmenturl">ล้าง</button>
@@ -247,10 +245,15 @@
                 @enderror
 
                 @if($event->assessment_url)
-                    <div class="imgassessmentqr">
+                    <div class="imgassessmentqr" id="assessment_qr_small">
                         {!! QrCode::size(260)->generate($event->assessment_url) !!}
                     </div>
-                    <a href="{{ $event->assessment_url }}" target="_blank" rel="noopener" class="linkassessmenturl">เปิดลิงก์แบบประเมิน</a>
+                    <div class="linkassessmenturl">
+                        <button type="button" class="linkassessmenturl-1" id="btn_enlarge_assessment_qr">
+                            <img src="{{ asset('admin/img/รูปขยายqrcode.png') }}" alt="รูปขยายqrcode" class="imgbtn-linkassessmenturl">
+                            <p class="linkassessmenturl-2">ขยาย QR แบบประเมิน</p>
+                        </button>
+                    </div>
                 @endif
             </div>
 
