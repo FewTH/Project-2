@@ -38,66 +38,70 @@
     {{-- พื้นหลังของวงล้อทั้งหมด --}}
     <div class="all-wheel-background">
 
-    {{-- ส่วนวงล้อรายชื่อของคนที่ทำแบบประเมิน --}}
-    <div class="respondent-box">
-        <div class="background-respondent-header">
-            <div class="Logo-topic-respondent">
-                <img src="{{asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของวงล้อรายชื่อ" width="50" height="50">
-                <p class="text-res-header">วงล้อสุ่มรายชื่อ</p>
+    <div class="reel-stack">
+        {{-- แถบสุ่มรายชื่อของคนที่ทำแบบประเมิน --}}
+        <div class="reel-section reel-section--name" id="nameReelSection">
+            <div class="background-respondent-header">
+                <div class="Logo-topic-respondent">
+                    <img src="{{asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png')}}" alt="โลโก้ของแถบสุ่มรายชื่อ" width="50" height="50">
+                    <p class="text-res-header">สุ่มรายชื่อ</p>
+                </div>
+                <div class="num-respondent-box">
+                    <span class="num-respondent-wheel" id="respondentCount">
+                        จำนวนรายชื่อทั้งหมด ({{ $respondents->count() }})
+                    </span>
+                </div>
             </div>
-            <div class="num-respondent-box">
-                <span class="num-respondent-wheel">
-                    จำนวนรายชื่อทั้งหมด ({{ $respondents->count() }})
-                </span>
+            {{-- ปุ่มเปิด/ปิดแถบรายชื่อ --}}
+            <div class="toggle-main-namebox">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-name-wheel" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+                <p class="tog-btn-descript">เปิด/ปิดแถบสุ่ม</p>
             </div>
-        </div>
-        {{-- ส่วนของปุ่มเปิด/ปิดวงล้อรายชื่อ --}}
-        <div class="toggle-main-namebox">
-            <label class="toggle-switch">
-                <input type="checkbox" id="toggle-name-wheel" checked>
-                <span class="toggle-slider"></span>
-            </label>
-            <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
-        </div>
-        {{-- แสดงวงล้อรายชื่อของผูัที่ทำแบบประเมิน --}}
-        <div class="respondent-main-wheel">
-            <canvas id="wheelNameCanvas" width="500" height="500"></canvas>
-            <div class="respondent-wheel-pointer"></div>
-        </div>
-    </div>
-
-        {{-- ส่วนวงล้อรางวัล --}}
-    <div class="wheel-reward-box">
-        <div class="text-wheel">
-            <div class="logo-topic">
-                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
-                <p class="text-topic">วงล้อสุ่มของรางวัล</p>
-            </div>
-            <div class="num-reward-box">
-                <span class="num-reward-wheel">
-                    จำนวนรางวัลทั้งหมด ({{ $wheel->rewards->sum('pivot.quantity_selected') }})
-                </span>
+            {{-- แถบการ์ดรายชื่อ (JS เติมการ์ดให้) --}}
+            <div class="reel-viewport" id="nameReel">
+                <div class="reel-strip"></div>
+                <div class="reel-pointer"></div>
             </div>
         </div>
-        {{-- แสดงวงล้อที่ผูกกับแบบประเมิน --}}
-        <div class="toggle-main-box">
-            <label class="toggle-switch">
-                <input type="checkbox" id="toggle-reward-wheel" checked>
-                <span class="toggle-slider"></span>
-            </label>
-            <p class="tog-btn-descript">เปิด/ปิดวงล้อ</p>
+ 
+        {{-- แถบสุ่มของรางวัล --}}
+        <div class="reel-section reel-section--reward" id="rewardReelSection">
+            <div class="text-wheel">
+                <div class="logo-topic">
+                    <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของแถบสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+                    <p class="text-topic">สุ่มของรางวัล</p>
+                </div>
+                <div class="num-reward-box">
+                    <span class="num-reward-wheel" id="rewardCount">
+                        จำนวนรางวัลทั้งหมด ({{ $wheel->rewards->sum('pivot.quantity_selected') }})
+                    </span>
+                </div>
+            </div>
+            {{-- ปุ่มเปิด/ปิดแถบรางวัล --}}
+            <div class="toggle-main-box">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-reward-wheel" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+                <p class="tog-btn-descript">เปิด/ปิดแถบสุ่ม</p>
+            </div>
+            {{-- แถบการ์ดรางวัล (JS เติมการ์ดให้) --}}
+            <div class="reel-viewport" id="rewardReel">
+                <div class="reel-strip"></div>
+                <div class="reel-pointer"></div>
+            </div>
         </div>
-        <div class="wheel-assessment-rewards">
-            <canvas id="wheelrewardCanvas" width="500" height="500"></canvas>
-            <div class="wheel-pointer"></div>
+ 
+        <div class="btnstartRandomreward">
+            <button type="button" class="btn-startRandomreward" id="spinassessmentBtn">
+                <img src="{{ asset('admin/img/รูปของปุ่มเรื่มสุ่มรางวัล.png') }}" alt="รูปของปุ่มเริ่มสุ่มรางวัล" class="img-btn-startRandomreward">
+                <p class="messagebtn-startRandomreward">สุ่มรางวัล</p>
+            </button>
         </div>
-    </div>
-    
-    <div class="btnstartRandomreward">
-        <button type="button" class="btn-startRandomreward" id="spinassessmentBtn">
-            <img src="{{ asset('admin/img/รูปของปุ่มเรื่มสุ่มรางวัล.png') }}" alt="รูปของปุ่มเรื่มสุ่มรางวัล" class="img-btn-startRandomreward">
-            <p class="messagebtn-startRandomreward">สุ่มรางวัล</p>
-        </button>
+ 
     </div>
     </div>
     {{-- ส่วนของpopup ตอนที่สุ่มได้รางวัลแล้วจะโชว์ขึ้นมา --}}

@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600;700&display=swap');
   /*ป้องกันกล่องส้น*/
   * {
     box-sizing: border-box;
@@ -818,7 +818,7 @@
   .framestatusQRCode{
     width: 100%;
     width: 600px;
-    height: 525px;
+    height: 550px;
     background-color: #fdfbf5;
     margin-top: 100px;
     border-radius: 15px;
@@ -3623,7 +3623,7 @@
     justify-content: center;
   }
   .imgenlargeQR svg{
-    width: min(720px, 80vh, 85vw);
+    width: min(680px, 80vh, 85vw);
     height: auto;
     border-radius: 20px;
     padding: 15px;
@@ -4436,11 +4436,11 @@
     z-index: 2;
   }
 
-
   /*กรอบของปุ่มสุ่มรางวัล*/
   .btnstartRandomreward{
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
     justify-content: center;
     flex-basis: 100%; 
   }
@@ -10157,7 +10157,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 900px;
+  height: 100%;
   border-radius: 20px;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
   display: flex;
@@ -10406,8 +10406,8 @@
   gap: 10px;
   color: #6d4300;
 }
-/* เข็มแหลมๆบนวงล้อรายชื่อ */
-.respondent-wheel-pointer{
+/* เข็มแหลมๆบนวงล้อรายชื่อ 88888888888888888*/
+/* .respondent-wheel-pointer{
   position: absolute;
   top: -6px;
   left: 50%;
@@ -10418,33 +10418,33 @@
   border-right: 14px solid transparent;
   border-top: 24px solid #f5cc53;
   z-index: 100;
-}
-/* จัดระเบียบวงล้อรายชื่อ */
-.respondent-main-wheel{
+} */
+/* จัดระเบียบวงล้อรายชื่อ 888888888888888888888*/
+/* .respondent-main-wheel{
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: 10px;
-}
-/* อนิเมชันตอนหมุนวงล้อรายชื่อ */
-#wheelNameCanvas{
+} */
+/* อนิเมชันตอนหมุนวงล้อรายชื่อ 88888888888888*/
+/* #wheelNameCanvas{
   transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-}
+} */
 
 
-/* อนิเมชันตอนหมุนวงล้อรางวัล */
-#wheelrewardCanvas{
+/* อนิเมชันตอนหมุนวงล้อรางวัล 8888888888888888*/
+/* #wheelrewardCanvas{
   transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-}
-/* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล */
-.wheel-assessment-rewards{
+} */
+/* กำหนดรูปแบบกับจัดตำแหน่งตัววงล้อรางวัล 8888888888888888*/
+/* .wheel-assessment-rewards{
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: 10px;
-}
-/* สร้างเข็มแหลมๆบนวงล้อรางวัล */
-.wheel-pointer{
+} */
+/* สร้างเข็มแหลมๆบนวงล้อรางวัล 8888888888888*/
+/* .wheel-pointer{
   position: absolute;
   top: -6px;
   left: 50%;
@@ -10455,7 +10455,7 @@
   border-right: 14px solid transparent;
   border-top: 24px solid #ec4899;
   z-index: 10;
-}
+} */
 .text-wheel{
   display: flex;
   box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.17);
@@ -10598,3 +10598,3000 @@
 .spin-result-box .congrat-btn:hover {
     background-color: #1d4ed8;
 }
+/* แถบสุ่มแนวนอนแบบ CSGO  */
+/* กรอบที่ครอบแถบสุ่มทั้งสองกับปุ่มสุ่ม เรียงจากบนลงล่าง */
+.reel-stack{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+/* กล่องของแต่ละแถบ (สีพื้นเหมือนกล่องวงล้อเดิม) */
+.reel-section{
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
+  transition: opacity 0.2s;
+}
+.reel-section--name{
+  background-color: #FFF6E3;
+}
+.reel-section--reward{
+  background-color: #ff00d00c;
+}
+/* ตอนปิดแถบด้วยปุ่ม toggle ให้จางลง */
+.reel-section.is-off{
+  opacity: 0.45;
+}
+
+/* หน้าต่างที่มองเห็นการ์ด */
+.reel-viewport{
+  --pointer-color: #f5cc53;
+  --reel-bg: #161a3a;
+  position: relative;
+  overflow: hidden;
+  margin: 16px 20px 24px;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at center, #252b63 0%, var(--reel-bg) 70%);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.55);
+}
+.reel-section--reward .reel-viewport{
+  --pointer-color: #ec4899;
+}
+
+/* เงาจางที่ขอบซ้ายขวา ให้การ์ดดูเหมือนวิ่งเข้าออกจากความมืด */
+.reel-viewport::before,
+.reel-viewport::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12%;
+  z-index: 2;
+  pointer-events: none;
+}
+.reel-viewport::before{
+  left: 0;
+  background: linear-gradient(90deg, var(--reel-bg), transparent);
+}
+.reel-viewport::after{
+  right: 0;
+  background: linear-gradient(270deg, var(--reel-bg), transparent);
+}
+
+/* แถวการ์ดที่เลื่อนได้  */
+.reel-strip{
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding: 22px 0;
+  will-change: transform;
+}
+
+/* การ์ดแต่ละใบ */
+.reel-card{
+  --card-color: #6c5ce7;
+  position: relative;
+  flex: 0 0 150px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 4px solid var(--card-color);
+}
+/* แสงเรืองสีประจำการ์ดด้านหลังไอคอน */
+.reel-card::before{
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--card-color);
+  opacity: 0.35;
+  filter: blur(22px);
+}
+.reel-card-icon{
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--card-color);
+}
+.reel-card-icon svg{
+  width: 28px;
+  height: 28px;
+  stroke: #ffffff;
+}
+/* ชื่อยาวเกิน 2 บรรทัดจะถูกตัดเป็น ... */
+.reel-card-label{
+  position: relative;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* การ์ดที่ชนะ เรืองแสงสีเดียวกับเข็ม */
+.reel-card.is-winner{
+  box-shadow: 0 0 0 3px var(--pointer-color), 0 0 26px var(--pointer-color);
+  animation: reel-win 0.6s ease-out;
+}
+@keyframes reel-win{
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* เข็มกลาง: เส้นแนวตั้ง + สามเหลี่ยมบนล่าง */
+.reel-pointer{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: var(--pointer-color);
+  box-shadow: 0 0 12px var(--pointer-color);
+  z-index: 3;
+  pointer-events: none;
+}
+.reel-pointer::before,
+.reel-pointer::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+}
+.reel-pointer::before{
+  top: 0;
+  border-top: 16px solid var(--pointer-color);
+}
+.reel-pointer::after{
+  bottom: 0;
+  border-bottom: 16px solid var(--pointer-color);
+}
+/* ข้อความตอนไม่มีรายชื่อหรือรางวัลเหลือ */
+.reel-empty{
+  width: 100%;
+  margin: 0;
+  padding: 60px 20px;
+  text-align: center;
+  color: #c7cbe6;
+}
+/* จอเล็ก ให้การ์ดเล็กลง */
+@media (max-width: 640px){
+  .reel-card{
+    flex-basis: 120px;
+    height: 130px;
+  }
+  .reel-viewport{
+    margin: 12px 10px 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  .reel-card.is-winner{
+    animation: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*ค่าสี ฟอนต์ ขนาดหลักของทั้งเว็บ เปลี่ยนตรงนี้ที่เดียว ทั้งเว็บเปลี่ยนตาม*/
+  /*อยากได้สีทองแบบเว็บเดิม: --primary: #C8961E; --primary-dark: #A87A12; --primary-soft: #FBF4E4;*/
+  :root{
+    --primary: #FF0043;
+    --primary-dark: #cc0036;
+    --primary-soft: #FFF0F4;
+    --danger: #B91C1C;
+    --danger-dark: #991B1B;
+    --heading: #222222;
+    --text: #333333;
+    --muted: #777777;
+    --placeholder: #999999;
+    --border: #E2E2E2;
+    --surface-soft: #FBFBFB;
+    --shadow: 0px 15px 60px rgba(62, 62, 62, 0.10);
+    --shadow-hover: 0px 15px 60px rgba(62, 62, 62, 0.20);
+    --shadow-popup: 0px 30px 80px rgba(0, 0, 0, 0.18);
+    --radius: 12px;
+    --radius-btn: 6px;
+    --radius-badge: 4px;
+    /*ภาษาอังกฤษกับตัวเลขใช้ Montserrat ภาษาไทยเบราว์เซอร์จะใช้ Kanit ให้เอง (อยากได้ Prompt ก็เปลี่ยนตรงนี้กับ @import)*/
+    --font: 'Montserrat', 'Kanit', sans-serif;
+  }
+
+
+
+
+  /*พื้นฐานทั้งเว็บ*/
+  body{
+    font-family: var(--font);
+    background-color: #ffffff;
+    color: var(--text);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*ปุ่มกับช่องกรอกไม่รับฟอนต์จาก body เอง ต้องบอกแยก*/
+  button,
+  input,
+  select,
+  textarea{
+    font-family: var(--font);
+  }
+
+  ::selection{
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+
+
+
+  /*แถบด้านบน (โปรไฟล์ผู้ใช้) พื้นขาว เส้นบางใต้แถบ*/
+  .btn-user-wrapper,
+  .btn-user-wrapper-1{
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0px 4px 30px rgba(62, 62, 62, 0.06);
+  }
+
+  .btn-user{
+    color: var(--heading);
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  .btn-user:hover{
+    color: var(--primary);
+  }
+
+  .btn-user-img{
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--primary);
+    background-color: #f2f2f2;
+  }
+
+
+
+
+  /*เมนูด้านซ้าย แบบ sidenav ของเทมเพลต: ไม่มีกรอบ คั่นด้วยเส้นเทาบาง*/
+  .container,
+  .container-1,
+  .container2,
+  .container3,
+  .container-assessment,
+  .container-mngrewrd{
+    background-color: #ffffff;
+    border-right: 1px solid var(--border);
+    font-family: var(--font);
+    padding: 20px;
+  }
+
+  .btn-Sidebar-dashboard,
+  .btn-Sidebar-assessment,
+  .btn-Sidebar-1,
+  .btn-Sidebar,
+  .btn-Sidebar3,
+  .btn-Sidebar-mngrewrd{
+    gap: 0;
+  }
+
+  .btn-Sidebar-dashboard a,
+  .btn-Sidebar-assessment a,
+  .btn-Sidebar-1 a,
+  .btn-Sidebar a,
+  .btn-Sidebar3 a,
+  .btn-Sidebar-mngrewrd a{
+    position: relative;
+    color: var(--heading);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 16px 10px 16px 14px;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+    background-color: transparent;
+  }
+
+  .btn-Sidebar-dashboard a:last-child,
+  .btn-Sidebar-assessment a:last-child,
+  .btn-Sidebar-1 a:last-child,
+  .btn-Sidebar a:last-child,
+  .btn-Sidebar3 a:last-child,
+  .btn-Sidebar-mngrewrd a:last-child{
+    border-bottom: 0;
+  }
+
+  .btn-Sidebar-dashboard a img,
+  .btn-Sidebar-assessment a img,
+  .btn-Sidebar-1 a img,
+  .btn-Sidebar a img,
+  .btn-Sidebar3 a img,
+  .btn-Sidebar-mngrewrd a img{
+    width: 28px;
+    height: 28px;
+    margin-right: 14px;
+    opacity: 0.55;
+  }
+
+  /*เอาเมาส์ชี้ ตัวหนังสือเป็นสีหลัก ไม่มีพื้นหลัง*/
+  .btn-Sidebar-dashboard a:hover,
+  .btn-Sidebar-assessment a:hover,
+  .btn-Sidebar-1 a:hover,
+  .btn-Sidebar a:hover,
+  .btn-Sidebar3 a:hover,
+  .btn-Sidebar-mngrewrd a:hover{
+    background-color: transparent;
+    color: var(--primary);
+  }
+
+  .btn-Sidebar-dashboard a:hover img,
+  .btn-Sidebar-assessment a:hover img,
+  .btn-Sidebar-1 a:hover img,
+  .btn-Sidebar a:hover img,
+  .btn-Sidebar3 a:hover img,
+  .btn-Sidebar-mngrewrd a:hover img{
+    opacity: 1;
+  }
+
+  /*เมนูที่เปิดอยู่: ตัวแดง มีขีดบางด้านซ้ายเหมือนเทมเพลต (ของเดิมใช้ !important เลยต้องใช้ตาม)*/
+  .btn-Dashboard-01,
+  .btn-Assessment-assess,
+  .btn-Managewheel4,
+  .btn-Manage_users3,
+  .btn-Manage_Rewards-mngrewrd{
+    background: transparent !important;
+    color: var(--primary) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    justify-content: flex-start !important;
+    padding: 16px 10px 16px 14px !important;
+    margin-top: 0 !important;
+  }
+
+  .btn-Dashboard-01::after,
+  .btn-Assessment-assess::after,
+  .btn-Managewheel4::after,
+  .btn-Manage_users3::after,
+  .btn-Manage_Rewards-mngrewrd::after{
+    left: 0;
+    right: auto;
+    top: 25%;
+    height: 50%;
+    width: 2px;
+    background-color: var(--primary);
+    border-radius: 2px;
+  }
+
+  /*ปุ่มออกจากระบบ แบบปุ่มขอบสีหลัก*/
+  .btn-logout-wrapper{
+    border-top: 1px solid var(--border);
+  }
+
+  .btn-logout{
+    color: var(--primary);
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-btn);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .btn-logout:hover{
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #ffffff;
+  }
+
+  .btn-logout-img{
+    width: 20px;
+    height: 20px;
+  }
+  .btn-logout:hover .btn-logout-img{
+    filter: brightness(0) invert(1);
+  }
+
+
+
+
+  /*หัวข้อใหญ่ของแต่ละหน้า สีเข้ม ตัวหนามากแบบเทมเพลต*/
+  .Overview_Dashboard,
+  .My_Profile,
+  .sectionlist,
+  .createactivity,
+  .judkarnlangwun-text,
+  .manageusr-title,
+  .wheel-mainspn-topic{
+    color: var(--heading);
+  }
+
+  .Overview_Dashboard h1,
+  .My_Profile h1,
+  .sectionlist h1,
+  .createactivity h1,
+  .judkarnlangwun-text h1,
+  .manageusr-title h1,
+  .wheel-mainspn-topic h1{
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--heading);
+  }
+
+  /*ชื่อกิจกรรมใต้หัวข้อหน้าสุ่มรางวัล*/
+  .messagelistactivities{
+    color: var(--primary);
+    font-size: 20px;
+  }
+
+
+
+
+  /*ปิดเอฟเฟกต์วงกลมตอนเอาเมาส์ชี้ของทุกปุ่ม เทมเพลตใช้แค่เปลี่ยนสีเรียบๆ*/
+  .btn-date::before,
+  .save-data-1::before,
+  .btn-cancel-1::before,
+  .save-password-1::before,
+  .btn-cancel-password::before,
+  .btn-activity::before,
+  .btn-rate::before,
+  .btn-build-activityurgent::before,
+  .frame-search-activity::before,
+  .view-details::before,
+  .search-activity-1::before,
+  .frameall-assessment::before,
+  .frameoff-assessment::before,
+  .farmeon-assessment::before,
+  .frameclosed::before,
+  .deleteRegister::before,
+  .btn-confirmdeletion::before,
+  .btn-canceldeletion::before,
+  .edit-activity::before,
+  .offRegister::before,
+  .btnconfirmoffRegister::before,
+  .canceloffRegister::before,
+  .btn-randomreward::before,
+  .btn-recordQrcode::before,
+  .btn-startRandomreward::before,
+  .offpopupluckywinner::before,
+  .framesearchsenditgmail::before,
+  .btn-senditgmail-1::before,
+  .btn-offpopuplistnameawardrecipient::before,
+  .btn-submitpopuplistnameawardrecipient::before,
+  .btn-sendallemails1::before,
+  .btn-Resend::before,
+  .btn-Resend1::before,
+  .btn-resendallthatfailed::before,
+  .Change_image::before,
+  .btn-uploadphoto::before,
+  .btn-close-1::before,
+  .btn-Edit-information-1::before,
+  .btn-Edit-information-profile::before,
+  .btn-close-Edit::before,
+  .Password-Change-Button::before,
+  .btn-change-password::before,
+  .btn-close-change::before,
+  .btn-assign-assessment::before,
+  .close-button::before,
+  .btn-cancel-evaluation::before,
+  .btn-confirm-evaluation::before,
+  .frame-status::before,
+  .assessment-open-1::before,
+  .enter-random::before,
+  .view-history::before,
+  .showmore::before,
+  .showmore-1::before,
+  .submitbuildandQR::before{
+    display: none !important;
+  }
+
+
+
+
+  /*การ์ดชั้นนอก: พื้นขาว ไม่มีขอบ มุมโค้ง 12px เงาฟุ้งบางๆ แบบ .card ของเทมเพลต*/
+  .alluser_frames,
+  .assessmentframe,
+  .randomall,
+  .framewaitreceiveaward,
+  .chart-wrap,
+  .framesmost_popular,
+  .framestatusQRCode,
+  .frameeditinformation,
+  .framechangepassword,
+  .frame-grey,
+  .frame-grey-1,
+  .framelargest,
+  .framebigofWheel,
+  .framesectionluckywinner,
+  .framechanceleavereward,
+  .framebiglistname,
+  .frameallbuttonsenditgmail,
+  .frameallbuttonsenditgmail-1,
+  .frameallbuttonsenditgmail-2,
+  .framebiglistnamerecipientreward,
+  .framelistthatfailed,
+  .Profile,
+  .User_Information,
+  .Change_password,
+  .grayframeactivity,
+  .reward-list,
+  .add-box-main,
+  .edit-re-main,
+  .manageusr-mainbox,
+  .edit-box-main,
+  .main-edit-box,
+  .reward-spn-list,
+  .main-wheel-spn,
+  .all-wheel-background,
+  .random-reward-header,
+  .footer-winner-card,
+  .footer-probability-card{
+    background-color: #ffffff;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /*กล่องชั้นใน (อยู่ในการ์ดอีกที): ใช้เส้นขอบบางแทนเงา จะได้ไม่ดูซ้อนหนา*/
+  .framesmallnameofwheel,
+  .framesmallrandomreward,
+  .frame-activity-assessment,
+  .all-activities,
+  .Closed-assessment,
+  .Open-assessment,
+  .frameinformation-assessment,
+  .frameactivitytime-1,
+  .framenumbermessageregister,
+  .framenumbermessagereceiveupto,
+  .framemessagenomessagestatus,
+  .framenumbertimemessagestimeoff,
+  .frameQRcoderegister-1,
+  .frameQRcoderegister-2,
+  .frameassessmenturl,
+  .framelistnamesregister,
+  .framealllistname,
+  .framereceivedlistname,
+  .framernotacceptingyet,
+  .framerlistnamerecipientreward,
+  .framerandom_all,
+  .frameReward_Box,
+  .frameblackactivity,
+  .wheel-reward-box,
+  .respondent-box,
+  .reel-section,
+  .reel-section--name,
+  .reel-section--reward{
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: none;
+  }
+
+  /*การ์ดกิจกรรมยังมีแถบสีประจำกิจกรรมด้านซ้าย แต่บางลง*/
+  .frame-activity-assessment{
+    border-left: 6px solid var(--activity-color, var(--primary));
+    transition: box-shadow 0.2s ease;
+  }
+  .frame-activity-assessment:hover{
+    box-shadow: var(--shadow);
+  }
+
+  /*กล่องข้อความว่าง (ไม่มีข้อมูล) ของหน้าจัดการรางวัล*/
+  .box-reward1{
+    background-color: var(--surface-soft);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+
+
+
+  /*ปุ่มหลัก: พื้นสีหลัก ตัวขาว มุมโค้ง 6px ไม่มีเงา (เหมือน .btn-primary)*/
+  .save-data-1,
+  .save-password-1,
+  .btn-build-activityurgent,
+  .btn-randomreward,
+  .btn-startRandomreward,
+  .offpopupluckywinner,
+  .btn-senditgmail-1,
+  .btn-submitpopuplistnameawardrecipient,
+  .btn-sendallemails1,
+  .btn-Edit-information-1,
+  .btn-Edit-information-profile,
+  .Password-Change-Button,
+  .btn-change-password,
+  .btn-assign-assessment,
+  .btn-confirm-evaluation,
+  .enter-random,
+  .submitbuildandQR,
+  .btnconfirmoffRegister,
+  .offRegister,
+  .btn-enlargeQRcode,
+  .linkassessmenturl-1,
+  .btn-saveassessmenturl,
+  .spin-assessment-btn,
+  .confirm-btn,
+  .addreward,
+  .add-usr-btn,
+  .addreward-btn1,
+  .addre-btn1,
+  .addusr-btn1,
+  .submit-btn-edtusr,
+  .submtedt-btn,
+  .submit-wheel-reward,
+  .spin-result-box .congrat-btn{
+    background: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    color: #ffffff;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /*ตัวหนังสือข้างในปุ่มหลักเป็นสีขาวทั้งหมด*/
+  .save-data-1 *,
+  .save-password-1 *,
+  .btn-build-activityurgent *,
+  .btn-randomreward *,
+  .btn-startRandomreward *,
+  .offpopupluckywinner *,
+  .btn-senditgmail-1 *,
+  .btn-submitpopuplistnameawardrecipient *,
+  .btn-sendallemails1 *,
+  .btn-Edit-information-1 *,
+  .btn-Edit-information-profile *,
+  .Password-Change-Button *,
+  .btn-change-password *,
+  .btn-assign-assessment *,
+  .btn-confirm-evaluation *,
+  .enter-random *,
+  .submitbuildandQR *,
+  .btnconfirmoffRegister *,
+  .offRegister *,
+  .btn-enlargeQRcode *,
+  .linkassessmenturl-1 *,
+  .addreward *,
+  .add-usr-btn *,
+  .spin-result-box .congrat-btn *{
+    color: #ffffff;
+  }
+
+  /*เอาเมาส์ชี้ปุ่มหลัก สีเข้มขึ้น (ไม่ทำกับปุ่มที่กดไม่ได้)*/
+  .save-data-1:not(:disabled):hover,
+  .save-password-1:not(:disabled):hover,
+  .btn-build-activityurgent:not(:disabled):hover,
+  .btn-randomreward:not(:disabled):hover,
+  .btn-startRandomreward:not(:disabled):hover,
+  .offpopupluckywinner:not(:disabled):hover,
+  .btn-senditgmail-1:not(:disabled):hover,
+  .btn-submitpopuplistnameawardrecipient:not(:disabled):hover,
+  .btn-sendallemails1:not(:disabled):hover,
+  .btn-Edit-information-1:not(:disabled):hover,
+  .btn-Edit-information-profile:not(:disabled):hover,
+  .Password-Change-Button:not(:disabled):hover,
+  .btn-change-password:not(:disabled):hover,
+  .btn-assign-assessment:not(:disabled):hover,
+  .btn-confirm-evaluation:not(:disabled):hover,
+  .enter-random:not(:disabled):hover,
+  .submitbuildandQR:not(:disabled):hover,
+  .btnconfirmoffRegister:not(:disabled):hover,
+  .offRegister:not(:disabled):hover,
+  .btn-enlargeQRcode:not(:disabled):hover,
+  .linkassessmenturl-1:not(:disabled):hover,
+  .btn-saveassessmenturl:not(:disabled):hover,
+  .spin-assessment-btn:not(:disabled):hover,
+  .confirm-btn:not(:disabled):hover,
+  .addreward:not(:disabled):hover,
+  .add-usr-btn:not(:disabled):hover,
+  .addreward-btn1:not(:disabled):hover,
+  .addre-btn1:not(:disabled):hover,
+  .addusr-btn1:not(:disabled):hover,
+  .submit-btn-edtusr:not(:disabled):hover,
+  .submtedt-btn:not(:disabled):hover,
+  .submit-wheel-reward:not(:disabled):hover,
+  .spin-result-box .congrat-btn:not(:disabled):hover{
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+
+  /*ปุ่มหลักตอนกดไม่ได้ ใช้สีเดิมแต่จางลง*/
+  .btn-randomreward:disabled,
+  .btn-startRandomreward:disabled,
+  .btn-confirm-evaluation:disabled{
+    background: var(--primary);
+    border-color: var(--primary);
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .btn-randomreward:disabled *,
+  .btn-confirm-evaluation:disabled *{
+    color: #ffffff;
+    opacity: 1;
+  }
+
+
+  /*ปุ่มรอง: ขอบสีหลัก พื้นใส เอาเมาส์ชี้แล้วเป็นพื้นสีหลัก (เหมือน .btn-outline-primary)*/
+  .btn-cancel-1,
+  .btn-cancel-password,
+  .btn-canceldeletion,
+  .canceloffRegister,
+  .btn-Resend,
+  .btn-Resend1,
+  .btn-resendallthatfailed,
+  .btn-cancel-evaluation,
+  .showmore,
+  .showmore-1,
+  .Change_image,
+  .btn-recordQrcode,
+  .edit-activity,
+  .view-details,
+  .btn-grant-extra,
+  .view-history,
+  .cancle-btn,
+  .cancle-btn-addusr,
+  .cancle-btn-editusr,
+  .cancle-btn-editreward,
+  .not-confirm-btn,
+  .cancle-wheel-btn,
+  .claerall-selected{
+    background: transparent;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    color: var(--primary);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-cancel-1 *,
+  .btn-cancel-password *,
+  .btn-canceldeletion *,
+  .canceloffRegister *,
+  .btn-Resend *,
+  .btn-Resend1 *,
+  .btn-resendallthatfailed *,
+  .btn-cancel-evaluation *,
+  .showmore *,
+  .showmore-1 *,
+  .Change_image *,
+  .btn-recordQrcode *,
+  .edit-activity *,
+  .view-details *,
+  .view-history *,
+  .claerall-selected *{
+    color: var(--primary);
+    transition: color 0.2s ease;
+  }
+
+  .btn-cancel-1:hover,
+  .btn-cancel-password:hover,
+  .btn-canceldeletion:hover,
+  .canceloffRegister:hover,
+  .btn-Resend:hover,
+  .btn-Resend1:hover,
+  .btn-resendallthatfailed:hover,
+  .btn-cancel-evaluation:hover,
+  .showmore:hover,
+  .showmore-1:hover,
+  .Change_image:hover,
+  .btn-recordQrcode:hover,
+  .edit-activity:hover,
+  .view-details:hover,
+  .btn-grant-extra:hover,
+  .view-history:hover,
+  .cancle-btn:hover,
+  .cancle-btn-addusr:hover,
+  .cancle-btn-editusr:hover,
+  .cancle-btn-editreward:hover,
+  .not-confirm-btn:hover,
+  .cancle-wheel-btn:hover,
+  .claerall-selected:hover{
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: #ffffff;
+  }
+
+  .btn-cancel-1:hover *,
+  .btn-cancel-password:hover *,
+  .btn-canceldeletion:hover *,
+  .canceloffRegister:hover *,
+  .btn-Resend:hover *,
+  .btn-Resend1:hover *,
+  .btn-resendallthatfailed:hover *,
+  .btn-cancel-evaluation:hover *,
+  .showmore:hover *,
+  .showmore-1:hover *,
+  .Change_image:hover *,
+  .btn-recordQrcode:hover *,
+  .edit-activity:hover *,
+  .view-details:hover *,
+  .view-history:hover *,
+  .claerall-selected:hover *{
+    color: #ffffff;
+  }
+
+  /*ไอคอนรูปในปุ่มรองเปลี่ยนเป็นสีขาวตอนพื้นเป็นสีหลัก*/
+  .btn-Resend:hover img,
+  .btn-Resend1:hover img,
+  .btn-recordQrcode:hover img,
+  .Change_image:hover img{
+    filter: brightness(0) invert(1);
+  }
+
+
+  /*ปุ่มลบ/อันตราย ใช้สีแดงเข้ม แยกจากสีหลักให้ชัด*/
+  .deleteRegister,
+  .btn-clearassessmenturl{
+    background: transparent;
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    color: var(--danger);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .message-deleteRegister{
+    color: var(--danger);
+  }
+  .deleteRegister:hover,
+  .btn-clearassessmenturl:hover{
+    background: var(--danger);
+    color: #ffffff;
+  }
+  .deleteRegister:hover .message-deleteRegister{
+    color: #ffffff;
+  }
+
+  .btn-confirmdeletion{
+    background: var(--danger);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+  }
+  .btn-confirmdeletion:hover{
+    background: var(--danger-dark);
+  }
+
+
+  /*ปุ่มปิดหรือยกเลิกแบบเรียบ สีเทา*/
+  .btn-close-Edit,
+  .btn-close-change,
+  .btn-offpopuplistnameawardrecipient,
+  .btn-close-1,
+  .btn-closeenlargeQR{
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    color: var(--text);
+    transition: background-color 0.2s ease;
+  }
+  .btn-close-Edit-1,
+  .btn-close-change-1,
+  .messagebtn-offpopuplistnameawardrecipient,
+  .btn-close-popup{
+    color: var(--text);
+  }
+  .btn-close-Edit:hover,
+  .btn-close-change:hover,
+  .btn-offpopuplistnameawardrecipient:hover,
+  .btn-close-1:hover,
+  .btn-closeenlargeQR:hover{
+    background: #f5f5f5;
+  }
+
+  /*ปุ่มที่ยังกดไม่ได้ (แบบประเมินยังเปิดอยู่)*/
+  .assessment-open-1{
+    background-color: #f2f2f2;
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+  }
+  .message-assessment-open{
+    color: var(--placeholder);
+  }
+
+
+  /*ขนาดปุ่มให้กะทัดรัดแบบเทมเพลต (ตัวหนังสือราว 16px)*/
+  .save-data-2,
+  .save-password-2,
+  .btn-cancel-2,
+  .btn-cancel-password-1{
+    font-size: 16px;
+    padding: 14px 44px;
+  }
+  .btn-cancel-1,
+  .btn-cancel-password{
+    height: auto;
+  }
+
+  .btn-Edit-information-2,
+  .btn-Change-password{
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 28px;
+  }
+
+  .btn-Edit-information-profile-1,
+  .btn-change-password-1,
+  .btn-close-Edit-1,
+  .btn-close-change-1{
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 34px;
+  }
+
+  .view-details{
+    width: auto;
+    height: auto;
+  }
+  .view-details-1{
+    font-size: 15px;
+    padding: 12px 30px;
+  }
+
+  .deleteRegister,
+  .edit-activity,
+  .offRegister{
+    height: 46px;
+    padding: 0px 28px;
+  }
+  .message-deleteRegister,
+  .message-edit-activity,
+  .message-offRegister{
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .btn-confirmdeletion,
+  .btn-canceldeletion,
+  .btnconfirmoffRegister,
+  .canceloffRegister,
+  .btn-offpopuplistnameawardrecipient,
+  .btn-submitpopuplistnameawardrecipient,
+  .offpopupluckywinner{
+    height: 52px;
+  }
+  .btn-confirmdeletion-2,
+  .btn-canceldeletion-1,
+  .btnconfirmoffRegister-1,
+  .canceloffRegister-1,
+  .messagebtn-offpopuplistnameawardrecipient,
+  .messagebtn-submitpopuplistnameawardrecipient,
+  .messageoffpopupluckywinner{
+    font-size: 16px;
+  }
+
+  .btn-randomreward{
+    height: 56px;
+  }
+  .messagestartrandom{
+    font-size: 18px;
+  }
+
+  .btn-startRandomreward{
+    height: 60px;
+    padding: 0px 56px;
+  }
+  .messagebtn-startRandomreward{
+    font-size: 18px;
+  }
+  .img-btn-startRandomreward{
+    width: 28px;
+    height: 28px;
+  }
+
+  .btn-recordQrcode,
+  .btn-enlargeQRcode{
+    height: 48px;
+  }
+  .message-recordQrcode,
+  .message-enlargeQRcode{
+    font-size: 16px;
+  }
+  .img-recordQrcode{
+    width: 18px;
+    height: 21px;
+  }
+
+  .btn-sendallemails1{
+    height: 50px;
+    padding: 0px 36px;
+  }
+  .sendallemails1,
+  .messagebtn-senditgmail{
+    font-size: 16px;
+  }
+
+  .btn-Resend,
+  .btn-resendallthatfailed{
+    height: 46px;
+  }
+  .btn-Resend1{
+    height: 38px;
+  }
+  .messagebtn-Resend,
+  .messagebtn-Resend1,
+  .messagebtn-resendallthatfailed{
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .message-view-history,
+  .message-enter-random,
+  .message-assessment-open{
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .btn-build-activityurgent-1{
+    font-size: 15px;
+    padding: 10px 28px;
+  }
+  .btn-plus{
+    font-size: 26px;
+    bottom: 1px;
+  }
+
+  .messageshowmore{
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .messagebuildandQR{
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .btn-grant-extra{
+    font-weight: 600;
+    padding: 6px 14px;
+  }
+
+  /*ปุ่มปิดบนแถบหัว popup มอบหมายแบบประเมิน (อยู่บนพื้นสีหลัก)*/
+  .close-button{
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    background: transparent;
+  }
+  .close-button:hover{
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+
+
+
+  /*แท็บ รายการกิจกรรม / แบบประเมิน: ตัวเทา แท็บที่เลือกเป็นตัวเข้ม มีเส้นสีหลักใต้*/
+  .btn-activity,
+  .btn-rate{
+    height: 50px;
+    border-radius: var(--radius-btn);
+  }
+  .btn-activity-1,
+  .btn-rate-1{
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--placeholder);
+    transition: color 0.2s ease;
+  }
+  .btn-activity:hover .btn-activity-1,
+  .btn-rate:hover .btn-rate-1{
+    color: var(--heading);
+  }
+  .btn-activity.active .btn-activity-1,
+  .btn-rate.active .btn-rate-1{
+    color: var(--heading);
+  }
+
+  .number-activity,
+  .number-rate{
+    background-color: #eeeeee;
+    color: var(--muted);
+    border: 0;
+    border-radius: var(--radius-btn);
+    font-size: 15px;
+  }
+  .number-activity.active,
+  .number-rate.active{
+    background-color: var(--primary);
+    border: 0;
+    color: #ffffff;
+  }
+
+  .bulb-black{
+    background-color: var(--border);
+    height: 2px;
+    border-radius: 0;
+  }
+  .bulb-yellow{
+    background-color: var(--primary);
+    height: 2px;
+    border-radius: 0;
+    transition: margin-left 0.25s ease;
+  }
+
+  /*แท็บ ทั้งหมด / รับแล้ว / ยังไม่รับ ของหน้าประวัติการสุ่ม*/
+  .messagebutton-section{
+    font-size: 18px;
+    color: var(--placeholder);
+  }
+  .messagebutton-section.active{
+    color: var(--primary);
+  }
+  .circlenumberbutton-section{
+    background-color: #eeeeee;
+    border-radius: var(--radius-btn);
+  }
+  .circlenumberbutton-section.active{
+    background-color: var(--primary);
+  }
+  .numberbutton-section{
+    color: var(--muted);
+  }
+  .numberbutton-section.active{
+    color: #ffffff;
+  }
+  .graylinesection{
+    height: 2px;
+    background-color: var(--border);
+  }
+  .yellowlinesection{
+    height: 2px;
+    background-color: var(--primary);
+    transition: margin-left 0.25s ease;
+  }
+
+  /*ปุ่มกรอง ทั้งหมด / ปิดแล้ว / เปิดอยู่*/
+  .frameall-assessment,
+  .frameoff-assessment,
+  .farmeon-assessment{
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .frameall-assessment:hover,
+  .frameoff-assessment:hover,
+  .farmeon-assessment:hover{
+    border-color: var(--primary);
+  }
+  .frameall-assessment.active,
+  .frameoff-assessment.active,
+  .farmeon-assessment.active{
+    height: 42px;
+    border: 1px solid var(--primary);
+    background-color: var(--primary-soft);
+  }
+  .all-assessment,
+  .off-assessment,
+  .on-assessment,
+  .allnumber-assessment,
+  .offnumber-assessment,
+  .onnumber-assessment{
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .all-assessment.active,
+  .off-assessment.active,
+  .on-assessment.active,
+  .allnumber-assessment.active,
+  .offnumber-assessment.active,
+  .onnumber-assessment.active{
+    color: var(--primary);
+  }
+
+  /*ปุ่มเลือก วัน / สัปดาห์ / เดือน ของแดชบอร์ด*/
+  .ButtonDate{
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    box-shadow: none;
+    padding: 4px;
+  }
+  .btn-date{
+    height: 40px;
+    border-radius: var(--radius-badge);
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .btn-date:hover{
+    color: var(--primary);
+  }
+  .btn-date.active{
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+
+
+
+
+  /*ช่องกรอกข้อมูลแบบเทมเพลต: ไม่มีกรอบ มีแค่เส้นใต้ คลิกแล้วเส้นเป็นสีหลัก*/
+  .input-username-1,
+  .input-FirstName-LastName-1,
+  .input-phonenumber-1,
+  .input-passwordcurrent-1,
+  .input-password-lasttime-1,
+  .input-username,
+  .input-FirstName-LastName,
+  .input-email-user,
+  .input-phonenumber,
+  .input-Current_password,
+  .input-Last_updated,
+  .framepimactivity-nam,
+  .framedatemonthyear,
+  .framenumberquantity,
+  .evaluation-formid,
+  .name-reward1,
+  .category_list_01,
+  .num-reward1,
+  .rate-reward1,
+  .name-usr-in,
+  .last-name-in,
+  .emaill-usr-in,
+  .role_list_01,
+  .passwd-addusr-in,
+  .last-name-in-editusr,
+  .namere-edt-in,
+  .catere-edt-in,
+  .ratere-edt-in,
+  .qntyre-edt-in,
+  .num-user-acc,
+  .name-user-acc,
+  .role-user-acc{
+    background-color: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    height: auto;
+    min-height: 44px;
+    padding: 8px 2px;
+    font-family: var(--font);
+    font-size: 15px;
+    color: var(--text);
+    transition: border-color 0.2s ease;
+  }
+
+  .input-username-1:focus,
+  .input-FirstName-LastName-1:focus,
+  .input-phonenumber-1:focus,
+  .input-passwordcurrent-1:focus,
+  .input-password-lasttime-1:focus,
+  .input-username:focus,
+  .input-FirstName-LastName:focus,
+  .input-email-user:focus,
+  .input-phonenumber:focus,
+  .input-Current_password:focus,
+  .input-Last_updated:focus,
+  .framepimactivity-nam:focus,
+  .framedatemonthyear:focus,
+  .framenumberquantity:focus,
+  .evaluation-formid:focus,
+  .name-reward1:focus,
+  .category_list_01:focus,
+  .num-reward1:focus,
+  .rate-reward1:focus,
+  .name-usr-in:focus,
+  .last-name-in:focus,
+  .emaill-usr-in:focus,
+  .role_list_01:focus,
+  .passwd-addusr-in:focus,
+  .last-name-in-editusr:focus,
+  .namere-edt-in:focus,
+  .catere-edt-in:focus,
+  .ratere-edt-in:focus,
+  .qntyre-edt-in:focus,
+  .num-user-acc:focus,
+  .name-user-acc:focus,
+  .role-user-acc:focus{
+    border: 0;
+    border-bottom: 1px solid var(--primary);
+  }
+
+  ::placeholder{
+    color: var(--placeholder);
+  }
+
+  /*ช่องจำนวนผู้เข้าร่วมตอนไม่จำกัด*/
+  #frame_number_quantity:disabled{
+    background: transparent;
+  }
+  #frame_number_quantity:disabled::placeholder{
+    color: var(--muted);
+  }
+
+  /*ช่องกรอกที่อยู่แถวเดียวกับปุ่ม ใช้กรอบบางมุมโค้งแทน*/
+  .inputassessmenturl{
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    transition: border-color 0.2s ease;
+  }
+  .inputassessmenturl:focus{
+    border-color: var(--primary);
+  }
+
+  /*ปุ่มตาดูรหัสผ่าน*/
+  .img-eye{
+    color: var(--placeholder);
+    transition: color 0.2s ease;
+  }
+  .img-eye:hover{
+    color: var(--primary);
+  }
+
+  /*ชื่อหัวข้อเหนือช่องกรอก ตัวเข้ม ขนาด 15px แบบ label ของเทมเพลต*/
+  .type-username-1,
+  .FirstNameLastName-1,
+  .typeemail-user-1,
+  .typephone_number-1,
+  .type-passwordcurrent-1,
+  .type-password-lasttime-1,
+  .messageactivity-name,
+  .dateactivity,
+  .closingtime-Register,
+  .messagechoosereward,
+  .messagequantity,
+  .message-evaluation-1,
+  .message-assigngivemanager{
+    color: var(--heading);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  /*ช่องค้นหาแบบเทมเพลต: พื้นขาว ไม่มีขอบ มีเงาฟุ้ง*/
+  .frame-search-activity,
+  .search-activity-1,
+  .framesearchsenditgmail{
+    background-color: #ffffff;
+    border: 0;
+    border-radius: var(--radius-btn);
+    box-shadow: var(--shadow);
+  }
+  .search-activity,
+  .search-activity-2,
+  .btn-framesearchsenditgmail{
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .search-registration,
+  .search-box,
+  .usr-searchbox,
+  .search-spn-input{
+    height: 46px;
+    background-color: #ffffff;
+    border: 0;
+    border-radius: var(--radius-btn);
+    box-shadow: var(--shadow);
+    padding-left: 17px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .search-registration::placeholder{
+    color: var(--placeholder);
+    font-weight: 400;
+  }
+  .search-registration:focus{
+    background-color: #ffffff;
+  }
+
+  /*ช่องติ๊กเลือกทั้งหมด ติ๊กแล้วเป็นสีหลัก*/
+  .btn-checkbox,
+  .limit-toggle1,
+  .checkboxgivemanager{
+    border: 2px solid #d0d0d0;
+    border-radius: var(--radius-badge);
+    background-color: #ffffff;
+  }
+  .btn-checkbox:checked,
+  .limit-toggle1:checked,
+  .checkboxgivemanager:checked{
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+  .reward-check-box{
+    accent-color: var(--primary);
+  }
+
+  /*ปุ่มเปิด/ปิดสุ่ม เปิดแล้วเป็นสีหลัก*/
+  .on-offlistnamesRandom-2,
+  .toggle-slider{
+    background-color: #d6d6d6;
+    box-shadow: none;
+  }
+  .btn-on-offlistnamesRandom:checked + .on-offlistnamesRandom-2,
+  .toggle-switch input:checked + .toggle-slider{
+    background-color: var(--primary);
+  }
+
+  /*ปุ่มบวกลบจำนวน*/
+  .btndelete,
+  .btnplus,
+  .btndelete-1{
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btndelete:hover,
+  .btnplus:hover{
+    color: var(--primary);
+  }
+  .quantity-stepper{
+    background-color: #f5f5f5;
+    box-shadow: inset 0px 0px 0px 1px var(--border);
+  }
+  .quantity-stepper .qnty-plus,
+  .quantity-stepper .qnty-minus{
+    color: var(--text);
+  }
+
+
+
+
+  /*ป้ายสถานะ/ป้ายรางวัล: มุมโค้งน้อยแบบ badge ของเทมเพลต*/
+  .framePrizes,
+  .framereward-listname-1,
+  .frmaemessagescan,
+  .frmaemessagescan-1{
+    background-color: var(--primary);
+    border-radius: var(--radius-badge);
+    height: 32px;
+  }
+  .rawardname,
+  .messagereward-listname,
+  .messagescan,
+  .messagescan-1{
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .frameclosed{
+    border: 0;
+    border-radius: var(--radius-badge);
+    width: auto;
+    padding: 0px 12px;
+  }
+
+  .frame-status,
+  .assess-status{
+    background-color: var(--primary-soft);
+    border: 0;
+    border-radius: var(--radius-badge);
+    color: var(--primary);
+  }
+  .point-status{
+    background-color: var(--primary);
+  }
+  .message-status{
+    color: var(--primary);
+  }
+
+  .framequantitypeople{
+    background-color: var(--primary-soft);
+    border: 0;
+    border-radius: var(--radius-badge);
+  }
+  .numberquantitypeople{
+    color: var(--primary);
+    font-size: 16px;
+  }
+
+  .framerstatusreward-listname1,
+  .framesenttogmail,
+  .frameerrorgmail,
+  .frameerrorgmail-1,
+  .fromyesterday,
+  .role-badge,
+  .In_use{
+    border-radius: var(--radius-badge);
+  }
+
+  .dateorganize2{
+    border: 1px solid var(--border);
+    border-radius: var(--radius-badge);
+  }
+
+  .framerank-1-assessment{
+    border-radius: var(--radius-badge);
+    padding: 0px 24px;
+  }
+
+  .framenotyetreceiveitems{
+    background-color: #FFF6EC;
+    border: 1px solid #F0B37E;
+    border-radius: var(--radius-btn);
+  }
+  .framenotyetreceiveitems-1{
+    border-radius: var(--radius-btn);
+  }
+
+  /*เลขลำดับหน้ารายชื่อ: สี่เหลี่ยมมุมโค้งสีหลัก แบบ card-icon ของเทมเพลต*/
+  .framenumberluckywinner,
+  .framenumberpeople,
+  .circlenumbername,
+  .framecirclenumberlistnamerecipientreward,
+  .winner-badge{
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary);
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .framenumberluckywinner-1,
+  .numberpeople,
+  .circlenumbername,
+  .circlenumberlistnamerecipientreward,
+  .winner-badge{
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  /*จุดหน้าชื่อรายการ*/
+  .pointnameprefixreward,
+  .reward-dot,
+  .pointlistnamerecipientreward{
+    background-color: var(--primary);
+  }
+  .pointlistnamethatfailed{
+    background-color: var(--danger);
+  }
+
+
+
+
+  /*เส้นคั่นทั้งหมด เป็นเส้นเทาบาง 1px*/
+  .blackline-1,
+  .blackline-2,
+  .blackline-3,
+  .blackline-5,
+  .linesectionluckywinner,
+  .linesectionluckywinner-1,
+  .lineactivity,
+  .lineactivity-1,
+  .lineactivity-2,
+  .lineQRcode,
+  .linequantitypeople,
+  .linesectionlistnamerecipientreward,
+  .linesectionlistnamerecipientreward1,
+  .linemessagelistnamerecipientreward,
+  .linemessagelistnamerecipientreward-1,
+  .linemessagelistnamerecipientreward-2,
+  .linepopupevaluation,
+  .lineframeQRcodepopup{
+    border: 0;
+    border-top: 1px solid var(--border);
+  }
+  .linemessageuserpopupluckywinner-1{
+    border: 0;
+    border-top: 1px dashed #d4d4d4;
+  }
+  .blackline-6,
+  .blackline-7{
+    background: var(--border);
+  }
+
+  .winner-row,
+  .footer-probability-row,
+  .reward-1,
+  .reward-wheel-1,
+  .user-1{
+    border-bottom: 1px solid var(--border);
+  }
+  .btn-openpopupname{
+    border-bottom: 1px solid var(--border);
+  }
+
+  /*หลอดเปอร์เซ็นต์ พื้นหลอดเป็นเทาอ่อน*/
+  .black-frame-pencil,
+  .black-frame-notebook,
+  .black-frame-book,
+  .black-frame-powerbank,
+  .black-frame-award{
+    background-color: #eeeeee;
+  }
+
+
+
+
+  /*แถบหัวของกล่องวงล้อ/แถบสุ่ม: พื้นขาว เส้นใต้บาง แทนแถบสีเหลือง/ชมพู*/
+  .framewheelname-quantityname,
+  .framemessagerandomreward,
+  .background-respondent-header,
+  .text-wheel,
+  .spn-wheel-topic{
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0px 0px;
+    box-shadow: none;
+    color: var(--heading);
+  }
+  .btn-manage-wheel{
+    background-color: #ffffff;
+    border-top: 1px solid var(--border);
+  }
+
+  .messageframewheelname,
+  .messagerandomreward{
+    color: var(--heading);
+    font-weight: 700;
+  }
+  .messagequantityname,
+  .messagequantityrandomreward,
+  .num-respondent-box,
+  .num-reward-box{
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .messagebtn-on-offlistnamesRandom,
+  .messagebtn-no-offrandomreward,
+  .toggle-main-namebox,
+  .toggle-main-box{
+    color: var(--muted);
+  }
+
+  /*แถบหัวของ popup เป็นพื้นสีหลัก ตัวขาว*/
+  .framephotomessage-evaluation,
+  .header-popup-spn,
+  .topic-assess{
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+
+  /*popup ทุกอัน: พื้นขาว มุมโค้ง 12px ไม่มีขอบ*/
+  .popupdeleteRegister,
+  .popupoffRegister,
+  .popupluckywinner-10,
+  .popuplistnameawardrecipient,
+  .popup-box,
+  .popup-btn-edit-1,
+  .popup-btn-Change-1,
+  .assignevaluation,
+  .popupenlargeQR,
+  .pop-up-content,
+  .spin-result-box{
+    background-color: #ffffff;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-popup);
+  }
+
+
+
+
+  /*สีตัวหนังสือหัวข้อในการ์ดต่างๆ ให้เป็นสีเข้มเดียวกันทั้งเว็บ*/
+  .sectionrandom,
+  .most_popular,
+  .statusQRCode,
+  .sectioneditinformation,
+  .sectionchangepassword,
+  .headingactivity,
+  .messagesectionactivity,
+  .messageQRcoderegister,
+  .messageactivity-1,
+  .messagelistnamesregiste,
+  .messagesectionluckywinner,
+  .messagesectionchanceleavereward,
+  .messagesectionlistnamerecipientreward,
+  .messagepopuplistnameawardrecipient-1,
+  .messagelistnamerecipientreward,
+  .personal_information,
+  .password,
+  .messagecreateactivity-1,
+  .messagesettings,
+  .footer-winner-title,
+  .footer-probability-title-wrapper,
+  .Topic-addreward,
+  .Topic-adduser,
+  .edit-usr-topic,
+  .message-confirmoffRegister,
+  .message-popupluckywinner,
+  .sectionassessment-1,
+  .section-assessment,
+  .Change-photo,
+  .confirm-edit,
+  .change-password,
+  .titleenlargeQR,
+  .Ttopic-wheel,
+  .sub-manageuser,
+  .messagepencil{
+    color: var(--heading);
+  }
+
+  /*ตัวเลขสถิติต่างๆ สีเข้ม ตัวหนา*/
+  .Userfigures,
+  .Numberframe,
+  .numberrandom,
+  .numberaward,
+  .activities-number-assessment,
+  .numberregister,
+  .numberreceiveupto,
+  .messageno,
+  .numbertime-1,
+  .numberalllistname-1,
+  .numberallbuttonsenditgmail,
+  .number_all-1{
+    color: var(--heading);
+    font-weight: 700;
+  }
+  /*ตัวเลขยังไม่รับ สีเหลืองเดิมอ่านยากบนพื้นขาว เปลี่ยนเป็นส้ม*/
+  .numbernotacceptingyetlistname-1{
+    color: #E58A00;
+  }
+
+  /*เวลานับถอยหลังปิด Register เป็นสีหลัก*/
+  .numbertime{
+    color: var(--primary);
+  }
+
+  /*ชื่อหัวข้อของการ์ดสถิติแดชบอร์ด เป็นสีเทา ตัวเลขข้างล่างเด่นกว่า*/
+  .All_users,
+  .frame,
+  .Random_all,
+  .waitreceiveaward,
+  .randomtoday,
+  .letterreceived,
+  .letterwaitreceive,
+  .letterall,
+  .ratereceiveaward{
+    color: var(--muted);
+  }
+
+  /*ข้อความรองต่างๆ เป็นสีเทา*/
+  .messagecreationtime,
+  .register-1,
+  .maximumnumber,
+  .outtime,
+  .messagewarndeleteactivity,
+  .messagewarn,
+  .message-choose,
+  .messageuserpopupluckywinner,
+  .messagenamerecipientreward,
+  .framemessage-prizesreceived,
+  .assessment-summary-sub,
+  .email,
+  .create-QR,
+  .fill-information,
+  .messagestationery,
+  .messagedateorganize,
+  .messageregister,
+  .messagereceiveupto,
+  .messagestatus,
+  .messagestimeoff{
+    color: var(--muted);
+  }
+  .maximumnumber,
+  .outtime{
+    font-weight: 500;
+  }
+
+  /*ข้อมูลสำคัญที่อยู่คู่กับข้อความรอง*/
+  .maximumnumber1,
+  .messageuserpopupluckywinner-1,
+  .messagenamerecipientreward-1,
+  .framemessage-prizesreceived-1,
+  .messagenameprizes,
+  .nameluckywinner,
+  .nameparticipants,
+  .messageusername-listname,
+  .messagelistnamegmaildateassessment,
+  .messagelistnamethatfailed-1{
+    color: var(--heading);
+  }
+
+  /*ตัวเลข/ชื่อที่ควรเด่นด้วยสีหลัก*/
+  .percentnameprizes,
+  .percentpencil,
+  .messagerewardreceived-2,
+  .spin-result-box .text-congrat{
+    color: var(--primary);
+  }
+
+
+
+
+  /*หน้าสุ่มรางวัล: ให้กรอบแถบสุ่มทั้ง 2 อันกว้างเต็มแถว (ในไฟล์เดิม .framesmallrandomreward height 800px อยู่หลังโค้ดแถบสุ่ม เลยทับกันอยู่)*/
+  .framesmallnameofwheel,
+  .framesmallrandomreward{
+    flex: 1 1 100%;
+    min-width: 0;
+    height: auto;
+    padding-bottom: 24px;
+  }
+
+  /*แถบสุ่ม CS:GO เอาเงาด้านนอกออก ให้แบนเข้ากับการ์ด*/
+  .roulette{
+    box-shadow: inset 0px 0px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  /*หน้าสุ่มรางวัล: popup ผู้โชคดี*/
+  .framepopupluckywinner{
+    background-color: var(--primary-soft);
+    box-shadow: none;
+    border-radius: var(--radius) var(--radius) 0px 0px;
+  }
+  .frameprizes,
+  .frameimgprizes{
+    border: 1px solid var(--border);
+  }
+  .frameprizes{
+    border-radius: var(--radius-btn);
+  }
+
+  /*หน้าประวัติการสุ่ม: กล่องข้อมูลใน popup ใช้พื้นเทาอ่อนแบบกล่องโค้ดของเทมเพลต*/
+  .framenamerecipientreward,
+  .frameQRcodepopup{
+    background-color: var(--surface-soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .frameprizesreceived{
+    background-color: var(--primary-soft);
+    border: 0;
+    border-radius: var(--radius);
+  }
+  .frameimgprizesreceived{
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  /*หน้ามอบหมายแบบประเมิน: ตัวเลือกผู้จัดการ*/
+  .message-checkbox-name{
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    color: var(--text);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .message-checkbox-name:has(.checkboxgivemanager:checked){
+    border-color: var(--primary);
+    background-color: var(--primary-soft);
+  }
+
+  /*หน้ารายละเอียดกิจกรรม: กรอบ QR*/
+  .img-QRcode-1,
+  .imgassessmentqr svg{
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .img-QRcode svg{
+    box-shadow: none;
+  }
+
+  /*หน้าสร้างกิจกรรม: แถวเลือกของรางวัล*/
+  .framechooserewardall{
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .framechooserewardall:has(.btn-checkbox:checked){
+    background-color: var(--primary-soft);
+    border-color: var(--primary);
+  }
+  .asteriskactivity,
+  .asteriskdateactivity,
+  .asteriskchoosereward{
+    color: var(--primary);
+  }
+
+  /*หน้าโปรไฟล์*/
+  .photo_user{
+    border: 3px solid var(--primary);
+    background-color: #f2f2f2;
+  }
+  .Nameprofile{
+    font-weight: 600;
+  }
+  .btn-uploadphoto{
+    background-color: var(--surface-soft);
+    border: 2px dashed #d4d4d4;
+    border-radius: var(--radius);
+    transition: border-color 0.2s ease;
+  }
+  .btn-uploadphoto:hover{
+    border-color: var(--primary);
+  }
+
+  /*แถวข้อมูลส่วนตัว/รหัสผ่าน: หัวข้อกว้างเท่ากันทุกแถว ช่องกรอกจะเริ่มตรงกัน*/
+  .username,
+  .FirstName-LastName,
+  .email-user,
+  .phone_number,
+  .Current_password,
+  .Last_updated{
+    gap: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--heading);
+  }
+  .username > :first-child,
+  .FirstName-LastName > :first-child,
+  .email-user > :first-child,
+  .phone_number > :first-child,
+  .Current_password > :first-child,
+  .Last_updated > :first-child{
+    flex: 0 0 170px;
+  }
+  .input-username,
+  .input-email-user{
+    flex: 1;
+    width: auto;
+    min-width: 0;
+  }
+  .personal_information,
+  .password{
+    font-size: 22px;
+  }
+
+  /*หน้าจัดการรางวัล/ผู้ใช้/วงล้อ: หัวตาราง*/
+  .topic-rewardlist,
+  .usr-topic,
+  .topic-spn-list{
+    background-color: var(--surface-soft);
+    color: var(--heading);
+    border-bottom: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+  }
+
+  /*ปุ่มเปลี่ยนหน้า*/
+  .pager-list a,
+  .pager-list span{
+    border: 1px solid var(--border);
+    border-radius: var(--radius-btn);
+    color: var(--text);
+  }
+  .pager-list a:hover{
+    background: #ffffff;
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .pager-list .active span{
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+
+
+  /* =====================================================================
+     ชุดสีเพิ่มมิติ (ใช้คู่กับ theme-godocs.css ที่วางไว้ก่อนหน้า)
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (อยู่ใต้ธีมเดิม)
+     สิ่งที่เปลี่ยน:
+     - พื้นหลังหน้าเป็นเทาอมฟ้าอ่อน การ์ดสีขาวจะลอยเด่นขึ้นมา
+     - เมนูซ้ายเป็นสีเข้ม โลโก้สีทองจะเด่น
+     - การ์ดตัวเลขแต่ละใบมีสีประจำของตัวเอง
+     - หัวตารางกับหัวกล่องเป็นสีเทาอ่อน แยกจากเนื้อหา
+     ===================================================================== */
+
+
+  /*สีชุดใหม่ (อยากได้เมนูซ้ายสีขาวแบบเดิม: --sidebar-bg กับ --sidebar-bg-2 เป็น #ffffff, --sidebar-text เป็น #222222)*/
+  :root{
+    --page-bg: #F3F4F8;
+    --sidebar-bg: #1B1A29;
+    --sidebar-bg-2: #262339;
+    --sidebar-text: #B9B7CC;
+    --sidebar-line: rgba(255, 255, 255, 0.08);
+    --head-bg: #F6F7FB;
+    --row-hover: #FAFAFD;
+
+    /*สีประจำการ์ดตัวเลข: สีเข้มใช้กับตัวเลข สีอ่อนใช้เป็นพื้น*/
+    --c-pink: #FF0043;
+    --c-pink-soft: #FFE8EE;
+    --c-blue: #3B6CF6;
+    --c-blue-soft: #E9EEFF;
+    --c-amber: #B76E00;
+    --c-amber-line: #F59E0B;
+    --c-amber-soft: #FEF3DA;
+    --c-green: #15803D;
+    --c-green-soft: #E3F6EA;
+    --c-purple: #7C4DEB;
+    --c-purple-soft: #EFE9FE;
+    --c-teal: #0F766E;
+    --c-teal-soft: #E0F3F1;
+    --c-red: #DC2626;
+    --c-red-soft: #FDECEC;
+
+    /*เงาการ์ดแบบใหม่ เหมาะกับพื้นเทา (ทับค่าเดิมในธีม การ์ดทุกใบเปลี่ยนตาม)*/
+    --shadow: 0px 10px 30px rgba(32, 33, 61, 0.06), 0px 1px 3px rgba(32, 33, 61, 0.05);
+    --shadow-hover: 0px 16px 40px rgba(32, 33, 61, 0.12);
+  }
+
+
+
+
+  /*พื้นหลังทั้งหน้า*/
+  body{
+    background-color: var(--page-bg);
+  }
+
+
+
+
+  /*เมนูซ้ายสีเข้ม*/
+  .container,
+  .container-1,
+  .container2,
+  .container3,
+  .container-assessment,
+  .container-mngrewrd{
+    background: linear-gradient(180deg, var(--sidebar-bg-2) 0%, var(--sidebar-bg) 100%);
+    border-right: 0;
+  }
+
+  /*ปุ่มเมนูเป็นแถบมุมโค้ง ไม่มีเส้นคั่น*/
+  .btn-Sidebar-dashboard a,
+  .btn-Sidebar-assessment a,
+  .btn-Sidebar-1 a,
+  .btn-Sidebar a,
+  .btn-Sidebar3 a,
+  .btn-Sidebar-mngrewrd a{
+    color: var(--sidebar-text);
+    border-bottom: 0;
+    border-radius: 8px;
+    padding: 13px 14px;
+    margin-bottom: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /*ไอคอนรูปเดิมเป็นสีเทา/ดำ ทำให้เป็นสีขาวจะได้เห็นบนพื้นเข้ม*/
+  .btn-Sidebar-dashboard a img,
+  .btn-Sidebar-assessment a img,
+  .btn-Sidebar-1 a img,
+  .btn-Sidebar a img,
+  .btn-Sidebar3 a img,
+  .btn-Sidebar-mngrewrd a img{
+    filter: brightness(0) invert(1);
+    opacity: 0.55;
+  }
+
+  .btn-Sidebar-dashboard a:hover,
+  .btn-Sidebar-assessment a:hover,
+  .btn-Sidebar-1 a:hover,
+  .btn-Sidebar a:hover,
+  .btn-Sidebar3 a:hover,
+  .btn-Sidebar-mngrewrd a:hover{
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  /*เมนูที่เปิดอยู่: พื้นชมพูโปร่ง ตัวขาว ขีดสีหลักด้านซ้าย*/
+  .btn-Dashboard-01,
+  .btn-Assessment-assess,
+  .btn-Managewheel4,
+  .btn-Manage_users3,
+  .btn-Manage_Rewards-mngrewrd{
+    background: rgba(255, 0, 67, 0.18) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 13px 14px !important;
+  }
+  .btn-Dashboard-01 img,
+  .btn-Assessment-assess img,
+  .btn-Managewheel4 img,
+  .btn-Manage_users3 img,
+  .btn-Manage_Rewards-mngrewrd img{
+    opacity: 1 !important;
+  }
+  .btn-Dashboard-01::after,
+  .btn-Assessment-assess::after,
+  .btn-Managewheel4::after,
+  .btn-Manage_users3::after,
+  .btn-Manage_Rewards-mngrewrd::after{
+    top: 20%;
+    height: 60%;
+    width: 3px;
+  }
+
+  /*ปุ่มออกจากระบบบนพื้นเข้ม*/
+  .btn-logout-wrapper{
+    border-top: 1px solid var(--sidebar-line);
+  }
+  .btn-logout{
+    color: #FF7096;
+    border-color: rgba(255, 0, 67, 0.55);
+  }
+  .btn-logout:hover{
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #ffffff;
+  }
+  .btn-logout-img{
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+  }
+
+
+
+
+  /*แดชบอร์ด: การ์ดตัวเลข 5 ใบ แต่ละใบมีสีของตัวเอง (เรียงตามลำดับในหน้า)*/
+  .alluser_frames-1 > *:nth-child(5n+1){
+    --accent: var(--c-pink);
+    --accent-soft: var(--c-pink-soft);
+  }
+  .alluser_frames-1 > *:nth-child(5n+2){
+    --accent: var(--c-blue);
+    --accent-soft: var(--c-blue-soft);
+  }
+  .alluser_frames-1 > *:nth-child(5n+3){
+    --accent: var(--c-amber);
+    --accent-soft: var(--c-amber-soft);
+  }
+  .alluser_frames-1 > *:nth-child(5n+4){
+    --accent: var(--c-green);
+    --accent-soft: var(--c-green-soft);
+  }
+  .alluser_frames-1 > *:nth-child(5n+5){
+    --accent: var(--c-purple);
+    --accent-soft: var(--c-purple-soft);
+  }
+
+  /*แถบสีด้านบน + พื้นไล่สีอ่อนๆ ที่มุมขวาล่าง*/
+  .alluser_frames-1 > *{
+    border-top: 4px solid var(--accent, var(--primary));
+    background: linear-gradient(150deg, #ffffff 50%, var(--accent-soft, var(--primary-soft)) 100%);
+  }
+
+  /*ตัวเลขเป็นสีประจำการ์ด*/
+  .alluser_frames-1 .Userfigures,
+  .alluser_frames-1 .Numberframe,
+  .alluser_frames-1 .numberrandom,
+  .alluser_frames-1 .numberaward{
+    color: var(--accent, var(--heading));
+  }
+
+
+
+
+  /*การ์ดตัวเลขที่มีความหมาย: พื้นสีอ่อน ตัวเลขสีเข้มของสีเดียวกัน ไม่มีเส้นขอบ*/
+
+  /*หน้ารายการกิจกรรม: ทั้งหมด / ปิดแล้ว / เปิดอยู่*/
+  .all-activities{
+    background-color: var(--c-blue-soft);
+    border: 0;
+  }
+  .activities-number-assessment{
+    color: var(--c-blue);
+  }
+  .Closed-assessment{
+    background-color: var(--c-red-soft);
+    border: 0;
+  }
+  .Closed-assessment-1{
+    color: var(--c-red);
+  }
+  .Open-assessment{
+    background-color: var(--c-green-soft);
+    border: 0;
+  }
+  .open-assessment-1{
+    color: var(--c-green);
+  }
+  .activities-assessment,
+  .Closed-assessment-2,
+  .open-assessment-2{
+    color: var(--heading);
+  }
+
+  /*หน้ารายละเอียดกิจกรรม: ลงทะเบียนแล้ว / รับสูงสุด / สถานะ / เวลาปิด*/
+  .framenumbermessageregister{
+    background-color: var(--c-blue-soft);
+    border: 0;
+  }
+  .numberregister{
+    color: var(--c-blue);
+  }
+  .framenumbermessagereceiveupto{
+    background-color: var(--c-purple-soft);
+    border: 0;
+  }
+  .numberreceiveupto{
+    color: var(--c-purple);
+  }
+  .framemessagenomessagestatus{
+    background-color: var(--c-teal-soft);
+    border: 0;
+  }
+  .messageno{
+    color: var(--c-teal);
+  }
+  .framenumbertimemessagestimeoff{
+    background-color: var(--c-amber-soft);
+    border: 0;
+  }
+  .numbertime-1{
+    color: var(--c-amber);
+  }
+
+  /*หน้าประวัติการสุ่ม: ทั้งหมด / รับแล้ว / ยังไม่รับ*/
+  .framealllistname{
+    background-color: var(--c-teal-soft);
+    border: 0;
+  }
+  .numberalllistname-1{
+    color: var(--c-teal);
+  }
+  .framereceivedlistname{
+    background-color: var(--c-green-soft);
+    border: 0;
+  }
+  .numberreceivelistname-1{
+    color: var(--c-green);
+  }
+  .framernotacceptingyet{
+    background-color: var(--c-amber-soft);
+    border: 0;
+  }
+  .numbernotacceptingyetlistname-1{
+    color: var(--c-amber);
+  }
+
+  /*หน้าส่งอีเมล: ทั้งหมด / ส่งแล้ว / ส่งไม่สำเร็จ*/
+  .frameallbuttonsenditgmail{
+    background-color: var(--c-teal-soft);
+  }
+  .numberallbuttonsenditgmail{
+    color: var(--c-teal);
+  }
+  .frameallbuttonsenditgmail-1{
+    background-color: var(--c-green-soft);
+  }
+  .numbersentbuttonsenditgmail{
+    color: var(--c-green);
+  }
+  .frameallbuttonsenditgmail-2{
+    background-color: var(--c-red-soft);
+  }
+  .numberdeliveryfailedbuttonsenditgmail{
+    color: var(--c-red);
+  }
+
+  /*หน้าโปรไฟล์: สุ่มทั้งหมด / จำนวนรางวัลที่ได้ (ไอคอนสีเหลือง ใช้พื้นเหลืองอ่อนให้เข้ากัน)*/
+  .framerandom_all,
+  .frameReward_Box{
+    background-color: var(--c-amber-soft);
+    border: 0;
+  }
+
+
+
+
+  /*หัวตาราง: พื้นเทาอ่อน ตัวเทาเข้ม แยกจากแถวข้อมูล*/
+  .topic-rewardlist,
+  .usr-topic,
+  .topic-spn-list{
+    background-color: var(--head-bg);
+    color: #555a6e;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /*เอาเมาส์ชี้แถวในตาราง แถวนั้นจะเป็นสีอ่อนให้รู้ว่าอยู่แถวไหน*/
+  .reward-1,
+  .user-1,
+  .reward-wheel-1{
+    transition: background-color 0.15s ease;
+  }
+  .reward-1:hover,
+  .user-1:hover,
+  .reward-wheel-1:hover{
+    background-color: var(--row-hover);
+  }
+
+  /*หัวกล่องวงล้อ/แถบสุ่ม ใช้พื้นเทาอ่อนเหมือนหัวตาราง*/
+  .framewheelname-quantityname,
+  .framemessagerandomreward,
+  .background-respondent-header,
+  .text-wheel,
+  .spn-wheel-topic,
+  .btn-manage-wheel{
+    background-color: var(--head-bg);
+  }
+
+  /*กล่องข้อมูลชั้นในของหน้ารายละเอียดกิจกรรม (กรอบหัวกิจกรรม) ให้มีพื้นอ่อนแยกจากการ์ด*/
+  .frameactivitytime-1{
+    background-color: var(--head-bg);
+    border: 0;
+  }
+
+
+
+  /* =====================================================================
+     เงาแบบโค้ดเดิม (box-shadow: 0px 8px 14px rgba(0,0,0,0.22))
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (ใต้ theme-colors)
+     อยากให้เงาอ่อนลง/เข้มขึ้น แก้ค่าใน :root ข้างล่างที่เดียว
+     ===================================================================== */
+
+
+  :root{
+    /*เงาเดียวกับโค้ดเดิม ใช้กับการ์ด กล่องชั้นใน ปุ่ม ช่องค้นหา*/
+    --shadow-old: 0px 8px 14px rgba(0, 0, 0, 0.22);
+    /*เงาเล็กของปุ่มเปิด/ปิด (ค่าเดิมของโค้ดคุณ)*/
+    --shadow-old-sm: 0px 4px 10px rgba(0, 0, 0, 0.22);
+
+    /*ทับเงาการ์ดของธีม การ์ดชั้นนอกกับช่องค้นหาทุกอันจะเปลี่ยนตาม*/
+    --shadow: var(--shadow-old);
+    --shadow-hover: 0px 12px 20px rgba(0, 0, 0, 0.26);
+  }
+
+
+
+
+  /*แถบด้านบน*/
+  .btn-user-wrapper,
+  .btn-user-wrapper-1{
+    box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.22);
+  }
+
+
+
+
+  /*กล่องชั้นในที่อยู่ในการ์ด (ธีมเดิมใช้แค่เส้นขอบ เพิ่มเงากลับมา)*/
+  .framesmallnameofwheel,
+  .framesmallrandomreward,
+  .frame-activity-assessment,
+  .all-activities,
+  .Closed-assessment,
+  .Open-assessment,
+  .frameinformation-assessment,
+  .frameactivitytime-1,
+  .framenumbermessageregister,
+  .framenumbermessagereceiveupto,
+  .framemessagenomessagestatus,
+  .framenumbertimemessagestimeoff,
+  .frameQRcoderegister-1,
+  .frameQRcoderegister-2,
+  .frameassessmenturl,
+  .framelistnamesregister,
+  .framealllistname,
+  .framereceivedlistname,
+  .framernotacceptingyet,
+  .framerlistnamerecipientreward,
+  .framerandom_all,
+  .frameReward_Box,
+  .frameblackactivity,
+  .wheel-reward-box,
+  .respondent-box,
+  .reel-section,
+  .framechooserewardall{
+    box-shadow: var(--shadow-old);
+  }
+
+  /*หัวกล่องวงล้อ/แถบสุ่ม (โค้ดเดิมมีเงาใต้แถบหัว)*/
+  .framewheelname-quantityname,
+  .framemessagerandomreward,
+  .background-respondent-header,
+  .text-wheel{
+    box-shadow: var(--shadow-old);
+  }
+
+
+
+
+  /*ปุ่มทุกแบบ (ปุ่มที่กดไม่ได้ยังไม่มีเงาเหมือนเดิม)*/
+  .save-data-1,
+  .save-password-1,
+  .btn-build-activityurgent,
+  .btn-randomreward,
+  .btn-startRandomreward,
+  .offpopupluckywinner,
+  .btn-senditgmail-1,
+  .btn-submitpopuplistnameawardrecipient,
+  .btn-sendallemails1,
+  .btn-Edit-information-1,
+  .btn-Edit-information-profile,
+  .Password-Change-Button,
+  .btn-change-password,
+  .btn-assign-assessment,
+  .btn-confirm-evaluation,
+  .enter-random,
+  .submitbuildandQR,
+  .btnconfirmoffRegister,
+  .offRegister,
+  .btn-enlargeQRcode,
+  .linkassessmenturl-1,
+  .btn-saveassessmenturl,
+  .spin-assessment-btn,
+  .confirm-btn,
+  .addreward,
+  .add-usr-btn,
+  .addreward-btn1,
+  .addre-btn1,
+  .addusr-btn1,
+  .submit-btn-edtusr,
+  .submtedt-btn,
+  .submit-wheel-reward,
+  .spin-result-box .congrat-btn,
+  .btn-cancel-1,
+  .btn-cancel-password,
+  .btn-canceldeletion,
+  .canceloffRegister,
+  .btn-Resend,
+  .btn-Resend1,
+  .btn-resendallthatfailed,
+  .btn-cancel-evaluation,
+  .showmore,
+  .showmore-1,
+  .Change_image,
+  .btn-recordQrcode,
+  .edit-activity,
+  .view-details,
+  .view-history,
+  .cancle-btn,
+  .cancle-btn-addusr,
+  .cancle-btn-editusr,
+  .cancle-btn-editreward,
+  .not-confirm-btn,
+  .cancle-wheel-btn,
+  .claerall-selected,
+  .deleteRegister,
+  .btn-clearassessmenturl,
+  .btn-confirmdeletion,
+  .btn-close-Edit,
+  .btn-close-change,
+  .btn-offpopuplistnameawardrecipient,
+  .btn-close-1,
+  .assessment-open-1,
+  .btn-logout{
+    box-shadow: var(--shadow-old);
+  }
+
+  /*ปุ่มกรอง ทั้งหมด/ปิดแล้ว/เปิดอยู่ และปุ่ม วัน/สัปดาห์/เดือน*/
+  .frameall-assessment,
+  .frameoff-assessment,
+  .farmeon-assessment,
+  .ButtonDate{
+    box-shadow: var(--shadow-old);
+  }
+
+  /*ปุ่มเปิด/ปิดสุ่ม*/
+  .on-offlistnamesRandom-2,
+  .toggle-slider{
+    box-shadow: var(--shadow-old-sm);
+  }
+
+
+
+
+  /*ช่องค้นหา (ที่ไม่ได้ใช้ตัวแปรของธีม)*/
+  .search-registration,
+  .search-box,
+  .usr-searchbox,
+  .search-spn-input,
+  .frame-search-activity,
+  .search-activity-1,
+  .framesearchsenditgmail{
+    box-shadow: var(--shadow-old);
+  }
+
+
+
+  /* =====================================================================
+     พื้นหลังให้แยกจากเนื้อหา + มุมโค้งมากขึ้น
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (ใต้ theme-shadow)
+     ===================================================================== */
+
+
+  :root{
+    /*พื้นหลังหน้าเข้มขึ้นจากเดิม การ์ดสีขาวจะแยกออกมาชัด*/
+    --page-bg: #E6E9F2;
+
+    /*ความโค้งของมุม: การ์ด / ปุ่มและช่องค้นหา / ป้ายเล็กๆ (999px = โค้งสุดเป็นแคปซูล)*/
+    --radius: 20px;
+    --radius-btn: 14px;
+    --radius-badge: 999px;
+  }
+
+
+
+
+  /*พื้นหลังทั้งหน้า: สีเทาอมฟ้า มีแสงสีชมพูจางๆ มุมขวาบน กับสีฟ้าจางๆ ด้านล่าง*/
+  body{
+    background-color: var(--page-bg);
+    background-image:
+      radial-gradient(circle at 100% 0%, rgba(255, 0, 67, 0.10) 0%, transparent 38%),
+      radial-gradient(circle at 40% 100%, rgba(59, 108, 246, 0.10) 0%, transparent 45%);
+    background-attachment: fixed;
+  }
+
+
+
+
+  /*ปุ่มเมนูซ้ายโค้งขึ้น*/
+  .btn-Sidebar-dashboard a,
+  .btn-Sidebar-assessment a,
+  .btn-Sidebar-1 a,
+  .btn-Sidebar a,
+  .btn-Sidebar3 a,
+  .btn-Sidebar-mngrewrd a{
+    border-radius: 12px;
+  }
+  .btn-Dashboard-01,
+  .btn-Assessment-assess,
+  .btn-Managewheel4,
+  .btn-Manage_users3,
+  .btn-Manage_Rewards-mngrewrd{
+    border-radius: 12px !important;
+  }
+
+  /*กล่องปุ่ม วัน/สัปดาห์/เดือน เป็นแคปซูลทั้งกล่อง*/
+  .ButtonDate{
+    border-radius: 999px;
+  }
+
+  /*เลขลำดับหน้ารายชื่อโค้งขึ้น*/
+  .framenumberluckywinner,
+  .framenumberpeople,
+  .circlenumbername,
+  .framecirclenumberlistnamerecipientreward,
+  .winner-badge,
+  .frameimgprizesreceived{
+    border-radius: 12px;
+  }
+
+  /*ช่องติ๊กยังเป็นสี่เหลี่ยมมุมมน (ไม่ให้กลายเป็นวงกลมตามป้าย)*/
+  .btn-checkbox,
+  .limit-toggle1{
+    border-radius: 6px;
+  }
+  /*ตัวเลือกผู้จัดการเป็นปุ่มวงกลม (radio)*/
+  .checkboxgivemanager{
+    border-radius: 50%;
+  }
+
+  /*แถบสุ่ม CS:GO โค้งตามกล่อง*/
+  .roulette{
+    border-radius: 16px;
+  }
+  .roulette-card{
+    border-radius: 14px;
+  }
+
+
+  /* =====================================================================
+     แก้ตามรูปที่ส่งมา
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (ใต้ theme-round)
+     ===================================================================== */
+
+
+
+
+  /* ---------- รูปที่ 1: แท็บแบบประเมิน ขาวเยอะไป ---------- */
+
+  /*เอากรอบขาวใหญ่ที่ครอบทั้งหมดออก ให้การ์ดแบบประเมินวางบนพื้นเทาเลย จะได้ไม่ขาวซ้อนขาว*/
+  .frame-grey-1{
+    background: transparent;
+    box-shadow: none;
+    padding: 10px 0px 30px 0px;
+  }
+
+  /*สีตามสถานะของแบบประเมิน: เปิดอยู่ = เขียว, ปิดแล้ว = แดง*/
+  .sectionassessment[data-status="open"]{
+    --status-color: var(--c-green);
+    --status-soft: var(--c-green-soft);
+  }
+  .sectionassessment[data-status="closed"]{
+    --status-color: var(--c-red);
+    --status-soft: var(--c-red-soft);
+  }
+
+  /*การ์ดแบบประเมิน: พื้นขาว มีแถบสีสถานะด้านซ้าย*/
+  .frameinformation-assessment{
+    background-color: #ffffff;
+    border: 0;
+    border-left: 6px solid var(--status-color, var(--primary));
+    margin-bottom: 10px;
+  }
+
+  /*ป้ายสถานะใช้สีเดียวกับแถบซ้าย*/
+  .frame-status{
+    background-color: var(--status-soft, var(--primary-soft));
+  }
+  .point-status{
+    background-color: var(--status-color, var(--primary));
+  }
+  .message-status{
+    color: var(--status-color, var(--primary));
+  }
+
+  /*ปุ่ม "คลิกเพื่อสร้างวงล้อ" ให้ดูกดได้ (เดิมเป็นสีเทาเหมือนปุ่มที่กดไม่ได้)*/
+  .assessment-open-1{
+    background-color: var(--primary-soft);
+    transition: background-color 0.2s ease;
+  }
+  .message-assessment-open{
+    color: var(--primary);
+  }
+  .assessment-open-1:hover{
+    background-color: var(--primary);
+  }
+  .assessment-open-1:hover .message-assessment-open{
+    color: #ffffff;
+  }
+
+
+
+
+  /* ---------- รูปที่ 2: หน้าจัดการวงล้อสุ่ม ปุ่มล้างการเลือกตกขอบ ---------- */
+
+  /*เดิมใช้ margin-left: 800px ดันไปขวา พอจอแคบลงเลยหลุดกรอบ เปลี่ยนเป็นชิดขวาอัตโนมัติ*/
+  .claerall-selected{
+    width: fit-content;
+    height: 46px;
+    margin: 20px 20px 24px auto;
+    padding: 0px 24px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /*หัวตารางเลือกของรางวัลเดิมเยื้องไปทางขวาจนเกินกรอบ ให้เว้นเท่ากันสองข้าง*/
+  .topic-spn-list{
+    margin: 0px 10px;
+  }
+
+
+
+
+  /* ---------- รูปที่ 3: หน้าเพิ่ม/แก้ไขผู้ใช้และรางวัล ปุ่มตกขอบล่าง ---------- */
+
+  /*เดิมกล่องสูงตายตัว (650px/500px) พอช่องกรอกสูงขึ้นปุ่มเลยล้นออกมา ให้สูงตามเนื้อหาแทน*/
+  .add-box-main,
+  .edit-box-main,
+  .main-edit-box,
+  .edit-re-main{
+    height: auto;
+    padding: 40px 40px 48px 40px;
+  }
+
+  /*ปุ่มบันทึกกับยกเลิกให้ขนาดและตัวหนังสือเท่ากัน*/
+  .addre-btn1,
+  .addreward-btn1,
+  .addusr-btn1,
+  .submit-btn-edtusr,
+  .submtedt-btn,
+  .cancle-btn,
+  .cancle-btn-addusr,
+  .cancle-btn-editusr,
+  .cancle-btn-editreward{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 52px;
+    padding: 0px;
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+
+
+  /* ---------- รูปที่ 4: popup แก้ไขข้อมูล/เปลี่ยนรหัสผ่าน ปุ่มยาวขึ้นแบบเดิม ---------- */
+
+  /*ปุ่มยืนยันกับยกเลิกยืดเต็มความกว้าง popup แบ่งครึ่งเท่ากัน*/
+  .btn_editinformation,
+  .btn_changepassword{
+    gap: 16px;
+  }
+  .btn-Edit-information-profile,
+  .btn-close-Edit,
+  .btn-change-password,
+  .btn-close-change{
+    flex: 1 1 0;
+  }
+  .btn-Edit-information-profile-1,
+  .btn-close-Edit-1,
+  .btn-change-password-1,
+  .btn-close-change-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 0px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+
+  /* =====================================================================
+     ปุ่มสุ่มรางวัล 2 สี (ชมพูไล่ไปม่วง) ใช้ทั้งหน้าสุ่มรางวัลของกิจกรรม และหน้าสุ่มของแบบประเมิน
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (ใต้ theme-fix)
+     อยากเปลี่ยนคู่สี แก้แค่ --spin-from กับ --spin-to ข้างล่าง
+     (สีน้ำเงิน-ม่วงแบบปุ่มเดิมของคุณ: --spin-from: #2F4380; --spin-to: #5F3F83;)
+     ===================================================================== */
+
+
+  :root{
+    --spin-from: #FF0043;
+    --spin-to: #8B3DFF;
+    --spin-glow: rgba(139, 61, 255, 0.35);
+  }
+
+
+  /*ปุ่มสุ่มทั้ง 2 หน้า + ปุ่มเริ่มสุ่มรางวัลในหน้ารายละเอียดกิจกรรม (ให้ปุ่มสุ่มทั้งเว็บเป็นสีเดียวกัน)*/
+  .btn-startRandomreward,
+  .spin-assessment-btn,
+  .btn-randomreward{
+    background-color: var(--spin-from);
+    background-image: linear-gradient(90deg, var(--spin-from) 0%, var(--spin-to) 50%, var(--spin-from) 100%);
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    border: 0;
+    box-shadow: 0px 10px 24px var(--spin-glow);
+    transition: background-position 0.5s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  /*ตัวหนังสือกับไอคอนในปุ่มเป็นสีขาว*/
+  .btn-startRandomreward *,
+  .spin-assessment-btn,
+  .spin-assessment-btn *,
+  .btn-randomreward *{
+    color: #ffffff;
+  }
+
+  /*เอาเมาส์ชี้: สีไหลจากชมพูไปม่วง ปุ่มลอยขึ้นนิดนึง เงาเรืองแสงชัดขึ้น*/
+  .btn-startRandomreward:not(:disabled):hover,
+  .spin-assessment-btn:not(:disabled):hover,
+  .btn-randomreward:not(:disabled):hover{
+    background-color: var(--spin-to);
+    background-image: linear-gradient(90deg, var(--spin-from) 0%, var(--spin-to) 50%, var(--spin-from) 100%);
+    background-position: 100% 50%;
+    box-shadow: 0px 14px 30px var(--spin-glow);
+    transform: translateY(-2px);
+  }
+
+  /*ตอนกด ปุ่มยุบลงกลับที่เดิม*/
+  .btn-startRandomreward:not(:disabled):active,
+  .spin-assessment-btn:not(:disabled):active,
+  .btn-randomreward:not(:disabled):active{
+    transform: translateY(0px);
+    box-shadow: 0px 6px 16px var(--spin-glow);
+  }
+
+  /*ตอนกดไม่ได้ (กำลังหมุนอยู่ หรือยังไม่หมดเวลาลงทะเบียน): ยังเป็น 2 สีแต่จางลง ไม่มีเงา*/
+  .btn-startRandomreward:disabled,
+  .spin-assessment-btn:disabled,
+  .btn-randomreward:disabled{
+    background-color: var(--spin-from);
+    background-image: linear-gradient(90deg, var(--spin-from) 0%, var(--spin-to) 50%, var(--spin-from) 100%);
+    opacity: 0.5;
+    filter: saturate(0.6);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  /*ปิดการเคลื่อนไหวสำหรับคนที่ตั้งค่าเครื่องให้ลดแอนิเมชัน*/
+  @media (prefers-reduced-motion: reduce){
+    .btn-startRandomreward,
+    .spin-assessment-btn,
+    .btn-randomreward{
+      transition: none;
+    }
+    .btn-startRandomreward:not(:disabled):hover,
+    .spin-assessment-btn:not(:disabled):hover,
+    .btn-randomreward:not(:disabled):hover{
+      transform: none;
+    }
+  }
+
+  /* =====================================================================
+     ช่องกรอกข้อมูลทุกช่องเป็นแบบกรอบ (แทนแบบเส้นใต้)
+     วิธีใช้: วางต่อท้ายสุดของ style.css อีกก้อน (ใต้ theme-spin-button)
+     ===================================================================== */
+
+
+  :root{
+    --input-border: #D7DAE3;         /*สีกรอบปกติ*/
+    --input-border-hover: #BFC3D1;   /*สีกรอบตอนเอาเมาส์ชี้*/
+    --input-ring: rgba(255, 0, 67, 0.12); /*แสงรอบกรอบตอนกำลังพิมพ์*/
+  }
+
+
+  /*ช่องกรอกทั้งหมด: พื้นขาว กรอบเทา มุมโค้ง*/
+  .input-username-1,
+  .input-FirstName-LastName-1,
+  .input-phonenumber-1,
+  .input-passwordcurrent-1,
+  .input-password-lasttime-1,
+  .input-username,
+  .input-FirstName-LastName,
+  .input-email-user,
+  .input-phonenumber,
+  .input-Current_password,
+  .input-Last_updated,
+  .framepimactivity-nam,
+  .framedatemonthyear,
+  .framenumberquantity,
+  .evaluation-formid,
+  .name-reward1,
+  .category_list_01,
+  .num-reward1,
+  .rate-reward1,
+  .name-usr-in,
+  .last-name-in,
+  .emaill-usr-in,
+  .role_list_01,
+  .passwd-addusr-in,
+  .last-name-in-editusr,
+  .namere-edt-in,
+  .catere-edt-in,
+  .ratere-edt-in,
+  .qntyre-edt-in,
+  .num-user-acc,
+  .name-user-acc,
+  .role-user-acc,
+  .inputassessmenturl{
+    background-color: #ffffff;
+    border: 1.5px solid var(--input-border);
+    border-radius: var(--radius-btn);
+    min-height: 48px;
+    padding: 10px 16px;
+    font-size: 15px;
+    color: var(--text);
+    box-shadow: none;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /*เอาเมาส์ชี้ กรอบเข้มขึ้นนิดนึง*/
+  .input-username-1:hover,
+  .input-FirstName-LastName-1:hover,
+  .input-phonenumber-1:hover,
+  .input-passwordcurrent-1:hover,
+  .input-password-lasttime-1:hover,
+  .input-username:hover,
+  .input-FirstName-LastName:hover,
+  .input-email-user:hover,
+  .input-phonenumber:hover,
+  .input-Current_password:hover,
+  .input-Last_updated:hover,
+  .framepimactivity-nam:hover,
+  .framedatemonthyear:hover,
+  .framenumberquantity:hover,
+  .evaluation-formid:hover,
+  .name-reward1:hover,
+  .category_list_01:hover,
+  .num-reward1:hover,
+  .rate-reward1:hover,
+  .name-usr-in:hover,
+  .last-name-in:hover,
+  .emaill-usr-in:hover,
+  .role_list_01:hover,
+  .passwd-addusr-in:hover,
+  .last-name-in-editusr:hover,
+  .namere-edt-in:hover,
+  .catere-edt-in:hover,
+  .ratere-edt-in:hover,
+  .qntyre-edt-in:hover,
+  .num-user-acc:hover,
+  .name-user-acc:hover,
+  .role-user-acc:hover,
+  .inputassessmenturl:hover{
+    border-color: var(--input-border-hover);
+  }
+
+  /*กำลังพิมพ์: กรอบเป็นสีหลัก มีแสงจางๆ รอบกรอบ*/
+  .input-username-1:focus,
+  .input-FirstName-LastName-1:focus,
+  .input-phonenumber-1:focus,
+  .input-passwordcurrent-1:focus,
+  .input-password-lasttime-1:focus,
+  .input-username:focus,
+  .input-FirstName-LastName:focus,
+  .input-email-user:focus,
+  .input-phonenumber:focus,
+  .input-Current_password:focus,
+  .input-Last_updated:focus,
+  .framepimactivity-nam:focus,
+  .framedatemonthyear:focus,
+  .framenumberquantity:focus,
+  .evaluation-formid:focus,
+  .name-reward1:focus,
+  .category_list_01:focus,
+  .num-reward1:focus,
+  .rate-reward1:focus,
+  .name-usr-in:focus,
+  .last-name-in:focus,
+  .emaill-usr-in:focus,
+  .role_list_01:focus,
+  .passwd-addusr-in:focus,
+  .last-name-in-editusr:focus,
+  .namere-edt-in:focus,
+  .catere-edt-in:focus,
+  .ratere-edt-in:focus,
+  .qntyre-edt-in:focus,
+  .num-user-acc:focus,
+  .name-user-acc:focus,
+  .role-user-acc:focus,
+  .inputassessmenturl:focus{
+    border: 1.5px solid var(--primary);
+    box-shadow: 0px 0px 0px 4px var(--input-ring);
+  }
+
+
+  /*ช่องรหัสผ่าน: เว้นด้านขวาให้ปุ่มรูปตา ตัวหนังสือจะได้ไม่วิ่งไปทับ*/
+  .input-passwordcurrent-1{
+    padding-right: 56px;
+  }
+
+
+  /*ช่องที่แก้ไม่ได้ (อ่านอย่างเดียว/ปิดอยู่): พื้นเทาอ่อน ให้รู้ว่าพิมพ์ไม่ได้*/
+  .input-password-lasttime-1[readonly],
+  .input-username[readonly],
+  .input-FirstName-LastName[readonly],
+  .input-email-user[readonly],
+  .input-phonenumber[readonly],
+  .input-Current_password[readonly],
+  .input-Last_updated[readonly],
+  .input-password-lasttime-1:disabled,
+  .input-username:disabled,
+  .input-FirstName-LastName:disabled,
+  .input-email-user:disabled,
+  .input-phonenumber:disabled,
+  .input-Current_password:disabled,
+  .input-Last_updated:disabled,
+  #frame_number_quantity:disabled{
+    background-color: var(--head-bg);
+    border-color: var(--input-border);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+
+  /*เว้นระยะระหว่างหัวข้อกับกรอบนิดนึง จะได้ไม่ติดกันเกินไป*/
+  .type-username-1,
+  .FirstNameLastName-1,
+  .typeemail-user-1,
+  .typephone_number-1,
+  .type-passwordcurrent-1,
+  .type-password-lasttime-1,
+  .messageactivity-name,
+  .dateactivity,
+  .closingtime-Register,
+  .messagechoosereward,
+  .messagequantity,
+  .message-evaluation-1{
+    margin-bottom: 8px;
+  }

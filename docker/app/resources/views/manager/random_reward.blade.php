@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>สุ่มของรางวัล</title>
         <link rel="stylesheet" href="{{ asset('manager/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('manager/css/theme-manager.css') }}">
         <link rel="icon" href="{{ asset('admin/img/Logo.png') }}">
     </head>
     <body>
@@ -69,7 +70,7 @@
                         <img src="{{ asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png') }}" alt="รูปของชื่อวงล้อสุ่มรายชื่อ" class="img-framewheelname-quantityname">
                         <p class="messageframewheelname">วงล้อสุ่มรายชื่อ</p>
                         <div class="messagequantityname-1">
-                            <span class="messagequantityname">จำนวนเริ่มต้นรายชื่อ {{ $event->registrations->count() }} วงล้อ</span>
+                            <span class="messagequantityname">จำนวนรายชื่อคงเหลือ {{ count($nameData) }} คน</span>
                         </div>
                     </div>
 
@@ -81,10 +82,7 @@
                         <p class="messagebtn-on-offlistnamesRandom">ปิด/เปิดสุ่มรายชื่อ</p>
                     </div>
 
-                    <div class="namecanvas">
-                        <div class="namecanvas-1"></div>
-                        <canvas id="name_canvas" width="600" height="600"></canvas>
-                    </div>
+                    <div class="roulette" id="name_canvas"></div>
                 </div>
 
                 <!--วงล้อสุ่มของรางวัล-->
@@ -93,7 +91,7 @@
                         <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward">
                         <p class="messagerandomreward">วงล้อสุ่มของรางวัล</p>
                         <div class="messagequantityrandomreward-1">
-                            <span class="messagequantityrandomreward">จำนวนเริ่มต้นรางวัล {{ $event->wheel->rewards->count() }} วงล้อ</span>
+                            <span class="messagequantityrandomreward">จำนวนรางวัลคงเหลือ {{ $rewardData->sum('quantity') }} ชิ้น</span>
                         </div>
                     </div>
 
@@ -105,10 +103,7 @@
                         <p class="messagebtn-no-offrandomreward">ปิด/เปิดสุ่มของรางวัล</p>
                     </div>
 
-                    <div class="rewardcanvas">
-                        <div class="rewardcanvas-1"></div>
-                        <canvas id="reward_canvas" width="600" height="600"></canvas>
-                    </div>
+                    <div class="roulette" id="reward_canvas"></div>
                 </div>
 
                 <div class="btnstartRandomreward">

@@ -140,7 +140,7 @@
 /* เมนูที่กำลังใช้งานอยู่  */
 .btn-managereward1 {
   background-color: #FEFCBF !important;
-  color: #0f0f0f !important;          
+  color: #ffffff !important;          
   font-weight: bold !important;
   box-shadow: none !important;
   position: relative;
@@ -288,3 +288,5 @@
   border-radius: 10px;
   color: #FFFFFF;
 }
+
+

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('manager/css/managespin.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/css/theme-manager.css') }}">
     <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
     <title>จัดการวงล้อ</title>
 </head>

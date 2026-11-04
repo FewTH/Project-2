@@ -1751,7 +1751,7 @@ body.no-scroll {
  /*ชื่อปุ่มแบบประเมิน/กิจกรรม*/
   .btn-Assessment-assess {
     background-color: #FEFCBF !important;
-    color: #0f0f0f !important;          
+    color: #ffffff !important;          
     font-weight: bold !important;
     box-shadow: none !important;
     position: relative;
@@ -5427,3 +5427,5 @@ body.no-scroll {
     position: relative;
     z-index: 1;
   }
+
+  

@@ -70,7 +70,7 @@
                         <img src="{{ asset('admin/img/รูปของชื่อวงล้อสุ่มรายชื่อ.png') }}" alt="รูปของชื่อวงล้อสุ่มรายชื่อ" class="img-framewheelname-quantityname">
                         <p class="messageframewheelname">วงล้อสุ่มรายชื่อ</p>
                         <div class="messagequantityname-1">
-                            <span class="messagequantityname">จำนวนเริ่มต้นรายชื่อ {{ $event->registrations->count() }} วงล้อ</span>
+                            <span class="messagequantityname">จำนวนรายชื่อคงเหลือ {{ count($nameData) }} คน</span>
                         </div>
                     </div>
 
@@ -92,7 +92,7 @@
                         <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward">
                         <p class="messagerandomreward">วงล้อสุ่มของรางวัล</p>
                         <div class="messagequantityrandomreward-1">
-                            <span class="messagequantityrandomreward">จำนวนเริ่มต้นรางวัล {{ $event->wheel->rewards->count() }} วงล้อ</span>
+                            <span class="messagequantityrandomreward">จำนวนรางวัลคงเหลือ {{ $rewardData->sum('quantity') }} ชิ้น</span>
                         </div>
                     </div>
 

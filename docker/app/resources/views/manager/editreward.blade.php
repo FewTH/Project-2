@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('manager/css/editreward.css')}}">
+    <link rel="stylesheet" href="{{ asset('manager/css/theme-manager.css') }}">
     <title>แก้ไขรางวัล</title>
 </head>
 <body>

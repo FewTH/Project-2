@@ -1,140 +1,190 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // อ่านข้อมูลจากตัวแปรที่มีใน spinwheel.blade
+    //  ข้อมูลที่ส่งมาจาก spinwheel.blade 
     let rewardData = window.rewardWheelData || [];
-    const canvas = document.getElementById('wheelrewardCanvas');
-    // กำหนดรูปแบบให้เป็นแบบวงกลม
-    const ctx = canvas.getContext('2d');
-
-    // ประกาศตัวแปรสำหรับรายชื่อผู้ตอบแบบประเมิน
     let nameData = window.nameWheelData || [];
     const assessmentId = window.assessmentId;
-    const nameCanvas = document.getElementById('wheelNameCanvas');
-    // กำหนดรูปแบบให้เป็นแบบวงกลม
-    const nameCtx = nameCanvas.getContext('2d');
 
     const colors = ['#6c5ce7', '#00b894', '#fdcb6e', '#e17055', '#0984e3', '#d63031', '#e84393', '#00cec9'];
 
+    //  ตั้งค่าแถบสุ่ม 
+    const IDLE_CARD_COUNT = 24;   // จำนวนการ์ดที่โชว์ตอนยังไม่กดสุ่ม
+    const FILLER_COUNT = 50;      // จำนวนการ์ดที่วิ่งผ่านก่อนถึงผู้ชนะ (ยิ่งมากยิ่งวิ่งไกล)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const NAME_SPIN_MS = reduceMotion ? 1200 : 5000;
+    const REWARD_SPIN_MS = reduceMotion ? 1200 : 6000; // ให้รางวัลหยุดทีหลังรายชื่อนิดนึง จะได้ลุ้น
 
-    // สร้างตัวแแปรไว้เก็บเสี้ยวของวงล้อเพื่อใช้คำนวนตอนหมุน
-    let rewardWedges = [];
-    let nameWedges = [];
-    let rewardRotation = 0;
-    let nameRotation = 0;
+    // ไอคอนบนการ์ด (เป็นข้อความคงที่ ใช้ innerHTML ได้ปลอดภัย)
+    const ICON_PERSON = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>';
+    const ICON_GIFT = '<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13M12 8S10.5 3 7.5 4.5 9 8 12 8zM12 8s1.5-5 4.5-3.5S15 8 12 8z"/></svg>';
 
-    //สร้างวงล้อรางวัล
-    function drawWheel() {
-        rewardWedges = [];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // ถ้าไม่มีรายการรางวัลในวงล้อเลยจะให้เป็นสีเทา
-        if (rewardData.length === 0) {
-            ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2 - 10, 0, 2 * Math.PI);
-            ctx.fillStyle = '#c1bdbd';
-            ctx.fill();
-            return;
-        }
+    // สีของรางวัลแต่ละอันผูกกับ id ไว้ตั้งแต่โหลดหน้า รางวัลเดิมจะได้สีเดิมตลอดแม้บางรางวัลหมดไปแล้ว
+    const rewardColorMap = {};
+    rewardData.forEach((r, i) => { rewardColorMap[r.id] = colors[i % colors.length]; });
 
-        const total = rewardData.reduce((sum, r) => sum + r.weight, 0);
-        const centerX = canvas.width / 2;
-        const centerY = canvas.height / 2;
-        const radius = canvas.width / 2 - 10;
-        let startAngle = 0;
-
-        rewardData.forEach((reward, index) => {
-            const sliceAngle = (reward.weight / total) * 2 * Math.PI;
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, centerY);
-            ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-            ctx.closePath();
-            ctx.fillStyle = colors[index % colors.length];
-            ctx.fill();
-
-            const midAngle = startAngle + sliceAngle / 2;
-            const textX = centerX + Math.cos(midAngle) * (radius * 0.65);
-            const textY = centerY + Math.sin(midAngle) * (radius * 0.65);
-
-            ctx.save();
-            ctx.translate(textX, textY);
-            ctx.fillStyle = '#fff';
-            ctx.font = '14px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`${reward.label} (${reward.quantity})`, 0, 0);
-            ctx.restore();
-
-            // เก็บค่าเสี้ยววงล้อ
-            rewardWedges.push({id: reward.id, midAngle: midAngle});
-
-            startAngle += sliceAngle;
-        });
-        // วงกลมขาวตรงกลางวงล้อ
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius * 0.22,0,2*Math.PI);
-        ctx.fillStyle = '#ffffff';
-        ctx.fill();
+    function nameColor(id) {
+        const text = String(id);
+        let hash = 0;
+        for (let i = 0; i < text.length; i++) hash = (hash * 31 + text.charCodeAt(i)) | 0;
+        return colors[Math.abs(hash) % colors.length];
     }
 
-    //สร้างวงล้อรายชื่อ
-    function drawNameWheel() {
-        nameCtx.clearRect(0, 0, nameCanvas.width, nameCanvas.height);
-        nameWedges=[];
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text ?? '';
+        return div.innerHTML;
+    }
 
-        // ถ้าไม่มีรายการรางวัลในวงล้อเลยจะให้เป็นสีเทา
-        if (nameData.length === 0) {
-            nameCtx.beginPath();
-            nameCtx.arc(nameCanvas.width / 2, nameCanvas.height / 2, nameCanvas.width / 2 - 10, 0, 2 * Math.PI);
-            nameCtx.fillStyle = '#c1bdbd';
-            nameCtx.fill();
-            return;
+    //  คลาสแถบสุ่มแนวนอน ใช้ร่วมกันทั้งแถบรายชื่อและแถบรางวัล 
+    class Reel {
+        constructor(viewport, renderCard) {
+            this.viewport = viewport;
+            this.strip = viewport.querySelector('.reel-strip');
+            this.renderCard = renderCard;
+            this.items = [];
+            this.offset = 0;
+            this.winnerIndex = null;
         }
 
-        const total = nameData.length; //ที่เป็นแบบนี้เพราะทุกคนมีน้ำหนักเท่ากันไม่เหมือนของรางวัล
-        const centerX = nameCanvas.width / 2;
-        const centerY = nameCanvas.height / 2;
-        const radius = nameCanvas.width / 2 - 10;
-        let startAngle = 0;
+        // ระยะจากการ์ดใบหนึ่งไปอีกใบ (กว้างการ์ด + ช่องว่าง) วัดจากหน้าจอจริง ไม่ต้องตั้งค่าให้ตรงกับ CSS
+        step() {
+            const cards = this.strip.children;
+            if (cards.length >= 2) return cards[1].offsetLeft - cards[0].offsetLeft;
+            return cards.length ? cards[0].offsetWidth : 0;
+        }
 
-        nameData.forEach((person, index) => {
-            const sliceAngle = (1 / total) * 2 * Math.PI;
+        render(items) {
+            this.strip.replaceChildren(...items.map(item => this.renderCard(item)));
+            this.items = items;
+        }
 
-            nameCtx.beginPath();
-            nameCtx.moveTo(centerX, centerY);
-            nameCtx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
-            nameCtx.closePath();
-            nameCtx.fillStyle = colors[index % colors.length];
-            nameCtx.fill();
+        moveTo(offset, durationMs = 0) {
+            this.strip.style.transition = durationMs
+                ? `transform ${durationMs}ms cubic-bezier(0.08, 0.7, 0.12, 1)`
+                : 'none';
+            this.strip.style.transform = `translateX(${-offset}px)`;
+            this.offset = offset;
+        }
 
-            const midAngle = startAngle + sliceAngle / 2;
-            const textX = centerX + Math.cos(midAngle) * (radius * 0.65);
-            const textY = centerY + Math.sin(midAngle) * (radius * 0.65);
+        // หน้าตาตอนยังไม่ได้กดสุ่ม
+        showIdle(pool, emptyText) {
+            this.winnerIndex = null;
+            if (pool.length === 0) {
+                const empty = document.createElement('p');
+                empty.className = 'reel-empty';
+                empty.textContent = emptyText;
+                this.strip.replaceChildren(empty);
+                this.items = [];
+                this.moveTo(0);
+                return;
+            }
+            const items = Array.from({ length: IDLE_CARD_COUNT }, (_, i) => pool[i % pool.length]);
+            this.render(items);
+            this.moveTo(0);
+        }
 
-            nameCtx.save();
-            nameCtx.translate(textX, textY);
-            nameCtx.fillStyle = '#fff';
-            nameCtx.font = '14px sans-serif';
-            nameCtx.textAlign = 'center';
-            nameCtx.fillText(`${person.label}`, 0, 0);
-            nameCtx.restore();
+        // หมุนแถบให้ไปหยุดที่ winner คืนค่าเป็น Promise ที่จะเสร็จตอนแถบหยุด
+        spin(winner, pickFiller, durationMs) {
+            // เก็บการ์ดที่กำลังโชว์อยู่ไว้เป็นจุดเริ่ม จะได้ไม่กระตุกตอนเริ่มหมุน
+            const oldStep = this.step();
+            const firstVisible = oldStep ? Math.floor(this.offset / oldStep) : 0;
+            const visibleCount = oldStep ? Math.ceil(this.viewport.clientWidth / oldStep) + 1 : 0;
+            const keep = this.items.slice(firstVisible, firstVisible + visibleCount);
+            const startOffset = oldStep ? this.offset - firstVisible * oldStep : 0;
 
-            // เก็บค่าเสี้ยววงล้อ
-            nameWedges.push({id: person.id, midAngle: midAngle});
+            // แถบใหม่ = การ์ดที่โชว์อยู่ + การ์ดสุ่มผ่าน ๆ + ผู้ชนะ + การ์ดต่อท้ายไม่ให้ด้านขวาโล่ง
+            const fillers = Array.from({ length: FILLER_COUNT }, pickFiller);
+            const tail = Array.from({ length: 8 }, pickFiller);
+            this.render([...keep, ...fillers, winner, ...tail]);
+            this.winnerIndex = keep.length + fillers.length;
 
-            startAngle += sliceAngle;
-        });
-        // วงกลมขาวตรงกลางวงล้อ
-        nameCtx.beginPath();
-        nameCtx.arc(centerX, centerY, radius * 0.22,0,2*Math.PI);
-        nameCtx.fillStyle = '#ffffff';
-        nameCtx.fill();
+            this.moveTo(startOffset);
+            void this.strip.offsetWidth; // บังคับให้เบราว์เซอร์วางตำแหน่งเริ่มก่อน แล้วค่อยเริ่มแอนิเมชัน
+
+            const step = this.step();
+            const cardWidth = this.strip.children[this.winnerIndex].offsetWidth;
+            const jitter = (Math.random() - 0.5) * cardWidth * 0.7; // ไม่ให้หยุดกลางการ์ดเป๊ะทุกครั้ง ดูเป็นธรรมชาติกว่า
+            const target = this.winnerIndex * step + cardWidth / 2 - this.viewport.clientWidth / 2 + jitter;
+
+            return new Promise(resolve => {
+                let finished = false;
+                const finish = () => {
+                    if (finished) return;
+                    finished = true;
+                    clearTimeout(fallback);
+                    this.strip.removeEventListener('transitionend', onEnd);
+                    this.strip.children[this.winnerIndex]?.classList.add('is-winner');
+                    resolve();
+                };
+                const onEnd = e => {
+                    if (e.target === this.strip && e.propertyName === 'transform') finish();
+                };
+                this.strip.addEventListener('transitionend', onEnd);
+                const fallback = setTimeout(finish, durationMs + 300); // กันกรณี transitionend ไม่ทำงาน
+                this.moveTo(target, durationMs);
+            });
+        }
+
+        // ตอนย่อขยายหน้าจอ ให้การ์ดผู้ชนะยังอยู่ใต้เข็มกลาง
+        recenter() {
+            if (this.winnerIndex === null) return;
+            const card = this.strip.children[this.winnerIndex];
+            if (!card) return;
+            this.moveTo(this.winnerIndex * this.step() + card.offsetWidth / 2 - this.viewport.clientWidth / 2);
+        }
     }
-    // เก็บประวัติผู้โชคดีล่าสุด
-    // ส่วนอันนี้จะเป็นแบบบว่าเก็บรายชื่อผู้โชคดีแยกตามแบบประเมินนั้นๆไม่ให้มันรวมกันอะแหละ
-    let storageKey = 'recentWinners_' + assessmentId;
-    //ประกาศว่าให้มันเก็บค่าลงlocalstorage เพื่อไม่ให้ข้อมูลมันหายตอนกดรีเฟรนช
-    let recentWinners = JSON.parse(localStorage.getItem(storageKey)) || [];
 
-    // ฟงก์ชันแสดงผลรายชื่อแบบเรนเดอมา
+    //  หน้าตาการ์ด
+    function buildCard(kindClass, color, icon, labelText) {
+        const card = document.createElement('div');
+        card.className = `reel-card ${kindClass}`;
+        card.style.setProperty('--card-color', color);
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'reel-card-icon';
+        iconWrap.innerHTML = icon;
+
+        const label = document.createElement('p');
+        label.className = 'reel-card-label';
+        label.textContent = labelText; // ใช้ textContent กันชื่อที่มีแท็ก HTML
+
+        card.append(iconWrap, label);
+        return card;
+    }
+
+    const nameReel = new Reel(
+        document.getElementById('nameReel'),
+        person => buildCard('reel-card--name', nameColor(person.id), ICON_PERSON, person.label)
+    );
+    const rewardReel = new Reel(
+        document.getElementById('rewardReel'),
+        reward => buildCard('reel-card--reward', rewardColorMap[reward.id] || colors[0], ICON_GIFT, reward.label)
+    );
+
+    // การ์ดที่วิ่งผ่าน: รางวัลสุ่มตามน้ำหนัก จะได้เห็นรางวัลที่ออกง่ายผ่านตาบ่อยกว่า
+    function pickWeightedReward() {
+        const total = rewardData.reduce((sum, r) => sum + Number(r.weight), 0);
+        let point = Math.random() * total;
+        for (const reward of rewardData) {
+            point -= Number(reward.weight);
+            if (point <= 0) return reward;
+        }
+        return rewardData[rewardData.length - 1];
+    }
+
+    function pickRandomName() {
+        return nameData[Math.floor(Math.random() * nameData.length)];
+    }
+
+    //  ผู้โชคดีล่าสุด (เก็บแยกตามแบบประเมินใน localStorage) 
+    const storageKey = 'recentWinners_' + assessmentId;
+    let recentWinners = [];
+    try {
+        recentWinners = JSON.parse(localStorage.getItem(storageKey)) || [];
+    } catch (e) {
+        recentWinners = [];
+    }
+
     function renderRecentWinners() {
         const container = document.getElementById('recentWinnersList');
         if (!container) return;
@@ -144,100 +194,83 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        let html = '';
-        recentWinners.forEach((winner, idx) => {
-            html += `
-                <div class="winner-row">
-                    <div class="winner-badge">${idx + 1}</div>
+        container.innerHTML = recentWinners.map((winner, idx) => `
+            <div class="winner-row">
+                <div class="winner-badge">${idx + 1}</div>
                 <div class="winner-info">
-                    <span class="winner-name">${winner.name}</span>
-                    <span class="winner-reward-text">ได้รับ: ${winner.reward}</span>
+                    <span class="winner-name">${escapeHtml(winner.name)}</span>
+                    <span class="winner-reward-text">ได้รับ: ${escapeHtml(winner.reward)}</span>
                 </div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
+            </div>
+        `).join('');
     }
 
+    function addRecentWinner(winnerName, rewardName) {
+        recentWinners.unshift({ name: winnerName, reward: rewardName });
+        recentWinners = recentWinners.slice(0, 3); // เก็บแค่ 3 คนล่าสุด
+        localStorage.setItem(storageKey, JSON.stringify(recentWinners));
+        renderRecentWinners();
+    }
 
-    // ฟังก์ชันคำนวณและแสดงผลโอกาสออกของรางวัล (เปอร์เซ็นต์)
-    // ฟังก์ชันแสดงรายชื่อรางวัลและอัตราการออก
+    //  อัตราการออกของรางวัล 
     function updateRewardProbabilities() {
-    const container = document.getElementById('rewardProbabilityList');
-    if (!container) return;
+        const container = document.getElementById('rewardProbabilityList');
+        if (!container) return;
 
-    if (!rewardData || rewardData.length === 0) {
-        container.innerHTML = '<p class="no-reward-text">ยังไม่มีรายการรางวัล</p>';
-        return;
-    }
+        if (rewardData.length === 0) {
+            container.innerHTML = '<p class="no-reward-text">ยังไม่มีรายการรางวัล</p>';
+            return;
+        }
 
-    let html = '';
-    rewardData.forEach((reward) => {
-        html += `
+        container.innerHTML = rewardData.map(reward => `
             <div class="footer-probability-row">
                 <div class="reward-prob-left">
                     <span class="reward-dot"></span>
-                    <span class="footer-probability-label">${reward.label}</span>
+                    <span class="footer-probability-label">${escapeHtml(reward.label)}</span>
                 </div>
-                <span class="footer-probability-value">${reward.rate}%</span>
+                <span class="footer-probability-value">${escapeHtml(String(reward.rate))}%</span>
             </div>
-        `;
-    });
-        container.innerHTML = html;
+        `).join('');
     }
 
-    // ฟังก์ชันเพิ่มและแสดงรายชื่อผู้โชคดีล่าสุด
-    function addRecentWinner(winnerName, rewardName) {
-        recentWinners.unshift({ name: winnerName, reward: rewardName });
-        if (recentWinners.length > 3) {
-            recentWinners.pop(); // ตัดออกให้เหลือแค่ 3 คนล่าสุด
+    //  ตัวเลขจำนวนบนหัวกล่อง 
+    function updateCounts() {
+        const respondentCount = document.getElementById('respondentCount');
+        if (respondentCount) respondentCount.textContent = `จำนวนรายชื่อทั้งหมด (${nameData.length})`;
+
+        const rewardCount = document.getElementById('rewardCount');
+        if (rewardCount) {
+            const totalQty = rewardData.reduce((sum, r) => sum + Number(r.quantity ?? r.quantity_selected ?? 0), 0);
+            rewardCount.textContent = `จำนวนรางวัลทั้งหมด (${totalQty})`;
         }
-
-        // บันทึกลงใน localStorage ของเบราว์เซอร์
-        localStorage.setItem(storageKey, JSON.stringify(recentWinners));
-
-        // สั่งให้แสดงผล
-        renderRecentWinners();
-        const container = document.getElementById('recentWinnersList');
-        if (!container) return;
-
-        let html = '';
-        recentWinners.forEach((winner, idx) => {
-            html += `
-                <div class="winner-item">
-                    <span class="winner-index">${idx + 1}. ${winner.name}</span>
-                    <span class="winner-reward">ได้รับ: ${winner.reward}</span>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
     }
 
-    
-    document.getElementById('toggle-name-wheel').addEventListener('change',function(){
-        const spinBtn = document.getElementById('spinassessmentBtn');
-        spinBtn.disabled = !this.checked;
-    });
-    document.getElementById('toggle-reward-wheel').addEventListener('change',function(){
-        const spinBtn = document.getElementById('spinassessmentBtn');
-        spinBtn.disabled = !this.checked;
-    });
-    drawWheel();
-    drawNameWheel();
-    updateRewardProbabilities(); //แสดงอัตราของรางวัลตั้งแต่เปิดเวง็บเลย
-    renderRecentWinners(); //แสดงรายชื่อเดิมที่เก็บในlocalstorageตอนโหลดหน้าเว็บเ
+    //  ปุ่มเปิด/ปิด และปุ่มสุ่ม 
+    const spinBtn = document.getElementById('spinassessmentBtn');
+    const toggleName = document.getElementById('toggle-name-wheel');
+    const toggleReward = document.getElementById('toggle-reward-wheel');
+    let isSpinning = false;
 
-    // คำนวนจุดหมุน
-    function calcTargetRotation(currentRotation, wedges, winnerId){
-        const wedge = wedges.find(w => w.id === winnerId);
-        const midDeg = wedge.midAngle*(180/Math.PI);
-        const extraSpins = 5*360;
-        return currentRotation + extraSpins + ((270 - midDeg -(currentRotation % 360)) % 360+360) % 360;
+    // กดสุ่มได้ก็ต่อเมื่อเปิดทั้งสองแถบ ยังมีรายชื่อและรางวัลเหลือ และไม่ได้กำลังหมุนอยู่
+    function updateSpinButton() {
+        const togglesOn = toggleName.checked && toggleReward.checked;
+        spinBtn.disabled = isSpinning || !togglesOn || rewardData.length === 0 || nameData.length === 0;
     }
-    document.getElementById('spinassessmentBtn').addEventListener('click', async function () {
-        const btn = this;
-        btn.disabled = true;
-        
+
+    toggleName.addEventListener('change', function () {
+        document.getElementById('nameReelSection')?.classList.toggle('is-off', !this.checked);
+        updateSpinButton();
+    });
+    toggleReward.addEventListener('change', function () {
+        document.getElementById('rewardReelSection')?.classList.toggle('is-off', !this.checked);
+        updateSpinButton();
+    });
+
+    spinBtn.addEventListener('click', async function () {
+        if (isSpinning) return;
+        isSpinning = true;
+        updateSpinButton();
+
         try {
             const res = await fetch(window.spinUrl, {
                 method: 'POST',
@@ -248,54 +281,54 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
             const data = await res.json();
-            if (!data.success){
-                alert(data.message);
-                btn.disabled = false;
+            if (!res.ok || !data.success) {
+                alert(data.message || 'สุ่มไม่สำเร็จ กรุณาลองใหม่');
                 return;
             }
-            rewardRotation = calcTargetRotation(rewardRotation, rewardWedges, data.winner_reward_id);
-            nameRotation = calcTargetRotation(nameRotation, nameWedges, data.winner_respondent_id);
 
-            canvas.style.transform = `rotate(${rewardRotation}deg)`;
-            nameCanvas.style.transform = `rotate(${nameRotation}deg)`;
+            // ผลสุ่มมาจาก server แถบแค่วิ่งไปหยุดให้ตรงกับผลนั้น
+            const winnerName = { id: data.winner_respondent_id, label: data.winner_name };
+            const winnerReward = { id: data.winner_reward_id, label: data.winner_reward_label };
 
-            setTimeout(()=>{
+            await Promise.all([
+                nameReel.spin(winnerName, pickRandomName, NAME_SPIN_MS),
+                rewardReel.spin(winnerReward, pickWeightedReward, REWARD_SPIN_MS),
+            ]);
 
-                document.getElementById('spinResultName').textContent = data.winner_name;
-                document.getElementById('spinResultReward').textContent = data.winner_reward_label;
-                document.getElementById('spinResultPopup').style.display = 'flex';
-                
-                addRecentWinner(data.winner_name, data.winner_reward_label);
+            document.getElementById('spinResultName').textContent = data.winner_name;
+            document.getElementById('spinResultReward').textContent = data.winner_reward_label;
+            document.getElementById('spinResultPopup').style.display = 'flex';
 
-                rewardData = data.remaining_rewards;
-                nameData = data.remaining_respondents;
-                
-                updateRewardProbabilities(); 
+            addRecentWinner(data.winner_name, data.winner_reward_label);
 
-                [canvas, nameCanvas].forEach(c =>{
-                    c.style.transition = 'none';
-                    c.style.transform = 'rotate(0deg)';
-                });
-                rewardRotation = 0;
-                nameRotation = 0;
-                drawWheel();
-                drawNameWheel();
-
-                void canvas.offsetWidth;
-                [canvas, nameCanvas].forEach(c=>{
-                    c.style.transition='transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-                });
-
-                btn.disabled=rewardData.length === 0 || nameData.length === 0;
-            },4000);
-        }catch (err){
+            // อัปเดตข้อมูลที่เหลือหลังสุ่ม รอบหน้าการ์ดที่วิ่งผ่านจะไม่มีคนที่ได้ไปแล้ว
+            rewardData = data.remaining_rewards;
+            nameData = data.remaining_respondents;
+            updateRewardProbabilities();
+            updateCounts();
+        } catch (err) {
             alert('เกิดข้อผิดพลาดในการสุ่ม');
             console.error(err);
-            btn.disabled = false;
+        } finally {
+            isSpinning = false;
+            updateSpinButton();
         }
     });
+
     document.getElementById('closeSpinResultBTN').addEventListener('click', function () {
-        document.getElementById('spinResultPopup').style.display='none';
+        document.getElementById('spinResultPopup').style.display = 'none';
     });
 
+    window.addEventListener('resize', function () {
+        if (isSpinning) return;
+        nameReel.recenter();
+        rewardReel.recenter();
+    });
+
+    //  เริ่มต้นตอนโหลดหน้า 
+    nameReel.showIdle(nameData, 'ไม่มีรายชื่อเหลือให้สุ่ม');
+    rewardReel.showIdle(rewardData, 'รางวัลหมดแล้ว');
+    updateRewardProbabilities();
+    renderRecentWinners();
+    updateSpinButton();
 });

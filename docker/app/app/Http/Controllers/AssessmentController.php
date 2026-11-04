@@ -145,10 +145,15 @@ class AssessmentController extends Controller
     $remainingRewards = $wheel->rewards()->get()
     ->filter(fn($r) => $r->pivot->quantity_selected > 0)
     ->map(fn($r) =>[
-        'id'=>$r->reward_id,
-        'label'=>$r->name,
-        'weight'=>$r->rate * $r->pivot->quantity_selected,
-        'quantity_selected' => $r->pivot->quantity_selected, 
+        'id'       => $r->reward_id,
+        'label'    => $r->name,
+        'rate'     => $r->rate,
+        'weight'   => $r->rate * $r->pivot->quantity_selected,
+        'quantity' => $r->pivot->quantity_selected,
+        // 'id'=>$r->reward_id,
+        // 'label'=>$r->name,
+        // 'weight'=>$r->rate * $r->pivot->quantity_selected,
+        // 'quantity_selected' => $r->pivot->quantity_selected, 
     ])->values();
     // ****
     $remainingRespondents = $availableRespondents
