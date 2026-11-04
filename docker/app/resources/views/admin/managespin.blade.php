@@ -78,7 +78,7 @@
     <div class="main-wheel-spn">
         <div class="text-wheel">
             <div class="logo-topic">
-                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward" width="50" height="50">
+                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward">
                 <p class="wonglor-text">วงล้อสุ่มของรางวัล</p>
             </div>
             <div class="num-reward-box">

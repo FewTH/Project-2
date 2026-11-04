@@ -932,14 +932,6 @@
   }
 
 
-  /*ขนาดปุ่มให้กะทัดรัดแบบเทมเพลต (ตัวหนังสือราว 16px)*/
-  .save-data-2,
-  .save-password-2,
-  .btn-cancel-2,
-  .btn-cancel-password-1{
-    font-size: 16px;
-    padding: 14px 44px;
-  }
   .btn-cancel-1,
   .btn-cancel-password{
     height: auto;
@@ -1711,7 +1703,6 @@
   .sectioneditinformation,
   .sectionchangepassword,
   .headingactivity,
-  .messagesectionactivity,
   .messageQRcoderegister,
   .messageactivity-1,
   .messagelistnamesregiste,
@@ -1736,7 +1727,6 @@
   .Change-photo,
   .confirm-edit,
   .change-password,
-  .titleenlargeQR,
   .Ttopic-wheel,
   .sub-manageuser,
   .messagepencil{
@@ -2956,7 +2946,7 @@
     background-color: var(--head-bg);
     border-color: var(--input-border);
     box-shadow: none;
-    cursor: not-allowed;
+    cursor: auto;
   }
 
 

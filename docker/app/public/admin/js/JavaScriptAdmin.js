@@ -1426,6 +1426,26 @@ if (typeof rewardData !== 'undefined') {
     rewardwheel = createwheel('reward_canvas', rewardData);
 }
 
+//อัปเดตตัวเลขจำนวนคงเหลือที่หัวกรอบของทั้ง 2 ช่อง
+function updateremainingcount(){
+    const countname = document.getElementById('count_name_remaining');
+    const countreward = document.getElementById('count_reward_remaining');
+
+    //จำนวนรายชื่อที่ยังไม่ถูกสุ่ม
+    if (countname && typeof nameData !== 'undefined'){
+        countname.textContent = 'จำนวนรายชื่อคงเหลือ ' + nameData.length + ' คน';
+    }
+
+    //จำนวนรางวัลที่เหลือรวมทุกชนิด
+    if (countreward && typeof rewardData !== 'undefined'){
+        let totalquantity = 0;
+        for (let i = 0; i < rewardData.length; i++){
+            totalquantity = totalquantity + rewardData[i].quantity;
+        }
+        countreward.textContent = 'จำนวนรางวัลคงเหลือ ' + totalquantity + ' ชิ้น';
+    }
+}
+
 //เอาผู้โชคดีที่เพิ่มสุ่มได้ไปใส่บนสุดของรายการผู้โชคดีล่าสุด 6 คน โดยไม่ต้องรีเฟรชหน้า
 function addlatestwinner(nameresult, rewardresult) {
     const latestwinnerslist = document.getElementById('latest_winners_list');
@@ -1557,6 +1577,9 @@ if (btnstartRandom) {
             if (rewardresult) {
                 rewardwheel.reduceandremove(rewardresult);
             }
+
+            //อัปเดตตัวเลขคงเหลือที่หัวกรอบ
+            updateremainingcount();
 
             //เช็คว่ารอบนี้มีผลการสุ่มเกิดขึ้นจริงอย่างน้อย 1 อย่างมั้ย
             let hasanyresult = false;

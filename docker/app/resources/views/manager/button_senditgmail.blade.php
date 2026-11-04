@@ -30,7 +30,7 @@
    </div>
    <!-- ปุ่มเมนู -->
    <div class="btn-Sidebar">
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+        <a href="{{ url('manager/managereward') }}" class="btn-Home-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
         </a>
@@ -115,7 +115,6 @@
                     <form action="{{ route('manager.senditgmail.resendone', $item->result_id) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn-Resend">
-                            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend">
                             <p class="messagebtn-Resend">ส่งใหม่</p>
                         </button>
                     </form>
@@ -140,7 +139,6 @@
             <form action="{{ route('manager.senditgmail.resendone', $item->result_id) }}" method="POST" class="btn-Resend0">
                 @csrf
                 <button type="submit" class="btn-Resend1">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
                     <p class="messagebtn-Resend1">ส่งใหม่</p>
                 </button>
             </form>
@@ -155,7 +153,6 @@
             <form action="{{ route('manager.senditgmail.resendallfailed', $assessment->assessment_id) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn-resendallthatfailed">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
                     <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
                 </button>
             </form>

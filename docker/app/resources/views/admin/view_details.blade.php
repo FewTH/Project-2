@@ -246,7 +246,7 @@
 
                 @if($event->assessment_url)
                     <div class="imgassessmentqr" id="assessment_qr_small">
-                        {!! QrCode::size(260)->generate($event->assessment_url) !!}
+                        {!! QrCode::size(350)->generate($event->assessment_url) !!}
                     </div>
                     <div class="linkassessmenturl">
                         <button type="button" class="linkassessmenturl-1" id="btn_enlarge_assessment_qr">

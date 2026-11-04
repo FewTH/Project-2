@@ -119,7 +119,6 @@
                     <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST">
                         @csrf
                         <button type="submit" class="btn-Resend">
-                            <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend">
                             <p class="messagebtn-Resend">ส่งใหม่</p>
                         </button>
                     </form>
@@ -144,7 +143,6 @@
             <form action="{{ route('admin.senditgmail.resendone', $item->result_id) }}" method="POST" class="btn-Resend0">
                 @csrf
                 <button type="submit" class="btn-Resend1">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
                     <p class="messagebtn-Resend1">ส่งใหม่</p>
                 </button>
             </form>
@@ -159,7 +157,6 @@
             <form action="{{ route('admin.senditgmail.resendallfailed', $assessment->assessment_id) }}" method="POST">
                 @csrf
                 <button type="submit" class="btn-resendallthatfailed">
-                    <img src="{{ asset('admin/img/รูปของปุ่มส่งใหม่.png') }}" alt="" class="imgbtn-Resend1">
                     <p class="messagebtn-resendallthatfailed">ส่งใหม่ทั้งหมดที่ล้มเหลว</p>
                 </button>
             </form>

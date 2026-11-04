@@ -413,7 +413,9 @@
 /* ส่วนรูปของวงล้อรางวัล */
 .logo-topic{
   display: flex;
+  align-items: center;
   margin-top: 5px;
+  gap: 10px;
 }
   /* ปุ่มบันทึกและยกเลิกวงล้อ */
   .btn-manage-wheel{

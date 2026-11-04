@@ -30,7 +30,7 @@
    </div>
    <!-- ปุ่มเมนู -->
    <div class="btn-Sidebar">
-        <a href="{{ url('manager/รอเปลี่ยน') }}" class="btn-Home-1">
+        <a href="{{ url('manager/managereward') }}" class="btn-Home-1">
             <img src="{{ asset('manager/img/รูปปุ่มเมนูจัดการรางวัล.png') }}" alt="รูปปุ่มเมนูจัดการรางวัล" class="btn-Home-img-1">
             <span>จัดการรางวัล</span>
         </a>
@@ -242,7 +242,7 @@
 
                 @if($event->assessment_url)
                     <div class="imgassessmentqr" id="assessment_qr_small">
-                        {!! QrCode::size(260)->generate($event->assessment_url) !!}
+                        {!! QrCode::size(350)->generate($event->assessment_url) !!}
                     </div>
                     <div class="linkassessmenturl">
                         <button type="button" class="linkassessmenturl-1" id="btn_enlarge_assessment_qr">

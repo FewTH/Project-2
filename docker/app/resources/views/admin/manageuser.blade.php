@@ -33,7 +33,7 @@
 
             <a href="{{ route('admin.adduser') }}" class="add-usr-btn">
                 {{-- <img src="img/ไอคอนบวก.png" alt="ไอคอนเพิ่มผู้ใช้งาน"> --}}
-                <span>+เพิ่มผู้ใช้งานใหม่</span>
+                <span>+ เพิ่มผู้ใช้งานใหม่</span>
             </a>
             @if(session('success'))
                 <div class="alert-success">

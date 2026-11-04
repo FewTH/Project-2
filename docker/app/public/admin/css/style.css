@@ -1208,8 +1208,7 @@
   .save-data-2 {
     color: #ffffff;
     font-size: 20px;
-    font-weight: 600;
-    padding: 25px 60px;
+    padding: 0px 75px;
     cursor: pointer;
     position: relative;
     border: none;
@@ -1259,9 +1258,8 @@
     color: #d39b00;
     border: none;
     background: none;
-    font-size: 22px;
-    padding: 20px 85px;
-    font-weight: 600;
+    font-size: 20px;
+    padding: 16px 85px;
     cursor: pointer;
     position: relative;
     z-index: 1;
@@ -1513,8 +1511,7 @@
     color: #ffffff;
     font-size: 20px;
     cursor: pointer;
-    padding: 20px 55px;
-    font-weight: 600;
+    padding: 0px 65px;
     border: none;
     background: none;
     position: relative;
@@ -1558,10 +1555,9 @@
   /*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
   .btn-cancel-password-1{
     color: #d39b00;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 20px;
     border: none;
-    padding: 25px 90px;
+    padding: 16px 85px;
     text-decoration: none;
     background: none;
     cursor: pointer;
@@ -3227,7 +3223,7 @@
 
   /*หัวข้อของกิจกรรม*/
   .messagesectionactivity{
-    color: #2F4380;
+    color: #E8004D;
     font-size: 30px;
     font-weight: 600;
   }
@@ -3611,7 +3607,7 @@
   .titleenlargeQR{
     margin: 0;
     font-size: 40px;
-    color: #1F7A47;
+    color: #E6004C;
   }
   .subtitleenlargeQR{
     margin: 8px 0 25px 0;
@@ -3855,6 +3851,7 @@
     align-items: center;
     border: none;
     padding: 0px 50px;
+    height: 55px;
     background-color: #2F9E5B;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
     cursor: pointer;
@@ -4821,7 +4818,7 @@
   }
   /*จุดหน้าชื่อของรางวัล*/
   .pointnameprefixreward{
-    background-color: #C1440E;
+    background-color: #2563EB;
     width: 13px;
     height: 13px;
     border-radius: 50%;
@@ -10469,7 +10466,9 @@
 /* ส่วนรูปของรางวัล */
 .logo-topic{
   display: flex;
+  align-items: center;
   margin-top: 5px;
+  gap: 10px;
 }
 .num-reward-box{
   margin-left: auto;
@@ -11526,15 +11525,6 @@
     color: var(--placeholder);
   }
 
-
-  /*ขนาดปุ่มให้กะทัดรัดแบบเทมเพลต (ตัวหนังสือราว 16px)*/
-  .save-data-2,
-  .save-password-2,
-  .btn-cancel-2,
-  .btn-cancel-password-1{
-    font-size: 16px;
-    padding: 14px 44px;
-  }
   .btn-cancel-1,
   .btn-cancel-password{
     height: auto;
@@ -12306,7 +12296,6 @@
   .sectioneditinformation,
   .sectionchangepassword,
   .headingactivity,
-  .messagesectionactivity,
   .messageQRcoderegister,
   .messageactivity-1,
   .messagelistnamesregiste,
@@ -12331,7 +12320,6 @@
   .Change-photo,
   .confirm-edit,
   .change-password,
-  .titleenlargeQR,
   .Ttopic-wheel,
   .sub-manageuser,
   .messagepencil{
@@ -13196,12 +13184,12 @@
 
   /* ---------- รูปที่ 1: แท็บแบบประเมิน ขาวเยอะไป ---------- */
 
-  /*เอากรอบขาวใหญ่ที่ครอบทั้งหมดออก ให้การ์ดแบบประเมินวางบนพื้นเทาเลย จะได้ไม่ขาวซ้อนขาว*/
-  .frame-grey-1{
-    background: transparent;
-    box-shadow: none;
-    padding: 10px 0px 30px 0px;
-  }
+    /*เอากรอบขาวใหญ่ที่ครอบทั้งหมดออก ให้การ์ดแบบประเมินวางบนพื้นเทาเลย จะได้ไม่ขาวซ้อนขาว*/
+    .frame-grey-1{
+      background: transparent;
+      box-shadow: none;
+      padding: 10px 0px 30px 0px;
+    }
 
   /*สีตามสถานะของแบบประเมิน: เปิดอยู่ = เขียว, ปิดแล้ว = แดง*/
   .sectionassessment[data-status="open"]{
@@ -13576,7 +13564,7 @@
     background-color: var(--head-bg);
     border-color: var(--input-border);
     box-shadow: none;
-    cursor: not-allowed;
+    cursor: auto;
   }
 
 
@@ -13595,3 +13583,4 @@
   .message-evaluation-1{
     margin-bottom: 8px;
   }
+

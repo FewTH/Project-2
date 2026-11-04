@@ -582,15 +582,13 @@ body.no-scroll {
 .save-data-2 {
   color: #ffffff;
   font-size: 20px;
-  font-weight: 600;
-  padding: 25px 60px;
+  padding: 0px 75px;
   cursor: pointer;
   position: relative;
   border: none;
   background: none;
   z-index: 1;
 }
-
 
 /*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าแก้ไขข้อมูล*/
 .save-data-1::before{
@@ -632,13 +630,13 @@ body.no-scroll {
   color: #d39b00;
   border: none;
   background: none;
-  font-size: 22px;
-  padding: 20px 85px;
-  font-weight: 600;
+  font-size: 20px;
+  padding: 16px 85px;
   cursor: pointer;
   position: relative;
   z-index: 1;
 }
+
 
 /*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าแก้ไขข้อมูล*/
 .btn-cancel-1::before{
@@ -853,15 +851,14 @@ body.no-scroll {
 
 /*ข้อความปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
 .save-password-2{
-  color: #ffffff;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 20px 55px;
-  font-weight: 600;
-  border: none;
-  background: none;
-  position: relative;
-  z-index: 1;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px 65px;
+    border: none;
+    background: none;
+    position: relative;
+    z-index: 1;
 }
 
 /*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
@@ -898,19 +895,19 @@ body.no-scroll {
   overflow: hidden;
 }
 
-/*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
-.btn-cancel-password-1{
-  color: #d39b00;
-  font-size: 22px;
-  font-weight: 600;
-  border: none;
-  padding: 25px 90px;
-  text-decoration: none;
-  background: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-}
+  /*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
+  .btn-cancel-password-1{
+    color: #d39b00;
+    font-size: 20px;
+    border: none;
+    padding: 16px 85px;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+  }
+
 
 /*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password::before{

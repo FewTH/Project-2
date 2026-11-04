@@ -205,8 +205,7 @@ body.no-scroll {
 .save-data-2 {
   color: #ffffff;
   font-size: 20px;
-  font-weight: 600;
-  padding: 25px 60px;
+  padding: 0px 75px;
   cursor: pointer;
   position: relative;
   border: none;
@@ -255,9 +254,8 @@ body.no-scroll {
   color: #d39b00;
   border: none;
   background: none;
-  font-size: 22px;
-  padding: 20px 85px;
-  font-weight: 600;
+  font-size: 20px;
+  padding: 16px 85px;
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -478,15 +476,14 @@ body.no-scroll {
 
 /*ข้อความปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
 .save-password-2{
-  color: #ffffff;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 20px 55px;
-  font-weight: 600;
-  border: none;
-  background: none;
-  position: relative;
-  z-index: 1;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px 65px;
+    border: none;
+    background: none;
+    position: relative;
+    z-index: 1;
 }
 
 /*กรอบเอฟเฟ็กต์ของปุ่มบันทึกของหน้าเปลี่ยนรหัสผ่าน*/
@@ -525,16 +522,15 @@ body.no-scroll {
 
 /*ชื่อปุ่มยกเลิกขของหน้าเปลี่ยนรหัสผ่าน*/
 .btn-cancel-password-1{
-  color: #d39b00;
-  font-size: 22px;
-  font-weight: 600;
-  border: none;
-  padding: 25px 90px;
-  text-decoration: none;
-  background: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
+    color: #d39b00;
+    font-size: 20px;
+    border: none;
+    padding: 16px 85px;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 /*กรอบเอฟเฟ็กต์ของปุ่มยกเลิกของหน้าเปลี่ยนรหัสผ่าน*/
@@ -2770,7 +2766,7 @@ body.no-scroll {
 
   /*หัวข้อของกิจกรรม*/
   .messagesectionactivity{
-    color: #2F4380;
+    color: #E8004D;
     font-size: 30px;
     font-weight: 600;
   }
@@ -3153,7 +3149,7 @@ body.no-scroll {
   .titleenlargeQR{
     margin: 0;
     font-size:  40px;
-    color: #1F7A47;
+    color: #E6004C;
   }
   .subtitleenlargeQR{
     margin: 8px 0 25px 0;
@@ -3398,6 +3394,7 @@ body.no-scroll {
     align-items: center;
     border: none;
     padding: 0px 50px;
+    height: 55px;
     background-color: #2F9E5B;
     box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
     cursor: pointer;
