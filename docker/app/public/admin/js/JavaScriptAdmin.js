@@ -122,61 +122,110 @@ const evaluationFormSelect = document.getElementById('Evaluation_formid');
 const checkboxContainer = document.querySelector('.frame-checkbox-name');
 const evaluationFormelement = document.getElementById('frame-choose-evaluation');
 const assignEvaluationModal = document.getElementById('assign_evaluation');
-const frameallassessment =  document.getElementById('frameall_assessment');
+// const evaluationFormSelect = document.getElementById('Evaluation_formid');
+// const checkboxContainer = document.querySelector('.frame-checkbox-name');
+// const evaluationFormelement = document.getElementById('frame-choose-evaluation');
+// const assignEvaluationModal = document.getElementById('assign_evaluation');
+// const frameallassessment =  document.getElementById('frameall_assessment');
 
-if(frameallassessment){
-    frameallassessment.addEventListener('click', function(){
-        document.getElementById('frameall_assessment').classList.add('active');
-        document.getElementById('frameoff_assessment').classList.remove('active');
-        document.getElementById('farmeon_assessment').classList.remove('active');
-        document.getElementById('all_assessment').classList.add('active');
-        document.getElementById('off_assessment').classList.remove('active');
-        document.getElementById('on_assessment').classList.remove('active');
-        document.getElementById('allnumber_assessment').classList.add('active');
-        document.getElementById('offnumber_assessment').classList.remove('active');
-        document.getElementById('onnumber_assessment').classList.remove('active');
+// if(frameallassessment){
+//     frameallassessment.addEventListener('click', function(){
+//         document.getElementById('frameall_assessment').classList.add('active');
+//         document.getElementById('frameoff_assessment').classList.remove('active');
+//         document.getElementById('farmeon_assessment').classList.remove('active');
+//         document.getElementById('all_assessment').classList.add('active');
+//         document.getElementById('off_assessment').classList.remove('active');
+//         document.getElementById('on_assessment').classList.remove('active');
+//         document.getElementById('allnumber_assessment').classList.add('active');
+//         document.getElementById('offnumber_assessment').classList.remove('active');
+//         document.getElementById('onnumber_assessment').classList.remove('active');
 
-        alloffnoassessment('all');
-    });
-}
+//         alloffnoassessment('all');
+//     });
+// }
 
 //ปุ่มปิดแล้วของหน้า assessment.blade.php
-const frameoffassessment = document.getElementById('frameoff_assessment');
-
-if(frameoffassessment){
-    frameoffassessment.addEventListener('click', function(){
-        document.getElementById('frameoff_assessment').classList.add('active');
-        document.getElementById('frameall_assessment').classList.remove('active');
-        document.getElementById('farmeon_assessment').classList.remove('active');
-        document.getElementById('off_assessment').classList.add('active');
-        document.getElementById('all_assessment').classList.remove('active');
-        document.getElementById('on_assessment').classList.remove('active');
-        document.getElementById('offnumber_assessment').classList.add('active');
-        document.getElementById('allnumber_assessment').classList.remove('active');
-        document.getElementById('onnumber_assessment').classList.remove('active');
-
-        alloffnoassessment('closed');
+// const frameoffassessment = document.getElementById('frameoff_assessment');
+// ===== ค้นหา/กรองแบบประเมินทั้งระบบ (ส่งไปให้ controller กรอง) =====
+function goAssessmentFilter(params) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', 'assessment');
+    url.searchParams.delete('assessment_page');          // กลับไปหน้า 1 เสมอ
+    Object.entries(params).forEach(([key, value]) => {
+        if (value) url.searchParams.set(key, value);
+        else url.searchParams.delete(key);
     });
+    window.location.href = url.toString();
 }
+
+// ปุ่ม ทั้งหมด / ปิดแล้ว / เปิดอยู่
+const statusButtons = {
+    frameall_assessment: '',
+    frameoff_assessment: 'closed',
+    farmeon_assessment:  'open',
+};
+Object.entries(statusButtons).forEach(([id, status]) => {
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener('click', () => goAssessmentFilter({ assessment_status: status }));
+    }
+});
+
+// ช่องค้นหาแบบประเมิน
+const framesearchassessment = document.getElementById('frame_search_activity_2');
+if (framesearchassessment) {
+    let assessTimer;
+    framesearchassessment.addEventListener('input', function () {
+        clearTimeout(assessTimer);
+        assessTimer = setTimeout(function () {
+            goAssessmentFilter({ assessment_search: framesearchassessment.value.trim() });
+        }, 400);
+    });
+
+    // หลังรีโหลด คืนเคอร์เซอร์ไว้ท้ายคำค้นหา
+   if (framesearchassessment.value) {
+        framesearchassessment.focus();
+        const len = framesearchassessment.value.length;
+        framesearchassessment.setSelectionRange(len, len);
+    }
+}
+
+// if(frameoffassessment){
+//     frameoffassessment.addEventListener('click', function(){
+//         document.getElementById('frameoff_assessment').classList.add('active');
+//         document.getElementById('frameall_assessment').classList.remove('active');
+//         document.getElementById('farmeon_assessment').classList.remove('active');
+//         document.getElementById('off_assessment').classList.add('active');
+//         document.getElementById('all_assessment').classList.remove('active');
+//         document.getElementById('on_assessment').classList.remove('active');
+//         document.getElementById('offnumber_assessment').classList.add('active');
+//         document.getElementById('allnumber_assessment').classList.remove('active');
+//         document.getElementById('onnumber_assessment').classList.remove('active');
+
+//         alloffnoassessment('closed');
+//     });
+// }
+
+
 
 //ปุ่มเปิดอยู่ของหน้า assessment.blade.php
 const frameonassessment = document.getElementById('farmeon_assessment')
 
-if(frameonassessment){
-    frameonassessment.addEventListener('click', function(){
-        document.getElementById('farmeon_assessment').classList.add('active');
-        document.getElementById('frameoff_assessment').classList.remove('active');
-        document.getElementById('frameall_assessment').classList.remove('active');
-        document.getElementById('on_assessment').classList.add('active');
-        document.getElementById('off_assessment').classList.remove('active');
-        document.getElementById('all_assessment').classList.remove('active');
-        document.getElementById('onnumber_assessment').classList.add('active');
-        document.getElementById('offnumber_assessment').classList.remove('active');
-        document.getElementById('allnumber_assessment').classList.remove('active');
+// if(frameonassessment){
+//     frameonassessment.addEventListener('click', function(){
+//         document.getElementById('farmeon_assessment').classList.add('active');
+//         document.getElementById('frameoff_assessment').classList.remove('active');
+//         document.getElementById('frameall_assessment').classList.remove('active');
+//         document.getElementById('on_assessment').classList.add('active');
+//         document.getElementById('off_assessment').classList.remove('active');
+//         document.getElementById('all_assessment').classList.remove('active');
+//         document.getElementById('onnumber_assessment').classList.add('active');
+//         document.getElementById('offnumber_assessment').classList.remove('active');
+//         document.getElementById('allnumber_assessment').classList.remove('active');
 
-        alloffnoassessment('open');
-    });
-}
+//         alloffnoassessment('open');
+//     });
+// }
 
 //กดปุ่มทั้งหมด ปิดอยู่ เปิดแล้ว ให้มันเข้าไปอยู่ในสถานะปุ่มของตัวมันเอง assessment.blade.php
 function alloffnoassessment(status){
@@ -234,7 +283,7 @@ function updatenumberassessment() {
     const numberrate = document.getElementById('number_rate');
     numberrate.textContent= allnumber;
 }
-updatenumberassessment();
+// updatenumberassessment();
 
 
 //ปุ่มกดเปิด popup มอบหมายแบบประเมิน  assessment.blade.php
@@ -453,30 +502,30 @@ if (framesearchactivity) {
 // }
 
 //ช่องค้นหารายชื่อแบบประเมิน ในหน้า assessment.blade.php
-const framesearchassessment = document.getElementById('frame_search_activity_2');
+// const framesearchassessment = document.getElementById('frame_search_activity_2');
 
-if(framesearchassessment){
-    framesearchassessment.addEventListener('keyup', function(){
+// if(framesearchassessment){
+//     framesearchassessment.addEventListener('keyup', function(){
         
-        const keywordassessment = framesearchassessment.value.trim().toLowerCase();
-        const frameactivityassessment = document.querySelectorAll('.sectionassessment');
+//         const keywordassessment = framesearchassessment.value.trim().toLowerCase();
+//         const frameactivityassessment = document.querySelectorAll('.sectionassessment');
 
-        frameactivityassessment.forEach(function (card){
-            const nameassessment = card.querySelector('.sectionassessment-1');
-            if (!nameassessment)
-                return;
+//         frameactivityassessment.forEach(function (card){
+//             const nameassessment = card.querySelector('.sectionassessment-1');
+//             if (!nameassessment)
+//                 return;
 
-            const  nameassessment1 = nameassessment.textContent.trim().toLowerCase();
+//             const  nameassessment1 = nameassessment.textContent.trim().toLowerCase();
 
-            if(nameassessment1.includes(keywordassessment)){
-                card.classList.remove('is-hidden');
-            }else{
-                card.classList.add('is-hidden');
-            }
-        });
+//             if(nameassessment1.includes(keywordassessment)){
+//                 card.classList.remove('is-hidden');
+//             }else{
+//                 card.classList.add('is-hidden');
+//             }
+//         });
 
-    })
-}
+//     })
+// }
 // จำแท็บไว้ใน URL เวลากดสลับเอง จะได้ไม่หายตอนรีเฟรชหรือ reload หลังมอบหมาย
 function setTabUrl(tab) {
     const url = new URL(window.location);

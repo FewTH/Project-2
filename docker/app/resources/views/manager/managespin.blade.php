@@ -112,24 +112,39 @@
     <div class="main-wheel-spn">
         <div class="text-wheel">
             <div class="logo-topic">
-                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของวงล้อสุ่มของรางวัล" class="img-framesmallrandomreward">
-                <p class="wonglor-text">วงล้อสุ่มของรางวัล</p>
+                <img src="{{ asset('admin/img/รูปของวงล้อสุ่มของรางวัล.png') }}" alt="รูปของแถบสุ่มของรางวัล" class="img-framesmallrandomreward">
+                <p class="wonglor-text">แถบสุ่มของรางวัล</p>
             </div>
             <div class="num-reward-box">
                 <span class="num-reward-wheel">
-                    จำนวนรางวัลทั้งหมด <span id="slected-count">0</span>
+                    รางวัลที่เลือก <span id="slected-count">0</span> รายการ
                 </span>
             </div>
         </div>
-
-        {{-- ตัววงล้อ --}}
-        <div class="wheel-spn-main">
-            <canvas id="wheel-spn-reward" width="500" height="500"></canvas>
+ 
+        <div class="spn-preview">
+            {{-- แถบการ์ดรางวัล (JS เติมการ์ดให้) --}}
+            <div class="reel-viewport" id="previewReel">
+                <div class="reel-strip"></div>
+                <div class="reel-pointer"></div>
+            </div>
+ 
+            {{-- ปุ่มทดลองหมุน ให้ดูหน้าตาก่อนบันทึก --}}
+            <div class="spn-test-row">
+                <button type="button" class="spn-test-btn" id="testSpinBtn" disabled>ทดลองหมุน</button>
+                <p class="spn-test-note">ผลทดลองไม่ถูกบันทึก</p>
+            </div>
+ 
+            {{-- โอกาสออกจริงของแต่ละรางวัล (JS คำนวณให้) --}}
+            <div class="spn-chance">
+                <p class="spn-chance-title">โอกาสออกของแต่ละรางวัล</p>
+                <div class="spn-chance-list" id="chanceList"></div>
+            </div>
         </div>
-        {{-- ปุ่มบันทึกกับลบ --}}
+ 
+        {{-- ปุ่มบันทึก --}}
         <div class="btn-manage-wheel">
-            <button type="button" class="submit-wheel-reward" id="submit-btn-wheel">บันทึก</button>
-            <button type="button" class="cancle-wheel-btn" id="cancle-btn-wheel">ยกเลิก</button>
+            <button type="button" class="submit-wheel-reward" id="submit-btn-wheel" disabled>บันทึก</button>
         </div>
     </div>
     </div>

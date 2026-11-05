@@ -224,7 +224,21 @@ class AssessmentController extends Controller
         'open'   => $assessments->where('is_open', 1)->count(),
         'closed' => $assessments->where('is_open', 0)->count(),
     ];
+    // ค้นหา/กรองสถานะทั้งระบบ (หลังคำนวณ stats จึงตัวเลขสรุปยังเป็นยอดรวมทั้งหมด)
+    $aSearch = trim((string) $request->input('assessment_search', ''));
+    $aStatus = $request->input('assessment_status');   // open | closed | null
 
+    if ($aSearch !== '') {
+    $assessments = $assessments->filter(
+        fn($a) => mb_stripos((string) $a->name, $aSearch) !== false
+        );
+    }
+    if ($aStatus === 'open') {
+        $assessments = $assessments->filter(fn($a) => (int) $a->is_open === 1);
+    } elseif ($aStatus === 'closed') {
+        $assessments = $assessments->filter(fn($a) => (int) $a->is_open === 0);
+}
+$assessments = $assessments->values();
     // จัดการจำนวนแบบประเมินที่จะให้แสดงตามจำนวนที่กำหนดแบบแบ่งหน้า
     $perPage = 10;
     $assessmentPage = LengthAwarePaginator::resolveCurrentPage('assessment_page');

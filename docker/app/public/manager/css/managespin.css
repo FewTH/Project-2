@@ -382,13 +382,13 @@
       margin-right: 0;
   }
   /* จัดตำแหน่งวงล้อสุ่ม */
-  .wheel-spn-main{
+  /* .wheel-spn-main{
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     padding: 10px 0;
-  }
+  } */
   /* ส่วนข้อความด้านบนวงล้อ */
   .wonglor-text{
     font-size: large;
@@ -617,5 +617,114 @@
     font-size: 12px;
     color: #666;
 }
-
+.spn-preview{
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+}
+.spn-preview .reel-viewport{
+  --pointer-color: #ec4899;
+}
+ 
+/* ปุ่มทดลองหมุน */
+.spn-test-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 20px;
+}
+.spn-test-btn{
+  height: 40px;
+  padding: 0 22px;
+  border-radius: 10px;
+  border: 2px solid #ec4899;
+  background-color: #ffffff;
+  color: #ec4899;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.spn-test-btn:hover:not(:disabled){
+  background-color: #ec4899;
+  color: #ffffff;
+}
+.spn-test-btn:disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.spn-test-note{
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+ 
+/* รายการโอกาสออกของแต่ละรางวัล */
+.spn-chance{
+  margin: 24px 20px 0;
+}
+.spn-chance-title{
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #183153;
+}
+.spn-chance-row{
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #E5EDF8;
+}
+.spn-chance-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--card-color);
+}
+.spn-chance-name{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1e293b;
+}
+.spn-chance-qty{
+  margin-left: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+.spn-chance-value{
+  font-weight: 600;
+  color: #183153;
+  font-variant-numeric: tabular-nums;
+}
+.spn-chance-bar{
+  grid-column: 2 / 4;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #EEF2F8;
+  overflow: hidden;
+}
+.spn-chance-bar span{
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--card-color);
+  transition: width 0.3s;
+}
+.spn-chance-empty{
+  margin: 0;
+  font-size: 14px;
+  color: #94a3b8;
+}
+ 
+/* ปุ่มบันทึกตอนยังเลือกไม่ครบ 2 รายการ */
+.submit-wheel-reward:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 

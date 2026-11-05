@@ -160,24 +160,26 @@
 <!--กรอบของแบบประเมิน-->
 <div class="frame-evaluation {{ $tab === 'assessment' ? 'active' : '' }}" id="frame_evaluation">
     <div class="frame-search-activity-1">
-        <div class="search-activity-1">
-        <input type=text class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน">
-        </div>
-        <div class="framealloffon-assessment">
-            <button class="frameall-assessment active" id="frameall_assessment">
-                <p class="all-assessment active" id="all_assessment">ทั้งหมด</p>
-                <span class="allnumber-assessment active" id="allnumber_assessment">({{ $assessmentStats['all'] }})</span>
-            </button>
-            <button class="frameoff-assessment" id="frameoff_assessment">
-                <p class="off-assessment" id="off_assessment">ปิดแล้ว</p>
-                <span class="offnumber-assessment" id="offnumber_assessment">({{ $assessmentStats['closed'] }})</span>
-            </button>
-            <button class="farmeon-assessment" id="farmeon_assessment">
-                <p class="on-assessment" id="on_assessment">เปิดอยู่</p>
-                <span class="onnumber-assessment" id="onnumber_assessment">({{ $assessmentStats['open'] }})</span>
-            </button>
-        </div>
+    <div class="search-activity-1">
+        <input type="text" class="search-activity-2" id="frame_search_activity_2" placeholder="ค้นหารายชื่อแบบประเมิน" value="{{ request('assessment_search') }}">
     </div>
+
+    @php $aStatus = request('assessment_status'); @endphp
+    <div class="framealloffon-assessment">
+        <button type="button" class="frameall-assessment {{ !$aStatus ? 'active' : '' }}" id="frameall_assessment">
+            <p class="all-assessment {{ !$aStatus ? 'active' : '' }}" id="all_assessment">ทั้งหมด</p>
+            <span class="allnumber-assessment {{ !$aStatus ? 'active' : '' }}" id="allnumber_assessment">({{ $assessmentStats['all'] }})</span>
+        </button>
+        <button type="button" class="frameoff-assessment {{ $aStatus === 'closed' ? 'active' : '' }}" id="frameoff_assessment">
+            <p class="off-assessment {{ $aStatus === 'closed' ? 'active' : '' }}" id="off_assessment">ปิดแล้ว</p>
+            <span class="offnumber-assessment {{ $aStatus === 'closed' ? 'active' : '' }}" id="offnumber_assessment">({{ $assessmentStats['closed'] }})</span>
+        </button>
+        <button type="button" class="farmeon-assessment {{ $aStatus === 'open' ? 'active' : '' }}" id="farmeon_assessment">
+            <p class="on-assessment {{ $aStatus === 'open' ? 'active' : '' }}" id="on_assessment">เปิดอยู่</p>
+            <span class="onnumber-assessment {{ $aStatus === 'open' ? 'active' : '' }}" id="onnumber_assessment">({{ $assessmentStats['open'] }})</span>
+        </button>
+    </div>
+</div>
     
     <!--กรอบของแบบประเมินที่ดึงมาจาก api-->
     <div class="frame-grey-1">

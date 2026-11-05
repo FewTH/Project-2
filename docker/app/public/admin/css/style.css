@@ -7311,6 +7311,7 @@
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 0.2s, transform 0.2s;
+    width: min(640px, 92vw);
   }
 
   .assignevaluation.show{
@@ -7431,13 +7432,36 @@
 
   /*กรอบของกลุ่มปุ่มติ๊กชื่อ*/
   .frame-checkbox-name{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-height: 220px;              /* ประมาณ 3 แถว ปรับได้ */
+    overflow-y: auto;
+    padding: 4px 6px 4px 2px; 
+    /* display: flex;
+    justify-content: space-between; */
   }
-
+  /*ข้อความ "กำลังโหลด" ให้กินทั้งแถว*/
+  .frame-checkbox-name .loading-text{
+    grid-column: 1 / -1;
+  } 
   /*กรอบของข้อความชื่อกับปุ่มติ๊ก*/
   .message-checkbox-name{
     background-color: #e7dec4;
+    color: #4e4e4e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;                   /* ให้ข้อความหดและขึ้นบรรทัดใหม่ได้ */
+    min-height: 60px;
+    padding: 8px 12px;
+    border-radius: 15px;
+    border: 2px solid #d39b00;
+    font-size: 16px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;        /* ชื่อยาวมากไม่ดันกล่อง */
+    cursor: pointer;
+    /* background-color: #e7dec4;
     color: #4e4e4e;
     display: flex;
     align-items: center;
@@ -7446,20 +7470,33 @@
     padding: 0px 15px;
     border-radius: 15px;
     border: 2px solid #d39b00;
-    font-size: 16px;
+    font-size: 16px; */
   }
 
   /*ขนาดของปุ่มติ๊กถูก*/
   .checkboxgivemanager{
     position: relative;
     appearance: none;
+    flex: 0 0 25px;
     width: 25px;
     height: 25px;
     border: 2px solid #d39b00;
     border-radius: 5px;
     cursor: pointer;
+    /* position: relative;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #d39b00;
+    border-radius: 5px;
+    cursor: pointer; */
   }
-
+  /*มือถือ: ลดเหลือ 2 คอลัมน์*/
+  @media (max-width: 600px){
+  .frame-checkbox-name{
+    grid-template-columns: repeat(2, 1fr);
+    }
+  }
   /*กรอบสีข้างในปุ่มติ๊กถูก*/
   .checkboxgivemanager:checked{
     background-color: #d39b0098;
@@ -7609,23 +7646,14 @@
     width: 100%;
   }
   .sectionassessment {
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: assessFadeIn 0.35s ease both;
     opacity: 1;
     max-height: 800px;
     overflow: visible;
 }
-  /* คลาสสำหรับซ่อนการ์ดแบบค่อยๆแสดงแบบสมูทๆหน่อย */
-  .sectionassessment.is-hidden {
-    opacity: 0;
-    transform: translateY(-8px);
-    max-height: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    border: none;
-    pointer-events: none;
-    overflow: hidden; 
+  @keyframes assessFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: none; }
   }
 
   /*กรอบของแบบประเมิน*/
@@ -9763,6 +9791,119 @@
     display: flex;
     flex-direction: column;
 }
+/* ------------------------------------------------------ */
+/* พื้นที่ตรงกลางระหว่างหัวกล่องกับปุ่มบันทึก เลื่อนขึ้นลงได้ถ้าเลือกรางวัลเยอะ */
+.spn-preview{
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12px;
+}
+.spn-preview .reel-viewport{
+  --pointer-color: #ec4899;
+}
+ 
+/* ปุ่มทดลองหมุน */
+.spn-test-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 20px;
+}
+.spn-test-btn{
+  height: 40px;
+  padding: 0 22px;
+  border-radius: 10px;
+  border: 2px solid #ec4899;
+  background-color: #ffffff;
+  color: #ec4899;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.spn-test-btn:hover:not(:disabled){
+  background-color: #ec4899;
+  color: #ffffff;
+}
+.spn-test-btn:disabled{
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.spn-test-note{
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+ 
+/* รายการโอกาสออกของแต่ละรางวัล */
+.spn-chance{
+  margin: 24px 20px 0;
+}
+.spn-chance-title{
+  margin: 0 0 8px;
+  font-weight: 600;
+  color: #183153;
+}
+.spn-chance-row{
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #E5EDF8;
+}
+.spn-chance-dot{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--card-color);
+}
+.spn-chance-name{
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #1e293b;
+}
+.spn-chance-qty{
+  margin-left: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+.spn-chance-value{
+  font-weight: 600;
+  color: #183153;
+  font-variant-numeric: tabular-nums;
+}
+.spn-chance-bar{
+  grid-column: 2 / 4;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #EEF2F8;
+  overflow: hidden;
+}
+.spn-chance-bar span{
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--card-color);
+  transition: width 0.3s;
+}
+.spn-chance-empty{
+  margin: 0;
+  font-size: 14px;
+  color: #94a3b8;
+}
+ 
+/* ปุ่มบันทึกตอนยังเลือกไม่ครบ 2 รายการ */
+.submit-wheel-reward:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* --------------------------------------------------------- */
   .main-wheel-spn {
       background-color: #FFFFFF;
       box-shadow: 0px 8px 14px rgba(0, 0, 0, 0.22);
@@ -9772,19 +9913,19 @@
       flex-direction: column;
       justify-content: space-between;
       width: 44%;
-      height: 800px;
+      height: 100%;
       box-sizing: border-box;
       margin-top: 0;
       margin-right: 0;
   }
   /* จัดตำแหน่งวงล้อสุ่ม */
-  .wheel-spn-main{
+  /* .wheel-spn-main{
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     padding: 10px 0;
-  }
+  } */
   /* ส่วนข้อความด้านบนวงล้อ */
   .spn-wheel-topic{
     padding: 5px 10px;
