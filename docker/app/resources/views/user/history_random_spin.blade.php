@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ประวัติการสุ่ม</title>
     <link rel="stylesheet" href="{{ asset('user/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/css/theme-user.css') }}">
     <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
 </head>
 <body>

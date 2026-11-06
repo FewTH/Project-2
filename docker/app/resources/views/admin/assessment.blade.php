@@ -224,15 +224,17 @@
                     สร้างโดย: {{$assessment->created_by_name ?? '-'}}
                     ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
                 </p>
+                {{-- ส่วนปุ่มสุ่มกับประวัติการสุ่ม --}}
                 @if($assessment->wheelAssessment)
-                {{-- กรณีที่เราบันทึกวงล้อแล้วตัวแบบประเมินจะมีปุ่มเข้าสู่การสุ่มเพิ่มขึ้นมา --}}
-                <a href="{{route('admin.assessment.random',$assessment->assessment_id)}}" class="enter-random">
-                    <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
-                    <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
-                </a>
-                <a href="{{ route('admin.history_random', $assessment->assessment_id) }}" class="view-history">
-                    <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                </a>
+                <div class="assessment-actions">
+                    <a href="{{ route('admin.assessment.random', $assessment->assessment_id) }}" class="enter-random">
+                    <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
+                        <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
+                    </a>
+                    <a href="{{ route('admin.history_random', $assessment->assessment_id) }}" class="view-history">
+                        <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                    </a>
+                </div>
                 @else
                 {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
                 <a href="{{url('admin/managespin')}}" class="assessment-open-1">

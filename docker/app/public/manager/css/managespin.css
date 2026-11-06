@@ -459,135 +459,188 @@
     border: none;
     margin: 20px 20px 20px auto;
   }
-/* แต่งป็อปอัพของหน้าจัดการวงล้อ */
-.pop-up-background{
-  position: fixed;
+/* จัดพื้นหลังป๊อปอัพให้อยู่กึ่งกลางจอพอดีเป๊ะ และบังคับให้ทับทุกอย่างด้วย z-index สูงๆ */
+.pop-up-background {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    /* display: flex; */
+    display: none; /* จะถูกเปลี่ยนเป็น flex ด้วย JavaScript ตอนเปิด Modal */
     justify-content: center;
     align-items: center;
-    z-index: 999;
-    display: none;
+    z-index: 9999;
 }
-.pop-up-content{
-  background-color: #FCF6E5;
-  border: 1px solid #a8731d;
-  width: 650px;
-  height: 440px;
-  margin-left: 400px;
-  border-radius: 10px;
-  /* overflow: hidden; */
+
+/* ตัวกล่องป๊อปอัพหลัก */
+.pop-up-content {
+    background-color: #ffffff;
+    border: none;
+    width: 650px;
+    max-height: 90vh;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px;
 }
-/* ส่วนheader */
-.header-popup-spn{
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  background-color: #a8731d;
-  height: 60px;
-  overflow: hidden;
-  border-radius: 10px;
-  color: #FCF6E5;
+
+/* ส่วน Header สีแดงด้านบนสุด */
+.header-popup-spn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #e60039;
+    height: 55px;
+    border-radius: 8px 8px 0 0;
+    color: #ffffff;
+    flex-shrink: 0;
+    margin: -20px -20px 15px -20px; /* ดึงให้แถบสีแดงชิดขอบบนและซ้ายขวาพอดี */
 }
-/* โลโก้รางวัล */
-.logo-popup-topic{
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  /* margin-top: 20px;
-  margin-left: 20px; */
+
+/* โลโก้รางวัลใน Header */
+.logo-popup-topic {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 } 
-/* ปุ่มกากบาท */
-.x-button{
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-  margin-left: 320px;
-  cursor: pointer;
+
+/* ข้อความหัวข้อ Header */
+.text-assess {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 0;
 }
-/* หัวข้อด้านบน */
-.text-assess{
-   /* margin-top: 20px; */
-   font-size: large;
-   font-weight: bold;
-   margin-left: 10px;
+
+/* ปุ่มกากบาทปิด Modal */
+.x-button {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    cursor: pointer;
 }
+
 /* ส่วนวงล้อที่สร้างใหม่ */
-.wheel-name{
-  padding-left: 10px; 
-  border-bottom: 1px solid #000;
-  margin-bottom: 10px;
-  margin-top: 20px;
+.wheel-name {
+    margin-top: 0;
+    margin-bottom: 12px;
+    padding-left: 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    flex-shrink: 0;
 }
-.wheel-sum-value{
-  margin: 0;
-  padding: 0;
+
+.topic-wheel-sub {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    color: #666;
+    font-weight: normal;
 }
-.topic-wheel-sub{
-  margin: 0;
-  padding: 0;
+
+.wheel-sum-value {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
 }
-/* ส่วนของหัวข้อเลือกแบบประเมินที่ต้องการ */
-.descrip{
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
+
+/* ส่วนหัวข้ออธิบายเลือกแบบประเมิน */
+.descrip {
+    margin-top: 0;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+    flex-shrink: 0;
 }
-.wheel-sum{
-  margin: 0;
-  padding: 0;
+
+.wheel-sumary {
+    margin: 0 0 2px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
 }
-.wheel-sumary{
-  margin: 0;
-  padding: 0;
+
+.wheel-sum {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
 }
-/* หัวข้อสถานะกับแบบประเมิน */
-.topic-assess{
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns:2fr 0fr;
-  width: 600px;
-  height: 100px;
-  background-color:  #a8731d;
-  color: #ffffff;
-  margin: 30px auto 0 auto;
-  border-radius: 10px;
-  box-sizing: border-box;
+
+/* หัวข้อแถบตาราง (รายการแบบประเมิน / สถานะ) พร้อมปรับเว้นระยะขวาให้ตรงกับปุ่ม */
+.topic-assess {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: #e60039;
+    color: #ffffff;
+    padding: 10px 48px 10px 20px;
+    margin: 8px 0 5px 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
 }
-.name-topic-assess{
-  margin-left: 50px;
+
+.name-topic-assess {
+    margin-left: 0;
 }
-.sts-topic-assess{
-  margin-right: 50px;
+
+.sts-topic-assess {
+    margin-right: 0;
 }
-/* ปุ่มป้อปอัป */
-.modal-footer-btn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 10px;
-  margin-top: 30px;
+
+/* กล่องแสดงรายการแบบประเมิน (มี Scrollbar เลื่อนดูได้ข้างใน) */
+.all-assess-list {
+    max-height: 220px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 5px;
+    padding: 5px;
 }
-.confirm-btn{
-  background-color: #a8731d;
-  color: #fdfbf5;
-  width: 90px;
-  height: 50px;
-  border: none;
-  border-radius: 10px;
+
+/* ส่วนปุ่มด้านล่าง (บันทึก / ยกเลิก) */
+.modal-footer-btn {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-bottom: 0;
+    flex-shrink: 0;
 }
-.not-confirm-btn{
-  background-color: #c22b3a;
-  border: none;
-  color: #ffffff;
-  width: 90px;
-  height: 50px;
-  border-radius: 10px;
+
+/* ตกแต่งปุ่มยืนยันและยกเลิกภายใน Modal */
+.confirm-btn {
+    background-color: #e60039;
+    color: #ffffff;
+    border: none;
+    padding: 8px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0px 4px 10px rgba(230, 0, 57, 0.3);
+}
+
+.not-confirm-btn {
+    background-color: #ffffff;
+    color: #e60039;
+    border: 1px solid #e60039;
+    padding: 8px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
 }
 /* จัดระเบียบแบบประเมินที่ยังเป็นแค่mockup */
 .all-assess-list{

@@ -7795,20 +7795,25 @@
     bottom: 20px;
     align-self: center;
     background-color: #FCD53F;
+    color: #333;
+    font-weight: bold;
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    padding: 0px 80px;
+    justify-content: center;
+    padding: 14px 40px; 
     border-radius: 20px;
     border: none;
     box-shadow: 0px 8px 14px rgba(0,0,0,0.22);
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   /*เอฟเฟ็กต์ของปุ่มของการสุ่มรางวัล*/
   .enter-random::before{
     content: "";
-    background-color: #ffce0b;
+    background-color: #fff176;
     width: 0px;
     height: 0px;
     position: absolute;
@@ -7823,6 +7828,11 @@
   .enter-random:hover::before{
     width: 500px;
     height: 500px;
+  }
+  /* เพิ่มเอฟเฟ็กต์ปุ่มลอยตัวขึ้นเล็กน้อยตอน Hover เพื่อความมีชีวิตชีวา */
+  .enter-random:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 12px 20px rgba(0,0,0,0.3);
   }
 
   /*รูปของปุ่มของการสุ่มรางวัล*/
@@ -7886,6 +7896,50 @@
     position: relative;
     z-index: 1;
   }
+  /*กรอบจัดแถวปุ่มของแบบประเมิน*/
+.assessment-actions{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/*ปุ่มทั้งสอง: ขนาดเท่ากัน ไม่ลอยออกนอกกรอบ*/
+.assessment-actions .enter-random,
+.assessment-actions .view-history{
+  position: static;          
+  align-self: auto;
+  flex: 0 0 45%;
+  width: 45%;
+  box-sizing: border-box;
+  min-height: 50px;
+  padding: 12px 16px;         
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*ข้อความในปุ่ม: ตัดช่องว่างบนล่างของ <p> เพื่อให้อยู่กลางปุ่มพอดี*/
+.assessment-actions .message-enter-random,
+.assessment-actions .message-view-history{
+  margin: 0;
+  white-space: nowrap;
+}
+
+/*จอแคบ: ปุ่มเรียงลงและเต็มความกว้าง*/
+@media (max-width: 600px){
+  .assessment-actions{
+    flex-direction: column;
+  }
+  .assessment-actions .enter-random,
+  .assessment-actions .view-history{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
 
 
 
@@ -9979,7 +10033,8 @@
     margin-right: 20px
   }
 /* จัดพื้นหลังป๊อปอัพให้อยู่กึ่งกลางจอพอดีเป๊ะ และบังคับให้ทับทุกอย่างด้วย z-index สูงๆ */
-.pop-up-background{
+/* จัดระเบียบ Popup Background และ Content ให้สะอาดเรียบร้อย */
+.pop-up-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -9992,174 +10047,174 @@
     z-index: 9999;
 }
 
-/* ตัวกล่องป๊อปอัพหลัก (ใช้ Flex จัดเรียงด้านใน ไม่ให้เนื้อหาทะลุกรอบ) */
-.pop-up-content{
-    background-color: #FCF6E5;
-    border: 1px solid #a8731d;
+/* ตัวกล่องป๊อปอัพหลัก */
+.pop-up-content {
+    background-color: #ffffff;
+    border: none;
     width: 650px;
-    max-height: 90vh; /* ป้องกันไม่ให้เกินความสูงหน้าจอ */
-    margin-left: 0;   /* เอา margin ซ้ายออก ป้องกันหน้าจอเบี้ยว */
-    border-radius: 10px;
+    max-height: 90vh;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
-    overflow: hidden; /* ตัดส่วนเกินไม่ให้ทะลุกรอบโค้ง */
+    overflow: hidden;
     box-sizing: border-box;
-    padding: 15px;
+    padding: 20px;
 }
 
-/* ส่วน Header */
-.header-popup-spn{
+/* ส่วน Header สีแดงด้านบนสุด */
+.header-popup-spn {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* จัดซ้าย-ขวาอัตโนมัติ ปุ่มกากบาทจะไม่เพี้ยน */
-    padding: 0 15px;
-    background-color: #a8731d;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #e60039;
     height: 55px;
-    border-radius: 8px;
-    color: #FCF6E5;
+    border-radius: 8px 8px 0 0;
+    color: #ffffff;
     flex-shrink: 0;
+    margin: -20px -20px 15px -20px; /* ดึงให้แถบสีแดงชิดขอบบนและซ้ายขวาพอดี */
 }
 
-/* โลโก้รางวัล */
-.logo-popup-topic{
-    width: 20px;
-    height: 20px;
+/* โลโก้รางวัลใน Header */
+.logo-popup-topic {
+    width: 22px;
+    height: 22px;
     object-fit: contain;
 } 
 
-/* ปุ่มกากบาท (เคลียร์ margin-left เดิมทิ้ง ป้องกันปุ่มตกบรรทัด) */
-.x-button{
+/* ข้อความหัวข้อ Header */
+.text-assess {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-left: 0;
+}
+
+/* ปุ่มกากบาทปิด Modal */
+.x-button {
     width: 20px;
     height: 20px;
     object-fit: contain;
-    margin-left: 0;
     cursor: pointer;
 }
 
-/* ส่วนชื่อวงล้อ */
+/* ส่วนวงล้อที่สร้างใหม่ */
 .wheel-name {
-    margin-top: 10px;
+    margin-top: 0;
+    margin-bottom: 12px;
+    padding-left: 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
     flex-shrink: 0;
 }
 
-/* ส่วนหัวข้ออธิบาย */
+.topic-wheel-sub {
+    margin: 0 0 4px 0;
+    font-size: 13px;
+    color: #666;
+    font-weight: normal;
+}
+
+.wheel-sum-value {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* ส่วนหัวข้ออธิบายเลือกแบบประเมิน */
 .descrip {
-    margin-top: 5px;
+    margin-top: 0;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
     flex-shrink: 0;
 }
 
-/* หัวข้อในตาราง */
-.topic-assess{
+.wheel-sumary {
+    margin: 0 0 2px 0;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.wheel-sum {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+/* หัวข้อแถบตาราง (รายการแบบประเมิน / สถานะ) */
+.topic-assess {
     display: flex;
     justify-content: space-between;
-    background-color: #a8731d;
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 6px;
-    margin-top: 10px;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: #e60039;
+    color: #ffffff;
+    padding: 10px 10% 10px 20px;
+    margin: 8px 0 5px 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 14px;
     flex-shrink: 0;
 }
 
-/* กล่องแสดงรายการแบบประเมิน (ให้มี Scrollbar เลื่อนดูได้ข้างใน ไม่ล้นป๊อปอัพ) */
-.all-assess-list{
-    max-height: 200px;
+.name-topic-assess {
+    margin-left: 0;
+}
+
+.sts-topic-assess {
+    margin-right: 0;
+}
+
+/* กล่องแสดงรายการแบบประเมิน (มี Scrollbar เลื่อนดูได้ข้างใน) */
+.all-assess-list {
+    max-height: 220px;
     overflow-y: auto;
     background-color: #fff;
-    border: 1px solid #d1c29b;
-    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
     margin-top: 5px;
     padding: 5px;
 }
 
 /* ส่วนปุ่มด้านล่าง (บันทึก / ยกเลิก) */
-.modal-footer-btn{
+.modal-footer-btn {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 15px;
-    padding-bottom: 5px;
+    margin-top: 20px;
+    padding-bottom: 0;
     flex-shrink: 0;
 }
-/* หัวข้อด้านบน */
-.text-assess{
-   /* margin-top: 20px; */
-   font-size: large;
-   font-weight: bold;
-   margin-left: 10px;
+
+/* ตกแต่งปุ่มยืนยันและยกเลิกภายใน Modal */
+.confirm-btn {
+    background-color: #e60039;
+    color: #ffffff;
+    border: none;
+    padding: 8px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0px 4px 10px rgba(230, 0, 57, 0.3);
 }
-/* ส่วนวงล้อที่สร้างใหม่ */
-.wheel-name{
-  padding-left: 10px; 
-  border-bottom: 1px solid #000;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-.wheel-sum-value{
-  margin: 0;
-  padding: 0;
-}
-.topic-wheel-sub{
-  margin: 0;
-  padding: 0;
-}
-/* ส่วนของหัวข้อเลือกแบบประเมินที่ต้องการ */
-.descrip{
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-}
-.wheel-sum{
-  margin: 0;
-  padding: 0;
-}
-.wheel-sumary{
-  margin: 0;
-  padding: 0;
-}
-/* หัวข้อสถานะกับแบบประเมิน */
-.topic-assess{
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns:2fr 0fr;
-  width: 600px;
-  height: 100px;
-  background-color:  #a8731d;
-  color: #ffffff;
-  margin: 30px auto 0 auto;
-  border-radius: 10px;
-  box-sizing: border-box;
-}
-.name-topic-assess{
-  margin-left: 50px;
-}
-.sts-topic-assess{
-  margin-right: 50px;
-}
-/* ปุ่มป้อปอัป */
-.modal-footer-btn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0 10px;
-  margin-top: 30px;
-}
-.confirm-btn{
-  background-color: #a8731d;
-  color: #fdfbf5;
-  width: 90px;
-  height: 50px;
-  border: none;
-  border-radius: 10px;
-}
-.not-confirm-btn{
-  background-color: #c22b3a;
-  border: none;
-  color: #ffffff;
-  width: 90px;
-  height: 50px;
-  border-radius: 10px;
+
+.not-confirm-btn {
+    background-color: #ffffff;
+    color: #e60039;
+    border: 1px solid #e60039;
+    padding: 8px 35px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
 }
 /* จัดระเบียบแบบประเมินที่ยังเป็นแค่mockup */
 .all-assess-list{
@@ -11379,7 +11434,7 @@
   .btn-change-password,
   .btn-assign-assessment,
   .btn-confirm-evaluation,
-  .enter-random,
+  /* .enter-random, */
   .submitbuildandQR,
   .btnconfirmoffRegister,
   .offRegister,
@@ -11421,7 +11476,7 @@
   .btn-change-password *,
   .btn-assign-assessment *,
   .btn-confirm-evaluation *,
-  .enter-random *,
+  /* .enter-random *, */
   .submitbuildandQR *,
   .btnconfirmoffRegister *,
   .offRegister *,
@@ -11449,7 +11504,7 @@
   .btn-change-password:not(:disabled):hover,
   .btn-assign-assessment:not(:disabled):hover,
   .btn-confirm-evaluation:not(:disabled):hover,
-  .enter-random:not(:disabled):hover,
+  /* .enter-random:not(:disabled):hover, */
   .submitbuildandQR:not(:disabled):hover,
   .btnconfirmoffRegister:not(:disabled):hover,
   .offRegister:not(:disabled):hover,
@@ -13725,3 +13780,475 @@
     margin-bottom: 8px;
   }
 
+  
+
+/* =====================================================================
+     อัปเกรด 2026 ของ admin (ทำจาก style.css ล่าสุดที่ส่งมา)
+     วิธีใช้: วางต่อท้ายสุดของ style.css ของ admin (ใต้ก้อนช่องกรอกข้อมูลแบบกรอบ)
+     ไฟล์นี้รวมเอฟเฟกต์เปลี่ยนหน้าไว้แล้ว ถ้าเคยวาง theme-2026-1-transition.css ให้ลบก้อนนั้นออก
+     แต่ละหมวดมีหมายเลข ไม่ชอบหมวดไหนลบเฉพาะหมวดนั้นได้ หมวดอื่นยังทำงานปกติ
+     ===================================================================== */
+
+
+
+
+  /* ---------- 1. สีหลักเข้มขึ้นนิดเดียว ตัวหนังสือขาวบนปุ่มอ่านง่ายผ่านเกณฑ์มาตรฐาน ---------- */
+  /*(สีเดิม #FF0043 ตัดกับตัวหนังสือขาวได้ 3.9:1 สีนี้ได้ 4.7:1 ตาแทบไม่เห็นความต่าง)*/
+  :root{
+    --primary: #E6003D;
+    --primary-dark: #B8002F;
+    --input-ring: rgba(230, 0, 61, 0.14);
+  }
+
+
+
+
+  /* ---------- 2. เงาแบบใหม่: ยังเห็นเงาชัด แต่ฟุ้งและนุ่มขึ้น ไม่ดำทึบ ---------- */
+  /*(อยากได้เงาหนาแบบเดิม ลบหมวดนี้ออก)*/
+  :root{
+    --shadow-old: 0px 1px 2px rgba(20, 22, 40, 0.06), 0px 10px 24px rgba(20, 22, 40, 0.10);
+    --shadow-old-sm: 0px 1px 2px rgba(20, 22, 40, 0.08), 0px 4px 10px rgba(20, 22, 40, 0.10);
+    --shadow-lift: 0px 2px 4px rgba(20, 22, 40, 0.06), 0px 18px 36px rgba(20, 22, 40, 0.14);
+  }
+
+
+
+
+  /* ---------- 3. แถบด้านบนเป็นกระจกฝ้า เลื่อนหน้าแล้วเนื้อหาลอดใต้แถบแบบเบลอๆ ---------- */
+  .btn-user-wrapper,
+  .btn-user-wrapper-1{
+    background-color: rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+    border-bottom: 1px solid rgba(20, 22, 40, 0.06);
+    box-shadow: 0px 6px 20px rgba(20, 22, 40, 0.06);
+  }
+  /*แถบบนเดิมกว้างเต็มจอ ส่วนซ้าย 280px ซ่อนอยู่ใต้เมนูซ้าย พอเป็นกระจกฝ้า ส่วนที่ซ่อนอยู่ก็เบลอเมนูซ้ายไปด้วย
+    และโผล่ขึ้นมาทับเมนูตอนเปลี่ยนหน้า ให้แถบบนเริ่มหลังเมนูซ้ายพอดี (เฉพาะหน้าที่มีเมนูซ้าย) หน้าตาเหมือนเดิมทุกอย่าง*/
+  body:has(.container, .container-1, .container2, .container3, .container-assessment, .container-mngrewrd) .btn-user-wrapper,
+  body:has(.container, .container-1, .container2, .container3, .container-assessment, .container-mngrewrd) .btn-user-wrapper-1{
+    left: 280px;
+    min-width: 0;
+  }
+
+  /*เบราว์เซอร์ที่ทำกระจกฝ้าไม่ได้ ใช้พื้นขาวทึบแทน*/
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+    .btn-user-wrapper,
+    .btn-user-wrapper-1{
+      background-color: #ffffff;
+    }
+  }
+
+
+
+
+  /* ---------- 4. เปลี่ยนหน้าแบบลื่นไหล (เมนูซ้ายกับแถบบนอยู่นิ่ง เนื้อหาค่อยๆ จางเข้า) ---------- */
+  @view-transition{
+    navigation: auto;
+  }
+  .container,
+  .container-1,
+  .container2,
+  .container3,
+  .container-assessment,
+  .container-mngrewrd{
+    view-transition-name: sidebar;
+  }
+  .btn-user-wrapper,
+  .btn-user-wrapper-1{
+    view-transition-name: topbar;
+  }
+  /*เนื้อหาเก่ากับใหม่จางสลับกันแบบผสมแสง (ไม่มีช่วงที่จอซีดขาว)*/
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(sidebar),
+  ::view-transition-new(sidebar),
+  ::view-transition-old(topbar),
+  ::view-transition-new(topbar){
+    animation-duration: 200ms;
+  }
+
+  /*ลำดับชั้นตอนเปลี่ยนหน้า: เมนูซ้ายอยู่บนสุด แถบบนรองลงมา เนื้อหาอยู่ล่างสุด*/
+  ::view-transition-group(root){
+    z-index: 0;
+  }
+  ::view-transition-group(topbar){
+    z-index: 1;
+  }
+  ::view-transition-group(sidebar){
+    z-index: 2;
+  }
+
+
+
+
+
+  /* ---------- 5. การ์ดค่อยๆ ลอยขึ้นตอนเปิดหน้า ไล่กันทีละใบ ---------- */
+  @keyframes rise-in{
+    from{
+      opacity: 0;
+      transform: translateY(16px) scale(0.985);
+    }
+  }
+
+  /*การ์ดหลักของทุกหน้า (backwards = มีผลแค่ช่วงเล่น จบแล้วไม่ไปทับเอฟเฟกต์อื่น เช่น ช่องค้นหาที่ซ่อนแถว)*/
+  .alluser_frames-1 > *,
+  .chart-wrap,
+  .framesmost_popular,
+  .framestatusQRCode,
+  .activity-Closed-Open > *,
+  .reward-list,
+  .manageusr-mainbox,
+  .reward-spn-list,
+  .main-wheel-spn,
+  .framelargest,
+  .framebigofWheel,
+  .framesectionluckywinner,
+  .framechanceleavereward,
+  .framebiglistname,
+  .frameallsentdeliveryfailed > *,
+  .framebiglistnamerecipientreward,
+  .framelistthatfailed,
+  .Profile,
+  .User_Information,
+  .Change_password,
+  .grayframeactivity,
+  .frame-grey-1,
+  .add-box-main,
+  .edit-box-main,
+  .main-edit-box,
+  .edit-re-main,
+  .frameeditinformation,
+  .framechangepassword,
+  .random-reward-header,
+  .footer-winner-card,
+  .footer-probability-card{
+    animation: rise-in 560ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  /*การ์ดในแถวเดียวกันขึ้นไล่กันจากซ้ายไปขวา*/
+  .alluser_frames-1 > *:nth-child(2),
+  .activity-Closed-Open > *:nth-child(2),
+  .frameallsentdeliveryfailed > *:nth-child(2){
+    animation-delay: 70ms;
+  }
+  .alluser_frames-1 > *:nth-child(3),
+  .activity-Closed-Open > *:nth-child(3),
+  .frameallsentdeliveryfailed > *:nth-child(3){
+    animation-delay: 140ms;
+  }
+  .alluser_frames-1 > *:nth-child(4),
+  .activity-Closed-Open > *:nth-child(4),
+  .frameallsentdeliveryfailed > *:nth-child(4){
+    animation-delay: 210ms;
+  }
+  .alluser_frames-1 > *:nth-child(5),
+  .activity-Closed-Open > *:nth-child(5),
+  .frameallsentdeliveryfailed > *:nth-child(5){
+    animation-delay: 280ms;
+  }
+
+  /*การ์ดแถวล่างของแดชบอร์ดขึ้นหลังการ์ดตัวเลข / การ์ดคู่ซ้ายขวา ใบขวาขึ้นช้ากว่านิดนึง*/
+  .chart-wrap{
+    animation-delay: 300ms;
+  }
+  .framesmost_popular{
+    animation-delay: 370ms;
+  }
+  .framestatusQRCode{
+    animation-delay: 440ms;
+  }
+  .framechanceleavereward,
+  .main-wheel-spn,
+  .framelistthatfailed,
+  .User_Information,
+  .footer-probability-card{
+    animation-delay: 90ms;
+  }
+  .Change_password{
+    animation-delay: 160ms;
+  }
+
+
+
+
+  /* ---------- 6. การ์ดที่กดได้ลอยขึ้นตอนเอาเมาส์ชี้ / ปุ่มยุบนิดๆ ตอนกด ---------- */
+  .frame-activity-assessment,
+  .frameinformation-assessment,
+  .alluser_frames-1 > *,
+  .framerandom_all,
+  .frameReward_Box{
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  }
+  .frame-activity-assessment:hover,
+  .frameinformation-assessment:hover,
+  .alluser_frames-1 > *:hover,
+  .framerandom_all:hover,
+  .frameReward_Box:hover{
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .save-data-1,
+  .save-password-1,
+  .btn-build-activityurgent,
+  .offpopupluckywinner,
+  .btn-senditgmail-1,
+  .btn-submitpopuplistnameawardrecipient,
+  .btn-sendallemails1,
+  .btn-Edit-information-1,
+  .btn-Edit-information-profile,
+  .Password-Change-Button,
+  .btn-change-password,
+  .btn-assign-assessment,
+  .btn-confirm-evaluation,
+  .enter-random,
+  .submitbuildandQR,
+  .btnconfirmoffRegister,
+  .offRegister,
+  .btn-enlargeQRcode,
+  .linkassessmenturl-1,
+  .btn-saveassessmenturl,
+  .confirm-btn,
+  .addreward,
+  .add-usr-btn,
+  .addreward-btn1,
+  .addre-btn1,
+  .addusr-btn1,
+  .submit-btn-edtusr,
+  .submtedt-btn,
+  .submit-wheel-reward,
+  .btn-cancel-1,
+  .btn-cancel-password,
+  .btn-canceldeletion,
+  .canceloffRegister,
+  .btn-Resend,
+  .btn-Resend1,
+  .btn-resendallthatfailed,
+  .btn-cancel-evaluation,
+  .showmore,
+  .showmore-1,
+  .Change_image,
+  .btn-recordQrcode,
+  .edit-activity,
+  .view-details,
+  .view-history,
+  .cancle-btn,
+  .cancle-btn-addusr,
+  .cancle-btn-editusr,
+  .cancle-btn-editreward,
+  .not-confirm-btn,
+  .cancle-wheel-btn,
+  .claerall-selected,
+  .deleteRegister,
+  .btn-confirmdeletion,
+  .btn-close-Edit,
+  .btn-close-change,
+  .btn-offpopuplistnameawardrecipient,
+  .btn-logout,
+  .spn-test-btn{
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+  .save-data-1:not(:disabled):active,
+  .save-password-1:not(:disabled):active,
+  .btn-build-activityurgent:not(:disabled):active,
+  .offpopupluckywinner:not(:disabled):active,
+  .btn-senditgmail-1:not(:disabled):active,
+  .btn-submitpopuplistnameawardrecipient:not(:disabled):active,
+  .btn-sendallemails1:not(:disabled):active,
+  .btn-Edit-information-1:not(:disabled):active,
+  .btn-Edit-information-profile:not(:disabled):active,
+  .Password-Change-Button:not(:disabled):active,
+  .btn-change-password:not(:disabled):active,
+  .btn-assign-assessment:not(:disabled):active,
+  .btn-confirm-evaluation:not(:disabled):active,
+  .enter-random:not(:disabled):active,
+  .submitbuildandQR:not(:disabled):active,
+  .btnconfirmoffRegister:not(:disabled):active,
+  .offRegister:not(:disabled):active,
+  .btn-enlargeQRcode:not(:disabled):active,
+  .linkassessmenturl-1:not(:disabled):active,
+  .btn-saveassessmenturl:not(:disabled):active,
+  .confirm-btn:not(:disabled):active,
+  .addreward:not(:disabled):active,
+  .add-usr-btn:not(:disabled):active,
+  .addreward-btn1:not(:disabled):active,
+  .addre-btn1:not(:disabled):active,
+  .addusr-btn1:not(:disabled):active,
+  .submit-btn-edtusr:not(:disabled):active,
+  .submtedt-btn:not(:disabled):active,
+  .submit-wheel-reward:not(:disabled):active,
+  .btn-cancel-1:active,
+  .btn-cancel-password:active,
+  .btn-canceldeletion:active,
+  .canceloffRegister:active,
+  .btn-Resend:active,
+  .btn-Resend1:active,
+  .btn-resendallthatfailed:active,
+  .btn-cancel-evaluation:active,
+  .showmore:active,
+  .showmore-1:active,
+  .Change_image:active,
+  .btn-recordQrcode:active,
+  .edit-activity:active,
+  .view-details:active,
+  .view-history:active,
+  .cancle-btn:active,
+  .cancle-btn-addusr:active,
+  .cancle-btn-editusr:active,
+  .cancle-btn-editreward:active,
+  .not-confirm-btn:active,
+  .cancle-wheel-btn:active,
+  .claerall-selected:active,
+  .deleteRegister:active,
+  .btn-confirmdeletion:active,
+  .btn-close-Edit:active,
+  .btn-close-change:active,
+  .btn-offpopuplistnameawardrecipient:active,
+  .btn-logout:active,
+  .spn-test-btn:not(:disabled):active{
+    transform: scale(0.97);
+  }
+
+
+
+
+  /* ---------- 7. กดปุ่ม Tab บนคีย์บอร์ด จะมีกรอบสีหลักบอกว่าอยู่ปุ่มไหน (ใช้เมาส์จะไม่ขึ้น) ---------- */
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible{
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+
+
+
+  /* ---------- 8. แถบเลื่อนบางๆ มุมโค้ง แทนแถบเทาหนาของเบราว์เซอร์ ---------- */
+  html{
+    scrollbar-width: thin;
+    scrollbar-color: #C3C7D4 transparent;
+  }
+  ::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track{
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb{
+    background-color: #C3C7D4;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background-color: #A3A8B8;
+  }
+
+
+
+
+  /* ---------- 9. หน้าจัดการวงล้อสุ่ม: ส่วนตัวอย่างแถบสุ่มกับโอกาสออกที่เพิ่มมาใหม่ ให้เข้าธีม ---------- */
+  .spn-test-btn{
+    background-color: #ffffff;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius-btn);
+    color: var(--primary);
+    box-shadow: var(--shadow-old);
+  }
+  .spn-test-btn:hover:not(:disabled){
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+  .spn-chance-title,
+  .spn-chance-name,
+  .spn-chance-value{
+    color: var(--heading);
+  }
+  .spn-chance-qty,
+  .spn-test-note,
+  .spn-chance-empty{
+    color: var(--muted);
+  }
+  .spn-chance-row{
+    border-bottom: 1px solid var(--border);
+  }
+  .spn-chance-bar{
+    background-color: #EEF0F5;
+  }
+
+
+
+
+  /* ---------- 10. กรอบขาวของแท็บแบบประเมินกลับมา (ตามที่ขอรอบก่อน) ---------- */
+
+
+
+
+  /* ---------- ปิดการเคลื่อนไหวทั้งหมดในไฟล์นี้ สำหรับคนที่ตั้งเครื่องให้ลดการเคลื่อนไหว ---------- */
+  @media (prefers-reduced-motion: reduce){
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*){
+      animation: none !important;
+    }
+    .alluser_frames-1 > *,
+    .chart-wrap,
+    .framesmost_popular,
+    .framestatusQRCode,
+    .activity-Closed-Open > *,
+    .reward-list,
+    .manageusr-mainbox,
+    .reward-spn-list,
+    .main-wheel-spn,
+    .framelargest,
+    .framebigofWheel,
+    .framesectionluckywinner,
+    .framechanceleavereward,
+    .framebiglistname,
+    .frameallsentdeliveryfailed > *,
+    .framebiglistnamerecipientreward,
+    .framelistthatfailed,
+    .Profile,
+    .User_Information,
+    .Change_password,
+    .grayframeactivity,
+    .frame-grey-1,
+    .add-box-main,
+    .edit-box-main,
+    .main-edit-box,
+    .edit-re-main,
+    .frameeditinformation,
+    .framechangepassword,
+    .random-reward-header,
+    .footer-winner-card,
+    .footer-probability-card{
+      animation: none;
+    }
+    .frame-activity-assessment:hover,
+    .frameinformation-assessment:hover,
+    .alluser_frames-1 > *:hover,
+    .framerandom_all:hover,
+    .frameReward_Box:hover{
+      transform: none;
+    }
+  }
+  
+   /* ===== แก้เมนูกระพริบตอนเปลี่ยนหน้า (วางไว้ล่างสุดของไฟล์ ใต้ทุกอย่าง) ===== */
+  @view-transition{
+    navigation: none;
+  }
+  .container,
+  .container-1,
+  .container2,
+  .container3,
+  .container-assessment,
+  .container-mngrewrd,
+  .btn-user-wrapper,
+  .btn-user-wrapper-1{
+    view-transition-name: none;
+  }
+    @view-transition{
+    navigation: auto;
+  }

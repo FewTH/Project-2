@@ -210,14 +210,15 @@
                     ปิดรับคำตอบ: {{$assessment->closed_at ? \Carbon\Carbon::parse($assessment->closed_at)->format('d M Y') : '-'}}
                 </p>
                 @if($assessment->wheelAssessment)
-                {{-- กรณีที่เราบันทึกวงล้อแล้วตัวแบบประเมินจะมีปุ่มเข้าสู่การสุ่มเพิ่มขึ้นมา --}}
-                <a href="{{route('manager.assessment.random',$assessment->assessment_id)}}" class="enter-random">
-                    <img src="{{asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png')}}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
-                    <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
-                </a>
-                <a href="{{ route('manager.history_random', $assessment->assessment_id) }}" class="view-history">
-                    <p class="message-view-history">ดูประวัติการสุ่ม</p>
-                </a>
+                <div class="assessment-actions">
+                    <a href="{{route('manager.assessment.random',$assessment->assessment_id)}}" class="enter-random">
+                        <img src="{{ asset('admin/img/รูปของปุ่มเข้าสู้การสุ่มรางวัล.png') }}" alt="รูปของการสุ่มแบบประเมิน" class="img-enter-random">
+                        <p class="message-enter-random">เข้าสู่การสุ่มรางวัล</p>
+                    </a>
+                    <a href="{{ route('manager.history_random', $assessment->assessment_id) }}" class="view-history">
+                        <p class="message-view-history">ดูประวัติการสุ่ม</p>
+                    </a>
+                </div>
                 @else
                 {{-- ยังไม่ได้ผูกวงล้อจะให้โชวปุ่มไปหน้าสร้างวงล้อ --}}
                 <a href="{{url('manager/managespin')}}" class="assessment-open-1">

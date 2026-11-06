@@ -130,4 +130,17 @@ class AssessmentApi
         ]);
         return collect($data['assessments'] ?? [])->map(fn($a) => $this->normalizeAssessment($a));
     }
+
+        // แบบประเมินที่ผู้ตอบ (ตามอีเมล) ได้ทำแล้ว
+    public function assessmentsByEmail(string $email): Collection
+    {
+        $email = strtolower(trim($email));
+
+        return Cache::remember('assess_by_email_' . md5($email), 120, function () use ($email) {
+            return $this->all()
+                ->filter(fn ($a) => $this->respondents($a->assessment_id)
+                    ->contains(fn ($r) => strtolower(trim($r->email)) === $email))
+                ->values();
+        });
+    }
 }

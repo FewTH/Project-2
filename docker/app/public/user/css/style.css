@@ -3383,6 +3383,13 @@ body.no-scroll {
     z-index: 1;
   }
 
+  .nothaveactivity{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
 
 /* แต่งหน้าlogin */
 .login-box-1{

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Spinresult;
 use App\Models\Reward;
 use App\Services\AssessmentApi;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
-        // ของรางวัลที่เคยได้รับของ user คนนี้ 
+        // ของรางวัลที่เคยได้รับของ user คนนี้
         $winReward = Spinresult::where('winner_email', $user->email)
                                 ->with('reward')
                                 ->latest()
@@ -33,36 +33,12 @@ class HomeController extends Controller
             $popularRewards = Reward::latest()->take(3)->get();
         }
 
-        // แบบประเมินที่ทำล่าสุด
+        // แบบประเมินที่ทำแล้ว (ดึงจาก API ตามอีเมลผู้ตอบ)
         $latestAssessments = collect();
         try {
-            $spinResults = Spinresult::where('winner_email', $user->email)
-                                    ->whereNotNull('assessment_id')
-                                    ->latest()
-                                    ->take(2)
-                                    ->get();
-
-            $latestAssessments = $spinResults->map(function($spin) use ($assessmentApi) {
-                $assessmentName = 'แบบประเมินความพึงพอใจ';
-                if ($spin->assessment_id) {
-                    try {
-                        // ดึงข้อมูลแบบประเมินรายรายการจาก API ของรุ่นพี่
-                        $assessObj = $assessmentApi->find($spin->assessment_id);
-                        if ($assessObj && isset($assessObj->name)) {
-                            $assessmentName = $assessObj->name;
-                        }
-                    } catch (\Exception $e) {
-                        // ถ้าเรียก API ไม่ผ่าน ใช้ชื่อสำรอง
-                    }
-                }
-
-                return (object) [
-                    'created_at' => $spin->created_at,
-                    'name' => $assessmentName,
-                ];
-            });
-        } catch (\Exception $e) {
-            $latestAssessments = collect();
+            $latestAssessments = $assessmentApi->assessmentsByEmail($user->email);
+        } catch (\Throwable $e) {
+            report($e);
         }
 
         return view('user.home', compact('user', 'winReward', 'popularRewards', 'latestAssessments'));
