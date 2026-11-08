@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderAssessmentList(assessments) {
         if (assessments.length === 0) {
-            assessmentListBodyn1.innerHTML = '<p class="no-data">ไม่มีแบบประเมินที่สามารถผูกได้ในขณะนี้</p>';
+            assessmentListBodyn1.innerHTML = '<p class="no-data">ไม่มีแบบประเมินที่สามารถเพิ่มวงล้อได้ในขณะนี้</p>';
             return;
         }
 

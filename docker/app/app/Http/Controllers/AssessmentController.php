@@ -31,20 +31,33 @@ class AssessmentController extends Controller
             $a->WheelAssessment = $a->wheelAssessment;
         });
     }
-    
+    public function assessmentsForuser(AssessmentApi $api)
+    {
+        $user = auth()->user();
+        $assignments = AssessmentAssignment::pluck('assigned_to', 'assessment_id');
+        $all = $api->all();
+        
+        // เงื่อนไขถ้า role เป็น manager จะเห็นแค่แบบประเมินที่ได้รับมอบหมาย
+        if($user->role === 'manager'){
+            return $all->filter(fn($a) => ($assignments[$a->assessment_id] ?? null) == $user->user_id);
+            }
+            // ถ้าเป็น Admin จะเห็นแบบประเมินทั้งหมดที่ยังไม่ได้มอบหมายให้manager
+            return $all->filter(fn($a) => !isset($assignments[$a->assessment_id]));
+    }
     public function availableAssessments(AssessmentApi $api)
     {
         // ดึงรายชื่อ assessment_id ที่ถูกผูกกับวงล้อไปแล้ว
-        $usedAssessmentIds = WheelAssessment::pluck('assessment_id')->all();
+        $used = WheelAssessment::pluck('assessment_id')->map(fn($id) => (int) $id)->all();
         
         // เอาเฉพาะอันที่ยังไม่เคยถูกเพิ่มวงล้อออกมา
-        $available = $api->all()
-        ->filter(fn($a) => $a->is_open && !in_array($a->assessment_id, $usedAssessmentIds))
+        $available = $this->assessmentsForUser($api)
+        ->filter(fn($a) => $a->is_open && !in_array((int) $a->assessment_id, $used, true))
+        ->sortByDesc('assessment_id')
         ->map(fn($a)=>[
             'id'=>$a->assessment_id,
             'name'=>$a->name,
             'created_by'=>$a->created_by_name,
-            'closed_at'=>$a->closed_at?->format('d M Y'),
+            'closed_at'  => $a->closed_at ? $a->closed_at->format('d M Y') : '-',
         ])->values();
 
         return response()->json($available);
