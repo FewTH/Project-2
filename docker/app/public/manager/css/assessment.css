@@ -2147,7 +2147,6 @@ body.no-scroll {
   display: flex;
   flex-direction: column;
   gap: 28px;
-  margin-top: 40px;
 }
  
 /* กล่องของแต่ละแถบ (สีพื้นเหมือนกล่องวงล้อเดิม) */

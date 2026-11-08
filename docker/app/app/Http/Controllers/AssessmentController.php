@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WheelAssessment;
+use App\Models\WheelItem;
 use App\Models\Spinresult;
 use App\Models\AssessmentAssignment;
 use Illuminate\Support\Str;
@@ -31,6 +32,39 @@ class AssessmentController extends Controller
             $a->WheelAssessment = $a->wheelAssessment;
         });
     }
+
+    // ผู้โชคดี 3 คนล่าสุดของแบบประเมินนี้ ดึงจากตาราง spin_results (เดิมเก็บใน localStorage ของเบราว์เซอร์)
+    private function recentWinners(int $assessmentId): array
+    {
+        return Spinresult::with('reward')
+            ->where('assessment_id', $assessmentId)
+            ->orderByDesc('result_id')
+            ->take(3)
+            ->get()
+            ->map(fn ($s) => [
+                'name'   => $s->winner_name,
+                'reward' => $s->reward->name ?? '-',
+            ])
+            ->values()
+            ->all();
+    }
+
+    // รายชื่อที่ยังสุ่มได้: is_drawn ใน API ยังเป็น 0 และยังไม่เคยได้รางวัลในแบบประเมินนี้ (เช็กจาก spin_results)
+    // กันกรณีแจ้ง API ว่าสุ่มแล้วไม่สำเร็จ (markDrawn ล้ม) แล้วคนเดิมถูกสุ่มซ้ำ
+    private function undrawnRespondents(int $assessmentId, AssessmentApi $api)
+    {
+        $wonEmails = Spinresult::where('assessment_id', $assessmentId)
+            ->pluck('winner_email')
+            ->filter()
+            ->map(fn ($e) => strtolower(trim($e)))
+            ->flip();
+
+        return $api->respondents($assessmentId)
+            ->where('is_drawn', 0)
+            ->reject(fn ($r) => $wonEmails->has(strtolower(trim((string) $r->email))))
+            ->values();
+    }
+
     public function assessmentsForuser(AssessmentApi $api)
     {
         $user = auth()->user();
@@ -73,7 +107,7 @@ class AssessmentController extends Controller
             return back()->with('error', 'แบบประเมินนี้ยังไม่มีวงล้อรางวัล');
         }
         $wheel = $assessment->wheelAssessment->wheel;
-        $respondents = $api->respondents((int) $id)->where('is_drawn', 0)->values();
+        $respondents = $this->undrawnRespondents((int) $id, $api);
         
         // เป็นการให้ตัวแปรนี้เก็บค่า role ของผู้ใช้และเมื่อมีการเรียกใช้หน้านี้ก็จะถูกเช็คว่าคนที่เรียกใช้อยู่ในrole อะไร
         $view = auth()->user()->role === 'manager' ? 'manager.spinwheel' : 'admin.spinwheel';
@@ -81,6 +115,7 @@ class AssessmentController extends Controller
             'assessment' => $assessment,
             'wheel' => $wheel,
             'respondents' => $respondents, //เพิ่มให้มันส่งผู้ตอบแบบประเมินมาด้วย
+            'recentWinners' => $this->recentWinners((int) $id), // ผู้โชคดีล่าสุดจาก database
         ]);
     }
     // ฟังก์ชันนี้ทำหลายอย่างมากตั้งแต่สุ่มวงล้อแล้วลดจำนวนรางวัลกับบันทึกลงดา้ตาเบส
@@ -98,8 +133,8 @@ class AssessmentController extends Controller
             return response()->json(['success'=>false,'message'=>'รางวัลในวงหมดแล้ว'],422);
         }
 
-        // ไว้เช็ครายชื่อที่ยังเหลืออยู่
-        $availableRespondents = $api->respondents((int) $id)->where('is_drawn',0)->values();
+        // ไว้เช็ครายชื่อที่ยังเหลืออยู่ (ไม่รวมคนที่เคยได้รางวัลในแบบประเมินนี้แล้ว)
+        $availableRespondents = $this->undrawnRespondents((int) $id, $api);
         
         if ($availableRespondents->isEmpty()){
             return response()->json(['success'=> false, 'message'=>'รายชื่อถูกสุ่มหมดแล้ว'],422);
@@ -120,30 +155,45 @@ class AssessmentController extends Controller
         // อันนี้จะสุ่มรายชื่อผู้ทำแบบประเมินนั้นๆ
         $winnerRespondent = $availableRespondents->random();
         
-        $spinResult = DB::transaction(function () use ($wheel,$winnerReward,$winnerRespondent,$id){
-            // อันนี้จะเป็นส่วนที่คอยลดจำนวนรางวัลในวงล้อทุกครั้งที่มีการกดสุ่ม
-            $wheel -> rewards()->updateExistingPivot($winnerReward->reward_id, [
-                'quantity_selected'=>$winnerReward->pivot->quantity_selected -1,
-            ]);
+        try {
+            $spinResult = DB::transaction(function () use ($wheel,$winnerReward,$winnerRespondent,$id){
+                // ล็อกแถวของรางวัลนี้ในวงล้อไว้ก่อน กันแอดมิน 2 คนกดสุ่มพร้อมกันแล้วแจกชิ้นสุดท้ายซ้ำ
+                $item = WheelItem::where('wheel_id', $wheel->wheel_id)
+                    ->where('reward_id', $winnerReward->reward_id)
+                    ->lockForUpdate()
+                    ->first();
+                if (!$item || (int) $item->quantity_selected < 1) {
+                    throw new \DomainException('รางวัลที่สุ่มได้เพิ่งหมดพอดี กรุณากดสุ่มใหม่');
+                }
 
-        // อันนี้เป็นการอัพเดตค่าผู้ที่ทำแบบประเมินว่าคนที่ถูกสุ่มได้จะมีสถานะเป็น is_drawn เป็น 1
-        // $winnerRespondent->update([
-        //     'is_drawn'=> 1,
-        //     'drawn_at'=> now(),
-        // ]);
+                // กันคนเดิมได้รางวัลซ้ำ (เช่น มีคนกดสุ่มพร้อมกันแล้วได้คนเดียวกัน)
+                $alreadyWon = Spinresult::where('assessment_id', (int) $id)
+                    ->where('winner_email', $winnerRespondent->email)
+                    ->exists();
+                if ($alreadyWon) {
+                    throw new \DomainException('ผู้โชคดีคนนี้เพิ่งได้รางวัลไปแล้ว กรุณากดสุ่มใหม่');
+                }
 
-        return Spinresult::create([
-            'reward_id' => $winnerReward->reward_id,
-            'assessment_id'=> (int) $id,
-            'drawn_by' => Auth::user()->user_id,
-            'qr_code' => (string) Str::uuid(), //เป็นการสร้าง qr_codeแบบจำลองไว้ก่อน
-            'winner_name'=> $winnerRespondent->full_name,
-            'winner_email'=> $winnerRespondent->email,
-            'receive_status' => 'not-received',
-            'receive_deadline' => now()->addDays(7),
-            'checked_by_user_id' => null,
-        ]);
-    });
+                // ลดจำนวนรางวัลในวงล้อทีละ 1 ทุกครั้งที่มีการกดสุ่ม
+                WheelItem::where('wheel_id', $wheel->wheel_id)
+                    ->where('reward_id', $winnerReward->reward_id)
+                    ->decrement('quantity_selected');
+
+                return Spinresult::create([
+                    'reward_id' => $winnerReward->reward_id,
+                    'assessment_id'=> (int) $id,
+                    'drawn_by' => Auth::user()->user_id,
+                    'qr_code' => (string) Str::uuid(), //เป็นการสร้าง qr_codeแบบจำลองไว้ก่อน
+                    'winner_name'=> $winnerRespondent->full_name,
+                    'winner_email'=> $winnerRespondent->email,
+                    'receive_status' => 'not-received',
+                    'receive_deadline' => now()->addDays(7),
+                    'checked_by_user_id' => null,
+                ]);
+            });
+        } catch (\DomainException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 409);
+        }
 
     // บันทึกผลสำเร็จแล้วค่อยแจ้ง API ถ้าเจ๊งให้เก็บ log ไว้
      try {
@@ -163,12 +213,8 @@ class AssessmentController extends Controller
         'rate'     => $r->rate,
         'weight'   => $r->rate * $r->pivot->quantity_selected,
         'quantity' => $r->pivot->quantity_selected,
-        // 'id'=>$r->reward_id,
-        // 'label'=>$r->name,
-        // 'weight'=>$r->rate * $r->pivot->quantity_selected,
-        // 'quantity_selected' => $r->pivot->quantity_selected, 
     ])->values();
-    // ****
+    
     $remainingRespondents = $availableRespondents
         ->where('respondent_id', '!=', $winnerRespondent->respondent_id)
         ->map(fn($r) => ['id' => $r->respondent_id,'label' => $r->full_name])
@@ -182,6 +228,7 @@ class AssessmentController extends Controller
         'winner_name'=> $winnerRespondent->full_name,
         'remaining_rewards'=> $remainingRewards,
         'remaining_respondents' => $remainingRespondents,
+        'recent_winners' => $this->recentWinners((int) $id), // ผู้โชคดีล่าสุดจาก database หลังบันทึกแล้ว
     ]);
     }
     // ฟังก์ชันนี้ก็ประมาณว่าดึงแบบบประเมินที่ยังไม่มีวงล้อทั้งหมดมาแสดงที่popupพร้อมรายชื่อmanager

@@ -176,13 +176,15 @@ document.addEventListener('DOMContentLoaded', function () {
         return nameData[Math.floor(Math.random() * nameData.length)];
     }
 
-    //  ผู้โชคดีล่าสุด (เก็บแยกตามแบบประเมินใน localStorage) 
-    const storageKey = 'recentWinners_' + assessmentId;
-    let recentWinners = [];
+    //  ผู้โชคดีล่าสุด (มาจาก database: controller ส่งมาทาง spinwheel.blade ตอนเปิดหน้า
+    //  และส่งชุดใหม่กลับมาทุกครั้งที่สุ่มเสร็จ เปิดเครื่องไหนก็เห็นเหมือนกัน)
+    let recentWinners = Array.isArray(window.recentWinners) ? window.recentWinners : [];
+
+    // ล้างข้อมูลเก่าที่เคยเก็บไว้ใน localStorage ของเครื่องนี้ (ไม่ได้ใช้แล้ว)
     try {
-        recentWinners = JSON.parse(localStorage.getItem(storageKey)) || [];
+        localStorage.removeItem('recentWinners_' + assessmentId);
     } catch (e) {
-        recentWinners = [];
+        // บางเบราว์เซอร์ปิด localStorage ไว้ ไม่เป็นไร
     }
 
     function renderRecentWinners() {
@@ -205,10 +207,8 @@ document.addEventListener('DOMContentLoaded', function () {
         `).join('');
     }
 
-    function addRecentWinner(winnerName, rewardName) {
-        recentWinners.unshift({ name: winnerName, reward: rewardName });
-        recentWinners = recentWinners.slice(0, 3); // เก็บแค่ 3 คนล่าสุด
-        localStorage.setItem(storageKey, JSON.stringify(recentWinners));
+    function setRecentWinners(list) {
+        if (Array.isArray(list)) recentWinners = list.slice(0, 3); // แสดงแค่ 3 คนล่าสุด
         renderRecentWinners();
     }
 
@@ -299,7 +299,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('spinResultReward').textContent = data.winner_reward_label;
             document.getElementById('spinResultPopup').style.display = 'flex';
 
-            addRecentWinner(data.winner_name, data.winner_reward_label);
+            // ผู้โชคดีล่าสุดชุดใหม่จาก database (ถ้า server ไม่ได้ส่งมา ก็ต่อหัวรายการเองไปก่อน)
+            setRecentWinners(data.recent_winners ?? [
+                { name: data.winner_name, reward: data.winner_reward_label },
+                ...recentWinners,
+            ]);
 
             // อัปเดตข้อมูลที่เหลือหลังสุ่ม รอบหน้าการ์ดที่วิ่งผ่านจะไม่มีคนที่ได้ไปแล้ว
             rewardData = data.remaining_rewards;

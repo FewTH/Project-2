@@ -3797,7 +3797,8 @@
     .popup-btn-Change-1{
       width: calc(100vw - 32px);
       max-width: 400px;
-      height: auto;
+      height: fit-content;      /* เดิมเป็น height: auto; */
+      box-sizing: border-box;   /* เพิ่มบรรทัดนี้ ให้เว้นขอบซ้ายขวาพอดี */
       padding: 16px 16px 20px 16px;
     }
     .img-edit-information,
@@ -4239,6 +4240,10 @@
     .frameReward_Box:hover{
       transform: none;
     }
+  }
+      /* ===== ฟอนต์แบบหัวกลม (Arial + Tahoma เหมือนฟอนต์มาตรฐานของ Windows) ===== */
+  :root{
+    --font: Arial, Tahoma, sans-serif;
   }
 
   

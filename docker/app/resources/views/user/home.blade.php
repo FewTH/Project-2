@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="{{ asset('user/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('user/css/theme-user.css') }}">
     <title>BUUGIFT</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     {{-- แถบเมนูซ้ายใช้ style จาก style.css + theme-user.css (คลาส container-home / btn-Sidebar-home / btn-Home1 / btn-logout1)
          ส่วนที่เหลือของหน้านี้ใช้ style ในตัวเอง (คลาสขึ้นต้นด้วย bg-) --}}
     <style>
@@ -17,7 +15,7 @@
             --text:#1b1a2e; --muted:#6b6a80; --line:#e8e8f0;
         }
         *{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Prompt',sans-serif;color:var(--text);min-height:100vh;min-width:0;
+        body{font-family:var(--font);color:var(--text);min-height:100vh;min-width:0;
             background:radial-gradient(900px 500px at 85% -5%,#f3dbe6 0,transparent 60%),var(--paper);}
         a{text-decoration:none;color:inherit}
 
@@ -85,7 +83,7 @@
         .bg-empty{grid-column:1/-1;text-align:center;padding:34px;color:var(--muted);background:var(--card);border-radius:20px;border:1px dashed var(--line)}
 
         /* ---------- สองคอลัมน์ล่าง ---------- */
-        .bg-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+        .bg-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
         .bg-panel{background:var(--card);border-radius:20px;border:1px solid var(--line);overflow:hidden;
             box-shadow:0 8px 24px -16px rgba(31,29,54,.35)}
         .bg-panel-head{display:flex;align-items:center;gap:10px;padding:16px 22px;font-weight:600;font-size:16px;

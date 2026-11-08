@@ -223,7 +223,6 @@
     display: flex;
     flex-direction: column;
     gap: 28px;
-    margin-top: 40px;
   }
 
   /* กล่องของแต่ละแถบ */
@@ -3664,4 +3663,8 @@
     .frameReward_Box:hover{
       transform: none;
     }
+  }
+      /* ===== ฟอนต์แบบหัวกลม (Arial + Tahoma เหมือนฟอนต์มาตรฐานของ Windows) ===== */
+  :root{
+    --font: Arial, Tahoma, sans-serif;
   }

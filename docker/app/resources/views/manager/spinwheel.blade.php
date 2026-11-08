@@ -224,6 +224,7 @@
         window.rewardWheelData = @json($rewardWheelDataArr);
         window.nameWheelData = @json($nameWheelDataArr);
         window.assessmentId = {{ $assessment->assessment_id }};
+        window.recentWinners = @json($recentWinners ?? []);
         window.spinUrl = "{{ route('manager.assessment.spin', $assessment->assessment_id) }}";
     </script>
     <script src="{{ asset('admin/js/assessmentrandomreward.js') }}"></script>
