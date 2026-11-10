@@ -35,15 +35,25 @@ class RewardController extends Controller
                          ->with('success', 'เพิ่มของรางวัลเรียบยร้อย');
     }
     // ฟังก์ชันนี้คือนำของรางวัลที่สร้างแล้วกลับไปแสดงทีview
-    public function index()
+    public function index(Request $request)
     {
-        // กำหนดให้แสดงแค่10รายการเท่านั้น
-        $rewards = Reward::with('category')->orderByDesc('reward_id')->paginate(10);
-        // สร้างตัวแปรนี้มาเพื่อเอาไว้เช็ค role ว่ามี request มาจาก role อะไรแล้วส่งค่ากลับไปตาม role ที่ request
-        $view = (auth()->user()->role === 'manager')? 'manager.managereward' : 'admin.managereward';
-        // ส่งตัวแปร users ไปให้หน้า managereward
-        return view($view, compact('rewards'));
-    }
+    $search = trim((string) $request->input('search', ''));
+
+    $rewards = Reward::with('category')
+        ->when($search !== '', function ($query) use ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhereHas('category', fn($c) => $c->where('name', 'like', '%' . $search . '%'));
+            });
+        })
+        ->orderByDesc('reward_id')
+        ->paginate(10)
+        ->withQueryString();   // ให้ลิงก์เปลี่ยนหน้าพ่วง ?search=... ไปด้วย
+
+    $view = (auth()->user()->role === 'manager') ? 'manager.managereward' : 'admin.managereward';
+
+    return view($view, compact('rewards', 'search'));
+    }   
     public function create()
     {
         $categories = RewardCategory::all();

@@ -41,10 +41,10 @@
                 </div>
             @endif
             <!-- search-user -->
-            <div class="search-usr-box">
-                <input type="text" class="usr-searchbox" placeholder="ค้นหาชื่อผู้ใช้งานหรืออีเมล">
+            <form method="GET" action="{{ route('admin.manageuser') }}" class="search-usr-box">
+                <input type="text" name="search" class="usr-searchbox"placeholder="ค้นหาชื่อผู้ใช้งานหรืออีเมล" value="{{ $search ?? '' }}">
                 <img src="{{ asset('admin/img/search.png') }}" alt="กล่องค้นหารายชื่อ" class="search-usr-png">
-            </div>
+            </form>
 
             <div class="usr-topic">
                 <h3 class="topic-info">ลำดับ</h3>

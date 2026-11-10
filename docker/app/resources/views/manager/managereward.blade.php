@@ -63,10 +63,14 @@
 
             <div class="btn-top-rewardbox">
                 {{-- ช่องค้นหา --}}
-                    <div class="input-wrapper">
+                <form method="GET" action="{{ route('manager.managereward') }}" class="input-wrapper">
+                    <input type="text" name="search" class="search-box" id="reward_search" placeholder="ค้นหารายการรางวัล" value="{{ $search ?? '' }}" autocomplete="off">
+                    <img src="{{ asset('admin/img/search.png') }}" alt="search-icon" class="search-icon">
+                </form>
+                    {{-- <div class="input-wrapper">
                         <input type="text" class="search-box" placeholder="ค้นหารายการรางวัล">
                         <img src="{{ asset('admin/img/search.png') }}" alt="search-icon" class="search-icon">
-                    </div>
+                    </div> --}}
             <!-- ปุ่มเพิ่มของรางวัล -->
                 {{-- <div class="addbutton"> --}}
                     <button type="button" class="addreward">

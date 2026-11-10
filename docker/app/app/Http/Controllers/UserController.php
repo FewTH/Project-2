@@ -16,10 +16,24 @@ class UserController extends Controller
         return strtolower(trim(explode('@', (string) $username)[0]));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
-        return view('admin.manageuser', compact('users'));
+        // ประกาศตัวแปร $search เพื่อเก็บค่าที่ผู้ใช้กรอกในช่องค้นหา โดยใช้ trim() เพื่อตัดช่องว่างด้านหน้าและด้านหลัง และใช้ (string) เพื่อแปลงค่าที่ได้เป็นสตริง
+        $search = trim((string) $request->input('search', ''));
+
+        $users = User::query()
+            ->when($search !== '', function ($q) use ($search) {
+                $q->where(function ($q) use ($search) {
+                $q->where('username', 'like', "%{$search}%")
+                    ->orWhere('full_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        })
+        ->latest()
+        ->paginate(10) // กำหนดจำนวนผู้ใช้ที่ต้องการให้แสดงต่อหนึ่งหน้า
+        ->withQueryString();   // ให้ลิงก์เปลี่ยนหน้าพ่วงsearchไปด้วย
+
+    return view('admin.manageuser', compact('users', 'search'));
     }
 
     public function create()
