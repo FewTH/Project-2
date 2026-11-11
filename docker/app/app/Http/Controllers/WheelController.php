@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Concerns\ManagesRewardStock;
+use Illuminate\Validation\ValidationException;
 use App\Models\Reward;
 use App\Models\spin_wheels;
 use App\Models\WheelItem;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class WheelController extends Controller
 {
+    use ManagesRewardStock;
     public function index()
     {
         $rewards = Reward::with('category')->orderByDesc('reward_id')->get();
@@ -22,49 +25,65 @@ class WheelController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'items'=>'required|array|min:2',
-            'items.*.reward_id'=>'required|exists:reward,reward_id',
-            'items.*.quantity_selected'=>'required|integer|min:1',
-            'assessment_ids'=>'required|array|min:1',
-            'assessment_ids.*'=>'required|integer',
-        ]);
-    
-        try{
-            DB::transaction(function()use($request){
-                //สร้างวงล้อ
-                $wheel=spin_wheels::create([
-                    'name'=>'วงล้อรางวัล' . now()->format('d/m/Y H:1'),
-                    'is_active' => 1,
-                    'created_by'=>auth()->id(),
-                ]);
+{
+    $request->validate([
+        'items'                     => 'required|array|min:2',
+        'items.*.reward_id'         => 'required|exists:reward,reward_id',
+        'items.*.quantity_selected' => 'required|integer|min:1',
+        'assessment_ids'            => 'required|array|min:1',
+        'assessment_ids.*'          => 'required|integer',
+    ]);
+ 
+    try {
+        DB::transaction(function () use ($request) {
+            // [ใหม่] หักจำนวนของรางวัลออกจากคลังก่อน ถ้าไม่พอจะหยุดทั้งหมด ไม่สร้างวงล้อ
+            // วงล้อนี้ใช้ร่วมกันทุกแบบประเมินที่เลือก จึงหักครั้งเดียว ไม่ต้องคูณจำนวนแบบประเมิน
+            $this->adjustRewardStock(
+                collect($request->items)
+                    ->mapWithKeys(fn ($item) => [(int) $item['reward_id'] => (int) $item['quantity_selected']])
+                    ->all()
+            );
+ 
+            // สร้างวงล้อ
+            $wheel = spin_wheels::create([
+                'name'       => 'วงล้อรางวัล ' . now()->format('d/m/Y H:i'), // [แก้] เดิมเป็น H:1 ทำให้นาทีไม่ขึ้น
+                'is_active'  => 1,
+                'created_by' => auth()->id(),
+            ]);
+ 
             // เพิ่มของรางวัลเข้าไปในวงล้อ
-            foreach($request->items as $item){
+            foreach ($request->items as $item) {
                 WheelItem::create([
-                    'wheel_id' =>$wheel->wheel_id,
-                    'reward_id' =>$item['reward_id'],
-                    'quantity_selected' =>$item['quantity_selected'],
+                    'wheel_id'          => $wheel->wheel_id,
+                    'reward_id'         => $item['reward_id'],
+                    'quantity_selected' => $item['quantity_selected'],
                 ]);
             }
-            // เชื่อมวงล้่อทีสร้างเข้ากับแบบประเมิน
-            foreach($request->assessment_ids as $assessmentId){
+ 
+            // เชื่อมวงล้อที่สร้างเข้ากับแบบประเมิน
+            foreach ($request->assessment_ids as $assessmentId) {
                 WheelAssessment::create([
-                    'wheel_id' =>$wheel->wheel_id,
-                    'assessment_id'=>$assessmentId,
+                    'wheel_id'      => $wheel->wheel_id,
+                    'assessment_id' => $assessmentId,
                 ]);
             }
-            });
-                return response()->json([
-                'success' => true,
-                'message' => 'บันทึกวงล้อสำเร็จ'
+        });
+ 
+        return response()->json([
+            'success' => true,
+            'message' => 'บันทึกวงล้อสำเร็จ',
         ]);
-        }
-        catch(\Throwable $e){
-            return response()->json([
-                'success'=> false,
-                'message'=>$e->getMessage()
-            ],500);
-        }
+    } catch (ValidationException $e) {
+        // [ใหม่] ของในคลังไม่พอ ส่งข้อความกลับไปให้หน้าเว็บแสดง
+        return response()->json([
+            'success' => false,
+            'message' => collect($e->errors())->flatten()->first(),
+        ], 422);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage(),
+        ], 500);
     }
+}
 }

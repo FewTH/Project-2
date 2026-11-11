@@ -120,7 +120,8 @@
                             <p class="messagepencil">{{ $reward->name }}</p>
                             <span class="messagestationery">{{ $reward->category->name ?? '-' }}</span>
                         </div>
-                            <p class="percentpencil">{{ $reward->quantity_reward }}</p>
+                            {{-- [ใหม่] เพิ่ม id และ data-stock ให้ JS ลดตัวเลขตามจำนวนที่เลือก --}}
+                            <p class="percentpencil" id="stock_{{ $reward->reward_id }}" data-stock="{{ $reward->quantity_reward }}">{{ $reward->quantity_reward }}</p>
                             <p class="percentpencil">{{ number_format($reward->rate, 1) }} %</p>
                         <div class="btn-plus-delete-checkbox">
                             <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
@@ -128,7 +129,8 @@
                             </button>
                             <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="1" class="btndelete-1"  max="{{ $reward->quantity_reward }}" disabled>
                             <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
-                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})">
+                            {{-- [ใหม่] ของรางวัลที่หมดคลังติ๊กเลือกไม่ได้ --}}
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $reward->quantity_reward < 1 ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>

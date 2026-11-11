@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
         colorById[row.dataset.id] = colors[i % colors.length];
     });
 
+    // [ใหม่] ฟังก์ชันวาดตัวเลขคงเหลือของแต่ละแถว เก็บไว้เรียกพร้อมกันตอนกดล้างทั้งหมด
+    const stockRenderers = [];
+
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text ?? '';
@@ -220,8 +223,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const qtyInput = item.querySelector('.qnty-in');
         const minusBtn = item.querySelector('.qnty-minus');
         const plusBtn = item.querySelector('.qnty-plus');
+        const stockCell = item.querySelector('.quantity_re1'); // [ใหม่] ช่อง "จำนวน"
         const min = parseInt(qtyInput.min) || 1;
-        const max = parseInt(qtyInput.max) || 0;
+        const max = parseInt(qtyInput.max) || 0;            // = จำนวนในคลังตอนโหลดหน้า
 
         // รางวัลที่ในคลังหมดแล้ว เลือกใส่แถบไม่ได้
         if (max < min) {
@@ -229,10 +233,19 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // [ใหม่] ช่อง "จำนวน" = จำนวนในคลัง − จำนวนที่ระบุ
+        // หักเฉพาะตอนติ๊กเลือกแล้ว ถ้ายกเลิกติ๊ก ตัวเลขจะกลับเป็นค่าเดิม
+        function renderStock() {
+            const used = checkbox.checked ? (parseInt(qtyInput.value) || min) : 0;
+            stockCell.textContent = max - used;
+        }
+        stockRenderers.push(renderStock);
+
         // จำกัดจำนวนให้อยู่ระหว่าง min ถึง max เสมอ ทั้งตอนกดปุ่มและตอนพิมพ์เอง
         function setQty(value) {
             const qty = Math.min(max, Math.max(min, parseInt(value) || min));
             qtyInput.value = qty;
+            renderStock(); // [ใหม่]
             if (selectedRe.has(id)) {
                 selectedRe.get(id).qty = qty;
                 updateUI(false);
@@ -245,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 selectedRe.delete(id);
             }
+            renderStock(); // [ใหม่]
             updateUI();
         });
 
@@ -258,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedRe.clear();
         document.querySelectorAll('.reward-check-box').forEach(cb => { cb.checked = false; });
         document.querySelectorAll('.qnty-in').forEach(input => { input.value = 1; });
+        stockRenderers.forEach(render => render()); // [ใหม่] คืนตัวเลขคงเหลือทุกแถว
         updateUI();
     });
 
@@ -356,7 +371,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (!res.ok) {
-                alert(`เกิดข้อผิดพลาดจาก Server (HTTP Status: ${res.status})`);
+                // [ใหม่] ถ้า server แจ้งว่าของในคลังไม่พอ (422) ให้แสดงข้อความนั้นแทนเลขสถานะ
+                const err = await res.json().catch(() => ({}));
+                alert(err.message || `เกิดข้อผิดพลาดจาก Server (HTTP Status: ${res.status})`);
                 return;
             }
 
@@ -364,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 alert('บันทึกวงล้อสำเร็จ');
                 closeAssessmentModal();
-                window.location.reload();
+                window.location.reload(); // โหลดหน้าใหม่ จะเห็นจำนวนในคลังที่ถูกหักแล้วจากฐานข้อมูล
             } else {
                 alert('เกิดข้อผิดพลาด: ' + (data.message || 'ไม่ทราบสาเหตุ'));
             }

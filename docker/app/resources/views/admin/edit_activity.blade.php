@@ -115,22 +115,27 @@
                 @php
                     $isSelected = isset($selectedrewards[$reward->reward_id]);
                     $selectedQty = $selectedrewards[$reward->reward_id] ?? 1;
+                    // [ใหม่] จำนวนที่ใช้ได้ในหน้านี้ = คงเหลือในคลัง + ที่กิจกรรมนี้จองไว้แล้ว
+                    // (เพราะตอนบันทึก ระบบหักส่วนของกิจกรรมนี้ออกจากคลังไปแล้ว)
+                    $stockForThisPage = $reward->quantity_reward + ($selectedrewards[$reward->reward_id] ?? 0);
                 @endphp
                 <div class="framebtn-chooserewardall {{ $loop->index >= 8? 'btn-showmore' : '' }}">
                     <div class="framechooserewardall">
                         <div class="framemessage2">
                             <p class="messagepencil">{{ $reward->name }}</p>
-                            <span class="messagestationery">{{ $reward->category->name }}</span>
+                            <span class="messagestationery">{{ $reward->category->name ?? '-' }}</span>
                         </div>
-                            <p class="percentpencil">{{ $reward->quantity_reward }}</p>
+                            {{-- [ใหม่] เพิ่ม id และ data-stock ให้ JS ลดตัวเลขตามจำนวนที่เลือก --}}
+                            <p class="percentpencil" id="stock_{{ $reward->reward_id }}" data-stock="{{ $stockForThisPage }}">{{ $reward->quantity_reward }}</p>
                             <p class="percentpencil">{{ number_format($reward->rate, 1) }} %</p>
                         <div class="btn-plus-delete-checkbox">
                             <button type="button" class="btndelete" onclick="deletenumberquantity('qty_{{ $reward->reward_id }}')">
                                 <p class="btndelet-10">-</p>
                             </button>
-                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" max="{{ $reward->quantity_reward }}" {{ $isSelected ? '' : 'disabled' }} >
-                            <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $reward->quantity_reward }})">+</button>
-                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $isSelected ? 'checked' : '' }}>
+                            {{-- [แก้] max และเพดานของปุ่ม + ใช้ $stockForThisPage --}}
+                            <input type="number" id="qty_{{ $reward->reward_id }}" name="rewards[{{ $reward->reward_id }}][qty]" value="{{ old('rewards.'.$reward->reward_id.'.qty', $selectedQty) }}" class="btndelete-1" max="{{ $stockForThisPage }}" {{ $isSelected ? '' : 'disabled' }}>
+                            <button type="button" class="btnplus" onclick="addnumberquantity('qty_{{ $reward->reward_id }}' , {{ $stockForThisPage }})">+</button>
+                            <input type="checkbox" class="btn-checkbox" id="active_{{ $reward->reward_id }}" value="1" onchange="checkmarkbutton({{ $reward->reward_id }})" {{ $isSelected ? 'checked' : '' }} {{ $stockForThisPage < 1 ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
@@ -146,7 +151,8 @@
                 <div class="frameandquantity">
                     <p class="messagequantity">จำนวนผู้เข้าร่วมสูงสุด</p>
                     
-                    <input type="number" name="max_participants" min="1 "value="{{ old('limit_enabled', $limited) ? old('max_participants', $event->max_participants ?? 1) : '' }}" placeholder="ไม่จำกัด" class="framenumberquantity" id="frame_number_quantity"{{ old('limit_enabled', $limited) ? '' : 'disabled' }}>
+                    {{-- [แก้] เดิม min="1 "value=... และ id="..."{{ }} ติดกัน เว้นวรรคให้ถูก --}}
+                    <input type="number" name="max_participants" min="1" value="{{ old('limit_enabled', $limited) ? old('max_participants', $event->max_participants ?? 1) : '' }}" placeholder="ไม่จำกัด" class="framenumberquantity" id="frame_number_quantity" {{ old('limit_enabled', $limited) ? '' : 'disabled' }}>
                     
                     <label class="limit-toggle">
                         <input type="checkbox" name="limit_enabled" class="limit-toggle1" value="1" id="limit_enabled" {{ old('limit_enabled', $limited) ? 'checked' : '' }}>

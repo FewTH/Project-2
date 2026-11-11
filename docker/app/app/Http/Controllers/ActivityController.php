@@ -11,6 +11,8 @@ use App\Models\EventRewardDraw;
 use App\Models\Assessment;
 use App\Models\Spinresult;
 use Illuminate\Http\Request;
+// .
+use App\Http\Controllers\Concerns\ManagesRewardStock;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -19,6 +21,7 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 
 class ActivityController extends Controller
 {
+    use ManagesRewardStock;
     // เอาไว้ดึงข้อมูลกิจกรรมมาใช้งานซ้ำ พร้อมเช็คว่ามีอยู่จริงมั้ย
     private function getEvent(int $eventId): Event
     {
@@ -195,158 +198,160 @@ class ActivityController extends Controller
 
     // บันทึกกิจกรรมใหม่ ของหน้าcreate_activity
     public function store(Request $request, $role = 'admin')
-    {
-        $data = $request->validate([
-            'title'               => 'required|string|max:300',
-            'event_date'          => 'required|date',
-            'register_close_time' => 'required',
-            'limit_enabled'       => 'nullable|boolean',
-            'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
-            'rewards'             => 'required|array|min:1',
-            'rewards.*.qty'       => 'required|integer|min:1',
-        ], [
-            'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
-            'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
-            'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
-            'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
-            'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
-            'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
-            'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
-            'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
+{
+    $data = $request->validate([
+        'title'               => 'required|string|max:300',
+        'event_date'          => 'required|date',
+        'register_close_time' => 'required',
+        'limit_enabled'       => 'nullable|boolean',
+        'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
+        'rewards'             => 'required|array|min:1',
+        'rewards.*.qty'       => 'required|integer|min:1',
+    ], [
+        'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
+        'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
+        'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
+        'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+        'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
+        'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
+        'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
+        'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
+    ]);
+ 
+    // กำหนดจำนวนผู้เข้าร่วมให้เป็น null ถ้าไม่ได้จำกัด ของหน้าcreate_activity
+    $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
+ 
+    // [แก้] ย้ายการตรวจจำนวนของรางวัลเข้าไปทำใน transaction (adjustRewardStock)
+    // จะได้ตรวจและหักพร้อมกันแบบล็อกแถว กันสองคนกดพร้อมกันแล้วของติดลบ
+ 
+    // รวมวันและเวลาปิดลงทะเบียน ของหน้าcreate_activity
+    $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
+    // ลบ key ออกจาก $data ก่อนบันทึกลงตาราง events ของหน้าcreate_activity
+    unset($data['rewards'], $data['event_date'], $data['register_close_time']);
+ 
+    // [reward_id => จำนวนที่เลือก]
+    $selectedQty = collect($request->input('rewards', []))
+        ->map(fn ($item) => (int) $item['qty'])
+        ->all();
+ 
+    // บันทึกข้อมูลแบบ transaction ของหน้าcreate_activity
+    $event = DB::transaction(function () use ($data, $registercloseat, $selectedQty) {
+ 
+        // [ใหม่] หักจำนวนของรางวัลออกจากคลัง ถ้าไม่พอจะเด้งกลับหน้าเดิมพร้อม error
+        // และจะไม่บันทึกกิจกรรมหรือวงล้อใด ๆ เลย
+        $this->adjustRewardStock($selectedQty);
+ 
+        // สร้างวงล้อสำหรับกิจกรรมนี้ ของหน้าcreate_activity
+        $wheel = spin_wheels::create([
+            'name'       => $data['title'] . '- วงล้อ',
+            'is_active'  => 1,
+            'created_by' => Auth::id(),
         ]);
-
-        // กำหนดจำนวนผู้เข้าร่วมให้เป็น 1 ถ้าไม่มีการกรอกใหม่ ของหน้าcreate_activity
-        $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
-
-        // ตรวจสอบของรางวัลฝั่ง server เผื่อมีคนมาเปลี่ยนแปลงข้อมูลหน้าบ้าน ของหน้าcreate_activity
-        foreach ($data['rewards'] as $rewardId => $item) {
-            $reward = Reward::find($rewardId);
-
-            // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน กัน error ตอนอ้าง $reward->name
-            if (!$reward) {
-                return back()->withErrors(["rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"])->withInput();
-            }
-
-            // หากจำนวนที่เลือกเกินที่มีให้ส่งกลับมาพร้อม Error ของหน้าcreate_activity
-            if ($item['qty'] > $reward->quantity_reward) {
-                return back()->withErrors(["rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"])->withInput();
-            }
+ 
+        // ผูกของรางวัลเข้ากับวงล้อ ของหน้าcreate_activity
+        foreach ($selectedQty as $rewardId => $qty) {
+            $wheel->rewards()->attach($rewardId, ['quantity_selected' => $qty]);
         }
-
-        // รวมวันและเวลาปิดลงทะเบียน ของหน้าcreate_activity
-        $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
-        // ลบ key ออกจาก $data ก่อนบันทึกลงตาราง events ของหน้าcreate_activity
-        unset($data['rewards'], $data['event_date'], $data['register_close_time']);
-
-        // บันทึกข้อมูลแบบ transaction ของหน้าcreate_activity
-        $event = DB::transaction(function () use ($data, $request, $registercloseat) {
-
-            // สร้างวงล้อสำหรับกิจกรรมนี้ ของหน้าcreate_activity
-            $wheel = spin_wheels::create([
-                'name'       => $data['title'] . '- วงล้อ',
-                'is_active'  => 1,
-                'created_by' => Auth::id(),
-            ]);
-
-            // ผูกของรางวัลเข้ากับวงล้อ ของหน้าcreate_activity
-            foreach ($request->input('rewards', []) as $rewardId => $item) {
-                $wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty']]);
-            }
-
-            // บันทึกและ return Event ลง database ของหน้าcreate_activity
-            return Event::create([
-                'wheel_id'          => $wheel->wheel_id,
-                'title'             => $data['title'],
-                'register_close_at' => $registercloseat,
-                'max_participants'  => $data['max_participants'],
-                'status'            => 'open',
-                'created_by'        => Auth::id(),
-            ]);
-        });
-
-        // เปลี่ยนไปหน้ารายละเอียดกิจกรรมview_detailsเมื่อทำเสร็จ ของหน้าcreate_activity
-        return redirect()->route($role . '.activity.detail', $event->event_id);
-    }
+ 
+        // บันทึกและ return Event ลง database ของหน้าcreate_activity
+        return Event::create([
+            'wheel_id'          => $wheel->wheel_id,
+            'title'             => $data['title'],
+            'register_close_at' => $registercloseat,
+            'max_participants'  => $data['max_participants'],
+            'status'            => 'open',
+            'created_by'        => Auth::id(),
+        ]);
+    });
+ 
+    // เปลี่ยนไปหน้ารายละเอียดกิจกรรมview_detailsเมื่อทำเสร็จ ของหน้าcreate_activity
+    return redirect()->route($role . '.activity.detail', $event->event_id);
+}
 
 
     // บันทึกการแก้ไขข้อมูล กิจกรรม ของหน้า edit_activity
     public function updateactivity(Request $request, $eventId, $role = 'admin')
-    {
-        $event = $this->getEvent($eventId);
-
-        // กันเหนียวอีกชั้น เผื่อมีคนเปิดฟอร์มค้างไว้แล้วกิจกรรมหมดเวลาไปแล้วระหว่างนั้น
-        $now = Carbon::now();
-        $closeat = Carbon::parse($event->register_close_at);
-
-        $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
-
-        if ($isexpired) {
-            return redirect()->route($role . '.activity.detail', $event->event_id);
-        }
-
-        $data = $request->validate([
-            'title'               => 'required|string|max:300',
-            'event_date'          => 'required|date',
-            'register_close_time' => 'required',
-            'limit_enabled'       => 'nullable|boolean',
-            'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
-            'rewards'             => 'required|array|min:1',
-            'rewards.*.qty'       => 'required|integer|min:1',
-        ], [
-            'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
-            'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
-            'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
-            'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
-            'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
-            'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
-            'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
-            'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
-        ]);
-
-        // ถ้าไม่กรอกจำนวนผู้เข้าร่วมมา ให้เป็น 1 ไปต่อไป ของหน้า edit_activity
-        $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
-
-        // ตรวจสอบของรางวัลฝั่ง server อีกรอบ เผื่อมีคนมาเปลี่ยนแปลงข้อมูลหน้าบ้าน ของหน้า edit_activity
-        foreach ($data['rewards'] as $rewardId => $item) {
-            $reward = Reward::find($rewardId);
-
-            // ถ้าไม่พบของรางวัลเลย ให้ error แยกจากกรณีจำนวนเกิน (กัน error ตอนอ้าง $reward->name)
-            if (!$reward) {
-                return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "ไม่พบของรางวัลที่เลือก กรุณาเลือกใหม่อีกครั้ง"
-                ])->withInput();
-            }
-
-            if ($item['qty'] > $reward->quantity_reward) {
-                return back()->withErrors([
-                    "rewards.{$rewardId}.qty" => "จำนวนของรางวัล \"{$reward->name}\" เกินจำนวนของรางวัลที่มี"
-                ])->withInput();
-            }
-        }
-
-        $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
-        unset($data['rewards'], $data['event_date'], $data['register_close_time']);
-
-        DB::transaction(function () use ($data, $request, $registercloseat, $event) {
-
-            $event->update([
-                'title'             => $data['title'],
-                'register_close_at' => $registercloseat,
-                'max_participants'  => $data['max_participants'],
-            ]);
-
-            // ลบของรางวัลเดิมก่อน แล้วผูกของรางวัลใหม่เข้าไปแทน
-            if ($event->wheel) {
-                $event->wheel->rewards()->detach();
-
-                foreach ($request->input('rewards', []) as $rewardId => $item) {
-                    $event->wheel->rewards()->attach($rewardId, ['quantity_selected' => $item['qty']]);
-                }
-            }
-        });
-
+{
+    $event = $this->getEvent($eventId);
+ 
+    // กันเหนียวอีกชั้น เผื่อมีคนเปิดฟอร์มค้างไว้แล้วกิจกรรมหมดเวลาไปแล้วระหว่างนั้น
+    $now = Carbon::now();
+    $closeat = Carbon::parse($event->register_close_at);
+ 
+    $isexpired = $event->status !== 'open' || $now->greaterThanOrEqualTo($closeat);
+ 
+    if ($isexpired) {
         return redirect()->route($role . '.activity.detail', $event->event_id);
     }
+ 
+    $data = $request->validate([
+        'title'               => 'required|string|max:300',
+        'event_date'          => 'required|date',
+        'register_close_time' => 'required',
+        'limit_enabled'       => 'nullable|boolean',
+        'max_participants'    => 'required_if:limit_enabled,1|nullable|integer|min:1',
+        'rewards'             => 'required|array|min:1',
+        'rewards.*.qty'       => 'required|integer|min:1',
+    ], [
+        'title.required'               => 'กรุณากรอกชื่อกิจกรรมด้วย',
+        'event_date.required'          => 'กรุณากรอกวันที่จัดกิจกรรมด้วย',
+        'register_close_time.required' => 'กรุณาเลือกเวลาปิด Register ด้วย',
+        'max_participants.min'         => 'จำนวนผู้เข้าร่วมต้องมีอย่างน้อย 1 คน',
+        'max_participants.required_if' => 'กรุณากรอกจำนวนผู้เข้าร่วมสูงสุดด้วย',
+        'rewards.required'             => 'กรุณาเลือกของรางวัลอย่างน้อย 1 รายการ',
+        'rewards.*.qty.required'       => 'กรุณาเลือกจำนวนของรางวัลด้วย',
+        'rewards.*.qty.min'            => 'จำนวนของรางวัลต้องมีอย่างน้อย 1 ชิ้น',
+    ]);
+ 
+    // ถ้าไม่ได้จำกัดจำนวนผู้เข้าร่วม ให้เป็น null ของหน้า edit_activity
+    $data['max_participants'] = $request->boolean('limit_enabled') ? (int) $data['max_participants'] : null;
+ 
+    // [แก้] ลบการตรวจแบบเดิมออก เพราะเดิมเทียบกับจำนวนคงเหลือในคลังตรง ๆ
+    // ซึ่งตอนนี้ถูกหักส่วนของกิจกรรมนี้ไปแล้ว จะทำให้แจ้ง error ผิด
+    // ตอนนี้ตรวจจากส่วนต่างแทน (ใน adjustRewardStock)
+ 
+    $registercloseat = $data['event_date'] . ' ' . $data['register_close_time'];
+    unset($data['rewards'], $data['event_date'], $data['register_close_time']);
+ 
+    // จำนวนใหม่จากฟอร์ม [reward_id => จำนวน]
+    $newQty = collect($request->input('rewards', []))
+        ->map(fn ($item) => (int) $item['qty'])
+        ->all();
+ 
+    DB::transaction(function () use ($data, $registercloseat, $event, $newQty) {
+ 
+        $event->update([
+            'title'             => $data['title'],
+            'register_close_at' => $registercloseat,
+            'max_participants'  => $data['max_participants'],
+        ]);
+ 
+        if ($event->wheel) {
+            // [ใหม่] จำนวนเดิมที่กิจกรรมนี้จองไว้ [reward_id => จำนวน]
+            $oldQty = $event->wheel->rewards()->get()
+                ->pluck('pivot.quantity_selected', 'reward_id')
+                ->map(fn ($qty) => (int) $qty)
+                ->all();
+ 
+            // [ใหม่] ส่วนต่าง: บวก = หักเพิ่มจากคลัง, ลบ = คืนเข้าคลัง
+            // เช่น เดิม 10 แก้เป็น 6 = คืน 4 / เดิมไม่มี เพิ่มมา 3 = หัก 3 / ติ๊กออก = คืนทั้งหมด
+            $changes = [];
+            foreach (array_unique(array_merge(array_keys($oldQty), array_keys($newQty))) as $rewardId) {
+                $changes[$rewardId] = ($newQty[$rewardId] ?? 0) - ($oldQty[$rewardId] ?? 0);
+            }
+            $this->adjustRewardStock($changes);
+ 
+            // ลบของรางวัลเดิมก่อน แล้วผูกของรางวัลใหม่เข้าไปแทน
+            $event->wheel->rewards()->detach();
+ 
+            foreach ($newQty as $rewardId => $qty) {
+                $event->wheel->rewards()->attach($rewardId, ['quantity_selected' => $qty]);
+            }
+        }
+    });
+ 
+    return redirect()->route($role . '.activity.detail', $event->event_id);
+}
 
 
     // แสดงหน้ารายละเอียดกิจกรรม ของหน้าview_details
@@ -373,23 +378,30 @@ class ActivityController extends Controller
 
     // ลบกิจกรรม พร้อมข้อมูลที่เกี่ยวข้องทั้งหมดและกลับไปหน้าassessment ของหน้าview_details
     public function deletedata($eventId, $role = 'admin')
-    {
-        $event = $this->getEvent($eventId);
-
-        DB::transaction(function () use ($event) {
-
-            $event->registrations()->delete();
-
-            if ($event->wheel) {
-                $event->wheel->rewards()->detach();
-                $event->wheel->delete();
-            }
-
-            $event->delete();
-        });
-
-        return redirect()->route($role . '.assessment');
-    }
+{
+    $event = $this->getEvent($eventId);
+ 
+    DB::transaction(function () use ($event) {
+ 
+        $event->registrations()->delete();
+ 
+        if ($event->wheel) {
+            // [ใหม่] quantity_selected ที่เหลือในวงล้อ = ของที่ยังไม่ได้แจก ให้คืนเข้าคลัง
+            $remaining = $event->wheel->rewards()->get()
+                ->pluck('pivot.quantity_selected', 'reward_id')
+                ->map(fn ($qty) => -1 * (int) $qty) // ค่าลบ = คืนเข้าคลัง
+                ->all();
+            $this->adjustRewardStock($remaining);
+ 
+            $event->wheel->rewards()->detach();
+            $event->wheel->delete();
+        }
+ 
+        $event->delete();
+    });
+ 
+    return redirect()->route($role . '.assessment');
+}
 
 
     // สามารถให้ปุ่มบันทึกใช้งานได้และโหลดQrcodeเป็นPNG ของหน้าview_details

@@ -1,18 +1,34 @@
-//ส่วนของหน้า create_activity.blade.php
 //ปุ่มบวกลบตัวเลขลองเลือกของรางวัล
+//ส่วนของหน้า create_activity.blade.php และ edit_activity.blade.php
+//ช่องจำนวนคงเหลือ = จำนวนที่ใช้ได้ − จำนวนที่เลือก (หักเฉพาะรางวัลที่ติ๊กแล้ว)
+function updateStockDisplay(rewardId) {
+    const stockEl = document.getElementById('stock_' + rewardId);
+    const qtyInput = document.getElementById('qty_' + rewardId);
+    const checkbox = document.getElementById('active_' + rewardId);
+    if (!stockEl || !qtyInput) return;
+
+    const stock = parseInt(stockEl.dataset.stock) || 0;
+    const used = checkbox && checkbox.checked ? (parseInt(qtyInput.value) || 0) : 0;
+    stockEl.textContent = Math.max(0, stock - used);
+}
+
+//ปุ่มบวกลบตัวเลขตอนเลือกของรางวัล
 function addnumberquantity(inputId, maxLimit){
     let inputid = document.getElementById(inputId);
 
     if (parseInt(inputid.value) < maxLimit){
         inputid.value = parseInt(inputid.value) + 1;
     }
+    updateStockDisplay(inputId.replace('qty_', ''));
 }
+
 function deletenumberquantity(inputId){
     let inputid = document.getElementById(inputId);
 
     if (parseInt(inputid.value) > 1){
         inputid.value = parseInt(inputid.value) - 1;
     }
+    updateStockDisplay(inputId.replace('qty_', ''));
 }
 
 //ต้องกดปุ่มติ๊กถูกถึงจะเลือกของรางวัลได้
@@ -23,6 +39,7 @@ function checkmarkbutton(rewardId){
     if (checkbox && qtyinput){
         qtyinput.disabled = !checkbox.checked;
     }
+    updateStockDisplay(rewardId);
 }
 
 
@@ -122,27 +139,7 @@ const evaluationFormSelect = document.getElementById('Evaluation_formid');
 const checkboxContainer = document.querySelector('.frame-checkbox-name');
 const evaluationFormelement = document.getElementById('frame-choose-evaluation');
 const assignEvaluationModal = document.getElementById('assign_evaluation');
-// const evaluationFormSelect = document.getElementById('Evaluation_formid');
-// const checkboxContainer = document.querySelector('.frame-checkbox-name');
-// const evaluationFormelement = document.getElementById('frame-choose-evaluation');
-// const assignEvaluationModal = document.getElementById('assign_evaluation');
-// const frameallassessment =  document.getElementById('frameall_assessment');
 
-// if(frameallassessment){
-//     frameallassessment.addEventListener('click', function(){
-//         document.getElementById('frameall_assessment').classList.add('active');
-//         document.getElementById('frameoff_assessment').classList.remove('active');
-//         document.getElementById('farmeon_assessment').classList.remove('active');
-//         document.getElementById('all_assessment').classList.add('active');
-//         document.getElementById('off_assessment').classList.remove('active');
-//         document.getElementById('on_assessment').classList.remove('active');
-//         document.getElementById('allnumber_assessment').classList.add('active');
-//         document.getElementById('offnumber_assessment').classList.remove('active');
-//         document.getElementById('onnumber_assessment').classList.remove('active');
-
-//         alloffnoassessment('all');
-//     });
-// }
 
 //ปุ่มปิดแล้วของหน้า assessment.blade.php
 // const frameoffassessment = document.getElementById('frameoff_assessment');
@@ -468,64 +465,6 @@ if (framesearchactivity) {
     }
 }
 
-// if(framesearchactivity){
-//     framesearchactivity.addEventListener('keyup', function(){
-        
-//         const keyword = framesearchactivity.value.trim().toLowerCase();
-//         const frameactivityassessment = document.querySelectorAll('.frame-activity-assessment');
-
-//         frameactivityassessment.forEach(function (card){
-//             const headingname = card.querySelector('.headingactivity');
-//             if (!headingname)
-//                 return;
-
-//             const  headingname1 = headingname.textContent.trim().toLowerCase();
-//             const match = headingname1.includes(keyword);
-
-//             if(match){
-//                 card.style.display = '';
-//                 requestAnimationFrame(function(){
-//                     card.classList.remove('is-hidden');
-//                 });
-
-//             }else{
-//                 card.classList.add('is-hidden');
-//                 setTimeout(function(){
-//                     if (card.classList.contains('is-hidden')){
-//                         card.style.display = 'none';
-//                     }
-//                 }, 250);
-//             }
-//         });
-
-//     });
-// }
-
-//ช่องค้นหารายชื่อแบบประเมิน ในหน้า assessment.blade.php
-// const framesearchassessment = document.getElementById('frame_search_activity_2');
-
-// if(framesearchassessment){
-//     framesearchassessment.addEventListener('keyup', function(){
-        
-//         const keywordassessment = framesearchassessment.value.trim().toLowerCase();
-//         const frameactivityassessment = document.querySelectorAll('.sectionassessment');
-
-//         frameactivityassessment.forEach(function (card){
-//             const nameassessment = card.querySelector('.sectionassessment-1');
-//             if (!nameassessment)
-//                 return;
-
-//             const  nameassessment1 = nameassessment.textContent.trim().toLowerCase();
-
-//             if(nameassessment1.includes(keywordassessment)){
-//                 card.classList.remove('is-hidden');
-//             }else{
-//                 card.classList.add('is-hidden');
-//             }
-//         });
-
-//     })
-// }
 // จำแท็บไว้ใน URL เวลากดสลับเอง จะได้ไม่หายตอนรีเฟรชหรือ reload หลังมอบหมาย
 function setTabUrl(tab) {
     const url = new URL(window.location);
@@ -571,29 +510,19 @@ if(showmore && showless){
     });
 
 }
-
-function updateStockDisplay(rewardId) {
-    const stockEl = document.getElementById('stock_' + rewardId);
-    const qtyInput = document.getElementById('qty_' + rewardId);
-    const checkbox = document.getElementById('active_' + rewardId);
-    if (!stockEl || !qtyInput) return; // หน้าอื่นที่ไม่มีช่องนี้จะข้ามไปเลย
- 
-    const stock = parseInt(stockEl.dataset.stock) || 0;
-    const used = checkbox && checkbox.checked ? (parseInt(qtyInput.value) || 0) : 0;
-    stockEl.textContent = Math.max(0, stock - used);
-}
  
 document.querySelectorAll('input[id^="qty_"]').forEach(function (input) {
     const rewardId = input.id.replace('qty_', '');
+    if (!document.getElementById('stock_' + rewardId)) return; // ทำเฉพาะหน้าที่มีช่องจำนวนคงเหลือ
  
-    // พิมพ์ตัวเลขเอง: บังคับให้อยู่ระหว่าง 1 ถึงจำนวนในคลัง แล้วอัปเดตช่องจำนวน
+    // พิมพ์ตัวเลขเอง: บังคับให้อยู่ระหว่าง 1 ถึงจำนวนที่ใช้ได้ แล้วอัปเดตช่องจำนวน
     input.addEventListener('change', function () {
         const max = parseInt(input.max) || 1;
         input.value = Math.min(max, Math.max(1, parseInt(input.value) || 1));
         updateStockDisplay(rewardId);
     });
  
-    // คำนวณตั้งแต่โหลดหน้า (จำเป็นกับหน้า edit ที่มีรางวัลติ๊กไว้แล้ว)
+    // คำนวณตั้งแต่โหลดหน้า (หน้า edit จะมีรางวัลที่ติ๊กไว้แล้ว)
     updateStockDisplay(rewardId);
 });
 
