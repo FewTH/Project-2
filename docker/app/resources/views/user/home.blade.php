@@ -21,11 +21,13 @@
 
         /* ---------- main ---------- */
         .bg-main{margin-left:280px;min-height:100vh}
-        .bg-top{height:56px;display:flex;align-items:center;justify-content:flex-end;padding:0 28px;
-            background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-        .bg-user{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500}
-        .bg-user img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--crimson);background:#fff}
-        .bg-wrap{padding:26px 24px 48px;max-width:1500px}
+        .bg-top{height:57px;display:flex;align-items:center;justify-content:flex-end;padding:0 35px 0 28px;
+            background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);
+            border-bottom:1px solid rgba(20,22,40,.06);box-shadow:0 6px 20px rgba(20,22,40,.06); position:sticky;top:0;z-index:10}
+        .bg-user{display:flex;align-items:center;gap:15px;font-size:16px;font-weight:600;color:var(--heading);transition:color .2s ease}
+        .bg-user:hover{color:var(--primary)}
+        .bg-user img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--primary);background:#f2f2f2}
+        .bg-wrap{padding:26px 32px 48px}
 
         /* ---------- hero ---------- */
         .bg-hero{position:relative;overflow:hidden;border-radius:26px;color:#fff;
@@ -108,6 +110,9 @@
         /* มือถือ: theme-user.css ย้ายเมนูซ้ายไปเป็นแถบล่างจอ เนื้อหาจึงต้องเต็มจอและเว้นล่างไว้ */
         @media (max-width:900px){
             .bg-main{margin-left:0;padding-bottom:84px}
+            .bg-top{height:56px;padding:0 16px}
+            .bg-user{font-size:15px;gap:10px}
+            .bg-user img{width:36px;height:36px}
         }
         @media (max-width:760px){
             .bg-hero{padding:30px 24px}.bg-hero h1{font-size:30px}

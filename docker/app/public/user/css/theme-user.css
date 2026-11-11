@@ -4246,4 +4246,13 @@
     --font: Arial, Tahoma, sans-serif;
   }
 
+    /*ป้ายสถานะ จุดในป้าย และแถบสีด้านซ้ายของการ์ด เปลี่ยนสีตามนี้พร้อมกัน*/
+  .sectionassessment[data-status="spined"]{
+    --status-color: var(--c-green);
+    --status-soft: var(--c-green-soft);
+  }
+  .sectionassessment[data-status="not-spin"]{
+    --status-color: #B45309;
+    --status-soft: #FEF3DA;
+  }
   

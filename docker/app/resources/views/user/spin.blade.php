@@ -70,7 +70,8 @@
     </div>
     @endforelse
 </div>
-
+</div>
+</div>  
 <div class="container-spin">
     <!-- โลโกมหาลัย -->
     <div class="img-Logo-home">

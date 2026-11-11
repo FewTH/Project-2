@@ -572,6 +572,31 @@ if(showmore && showless){
 
 }
 
+function updateStockDisplay(rewardId) {
+    const stockEl = document.getElementById('stock_' + rewardId);
+    const qtyInput = document.getElementById('qty_' + rewardId);
+    const checkbox = document.getElementById('active_' + rewardId);
+    if (!stockEl || !qtyInput) return; // หน้าอื่นที่ไม่มีช่องนี้จะข้ามไปเลย
+ 
+    const stock = parseInt(stockEl.dataset.stock) || 0;
+    const used = checkbox && checkbox.checked ? (parseInt(qtyInput.value) || 0) : 0;
+    stockEl.textContent = Math.max(0, stock - used);
+}
+ 
+document.querySelectorAll('input[id^="qty_"]').forEach(function (input) {
+    const rewardId = input.id.replace('qty_', '');
+ 
+    // พิมพ์ตัวเลขเอง: บังคับให้อยู่ระหว่าง 1 ถึงจำนวนในคลัง แล้วอัปเดตช่องจำนวน
+    input.addEventListener('change', function () {
+        const max = parseInt(input.max) || 1;
+        input.value = Math.min(max, Math.max(1, parseInt(input.value) || 1));
+        updateStockDisplay(rewardId);
+    });
+ 
+    // คำนวณตั้งแต่โหลดหน้า (จำเป็นกับหน้า edit ที่มีรางวัลติ๊กไว้แล้ว)
+    updateStockDisplay(rewardId);
+});
+
 
 //ช่องติ๊กจำกัดจำนวนผู้เข้าร่วม ในหน้า create_activity.blade.php และ edit_activity.blade.php
 //ไม่ติ๊ก = ไม่จำกัดจำนวนคน (ช่องว่างเปล่าเป็น null พิมพ์ไม่ได้) ถ้าติ๊ก = พิมพ์ตัวเลขได้ (เริ่มที่ 1)

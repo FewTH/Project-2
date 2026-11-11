@@ -17,7 +17,7 @@ class AssessmentApi
 
     // ดัชนี "อีเมล -> แบบประเมินที่ทำแล้ว" ใช้ร่วมกันทุกคน
     // สดอยู่ 5 นาที / หลังจากนั้นถึง 1 ชม. ยังส่งค่าเดิมให้ทันที แล้วค่อยอัปเดตเบื้องหลังหลังส่งหน้าเว็บไปแล้ว
-    private const EMAIL_INDEX_KEY   = 'assess_email_index_v2';   // เปลี่ยนชื่อจาก v1 ดัชนีว่างที่ค้างอยู่จากรอบก่อนจะไม่ถูกใช้อีก
+    private const EMAIL_INDEX_KEY   = 'assess_email_index_v3';   // v3: เพิ่มสถานะ "ถูกสุ่มแล้ว" ของแต่ละคน (ใช้กับหน้าสุ่มของรางวัล)
     private const EMAIL_INDEX_FRESH = 300;
     private const EMAIL_INDEX_STALE = 3600;
     // ยิงพร้อมกันทีละกี่ครั้ง (เซิร์ฟเวอร์ API บางตัวรับพร้อมกันเยอะๆ ไม่ไหว)
@@ -164,11 +164,27 @@ class AssessmentApi
 
         $index = $this->emailIndex();
         $mine  = array_flip($index['emails'][$email] ?? []);
+        $drawn = array_flip($index['drawn'][$email] ?? []);
 
+        // แต่ละรายการมี is_drawn ติดมาด้วย (1 = คนนี้ถูกสุ่มแล้วในแบบประเมินนั้น) หน้าสุ่มของรางวัลใช้ หน้าหลักไม่ได้ใช้ก็ไม่เป็นไร
         return collect($index['assessments'])
             ->filter(fn ($a, $id) => isset($mine[$id]))
-            ->map(fn ($a) => $this->normalizeAssessment($a))
+            ->map(function ($a, $id) use ($drawn) {
+                $assessment = $this->normalizeAssessment($a);
+                $assessment->is_drawn = isset($drawn[$id]) ? 1 : 0;
+                return $assessment;
+            })
             ->values();
+    }
+
+    // คนนี้ (ตามอีเมล) ถูกสุ่มแล้วในแบบประเมินนี้หรือยัง ดูจากดัชนีที่แคชไว้ ไม่ต้องเรียก API
+    public function isDrawn(int $assessmentId, string $email): bool
+    {
+        $email = strtolower(trim($email));
+        if ($email === '') {
+            return false;
+        }
+        return in_array($assessmentId, $this->emailIndex()['drawn'][$email] ?? [], true);
     }
 
     // ดัชนีที่แคชไว้ (ถ้าเก่าแล้วจะได้ค่าเดิมทันที แล้วระบบอัปเดตให้หลังส่งหน้าเว็บเสร็จ)
@@ -209,7 +225,7 @@ class AssessmentApi
         }
 
         if (!$uris) {
-            return ['assessments' => [], 'emails' => []];
+            return ['assessments' => [], 'emails' => [], 'drawn' => []];
         }
 
         // token ของแต่ละ URI: ใช้ที่แคชไว้ ตัวไหนยังไม่มีค่อยขอแบบพร้อมกัน
@@ -232,6 +248,7 @@ class AssessmentApi
         }
 
         $emails  = [];
+        $drawn   = [];
         $retried = [];
         $failed  = [];
         foreach ($uris as $id => $uri) {
@@ -264,6 +281,9 @@ class AssessmentApi
                 $email = strtolower(trim((string) ($r['email'] ?? '')));
                 if ($email !== '') {
                     $emails[$email][] = (int) $id;
+                    if ((int) ($r['is_drawn'] ?? 0) === 1) {
+                        $drawn[$email][] = (int) $id;
+                    }
                 }
             }
         }
@@ -279,8 +299,11 @@ class AssessmentApi
         foreach ($emails as $email => $ids) {
             $emails[$email] = array_values(array_unique($ids));
         }
+        foreach ($drawn as $email => $ids) {
+            $drawn[$email] = array_values(array_unique($ids));
+        }
 
-        return ['assessments' => $assessments, 'emails' => $emails];
+        return ['assessments' => $assessments, 'emails' => $emails, 'drawn' => $drawn];
     }
 
     private function prefetchTokens(array $uris): void
