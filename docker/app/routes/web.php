@@ -17,14 +17,17 @@
     
 
 
-    Route::get('/', function () {
+   /* Route::get('/', function () {
         return view('welcome');
-    });
+    });*/
 
     // ส่วนloginและ route ไปตามrole
-        Route::get('/user/loginuser',[AuthController::class, 'showLoginForm'])->name('login');
-        Route::post('/login',[AuthController::class,'login'])->name('login.submit');
-        Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+    Route::get('/',[AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('/login',[AuthController::class, 'showLoginForm']);
+    Route::post('/login',[AuthController::class,'login'])->name('login.submit');
+    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+
+    Route::redirect('/user/loginuser', '/login');
     // ส่วนของ Admin 
     // Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('admin')->middleware('role:admin')->group(function () {

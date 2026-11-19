@@ -10,6 +10,9 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // บทบาทเริ่มต้นของบุคลากรห้องสมุดที่เข้าสู่ระบบครั้งแรก (ผู้ดูแลระบบเปลี่ยนได้ที่หน้าจัดการผู้ใช้)
+    private const NEW_STAFF_ROLE = 'user';
+
     public function showLoginForm()
     {
         return view('user.loginuser');
@@ -22,6 +25,7 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
+        // ตัด @buu.ac.th หรือ @go.buu.ac.th ออก ApiLib ต้องการแค่ชื่อผู้ใช้ส่วนหน้า
         $username = strtolower(Str::before(trim($request->username), '@'));
         $remember = $request->has('remember');
 
@@ -29,10 +33,39 @@ class AuthController extends Controller
         $fail = fn() => back()->withErrors([
             'username' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
         ])->onlyInput('username');
+        $apiDown = fn() => back()->withErrors([
+            'username' => 'ระบบห้องสมุดไม่พร้อมใช้งานชั่วคราว ลองใหม่อีกครั้ง',
+        ])->onlyInput('username');
 
-        // ไม่มีบัญชีในระบบเรา = เข้าไม่ได้ (ApiLib ยืนยันตัวตนอย่างเดียว ไม่ได้ให้สิทธิ์)
+        // ยังไม่มีบัญชีในระบบ: สร้างให้อัตโนมัติ เฉพาะบุคลากรห้องสมุดเท่านั้น (statusauth = library)
         if (!$user) {
-            return $fail();
+            try {
+                $info = $apiLib->login($username, $request->password, 'library');
+            } catch (\RuntimeException $e) {
+                return $apiDown();
+            }
+
+            // รหัสผ่านผิด หรือไม่ใช่บุคลากรห้องสมุด ใช้ข้อความเดียวกันเพื่อไม่บอกใบ้ว่าผิดตรงไหน
+            if ($info === null) {
+                return $fail();
+            }
+
+            $user = User::firstOrCreate(
+                ['username' => $username],
+                [
+                    'full_name'     => ($info['fullname'] ?? '') ?: $username,
+                    'email'         => ($info['email'] ?? '') ?: null,
+                    'password_hash' => null,          // เข้าสู่ระบบผ่าน ApiLib ไม่เก็บรหัสผ่าน
+                    'role'          => self::NEW_STAFF_ROLE,
+                    'auth_source'   => 'api',
+                    'is_active'     => true,
+                ]
+            );
+
+            Auth::login($user, $remember);
+            $request->session()->regenerate();
+
+            return $this->redirectByRole($user);
         }
 
         if (!$user->is_active) {
@@ -41,13 +74,11 @@ class AuthController extends Controller
         }
 
         if ($user->isApiUser()) {
-            // บัญชีมหาวิทยาลัย: ตรวจกับ ApiLib
+            // บัญชีมหาวิทยาลัยที่มีอยู่แล้ว: ตรวจกับ ApiLib
             try {
                 $info = $apiLib->login($username, $request->password);
             } catch (\RuntimeException $e) {
-                return back()->withErrors([
-                    'username' => 'ระบบห้องสมุดไม่พร้อมใช้งานชั่วคราว ลองใหม่อีกครั้ง',
-                ])->onlyInput('username');
+                return $apiDown();
             }
 
             if ($info === null) {
@@ -69,12 +100,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return match ($user->role) {
-            'admin'   => redirect()->route('admin.dashboard'),
-            'manager' => redirect()->route('manager.profile'),
-            'user'    => redirect()->route('user.home'),
-            default   => redirect('/'),
-        };
+        return $this->redirectByRole($user);
     }
 
     public function logout(Request $request)
@@ -84,5 +110,16 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    // พาไปหน้าแรกตามบทบาท
+    private function redirectByRole(User $user)
+    {
+        return match ($user->role) {
+            'admin'   => redirect()->route('admin.dashboard'),
+            'manager' => redirect()->route('manager.profile'),
+            'user'    => redirect()->route('user.home'),
+            default   => redirect('/'),
+        };
     }
 }

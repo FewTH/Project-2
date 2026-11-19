@@ -43,7 +43,7 @@
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper3">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout3">
+        <a href="{{ route('login') }}" class="btn-logout3">
             <img src="{{ asset('user/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img3">
             <span>ออกจากระบบ </span>
         </a>

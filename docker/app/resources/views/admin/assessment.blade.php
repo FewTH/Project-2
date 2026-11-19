@@ -51,7 +51,7 @@
 </div>
 <!-- ปุ่มกดออกจากระบบ -->
 <div class="btn-logout-wrapper">
-    <a href="{{ url('user/loginuser') }}" class="btn-logout">
+    <a href="{{ route('login') }}" class="btn-logout">
         <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
         <span>ออกจากระบบ</span>
     </a>
@@ -189,7 +189,7 @@
         </button>
     </div>
         <div class="frame-assign-assessment">
-            <button class="btn-assign-assessment"  id="btn_assign_assessment">
+            <button class="btn-assign-assessment"  id="btn_assign_assessment" data-unassigned-url="{{ route('admin.assessments.unassigned') }}" data-assign-url="{{ route('admin.assessments.assign') }}">
                 <img src="{{ asset('admin/img/รูปของปุ่มมอบหมายแบบประเมิน.png') }}" alt="รูปของปุ่มมอบหมายแบบประเมิน" class="img-assign-assessment">
                 <p class="message-assign-assessment">มอบหมายแบบประเมิน</p>
             </button>

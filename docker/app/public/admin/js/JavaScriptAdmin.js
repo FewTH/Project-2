@@ -290,7 +290,7 @@ if (btnassignassessment){
     btnassignassessment.addEventListener('click', async function(){
     try {
         // เรียกแบบประเมินที่ยังไม่ผูกแบบประเมิน
-        const res = await fetch('/admin/assessments/unassigned');
+        const res = await fetch(btnassignassessment.dataset.unassignedUrl);
         if (!res.ok) throw new Error('ไม่สามารถดึงข้อมูลได้');
         const data = await res.json();
 
@@ -419,7 +419,7 @@ if (evaluationFormelement) {
         const managerId = checkedManager.value;
 
         try {
-        const res = await fetch('/admin/assessments/assign',{
+        const res = await fetch(btnassignassessment.dataset.assignUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1603,8 +1603,7 @@ if (btnstartRandom) {
                     rewardIdToSend = rewardresult.id;
                 }
 
-                const roleprefix = window.location.pathname.split('/')[1];
-                fetch(`/${roleprefix}/random-reward/${eventId}/save-result`, {
+                fetch(saveResultUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2084,7 +2083,7 @@ const btnday = document.getElementById('button-day')
 
 if (btnday){
 btnday.addEventListener('click', function() {
-    window.location.href = '/admin/dashboard?range=day';
+    window.location.href = '?range=day';
 });
 }
 
@@ -2093,7 +2092,7 @@ const btnweek = document.getElementById('button-week')
 
 if (btnweek){
 btnweek.addEventListener('click', function() {
-    window.location.href = '/admin/dashboard?range=week';
+    window.location.href = '?range=week';
 });
 }
 
@@ -2102,7 +2101,7 @@ const btnmonth = document.getElementById('button-month')
 
 if (btnmonth){
 btnmonth.addEventListener('click', function() {
-    window.location.href = '/admin/dashboard?range=month';
+    window.location.href = '?range=month';
 });
 }
 

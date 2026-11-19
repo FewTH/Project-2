@@ -51,7 +51,7 @@
     </div>
     <!-- ปุ่มกดออกจากระบบ -->
     <div class="btn-logout-wrapper">
-        <a href="{{ url('user/loginuser') }}" class="btn-logout">
+        <a href="{{ route('login') }}" class="btn-logout">
             <img src="{{ asset('admin/img/รูปปุ่มกดออก.png') }}" alt="รูปออกจากระบบ" class="btn-logout-img">
             <span>ออกจากระบบ</span>
         </a>
@@ -201,6 +201,7 @@
 @if($event->wheel)
 <script>
     const eventId = {{ $event->event_id }};
+    const saveResultUrl = "{{ route($prefix . '.random-reward.save-result', $event->event_id) }}";
     const nameData = @json($nameData);
     const rewardData = @json($rewardData);
 </script>
