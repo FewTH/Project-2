@@ -258,39 +258,46 @@
             </div>
 
             <div class="framelistnamesregister">
+                @php
+                    // รวมการลงทะเบียนของคนเดียวกันไว้แถวเดียว (คนเดียวกัน = รหัสเครื่องเดียวกัน ถ้าไม่มีค่อยดู user_id)
+                    // ในหน้าสุ่มรางวัลยังแยกเป็น 1 สิทธิ์ = 1 ใบ เหมือนเดิม
+                    $people = $event->registrations->groupBy(fn ($r) => $r->guest_token
+                        ? 'g'.$r->guest_token
+                        : ($r->user_id ? 'u'.$r->user_id : 'r'.$r->registration_id));
+                    $totalRights = $event->registrations->count();
+                @endphp
                 <div class="framelistnamesregister-1">
                     <p class="messagelistnamesregiste">รายชื่อผู้ลงทะเบียน</p>
                     <input type="text" id="search_registration" class="search-registration" placeholder="ค้นหาชื่อ...">
                     <div class="framequantitypeople">
-                        <p class="numberquantitypeople">{{ $event->registrations->count() }} คน</p>
+                        <p class="numberquantitypeople">{{ $people->count() }} คน</p>
                     </div>
                 </div>
                 <hr class="linequantitypeople">
 
                 <div id="registration_list" data-count-url="{{ route('admin.registration.count', $event->event_id) }}">
+                    @foreach($people as $rows)
                     @php
-                        $grantedByPerson = $event->registrations->groupBy(fn($r) => $r->user_id ? 'u'.$r->user_id : 'g'.$r->guest_token);
+                        $first  = $rows->first();
+                        $latest = $rows->last();
+                        $rights = $rows->count();
+                        $totalGranted = $rows->sum('extra_granted');
                     @endphp
-
-                    @foreach($event->registrations as $index => $registration)
                     <div class="frameinformationparticipants">
                         <div class="framenumberpeople">
-                            <p class="numberpeople">{{ $index + 1 }}</p>
+                            <p class="numberpeople">{{ $loop->iteration }}</p>
                         </div>
                         <div class="frmaename-emailparticipants">
-                            <p class="nameparticipants">{{ $registration->full_name }}</p>
+                            <p class="nameparticipants">{{ $first->full_name }}</p>
+                            @if($rights > 1)
+                                <span class="rights-badge">{{ $rights }} สิทธิ์</span>
+                            @endif
                         </div>
                         <div class="frametimeparticipants">
-                            <p class="timeparticipants">{{ $registration->registered_at->format('H:i') }} น.</p>
+                            <p class="timeparticipants" title="ลงทะเบียนเวลา {{ $rows->map(fn ($r) => $r->registered_at?->format('H:i'))->filter()->implode(', ') }} น.">{{ $first->registered_at?->format('H:i') }} น.</p>
                         </div>
 
-                        @php
-                            $key = $registration->user_id ? 'u'.$registration->user_id : 'g'.$registration->guest_token;
-                            $personRows = $grantedByPerson[$key] ?? collect([$registration]);
-                            $totalGranted = $personRows->sum('extra_granted');
-                        @endphp
-
-                        <form action="{{ route('admin.registration.grant', $registration->registration_id) }}" method="POST" style="margin-left:10px;">
+                        <form action="{{ route('admin.registration.grant', $latest->registration_id) }}" method="POST" style="margin-left:10px;">
                             @csrf
                             <button type="submit" class="btn-grant-extra">+ ให้ลงเพิ่ม</button>
                             @if($totalGranted > 0)

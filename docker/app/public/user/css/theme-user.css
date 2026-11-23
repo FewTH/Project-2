@@ -4255,4 +4255,46 @@
     --status-color: #B45309;
     --status-soft: #FEF3DA;
   }
+
+
+  
+  /* ===== หน้าลงทะเบียนกิจกรรม: ป้ายจำนวนสิทธิ์ข้างชื่อผู้ลงทะเบียน (แบบเดียวกับหน้า admin) ===== */
+  .fullnameRegistrant{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    min-width: 0;
+  }
+  .rights-badge{
+    flex: none;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background-color: var(--primary-soft, #FFF0F4);
+    color: var(--primary, #E6003D);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .timepersonRegistrant-1{
+    white-space: nowrap;
+  }
+
+  /*หัวข้อชื่อ-นามสกุล + ข้อความแจ้งเตือนสีแดง: เว้นระยะไม่ให้ติดกัน*/
+.framedataframeworkname{
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 24px 0 10px 0;
+}
+.framedataframeworkname .messagename{
+  margin: 0;
+}
+.framedataframeworkname .asteriskdataframe{
+  line-height: 1;
+}
+.framedataframework .savesuccessimage-error-2{
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
   

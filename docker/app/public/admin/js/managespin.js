@@ -152,27 +152,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderChances(list) {
-        if (list.length === 0) {
-            chanceList.innerHTML = '<p class="spn-chance-empty">ยังไม่ได้เลือกรางวัล</p>';
-            return;
-        }
-
-        const total = list.reduce((sum, r) => sum + weightOf(r), 0);
-        chanceList.replaceChildren(...list.map(reward => {
-            const percent = total > 0 ? (weightOf(reward) / total) * 100 : 0;
-
-            const row = document.createElement('div');
-            row.className = 'spn-chance-row';
-            row.style.setProperty('--card-color', colorById[reward.id] || colors[0]);
-            row.innerHTML = `
-                <span class="spn-chance-dot"></span>
-                <span class="spn-chance-name">${escapeHtml(reward.name)}<span class="spn-chance-qty">× ${reward.qty}</span></span>
-                <span class="spn-chance-value">${percent.toFixed(1)}%</span>
-                <div class="spn-chance-bar"><span style="width:${percent}%"></span></div>
-            `;
-            return row;
-        }));
+    if (list.length === 0) {
+        chanceList.innerHTML = '<p class="spn-chance-empty">ยังไม่ได้เลือกรางวัล</p>';
+        return;
     }
+
+    const total = list.reduce((sum, r) => sum + weightOf(r), 0);
+    let totalPercent = 0;
+
+    const rows = list.map(reward => {
+        const percent = total > 0 ? (weightOf(reward) / total) * 100 : 0;
+        totalPercent += percent;
+
+        const row = document.createElement('div');
+        row.className = 'spn-chance-row';
+        row.style.setProperty('--card-color', colorById[reward.id] || colors[0]);
+        row.innerHTML = `
+            <span class="spn-chance-dot"></span>
+            <span class="spn-chance-name">${escapeHtml(reward.name)}<span class="spn-chance-qty">× ${reward.qty}</span></span>
+            <span class="spn-chance-value">${percent.toFixed(1)}%</span>
+            <div class="spn-chance-bar"><span style="width:${percent}%"></span></div>
+        `;
+        return row;
+    });
+
+    // บรรทัดรวม: จำนวนชิ้นทั้งหมด และผลรวมเปอร์เซ็นต์ (ต้องได้ 100%)
+    const totalQty = list.reduce((sum, r) => sum + r.qty, 0);
+    const totalRow = document.createElement('div');
+    totalRow.className = 'spn-chance-total' + (total > 0 ? '' : ' is-warning');
+    totalRow.innerHTML = `
+        <span>รวม ${list.length} รายการ </span>
+        <span class="spn-chance-value"> ${totalPercent.toFixed(1)}%</span>
+    `;
+
+    chanceList.replaceChildren(...rows, totalRow);
+}
 
     // ===== อัปเดตหน้าจอทุกครั้งที่เลือกหรือเปลี่ยนจำนวน =====
     let isSpinning = false;

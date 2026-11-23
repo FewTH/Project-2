@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ลงทะเบียนเข้าร่วมกิจกรรม</title>
-    <link rel="stylesheet" href="{{ asset('user/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('user/css/theme-user.css') }}">
+    <link rel="stylesheet" href="{{ asset('user/css/style.css') }}?v={{ filemtime(public_path('user/css/style.css')) }}">
+    <link rel="stylesheet" href="{{ asset('user/css/theme-user.css') }}?v={{ filemtime(public_path('user/css/theme-user.css')) }}">
     <link rel="icon" href="{{ asset('user/img/Logo.png') }}">
 </head>
 <body>
@@ -69,7 +69,12 @@
                 @error('full_name')
                     <p class="savesuccessimage-error-2">{{ $message }}</p>
                 @enderror
-                <input type="text" name="full_name" class="dataframeworkfullname" value="{{ old('full_name', $prefillName ?? '') }}" placeholder="กรอกชื่อ-นามสกุล" autocomplete="name" id="dataframe_workfullname">
+                @if($nameLocked ?? false)
+                    {{-- ลงเพิ่ม: ล็อกชื่อไว้เป็นชื่อเดิม คลิกหรือพิมพ์ไม่ได้ (controller ใช้ชื่อเดิมจากฐานข้อมูลเอง) --}}
+                    <input type="text" class="dataframeworkfullname" value="{{ $prefillName }}" id="dataframe_workfullname" disabled>
+                @else
+                    <input type="text" name="full_name" class="dataframeworkfullname" value="{{ old('full_name', $prefillName ?? '') }}" placeholder="กรอกชื่อ-นามสกุล" autocomplete="name" id="dataframe_workfullname">
+                @endif
 
                 <button type="submit" class="btn-registerparticipate">
                     <p class="messageregisterparticipate">ลงทะเบียนเข้าร่วม</p>
@@ -79,32 +84,46 @@
         @endif
 
 
-        <div class="framepersonRegistrant">
+               <div class="framepersonRegistrant">
+            @php
+                // รวมการลงทะเบียนของคนเดียวกันไว้แถวเดียว แบบเดียวกับหน้ารายละเอียดกิจกรรมของ admin
+                $people = $event->registrations->groupBy(fn ($r) => $r->user_id
+                    ? 'u'.$r->user_id
+                    : ($r->guest_token ? 'g'.$r->guest_token : 'r'.$r->registration_id));
+            @endphp
             <div class="framepersonRegistrantnumberpeople">
                 <p class="pointtopicpage"></p>
                 <span class="messagepersonRegistrant">ผู้ลงทะเบียนแล้ว</span>
                 <div class="frmaenumberpeople">
-                    <p class="messagenumberpeople">{{ $event->registrations->count() }} คน</p>
+                    <p class="messagenumberpeople">{{ $people->count() }} คน</p>
                 </div>
             </div>
             <hr class="linepersonRegistrant">
-            @forelse($event->registrations as $index => $registration)
+            @forelse($people as $rows)
+            @php
+                $first  = $rows->first();
+                $rights = $rows->count();
+                $isMine = $rows->pluck('registration_id')->intersect($myRegistrationIds ?? [])->isNotEmpty();
+            @endphp
             <div class="framefullname-timepersonRegistrant">
                 <div class="numbertopicpagfullnamee">
-                    <p class="messatopicpagfullnamee">{{ $index + 1 }}</p>
+                    <p class="messatopicpagfullnamee">{{ $loop->iteration }}</p>
                 </div>
                 <div class="fullnameRegistrant">
-                    <p class="fullnameRegistrant-1">{{ $registration->full_name }}@if(in_array($registration->registration_id, $myRegistrationIds ?? [])) (คุณ) @endif</p>
+                    <p class="fullnameRegistrant-1">{{ $first->full_name }}@if($isMine) (คุณ)@endif</p>
+                    @if($rights > 1)
+                        <span class="rights-badge">{{ $rights }} สิทธิ์</span>
+                    @endif
                 </div>
                 <div class="timepersonRegistrant">
-                    <span class="timepersonRegistrant-1">{{ $registration->registered_at->format('H:i') }} น.</span>
+                    <span class="timepersonRegistrant-1">{{ $first->registered_at?->format('H:i') }} น.</span>
                 </div>
             </div>
             <hr class="linepersonRegistrant-1">
             @empty
             <div class="reg-empty">
                 <p class="reg-empty1">ยังไม่มีผู้ลงทะเบียน เป็นคนแรกเลย</p>
-                </div>
+            </div>
             @endforelse
         </div>
 

@@ -9898,7 +9898,9 @@
 }
 .spn-chance-title{
   margin: 0 0 8px;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: large;
+  font-family: 'Sarabun', sans-serif;
   color: #183153;
 }
 .spn-chance-row{
@@ -9950,6 +9952,15 @@
   margin: 0;
   font-size: 14px;
   color: #94a3b8;
+}
+/* ส่วนแสดงผลรวมอัตราของรางวัลทั้งหมด */
+.spn-chance-total{
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  
 }
  
 /* ปุ่มบันทึกตอนยังเลือกไม่ครบ 2 รายการ */
@@ -14254,4 +14265,46 @@
     /* ===== ฟอนต์แบบหัวกลม (Arial + Tahoma เหมือนฟอนต์มาตรฐานของ Windows) ===== */
   :root{
     --font: Arial, Tahoma, sans-serif;
+  }
+
+
+  
+  /* ===== หน้ารายละเอียดกิจกรรม: ป้ายจำนวนสิทธิ์ข้างชื่อผู้ลงทะเบียน ===== */
+  .frmaename-emailparticipants{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .rights-badge{
+    flex: none;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background-color: var(--primary-soft, #FFF0F4);
+    color: var(--primary, #E6003D);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+
+  
+  /* ===== หน้าลงทะเบียนกิจกรรม: ช่องชื่อที่ล็อกไว้ตอนลงเพิ่ม (ใช้ชื่อเดิม) ===== */
+  .dataframeworkfullname:disabled,
+  .dataframeworkfullname:disabled:hover{
+    background-color: #EEF0F4;
+    border: 1.5px dashed #C3C7D4;
+    box-shadow: none;
+    color: #555a6e;
+    -webkit-text-fill-color: #555a6e;
+    opacity: 1;
+    cursor: not-allowed;
+  }
+  .namelocked-hint{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--muted, #777777);
   }

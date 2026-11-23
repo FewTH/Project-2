@@ -1006,7 +1006,7 @@ let rewardwheel = null;
 
 
 //ฟังก์ชันสร้างแถบสุ่มแนวนอนแบบเว็บเปิดกล่อง CS:GO (แทนวงล้อกลมแบบเดิม)
-//ใช้ชื่อ createwheel และคืนค่า spin / reduceandremove / removeitem เหมือนเดิม
+//ใช้ชื่อ createwheel และคืนค่า spin / reduceandremove / removeitem / refresh
 //โค้ดปุ่มสุ่ม popup ผู้โชคดี และปุ่มเปิด/ปิด ข้างล่างเลยใช้ต่อได้โดยไม่ต้องแก้
 function createwheel(containerId, items) {
     const container = document.getElementById(containerId);
@@ -1255,13 +1255,14 @@ function createwheel(containerId, items) {
 
         //สร้างแถบใหม่: ช่วงต้นก๊อปการ์ดที่เห็นอยู่ตอนนี้มาวาง ภาพจะต่อเนื่องไม่กระตุก
         //ช่วงกลางสุ่มตามเปอร์เซ็นต์ (ของหายากจะโผล่ให้เห็นน้อย) แล้ววางผู้ชนะไว้ที่ winnerindex
+        //การ์ดเก่าที่ถูกสุ่มออกไปแล้วจะไม่ถูกก๊อปมาวาง
         const list = [];
         for (let i = 0; i < totalcards; i++) {
             const oldcard = cards[centerindex - startindex + i];
 
             if (i === winnerindex) {
                 list.push(winner);
-            } else if (i <= startindex * 2 && oldcard) {
+            } else if (i <= startindex * 2 && oldcard && items.indexOf(oldcard.item) !== -1) {
                 list.push(oldcard.item);
             } else {
                 list.push(pickrandomitem());
@@ -1400,6 +1401,24 @@ function createwheel(containerId, items) {
     }
 
 
+    //วาดแถบใหม่ให้เหลือแค่รายการที่ยังสุ่มได้ (เรียกตอนปิด popup ผู้โชคดี)
+    function refresh() {
+        if (isspinning) {
+            return;
+        }
+
+        //ไม่เหลือรายการแล้ว ล้างการ์ดออกแล้วขึ้นข้อความว่าไม่มีให้สุ่ม
+        if (items.length === 0) {
+            track.innerHTML = '';
+            cards = [];
+            container.classList.add('is-empty');
+            return;
+        }
+
+        renderidle();
+    }
+
+
     //ย่อขยายหน้าจอแล้วให้การ์ดที่ได้ยังอยู่ตรงลูกศร
     window.addEventListener('resize', function () {
         if (!isspinning && cards.length > 0) {
@@ -1412,11 +1431,12 @@ function createwheel(containerId, items) {
     renderidle();
 
 
-    //ส่งฟังก์ชันออกไปให้ข้างนอกเรียกใช้ได้ (ชื่อเดิมทั้งหมด)
+    //ส่งฟังก์ชันออกไปให้ข้างนอกเรียกใช้ได้
     return {
         spin: spin,
         reduceandremove: reduceandremove,
-        removeitem: removeitem
+        removeitem: removeitem,
+        refresh: refresh
     };
 }
 
@@ -1668,6 +1688,20 @@ const offpopupluckywinner = document.getElementById('off-popupluckywinner');
 if (offpopupluckywinner) {
     offpopupluckywinner.addEventListener('click', function () {
         closeDialog(document.getElementById('popup_luckywinner'));
+    });
+}
+
+//ปิด popup ผู้โชคดีแล้ว (กดปุ่มปิดหรือกด Esc) ให้แถบสุ่มเหลือแค่รายชื่อ/ของรางวัลที่ยังสุ่มได้
+const popupluckywinnerdialog = document.getElementById('popup_luckywinner');
+
+if (popupluckywinnerdialog) {
+    popupluckywinnerdialog.addEventListener('close', function () {
+        if (namewheel) {
+            namewheel.refresh();
+        }
+        if (rewardwheel) {
+            rewardwheel.refresh();
+        }
     });
 }
 

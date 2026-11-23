@@ -43,6 +43,21 @@ class EventRegistrationController extends Controller
             ->get();
     }
 
+    //จัดชื่อให้เป็นรูปแบบเดียวกัน: ตัดช่องว่างหัวท้าย และช่องว่างซ้อนกลางชื่อเหลือช่องเดียว
+    private function normalizeName($name): string
+    {
+        return trim(preg_replace('/\s+/u', ' ', (string) $name));
+    }
+
+    //หาแถวที่ลงทะเบียนในกิจกรรมนี้ด้วยชื่อเดียวกัน (ไม่สนตัวพิมพ์เล็กใหญ่ และช่องว่างหัวท้าย)
+    private function registrationsByName($eventId, string $name)
+    {
+        return EventRegistration::where('event_id', $eventId)
+            ->whereRaw('LOWER(TRIM(full_name)) = ?', [mb_strtolower($name)])
+            ->orderBy('registration_id')
+            ->get();
+    }
+
     //แสดงฟอร์มลงทะเบียนเข้าร่วมกิจกรรม (ไม่ต้องล็อกอิน)
     public function create(Request $request, $eventId)
     {
@@ -63,8 +78,11 @@ class EventRegistrationController extends Controller
         //ลงทะเบียนแล้วและไม่มีสิทธิ์ลงเพิ่ม = โชว์หน้าลงทะเบียนเรียบร้อย
         $alreadyRegistered = $mine->isNotEmpty() && $extraLeft === 0;
 
-        //ชื่อที่เติมให้อัตโนมัติ: ใช้ชื่อที่เคยลงล่าสุด ไม่มีก็ใช้ชื่อในบัญชี
-        $prefillName = $mine->last()?->full_name ?? '';
+        //ลงเพิ่ม (เคยลงแล้วและยังมีสิทธิ์เหลือ) = ล็อกช่องชื่อ ต้องใช้ชื่อเดิมที่ลงครั้งแรก
+        $nameLocked = $mine->isNotEmpty() && $extraLeft > 0;
+
+        //ชื่อที่เติมให้อัตโนมัติ: ใช้ชื่อที่ลงครั้งแรก ไม่มีก็เว้นว่าง
+        $prefillName = $mine->first()?->full_name ?? '';
 
         return view('user.register_event', [
             'event' => $event,
@@ -74,6 +92,7 @@ class EventRegistrationController extends Controller
             'myRegistrationIds' => $mine->pluck('registration_id')->all(),
             'extraLeft' => $extraLeft,
             'prefillName' => $prefillName,
+            'nameLocked' => $nameLocked,
         ]);
     }
 
@@ -110,15 +129,29 @@ class EventRegistrationController extends Controller
                 return back()->withErrors(['limitmax' => 'ลงทะเบียนเต็มจำนวนแล้ว']);
             }
 
-            //แถวที่คนนี้เคยลงไว้
+            //แถวที่คนนี้เคยลงไว้ (จำจากบัญชีที่ล็อกอิน หรือคุกกี้ของเครื่อง)
             $mine = $this->myRegistrations($request, $event->event_id);
+
+            //ชื่อที่พิมพ์มา
+            $typedName = $this->normalizeName($request->input('full_name'));
+
+            //เครื่องนี้จำไม่ได้ (เช่น iPhone ลบคุกกี้ เปิดโหมดส่วนตัว หรือสแกนแล้วเปิดในเบราว์เซอร์ชั่วคราว) ให้ดูจากชื่อแทน
+            //ชื่อซ้ำกับคนที่ลงไว้แล้ว = ถือว่าเป็นคนเดิม ต้องได้สิทธิ์ลงเพิ่มก่อนถึงจะลงได้อีก
+            $matchedByName = false;
+            if ($mine->isEmpty() && $typedName !== '') {
+                $mine = $this->registrationsByName($event->event_id, $typedName);
+                $matchedByName = $mine->isNotEmpty();
+            }
+
             $grantRow = $mine->firstWhere(fn($r) => $r->extra_allowed > 0);
 
             if ($mine->isNotEmpty()) {
                 //เคยลงแล้ว: ต้องมีสิทธิ์ลงเพิ่มถึงจะลงได้อีก
                 if (!$grantRow) {
                     DB::rollBack();
-                    return back()->withErrors(['full_name' => 'คุณลงทะเบียนกิจกรรมนี้ไปแล้ว']);
+                    return back()->withErrors(['full_name' => $matchedByName
+                        ? 'ชื่อนี้ลงทะเบียนกิจกรรมนี้ไปแล้ว'
+                        : 'คุณลงทะเบียนกิจกรรมนี้ไปแล้ว'])->withInput();
                 }
 
                 //ตัดสิทธิ์ลงเพิ่มของแถวนี้ 1 ครั้ง (ล็อกแถวกันกดซ้ำพร้อมกันแล้วใช้สิทธิ์เกิน)
@@ -130,11 +163,17 @@ class EventRegistrationController extends Controller
                 $grantRow->extra_allowed = $grantRow->extra_allowed - 1;
                 $grantRow->save();
 
-                //ครั้งที่ 2 ไม่ต้องพิมพ์ชื่อ ใช้ชื่อเดิมถ้าช่องว่าง
-                $fullName = trim((string) $request->input('full_name')) ?: $mine->last()->full_name;
+                //ลงเพิ่มต้องใช้ชื่อเดิมที่ลงครั้งแรกเสมอ ไม่ใช้ชื่อที่ส่งมาจากฟอร์ม (กันคนแก้ช่องที่ล็อกไว้ผ่าน F12)
+                $fullName = $mine->first()->full_name;
+
+                //ใช้รหัสเครื่องเดิมของคนนี้ หน้า admin จะได้รวมเป็นแถวเดียว และเครื่องนี้จะจำคนนี้ได้ต่อจากนี้
+                $originalToken = $mine->pluck('guest_token')->filter()->first();
+                if ($originalToken) {
+                    $token = $originalToken;
+                }
             } else {
                 //ลงทะเบียนครั้งแรก: ต้องกรอกชื่อ
-                $fullName = trim((string) $request->input('full_name'));
+                $fullName = $typedName;
                 if ($fullName === '') {
                     DB::rollBack();
                     return back()->withErrors(['full_name' => 'กรุณากรอกชื่อ-นามสกุลด้วย'])->withInput();

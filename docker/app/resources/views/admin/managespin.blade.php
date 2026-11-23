@@ -57,9 +57,9 @@
             {{-- ปุ่มเพิ่มกับลดจำนวนของรางวัล --}}
             <div class="select-re-qnty">
                 <div class="quantity-stepper">
-                    <button type="button" class="qnty-plus">+</button>
-                    <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
                     <button type="button" class="qnty-minus">-</button>
+                    <input type="number" class="qnty-in" value="1" min="1" max="{{$reward->quantity_reward}}">
+                    <button type="button" class="qnty-plus">+</button>
                 </div>
                 <input type="checkbox" class="reward-check-box" id="reward-{{$reward->reward_id}}">
                 <label for="reward-{{$reward->reward_id}}" class="checkbx-reward"></label>

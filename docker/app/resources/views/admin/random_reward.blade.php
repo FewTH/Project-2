@@ -194,9 +194,6 @@
                 @endforeach
             </div>
         </div>
-
-
-    
     </div>
 @if($event->wheel)
 <script>
